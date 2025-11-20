@@ -1146,21 +1146,43 @@ function generateHTMLDocument(bodyContent, title, outputPath) {
     .theorem-box {
       margin: 1.75em 0;
       padding: 1.25em;
-      border-left: 5px solid #16a34a;
-      background: linear-gradient(to top, #bbf7d0 0%, #d1fae5 100%);
+      border-left: 5px solid #1d4ed8; /* default: theorem blue */
+      background: linear-gradient(to top, #bfdbfe 0%, #eff6ff 100%);
       border-radius: 6px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
-    .definition-box { border-left-color: #16a34a; background: linear-gradient(to top, #d1fae5 0%, #ecfdf5 100%); }
-    .lemma-box { border-left-color: #1e3a8a; background: linear-gradient(to top, #bfdbfe 0%, #dbeafe 100%); }
-    .corollary-box { border-left-color: #9333ea; background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%); }
-    .proposition-box { border-left-color: #dc2626; background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%); }
-    .remark-box { border-left-color: #64748b; background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%); }
-    .example-box { border-left-color: #0891b2; background: linear-gradient(to top, #a5f3fc 0%, #cffafe 100%); }
-    .construction-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
-    .notation-box { border-left-color: #ca8a04; background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%); }
-    .exercise-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
-    .problem-box { border-left-color: #ec4899; background: linear-gradient(to top, #fbcfe8 0%, #fce7f3 100%); }
+    .lemma-box {
+      border-left-color: #0f766e;
+      background: linear-gradient(to top, #a7f3d0 0%, #ccfbf1 100%);
+    }
+    .proposition-box {
+      border-left-color: #dc2626;
+      background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%);
+    }
+    .corollary-box {
+      border-left-color: #7c3aed;
+      background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%);
+    }
+    .definition-box {
+      border-left-color: #16a34a;
+      background: linear-gradient(to top, #bbf7d0 0%, #ecfdf5 100%);
+    }
+    .example-box {
+      border-left-color: #d97706;
+      background: linear-gradient(to top, #fde68a 0%, #fef3c7 100%);
+    }
+    .exercise-box {
+      border-left-color: #ea580c;
+      background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%);
+    }
+    .remark-box {
+      border-left-color: #64748b;
+      background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%);
+    }
+    .notation-box {
+      border-left-color: #ca8a04;
+      background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%);
+    }
     .theorem-header {
       margin-bottom: 0.75em;
       font-size: 1.05em;
