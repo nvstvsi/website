@@ -30,7 +30,7 @@ In this section we present the proof of Whitney's $C^m$ Extension Theorem.
         \[ \operatorname{conv}(\rho) := \operatorname{conv}\left( [0,\infty) \cup \graph (\rho) \right) \]
         to be the closed convex hull of the graph of $\rho$ together with the nonnegative $t$-axis.
         Since $\operatorname{conv}(\rho)$ is convex and $\rho$ is non-negative, 
-        see that for each $t \geq 0$, the set $\{ s : (t,s) \in \operatorname{conv}(\rho) \}$ is a closed (possiby degenerate) interval of the form $[0,\omega(t)]$ for some $\omega(t) \geq \rho(t) \geq 0$.
+        see that for each $t \geq 0$, the set $\{ s : (t,s) \in \operatorname{conv}(\rho) \}$ is a closed (possibly degenerate) interval of the form $[0,\omega(t)]$ for some $\omega(t) \geq \rho(t) \geq 0$.
 
         This defines a function $\omega$ on $[0,\infty)$ by $\omega(t) := \sup \{ s : (t,s) \in \operatorname{conv}(\rho) \}$.
 
@@ -121,7 +121,7 @@ We warn you that this is one of the \emph{longest} proofs in the book, and it is
     \[ \omega(t) = \omega(\diam A) \qquad \forall \, t\geq \diam A, \]
     and \[ \|f^\bullet\|_{\mathcal{W}^m(A)} = \| f^\bullet \|_{J^m(A)} + \omega(\diam A). \]
 
-    Now we fix an cube $Q\subset \R^n$ such that $A \subset Q$ for the rest of the proof.
+    Now we fix a cube $Q\subset \R^n$ such that $A \subset Q$ for the rest of the proof.
     
     \vspace{2mm}
     \textit{Claim 2:}
@@ -171,7 +171,7 @@ We warn you that this is one of the \emph{longest} proofs in the book, and it is
         and as a result, we conclude that $\underline{\partial^{\alpha}} f$ is differentiable at $a$ with derivative $\underline{\partial^{\alpha + e_j}} f(a) = f^{(\alpha + e_j)}(a)$ for each $j \in \{1,2,\ldots,n\}$.
         Since $a \in A$ was arbitrary, we conclude that $\underline{\partial^{\alpha}} f$ is differentiable at each point of $A$ with derivative $\underline{\partial^{\alpha + e_j}} f(a) = f^{(\alpha + e_j)}(a)$ for each $j \in \{1,2,\ldots,n\}$; hence $\underline{\partial^{\alpha}} f$ is $C^1$ on $\R^n$. 
 
-        Now taking $\alpha = 0$ shows that for each $j\in \{1,2,\ldots,n\}$ the function $\underline{\partial_j} f$ is continuous , and the above argument combined with Claim 1 shows that $\underline{\partial_j} f$ is the $j^{\text{th}}$ partial derivative of $f$ on $\R^n$. 
+        Now taking $\alpha = 0$ shows that for each $j\in \{1,2,\ldots,n\}$ the function $\underline{\partial_j} f$ is continuous, and the above argument combined with Claim 1 shows that $\underline{\partial_j} f$ is the $j^{\text{th}}$ partial derivative of $f$ on $\R^n$. 
         Therefore $f \in C^1(\R^n)$ and $\underline{\partial_j} f = D_j f$ for each $j \in \{1,2,\ldots,n\}$.
 
         In a similar way, we then see that for each multi-index $\alpha$ with $|\alpha| = 2$, the function $\underline{\partial^{\alpha}} f$ is continuous; writing
