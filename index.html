@@ -1,79 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>C. Nastasi's Analysis Notes</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Georgia', 'Times New Roman', serif; background: #fafafa; min-height: 100vh; color: #333; line-height: 1.6; }
-    .container { max-width: 1000px; margin: 0 auto; padding: 60px 40px; }
-    header { text-align: center; margin-bottom: 50px; padding-bottom: 40px; border-bottom: 2px solid #e0e0e0; }
-    h1 { font-size: 3em; font-weight: 400; margin-bottom: 15px; color: #1a1a1a; letter-spacing: -0.02em; }
-    .tagline { font-size: 1.1em; color: #666; font-style: italic; }
-    nav { text-align: center; margin-bottom: 50px; }
-    nav a { display: inline-block; padding: 10px 25px; margin: 0 10px; text-decoration: none; color: #555; font-size: 1em; border-bottom: 2px solid transparent; transition: all 0.2s ease; }
-    nav a:hover { color: #1a1a1a; border-bottom-color: #333; }
-    h2 { font-size: 1.8em; font-weight: 500; margin-bottom: 30px; color: #222; }
-    .subjects { display: flex; flex-direction: column; gap: 25px; }
-    .subject-card { background: white; border: 1px solid #e0e0e0; border-radius: 8px; padding: 30px; transition: all 0.2s ease; text-decoration: none; color: inherit; display: block; }
-    .subject-card:hover { border-color: #999; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transform: translateY(-2px); }
-    .subject-card.disabled { opacity: 0.7; cursor: default; }
-    .subject-card.disabled:hover { transform: none; box-shadow: none; border-color: #e0e0e0; }
-    .subject-header { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; }
-    .subject-title { font-size: 1.4em; font-weight: 600; color: #1a1a1a; }
-    .status-badge { font-size: 0.75em; padding: 4px 12px; border-radius: 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
-    .status-coming-soon { background: #f5f5f5; color: #888; border: 1px solid #ddd; }
-    .status-in-prep { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
-    .status-in-progress { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
-    .subject-subtitle { font-size: 1.05em; color: #444; font-style: italic; margin-bottom: 10px; }
-    .subject-topics { font-size: 0.9em; color: #666; line-height: 1.7; }
-    footer { margin-top: 80px; padding-top: 30px; border-top: 1px solid #e0e0e0; text-align: center; font-size: 0.85em; color: #888; }
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background: #fafafa;
+      min-height: 100vh;
+      color: #333;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+      padding-bottom: 40px;
+      border-bottom: 2px solid #e0e0e0;
+    }
+    h1 {
+      font-size: 3em;
+      font-weight: 400;
+      margin-bottom: 15px;
+      color: #1a1a1a;
+      letter-spacing: -0.02em;
+    }
+    .tagline {
+      font-size: 1.1em;
+      color: #666;
+      font-style: italic;
+    }
+
+    nav {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    nav a {
+      display: inline-block;
+      padding: 10px 25px;
+      margin: 0 10px;
+      text-decoration: none;
+      color: #555;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+      font-size: 0.95em;
+    }
+    nav a:hover {
+      color: #1a1a1a;
+      border-bottom-color: #333;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      margin-bottom: 25px;
+      color: #222;
+    }
+
+    .subjects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+    }
+
+    .subject-card {
+      display: block;
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px 22px;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.04);
+      border: 1px solid #e6e6e6;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+    .subject-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+      border-color: #d0d0d0;
+    }
+
+    .subject-card.disabled {
+      opacity: 0.7;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .subject-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .subject-title {
+      font-size: 1.2em;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+
+    .subject-subtitle {
+      font-size: 0.9em;
+      color: #666;
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+
+    .subject-topics {
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    /* Speech-bubble style status badge */
+    .status-badge {
+      position: relative;
+      font-size: 0.7em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #f0f0f0;
+      color: #555;
+      border: 1px solid #d0d0d0;
+      white-space: nowrap;
+    }
+    .status-badge::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -6px;
+      transform: translateX(-50%);
+      border-width: 6px 6px 0 6px;
+      border-style: solid;
+      border-color: #f0f0f0 transparent transparent transparent;
+    }
+
+    .status-soon {
+      background: #fff4d6;
+      border-color: #f1c96b;
+      color: #9a6c16;
+    }
+    .status-soon::after {
+      border-color: #fff4d6 transparent transparent transparent;
+    }
+
+    .status-prep {
+      background: #e6f0ff;
+      border-color: #99b4ff;
+      color: #274b9f;
+    }
+    .status-prep::after {
+      border-color: #e6f0ff transparent transparent transparent;
+    }
+
+    .status-progress {
+      background: #e7f7e7;
+      border-color: #9ad29a;
+      color: #276627;
+    }
+    .status-progress::after {
+      border-color: #e7f7e7 transparent transparent transparent;
+    }
+
+    footer {
+      margin-top: 80px;
+      padding-top: 30px;
+      border-top: 1px solid #e0e0e0;
+      text-align: center;
+      font-size: 0.85em;
+      color: #888;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <h1>C. Nastasi's Analysis Notes</h1>
-      <p class="tagline">A comprehensive guide to real, complex, and functional analysis</p>
+      <p class="tagline">
+        A long-term project in real, complex, and functional analysis.
+      </p>
     </header>
-    <nav><a href="about.html">About</a></nav>
+
+    <nav>
+      <a href="about.html">About</a>
+    </nav>
+
     <h2>Subjects</h2>
+
     <div class="subjects">
+      <!-- Analysis I -->
       <a href="analysis-1/index.html" class="subject-card disabled">
         <div class="subject-header">
           <span class="subject-title">Analysis I</span>
-          <span class="status-badge status-coming-soon">Coming Soon</span>
+          <span class="status-badge status-soon">Coming soon</span>
         </div>
         <div class="subject-subtitle">The Real Line</div>
-        <p class="subject-topics">ℝ, sequences and series, limits and continuity, derivatives, the Riemann integral, the fundamental theorem of calculus</p>
+        <p class="subject-topics">
+          R, sequences and series, limits and continuity, derivatives,
+          the Riemann integral, the Fundamental Theorem of Calculus.
+        </p>
       </a>
+
+      <!-- Analysis II -->
       <a href="analysis-2/index.html" class="subject-card disabled">
         <div class="subject-header">
           <span class="subject-title">Analysis II</span>
-          <span class="status-badge status-coming-soon">Coming Soon</span>
+          <span class="status-badge status-soon">Coming soon</span>
         </div>
-        <div class="subject-subtitle">Topology, Linear Functional Analysis, and Differentiation</div>
-        <p class="subject-topics">Basic topology, metric spaces, normed/Banach/Hilbert spaces, derivatives, the inverse and implicit function theorems</p>
+        <div class="subject-subtitle">
+          Topology, Linear Functional Analysis, and Differentiation
+        </div>
+        <p class="subject-topics">
+          Basic topology, metric spaces, normed/Banach/Hilbert spaces,
+          derivatives, inverse function theorem, implicit function theorem.
+        </p>
       </a>
+
+      <!-- Complex Analysis -->
       <a href="complex-analysis/index.html" class="subject-card">
         <div class="subject-header">
           <span class="subject-title">Complex Analysis</span>
-          <span class="status-badge status-in-prep">In Preparation</span>
+          <span class="status-badge status-prep">In preparation</span>
         </div>
-        <div class="subject-subtitle">Functions of a Complex Variable</div>
-        <p class="subject-topics">ℂ, analytic functions, power series, Riemann-Stieltjes integrals, contour integrals, Cauchy's Theorem, Residue Calculus, Phragmén-Lindelöf</p>
+        <div class="subject-subtitle">Complex analysis on C</div>
+        <p class="subject-topics">
+          C, analytic functions, power series, Riemann–Stieltjes integrals,
+          contour integrals, Cauchy's Theorem, residue calculus,
+          Phragmén–Lindelöf.
+        </p>
       </a>
-      <a href="analysis-3/html_preview/index.html" class="subject-card"></a>
+
+      <!-- Analysis III -->
+      <a href="analysis-3/analysis-3-index.html" class="subject-card">
         <div class="subject-header">
           <span class="subject-title">Analysis III</span>
-          <span class="status-badge status-in-progress">In Progress</span>
+          <span class="status-badge status-progress">In progress</span>
         </div>
-        <div class="subject-subtitle">Measure Theory, Integration, and Fine Properties of Functions</div>
-        <p class="subject-topics">Measure theory, the Lebesgue integral, Fubini's theorem, Lᵖ spaces, differentiation of measures, functions of bounded variation, Hausdorff measures, Whitney's Extension Theorem</p>
+        <div class="subject-subtitle">
+          Measure Theory, Integration, and Fine Properties of Functions
+        </div>
+        <p class="subject-topics">
+          Measure theory, the Lebesgue integral, Fubini's theorem,
+          functions of bounded variation, Hausdorff measures,
+          Whitney's Extension Theorem.
+        </p>
       </a>
     </div>
-    <footer><p>© 2024 C. Nastasi</p></footer>
+
+    <footer>
+      <p>© 2024 C. Nastasi</p>
+    </footer>
   </div>
 </body>
 </html>
