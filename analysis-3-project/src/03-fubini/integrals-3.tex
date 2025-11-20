@@ -1,0 +1,610 @@
+\section{Applications of The Fubini-Tonelli Theorem to Integrals in $\R^n$}
+
+With the Fubini-Tonelli theorem, we finally have the tools to prove the following important result about how Lebesgue measure behaves under linear transformations.
+This completes our verification that Lebesgue measure is the ``right'' notion of volume in $\R^n$, and behaves as expected, at least for measurable sets.
+
+This first exercise does not use the Fubini-Tonelli theorem, but it is a useful property of the Lebesgue integral that will be used in the following Proposition about Lebesgue measure and linear maps.
+\begin{exercise}[Translation Invariance of the Lebesgue Integral on $\R^n$]
+    \label{ex:translation_invariance_of_lebesgue_integral}
+    Let $f\in L^1(\R^n)$ and let $y\in\R^n$.
+    Then
+    \[ \int_{\R^n} f(x - y) \, \dif x = \int_{\R^n} f(x) \, \dif x. \]
+\end{exercise}
+\begin{proof}
+    \textit{Step 1:} We prove the result for characteristic functions of measurable sets of finite measure.
+    \vspace{2mm}
+
+    Let $E \sub \R^n$ be a measurable set with $\mathcal{L}^n(E) < \infty$, and let $y\in\R^n$.
+    Then we compute
+    \[ \Chi_{ E + y }(x) = \begin{cases}
+        1 & \text{if } x\in E + y \\
+        0 & \text{if } x\notin E + y
+    \end{cases} \ = \begin{cases}
+        1 & \text{if } x - y \in E \\
+        0 & \text{if } x - y \notin E
+    \end{cases} \ = \Chi_{E}(x - y) \]
+    for each $x\in\R^n$, which implies that \[ \int_{\R^n} \Chi_{E + y}(x) \, \dif x = \mathcal{L}^n(E + y) = \mathcal{L}^n(E) = \int_{\R^n} \Chi_E(x) \, \dif x \]
+    by translation invariance of Lebesgue measure (Proposition \ref{prop:translation_invariance_homogeneity}).
+
+    Thus the result holds for characteristic functions of measurable sets with finite measure.
+
+    \vspace{2mm}
+    \textit{Step 2:} We prove the result for simple functions.
+    \vspace{2mm}
+
+    Let $\varphi : \R^n \to [0,\infty)$ be a simple function.
+    Then there exist measurable sets $E_1,\ldots,E_m \sub \R^n$ with $\mathcal{L}^n(E_j) < \infty$ for each $j=1,\ldots,m$, and nonnegative numbers $a_1,\ldots,a_m \geq 0$ such that
+    \[ \varphi = \sum_{j=1}^m a_j \Chi_{E_j}. \]
+    Then we compute
+    \begin{align*}
+        \int_{\R^n} \varphi(x - y) \, \dif x &= \int_{\R^n} \sum_{j=1}^m a_j \Chi_{E_j}(x - y) \, \dif x \\
+            &= \sum_{j=1}^m a_j \int_{\R^n} \Chi_{E_j}(x - y) \, \dif x \\
+            &= \sum_{j=1}^m a_j \int_{\R^n} \Chi_{E_j}(x) \, \dif x \\
+            &= \int_{\R^n} \varphi(x) \, \dif x,
+    \end{align*}
+    where we have used Step 1 in the third line.
+    Thus the result holds for simple functions.
+
+    \vspace{2mm}
+    \textit{Step 3:} We prove the result for nonnegative measurable functions.
+    \vspace{2mm}
+
+    Let $f : \R^n \to [0,\infty]$ be a nonnegative measurable function.
+    Then there exists a sequence of simple functions $\{\varphi_k\}_{k=1}^\infty$ such that $0 \leq \varphi_1 \leq \varphi_2 \leq \cdots \leq f$ and $\varphi_k(x) \to f(x)$ for each $x\in\R^n$ as $k\to\infty$ by Proposition \ref{prop:approximation_by_simple_functions}.
+    Then $\{\varphi_k(\cdot - y)\}_{k=1}^\infty$ is a sequence of simple functions such that $0 \leq \varphi_1(\cdot - y) \leq \varphi_2(\cdot - y) \leq \cdots \leq f(\cdot - y)$ and $\varphi_k(x - y) \to f(x - y)$ for each $x\in\R^n$ as $k\to\infty$.
+    Now we can use the Monotone Convergence Theorem to compute
+    \begin{align*}
+        \int_{\R^n} f(x - y) \, \dif x &= \int_{\R^n} \lim_{k\to\infty} \varphi_k(x - y) \, \dif x \\
+            &= \lim_{k\to\infty} \int_{\R^n} \varphi_k(x - y) \, \dif x \\
+            &= \lim_{k\to\infty} \int_{\R^n} \varphi_k(x) \, \dif x = \int_{\R^n} f(x) \, \dif x,
+    \end{align*}
+    where we have used Step 2 in the third line.
+    Thus the result holds for nonnegative measurable functions.
+
+    \vspace{2mm}
+    \textit{Step 4:} We prove the result for general integrable functions.
+    \vspace{2mm}
+
+    Let $f\in L^1(\R^n)$ and let $y\in\R^n$.
+    Then we can write $f = f^+ - f^-$ where $f^+,f^- : \R^n \to [0,\infty]$ are nonnegative measurable functions with $\int_{\R^n} f^+ \, \dif x < \infty$ and $\int_{\R^n} f^- \, \dif x < \infty$.
+    Then we compute
+    \begin{align*}
+        \int_{\R^n} f(x - y) \, \dif x &= \int_{\R^n} f^+(x - y) \, \dif x - \int_{\R^n} f^-(x - y) \, \dif x \\
+            &= \int_{\R^n} f^+(x) \, \dif x - \int_{\R^n} f^-(x) \, \dif x \\
+            &= \int_{\R^n} f(x) \, \dif x,
+    \end{align*}
+    where we have used Step 3 in the second line.
+    Thus the result holds for general integrable functions.
+\end{proof}
+
+
+\begin{proposition}[Lebesgue Measure and Linear Maps]
+    \label{prop:linear_transformation_lebesgue_measure}
+    Let $T : \R^n \to \R^n$ be a linear map.
+    Then for each measurable set $E \sub \R^n$ we have
+    \[ \mathcal{L}^n(T(E)) = |\det(T)| \cdot \mathcal{L}^n(E). \]
+\end{proposition}
+
+\begin{proof}
+    \textit{Step 1:} Suppose we are in the special case of a box and a diagonal linear map.
+    \vspace{2mm}
+
+    Let $ R = [a_1,b_1]\times \cdots \times [a_n,b_n] \sub \R^n $ be a box, and let $T : \R^n \to \R^n$ be the diagonal linear map defined by
+    \[ T(x_1,\ldots,x_n) = (\lambda_1 x_1, \ldots, \lambda_n x_n) \]
+    for some $\lambda_1,\ldots,\lambda_n \in \R$. 
+    If $\lambda_j = 0$ for some $j\in\{1,\ldots,n\}$, then $\det(T) = 0$ and $T(R)$ is contained in the hyperplane $\{x_j = 0\}$, which has Lebesgue measure zero; the result holds in this case.
+
+    Thus we may assume that $\lambda_j \neq 0$ for each $j=1,\ldots,n$.
+    Then $T(R)$ is the box 
+    \[ T(R) = [\lambda_1 a_1, \lambda_1 b_1] \times \cdots \times [\lambda_n a_n, \lambda_n b_n]. \]
+    By direct computation we have
+    \begin{align*}
+        \vol(T(R)) &= \prod_{j=1}^n |\lambda_j b_j - \lambda_j a_j| = \prod_{j=1}^n |\lambda_j| \cdot \prod_{j=1}^n |b_j - a_j| \\
+            &= |\det(T)| \cdot \vol(R).
+    \end{align*}
+    This proves the result in this special case.
+
+    \vspace{2mm}
+    \textit{Step 2:} We prove the special case of a measurable set and a diagonal linear map.
+    \vspace{2mm}
+
+    Let $E \sub \R^n$ be a measurable set, and let $T : \R^n \to \R^n$ be the diagonal linear map defined by
+    \[ T(x_1,\ldots,x_n) = (\lambda_1 x_1, \ldots, \lambda_n x_n) \]
+    for some $\lambda_1,\ldots,\lambda_n \in \R$.
+    If $\lambda_j = 0$ for some $j\in\{1,\ldots,n\}$, then $\det(T) = 0$ and $T(E)$ is contained in the hyperplane $\{x_j = 0\}$, which has Lebesgue measure zero; the result holds in this case.
+    Thus we may assume that $\lambda_j \neq 0$ for each $j=1,\ldots,n$.
+    Also if $\mathcal{L}^n(E) = \infty$, then the result holds trivially, so we may assume that $\mathcal{L}^n(E) < \infty$.
+
+    Let $\epsilon > 0$. Then there exists a countable collection of boxes $\{R_k\}_{k=1}^\infty$ such that $E \sub \bigcup_{k=1}^\infty R_k$ and
+    \[ \sum_{k=1}^\infty \vol(R_k) < \mathcal{L}^n(E) + \epsilon. \]
+    Then the collection $\{T(R_k)\}_{k=1}^\infty$ is a countable cover of $T(E)$ by boxes, so
+    \begin{align*}
+        \mathcal{L}^n(T(E)) &\leq \mathcal{L}^n \left( \bigcup_{k=1}^\infty T(R_k) \right) \leq \sum_{k=1}^\infty \vol(T(R_k)) \\
+            &= \sum_{k=1}^\infty |\det(T)| \cdot \vol(R_k) = |\det(T)| \cdot \sum_{k=1}^\infty \vol(R_k) \\
+            &< |\det(T)| \cdot (\mathcal{L}^n(E) + \epsilon)
+    \end{align*}
+    by Step 1. Since $\epsilon > 0$ was arbitrary, we have
+    \[ \mathcal{L}^n(T(E)) \leq |\det(T)| \cdot \mathcal{L}^n(E). \]
+
+    But $T$ is invertible since $\lambda_j \neq 0$ for each $j=1,\ldots,n$, so because $T^{-1}$ is also a diagonal linear map with determinant $\det(T^{-1}) = 1/\det(T)$, we can apply the same argument to $T^{-1}$ to get
+    \[ \mathcal{L}^n(T^{-1}(T(E))) \leq |\det(T^{-1})| \cdot \mathcal{L}^n(T(E)) = \frac{1}{|\det(T)|} \cdot \mathcal{L}^n(T(E)). \]
+    That is, \[ |\det(T)| \cdot \mathcal{L}^n(E) \leq \mathcal{L}^n(T(E)). \]
+
+    Therefore we have equality, \[ \mathcal{L}^n(T(E)) = |\det(T)| \cdot \mathcal{L}^n(E) \]
+    and the result holds in this case.
+
+    \vspace{2mm}
+    \textit{Step 3:} We prove the special case of a measurable set and a special class of invertible linear transformations.
+    \vspace{2mm}
+
+    Let $E \sub \R^n$ be a measurable set with $\mathcal{L}^n(E) < \infty$, and let $T : \R^n \to \R^n$ be an invertible linear map given by an upper triangular matrix with $1$'s on the diagonal; that is,
+    there exist numbers $\{ a_{j,k} \}_{1\leq j,k \leq n}$ such that $a_{j,j} = 1$ for each $j=1,\ldots,n$, and $a_{j,k} = 0$ for each $j > k$, and 
+    \[ T \begin{pmatrix}
+        x_1 \\ x_2 \\ \vdots \\ x_n
+    \end{pmatrix}
+    = \begin{pmatrix}
+        x_1 + a_{1,2} x_2 + \cdots + a_{1,n} x_n \\
+        x_2 + a_{2,3} x_3 + \cdots + a_{2,n} x_n \\
+        \vdots \\
+        x_j + \sum_{ j < k \leq n} a_{j,k} x_k \\
+        \vdots \\
+        x_n
+    \end{pmatrix} \]
+
+for each $(x_1,\ldots,x_n) \in \R^n$.
+    
+Note that $\det(T) = 1$. Also note that
+\begin{align*}
+    \Chi_{T(E)}(y) &= \Chi_E(T^{-1}(y)) \\
+        &= \Chi_E \begin{pmatrix}
+            y_1 - a_{1,2} y_2 - \cdots - a_{1,n} y_n \\
+            y_2 - a_{2,3} y_3 - \cdots - a_{2,n} y_n \\
+            \vdots \\
+            y_j - \sum_{ j < k \leq n} a_{j,k} y_k \\
+            \vdots \\
+            y_n
+        \end{pmatrix}
+\end{align*}
+since $T$ is a linear bijection.
+If $E \subseteq \R^n$ is a measurable set, then we compute
+\begin{align*}
+    \mathcal{L}^n (T(E)) &= \int_{\R^n} \Chi_{T(E)}(y) \, \dif y \\
+        &= \int_\R \cdots \int_\R \Chi_{T(E)} (y_1,\ldots,y_n) \, \dif y_1 \cdots \dif y_n \\
+        &= \int_\R \cdots \int_\R \Chi_E\left( y_1 - \sum_{1 < k \leq n} a_{1,k} y_k, \ldots, y_j - \sum_{ j < k \leq n} a_{j,k} y_k, \ldots, y_n \right) \, \dif y_1 \cdots \dif y_n \\
+        &= \int_\R \cdots \int_\R \Chi_E(y_1,y_2 - \sum_{2 < k \leq n} a_{2,k} y_k, \ldots, y_j - \sum_{ j < k \leq n} a_{j,k} y_k, \ldots, y_n) \, \dif y_1 \dif y_2 \cdots \dif y_n \\
+        &= \int_\R \cdots \int_\R \Chi_E(y_1,y_2 - \sum_{2 < k \leq n} a_{2,k} y_k, \ldots, y_{n-1} - a_{n-1,n} y_n, y_n) \, \dif y_2 \dif y_1\cdots \dif y_n \\
+\end{align*}
+where we have used Tonelli's theorem in the second and last line, and translation invariance of the Lebesgue integral on $\R^n$ in the fourth line.
+
+If we repeat these last two steps $n-2$ more times, we eventually get
+\begin{align*}
+    \mathcal{L}^n(T(E)) &= \int_\R \cdots \int_\R \Chi_E(y_1,y_2,\ldots,y_n) \, \dif y_{n-1} \cdots \dif y_2 \dif y_1\dif y_n \\
+        &= \int_{\R^n} \Chi_E(y) \, \dif y = \mathcal{L}^n(E)
+\end{align*}
+where we have again used Tonelli's theorem in the second line.
+
+Since $\det(T) = 1$, we have proven the result in this case. 
+
+\vspace{2mm}
+\textit{Step 4:} We prove the general case.
+\vspace{2mm}
+
+Let $E \sub \R^n$ be a measurable set, and let $T : \R^n \to \R^n$ be a linear map.
+If $\det(T) = 0$, then $T(E)$ is contained in a hyperplane, which has Lebesgue measure zero; the result holds in this case.
+Thus we may assume that $\det(T) \neq 0$.
+Also if $\mathcal{L}^n(E) = \infty$, then the result holds trivially, so we may assume that $\mathcal{L}^n(E) < \infty$.
+
+By the LDU decomposition from linear algebra, we can write $T = L D U$ where $L$ is a lower triangular matrix with $1$'s on the diagonal, $D$ is a diagonal matrix, and $U$ is an upper triangular matrix with $1$'s on the diagonal.
+Then $\det(T) = \det(L) \det(D) \det(U) = \det(D)$ since $\det(L) = \det(U) = 1$.
+We compute that
+\begin{align*}
+    \mathcal{L}^n(T(E)) &= \mathcal{L}^n(L(D(U(E)))) \\
+        &= \mathcal{L}^n(D(U(E))) && \text{by Step 3} \\
+        &= |\det(D)| \cdot \mathcal{L}^n(U(E)) && \text{by Step 2} \\
+        &= |\det(D)| \cdot \mathcal{L}^n(E) && \text{by Step 3} \\
+        &= |\det(T)| \cdot \mathcal{L}^n(E)
+\end{align*}
+at last.
+This proves the result in general.
+\end{proof}
+
+\begin{exercise}[Linear Change of Variables]
+    \label{ex:linear_change_of_variables}
+    Let $T : \R^n \to \R^n$ be a linear isomorphism, and let $f \in L^1(\R^n)$.
+    Then
+    \[ \int_{\R^n} f(T(x)) |\det(T)| \, \dif x = \int_{\R^n} f(y) \, \dif y. \]
+\end{exercise}
+\begin{proof}
+    Define 
+    \[ \mathcal{F} := \{ f\in L^1(\R^n) : \int_{\R^n} f(T(x)) |\det(T)| \, \dif x = \int_{\R^n} f(y) \, \dif y \}. \]
+    We argue that $\mathcal{F} = L^1(\R^n)$ --- we break the proof into three steps.
+
+    \vspace{2mm}
+    \textit{Step 1:} We prove that $\mathcal{F}$ is a vector subspace of $L^1(\R^n)$.
+    \vspace{2mm}
+
+    Let $f,g \in \mathcal{F}$ and let $\alpha\in\R$.
+    Then \begin{align*}
+        \int_{\R^n} (f + \alpha g) \,\dif y &= \int_{\R^n} f(y) \, \dif y + \alpha \int_{\R^n} g(y) \, \dif y \\
+            &= \int_{\R^n} f(T(x)) |\det(T)| \, \dif x + \alpha \int_{\R^n} g(T(x)) |\det(T)| \, \dif x \\
+            &= \int_{\R^n} (f(T(x)) + \alpha g(T(x))) |\det(T)| \, \dif x \\
+            &= \int_{\R^n} (f + \alpha g)(T(x)) |\det(T)| \, \dif x.
+    \end{align*}
+    Thus $f + \alpha g \in \mathcal{F}$, and $\mathcal{F}$ is a vector subspace of $L^1(\R^n)$.
+
+    \vspace{2mm}
+    \textit{Step 2:} We prove that $\mathcal{F}$ contains all simple functions.
+    \vspace{2mm}
+
+    Since every simple function is a finite linear combination of characteristic functions of measurable sets of finite measure, it suffices to show that $\Chi_E \in \mathcal{F}$ for each measurable set $E \sub \R^n$ with $\mathcal{L}^n(E) < \infty$
+    by Step 1.
+
+    If $E\subseteq \R^n$ is a measurable set with $\mathcal{L}^n(E) < \infty$, then we compute
+    \[ \Chi_{T^{-1}(E)}(x) = \begin{cases}
+        1 & \text{if } x\in T^{-1}(E) \\
+        0 & \text{if } x\notin T^{-1}(E)
+    \end{cases} = \begin{cases}
+        1 & \text{if } T(x) \in E \\
+        0 & \text{if } T(x) \notin E
+    \end{cases} = \Chi_E(T(x)) \]
+    for each $x\in\R^n$.
+    Thus we use the result in Proposition \ref{prop:linear_transformation_lebesgue_measure} to compute
+    \begin{align*}
+        \int_{\R^n} \Chi_E(T(x)) \,\dif x &= \int_{\R^n} \Chi_{T^{-1}(E)}(x) \, \dif x = \mathcal{L}^n(T^{-1}(E)) \\
+            &= \frac{1}{|\det(T)|} \cdot \mathcal{L}^n(E) = \frac{1}{|\det(T)|} \cdot \int_{\R^n} \Chi_E(y) \, \dif y
+    \end{align*}
+    and multiplying both sides by $|\det(T)|$ shows that $\Chi_E \in \mathcal{F}$.
+
+    Since $E$ was an arbitrary measurable set with $\mathcal{L}^n(E) < \infty$, we have shown that $\mathcal{F}$ contains all characteristic functions of measurable sets of finite measure, and hence $\mathcal{F}$ contains all simple functionsby Step 1.
+    
+    \vspace{2mm}
+    \textit{Step 3:} We prove that $\mathcal{F} = L^1(\R^n)$.
+    \vspace{2mm}
+
+    Let $f\in L^1(\R^n)$ be a nonnegative function.
+    Then there exists a sequence of simple functions $\{f_k\}_{k=1}^\infty$ such that $0 \leq f_1 \leq f_2 \leq \cdots \leq f$ and $f_k(x) \to f(x)$ for each $x\in\R^n$ as $k\to\infty$ by Proposition \ref{prop:approximation_by_simple_functions}.
+    Then $\{ f_k \circ T \}_{k=1}^\infty$ is a sequence of simple functions such that $0 \leq f_1 \circ T \leq f_2 \circ T \leq \cdots \leq f \circ T$ and $f_k(T(x)) \to f(T(x))$ for each $x\in\R^n$ as $k\to\infty$.
+    Now we can use the Monotone Convergence Theorem to compute
+    \[ \int_{\R^n} f(T(x)) |\det(T)| \, \dif x = \lim_{k\to\infty} \int_{\R^n} f_k(T(x)) |\det(T)| \, \dif x = \lim_{k\to\infty} \int_{\R^n} f_k(y) \, \dif y = \int_{\R^n} f(y) \, \dif y \]
+    since each $f_k \in \mathcal{F}$ by Step 2.
+    Thus $f \in \mathcal{F}$.
+
+    Let $f\in L^1(\R^n)$ be a real-valued integrable function, then we can write $f = f^+ - f^-$ where $f^+,f^- \geq 0$ are integrable functions.
+    Since $f^+,f^- \in \mathcal{F}$ and $\mathcal{F}$ is a vector subspace of $L^1(\R^n)$ by Step 1, we have $f \in \mathcal{F}$.
+\end{proof}
+
+\begin{exercise}[Baby Gauss-Green Theorem]
+    \label{ex:baby_gauss_green_theorem}
+    If $\varphi \in C^1_c(\R^n)$ then
+    \[ \int_{\R^n} \nabla \varphi(x) \, \dif x = 0. \]
+\end{exercise}
+
+\begin{proof}
+    Let $\varphi \in C^1_c(\R^n)$.
+    Then the support of $\varphi$ is compact, so there exists $R>0$ such that $\varphi(x) = 0$ for all $x\in \R^n$ with $\|x\|_\infty \geq R$.
+    That is, the function $\varphi$ vanishes outside the cube $[-R,R]^n$.
+
+    Thus $\nabla \varphi$ also vanishes outside $[-R,R]^n$, so
+    \[ \int_{\R^n} \nabla \varphi \, \dif x = \int_{ [-R,R]^n } \nabla \varphi \,\dif x. \]
+    As $\nabla \varphi = (\partial_1 \varphi, \ldots, \partial_n \varphi)$ is vector-valued, we have
+    \[ \int_{[-R,R]^n} \partial_j \varphi(x) \, \dif x = \int_{[-R,R]^n} \frac{\partial \varphi}{\partial x_j}(x) \, \dif x \]
+    for each $j=1,\ldots,n$.
+
+    Fix $j\in\{1,\ldots,n\}$.
+    We can compute this integral using iterated integrals --- use the Fubini-Tonelli theorem to see that
+    \[ \int_{\R^n} \partial_j \,\dif x = \int_{[-R,R]^{n-1}} \left( \int_{-R}^R \partial_j \varphi(x) \, \dif x_j \right) \, \dif x_1 \cdots \widehat{\dif x_j} \cdots \dif x_n. \]
+    By the fundamental theorem of calculus, for each fixed $(x_1,\ldots,x_{j-1},x_{j+1},\ldots,x_n) \in [-R,R]^{n-1}$, we have
+    \[ \int_{-R}^R \partial_j \varphi(x) \, \dif x_j = \varphi(x_1,\ldots,x_{j-1},R,x_{j+1},\ldots,x_n) - \varphi(x_1,\ldots,x_{j-1},-R,x_{j+1},\ldots,x_n) = 0 \]
+    since $\varphi$ vanishes on $\R^n \setminus (-R,R)^n$.
+
+    Thus
+    \[ \int_{\R^n} \partial_j \varphi(x) \, \dif x = \int_{[-R,R]^{n-1}} 0 \, \dif x_1 \cdots \widehat{\dif x_j} \cdots \dif x_n = 0. \]
+    Since this holds for each $j=1,\ldots,n$, we have
+    \[ \int_{\R^n} \nabla \varphi(x) \, \dif x = 0. \]
+\end{proof}
+
+\subsection{Volume of the Unit Ball in $\R^n$}
+
+In this section, we compute the volume of the unit ball in $\R^n$ from scratch.
+In particular, we will not assume the formula for the volume (area) of the unit ball (disk) in $\R^2$ or use polar coordinates.
+
+This is important to be totally rigorous, as I do not want to assume any results from multivariable Riemann integration.
+All we will need is the Fubini-Tonelli theorem and some single variable Riemann integration results like the Fundamental Theorem of Calculus, the Change of Variables Theorem, and Integration by Parts.
+
+\begin{exercise}[Warm-up]
+    \label{ex:warm_up_gaussian_integral}
+    Show that
+    \[ \int_0^\infty y e^{-a y^2} \, \dif y = \frac{1}{2a} \]
+    for each $a > 0$.
+\end{exercise}
+\begin{proof}
+    Let $a > 0$.
+    Then we can compute this as a Riemann integral using the change of variable
+    \[ t(y) = -a y^2 \quad \Rightarrow \dif t = -2a y \, \dif y \]
+    which gives
+    \begin{align*}
+        \int_0^\infty y e^{-a y^2} \, \dif y &= \lim_{R\to \infty} \int_0^R y e^{-a y^2} \, \dif y \\
+            &= \lim_{R\to\infty} \int_{t(0)}^{t(R)} -\frac{1}{2a} e^t \, \dif t \\
+            &= \lim_{R\to\infty} -\frac{1}{2a} \int_0^{-a R^2} e^t \, \dif t \\
+            &= \lim_{R\to\infty} \frac{1}{2a} \int_{-a R^2}^0 e^t \, \dif t \\
+            &= \lim_{R\to\infty} \frac{1}{2a} \left( e^0 - e^{-a R^2} \right) && \text{ by the Fundamental Theorem of Calculus} \\
+            &= \lim_{R\to\infty} \frac{1}{2a} (1 - e^{-a R^2}) = \frac{1}{2a}.
+    \end{align*}
+    
+    We note that because the integrand is nonnegative and the improper Riemann integral converges, the Lebesgue integral also converges and agrees with the improper Riemann integral.
+    This completes the proof.
+\end{proof}
+
+\begin{proposition}[Gaussian Integral Identity]
+    \label{prop:gaussian_integral_identity}
+    \[ \int_{\R} e^{-x^2} \, \dif x = \sqrt{\pi}. \]
+\end{proposition}
+
+\begin{proof}
+    Notice that
+    \[ \int_\R e^{-x^2} \, \dif x = \int_{-\infty}^\infty e^{-x^2} \, \dif x = 2 \int_0^\infty e^{-x^2} \, \dif x. \]
+    Set
+    \[ J := \int_0^\infty e^{-x^2} \, \dif x \]
+    and notice that
+    \begin{align*}
+        J^2 &= \left( \int_0^\infty e^{-x^2} \, \dif x \right) \left( \int_0^\infty e^{-y^2} \, \dif y \right) \\
+            &= \int_0^\infty \int_0^\infty e^{-x^2} e^{-y^2} \, \dif x \dif y && \text{ by the Fubini-Tonelli theorem}\\
+            &= \int_0^\infty \int_0^\infty e^{-(x^2 + y^2)} \, \dif x \dif y.
+    \end{align*}
+
+    Define 
+    \[ \phi(y) = \int_0^\infty e^{-(x^2 + y^2)} \, \dif x \]
+    for each $y\in[0,\infty)$.
+    For each fixed $y\in[0,\infty)$, we compute this integral with the change of variable 
+    \[ t(x) = \frac{x}{y} \quad \Rightarrow \quad x = yt, \quad \dif x = y \, \dif t \]
+    to see that
+    \[ \phi(y) = \int_0^\infty e^{-(y^2 t^2 + y^2)} y\,\dif t = \int_0^\infty e^{-y^2 (t^2 + 1)} y\,\dif t \]
+    Returning to the original computation for $J^2$ we have that
+    \begin{align*}
+        J^2 &= \int_0^\infty \phi(y) \, \dif y \\
+            &= \int_0^\infty \int_0^\infty e^{-y^2 (t^2 + 1)} y \, \dif t \dif y \\
+            &= \int_0^\infty \left( \int_0^\infty e^{-y^2 (t^2 + 1)} y \, \dif y \right) \dif t && \text{ by the Fubini-Tonelli theorem} \\
+            &= \int_0^\infty \frac{1}{2(t^2 + 1)} \, \dif t && \text{ by the Warm-up Exercise} \\
+            &= \frac{1}{2} \left[ \tan^{-1}(t) \right]\Big|_{t=0}^{t=\infty} = \frac{1}{2}\left( \frac{\pi}{2} - 0 \right) = \frac{\pi}{4}.
+    \end{align*}
+    We note that in this computation, we have used the Fubini-Tonelli theorem twice, two single-varible substitutions (in the Warm-up Exercise and in the definition of $\phi$), the single variable Fundamental Theorem of Calculus, and the fact that $\lim_{t\to\infty} \tan^{-1}(t) = \frac{\pi}{2}$.
+    We have also used the fact that all the functions we have integrated are nonnegative and have convergent improper Riemann integrals, so that their Lebesgue integrals are also finite and agree with the improper Riemann integrals.
+
+    Thus $J^2 = \frac{\pi}{4}$, so $J = \frac{\sqrt{\pi}}{2}$.
+    Therefore
+    \[ \int_\R e^{-x^2} \, \dif x = 2J = \sqrt{\pi}. \]
+\end{proof}
+
+\begin{proposition}[Volume of the $n$-Dimensional Ball]
+    \label{ex:volume_of_n_dimensional_ball}
+    For each $n \geq 2$, the volume of the $n$-dimensional ball of unit radius in $\R^n$ satisfies
+    \[ \mathcal{L}^n (B_n(0,1)) = \frac{2\pi}{n}\mathcal{L}^{n-2}(B_{n-2}(0,1)). \] 
+\end{proposition}
+\begin{proof}
+    \textit{Step 0:}
+    We compute the volume of the $0$-dimensional, $1$-dimensional, and $2$-dimensional unit balls to start the induction.
+
+    Since $\mathcal{L}^0$ is the counting measure, we have
+    \[ B_0(0,1) = \{0\} \quad \Rightarrow \quad \mathcal{L}^0(B_0(0,1)) = 1. \]
+    In one dimension we have
+    \[ B_1(0,1) = (-1,1) \quad \Rightarrow \quad \mathcal{L}^1(B_1(0,1)) = 2. \]
+
+    In two dimensions, we have the unit disk 
+    \[ B_2(0,1) = \{ (x_1,x_2) \in \R^2 : x_1^2 + x_2^2 < 1 \}. \]
+    We compute its volume using Tonelli's theorem.
+
+    Note that if $x_2\in \R$ is such that $|x_2| > 1$, then $\Chi_{B_2(0,1)}(x_1,x_2) = 0$ for each $x_1\in\R$.
+    If $x_2\in\R$ is such that $|x_2| \leq 1$, then
+    \begin{align*} \Chi_{B_2(0,1)}(x_1,x_2) &= \begin{cases}
+        1, & \text{if } x_1^2 + x_2^2 < 1 \\
+        0, & \text{if } x_1^2 + x_2^2 \geq 1
+    \end{cases} \\& = \begin{cases}
+        1, & \text{if } -\sqrt{1 - x_2^2} < x_1 < \sqrt{1 - x_2^2} \\
+        0, & \text{otherwise}
+    \end{cases} = \Chi_{\left[-\sqrt{1 - x_2^2}, \sqrt{1 - x_2^2}\right]}(x_1) \end{align*}
+    for each $x_1\in\R$.
+
+    Now can can compute
+    \begin{align*}
+        \mathcal{L}^2(B_2(0,1)) &= \int_{\R^2} \Chi_{B_2(0,1)} \, \dif x \\
+            &= \int_{\R} \int_{\R} \Chi_{B_2(0,1)}(x_1,x_2) \, \dif x_1 \dif x_2  && \text{ by Fubini's theorem} \\
+            &= \int_{\R} \int_{\R} \Chi_{\left[-\sqrt{1 - x_2^2}, \sqrt{1 - x_2^2}\right]}(x_1) \, \dif x_1 \dif x_2 &&\text{ by previous computation}\\
+            &= \int_{-1}^1 \left( \int_{-\sqrt{1 - x_1^2}}^{\sqrt{1 - x_1^2}} 1 \, \dif x_2 \right) \dif x_1 \\
+            &= \int_{-1}^1 2\sqrt{1 - x_1^2} \, \dif x_1 \\
+            &= 4\int_0^1 \sqrt{1 - x_1^2} \, \dif x_1 && \text{ by symmetry} \\
+            &= 4\int_0^{\pi/2} \cos^2(\theta) \, \dif \theta && \text{ by the change of variables } x_1 = \sin(\theta) \\
+            &= 4\int_0^{\pi/2} \frac{1 + \cos(2\theta)}{2} \, \dif \theta && \text{ by the double-angle formula} \\
+            &= 2\left[ \theta + \frac{\sin(2\theta)}{2} \right]\Big|_{0}^{\pi/2} = 2\left( \frac{\pi}{2} - 0 + 0 - 0 \right) = \pi.
+    \end{align*}
+    Thus we have
+    \[ \mathcal{L}^0(B_0(0,1)) = 1, \quad \mathcal{L}^1(B_1(0,1)) = 2, \quad \mathcal{L}^2(B_2(0,1)) = \pi \]
+    as we expect.
+
+    \vspace{2mm}
+    \textit{Step 1:} 
+    Now we prove the result for $n > 2$ by induction.
+    Assume that the result holds for $n-1$ and $n-2$ where $n > 2$.
+    We compute the volume of the $n$-dimensional unit ball using Tonelli's theorem.
+
+    Note that if $(x_1,x_2)\in \R^2$ is such that $x_1^2 + x_2^2 > 1$, then $\Chi_{B_n(0,1)}(x_1,x_2,y) = 0$ for each $y \in \R^{n-2}$.
+    If $(x_1,x_2)\in\R^2$ is such that $x_1^2 + x_2^2 \leq 1$, then
+    \begin{align*}
+        \Chi_{B_n(0,1)}(x_1,x_2,y) &= \begin{cases}
+            1, & \text{if } x_1^2 + x_2^2 + \|y\|^2 < 1 \\
+            0, & \text{if } x_1^2 + x_2^2 + \|y\|^2 \geq 1
+        \end{cases} \\&= \begin{cases}
+            1, & \text{if } \|y\|^2 < 1 - (x_1^2 + x_2^2) \\
+            0, & \text{if } \|y\|^2 \geq 1 - (x_1^2 + x_2^2)
+        \end{cases} \\&= \Chi_{B_{n-2}(0,\sqrt{1 - (x_1^2 + x_2^2)})}(y)
+    \end{align*}
+    for each $y \in \R^{n-2}$.
+
+    Now we can compute
+    \begin{align*}
+        \mathcal{L}^n(B_n(0,1)) &= \int_{\R^n} \Chi_{B_n(0,1)} \, \dif x \\
+            &= \int_{\R^2} \int_{\R^{n-2}} \Chi_{B_n(0,1)}(x_1,x_2,y) \, \dif y \dif x_1 \dif x_2 && \text{ by Tonelli's theorem} \\
+            &= \int_{\R^2} \int_{\R^{n-2}} \Chi_{B_{n-2}(0,\sqrt{1 - (x_1^2 + x_2^2)})}(y) \, \dif y \dif x_1 \dif x_2 &&\text{ by previous computation}\\
+            &= \int_{x_1^2 + x_2^2 \leq 1} \left( \int_{\R^{n-2}} \Chi_{B_{n-2}(0,\sqrt{1 - (x_1^2 + x_2^2)})}(y) \, \dif y \right) \dif x_1 \dif x_2 \\
+            &= \int_{x_1^2 + x_2^2 \leq 1} \mathcal{L}^{n-2}(B_{n-2}(0,\sqrt{1 - (x_1^2 + x_2^2)})) \, \dif x_1 \dif x_2 \\
+            &= \int_{x_1^2 + x_2^2 \leq 1} (1 - (x_1^2 + x_2^2))^{\frac{n-2}{2}} \mathcal{L}^{n-2}(B_{n-2}(0,1))\,\dif x_1 \dif x_2 && \text{ by \ref{prop:linear_transformation_lebesgue_measure}} \\
+            &= \mathcal{L}^{n-2}(B_{n-2}(0,1)) \int_{x_1^2 + x_2^2 \leq 1} (1 - (x_1^2 + x_2^2))^{\frac{n-2}{2}} \, \dif x_1 \dif x_2 \\
+            &= \mathcal{L}^{n-2}(B_{n-2}(0,1)) \int_{-1}^1 \int_{-\sqrt{1 - x_1^2}}^{\sqrt{1 - x_1^2}} (1 - (x_1^2 + x_2^2))^{\frac{n-2}{2}} \, \dif x_2 \dif x_1 && \text{ by Tonelli's theorem} \\
+            &= 4\,\mathcal{L}^{n-2}(B_{n-2}(0,1)) \int_0^1 \int_0^{\sqrt{1 - x_1^2}} (1 - (x_1^2 + x_2^2))^{\frac{n-2}{2}} \, \dif x_2 \dif x_1 && \text{ by symmetry and homogeneity.} \\
+    \end{align*}
+
+    For each $ s\in[-1,1]$ we define
+    \[ \psi(s) := \int_0^{\sqrt{1 - s^2}} (1 - (s^2 + x_2^2))^{\frac{n-2}{2}} \, \dif x_2. \]
+    Then the big computation above shows that
+    \[ \mathcal{L}^n(B_n(0,1)) = 4\,\mathcal{L}^{n-2}(B_{n-2}(0,1)) \int_0^1 \psi(s) \, \dif s. \tag{$\star$} \]
+
+    We claim That
+    \[ \psi(s) = (1 - s^2)^{\frac{n}{2}} \int_0^1 (1 - t^2)^{\frac{n-2}{2}} \, \dif t \]
+    for each $s\in(-1,1)$.
+    To see this, we use the change of variables
+    \[ x(t) = t\sqrt{1 - s^2} \quad \Rightarrow \quad \dif x = \sqrt{1 - s^2} \, \dif t \]
+    to see that for $0 \leq x \leq \sqrt{1 - s^2}$, we have 
+    \[ (1-s^2 - x^2) = ( 1 - s^2 - t^2(1-s^2)) = (1 - s^2)(1 - t^2) \]
+    which implies
+    \begin{align*}
+        \int_0^{\sqrt{1-s^2}} (1 - s^2 - x^2)^{\frac{n-2}{2}} \, \dif x &= (1 - s^2)^{\frac{n-2}{2}} \int_0^1 (1 - t^2)^{\frac{n-2}{2}} \sqrt{1 - s^2} \, \dif t \\
+            &= (1 - s^2)^{\frac{n-1}{2}} \int_0^1 (1 - t^2)^{\frac{n-2}{2}} \, \dif t \\
+    \end{align*}
+    proving our claim.
+
+    Returning to the computation in ($\star$), we have
+    \[ \mathcal{L}^n(B_n(0,1)) = 4\,\mathcal{L}^{n-2}(B_{n-2}(0,1)) \int_0^1 (1 - s^2)^{\frac{n-1}{2}} \, \dif s\, \int_0^1 (1 - t^2)^{\frac{n-2}{2}} \, \dif t \tag{$\star\star$}\]
+    by our claim and another application of Tonelli's theorem.
+
+\noindent\textit{Step 2:}
+We finish the computation.
+\vspace{2mm}
+
+Let
+\[ C_m:=\int_{0}^{\pi/2}\cos^{m}\theta\,\mathrm{d}\theta \]
+for each integer $m\geq 0$.
+We notice that with the change of variables $s=\sin\theta$ and $t=\sin\phi$, we have
+\[ \int_0^1 (1 - s^2)^{\frac{n-1}{2}} \, \dif s = \int_0^{\pi/2} \cos^{n} \theta \, \dif \theta = C_{n} \]
+and
+\[ \int_0^1 (1 - t^2)^{\frac{n-2}{2}} \, \dif t = \int_0^{\pi/2} \cos^{n-1} \phi \, \dif \phi = C_{n-1}. \]
+Going back to ($\star\star$), we have
+\[ \mathcal{L}^n(B_n(0,1)) = 4\,\mathcal{L}^{n-2}(B_{n-2}(0,1)) C_{n} C_{n-1}. \]
+By exercise \ref{ex:recurrance_relation_for_cosine_powers}, we see that $2C_n C_{n-1} = \frac{\pi}{n}$ so that 
+\[ \mathcal{L}^n(B_n(0,1)) = \frac{2\pi}{n} \mathcal{L}^{n-2}(B_{n-2}(0,1)) \]
+as desired.
+\end{proof}
+
+You see, it's a bit of work to avoid computing in polar coordinates. 
+
+\begin{exercise}[Recurrance Relation for Cosine Powers]
+    \label{ex:recurrance_relation_for_cosine_powers}
+    For each integer $m\geq 0$ we define
+    \[ C_m := \int_0^{\pi/2} \cos^m \theta \, \dif \theta. \]
+    Show that
+    \[ C_0 = \frac{\pi}{2}, \quad C_1 = 1, \quad \text{and} \quad C_m = \frac{m-1}{m} C_{m-2} \text{ for } m \geq 2. \]
+    From this, deduce that \[ 2C_m C_{m-1} = \frac{\pi}{m} \text{ for each integer } m \geq 1. \]
+\end{exercise}
+\begin{proof}
+    The base cases are straightforward:
+    \[ C_0 = \int_0^{\pi/2} 1 \,\dif \theta = \frac{\pi}{2}, \quad\text{ and }\quad C_1 = \int_0^{\pi/2} \cos \theta \, \dif \theta = \sin\left(\frac{\pi}{2}\right) - \sin(0)= 1. \]
+    Let's prove the recurrence relation for $m \geq 2$ using integration by parts.
+    See that
+    \begin{align*}
+        C_m &=\int_0^{\pi/2} \cos^m \theta \, \dif \theta\\
+            &= \int_0^{\pi/2} \cos^{m-1} \theta \cdot \cos \theta \, \dif \theta \\
+            &= \int_0^{\pi/2} \cos^{m-1} \theta \, \dif\,(\sin\theta) \\
+            &= \left[ \cos^{m-1} \theta \sin \theta \right]\Big|_0^{\pi/2} - \int_0^{\pi/2} \sin \theta \, \dif\,(\cos^{m-1} \theta) \\
+            &= 0 \,- (m-1) \int_0^{\pi/2} \sin \theta \cdot \cos^{m-2} \theta (-\sin \theta) \, \dif \theta \\
+            &= (m-1) \int_0^{\pi/2} \sin^2 \theta \cdot \cos^{m-2} \theta \, \dif \theta \\
+            &= (m-1) \int_0^{\pi/2} (1 - \cos^2 \theta) \cdot \cos^{m-2} \theta \, \dif \theta \\
+            &= (m-1) \left( \int_0^{\pi/2} \cos^{m-2} \theta \, \dif \theta - \int_0^{\pi/2} \cos^m \theta \, \dif \theta \right) \\
+            &= (m-1) (C_{m-2} - C_m)
+    \end{align*}
+    which implies 
+    \[ C_m = (m-1)C_{m-2} - (m-1)C_m \]
+    and hence
+    \begin{align*} C_m + (m-1)C_m = (m-1)C_{m-2} \\
+    \implies m C_m = (m-1) C_{m-2} \\
+    \implies C_m = \frac{m-1}{m} C_{m-2}. \end{align*}
+    This proves the recurrence relation.
+
+    \vspace{2mm}
+
+    Now we prove that
+    \[ 2C_m C_{m-1} = \frac{\pi}{m} \]
+    for each integer $m \geq 1$ by induction on $m$.
+    The base case $m=1$ is true since
+    \[ 2C_1 C_0 = 2 \cdot 1 \cdot \frac{\pi}{2} = \pi = \frac{\pi}{1}. \]
+    For the induction hypothesis, assume that there is an integer $m-1 \geq 1$ such that for each integer $k$ with $1 \leq k \leq m-1$, we have
+    \[ 2C_k C_{k-1} = \frac{\pi}{k}. \]
+    Then 
+\begin{align*}
+    2C_m C_{m-1} &= 2 \cdot \frac{m-2}{m} C_{m-2} C_{m-3} \\
+        &= \frac{m-2}{m} \cdot 2C_{m-2} C_{m-3} \\
+        &= \frac{m-2}{m} \cdot \frac{\pi}{m-2} && \text{ by the induction hypothesis}\\
+        &= \frac{\pi}{m}
+\end{align*}
+    completing the induction.
+\end{proof}
+
+\begin{exercise}
+    \label{ex:properties_of_gamma_function}
+    Define the Gamma function $\Gamma:(0,\infty) \to (0,\infty)$ by
+\[  \Gamma(s) := \int_0^\infty t^{s-1} e^{-t} \, \dif t  \qquad \text{for } s > 0. \]
+    Show that $\Gamma(1) = 1$ and $\Gamma(s+1) = s\Gamma(s)$ for each $s > 0$.
+    Deduce that $\Gamma(n) = (n-1)!$ for each $n \in \Z^+$.
+\end{exercise}
+\begin{proof}
+    We compute $\Gamma(1)$ directly:
+    \[ \Gamma(1) = \int_0^\infty t^{1-1} e^{-t} \, \dif t = \int_0^\infty e^{-t} \, \dif t = \lim_{R\to\infty} \int_0^R e^{-t} \, \dif t = \lim_{R\to\infty} (- e^{-R} - (-e^0)) = 0 + 1 = 1. \]
+
+    Now let $s > 0$.
+    We compute $\Gamma(s+1)$ using integration by parts:
+    \begin{align*}
+        \Gamma(s+1) &= \int_0^\infty t^{(s+1)-1} e^{-t} \, \dif t = \int_0^\infty t^s e^{-t} \, \dif t \\
+            &= \lim_{R\to\infty} \int_0^R t^s e^{-t} \, \dif t \\
+            &= \lim_{R\to\infty} \left( \left[ -t^s e^{-t} \right]\Big|_0^R + \int_0^R s t^{s-1} e^{-t} \, \dif t \right) \\
+            &= 0 + \int_0^\infty s t^{s-1} e^{-t} \, \dif t \\
+            &= s \int_0^\infty t^{s-1} e^{-t} \, \dif t = s \Gamma(s).
+    \end{align*}
+    This proves the desired identity. 
+
+    Finally, note that $\Gamma(1) = 1 = 0!$, which is the base case of an induction argument.
+    Now let $n \in \Z^+$ and assume that $\Gamma(k) = (k-1)!$ for each $1 \leq k < n$.
+    Then
+    \[ \Gamma(n) = (n-1) \Gamma(n-1) = (n-1)(n-2)! = (n-1)! \]
+    by the induction hypothesis.
+    Thus by induction, we conclude that $\Gamma(n) = (n-1)!$ for each $n \in \Z^+$.
+\end{proof}
+
+\begin{exercise}
+    \label{ex:volume_of_n_dimensional_ball_formula}
+    Show that for each integer $n \geq 1$, we have
+    \[ \mathcal{L}^n(B_n(0,1)) = \frac{\pi^{n/2}}{\Gamma\left(\frac{n}{2} + 1\right)}. \]
+\end{exercise}
+\begin{proof}
+    We prove this by induction on $n$.
+    The base case $n=1$ is true since
+    \[ \mathcal{L}^1(B_1(0,1)) = \mathcal{L}^1((-1,1)) = 2 \]
+    and 
+    \begin{align*}
+    \Gamma\left(\frac{1}{2} + 1\right) &= \Gamma\left(\frac{3}{2}\right) = \frac{1}{2} \Gamma\left(\frac{1}{2}\right)  \\
+        &= \frac{1}{2} \int_0^\infty t^{\frac{1}{2} - 1} e^{-t} \, \dif t = \frac{1}{2} \int_0^\infty t^{-\frac{1}{2}} e^{-t} \, \dif t \\
+        &= \frac{1}{2} \int_0^\infty \frac{e^{-t}}{\sqrt{t}} \, \dif t \\
+        &= \frac{1}{2} \int_0^\infty \frac{e^{-x^2}}{x} 2x \, \dif x && \text{ by the change of variables }t = x^2 \\
+        &= \int_0^\infty e^{-x^2} \, \dif x = \frac{\sqrt{\pi}}{2} && \text{ by the Gaussian Identity \ref{prop:gaussian_integral_identity}}.
+    \end{align*}
+    Thus
+    \[ \frac{\pi^{1/2}}{\Gamma\left(\frac{1}{2} + 1\right)} = \frac{\pi^{1/2}}{\frac{\sqrt{\pi}}{2}} = 2 = \mathcal{L}^1(B_1(0,1)). \]
+
+    Now let $n \geq 2$ and assume that the result holds for each integer $1 \leq k < n$.
+    Then by the induction hypothesis, we have
+    \[ \mathcal{L}^{n-2}(B_{n-2}(0,1)) = \frac{\pi^{(n-2)/2}}{\Gamma\left(\frac{n-2}{2} + 1\right)}. \]
+    By the volume recurrence relation \ref{ex:volume_of_n_dimensional_ball}, we have
+    \begin{align*}
+        \mathcal{L}^n(B_n(0,1)) &= \frac{2\pi}{n} \mathcal{L}^{n-2}(B_{n-2}(0,1)) \\
+            &= \frac{2\pi}{n} \cdot \frac{\pi^{(n-2)/2}}{\Gamma\left(\frac{n-2}{2} + 1\right)} && \text{ by the induction hypothesis} \\
+            &= \frac{2\pi^{n/2}}{n \Gamma\left(\frac{n-2}{2} + 1\right)} \\
+            &= \frac{\pi^{n/2}}{\left(\frac{n}{2}\right) \Gamma\left(\frac{n-2}{2} + 1\right)} \\
+            &= \frac{\pi^{n/2}}{\Gamma\left(\frac{n}{2} + 1\right)} && \text{ by exercise \ref{ex:properties_of_gamma_function}.}
+    \end{align*}
+\end{proof}

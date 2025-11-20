@@ -1,0 +1,502 @@
+
+\section{Applications of Whitney's Extension Theorem}
+
+We flush out all the details of Whitney's paper \textit{Functions Differentiable on the Boundaries of Regions}, 
+which is a follow up to his extension theorem paper \textit{Analytic Extensions of Differentiable Functions Defined in Closed Sets}.
+
+\subsection{Two different definitions of $C^m(\overline{U})$}
+
+In this section we want to define and compare two different $C^m$ function spaces on the closure of an open set $U \subseteq \R^n$.
+
+\begin{definition}
+    \label{def:Cm_spaces_on_closure}
+Let $U \subseteq \R^n$ be an open set.
+First we recall the definition of the space
+\[ C^m_\text{b}(U) := \{ f \in C^m(U) : \text{ for each } \alpha \in \N^n \text{ with } |\alpha| \leq m, D^\alpha f \text{ is bounded on } U \} \]
+of $C^m$ functions on $U$ with bounded derivatives up to order $m$.
+
+Then the ``geometeric'' definition of $C^m(\overline{U})$ is the set
+\[ C^m_{\text{geo}}(\overline{U}) := \left\{ f \in C^0(\overline{U}) : \text{ there is an open set } V \subseteq \R^n \text{ such that } \overline{U} \subset V \text{ and there is a function } \tilde{f} \in C^m(V) \text{ with } \tilde{f}|_{\overline{U}} = f \right\} \]
+while the ``analytic'' definition of $C^m(\overline{U})$ is the set
+\[ C^m_{\text{ana}}(\overline{U}) := \left\{ f \in C^m(U) :\text{ for each } \alpha \in \N^n \text{ with } |\alpha| \leq m, D^\alpha f \text{ is uniformly continuous on each bounded subset of } U \right\}. \] 
+\end{definition}
+
+The definition of $C^m_{\text{ana}}(\overline{U})$ makes it possible to extend a function $f \in C^m_{\text{ana}}(\overline{U})$ and its derivatives to be defined on the closure $\overline{U}$.
+The definition of $C^m_{\text{geo}}(\overline{U})$ makes it possible to extend a function $f \in C^m_{\text{geo}}(\overline{U})$ and its derivatives to be defined on an open set containing the closure $\overline{U}$.
+That's the key difference.
+
+\begin{remark}[Natural inclusion $C^m_{\text{geo}}(\overline{U}) \hookrightarrow C^m_{\text{ana}}(\overline{U})$]
+    \label{rmk:natural_inclusion_of_Cm_spaces}
+Assume that $U\subseteq \R^n$ is an open set.
+Then it is easy to see that the restriction map
+\[ C^m_{\text{geo}}(\overline{U}) \hookrightarrow C^m_{\text{ana}}(\overline{U}), \qquad f \longmapsto f|_U \]
+is a well-defined linear injection.
+
+To see this, let $f \in C^m_{\text{geo}}(\overline{U})$.
+Then $f \in C^0(\overline{U})$ and there is an open set $V \subseteq \R^n$ such that $\overline{U} \subset V$ and a function $\tilde{f} \in C^m(V)$ such that $\tilde{f}|_{\overline{U}} = f$.
+But then 
+\[ f|_U = \tilde{f}|_U \in C^m(U) \] 
+and for each $\alpha \in \N^n$ with $|\alpha| \leq m$, the function $D^\alpha \tilde{f}$ is continuous on $\overline{U}$, so the function $D^\alpha (f|_U) = \left(D^\alpha \tilde{f}\right)|_U$ 
+is continuous on each compact subset of $U$ and is hence uniformly continuous on each bounded subset of $U$.
+
+This shows $f|_U \in C^m_{\text{ana}}(\overline{U})$, so the restriction map is well-defined.
+Also this map is injective because if $f, g \in C^m_{\text{geo}}(\overline{U})$ and $f|_U = g|_U$, then $f = g$ on $\overline{U}$ by continuity of $f$ and $g$.
+Lastly it is clear the restriction map is linear because if $f, g \in C^m_{\text{geo}}(\overline{U})$ and $\lambda \in \R$, then 
+\[ (f+\lambda g)|_U = f|_U + (\lambda g)|_U = f|_U + \lambda \cdot g|_U. \]
+
+Note that we use the language ``inclusion map'' because we cannot say that $C^m_{\text{geo}}(\overline{U})$ is a subset of $C^m_{\text{ana}}(\overline{U})$ because (by definition) they contain different types of objects 
+--- the space $C^m_{\text{geo}}(\overline{U})$ contains functions defined on $\overline{U}$, while $C^m_{\text{ana}}(\overline{U})$ contains functions defined on $U$.
+\end{remark}
+
+\subsection{Properties of the analysts' definition of $C^m(\overline{U})$}
+
+\begin{lemma}[Extension Lemma]
+    \label{lem:extension_of_uniformly_continuous_on_bdd_subsets}
+    Let $(X, d_X)$ be a metric space, let $U\subseteq X$ be an open subset, and let $(Y, d_Y)$ be a complete metric space.
+
+    Then each continuous function $g : U \to Y$ that is uniformly continuous on each bounded subset of $U$ extends to a unique continuous function $\tilde{g} : \overline{U} \to Y$ such that $\tilde{g}|_U = g$.
+\end{lemma}
+
+\begin{proof}
+    Let $g : U \to Y$ be a function that is uniformly continuous on each bounded subset of $U$.
+    Then we claim that there is a unique continuous function $\tilde{g} : \overline{U} \to \R$ such that $\tilde{g}|_U = g$.
+
+    \vspace{2mm}
+
+    First we will show that there is at most one such function $\tilde{g}$.
+    Let $\tilde{g}_1, \tilde{g}_2 : \overline{U} \to Y$ be two continuous functions such that $\tilde{g}_1|_U = g$ and $\tilde{g}_2|_U = g$.
+    Then for each $x \in \overline{U}$, we have
+    \[ d_Y(\tilde{g}_1(x), \tilde{g}_2(x)) = \lim_{U \ni y \to x} d_Y(\tilde{g}_1(y), \tilde{g}_2(y)) = \lim_{U \ni y \to x} d_Y(g(y), g(y)) = 0, \]
+    so $\tilde{g}_1(x) = \tilde{g}_2(x)$.
+    This shows that $\tilde{g}_1 = \tilde{g}_2$, and hence there is at most one such function $\tilde{g}$.
+
+    \vspace{2mm}
+
+    Now we will define the desired extension.
+    For each $x \in \overline{U}$, choose a sequence $\{ x_k \}_{k=1}^\infty$ in $U$ such that $\lim_{k \to \infty} x_k = x$.
+    Then the sequence $\{ x_k \}_{k=1}^\infty$ is a Cauchy sequence in $U$, and is contained in a bounded subset $V$ of $U$; 
+    by uniform continuity of $g$ on $V$, the sequence $\{ g(x_k) \}_{k=1}^\infty$ is a Cauchy sequence in the complete metric space $Y$, and hence converges to some point $\tilde{g}(x) \in Y$.
+
+    We claim that this function $\tilde{g} : \overline{U} \to Y$ is well-defined.
+    Let $x\in U$ and let $\{ x_k \}_{k=1}^\infty$ and $\{ y_k \}_{k=1}^\infty$ be two sequences in $U$ such that $\lim_{k \to \infty} x_k = x$ and $\lim_{k \to \infty} x_k' = x$.
+    Then the sequences $\{ x_k \}_{k=1}^\infty$ and $\{ x_k' \}_{k=1}^\infty$ are Cauchy sequences in $U$, and are contained in a bounded subset $V$ of $U$;
+    since $g$ is uniformly continuous on $V$, the sequences $\{ g(x_k) \}_{k=1}^\infty$ and $\{g(x_k')\}_{k=1}^\infty$ are Cauchy sequences in $Y$, and hence converge.
+    We need to show that 
+    \[ \lim_{k\to\infty} g(x_k) = \lim_{k\to\infty} g(x_k'). \tag{$\decoone$}\]
+
+    Let $\{ z_n \}_{n=1}^\infty$ be the sequence defined by $z_{2k-1} := x_k$ and $z_{2k} := x_k'$ for each $k \in \Z^+$.
+    (That is the sequence $\{ z_n \}_{n=1}^\infty$ alternates between the two sequences $\{ x_k \}_{k=1}^\infty$ and $\{ x_k' \}_{k=1}^\infty$)
+    Let $\epsilon > 0$, and let $N \in \Z^+$ be such that
+    \[ d_X(x_k,x) < \epsilon \quad\text{ and }\quad d_X(x_k',x) < \epsilon \qquad \forall \, k\geq N. \]
+    Then if $k\geq 2N$ see that $\frac{n}{2} \geq N$ and $\frac{n+1}{2} \geq N$, so that
+    \[ d_X(z_k, x) = d_X(x_{\frac{k}{2}}, x) < \epsilon \]
+    if $k$ is even, and
+    \[ d_X(z_k, x) = d_X(x_{\frac{k+1}{2}}', x) < \epsilon \]
+    if $k$ is odd.
+    In either case, we have $d(z_k, x) < \epsilon$ for each $k \geq 2N$, so $\{ z_n \}_{n=1}^\infty$ is a sequence in $U$ that converges to $x$.
+    As we argued above, the sequence $\{ g(z_n) \}_{n=1}^\infty$ is a Cauchy sequence in $Y$, and hence converges to some point $y \in Y$.
+    Since the sequences $\{ x_k \}_{k=1}^\infty$ and $\{ x_k' \}_{k=1}^\infty$ are subsequences of $\{ z_n \}_{n=1}^\infty$, we see that the sequences $\{ g(x_k) \}_{k=1}^\infty$ and $\{ g(x_k') \}_{k=1}^\infty$ are subsequences of 
+    $\{ g(z_n) \}_{n=1}^\infty$, and hence converge to the same limit $y$.
+    This proves $(\decoone)$, and hence $\tilde{g}$ is well-defined.
+
+    \vspace{2mm}
+
+    Finally we will show that $\tilde{g}$ is continuous and that $\tilde{g}|_U = g$.
+
+    Let $x \in U$ and see that the constant sequence with each term equal to $x$ converges to $x$, so $\tilde{g}(x) = \lim_{k \to \infty} g(x) = g(x)$, and hence $\tilde{g}|_U = g$.
+
+    To see that $\tilde{g}$ is continuous, we will prove that $\tilde{g}$ is uniformly continuous on each bounded subset of $\overline{U}$.
+    In particular, from this it follows that $\tilde{g}$ is uniformly continuous on each closed ball in $\overline{U}$, and hence that $\tilde{g}$ is continuous on $\overline{U}$.
+
+    Fix a bounded subset $K$ of $\overline{U}$, and let $\epsilon > 0$.
+    Since $g$ is uniformly continuous on $K$, there exists $\delta > 0$ such that 
+    \[ x_1,x_2 \in K, d_X(x_1,x_2) < \delta \implies d_Y(g(x_1), g(x_2)) < \frac{\epsilon}{3}. \]
+    Let $x_1, x_2 \in K$ be points such that $d_X(x_1,x_2) < \frac{\delta}{3}$.
+    Then there are sequences $\{ x_{1,k} \}_{k=1}^\infty$ and $\{ x_{2,k} \}_{k=1}^\infty$ in $U$ such that $\lim_{k \to \infty} x_{1,k} = x_1$ and $\lim_{k \to \infty} x_{2,k} = x_2$.
+    Hence there exists $N_1 \in \Z^+$ such that for each $k \geq N_1$, we have 
+    \[ d_X(x_{1,k}, x_1) < \frac{\delta}{3} \quad\text{ and }\quad d_X(x_{2,k}, x_2) < \frac{\delta}{3}. \]
+    Then for each $k \geq N_1$, we have
+    \[ d_X(x_{1,k},x_{2,k}) \leq  d_X(x_{1,k}, x_1) + d_X(x_1, x_2) + d_X(x_2, x_{2,k}) < \frac{\delta}{3} + \frac{\delta}{3} + \frac{\delta}{3} = \delta \]
+    and hence $d_Y(g(x_{1,k}), g(x_{2,k})) < \epsilon$.
+
+    Also since $\tilde{g}(x_1) = \lim_{k \to \infty} g(x_{1,k})$ and $\tilde{g}(x_2) = \lim_{k \to \infty} g(x_{2,k})$, there exists $N_2 \in Z^+$ such that for each $k \geq N_2$, we have
+    \[ d_Y(g(x_{1,k}), \tilde{g}(x_1)) < \frac{\epsilon}{3} \quad\text{ and }\quad d_Y(g(x_{2,k}), \tilde{g}(x_2)) < \frac{\epsilon}{3}. \]
+    Then for each $k \geq \max\{N_1, N_2\}$, we have
+    \[ d_Y(\tilde{g}(x_1), \tilde{g}(x_2)) \leq d_Y(\tilde{g}(x_1), g(x_{1,k})) + d_Y(g(x_{1,k}), g(x_{2,k})) + d_Y(g(x_{2,k}), \tilde{g}(x_2)) < \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} = \epsilon. \]
+    Since $x_1, x_2 \in K$ were arbitrary points such that $d_X(x_1,x_2) < \frac{\delta}{3}$, this shows that
+    \[ x_1, x_2 \in K, d_X(x_1,x_2) < \frac{\delta}{3} \implies d_Y(\tilde{g}(x_1), \tilde{g}(x_2)) < \epsilon. \]
+    Since $\epsilon > 0$ was arbitrary, this shows that $\tilde{g}$ is uniformly continuous on $K$.
+
+    Since $K$ was an arbitrary bounded subset of $\overline{U}$, this shows that $\tilde{g}$ is uniformly continuous on each bounded subset of $\overline{U}$, and hence that $\tilde{g}$ is
+    continuous on $\overline{U}$.
+\end{proof}
+
+
+\begin{corollary}[Derivatives of $C^m_{\text{ana}}(\overline{U})$ functions extend to continuous functions on the closure]
+    \label{ex:derivatives_of_Cm_ana_functions_extend}
+    Let $U \subseteq \R^n$ be an open set and let $m \in \Z^+$.
+    If $f \in C^m_{\text{ana}}(\overline{U})$ then for each $\alpha \in \N^n$ with $|\alpha| \leq m$, the function $D^\alpha f : U \to \R$ extends to a continuous function on $\overline{U}$, which we also denote by $D^\alpha f$.
+\end{corollary}
+
+\begin{proof}
+    Let $f \in C^m_{\text{ana}}(\overline{U})$ and let $\alpha \in \N^n$ with $|\alpha| \leq m$.
+    Then the function $D^\alpha f : U \to \R$ is uniformly continuous on each bounded subset of $U$, so by Lemma \ref{lem:extension_of_uniformly_continuous_on_bdd_subsets}, there is a unique continuous function $\tilde{g}_\alpha : \overline{U} \to \R$ such that $\tilde{g}_\alpha|_U = D^\alpha f$.
+    For each $\alpha \in \N^n$ with $|\alpha| \leq m$, we will slightly abuse notation and denote $\tilde{g}_\alpha$ by $D^\alpha f$.
+    This shows that for each $\alpha \in \N^n$ with $|\alpha| \leq m$, the function $D^\alpha f : U \to \R$ extends to a continuous function on $\overline{U}$, also denoted by $D^\alpha f$.
+\end{proof}
+
+\begin{remark}[Be careful with the abuse of notation at boundary points]
+    \label{rmk:abuse_of_notation_at_boundary_points}
+    In general, you should be careful with the notation $D^\alpha f(x)$ when $x$ is a boundary point of $U$ --- of course it is true that 
+    \[ \lim_{U\ni y\to x} D^\alpha f(y) = D^\alpha f(x), \]
+    but the classical definition (as the best linear approximation) of the derivative $D^\alpha f(x)$ at a boundary point $x$ of $U$ \emph{is not guaranteed to hold} with the abuse of notation above.
+
+    It turns out that this is only an issue for some pathological open sets $U$, which we are not really interested in.
+    Still, be careful.
+\end{remark}
+
+\begin{exercise}[Norm on $C^m$ spaces]
+    \label{ex:Cm_b_normed_vs}
+    Let $U \subseteq \R^n$ be an open set and let $m \in \Z^+$.
+    For $f \in C^m(U)$ we recall its $C^m$-norm is defined by
+    \[ \|f\|_{C^m(U)} := \max_{|\alpha| \leq m} \, \|D^\alpha f\|_{C^0(U)}, \]
+    which may be infinite.
+
+    Show that $\| \cdot \|_{C^m(U)}$ is a norm on $C^m_\text{b}(U)$ and on $C^m_{\text{ana}}(\overline{U})$.
+
+    \vspace{2mm}
+    
+    \noindent Also show that $\llbracket \:\! \cdot \:\! \rrbracket_{C^m(U)}$ defined by
+    \[ \llbracket f \rrbracket_{C^m(U)} := \sum_{|\alpha| \leq m} \, \|D^\alpha f\|_{C^0(U)} \]
+    is a norm on $C^m_\text{b}(U)$ and on $C^m_{\text{ana}}(\overline{U})$, and that the two norms $\| \cdot \|_{C^m(U)}$ and $\llbracket \:\! \cdot \:\! \rrbracket_{C^m(U)}$ are equivalent on these spaces.
+\end{exercise}
+
+Because these norms are equivalent, we will use the notation $\| \cdot \|_{C^m(U)}$ for both of them, and will only distinguish them when necessary.
+
+\begin{proof}
+    First we will show that $\| \cdot \|_{C^m(U)}$ is positive definite, homogeneous, and satisfies the triangle inequality for $C^m$ functions on $U$.
+    Let $f, g \in C^m(U)$ and let $\lambda \in \R$.
+
+    Then clearly $\|f\|_{C^m(U)} \geq 0$ and
+    \begin{align*}
+        \|f\|_{C^m(U)} = 0 &\implies \|D^\alpha f\|_{C^0(U)} = 0 \text{ for each } \alpha \in \N^n \text{ with } |\alpha| \leq m \\
+            &\implies \| f\|_{C^0(U)} = 0 \\
+            &\implies f = 0 \ \text{ on } U
+    \end{align*}
+    by using positive definiteness of the $C^0$-norm $\| \cdot \|_{C^0(U)}$.
+    This shows that $\| \cdot \|_{C^m(U)}$ is positive definite.
+
+    Also we have 
+    \begin{align*}
+        \| \lambda f \|_{C^m(U)} &= \max_{|\alpha| \leq m} \, \|D^\alpha (\lambda f)\|_{C^0(U)} \\
+            &= \max_{|\alpha| \leq m} \, |\lambda| \cdot \|D^\alpha f\|_{C^0(U)} \\
+            &= |\lambda| \cdot \max_{|\alpha| \leq m} \, \|D^\alpha f\|_{C^0(U)} = |\lambda| \cdot \|f\|_{C^m(U)}
+    \end{align*}
+    by using homogeneity of the $C^0$-norm $\| \cdot \|_{C^0(U)}$.
+    This shows that $\| \cdot \|_{C^m(U)}$ is homogeneous.
+
+    Finally we have 
+    \begin{align*}
+        \|f + g\|_{C^m(U)} &= \max_{|\alpha| \leq m} \, \|D^\alpha (f + g)\|_{C^0(U)} \\
+            &\leq \max_{|\alpha| \leq m} \, \left( \|D^\alpha f\|_{C^0(U)} + \|D^\alpha g\|_{C^0(U)} \right) \\
+            &\leq \max_{|\alpha| \leq m} \, \|D^\alpha f\|_{C^0(U)} + \max_{|\alpha| \leq m} \, \|D^\alpha g\|_{C^0(U)} = \|f\|_{C^m(U)} + \|g\|_{C^m(U)}
+    \end{align*}
+    by using the triangle inequality for the $C^0$-norm $\| \cdot \|_{C^0(U)}$.
+    This shows that $\| \cdot \|_{C^m(U)}$ satisfies the triangle inequality.
+
+    In particular, $\| \cdot \|_{C^m(U)}$ is a norm on $C^m_\text{b}(U)$ and on $C^m_{\text{ana}}(\overline{U})$ because it is finite-valued on these subsets of $C^m(U)$.
+    (Notice this function is not finite-valued on $C^m(U)$ and hence not a norm on $C^m(U)$; that is our reason for considering these subspaces).
+
+    \vspace{2mm}
+
+    A nearly identical proof shows that $\llbracket \:\! \cdot \:\! \rrbracket_{C^m(U)}$ is a norm on $C^m_\text{b}(U)$ and on $C^m_{\text{ana}}(\overline{U})$.
+
+    \vspace{2mm}
+
+    Finally see that if $f \in C^m(U)$, then 
+    \[ \max_{|\alpha| \leq m} \, \|D^\alpha f\|_{C^0(U)} \leq \sum_{|\alpha| \leq m} \, \|D^\alpha f\|_{C^0(U)} \leq \left( \sum_{|\alpha| \leq m} 1 \right) \max_{|\alpha| \leq m} \, \|D^\alpha f\|_{C^0(U)} \]
+    which says that 
+    \[ \| f \|_{C^m(U)} \leq \llbracket f \rrbracket_{C^m(U)} \leq \left( \sum_{|\alpha| \leq m} 1 \right) \| f \|_{C^m(U)} \]
+    so the two norms $\| \cdot \|_{C^m(U)}$ and $\llbracket \:\! \cdot \:\! \rrbracket_{C^m(U)}$ are equivalent on the spaces $C^m_\text{b}(U)$ and on $C^m_{\text{ana}}(\overline{U})$.
+\end{proof}
+
+\begin{proposition}[$C^1_{\text{b}}(U)$ is a Banach space]
+    \label{prop:C1_b_is_Banach}
+    Let $U \subseteq \R^n$ be an open set.
+    Then the space $C^1_{\text{b}}(U)$ is a Banach space with respect to the $C^1$-norm $\| \cdot \|_{C^1(U)}$.
+
+\end{proposition}
+
+\begin{proof}
+    
+    Let $\{ f_k \}_{k=1}^\infty$ be a Cauchy sequence in $C^1_{\text{b}}(U)$ with respect to the $C^1$-norm $\| \cdot \|_{C^1(U)}$.
+    Then $\{ f_k \}_{k=1}^\infty$ is a Cauchy sequence in $C^0_{\text{b}}(U)$ with respect to the $C^0$-norm $\| \cdot \|_{C^0(U)}$,
+    and for each $j \in \{1,2,\ldots,n\}$, the sequence of partial derivatives $\{ D_j f_k \}_{k=1}^\infty$ is a Cauchy sequence in $C^0_{\text{b}}(U)$.
+    Since $C^0_{\text{b}}(U)$ is a Banach space with respect to the $C^0$-norm $\| \cdot \|_{C^0(U)}$, there are functions $f \in C^0_{\text{b}}(U)$ and $g_1, g_2, \ldots, g_n \in C^0_{\text{b}}(U)$ such that 
+    \[ \lim_{k \to \infty} \|f_k - f\|_{C^0(U)} = 0 \]
+    and \[ \lim_{k \to \infty} \|D_j f_k - g_j\|_{C^0(U)} = 0 \quad \text{for each } j \in \{1,2,\ldots,n\}. \]
+
+    The main difficulty is to show that $f \in C^1_{\text{b}}(U)$ and that $D_j f = g_j$ for each $j \in \{1,2,\ldots,n\}$.
+
+    \[ \left\| f(x+h) - f(x) - \sum_{j=1}^n g_j(x) h_j \right\| = \]
+
+\end{proof}
+
+
+
+
+
+\begin{corollary}[$C^m_{\text{b}}(U)$ is a Banach space]
+    \label{cor:Cm_b_is_Banach}
+    Let $U \subseteq \R^n$ be an open set and let $m \in \Z^+$.
+    Then the space $C^m_{\text{b}}(U)$ is a Banach space with respect to the $C^m$-norm $\| \cdot \|_{C^m(U)}$.
+\end{corollary}
+
+\begin{proof}
+    
+\end{proof}
+
+
+
+\begin{proposition}[$C^1_{\text{ana}}(\overline{U})$ is a Banach space when $U$ is bounded]
+    \label{prop:C1_ana_is_Banach_for_bdd_U}
+    Let $U \subseteq \R^n$ be a bounded open set.
+    Then the space $C^1_\text{ana}(\overline{U})$ is also a Banach space with respect to the $C^1$-norm $\| \cdot \|_{C^1(U)}$.
+\end{proposition}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{corollary}[$C^m_{\text{ana}}(\overline{U})$ is a Banach space when $U$ is bounded]
+    \label{cor:Cm_ana_is_Banach_for_bdd_U}
+    Let $U \subseteq \R^n$ be a bounded open set and let $m \in \Z^+$.
+    Then the space $C^m_\text{ana}(\overline{U})$ is also a Banach space with respect to the $C^m$-norm $\| \cdot \|_{C^m(U)}$.
+\end{corollary}
+
+\begin{proof}
+    
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{exercise}[Fréchet space structure on $C^m_{\text{ana}}(\overline{U})$ when $U$ is unbounded]
+    \label{ex:Cm_ana_is_Frechet}
+    Let $U \subseteq \R^n$ be an open set and let $m \in \Z^+$.
+    For each bounded open subset $V \subset U$ we define $\| \cdot \|_{C^m(V)}$ by
+    \[ \|f\|_{C^m(V)} := \max_{|\alpha| \leq m} \, \|D^\alpha f\|_{C^0(V)}, \]
+    and show that $\| \cdot \|_{C^m(V)}$ is a semi-norm on $C^m_{\text{ana}}(\overline{U})$.
+
+    Now let $\{ V_k \}_{k=1}^\infty$ be an increasing sequence of bounded open subsets of $U$ such that $\bigcup_{k=1}^\infty V_k = U$.
+    Then show that the family of semi-norms $\{ \| \cdot \|_{C^m(V_k)} \}_{k=1}^\infty$ gives $C^m_{\text{ana}}(\overline{U})$ the structure of a Fréchet space, and that the resulting topology on 
+    $C^m_{\text{ana}}(\overline{U})$ is independent of the choice of the sequence $\{ V_k \}_{k=1}^\infty$.
+
+    In this topology, a sequence $\{ f_j \}_{j=1}^\infty$ in $C^m_{\text{ana}}(\overline{U})$ converges to $f \in C^m_{\text{ana}}(\overline{U})$ if and only if for each bounded open subset $V \subset U$, we have $\|f_j - f\|_{C^m(V)} \to 0$ as $j \to \infty$.
+\end{exercise}
+
+\begin{proof}
+    The fact that $\| \cdot \|_{C^m(V)}$ is a semi-norm on $C^m_{\text{ana}}(\overline{U})$ follows from the fact that $\| \cdot \|_{C^m(V)}$ is a norm on $C^m(V)$.
+    Recall that this family of seminorms also defines the Fréchet space structure on $C^m(U)$, and that the resulting topology is independent of the choice of the sequence $\{ V_k \}_{k=1}^\infty$.
+
+    See that $C^m_{\text{ana}}(\overline{U})$ is a linear subspace of $C^m(U)$, and we claim that $C^m_{\text{ana}}(\overline{U})$ is closed with respect to the topology defined by the family of seminorms $\{ \| \cdot \|_{C^m(V_k)} \}_{k=1}^\infty$.
+    
+    Let $\{ f_j \}_{j=1}^\infty$ be a sequence in $C^m_{\text{ana}}(\overline{U})$ that converges to some $f \in C^m(U)$ with respect to 
+    the family of seminorms $\{ \| \cdot \|_{C^m(V_k)} \}_{k=1}^\infty$.
+    We need to show that $f \in C^m_{\text{ana}}(\overline{U})$, i.e. that $f$ and all of its derivatives of order $\leq m$ 
+    are uniformly continuous on each bounded subset of $U$.
+
+    Let $V \subset U$ be a bounded open subset.
+    Then there exists $N \in \Z^+$ such that $\overline{V} \subset V_N$, and hence $\|f_j - f\|_{C^m(V_N)} \to 0$ as $j \to \infty$.
+    Since $C^m(\overline{V_N})$ is a Banach space with respect to the $C^m$-norm we just have $f|_{V_N} \in C^m(\overline{V_N})$.
+    Then $V$ is a bounded subset of $V_N$, so $f|_V$ and all of its derivatives of order $\leq m$ are uniformly continuous on $V$.
+    Thus $f$ and all of its derivatives of order $\leq m$ are uniformly continuous on each bounded subset of $U$, and hence $f \in C^m_{\text{ana}}(\overline{U})$.
+
+    Since $\{ f_j \}_{j=1}^\infty$ was an arbitrary convergent sequence in $C^m_{\text{ana}}(\overline{U})$, this shows that $C^m_{\text{ana}}(\overline{U})$ 
+    is closed with respect to the topology defined by the family of seminorms $\{ \| \cdot \|_{C^m(V_k)} \}_{k=1}^\infty$.
+    Since $C^m(U)$ is a Fréchet space with respect to this topology, it follows that $C^m_{\text{ana}}(\overline{U})$ is also a Fréchet space with respect to the induced topology.
+
+    Since the Frechet space topology on $C^m(U)$ does not depend on the choice of the sequence $\{ V_k \}_{k=1}^\infty$, 
+    it follows that the induced topology on $C^m_{\text{ana}}(\overline{U})$ also does not depend on the choice of the sequence $\{ V_k \}_{k=1}^\infty$.
+
+    \vspace{2mm}
+
+    It remains to prove the final remark about convergence of sequences in $C^m_{\text{ana}}(\overline{U})$.
+
+    Let $\{ f_j \}_{j=1}^\infty$ be a sequence in $C^m_{\text{ana}}(\overline{U})$ and let $f \in C^m_{\text{ana}}(\overline{U})$.
+    if and only if for each $k \in \Z^+$, we have $\|f_j - f\|_{C^m(V_k)} \to 0$ as $j \to \infty$. 
+
+    Suppose that $\{ f_j \}_{j=1}^\infty$ converges to $f$ in the topology defined by the family of seminorms $\{ \| \cdot \|_{C^m(V_k)} \}_{k=1}^\infty$.
+    For each bounded open subset $V \subset U$, there exists $N \in \Z^+$ such that $\overline{V} \subset V_N$, and hence
+    \[ \lim_{j\to\infty} \| f_j - f \|_{C^m(V_N)} = 0 \]
+    implies 
+    \[ \lim_{j\to\infty} \| f_j - f \|_{C^m(V)} = 0. \]
+    Since $V$ was an arbitrary bounded open subset of $U$, this shows that for each bounded open subset $V \subset U$, we have $\|f_j - f\|_{C^m(V)} \to 0$ as $j \to \infty$.
+
+    Conversely, if $\{ f_j \}_{j=1}^\infty$ converges to $f$ in the $\| \cdot \|_{C^m(V)}$-norm for each bounded open subset $V \subset U$, then clearly $\{ f_j \}_{j=1}^\infty$ converges to $f$ in the topology defined by the family of seminorms $\{ \| \cdot \|_{C^m(V_k)} \}_{k=1}^\infty$.
+    Since $\{ f_j \}_{j=1}^\infty$ was an arbitrary sequence in $C^m_{\text{ana}}(\overline{U})$ and $f \in C^m_{\text{ana}}(\overline{U})$ was arbitrary, this proves the final remark about convergence of sequences in $C^m_{\text{ana}}(\overline{U})$.
+\end{proof}
+
+\subsection{When the two definitions of $C^m(\overline{U})$ agree}
+
+In this section, we will show that under a simple geometric condition on the open set $U$, the two definitions of $C^m(\overline{U})$ coincide in the sense that the natural inclusion map
+\[ C^m_{\text{geo}}(\overline{U}) \hookrightarrow C^m_{\text{ana}}(\overline{U}), \qquad f \longmapsto f|_U \]
+from \ref{rem:natural_inclusion_of_Cm_spaces} is a bijection and the Whitney extension map is the inverse of the restriction map.
+
+\begin{definition}[Quasiconvex]
+    \label{def:quasiconvex}
+    Let $S \subseteq \R^n$ be an arbitrary set.
+    We say that $S$ is \textit{quasiconvex} if there exists a constant $C \geq 1$ such that for every pair of points $x,y \in S$, there is a curve $\sigma : [0,1] \to U$ 
+    such that $\sigma(0) = x$, $\sigma(1) = y$, and
+    \[ \operatorname{length}(\sigma) \leq C \|x - y\|. \]
+    If the constant $C$ is important, we say that the set $S$ is $C$\textit{-quasiconvex}.
+\end{definition}
+
+Note that the curve $\sigma$ supposed to exist in the definition must be rectifiable, so that its length is well-defined and finite.
+
+Of course, if $S$ is convex, then $S$ is $1$-quasiconvex because every pair of points in $S$ can be connected by a line segment, which has length equal to the distance between the two points.
+The definition of quasiconvexity is a weakening of convexity, in the sense that $S$ may not be convex, but still every pair of points in $S$ can be connected by a curve whose length is at
+most a constant multiple of the distance between the two points.
+
+\begin{lemma}[The closure of a quasiconvex open set is quasiconvex]
+    \label{lem:closure_of_quasiconvex_open_set_is_quasiconvex}
+    Let $U \subseteq \R^n$ be an open quasiconvex set.
+    Then $\overline{U}$ is also quasiconvex.
+\end{lemma}
+\begin{proof}
+    In fact if $U$ is $C$-quasiconvex, then $\overline{U}$ is $C_*$-quasiconvex for each $C_* > C$.
+
+
+    
+\end{proof}
+
+\begin{proposition}[Remainder Formula]
+    \label{prop:remainder_formula}
+    Let $\sigma: [0,L] \to \R^n$ be a rectificable curve which is parametrized by arc length, and has endpoints $\sigma(0) = a$ and $\sigma(L) = x$.
+    Let $A = \sigma([0,L])$ be the image of $\sigma$.
+    If $f^\bullet \in \mathcal{W}^m(A)$, then for each $\alpha \in \N^n$ with $|\alpha| \leq m$, the remainder term $R^m_a f^\bullet$ satisfies 
+    \[ (R^m_a f^\bullet)^{(\alpha)}(x) = - \sum_{|\beta| = m - |\alpha|} \frac{1}{\beta!} \int_0^L 
+        \left[ f^{(\alpha + \beta)}(\sigma(t)) - f^{(\alpha+\beta)}(x) \right] \, \dif\left( (a-\sigma(t))^\beta \right). \]
+\end{proposition}
+
+Here the integral is a Riemann-Stieltjes integral, as introduced in our Complex Analysis text.
+
+\begin{proof}
+    Fix a Whitney jet $f^\bullet \in \mathcal{W}^m(A)$ and let $\alpha$ be a multi-index with $|\alpha| \leq m$.
+
+    \vspace{2mm}
+    \textit{Step 1:}
+    Consider an arbitrary partition $P$ of the interval $[0,L]$ given by
+    \[ 0 = t_0 < t_1 < \cdots < t_N = L. \]
+
+    \[ (R^m_a f^\bullet)^{(\alpha)}(\sigma(t_{j-1})) - (R^m_a f^\bullet)^{(\alpha)}(\sigma(t_j)) =
+        \sum_{|\beta| \leq m - |\alpha|} \frac{\left(R^m_{\sigma(t_j)} f^\bullet\right)^{(\alpha+\beta)}(\sigma(t_{j-1})) }{\beta!}(a-\sigma(t_j))^\beta \]
+
+\textbf{SIMPLEST VERSION}
+
+    \[ (R^m_a f^\bullet)^{(\alpha)}(z) - (R^m_a f^\bullet)^{(\alpha)}(y) =
+        \sum_{|\beta| \leq m - |\alpha|} \frac{\left(R^m_{y} f^\bullet\right)^{(\alpha+\beta)}(z) }{\beta!}(a-y)^\beta \tag{$\leafNW$} \]
+
+    \begin{proof}
+        
+    \end{proof}
+
+Hence \textbf{SOMETHING I DONT UNDERSTAND WHY IS TRUE, BUT IF IT IS THEN}
+
+    summing over $j$ gives
+    \[ (R^m_a f^\bullet)^{(\alpha)}(x) = \sum_{|\beta|\leq m - |\alpha|} \frac{1}{\beta!}
+        \sum_{j=1}^N \left(R^m_{\sigma(t_j)} f^\bullet\right)^{(\alpha+\beta)}(\sigma(t_{j-1})) (a-\sigma(t_j))^\beta \tag{$\bomb$} \]
+
+
+    \vspace{2mm}
+    \textit{Step 2}: We claim that if $\beta$ is a multi-index with $|\beta| < m - |\alpha|$ then for each $\epsilon > 0$ there is a $\delta > 0$ 
+    such that if $P$ is a partition of $[0,L]$ given by
+    \[ 0 = t_0 < t_1 < \cdots < t_N = L \]
+    and satisfies $\displaystyle\max_{1 \leq j \leq N} (t_j - t_{j-1}) < \delta$, then
+    \[ \left| \sum_{j=1}^N \left(R^m_{\sigma(t_j)} f^\bullet\right)^{(\alpha+\beta)}(\sigma(t_{j-1})) (a-\sigma(t_j))^\beta \right| < \epsilon. \]
+
+    \begin{proof}
+        
+    \end{proof}
+
+    Now for each multi-index $\beta$ with $|\beta| = m - |\alpha|$, we have
+    \begin{align*}
+        \sum_{j=1}^N \left(R^m_{\sigma(t_j)} f^\bullet\right)^{(\alpha+\beta)}(\sigma(t_{j-1})) (a-\sigma(t_j))^\beta &=
+            \sum_{j=1}^N ...
+    \end{align*}
+
+
+    Thus plugging this into ($\bomb$) and taking the limit as the mesh of the partition $P$ tends to zero gives
+
+
+\end{proof}
+
+\begin{lemma}
+    Let $\sigma: [0,L] \to \R^n$ be a rectificable curve which is parametrized by arc length, and has endpoints $\sigma(0) = a$ and $\sigma(L) = x$.
+    Let $A = \sigma([0,L])$ be the image of $\sigma$.
+    If $f^\bullet \in \mathcal{W}^m(A)$, then for each $\alpha \in \N^n$ with $|\alpha| = m$, and $\delta > 0$ is such that 
+    \[ \left| f^{(\alpha)}(\sigma(t)) - f^{(\alpha)}(x) \right| < \delta \]
+    then
+    \[ \left| (R^m_a f^\bullet)^{(\alpha)}(x) \right| < n(m+1)^n L^{m-|\alpha|}\delta^5 \]
+\end{lemma}
+
+\begin{remark}
+    
+    The factor $n(m+1)^n$ is the number of multi-indices $\beta$ with $|\beta| = m - |\alpha|$ --- \textbf{CHECK THIS}
+    and thus may be replaced by the factor
+    \[ \sum \sum \frac{1}{!} = \frac{n^{m-|\alpha|}}{(m-|\alpha|-1)!} \]
+
+\end{remark}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{lemma}
+    
+
+\end{lemma}
+
+\begin{proof}
+    
+\end{proof}
+
+
+
+
+
+
+
+
+
+\begin{theorem}
+    
+
+\end{theorem}
+
+
+
+\newpage
+
+
+
+
+
+

@@ -1,0 +1,565 @@
+\section{Lebesgue Measure}
+Up to now, we have not really had any interesting examples. Sorry.
+Of course, it is examples which motivated all the abstract theory we have developed so far.
+The most important and motivating example is Lebesgue measure on the line $\R$ and in Euclidean space $\R^n$.
+
+We will look at another example, the Hausdorff measure(s), in a later section.
+
+\subsection{Boxes and Cubes}
+
+\begin{definition}[Boxes and Cubes]
+    \label{def:boxes_and_cubes}
+A \textit{closed box} in $\R^n$ is a set of the form
+\[ R = [a_1,b_1]\times [a_2,b_2] \times \cdots \times [a_n,b_n] \]
+for some real numbers $a_j\leq b_j$ for $j=1,\ldots,n$.
+The \textit{volume} of such a box is defined to be
+\[ \vol(R) := \prod_{j=1}^n (b_j - a_j). \]
+An \textit{open box} is a set of the form
+\[ (a_1,b_1)\times (a_2,b_2) \times \cdots \times (a_n,b_n) \]
+for some real numbers $a_j < b_j$ for $j=1,\ldots,n$.
+A \textit{half-open} box is a set of the form
+\[ [a_1,b_1)\times [a_2,b_2) \times \cdots \times [a_n,b_n) \]
+for some real numbers $a_j \leq b_j$ for $j=1,\ldots,n$.
+The volume of an open or half-open box is defined in the same way as for closed boxes.
+
+\vspace{2mm}
+\noindent A \textit{cube} is a special case of a box where all the side lengths are equal, i.e. $b_j - a_j = b_i - a_i$ for all $1\leq i,j\leq n$.
+If $Q\subset \R^n$ is a cube with side length $\ell > 0$, then $\vol(Q) = \ell^n$.
+\end{definition}
+
+We remark that we allow degenerate closed and half-open boxes, where $a_j = b_j$ for some $j$.
+Degenerate open boxes are empty, so we do not allow them.
+Also, in our definition, boxes and cubes have sides parallel to the coordinate axes.
+
+\begin{definition}[Almost Disjoint]
+    Say that a collection of boxes $\{ R_j \}_{j\in J}$ in $\R^n$ is \textit{almost disjoint} if the interiors of the boxes are pairwise disjoint.
+\end{definition}
+
+Intuitively, a collection of boxes is almost disjoint if they only overlap on their boundaries.
+
+\begin{lemma}
+    \label{lem:almost_disjoint_boxes}
+
+    Let $R\sub \R^n$ be a closed box, and let $\{ R_j \}_{j=1}^N$ be a finite collection of almost disjoint closed boxes in $\R^n$
+    such that \[ R = \bigcup_{j=1}^N R_j. \]
+    Then
+    \[ \vol\left( \bigcup_{j=1}^N R_j \right) = \sum_{j=1}^N \vol(R_j). \]
+\end{lemma}
+
+\begin{proof}
+    For each $1\leq j \leq N$, let the box $R_j$ be given by
+    \[ R_j = [a_{j,1},b_{j,1}]\times [a_{j,2},b_{j,2}] \times \cdots \times [a_{j,n},b_{j,n}] \]
+    where $a_{j,i} \leq b_{j,i}$ for $i=1,\ldots,n$.
+    Then for each index $1\leq i \leq n$, we collect the endpoints of the $i$-th intervals of all the boxes into a set, 
+    \[ S_i = \{ a_{j,i}, b_{j,i} : 1\leq j \leq N \} \]
+    which is a finite set of real numbers, and therefore can be written as 
+    \[  S_i = \{ c_{i,1}, c_{i,2}, \ldots, c_{i,m_i} \} \]
+    where $c_{i,1} < c_{i,2} < \cdots < c_{i,m_i}$.
+    
+    For each $1\leq i \leq n$ and each $1\leq k \leq m_i$ define the interval
+    \[ I_{i,k} := [c_{i,k-1}, c_{i,k}]. \]
+    This gives a collection of closed boxes $\{ \tilde{R}_{k_1,k_2,\ldots,k_n} \}_{1\leq k_i \leq m_i, 1\leq i \leq n}$ where
+    \[ \tilde{R}_{k_1,k_2,\ldots,k_n} := I_{1,k_1} \times I_{2,k_2} \times \cdots \times I_{n,k_n}. \]
+    We note that there are at most $m_1 m_2 \cdots m_n$ such boxes, and that these boxes are almost disjoint because the interior of a box $\tilde{R}_{k_1,k_2,\ldots,k_n}$ is a product of open intervals
+    $I_{1,k_1}^\circ \times I_{2,k_2}^\circ \times \cdots \times I_{n,k_n}^\circ$, and two such products of open intervals are either equal or disjoint by definition of endpoints $c_{i,j}$.
+
+    Define index sets 
+    \[ \mathcal{J} := \left\{ (k_1,k_2,\ldots,k_n) : \tilde{R}_{k_1,k_2,\ldots,k_n} \subseteq R \right\} \quad\text{and}\quad \mathcal{J}_j := \left\{ (k_1,k_2,\ldots,k_n) : \tilde{R}_{k_1,k_2,\ldots,k_n} \subseteq R_j \right\} \]
+    for $1\leq j \leq N$.
+    Then for each $1\leq j \leq N$ we claim that we have
+    \[ R_j = \bigcup_{(k_1,k_2,\ldots,k_n) \in \mathcal{J}_j} \tilde{R}_{k_1,k_2,\ldots,k_n}. \]
+    Fix $1\leq j \leq N$.
+    The inclusion $\supseteq$ holds by definition of $\mathcal{J}_j$. To see that the inclusion $\subseteq$ holds, let $x\in R_j$; then 
+    \[ x = (x_1,x_2,\ldots,x_n) \in [a_{j,1},b_{j,1}]\times [a_{j,2},b_{j,2}] \times \cdots \times [a_{j,n},b_{j,n}]. \]
+    Since $a_{j,i}, b_{j,i} \in S_i$ for each $1\leq i \leq n$, there exist indices $1\leq k_i \leq m_i$ such that $x_i \in I_{i,k_i}$ for each $1\leq i \leq n$.
+    Thus \[x\in \tilde{R}_{k_1,k_2,\ldots,k_n},\] and by definition of $\mathcal{J}_j$ we have $(k_1,k_2,\ldots,k_n) \in \mathcal{J}_j$.
+    Therefore $x\in \bigcup_{(k_1,k_2,\ldots,k_n) \in \mathcal{J}_j} \tilde{R}_{k_1,k_2,\ldots,k_n}$. 
+    Since $x\in R_j$ was arbitrary, we have proven the reverse inclusion $\supseteq$ and shown the claim.
+    As a consequence of this claim and the fact that $R= \bigcup_{j=1}^N R_j$, we also have
+    \[ \mathcal{J} = \bigcup_{j=1}^N \mathcal{J}_j. \tag{$*$} \]
+    The fact that the boxes $\tilde{R}_{k_1,k_2,\ldots,k_n}$ are almost disjoint also implies that the sets $\{ \mathcal{J}_j \}_{j=1}^N$ are pairwise disjoint.
+
+    We also claim that 
+    \[ \vol(R_j) = \sum_{(k_1,k_2,\ldots,k_n) \in \mathcal{J}_j} \vol(\tilde{R}_{k_1,k_2,\ldots,k_n}) \tag{$**$} \]
+    for each $1\leq j \leq N$.
+
+    To see this, fix $1\leq j \leq N$. Then for each $1\leq i \leq n$ we have
+    \[ a_{j,i} = c_{i,l_i} < c_{i,l_i+r_i} = b_{j,i} \]
+    for some $1\leq l_i < l_i+r_i \leq m_i$ and some $r_i\geq 1$; in particular, the interval $[a_{j,i},b_{j,i}]$ is partitioned by the intervals $I_{i,l_i}, I_{i,l_i+1}, \ldots, I_{i,l_i+r_i}$.
+    As a telescoping sum, we have
+    \[ b_{j,i} - a_{j,i} = c_{i,l_i+r_i} - c_{i,l_i} = \sum_{s=l_i}^{l_i+r_i-1} (c_{i,s+1} - c_{i,s}) \]
+    for each $1\leq i \leq n$. Thus, we obtain
+    \begin{align*}
+        \vol(R_j) &= \prod_{i=1}^n (b_{j,i} - a_{j,i}) = \prod_{i=1}^n \sum_{s=l_i}^{l_i+r_i-1} (c_{i,s+1} - c_{i,s}) \\
+            &= \sum_{s_1=l_1}^{l_1+r_1-1} \sum_{s_2=l_2}^{l_2+r_2-1} \cdots \sum_{s_n=l_n}^{l_n+r_n-1} \prod_{i=1}^n (c_{i,s_i+1} - c_{i,s_i}) \\
+            &= \sum_{s_1=l_1}^{l_1+r_1-1} \sum_{s_2=l_2}^{l_2+r_2-1} \cdots \sum_{s_n=l_n}^{l_n+r_n-1} \vol(\tilde{R}_{s_1,s_2,\ldots,s_n}) \\
+            &= \sum_{(k_1,k_2,\ldots,k_n) \in \mathcal{J}_j} \vol(\tilde{R}_{k_1,k_2,\ldots,k_n}).
+    \end{align*}
+    where in the final equality we have used the fact that $\tilde{R}_{s_1,s_2,\ldots,s_n} \subseteq R_j$ if and only if $l_i \leq s_i \leq l_i+r_i-1$ for each $1\leq i \leq n$, which is equivalent to $(s_1,s_2,\ldots,s_n) \in \mathcal{J}_j$.
+    We have thus shown the claim.
+
+    We make a third and final claim that 
+    \[ \vol\left(R \right) = \sum_{(k_1,k_2,\ldots,k_n) \in \mathcal{J}} \vol(\tilde{R}_{k_1,k_2,\ldots,k_n}). \tag{$\dagger$} \]
+    To see this, we write $R$ as a box of \[ R = [a_1,b_1]\times [a_2,b_2]\times \cdots \times [a_n,b_n]. \]
+    Then for each $1\leq i \leq n$ we have $a_i, b_i \in S_i$, and in fact it must be the case that $a_i = c_{i,1}$ and $b_i = c_{i,m_i}$.
+    Thus, for each $1\leq i \leq n$ we have
+    \[ b_i - a_i = c_{i,m_i} - c_{i,1} = \sum_{s=1}^{m_i-1} (c_{i,s+1} - c_{i,s}) \]
+    and therefore
+    \begin{align*}
+        \vol(R) &= \prod_{i=1}^n (b_i - a_i) = \prod_{i=1}^n \sum_{s=1}^{m_i-1} (c_{i,s+1} - c_{i,s}) \\
+            &= \sum_{s_1=1}^{m_1-1} \sum_{s_2=1}^{m_2-1} \cdots \sum_{s_n=1}^{m_n-1} \prod_{i=1}^n (c_{i,s_i+1} - c_{i,s_i}) \\
+            &= \sum_{s_1=1}^{m_1-1} \sum_{s_2=1}^{m_2-1} \cdots \sum_{s_n=1}^{m_n-1} \vol(\tilde{R}_{s_1,s_2,\ldots,s_n}) \\
+            &= \sum_{(k_1,k_2,\ldots,k_n) \in \mathcal{J}} \vol(\tilde{R}_{k_1,k_2,\ldots,k_n}).
+    \end{align*}
+    This proves the claim.
+
+    Now we see that putting $(*)$, $(**)$, and $(\dagger)$ together yields
+    \begin{align*}
+        \vol(R) &= \sum_{(k_1,k_2,\ldots,k_n) \in \mathcal{J}} \vol(\tilde{R}_{k_1,k_2,\ldots,k_n}) \\
+            &= \sum_{j=1}^N \sum_{(k_1,k_2,\ldots,k_n) \in \mathcal{J}_j} \vol(\tilde{R}_{k_1,k_2,\ldots,k_n}) \\
+            &= \sum_{j=1}^N \vol(R_j).
+    \end{align*}
+    This completes the proof.
+\end{proof}
+
+\begin{lemma}
+    \label{lem:covering_box_by_boxes}
+    Let $R\sub \R^n$ be a closed box, and let $\{ R_j \}_{j=1}^N$ be a finite collection of closed boxes such that
+    \[ R\sub \bigcup_{j=1}^N R_j. \] 
+    Then
+    \[ \vol(R) \leq \sum_{j=1}^N \vol(R_j). \]
+\end{lemma}
+
+    The idea is similar to the last proof.
+
+\begin{proof}
+    For each $1\leq j \leq N$, let the box $R_j$ be given by
+    \[ R_j = [a_{j,1},b_{j,1}]\times [a_{j,2},b_{j,2}] \times \cdots \times [a_{j,n},b_{j,n}] \]
+    where $a_{j,i} \leq b_{j,i}$ for $i=1,\ldots,n$.
+    Then for each index $1\leq i \leq n$, we collect the endpoints of the $i$-th intervals of all the boxes into a set, 
+    \[ S_i = \{ a_{j,i}, b_{j,i} : 1\leq j \leq N \} \]
+    which is a finite set of real numbers, and therefore can be written as 
+    \[  S_i = \{ c_{i,1}, c_{i,2}, \ldots, c_{i,m_i} \} \]
+    where $c_{i,1} < c_{i,2} < \cdots < c_{i,m_i}$.
+    
+    For each $1\leq i \leq n$ and each $1\leq k \leq m_i$ define the interval
+    \[ I_{i,k} := [c_{i,k-1}, c_{i,k}]. \]
+    This gives a collection of closed boxes $\{ \tilde{R}_{k_1,k_2,\ldots,k_n} \}_{1\leq k_i \leq m_i, 1\leq i \leq n}$ where
+    \[ \tilde{R}_{k_1,k_2,\ldots,k_n} := I_{1,k_1} \times I_{2,k_2} \times \cdots \times I_{n,k_n}. \]
+    We note that there are at most $m_1 m_2 \cdots m_n$ such boxes, and that these boxes are almost disjoint because the interior of a box $\tilde{R}_{k_1,k_2,\ldots,k_n}$ is a product of open intervals
+    $I_{1,k_1}^\circ \times I_{2,k_2}^\circ \times \cdots \times I_{n,k_n}^\circ$, and two such products of open intervals are either equal or disjoint by definition of endpoints $c_{i,j}$.
+
+    Define index sets 
+    \[ \mathcal{J} := \left\{ (k_1,k_2,\ldots,k_n) : \tilde{R}_{k_1,k_2,\ldots,k_n} \subseteq R \right\} \quad\text{and}\quad \mathcal{J}_j := \left\{ (k_1,k_2,\ldots,k_n) : \tilde{R}_{k_1,k_2,\ldots,k_n} \subseteq R_j \right\} \]
+    for $1\leq j \leq N$.
+    Then for each $1\leq j \leq N$ we claim that we have
+    \[ R_j = \bigcup_{(k_1,k_2,\ldots,k_n) \in \mathcal{J}_j} \tilde{R}_{k_1,k_2,\ldots,k_n} \]
+    and similarly \[ R = \bigcup_{(k_1,k_2,\ldots,k_n) \in \mathcal{J}} \tilde{R}_{k_1,k_2,\ldots,k_n}. \]
+    The proof of this claim is identical to the proof of the same claim in the previous lemma.
+    As a consequence of this claim and the fact that $R\sub \bigcup_{j=1}^N R_j$, we also have
+    \[ \mathcal{J} \sub \bigcup_{j=1}^N \mathcal{J}_j. \tag{$*$} \]
+    The main difference from the previous lemma is that the sets $\{ \mathcal{J}_j \}_{j=1}^N$ are not necessarily pairwise disjoint.
+    Because the boxes $\{R_j\}_{j=1}^N$ are not necessarily almost disjoint, the a single box $\tilde{R}_{k_1,k_2,\ldots,k_n}$ may be contained in more than one of the boxes $R_j$.
+
+    Now we see that 
+    \begin{align*}
+        \vol(R) &= \sum_{(k_1,k_2,\ldots,k_n) \in \mathcal{J}} \vol(\tilde{R}_{k_1,k_2,\ldots,k_n}) \\
+            &\leq \sum_{j=1}^N \sum_{(k_1,k_2,\ldots,k_n) \in \mathcal{J}_j} \vol(\tilde{R}_{k_1,k_2,\ldots,k_n}) \\
+            &= \sum_{j=1}^N \vol(R_j)
+    \end{align*}
+    where we have used the previous lemma and our claim in the first equality, the inclusion $(*)$ in the inequality, and the previous lemma and our claim again in the final equality. 
+\end{proof}
+
+
+\begin{exercise}
+    \label{ex:open_set_covered_by_boxes}
+    Let $U\sub \R^n$ be a nonempty open set.
+    Show that there exists a countable collection of almost disjoint closed cubes $\{ Q_j \}_{j=1}^\infty$ such that
+    \[ U = \bigcup_{j=1}^\infty Q_j. \]
+\end{exercise}
+
+\begin{proof}
+    For this proof, we will use the dyadic cubes 
+    \[ Q_{m,k} := \left\{ x = (x_1,\ldots,x_n)\in\R^n : 2^k m_j \leq x_j \leq 2^k (m_j+1) \text{ for } j=1,2,\ldots,n \right\} , \quad m\in \Z^n, k\in\Z. \]
+    We say that $Q_{m,k}$ is a dyadic cube of generation $k$.
+    It has edge length $2^k$ and volume $2^{kn}$, and corner point $2^k m\in 2^k \Z^n$.
+    Notice that $Q_{m,0}$ is a half-open cube of edge length $1$ with corner point $m\in \Z^n$.
+    Then $Q_{m,1}$ is a half-open cube of edge length $2$ with corner point $2m\in 2\Z^n$, and so on.
+    Similarly, $Q_{m,-1}$ is a half-open cube of edge length $\frac{1}{2}$ with corner point $\frac{m}{2}\in \frac{1}{2}\Z^n$, and so on.
+    The dyadic cubes of generation $k$ form are almost disjoint and their union is $\R^n$.
+
+    We define the desired collection of cubes $\{ Q_j \}_{j=1}^\infty$ as follows.
+
+    At the first step, let $\mathcal{Q}_{-1}$ be the set of all dyadic cubes of generation $-1$, which have edge length $\frac{1}{2}$.
+    There are countably many such cubes, and we sort them into three sets based on their relationship to $U$ --- we define
+    \begin{align*}
+        \text{green}_1 &= \{ Q_{m,-1} : m\in \Z^n \text{ and } Q_{m,-1} \subset U \} \\
+        \text{red}_1 &= \{ Q_{m,-1} : m\in \Z^n \text{ and } Q_{m,-1} \cap U = \emptyset \} \\
+        \text{yellow}_1 &= \{ Q_{m,-1} : m\in \Z^n \text{ and } Q_{m,-1} \cap U \neq \emptyset, Q_{m,-1} \not\subset U \}.
+    \end{align*}
+    The green cubes are those which are completely contained in $U$, the red cubes are those which do not intersect $U$ at all and are contained in the complement of $U$, and the yellow cubes are those which intersect $U$ but are not completely contained in $U$.
+    The set of green cubes $\text{green}_1$ and the set of yellow cubes $\text{yellow}_1$ cannot both be empty, since $U$ is nonempty and open.
+    Let $\mathcal{G}_1 := \text{green}_1$ be the set of green cubes at step $1$.
+
+    At the second step, we look at the yellow cubes from the first step.
+    Each yellow cube $Q_{m,-1}$ evolves into $2^n$ dyadic cubes of generation $-2$, each with edge length $\frac{1}{4}$.
+    We sort these new cubes into three sets based on their relationship to $U$ --- we define
+    \begin{align*}
+        \text{green}_2 &= \{ Q_{m,-2} : Q_{m,-2} \subset U \text{ and } Q_{m,-1} \subset \text{yellow}_1 \} \\
+        \text{red}_2 &= \{ Q_{m,-2} : Q_{m,-2} \cap U = \emptyset \text{ and } Q_{m,-1} \subset \text{yellow}_1 \} \\
+        \text{yellow}_2 &= \{ Q_{m,-2} : Q_{m,-2} \cap U \neq \emptyset, Q_{m,-2} \not\subset U \text{ and } Q_{m,-1} \subset \text{yellow}_1 \}.
+    \end{align*}
+    The set of green cubes $\text{green}_2$ and the set of yellow cubes $\text{yellow}_2$ cannot both be empty, since each yellow cube from the first step intersects $U$ and $U$ is open.
+    Let $\mathcal{G}_2 := \mathcal{G}_1 \cup \text{green}_2$ be the set of green cubes at step $2$.
+
+    We continue in this manner, where at step $k$ we look at the yellow cubes from step $k-1$, subdivide each of them into $2^n$ dyadic cubes of generation $-k$, and sort these new cubes into three sets based on their relationship to $U$.
+    We define the sets $\text{green}_k$, $\text{red}_k$, and $\text{yellow}_k$ in the obvious way, and let $\mathcal{G}_k := \mathcal{G}_{k-1} \cup \text{green}_k$ be the set of green cubes at step $k$.
+    This process results in a countable collection of green cubes $\mathcal{G} := \bigcup_{k=1}^\infty \mathcal{G}_k$.
+    We claim that $\mathcal{G}$ is the desired collection of cubes, i.e
+    \[ U = \bigcup_{Q\in \mathcal{G}} Q. \]
+
+    To see this, first note that every cube in $\mathcal{G}$ is contained in $U$ by construction, so we have the inclusion $\supseteq$.
+    To see the inclusion $\subseteq$, let $x\in U$.
+    Then there exists an $N>0$ and a cube $Q_{m,-N}$ of generation $-N$ such that $x\in Q_{m,-N} \subset U$.
+    Either this cube $Q_{m,-N}$ is in $\mathcal{G}$, or it is contained in a cube which is in $\mathcal{G}$.
+    Therefore $x\in \bigcup_{Q\in \mathcal{G}} Q$, and since $x\in U$ was arbitrary, we have shown the inclusion $\sub$.
+
+    Finally, we note that the cubes in $\mathcal{G}$ are almost disjoint, since they are dyadic cubes of various generations.
+    Since $U$ was an arbitrary nonempty open set, this completes the proof.
+\end{proof}
+
+\begin{corollary}
+    \label{cor:borel_generated_by_boxes}
+    The Borel $\sigma$-algebra on $\R^n$ is generated by the collection of closed boxes in $\R^n$.
+    Similarly, it is also generated by the collection of open boxes in $\R^n$, or by the collection of half-open boxes in $\R^n$.
+\end{corollary}
+
+\begin{proof}
+    Let $\mathcal{A}$ be the smallest $\sigma$-algebra containing all closed (open, half-open) boxes in $\R^n$.
+    By the previous exercise, every open set in $\R^n$ is a countable union of closed (open, half-open) boxes, so every open set is in $\mathcal{A}$.
+    Since the Borel $\sigma$-algebra is the smallest $\sigma$-algebra containing all open sets, we have that the Borel $\sigma$-algebra is contained
+    in $\mathcal{A}$.
+
+    Conversely, the collection of closed (open, half-open) boxes is a subset of the Borel $\sigma$-algebra and is a $\pi$-system which generates $\mathcal{A}$, so we know that $\mathcal{A}$ is contained in the Borel $\sigma$-algebra.
+\end{proof}
+
+\newpage
+
+\subsection{Lebesgue Measure on $\R^n$}
+
+With the theory we have put in place, this should be pretty straightforward.
+
+
+We want to define an outer measure $\mu$ on $\R^n$ which assigns to each box its volume.
+This measure should also satisfy the following properties, to capture our intuition of volume:
+\begin{itemize}
+    \item (Translation Invariance) If $A\sub \R^n$ and $x\in \R^n$, then $\mu(A+x) = \mu(A)$, where $A+x = \{ a+x : a\in A \}$.
+    \item (Homogeneity) If $A\sub \R^n$ and $t>0$, then $\mu(tA) = t^n\mu(A)$, where $tA = \{ ta : a\in A \}$.
+    \item (Disjoint Additivity) If $A\sub \R^n$ and $B\sub \R^n$ are disjoint, then $\mu(A\cup B) = \mu(A) + \mu(B)$.
+\end{itemize}
+We will see that these properties are all satisfied by $\mu$-measurable sets with respect to the Lebesgue measure $\mu$ we construct.
+
+\begin{definition}[Lebesgue Outer Measure]
+    \label{def:lebesgue_outer_measure}
+    The \emph{Lebesgue outer measure} $\mu$ on $\R^n$ is defined for each $E\sub \R^n$ by
+    \[ \mu(E) := \inf \left\{ \sum_{j=1}^\infty \vol(Q_j) : E\sub \bigcup_{j=1}^\infty Q_j, \text{ each } Q_j \text{ is a closed cube} \right\} \]
+    where $\vol(Q_j)$ is the volume of the cube $Q_j$.    
+\end{definition}
+
+That is, to define the Lebesgue outer measure of a set $E\sub \R^n$, we cover $E$ by a countable collection of closed cubes $\{ Q_j \}_{j=1}^\infty$ and take the infimum of the sums of the volumes of these cubes over all such covers.
+We see that for each $E\sub \R^n$, the set over which we are taking the infimum in the definition of $\mu(E)$ is nonempty, 
+so $\mu(E)$ is well-defined and takes values in $[0,\infty]$.
+
+One can instead use open, half-open, or closed boxes instead of closed cubes in the definition, and the resulting outer measure will be the same.
+One can even use dyadic cubes instead of arbitrary cubes or boxes.
+The theory is the same in all these cases.
+One can also cover by countably many open or closed balls instead of cubes or boxes, but it is nontrivial to show this gives the same theory (but it does).
+
+What is crucial though is that we allow countably many cubes or boxes in the cover.
+Allowing only finitely many cubes or boxes would give the theory of \emph{Jordan content}, instead of Lebesgue measure.
+
+\vspace{3mm}
+
+Let us begin by showing that the Lebesgue outer measure gives the correct value on boxes.
+
+\begin{lemma}
+    \label{lem:lebesgue_outer_measure_on_boxes}
+    Let $R\sub \R^n$ be a box which is either closed, open, or half-open.
+    Then $\mu(R) = \vol(R)$.
+\end{lemma}
+
+\begin{proof}
+
+    \textit{Step 1}: We will first show that $\mu(Q) = \vol(Q)$ for every closed cube $Q\sub \R^n$.
+    \vspace{2mm}
+    
+    Let $Q\sub \R^n$ be a cube of the form
+    \[ Q = [a_1,b_1]\times [a_2,b_2] \times \cdots \times [a_n,b_n]. \]
+    To see that $\mu(Q) = \vol(Q)$, first note that $\mu(Q) \leq \vol(Q)$ since $Q$ can be covered by itself.
+    This inequality shows that equality holds if $\vol(Q) = 0$, so we may assume that $\vol(Q) > 0$.
+    Let $\{ Q_j \}_{j=1}^\infty$ be a cover of $Q$ by closed cubes; let $\epsilon > 0$ be given.
+    For each $j\geq 1$ we choose an open cube $S_{j,\epsilon}$ containing $Q_j$ such that $\vol(S_{j,\epsilon}) \leq (1+\epsilon)\vol(Q_j)$.
+    Then $\{ S_{j,\epsilon} \}_{j=1}^\infty$ is an open cover of the compact set $Q$, so we can choose a finite subcover $\{ S_{j,\epsilon} \}_{j=1}^N$ of $Q$.
+    Taking the closure of these cubes, we obtain a finite cover of $Q$ by closed cubes $\{ \overline{S_{j,\epsilon}} \}_{j=1}^N$.
+    Then by \ref{lem:covering_box_by_boxes} we have
+    \[ \vol(Q) \leq \sum_{j=1}^N \vol(\overline{S_{j,\epsilon}}) = \sum_{j=1}^N \vol(S_{j,\epsilon}) \leq (1+\epsilon) \sum_{j=1}^N \vol(Q_j). \]
+    Since $\epsilon > 0$ was arbitrary, we have
+    \[ \vol(Q) \leq \sum_{j=1}^\infty \vol(Q_j). \]
+    Taking the infimum over all such covers $\{ Q_j \}_{j=1}^\infty$ of $Q$, we obtain $\vol(Q) \leq \mu(Q)$.
+    Thus we have shown $\mu(Q) = \vol(Q)$ for every closed cube $Q\sub \R^n$.
+
+    \vspace{2mm}
+    \textit{Step 2}: We will now extend this to all boxes.
+    \vspace{2mm}
+
+    Now let $R\sub \R^n$ be a box which is either closed, open, or half-open.
+    If $\vol(R) = 0$, then $\mu(R) = 0$ as $R$ can be covered by a degenerate cube of volume $0$.
+    Thus we may assume that $\vol(R) > 0$.
+    For convenience, we let
+    \[ \overline{R} = [a_1,b_1]\times [a_2,b_2] \times \cdots \times [a_n,b_n] \]
+    where $a_j< b_j$ for $j=1,\ldots,n$.
+
+    Suppose that $\{Q_j\}_{j=1}^\infty$ is a cover of $R$ by closed cubes.
+    Then for each $\varepsilon > 0$ and each $j\geq 1$ we can choose an open cube $S_{j,\epsilon}$ containing $Q_j$ such that $\vol(S_{j,\epsilon}) \leq (1+\epsilon)\vol(Q_j)$.
+    Then $\{ S_{j,\epsilon} \}_{j=1}^\infty$ is an open cover of the compact set $\overline{R}$, so we can choose a finite subcover $\{ S_{j,\epsilon} \}_{j=1}^N$ of $\overline{R}$.
+    Taking the closure of these cubes, we obtain a finite cover of $\overline{R}$ by closed cubes $\{ \overline{S_{j,\epsilon}} \}_{j=1}^N$.
+    Then by \ref{lem:covering_box_by_boxes} we have
+    \[ \vol(\overline{R}) \leq \sum_{j=1}^N \vol(\overline{S_{j,\epsilon}}) = \sum_{j=1}^N \vol(S_{j,\epsilon}) \leq (1+\epsilon) \sum_{j=1}^N \vol(Q_j) = (1+\epsilon) \sum_{j=1}^\infty \vol(Q_j). \]
+    Since $\epsilon > 0$ was arbitrary, we have
+    \[ \vol(\overline{R}) \leq \sum_{j=1}^\infty \vol(Q_j). \]
+    Taking the infimum over all such covers $\{ Q_j \}_{j=1}^\infty$ of $R$, we obtain $\vol(\overline{R}) \leq \mu(R)$.
+    Since $\vol(\overline{R}) = \vol(R)$, we have shown that $\vol(R) \leq \mu(R)$.
+
+    To see the reverse inequality, fix $k\geq 1$; we let $\mathcal{Q}_k$ be given by
+    \[ \mathcal{Q}_k = \left\{ [m_1/k, (m_1+1)/k] \times [m_2/k, (m_2+1)/k] \times \cdots \times [m_n/k, (m_n+1)/k] : m_i \in \mathbb{Z} \right\} \]
+    which is a collection of almost disjoint closed cubes of side length $1/k$ that cover $\R^n$.
+    We let $\mathcal{Q}_k^{(1)}$ be the subcollection of cubes in $\mathcal{Q}_k$ which are entirely contained in $R$, and we let $\mathcal{Q}_k^{(2)}$ be the subcollection of cubes in $\mathcal{Q}_k$ which intersect $R$ but are not entirely contained in $R$.
+    Then both $\mathcal{Q}_k^{(1)}$ and $\mathcal{Q}_k^{(2)}$ are finite collections of cubes since $R$ is bounded, and we have \[R \sub\bigcup_{Q\in \mathcal{Q}_k^{(1)} \cup \mathcal{Q}_k^{(2)}} Q. \]
+    See that for $1\leq i \leq n$, the number of intervals of length $1/k$ which fit inside $[a_i,b_i]$ is at most $N_i = \lfloor k(b_i - a_i) \rfloor$; hence the number of cubes in $\mathcal{Q}_k^{(1)}$ is at most $N_1 N_2 \cdots N_n$.
+    Thus we have
+    \[ \sum_{Q\in \mathcal{Q} } \vol(Q) \leq \left( \prod_{i=1}^n N_i \right) \frac{1}{k^n} \leq \prod_{i=1}^n \frac{\lfloor k(b_i - a_i) \rfloor}{k^n} \leq \prod_{i=1}^n (b_i - a_i) = \vol(R). \tag{$\star$}\]
+
+    \vspace{2mm}
+    We claim that the number of cubes in $\mathcal{Q}_k^{(2)}$ is bounded above by $Ck^{n-1}$ for some constant $C$ depending only on $R$ and $n$.
+    \vspace{2mm}
+
+    For a cube $Q\in \mathcal{Q}_k^{(2)}$, see that $Q$ intersects the boundary of $R$.
+    Since each cube $Q\in \mathcal{Q}_k^{(2)}$ has side length $1/k$, we see that there exists $1\leq i \leq n$ such that the $i$-th closed interval $[m_i/k, (m_i+1)/k]$ defining $Q$ intersects $[a_i,b_i]$ but is not contained in $[a_i,b_i]$.
+    Thus either $m_i/k < a_i < (m_i+1)/k$ or $m_i/k < b_i < (m_i+1)/k$.
+    In either case, there are at most $2$ choices for $m_i$.
+
+    Say $Q\in \mathcal{Q}$$_k^{(2)}$ is defined by the intervals $[m_j/k, (m_j+1)/k]$ for $j=1,\ldots,n$, 
+    and that there is an $i$ such that $[m_i/k, (m_i+1)/k]$ intersects $[a_i,b_i]$ but is not contained in $[a_i,b_i]$.
+    Then for each $j\neq i$, we have $a_j \leq (m_j+1)/k$ and $b_j \geq m_j/k$, so
+    \[ m_j \in \{ \lceil ka_j \rceil - 1, \lceil ka_j \rceil, \ldots, \lfloor kb_j \rfloor \}. \]
+    Thus for each $1\leq i\leq n$, there are at most $2$ choices for the integer $m_i$, and for each $j\neq i$ there are at most $\lfloor kb_j \rfloor - \lceil ka_j \rceil + 2 $ choices for the integer $m_j$.
+
+    Thus the number of cubes in $\mathcal{Q}_k^{(2)}$ is at most
+    \begin{align*}
+         \sum_{i=1}^n \left(2 \,\prod_{j\neq i} \left( \lfloor kb_j \rfloor - \lceil ka_j \rceil + 2 \right) \right) &\leq 2\, \sum_{i=1}^n \prod_{j\neq i} (k(b_j - a_j) + 2) \\
+            &\leq 2k^{n-1} \sum_{i=1}^n \prod_{j\neq i} ((b_j - a_j) + \frac{2}{k} ) \\ 
+            &\leq 2k^{n-1} \sum_{i=1}^n \prod_{j\neq i} (b_j - a_j + 2) \\
+            &=: C k^{n-1}
+    \end{align*}
+    which proves the claim.
+
+    As a result, it follows that 
+    \[ \sum_{Q\in \mathcal{Q}_k^{(2)}} \vol(Q) \leq C k^{n-1} \cdot \frac{1}{k^n} = \frac{C}{k}. \tag{$\star\star$} \]
+
+    \vspace{2mm}
+
+    Using ($\star$) and ($\star\star$), we have
+    \[ \sum_{Q\in \mathcal{Q}_k^{(1)} \cup \mathcal{Q}_k^{(2)}} \vol(Q) \leq \vol(R) + \frac{C}{k}. \]
+    Since $k\geq 1$ was arbitrary, we have shown that for every error $\epsilon > 0$, there exists a cover of $R$ by closed cubes whose total volume is at most $\vol(R) + \epsilon$.
+    Taking the infimum over all such covers of $R$, we obtain $\mu(R) \leq \vol(R)$, finally proving that $\mu(R) = \vol(R)$.
+\end{proof}
+
+\begin{theorem}
+    \label{thm:lebesgue_outer_measure}
+    The Lebesgue outer measure $\mu$ is a metric outer measure on $\R^n$ which is finite on compact sets.
+\end{theorem}
+
+\begin{proof}
+    \textit{Step 1}: 
+    We will verify the three properties of an outer measure.
+    \vspace{2mm}
+
+    First see that $\mu(\emptyset) = 0$ because the empty set can be covered by a degenerate cube of volume $0$.
+    Next, if $E\sub F\sub \R^n$, then any cover of $F$ by closed cubes is also a cover of $E$ by closed cubes, so
+    \[ \mu(E) \leq \mu(F). \]
+    Finally, if $E = \bigcup_{j=1}^\infty E_j$, then for $\epsilon > 0$ and
+    for each $j$ we can choose a cover of $E_j$ by closed cubes $\{ Q_{j,k} \}_{k=1}^\infty$ such that
+    \[ \sum_{k=1}^\infty \vol(Q_{j,k}) \leq \mu(E_j) + \frac{\epsilon}{2^j} \]
+    Then $\{ Q_{j,k} : j,k\in \Z^+ \}$ is a cover of $E$ by closed cubes, so
+    \begin{align*}
+        \mu(E) &\leq \sum_{j=1}^\infty \sum_{k=1}^\infty \vol(Q_{j,k}) \\
+            &\leq \sum_{j=1}^\infty \left( \mu(E_j) + \frac{\epsilon}{2^j} \right) \\
+            &= \sum_{j=1}^\infty \mu(E_j) + \epsilon.
+    \end{align*}
+    Since $\epsilon > 0$ was arbitrary, we have
+    \[ \mu(E) \leq \sum_{j=1}^\infty \mu(E_j). \]
+    Thus $\mu$ is an outer measure on $\R^n$.
+
+    \vspace{2mm}
+    \textit{Step 2}: We will show that $\mu$ is finite on compact sets.
+    \vspace{2mm}
+
+    Now let $K\sub \R^n$ be compact.
+    Then $K$ is closed and bounded by the Heine-Borel theorem, so $K$ is contained in some closed cube $Q$.
+    Since $\mu(Q) \leq \vol(Q) < \infty$, we have $\mu(K) \leq \mu(Q) < \infty$.
+    Thus $\mu$ is finite on compact sets.
+
+    \vspace{2mm}
+    \textit{Step 3}: We will show that $\mu$ is a metric outer measure.
+    That is, if $E_1, E_2\sub \R^n$ are such that $\dist(E_1,E_2) > 0$, then
+    \[ \mu(E_1\cup E_2) = \mu(E_1) + \mu(E_2). \]
+    \vspace{2mm}
+
+    Let $E_1, E_2\sub \R^n$ be such that $\dist(E_1,E_2) > 0$.
+    Then by countable subadditivity of $\mu$, we have
+    \[ \mu(E_1\cup E_2) \leq \mu(E_1) + \mu(E_2). \]
+    To prove the reverse inequality, let $\delta$ be such that $0 < \delta < \dist(E_1,E_2)$. 
+    Let $\epsilon > 0$ be arbitrary, and let $\{ Q_j \}_{j=1}^\infty$ be a cover of $E_1\cup E_2$ by closed cubes such that
+    \[ \sum_{j=1}^\infty \vol(Q_j) < \mu(E_1\cup E_2) + \epsilon. \]
+    After subdividing the cubes if necessary, we may assume that $\diam(Q_j) < \delta$ for each $j$.
+    Then each cube $Q_j$ intersects at most one of the sets $E_1$ or $E_2$, since $\dist(E_1,E_2) > \delta$.
+    Let 
+    \[ J_i := \{ j \in \mathbb{N} : Q_j \cap E_i \neq \emptyset \} \]
+    for $i=1,2$.
+    Then $J_1 \cap J_2 = \emptyset$ and we have 
+    \[ E_i \sub \bigcup_{j\in J_i} Q_j \]
+    for $i=1,2$. By definition of the Lebesgue outer measure $\mu$, we have
+    \begin{align*}
+        \mu(E_1) + \mu(E_2) &\leq \sum_{j\in J_1} \vol(Q_j) + \sum_{j\in J_2} \vol(Q_j) \\
+            &= \sum_{j\in J_1 \cup J_2} \vol(Q_j) \\
+            &\leq \sum_{j=1}^\infty \vol(Q_j) \\
+            &< \mu(E_1\cup E_2) + \epsilon.
+    \end{align*}
+    Since $\epsilon > 0$ was arbitrary, we have 
+    \[ \mu(E_1) + \mu(E_2) \leq \mu(E_1\cup E_2) \]
+    which proves that $\mu(E_1\cup E_2) = \mu(E_1) + \mu(E_2)$ as desired.
+
+    Since $E_1, E_2\sub \R^n$ with $\dist(E_1,E_2) > 0$ were arbitrary, we have shown that $\mu$ is a metric outer measure on $\R^n$.
+\end{proof}
+
+\begin{corollary}[Unions of Almost Disjoint Boxes]
+    \label{cor:unions_of_almost_disjoint_boxes}
+    If $\{ Q_j \}_{j=1}^\infty$ is a countable collection of almost disjoint boxes in $\R^n$, then
+    \[ \mu\left( \bigcup_{j=1}^\infty Q_j \right) = \sum_{j=1}^\infty \vol(Q_j). \]
+\end{corollary}
+
+\begin{proof}
+    Let $\epsilon > 0$ be arbitrary.
+    For each $j\geq 1$ we let $S_{j,\epsilon}$ be a closed box contained in $Q_j$ such that $\vol(Q_j) \leq \vol(S_{j,\epsilon}) + \epsilon/2^j$.
+    Then for each $N\geq 1$ the collection of boxes $\{ S_{j,\epsilon} \}_{j=1}^N$ is disjoint, so that $\dist(S_{i,\epsilon}, S_{j,\epsilon}) > 0$ for $i\neq j$.
+    Since $\mu$ is a metric outer measure by \ref{thm:lebesgue_outer_measure}, for each $N\geq 1$ we have
+    \[ \mu\left( \bigcup_{j=1}^N S_{j,\epsilon} \right) = \sum_{j=1}^N \mu(S_{j,\epsilon}) = \sum_{j=1}^N \vol(S_{j,\epsilon}) \geq \sum_{j=1}^N \left(\vol(Q_j) - \frac{\epsilon}{2^j}\right) = \sum_{j=1}^N \vol(Q_j) - \epsilon \]
+    where the second equality follows from Lemma \ref{lem:lebesgue_outer_measure_on_boxes}.
+    Since $\bigcup_{j=1}^N S_{j,\epsilon} \sub \bigcup_{j=1}^\infty Q_j$ for each $N\geq 1$, monotonicity of $\mu$ gives
+    \[ \mu\left( \bigcup_{j=1}^\infty Q_j \right) \geq \mu\left( \bigcup_{j=1}^N S_{j,\epsilon} \right) \geq \sum_{j=1}^N \vol(Q_j) - \epsilon, \]
+    and taking the limit as $N\to\infty$ gives
+    \[ \mu\left( \bigcup_{j=1}^\infty Q_j \right) \geq \sum_{j=1}^\infty \vol(Q_j) - \epsilon. \]
+    Since $\epsilon > 0$ was arbitrary, we have shown that 
+    \[ \mu\left( \bigcup_{j=1}^\infty Q_j \right) \geq \sum_{j=1}^\infty \vol(Q_j). \]
+
+    The reverse inequality follows from the fact that $\{\overline{Q_j}\}_{j=1}^\infty$ is a cover of $\bigcup_{j=1}^\infty Q_j$ by closed boxes, so we have
+    \[ \mu\left( \bigcup_{j=1}^\infty Q_j \right) \leq \sum_{j=1}^\infty \vol(\overline{Q_j}) = \sum_{j=1}^\infty \vol(Q_j). \]
+\end{proof}
+
+As another corollary of the fact that Lebesgue outer measure is a metric outer measure, we have the following.
+
+\begin{corollary}[Borel Regularity of Lebesgue Measure]
+    \label{cor:borel_regular_lebesgue_measure}
+    The Lebesgue outer measure $\mu$ is a Borel regular outer measure on $\R^n$, and the Borel $\sigma$-algebra is contained in the $\sigma$-algebra of $\mu$-measurable sets.
+    That is, every Borel set in $\R^n$ is Lebesgue measurable.
+\end{corollary}
+
+\begin{proof}
+    Since $\mu$ is a metric outer measure by \ref{thm:lebesgue_outer_measure}, it is Borel regular by \ref{thm:caratheodory_criterion}.
+\end{proof}
+
+\begin{remark}
+    Recall that the $\sigma$-algebra of $\mu$-measurable sets is denoted by $\mathcal{M}_\mu$, and sets in $\mathcal{M}_\mu$ are called $\mu$-measurable.
+    In this case of Lebesgue outer measure $\mu$, sets in $\mathcal{M}_\mu$ are called \emph{Lebesgue measurable}.
+\end{remark}
+
+\begin{corollary}[Countable Disjoint Additivity]
+    \label{cor:countable_disjoint_additivity_lebesgue}
+    Let $\{ E_j \}_{j=1}^\infty$ be a countable collection of disjoint Lebesgue measurable sets in $\R^n$.
+    Then \[ \mu\left( \bigcup_{j=1}^\infty E_j \right) = \sum_{j=1}^\infty \mu(E_j). \]
+\end{corollary}
+
+\begin{proof}
+    This is just a special case of \ref{prop:sequences_of_measurable_sets}.
+\end{proof}
+
+Instead of just boxes, we can compute the Lebesgue outer measure of more interesting sets.
+
+\begin{example}[The Cantor Set]
+    \label{ex:cantor_set}
+    Let's look at a classical example.
+    The \emph{Cantor set} $C\sub [0,1]$ is constructed by starting with the interval $[0,1]$ and iteratively removing the open middle third of each remaining interval.
+    That is, we start with $C_0 = [0,1]$.
+    At the first step, we remove the open interval $(1/3, 2/3)$ of length $1/3$ to obtain
+    \[ C_1 = [0,1/3] \cup [2/3,1]. \]
+    At the second step, we remove the open intervals $(1/9,2/9)$ and $(7/9,8/9)$, each of length $1/9$ to obtain
+    \[ C_2 = [0,1/9] \cup [2/9,1/3] \cup [2/3,7/9] \cup [8/9,1]. \]
+    Continuing in this way, at the $n$-th step we remove $2^{n-1}$ disjoint open intervals, each of length $1/3^n$, to obtain $C_n$.
+    By induction, we see that for each $n\in \Z^+$, the set $C_n$ consists of $2^n$ disjoint closed intervals, each of length $1/3^n$.
+
+    The \textbf{Cantor set} is defined to be
+    \[ C := \bigcap_{n=0}^\infty C_n. \]
+    Clearly $C$ is closed, as the intersection of closed sets.
+    It can also be shown that $C$ is uncountable and totally disconnected (i.e. the only connected subsets of $C$ are singletons).
+
+    Moreover, we can compute the Lebesgue measure of $C$.
+    For each $n\in \Z^+$, see that $C\sub C_n$ and thus $\mu(C) \leq \mu(C_n) = (2/3)^n$.
+    Taking the limit as $n\to\infty$, we obtain $\mu(C) = 0$.
+    Thus the Cantor set is an uncountable set of Lebesgue outer measure zero. \qed
+\end{example}
+
+At this point, we have shown that the Lebesgue outer measure $\mu$ is a Borel regular outer measure on $\R^n$ which is finite on compact sets, (so it can measure all Borel sets), and $\mu$ computes the correct value on boxes.
+Thus, by \ref{cor:borel_reg_outer_measures_in_rn}, any measure which gives the same values on boxes as $\mu$ must agree with $\mu$ on all Borel sets.
+In particular, there can be no other measure which gives the correct value on boxes and is defined on all Borel sets.
+
+\begin{notation}[Lebesgue Measure]
+    \label{not:lebesgue_measure}
+    From now on, we will refer to the Lebesgue outer measure $\mu$ simply as the \emph{Lebesgue measure} on $\R^n$, and we will denote it by $\mathcal{L}^n$ instead of $\mu$.
+    That is, for each $E\sub \R^n$, we write $\mathcal{L}^n(E)$ to denote the Lebesgue measure of $E$.
+\end{notation}
+
+We now prove the two remaining properties of Lebesgue measure we wanted: translation invariance and homogeneity.
+\begin{proposition}[Translation Invariance and Homogeneity]
+    \label{prop:translation_invariance_homogeneity}
+    The Lebesgue measure $\mathcal{L}^n$ on $\R^n$ is translation invariant and homogeneous.
+    That is, if $E\sub \R^n$ and $y\in \R^n$, then $\mathcal{L}^n(E+y) = \mathcal{L}^n(E)$, where $E+y = \{ x+y : x\in E \}$.
+    Similarly, if $E\sub \R^n$ and $t>0$, then $\mathcal{L}^n(tE) = t^n\mathcal{L}^n(E)$, where $tE = \{ tx : x\in E \}$.
+\end{proposition}
+
+\begin{proof}
+    \textit{Translation Invariance}:
+    Let $E\sub \R^n$ and $y\in \R^n$.
+    See that if $\{ Q_j \}_{j=1}^\infty$ is a cover of $E$ by closed cubes, then $\{ Q_j + y \}_{j=1}^\infty$ is a cover of $E+y$ by closed cubes, and $\vol(Q_j + y) = \vol(Q_j)$ for each $j$.
+    Conversely, if $\{ S_j \}_{j=1}^\infty$ is a cover of $E+y$ by closed cubes, then $\{ S_j - y \}_{j=1}^\infty$ is a cover of $E$ by closed cubes, and $\vol(S_j - y) = \vol(S_j)$ for each $j$.
+    Thus by definition of the Lebesgue measure $\mathcal{L}^n$, we have
+    \begin{align*}
+        \mathcal{L}^n(E+y) &= \inf \left\{ \sum_{j=1}^\infty \vol(Q_j) : E+y \sub \bigcup_{j=1}^\infty Q_j, \text{ each } Q_j \text{ is a closed cube} \right\} \\
+            &= \inf \left\{ \sum_{j=1}^\infty \vol(S_j) : E \sub \bigcup_{j=1}^\infty S_j, \text{ each } S_j \text{ is a closed cube} \right\} \\
+            &= \mathcal{L}^n(E).
+    \end{align*}
+    Since $E\sub \R^n$ and $y\in \R^n$ were arbitrary, we have shown that $\mathcal{L}^n$ is translation invariant.
+
+    \textit{Homogeneity}:
+    Let $E\sub \R^n$ and $t>0$.
+    See that if $\{ Q_j \}_{j=1}^\infty$ is a cover of $E$ by closed cubes, then $\{ tQ_j \}_{j=1}^\infty$ is a cover of $tE$ by closed cubes, and $\vol(tQ_j) = t^n \vol(Q_j)$ for each $j$.
+    Conversely, if $\{ S_j \}_{j=1}^\infty$ is a cover of $tE$ by closed cubes, then $\{ S_j / t \}_{j=1}^\infty$ is a cover of $E$ by closed cubes, and $\vol(S_j / t) = t^{-n} \vol(S_j)$ for each $j$.
+    Thus by definition of the Lebesgue measure $\mathcal{L}^n$, we have
+    \begin{align*}
+        \mathcal{L}^n(tE) &= \inf \left\{ \sum_{j=1}^\infty \vol(Q_j) : tE \sub \bigcup_{j=1}^\infty Q_j, \text{ each } Q_j \text{ is a closed cube} \right\} \\
+            &= \inf \left\{ \sum_{j=1}^\infty t^n \vol(S_j) : E \sub \bigcup_{j=1}^\infty S_j, \text{ each } S_j \text{ is a closed cube} \right\} \\
+            &= t^n \mathcal{L}^n(E).
+    \end{align*}
+    Since $E\sub \R^n$ and $t>0$ were arbitrary, we have shown that $\mathcal{L}^n$ is homogeneous.
+\end{proof}
+
+The proofs of rotation invariance and scaling under linear transformations are more involved, and we will not prove them until after we have developed a theory of integration.

@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>integrals-3</title>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '0.8em',
+      packages: {'[+]': ['ams']},
+      macros: {
+        R: '\\mathbb{R}',
+        C: '\\mathbb{C}',
+        N: '\\mathbb{N}',
+        Z: '\\mathbb{Z}',
+        Q: '\\mathbb{Q}',
+        E: '\\mathbb{E}',
+        F: '\\mathbb{F}',
+        S: '\\mathbb{S}',
+        H: '\\mathcal{H}',
+        L: '\\mathcal{L}',
+        dif: '\\,\\mathrm{d}',
+        supp: '\\operatorname{supp}',
+        proj: '\\operatorname{proj}',
+        Id: '\\operatorname{Id}',
+        Span: '\\operatorname{span}',
+        graph: '\\operatorname{graph}',
+        dist: '\\operatorname{dist}',
+        diam: '\\operatorname{diam}',
+        avg: '\\operatorname{avg}',
+        div: '\\operatorname{div}',
+        vol: '\\operatorname{vol}',
+        ord: '\\operatorname{ord}',
+        Chi: '\\mathbf{1}',
+        sub: '\\subseteq',
+        mres: '\\downharpoonright',
+        ddag: '\\ddagger',
+        dag: '\\dagger',
+        norm: ['\\left\\| #1 \\right\\|', 1],
+        abs: ['\\left| #1 \\right|', 1],
+        set: ['\\left\\{ #1 \\right\\}', 1],
+        inner: ['\\langle #1, #2 \\rangle', 2],
+        floor: ['\\lfloor #1 \\rfloor', 1],
+        ceil: ['\\lceil #1 \\rceil', 1],
+        llbracket: '\\unicode{x27E6}',
+        rrbracket: '\\unicode{x27E7}',
+        bigskull: '\\unicode{x1F480}',
+        skull: '\\unicode{x2620}',
+        mathwitch: '\\unicode{x1F9D9}',
+        pumpkin: '\\unicode{x1F383}',
+        mathpumpkin: '\\unicode{x1F383}',
+        bigpumpkin: '\\unicode{x1F383}',
+        mathghost: '\\unicode{x1F47B}',
+        mathcat: '\\unicode{x1F408}',
+        mathbat: '\\unicode{x1F987}',
+        esssup: '\\operatorname{ess\\,sup}',
+        essinf: '\\operatorname{ess\\,inf}',
+        Lip: '\\operatorname{Lip}',
+        pd: ['\\frac{\\partial#1}{\\partial#2}', 2],
+        od: ['\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}', 2],
+        dashint: '\\mathchoice{\\rlap{-}\\!\\int}{\\rlap{\\raise.15ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}',
+        eurologo: '\\unicode{x20AC}',
+        starredbullet: '\\unicode{x2726}',
+        grimace: '\\unicode{x1F62C}',
+        textthing: '\\unicode{x2639}',
+        noway: '\\unicode{x26D4}',
+        warning: '\\unicode{x26A0}',
+        danger: '\\unicode{x26A0}',
+        textxswup: '\\unicode{x2195}',
+        textxswdown: '\\unicode{x2195}',
+        decoone: '\\unicode{x2756}',
+        decotwo: '\\unicode{x2767}',
+        decothreeleft: '\\unicode{x2619}',
+        decothreeright: '\\unicode{x2767}',
+        decofourleft: '\\unicode{x261A}',
+        decofourright: '\\unicode{x261B}',
+        floweroneleft: '\\unicode{x2740}',
+        floweroneright: '\\unicode{x2740}',
+        lefthand: '\\unicode{x261C}',
+        righthand: '\\unicode{x261E}',
+        decosix: '\\unicode{x2766}',
+        bomb: '\\unicode{x1F4A3}',
+        caution: '\\unicode{x2621}',
+        leftblackhand: '\\unicode{x261A}',
+        rightblackhand: '\\unicode{x261B}',
+        leafleft: '\\unicode{x2618}',
+        leafright: '\\unicode{x2618}',
+        leafNW: '\\unicode{x2618}',
+        leafNE: '\\unicode{x2618}',
+        leafSE: '\\unicode{x2618}',
+        leafSW: '\\unicode{x2618}',
+        aldineleft: '\\unicode{x2619}',
+        aldineright: '\\unicode{x2767}',
+        aldine: '\\unicode{x2766}',
+        aldinesmall: '\\unicode{x2767}',
+        aldinesmallrevert: '\\unicode{x2619}',
+        aldinesmallup: '\\unicode{x2766}',
+        grappe: '\\unicode{x2766}',
+        rightgrappe: '\\unicode{x2767}',
+        leftgrappe: '\\unicode{x2619}',
+        oldpilcrowone: '\\unicode{x00B6}',
+        oldpilcrowtwo: '\\unicode{x00B6}',
+        oldpilcrowthree: '\\unicode{x00B6}',
+        oldpilcrowfour: '\\unicode{x00B6}',
+        oldpilcrowfive: '\\unicode{x00B6}',
+        oldpilcrowsix: '\\unicode{x00B6}'
+      }
+    },
+    startup: {
+      pageReady: () => {
+        return MathJax.startup.defaultPageReady().then(() => {
+          console.log('MathJax ready');
+        });
+      }
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+  <script>
+  (function() {
+    window.addEventListener('beforeunload', function() {
+      saveProofState();
+      saveCollapsibleState();
+    });
+    
+    const eventSource = new EventSource('http://localhost:35729/reload-stream');
+    
+    eventSource.onmessage = function(event) {
+      if (event.data === 'reload') {
+        console.log('📝 File updated, saving state and reloading...');
+        saveProofState();
+        saveCollapsibleState();
+        setTimeout(() => {
+          window.location.reload();
+        }, 50);
+      }
+    };
+    
+    eventSource.onerror = function() {
+      console.log('⚠️  Auto-reload server not available. Run node watch.js to enable auto-reload.');
+      eventSource.close();
+    };
+    
+    console.log('🔄 Auto-reload enabled');
+  })();
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+    
+    /* Layout with sidebar */
+    .page-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      width: 280px;
+      background: #fff;
+      border-right: 1px solid #e0e0e0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px 0;
+      font-size: 14px;
+    }
+    
+    .sidebar-header {
+      padding: 15px 20px 25px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .sidebar-header h1 {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 5px 0;
+    }
+    
+    .sidebar-header .subtitle {
+      font-size: 0.85em;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .sidebar-header .back-link {
+      display: block;
+      font-size: 0.8em;
+      color: #666;
+      text-decoration: none;
+      margin-top: 12px;
+    }
+    
+    .sidebar-header .back-link:hover {
+      color: #1a1a1a;
+    }
+    
+    .sidebar-nav {
+      padding: 10px 0;
+    }
+    
+    .chapter-group {
+      margin-bottom: 2px;
+    }
+    
+    .chapter-title {
+      padding: 12px 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chapter-title:hover {
+      background: #f5f5f5;
+    }
+    
+    .chapter-title .toggle {
+      font-size: 0.65em;
+      color: #999;
+      transition: transform 0.2s;
+    }
+    
+    .chapter-group.expanded .chapter-title .toggle {
+      transform: rotate(90deg);
+    }
+    
+    .section-list {
+      display: none;
+      padding: 5px 0;
+      background: #f8f8f8;
+    }
+    
+    .chapter-group.expanded .section-list {
+      display: block;
+    }
+    
+    .section-link {
+      display: block;
+      padding: 8px 20px 8px 35px;
+      font-size: 0.85em;
+      color: #555;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+    }
+    
+    .section-link:hover {
+      background: #f0f0f0;
+      color: #1a1a1a;
+    }
+    
+    .section-link.active {
+      background: #e8e8e8;
+      border-left-color: #333;
+      color: #000;
+      font-weight: 500;
+    }
+    
+    /* Main content area */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      max-width: 900px;
+      padding: 40px 60px;
+    }
+    
+    @media (max-width: 1100px) {
+      .sidebar {
+        width: 240px;
+      }
+      .main-content {
+        margin-left: 240px;
+        padding: 30px 40px;
+      }
+    }
+    
+    @media (max-width: 800px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+      .page-layout {
+        flex-direction: column;
+      }
+    }
+    
+    h2, h3, h4 {
+      margin-top: 2em;
+      margin-bottom: 0.75em;
+      color: #000;
+      font-weight: 600;
+    }
+    h2 { font-size: 1.5em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.1em; }
+    p {
+      margin: 1em 0;
+      text-indent: 2em;
+    }
+    p:first-of-type,
+    h2 + p,
+    h3 + p,
+    h4 + p,
+    .theorem-box + p,
+    .proof-box + p {
+      text-indent: 0;
+    }
+    .noindent + p,
+    p:has(> .noindent:first-child) {
+      text-indent: 0 !important;
+    }
+    .noindent {
+      display: none;
+    }
+    .theorem-box {
+      margin: 1.75em 0;
+      padding: 1.25em;
+      border-left: 5px solid #16a34a;
+      background: linear-gradient(to top, #bbf7d0 0%, #d1fae5 100%);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .definition-box { border-left-color: #16a34a; background: linear-gradient(to top, #d1fae5 0%, #ecfdf5 100%); }
+    .lemma-box { border-left-color: #1e3a8a; background: linear-gradient(to top, #bfdbfe 0%, #dbeafe 100%); }
+    .corollary-box { border-left-color: #9333ea; background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%); }
+    .proposition-box { border-left-color: #dc2626; background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%); }
+    .remark-box { border-left-color: #64748b; background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%); }
+    .example-box { border-left-color: #0891b2; background: linear-gradient(to top, #a5f3fc 0%, #cffafe 100%); }
+    .construction-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .notation-box { border-left-color: #ca8a04; background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%); }
+    .exercise-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .problem-box { border-left-color: #ec4899; background: linear-gradient(to top, #fbcfe8 0%, #fce7f3 100%); }
+    .theorem-header {
+      margin-bottom: 0.75em;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+    .theorem-header.clickable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .theorem-header.clickable:hover {
+      background: rgba(0,0,0,0.03);
+      margin: -0.5em -0.75em 0.75em -0.75em;
+      padding: 0.5em 0.75em;
+      border-radius: 4px;
+    }
+    .collapsible-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      margin-right: 0.5em;
+      color: #6b7280;
+    }
+    .collapsible-box.collapsed .collapsible-icon {
+      transform: rotate(-90deg);
+    }
+    .collapsible-content {
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+    }
+    .collapsible-box.collapsed .collapsible-content {
+      display: none;
+    }
+    .theorem-content {
+      padding-left: 0.5em;
+      line-height: 1.8;
+    }
+    .proof-box {
+      margin: 1.5em 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .proof-header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      border-radius: 6px 6px 0 0;
+    }
+    .proof-toggle {
+      width: 100%;
+      padding: 0.85em 1.25em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      transition: background 0.15s;
+    }
+    .proof-toggle:hover { background: rgba(0,0,0,0.03); }
+    .proof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      color: #6b7280;
+    }
+    .proof-box.collapsed .proof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .proof-content {
+      padding: 1.25em;
+      line-height: 1.8;
+    }
+    .proof-box.collapsed .proof-content {
+      display: none;
+    }
+    .proof-end {
+      float: right;
+      font-size: 1.3em;
+      margin-left: 0.5em;
+      color: #374151;
+    }
+    .subproof {
+      margin: 1em 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #f9fafb;
+    }
+    .subproof-header {
+      background: linear-gradient(to bottom, #f9fafb 0%, #f3f4f6 100%);
+      border-bottom: 1px solid #d1d5db;
+      border-radius: 4px 4px 0 0;
+    }
+    .subproof-toggle {
+      width: 100%;
+      padding: 0.6em 1em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: background 0.15s;
+    }
+    .subproof-toggle:hover {
+      background: rgba(0,0,0,0.03);
+    }
+    .subproof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.7em;
+      color: #6b7280;
+    }
+    .subproof.collapsed .subproof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .subproof-content {
+      padding: 1em;
+      line-height: 1.7;
+    }
+    .subproof.collapsed .subproof-content {
+      display: none;
+    }
+    .ref-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 0.15em;
+      border-radius: 2px;
+    }
+    .ref-link:hover {
+      background: #dbeafe;
+      text-decoration: underline;
+    }
+    .ref-unknown {
+      color: #dc2626;
+      font-weight: bold;
+      background: #fee2e2;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+    ol, ul {
+      margin: 1em 0;
+      padding-left: 2.5em;
+      line-height: 1.8;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    .latex-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5em auto;
+    }
+    .latex-figure .latex-image {
+      display: inline-block;
+      margin: 0.5em;
+      vertical-align: middle;
+    }
+    .latex-figure {
+      margin: 2em 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .latex-figure .figure-content {
+      margin-bottom: 0.75em;
+      line-height: normal;
+    }
+    .latex-figure .figure-content > * {
+      vertical-align: middle;
+    }
+    .latex-figure figcaption {
+      font-size: 0.9em;
+      color: #4b5563;
+      font-style: italic;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1>Analysis III</h1>
+        <div class="subtitle">Measure Theory &amp; Integration</div>
+        <a href="../index.html" class="back-link">← Table of Contents</a>
+      </div>
+      <div class="sidebar-nav">
+        <div class="chapter-group expanded">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>1. Measure Theory</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../01-measure-theory/measure-theory.html" class="section-link">Overview</a>
+            <a href="../01-measure-theory/basics.html" class="section-link">Outer Measures</a>
+            <a href="../01-measure-theory/lebesgue-meas.html" class="section-link">Lebesgue Measure</a>
+            <a href="../01-measure-theory/cantor.html" class="section-link">The Cantor Set</a>
+            <a href="../01-measure-theory/measure-spaces.html" class="section-link">Measure Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>2. Integration</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../02-integration/integration.html" class="section-link">Overview</a>
+            <a href="../02-integration/integrals-1.html" class="section-link">Simple Functions</a>
+            <a href="../02-integration/integrals-2.html" class="section-link">General Functions</a>
+            <a href="../02-integration/convergence.html" class="section-link">Convergence Theorems</a>
+            <a href="../02-integration/inequality-party.html" class="section-link">Integral Inequalities</a>
+            <a href="../02-integration/lp_spaces.html" class="section-link">Lᵖ Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>3. Product Measures</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../03-fubini/fubini_ch.html" class="section-link">Overview</a>
+            <a href="../03-fubini/fubini.html" class="section-link">Fubini-Tonelli</a>
+            <a href="../03-fubini/integrals-3.html" class="section-link">Product Measures</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>4. Differentiation I</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../04-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../04-differentiation-1/covering.html" class="section-link">Vitali Covering</a>
+            <a href="../04-differentiation-1/monotone.html" class="section-link">Monotone Functions</a>
+            <a href="../04-differentiation-1/BV_on_R.html" class="section-link">Bounded Variation</a>
+            <a href="../04-differentiation-1/FTOC.html" class="section-link">FTC for Lebesgue</a>
+            <a href="../04-differentiation-1/HL.html" class="section-link">Hardy-Littlewood</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>5. Differentiation I (cont)</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../05-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../05-differentiation-1/r-nik.html" class="section-link">Radon-Nikodym</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>6. Differentiation II</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-differentiation-2/diff-2.html" class="section-link">Overview</a>
+            <a href="../06-differentiation-2/vector-measures.html" class="section-link">Vector Measures</a>
+            <a href="../06-differentiation-2/r-nik.html" class="section-link">Radon-Nikodym</a>
+            <a href="../06-differentiation-2/besi.html" class="section-link">Besicovitch</a>
+            <a href="../06-differentiation-2/densities.html" class="section-link">Densities</a>
+            <a href="../06-differentiation-2/diff-measures.html" class="section-link">Measure Derivatives</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>7. Riesz Representation</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-riesz/riesz.html" class="section-link">Overview</a>
+            <a href="../06-riesz/riesz_functional.html" class="section-link">Riesz Representation</a>
+            <a href="../06-riesz/LCH_spaces.html" class="section-link">LCH Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>8. Integral Formulas</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../07-formulas/formulas.html" class="section-link">Overview</a>
+            <a href="../07-formulas/hausdorff_meas.html" class="section-link">Hausdorff Measures</a>
+            <a href="../07-formulas/lippy.html" class="section-link">Lipschitz Maps</a>
+            <a href="../07-formulas/rademacher.html" class="section-link">Rademacher</a>
+            <a href="../07-formulas/coarea-prereq.html" class="section-link">Coarea Prerequisites</a>
+            <a href="../07-formulas/coarea.html" class="section-link">Coarea Formula</a>
+            <a href="../07-formulas/area-prereq.html" class="section-link">Area Prerequisites</a>
+            <a href="../07-formulas/area-formula.html" class="section-link">Area Formula</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>9. Extension Results</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../08-ext-res/ext-res.html" class="section-link">Overview</a>
+            <a href="../08-ext-res/taylor_thm_integral_remainder.html" class="section-link">Taylor's Theorem</a>
+            <a href="../08-ext-res/whitney-cover.html" class="section-link">Whitney Covering</a>
+            <a href="../08-ext-res/whitney-partition-of-unity.html" class="section-link">Partition of Unity</a>
+            <a href="../08-ext-res/whitney-decomposition.html" class="section-link">Decomposition</a>
+            <a href="../08-ext-res/whitney-extension-theorem.html" class="section-link">Extension Theorem</a>
+            <a href="../08-ext-res/whitney-extension-proof.html" class="section-link">Extension Proof</a>
+            <a href="../08-ext-res/whitney-extension-applications.html" class="section-link">Applications</a>
+            <a href="../08-ext-res/whitney-extension.html" class="section-link">Summary</a>
+            <a href="../08-ext-res/more-bump.html" class="section-link">More Bump Functions</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <main class="main-content">
+      <h2>Applications of The Fubini-Tonelli Theorem to Integrals in $\R^n$</h2>
+<p>With the Fubini-Tonelli theorem, we finally have the tools to prove the following important result about how Lebesgue measure behaves under linear transformations.
+This completes our verification that Lebesgue measure is the ``right'' notion of volume in $\R^n$, and behaves as expected, at least for measurable sets.</p>
+<p>This first exercise does not use the Fubini-Tonelli theorem, but it is a useful property of the Lebesgue integral that will be used in the following Proposition about Lebesgue measure and linear maps.</p>
+<div class="theorem-box exercise-box" id="ex:translation_invariance_of_lebesgue_integral">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Translation Invariance of the Lebesgue Integral on $\R^n$)</div>
+  <div class="theorem-content">Let $f\in L^1(\R^n)$ and let $y\in\R^n$.
+    Then
+    \[ \int_{\R^n} f(x - y) \, \dif x = \int_{\R^n} f(x) \, \dif x. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-0">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-0')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-0">
+    <em>Step 1:</em> We prove the result for characteristic functions of measurable sets of finite measure.
+    <div style="margin: 1em 0;"></div>
+<p>Let $E \sub \R^n$ be a measurable set with $\mathcal{L}^n(E) < \infty$, and let $y\in\R^n$.
+    Then we compute
+    \[ \Chi_{ E + y }(x) = \begin{cases}
+        1 & \text{if } x\in E + y \\
+        0 & \text{if } x\notin E + y
+    \end{cases} \ = \begin{cases}
+        1 & \text{if } x - y \in E \\
+        0 & \text{if } x - y \notin E
+    \end{cases} \ = \Chi_{E}(x - y) \]
+    for each $x\in\R^n$, which implies that \[ \int_{\R^n} \Chi_{E + y}(x) \, \dif x = \mathcal{L}^n(E + y) = \mathcal{L}^n(E) = \int_{\R^n} \Chi_E(x) \, \dif x \]
+    by translation invariance of Lebesgue measure (Proposition <span class="ref-unknown" title="Reference not found: prop:translation_invariance_homogeneity">[prop:translation_invariance_homogeneity?]</span>).</p>
+<p>Thus the result holds for characteristic functions of measurable sets with finite measure.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 2:</em> We prove the result for simple functions.
+    <div style="margin: 1em 0;"></div></p>
+<p>Let $\varphi : \R^n \to [0,\infty)$ be a simple function.
+    Then there exist measurable sets $E_1,\ldots,E_m \sub \R^n$ with $\mathcal{L}^n(E_j) < \infty$ for each $j=1,\ldots,m$, and nonnegative numbers $a_1,\ldots,a_m \geq 0$ such that
+    \[ \varphi = \sum_{j=1}^m a_j \Chi_{E_j}. \]
+    Then we compute
+    \begin{align*}
+        \int_{\R^n} \varphi(x - y) \, \dif x &= \int_{\R^n} \sum_{j=1}^m a_j \Chi_{E_j}(x - y) \, \dif x \\
+            &= \sum_{j=1}^m a_j \int_{\R^n} \Chi_{E_j}(x - y) \, \dif x \\
+            &= \sum_{j=1}^m a_j \int_{\R^n} \Chi_{E_j}(x) \, \dif x \\
+            &= \int_{\R^n} \varphi(x) \, \dif x,
+    \end{align*}
+    where we have used Step 1 in the third line.
+    Thus the result holds for simple functions.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 3:</em> We prove the result for nonnegative measurable functions.
+    <div style="margin: 1em 0;"></div></p>
+<p>Let $f : \R^n \to [0,\infty]$ be a nonnegative measurable function.
+    Then there exists a sequence of simple functions $\{\varphi_k\}_{k=1}^\infty$ such that $0 \leq \varphi_1 \leq \varphi_2 \leq \cdots \leq f$ and $\varphi_k(x) \to f(x)$ for each $x\in\R^n$ as $k\to\infty$ by Proposition <span class="ref-unknown" title="Reference not found: prop:approximation_by_simple_functions">[prop:approximation_by_simple_functions?]</span>.
+    Then $\{\varphi_k(\cdot - y)\}_{k=1}^\infty$ is a sequence of simple functions such that $0 \leq \varphi_1(\cdot - y) \leq \varphi_2(\cdot - y) \leq \cdots \leq f(\cdot - y)$ and $\varphi_k(x - y) \to f(x - y)$ for each $x\in\R^n$ as $k\to\infty$.
+    Now we can use the Monotone Convergence Theorem to compute
+    \begin{align*}
+        \int_{\R^n} f(x - y) \, \dif x &= \int_{\R^n} \lim_{k\to\infty} \varphi_k(x - y) \, \dif x \\
+            &= \lim_{k\to\infty} \int_{\R^n} \varphi_k(x - y) \, \dif x \\
+            &= \lim_{k\to\infty} \int_{\R^n} \varphi_k(x) \, \dif x = \int_{\R^n} f(x) \, \dif x,
+    \end{align*}
+    where we have used Step 2 in the third line.
+    Thus the result holds for nonnegative measurable functions.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 4:</em> We prove the result for general integrable functions.
+    <div style="margin: 1em 0;"></div></p>
+<p>Let $f\in L^1(\R^n)$ and let $y\in\R^n$.
+    Then we can write $f = f^+ - f^-$ where $f^+,f^- : \R^n \to [0,\infty]$ are nonnegative measurable functions with $\int_{\R^n} f^+ \, \dif x < \infty$ and $\int_{\R^n} f^- \, \dif x < \infty$.
+    Then we compute
+    \begin{align*}
+        \int_{\R^n} f(x - y) \, \dif x &= \int_{\R^n} f^+(x - y) \, \dif x - \int_{\R^n} f^-(x - y) \, \dif x \\
+            &= \int_{\R^n} f^+(x) \, \dif x - \int_{\R^n} f^-(x) \, \dif x \\
+            &= \int_{\R^n} f(x) \, \dif x,
+    \end{align*}
+    where we have used Step 3 in the second line.
+    Thus the result holds for general integrable functions.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box proposition-box" id="prop:linear_transformation_lebesgue_measure">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Lebesgue Measure and Linear Maps)</div>
+  <div class="theorem-content">Let $T : \R^n \to \R^n$ be a linear map.
+    Then for each measurable set $E \sub \R^n$ we have
+    \[ \mathcal{L}^n(T(E)) = |\det(T)| \cdot \mathcal{L}^n(E). \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-1">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-1')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-1">
+    <em>Step 1:</em> Suppose we are in the special case of a box and a diagonal linear map.
+    <div style="margin: 1em 0;"></div>
+<p>Let $ R = [a_1,b_1]\times \cdots \times [a_n,b_n] \sub \R^n $ be a box, and let $T : \R^n \to \R^n$ be the diagonal linear map defined by
+    \[ T(x_1,\ldots,x_n) = (\lambda_1 x_1, \ldots, \lambda_n x_n) \]
+    for some $\lambda_1,\ldots,\lambda_n \in \R$. 
+    If $\lambda_j = 0$ for some $j\in\{1,\ldots,n\}$, then $\det(T) = 0$ and $T(R)$ is contained in the hyperplane $\{x_j = 0\}$, which has Lebesgue measure zero; the result holds in this case.</p>
+<p>Thus we may assume that $\lambda_j \neq 0$ for each $j=1,\ldots,n$.
+    Then $T(R)$ is the box 
+    \[ T(R) = [\lambda_1 a_1, \lambda_1 b_1] \times \cdots \times [\lambda_n a_n, \lambda_n b_n]. \]
+    By direct computation we have
+    \begin{align*}
+        \vol(T(R)) &= \prod_{j=1}^n |\lambda_j b_j - \lambda_j a_j| = \prod_{j=1}^n |\lambda_j| \cdot \prod_{j=1}^n |b_j - a_j| \\
+            &= |\det(T)| \cdot \vol(R).
+    \end{align*}
+    This proves the result in this special case.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 2:</em> We prove the special case of a measurable set and a diagonal linear map.
+    <div style="margin: 1em 0;"></div></p>
+<p>Let $E \sub \R^n$ be a measurable set, and let $T : \R^n \to \R^n$ be the diagonal linear map defined by
+    \[ T(x_1,\ldots,x_n) = (\lambda_1 x_1, \ldots, \lambda_n x_n) \]
+    for some $\lambda_1,\ldots,\lambda_n \in \R$.
+    If $\lambda_j = 0$ for some $j\in\{1,\ldots,n\}$, then $\det(T) = 0$ and $T(E)$ is contained in the hyperplane $\{x_j = 0\}$, which has Lebesgue measure zero; the result holds in this case.
+    Thus we may assume that $\lambda_j \neq 0$ for each $j=1,\ldots,n$.
+    Also if $\mathcal{L}^n(E) = \infty$, then the result holds trivially, so we may assume that $\mathcal{L}^n(E) < \infty$.</p>
+<p>Let $\epsilon > 0$. Then there exists a countable collection of boxes $\{R_k\}_{k=1}^\infty$ such that $E \sub \bigcup_{k=1}^\infty R_k$ and
+    \[ \sum_{k=1}^\infty \vol(R_k) < \mathcal{L}^n(E) + \epsilon. \]
+    Then the collection $\{T(R_k)\}_{k=1}^\infty$ is a countable cover of $T(E)$ by boxes, so
+    \begin{align*}
+        \mathcal{L}^n(T(E)) &\leq \mathcal{L}^n \left( \bigcup_{k=1}^\infty T(R_k) \right) \leq \sum_{k=1}^\infty \vol(T(R_k)) \\
+            &= \sum_{k=1}^\infty |\det(T)| \cdot \vol(R_k) = |\det(T)| \cdot \sum_{k=1}^\infty \vol(R_k) \\
+            &< |\det(T)| \cdot (\mathcal{L}^n(E) + \epsilon)
+    \end{align*}
+    by Step 1. Since $\epsilon > 0$ was arbitrary, we have
+    \[ \mathcal{L}^n(T(E)) \leq |\det(T)| \cdot \mathcal{L}^n(E). \]</p>
+<p>But $T$ is invertible since $\lambda_j \neq 0$ for each $j=1,\ldots,n$, so because $T^{-1}$ is also a diagonal linear map with determinant $\det(T^{-1}) = 1/\det(T)$, we can apply the same argument to $T^{-1}$ to get
+    \[ \mathcal{L}^n(T^{-1}(T(E))) \leq |\det(T^{-1})| \cdot \mathcal{L}^n(T(E)) = \frac{1}{|\det(T)|} \cdot \mathcal{L}^n(T(E)). \]
+    That is, \[ |\det(T)| \cdot \mathcal{L}^n(E) \leq \mathcal{L}^n(T(E)). \]</p>
+<p>Therefore we have equality, \[ \mathcal{L}^n(T(E)) = |\det(T)| \cdot \mathcal{L}^n(E) \]
+    and the result holds in this case.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 3:</em> We prove the special case of a measurable set and a special class of invertible linear transformations.
+    <div style="margin: 1em 0;"></div></p>
+<p>Let $E \sub \R^n$ be a measurable set with $\mathcal{L}^n(E) < \infty$, and let $T : \R^n \to \R^n$ be an invertible linear map given by an upper triangular matrix with $1$'s on the diagonal; that is,
+    there exist numbers $\{ a_{j,k} \}_{1\leq j,k \leq n}$ such that $a_{j,j} = 1$ for each $j=1,\ldots,n$, and $a_{j,k} = 0$ for each $j > k$, and 
+    \[ T \begin{pmatrix}
+        x_1 \\ x_2 \\ \vdots \\ x_n
+    \end{pmatrix}
+    = \begin{pmatrix}
+        x_1 + a_{1,2} x_2 + \cdots + a_{1,n} x_n \\
+        x_2 + a_{2,3} x_3 + \cdots + a_{2,n} x_n \\
+        \vdots \\
+        x_j + \sum_{ j < k \leq n} a_{j,k} x_k \\
+        \vdots \\
+        x_n
+    \end{pmatrix} \]</p>
+<p>for each $(x_1,\ldots,x_n) \in \R^n$.</p>
+<p>Note that $\det(T) = 1$. Also note that
+\begin{align*}
+    \Chi_{T(E)}(y) &= \Chi_E(T^{-1}(y)) \\
+        &= \Chi_E \begin{pmatrix}
+            y_1 - a_{1,2} y_2 - \cdots - a_{1,n} y_n \\
+            y_2 - a_{2,3} y_3 - \cdots - a_{2,n} y_n \\
+            \vdots \\
+            y_j - \sum_{ j < k \leq n} a_{j,k} y_k \\
+            \vdots \\
+            y_n
+        \end{pmatrix}
+\end{align*}
+since $T$ is a linear bijection.
+If $E \subseteq \R^n$ is a measurable set, then we compute
+\begin{align*}
+    \mathcal{L}^n (T(E)) &= \int_{\R^n} \Chi_{T(E)}(y) \, \dif y \\
+        &= \int_\R \cdots \int_\R \Chi_{T(E)} (y_1,\ldots,y_n) \, \dif y_1 \cdots \dif y_n \\
+        &= \int_\R \cdots \int_\R \Chi_E\left( y_1 - \sum_{1 < k \leq n} a_{1,k} y_k, \ldots, y_j - \sum_{ j < k \leq n} a_{j,k} y_k, \ldots, y_n \right) \, \dif y_1 \cdots \dif y_n \\
+        &= \int_\R \cdots \int_\R \Chi_E(y_1,y_2 - \sum_{2 < k \leq n} a_{2,k} y_k, \ldots, y_j - \sum_{ j < k \leq n} a_{j,k} y_k, \ldots, y_n) \, \dif y_1 \dif y_2 \cdots \dif y_n \\
+        &= \int_\R \cdots \int_\R \Chi_E(y_1,y_2 - \sum_{2 < k \leq n} a_{2,k} y_k, \ldots, y_{n-1} - a_{n-1,n} y_n, y_n) \, \dif y_2 \dif y_1\cdots \dif y_n \\
+\end{align*}
+where we have used Tonelli's theorem in the second and last line, and translation invariance of the Lebesgue integral on $\R^n$ in the fourth line.</p>
+<p>If we repeat these last two steps $n-2$ more times, we eventually get
+\begin{align*}
+    \mathcal{L}^n(T(E)) &= \int_\R \cdots \int_\R \Chi_E(y_1,y_2,\ldots,y_n) \, \dif y_{n-1} \cdots \dif y_2 \dif y_1\dif y_n \\
+        &= \int_{\R^n} \Chi_E(y) \, \dif y = \mathcal{L}^n(E)
+\end{align*}
+where we have again used Tonelli's theorem in the second line.</p>
+<p>Since $\det(T) = 1$, we have proven the result in this case.</p>
+<p><div style="margin: 1em 0;"></div>
+<em>Step 4:</em> We prove the general case.
+<div style="margin: 1em 0;"></div></p>
+<p>Let $E \sub \R^n$ be a measurable set, and let $T : \R^n \to \R^n$ be a linear map.
+If $\det(T) = 0$, then $T(E)$ is contained in a hyperplane, which has Lebesgue measure zero; the result holds in this case.
+Thus we may assume that $\det(T) \neq 0$.
+Also if $\mathcal{L}^n(E) = \infty$, then the result holds trivially, so we may assume that $\mathcal{L}^n(E) < \infty$.</p>
+<p>By the LDU decomposition from linear algebra, we can write $T = L D U$ where $L$ is a lower triangular matrix with $1$'s on the diagonal, $D$ is a diagonal matrix, and $U$ is an upper triangular matrix with $1$'s on the diagonal.
+Then $\det(T) = \det(L) \det(D) \det(U) = \det(D)$ since $\det(L) = \det(U) = 1$.
+We compute that
+\begin{align*}
+    \mathcal{L}^n(T(E)) &= \mathcal{L}^n(L(D(U(E)))) \\
+        &= \mathcal{L}^n(D(U(E))) && \text{by Step 3} \\
+        &= |\det(D)| \cdot \mathcal{L}^n(U(E)) && \text{by Step 2} \\
+        &= |\det(D)| \cdot \mathcal{L}^n(E) && \text{by Step 3} \\
+        &= |\det(T)| \cdot \mathcal{L}^n(E)
+\end{align*}
+at last.
+This proves the result in general.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:linear_change_of_variables">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Linear Change of Variables)</div>
+  <div class="theorem-content">Let $T : \R^n \to \R^n$ be a linear isomorphism, and let $f \in L^1(\R^n)$.
+    Then
+    \[ \int_{\R^n} f(T(x)) |\det(T)| \, \dif x = \int_{\R^n} f(y) \, \dif y. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-2">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-2')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-2">
+    Define 
+    \[ \mathcal{F} := \{ f\in L^1(\R^n) : \int_{\R^n} f(T(x)) |\det(T)| \, \dif x = \int_{\R^n} f(y) \, \dif y \}. \]
+    We argue that $\mathcal{F} = L^1(\R^n)$ --- we break the proof into three steps.
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 1:</em> We prove that $\mathcal{F}$ is a vector subspace of $L^1(\R^n)$.
+    <div style="margin: 1em 0;"></div></p>
+<p>Let $f,g \in \mathcal{F}$ and let $\alpha\in\R$.
+    Then \begin{align*}
+        \int_{\R^n} (f + \alpha g) \,\dif y &= \int_{\R^n} f(y) \, \dif y + \alpha \int_{\R^n} g(y) \, \dif y \\
+            &= \int_{\R^n} f(T(x)) |\det(T)| \, \dif x + \alpha \int_{\R^n} g(T(x)) |\det(T)| \, \dif x \\
+            &= \int_{\R^n} (f(T(x)) + \alpha g(T(x))) |\det(T)| \, \dif x \\
+            &= \int_{\R^n} (f + \alpha g)(T(x)) |\det(T)| \, \dif x.
+    \end{align*}
+    Thus $f + \alpha g \in \mathcal{F}$, and $\mathcal{F}$ is a vector subspace of $L^1(\R^n)$.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 2:</em> We prove that $\mathcal{F}$ contains all simple functions.
+    <div style="margin: 1em 0;"></div></p>
+<p>Since every simple function is a finite linear combination of characteristic functions of measurable sets of finite measure, it suffices to show that $\Chi_E \in \mathcal{F}$ for each measurable set $E \sub \R^n$ with $\mathcal{L}^n(E) < \infty$
+    by Step 1.</p>
+<p>If $E\subseteq \R^n$ is a measurable set with $\mathcal{L}^n(E) < \infty$, then we compute
+    \[ \Chi_{T^{-1}(E)}(x) = \begin{cases}
+        1 & \text{if } x\in T^{-1}(E) \\
+        0 & \text{if } x\notin T^{-1}(E)
+    \end{cases} = \begin{cases}
+        1 & \text{if } T(x) \in E \\
+        0 & \text{if } T(x) \notin E
+    \end{cases} = \Chi_E(T(x)) \]
+    for each $x\in\R^n$.
+    Thus we use the result in Proposition <span class="ref-unknown" title="Reference not found: prop:linear_transformation_lebesgue_measure">[prop:linear_transformation_lebesgue_measure?]</span> to compute
+    \begin{align*}
+        \int_{\R^n} \Chi_E(T(x)) \,\dif x &= \int_{\R^n} \Chi_{T^{-1}(E)}(x) \, \dif x = \mathcal{L}^n(T^{-1}(E)) \\
+            &= \frac{1}{|\det(T)|} \cdot \mathcal{L}^n(E) = \frac{1}{|\det(T)|} \cdot \int_{\R^n} \Chi_E(y) \, \dif y
+    \end{align*}
+    and multiplying both sides by $|\det(T)|$ shows that $\Chi_E \in \mathcal{F}$.</p>
+<p>Since $E$ was an arbitrary measurable set with $\mathcal{L}^n(E) < \infty$, we have shown that $\mathcal{F}$ contains all characteristic functions of measurable sets of finite measure, and hence $\mathcal{F}$ contains all simple functionsby Step 1.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 3:</em> We prove that $\mathcal{F} = L^1(\R^n)$.
+    <div style="margin: 1em 0;"></div></p>
+<p>Let $f\in L^1(\R^n)$ be a nonnegative function.
+    Then there exists a sequence of simple functions $\{f_k\}_{k=1}^\infty$ such that $0 \leq f_1 \leq f_2 \leq \cdots \leq f$ and $f_k(x) \to f(x)$ for each $x\in\R^n$ as $k\to\infty$ by Proposition <span class="ref-unknown" title="Reference not found: prop:approximation_by_simple_functions">[prop:approximation_by_simple_functions?]</span>.
+    Then $\{ f_k \circ T \}_{k=1}^\infty$ is a sequence of simple functions such that $0 \leq f_1 \circ T \leq f_2 \circ T \leq \cdots \leq f \circ T$ and $f_k(T(x)) \to f(T(x))$ for each $x\in\R^n$ as $k\to\infty$.
+    Now we can use the Monotone Convergence Theorem to compute
+    \[ \int_{\R^n} f(T(x)) |\det(T)| \, \dif x = \lim_{k\to\infty} \int_{\R^n} f_k(T(x)) |\det(T)| \, \dif x = \lim_{k\to\infty} \int_{\R^n} f_k(y) \, \dif y = \int_{\R^n} f(y) \, \dif y \]
+    since each $f_k \in \mathcal{F}$ by Step 2.
+    Thus $f \in \mathcal{F}$.</p>
+<p>Let $f\in L^1(\R^n)$ be a real-valued integrable function, then we can write $f = f^+ - f^-$ where $f^+,f^- \geq 0$ are integrable functions.
+    Since $f^+,f^- \in \mathcal{F}$ and $\mathcal{F}$ is a vector subspace of $L^1(\R^n)$ by Step 1, we have $f \in \mathcal{F}$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:baby_gauss_green_theorem">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Baby Gauss-Green Theorem)</div>
+  <div class="theorem-content">If $\varphi \in C^1_c(\R^n)$ then
+    \[ \int_{\R^n} \nabla \varphi(x) \, \dif x = 0. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-3">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-3')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-3">
+    Let $\varphi \in C^1_c(\R^n)$.
+    Then the support of $\varphi$ is compact, so there exists $R>0$ such that $\varphi(x) = 0$ for all $x\in \R^n$ with $\|x\|_\infty \geq R$.
+    That is, the function $\varphi$ vanishes outside the cube $[-R,R]^n$.
+<p>Thus $\nabla \varphi$ also vanishes outside $[-R,R]^n$, so
+    \[ \int_{\R^n} \nabla \varphi \, \dif x = \int_{ [-R,R]^n } \nabla \varphi \,\dif x. \]
+    As $\nabla \varphi = (\partial_1 \varphi, \ldots, \partial_n \varphi)$ is vector-valued, we have
+    \[ \int_{[-R,R]^n} \partial_j \varphi(x) \, \dif x = \int_{[-R,R]^n} \frac{\partial \varphi}{\partial x_j}(x) \, \dif x \]
+    for each $j=1,\ldots,n$.</p>
+<p>Fix $j\in\{1,\ldots,n\}$.
+    We can compute this integral using iterated integrals --- use the Fubini-Tonelli theorem to see that
+    \[ \int_{\R^n} \partial_j \,\dif x = \int_{[-R,R]^{n-1}} \left( \int_{-R}^R \partial_j \varphi(x) \, \dif x_j \right) \, \dif x_1 \cdots \widehat{\dif x_j} \cdots \dif x_n. \]
+    By the fundamental theorem of calculus, for each fixed $(x_1,\ldots,x_{j-1},x_{j+1},\ldots,x_n) \in [-R,R]^{n-1}$, we have
+    \[ \int_{-R}^R \partial_j \varphi(x) \, \dif x_j = \varphi(x_1,\ldots,x_{j-1},R,x_{j+1},\ldots,x_n) - \varphi(x_1,\ldots,x_{j-1},-R,x_{j+1},\ldots,x_n) = 0 \]
+    since $\varphi$ vanishes on $\R^n \setminus (-R,R)^n$.</p>
+<p>Thus
+    \[ \int_{\R^n} \partial_j \varphi(x) \, \dif x = \int_{[-R,R]^{n-1}} 0 \, \dif x_1 \cdots \widehat{\dif x_j} \cdots \dif x_n = 0. \]
+    Since this holds for each $j=1,\ldots,n$, we have
+    \[ \int_{\R^n} \nabla \varphi(x) \, \dif x = 0. \]
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<h3>Volume of the Unit Ball in $\R^n$</h3>
+<p>In this section, we compute the volume of the unit ball in $\R^n$ from scratch.
+In particular, we will not assume the formula for the volume (area) of the unit ball (disk) in $\R^2$ or use polar coordinates.</p>
+<p>This is important to be totally rigorous, as I do not want to assume any results from multivariable Riemann integration.
+All we will need is the Fubini-Tonelli theorem and some single variable Riemann integration results like the Fundamental Theorem of Calculus, the Change of Variables Theorem, and Integration by Parts.</p>
+<div class="theorem-box exercise-box" id="ex:warm_up_gaussian_integral">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Warm-up)</div>
+  <div class="theorem-content">Show that
+    \[ \int_0^\infty y e^{-a y^2} \, \dif y = \frac{1}{2a} \]
+    for each $a > 0$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-4">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-4')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-4">
+    Let $a > 0$.
+    Then we can compute this as a Riemann integral using the change of variable
+    \[ t(y) = -a y^2 \quad \Rightarrow \dif t = -2a y \, \dif y \]
+    which gives
+    \begin{align*}
+        \int_0^\infty y e^{-a y^2} \, \dif y &= \lim_{R\to \infty} \int_0^R y e^{-a y^2} \, \dif y \\
+            &= \lim_{R\to\infty} \int_{t(0)}^{t(R)} -\frac{1}{2a} e^t \, \dif t \\
+            &= \lim_{R\to\infty} -\frac{1}{2a} \int_0^{-a R^2} e^t \, \dif t \\
+            &= \lim_{R\to\infty} \frac{1}{2a} \int_{-a R^2}^0 e^t \, \dif t \\
+            &= \lim_{R\to\infty} \frac{1}{2a} \left( e^0 - e^{-a R^2} \right) && \text{ by the Fundamental Theorem of Calculus} \\
+            &= \lim_{R\to\infty} \frac{1}{2a} (1 - e^{-a R^2}) = \frac{1}{2a}.
+    \end{align*}
+<p>We note that because the integrand is nonnegative and the improper Riemann integral converges, the Lebesgue integral also converges and agrees with the improper Riemann integral.
+    This completes the proof.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box proposition-box" id="prop:gaussian_integral_identity">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Gaussian Integral Identity)</div>
+  <div class="theorem-content">\[ \int_{\R} e^{-x^2} \, \dif x = \sqrt{\pi}. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-5">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-5')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-5">
+    Notice that
+    \[ \int_\R e^{-x^2} \, \dif x = \int_{-\infty}^\infty e^{-x^2} \, \dif x = 2 \int_0^\infty e^{-x^2} \, \dif x. \]
+    Set
+    \[ J := \int_0^\infty e^{-x^2} \, \dif x \]
+    and notice that
+    \begin{align*}
+        J^2 &= \left( \int_0^\infty e^{-x^2} \, \dif x \right) \left( \int_0^\infty e^{-y^2} \, \dif y \right) \\
+            &= \int_0^\infty \int_0^\infty e^{-x^2} e^{-y^2} \, \dif x \dif y && \text{ by the Fubini-Tonelli theorem}\\
+            &= \int_0^\infty \int_0^\infty e^{-(x^2 + y^2)} \, \dif x \dif y.
+    \end{align*}
+<p>Define 
+    \[ \phi(y) = \int_0^\infty e^{-(x^2 + y^2)} \, \dif x \]
+    for each $y\in[0,\infty)$.
+    For each fixed $y\in[0,\infty)$, we compute this integral with the change of variable 
+    \[ t(x) = \frac{x}{y} \quad \Rightarrow \quad x = yt, \quad \dif x = y \, \dif t \]
+    to see that
+    \[ \phi(y) = \int_0^\infty e^{-(y^2 t^2 + y^2)} y\,\dif t = \int_0^\infty e^{-y^2 (t^2 + 1)} y\,\dif t \]
+    Returning to the original computation for $J^2$ we have that
+    \begin{align*}
+        J^2 &= \int_0^\infty \phi(y) \, \dif y \\
+            &= \int_0^\infty \int_0^\infty e^{-y^2 (t^2 + 1)} y \, \dif t \dif y \\
+            &= \int_0^\infty \left( \int_0^\infty e^{-y^2 (t^2 + 1)} y \, \dif y \right) \dif t && \text{ by the Fubini-Tonelli theorem} \\
+            &= \int_0^\infty \frac{1}{2(t^2 + 1)} \, \dif t && \text{ by the Warm-up Exercise} \\
+            &= \frac{1}{2} \left[ \tan^{-1}(t) \right]\Big|_{t=0}^{t=\infty} = \frac{1}{2}\left( \frac{\pi}{2} - 0 \right) = \frac{\pi}{4}.
+    \end{align*}
+    We note that in this computation, we have used the Fubini-Tonelli theorem twice, two single-varible substitutions (in the Warm-up Exercise and in the definition of $\phi$), the single variable Fundamental Theorem of Calculus, and the fact that $\lim_{t\to\infty} \tan^{-1}(t) = \frac{\pi}{2}$.
+    We have also used the fact that all the functions we have integrated are nonnegative and have convergent improper Riemann integrals, so that their Lebesgue integrals are also finite and agree with the improper Riemann integrals.</p>
+<p>Thus $J^2 = \frac{\pi}{4}$, so $J = \frac{\sqrt{\pi}}{2}$.
+    Therefore
+    \[ \int_\R e^{-x^2} \, \dif x = 2J = \sqrt{\pi}. \]
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box proposition-box" id="ex:volume_of_n_dimensional_ball">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Volume of the $n$-Dimensional Ball)</div>
+  <div class="theorem-content">For each $n \geq 2$, the volume of the $n$-dimensional ball of unit radius in $\R^n$ satisfies
+    \[ \mathcal{L}^n (B_n(0,1)) = \frac{2\pi}{n}\mathcal{L}^{n-2}(B_{n-2}(0,1)). \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-6">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-6')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-6">
+    <em>Step 0:</em>
+    We compute the volume of the $0$-dimensional, $1$-dimensional, and $2$-dimensional unit balls to start the induction.
+<p>Since $\mathcal{L}^0$ is the counting measure, we have
+    \[ B_0(0,1) = \{0\} \quad \Rightarrow \quad \mathcal{L}^0(B_0(0,1)) = 1. \]
+    In one dimension we have
+    \[ B_1(0,1) = (-1,1) \quad \Rightarrow \quad \mathcal{L}^1(B_1(0,1)) = 2. \]</p>
+<p>In two dimensions, we have the unit disk 
+    \[ B_2(0,1) = \{ (x_1,x_2) \in \R^2 : x_1^2 + x_2^2 < 1 \}. \]
+    We compute its volume using Tonelli's theorem.</p>
+<p>Note that if $x_2\in \R$ is such that $|x_2| > 1$, then $\Chi_{B_2(0,1)}(x_1,x_2) = 0$ for each $x_1\in\R$.
+    If $x_2\in\R$ is such that $|x_2| \leq 1$, then
+    \begin{align*} \Chi_{B_2(0,1)}(x_1,x_2) &= \begin{cases}
+        1, & \text{if } x_1^2 + x_2^2 < 1 \\
+        0, & \text{if } x_1^2 + x_2^2 \geq 1
+    \end{cases} \\& = \begin{cases}
+        1, & \text{if } -\sqrt{1 - x_2^2} < x_1 < \sqrt{1 - x_2^2} \\
+        0, & \text{otherwise}
+    \end{cases} = \Chi_{\left[-\sqrt{1 - x_2^2}, \sqrt{1 - x_2^2}\right]}(x_1) \end{align*}
+    for each $x_1\in\R$.</p>
+<p>Now can can compute
+    \begin{align*}
+        \mathcal{L}^2(B_2(0,1)) &= \int_{\R^2} \Chi_{B_2(0,1)} \, \dif x \\
+            &= \int_{\R} \int_{\R} \Chi_{B_2(0,1)}(x_1,x_2) \, \dif x_1 \dif x_2  && \text{ by Fubini's theorem} \\
+            &= \int_{\R} \int_{\R} \Chi_{\left[-\sqrt{1 - x_2^2}, \sqrt{1 - x_2^2}\right]}(x_1) \, \dif x_1 \dif x_2 &&\text{ by previous computation}\\
+            &= \int_{-1}^1 \left( \int_{-\sqrt{1 - x_1^2}}^{\sqrt{1 - x_1^2}} 1 \, \dif x_2 \right) \dif x_1 \\
+            &= \int_{-1}^1 2\sqrt{1 - x_1^2} \, \dif x_1 \\
+            &= 4\int_0^1 \sqrt{1 - x_1^2} \, \dif x_1 && \text{ by symmetry} \\
+            &= 4\int_0^{\pi/2} \cos^2(\theta) \, \dif \theta && \text{ by the change of variables } x_1 = \sin(\theta) \\
+            &= 4\int_0^{\pi/2} \frac{1 + \cos(2\theta)}{2} \, \dif \theta && \text{ by the double-angle formula} \\
+            &= 2\left[ \theta + \frac{\sin(2\theta)}{2} \right]\Big|_{0}^{\pi/2} = 2\left( \frac{\pi}{2} - 0 + 0 - 0 \right) = \pi.
+    \end{align*}
+    Thus we have
+    \[ \mathcal{L}^0(B_0(0,1)) = 1, \quad \mathcal{L}^1(B_1(0,1)) = 2, \quad \mathcal{L}^2(B_2(0,1)) = \pi \]
+    as we expect.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 1:</em> 
+    Now we prove the result for $n > 2$ by induction.
+    Assume that the result holds for $n-1$ and $n-2$ where $n > 2$.
+    We compute the volume of the $n$-dimensional unit ball using Tonelli's theorem.</p>
+<p>Note that if $(x_1,x_2)\in \R^2$ is such that $x_1^2 + x_2^2 > 1$, then $\Chi_{B_n(0,1)}(x_1,x_2,y) = 0$ for each $y \in \R^{n-2}$.
+    If $(x_1,x_2)\in\R^2$ is such that $x_1^2 + x_2^2 \leq 1$, then
+    \begin{align*}
+        \Chi_{B_n(0,1)}(x_1,x_2,y) &= \begin{cases}
+            1, & \text{if } x_1^2 + x_2^2 + \|y\|^2 < 1 \\
+            0, & \text{if } x_1^2 + x_2^2 + \|y\|^2 \geq 1
+        \end{cases} \\&= \begin{cases}
+            1, & \text{if } \|y\|^2 < 1 - (x_1^2 + x_2^2) \\
+            0, & \text{if } \|y\|^2 \geq 1 - (x_1^2 + x_2^2)
+        \end{cases} \\&= \Chi_{B_{n-2}(0,\sqrt{1 - (x_1^2 + x_2^2)})}(y)
+    \end{align*}
+    for each $y \in \R^{n-2}$.</p>
+<p>Now we can compute
+    \begin{align*}
+        \mathcal{L}^n(B_n(0,1)) &= \int_{\R^n} \Chi_{B_n(0,1)} \, \dif x \\
+            &= \int_{\R^2} \int_{\R^{n-2}} \Chi_{B_n(0,1)}(x_1,x_2,y) \, \dif y \dif x_1 \dif x_2 && \text{ by Tonelli's theorem} \\
+            &= \int_{\R^2} \int_{\R^{n-2}} \Chi_{B_{n-2}(0,\sqrt{1 - (x_1^2 + x_2^2)})}(y) \, \dif y \dif x_1 \dif x_2 &&\text{ by previous computation}\\
+            &= \int_{x_1^2 + x_2^2 \leq 1} \left( \int_{\R^{n-2}} \Chi_{B_{n-2}(0,\sqrt{1 - (x_1^2 + x_2^2)})}(y) \, \dif y \right) \dif x_1 \dif x_2 \\
+            &= \int_{x_1^2 + x_2^2 \leq 1} \mathcal{L}^{n-2}(B_{n-2}(0,\sqrt{1 - (x_1^2 + x_2^2)})) \, \dif x_1 \dif x_2 \\
+            &= \int_{x_1^2 + x_2^2 \leq 1} (1 - (x_1^2 + x_2^2))^{\frac{n-2}{2}} \mathcal{L}^{n-2}(B_{n-2}(0,1))\,\dif x_1 \dif x_2 && \text{ by [prop:linear_transformation_lebesgue_measure?]} \\
+            &= \mathcal{L}^{n-2}(B_{n-2}(0,1)) \int_{x_1^2 + x_2^2 \leq 1} (1 - (x_1^2 + x_2^2))^{\frac{n-2}{2}} \, \dif x_1 \dif x_2 \\
+            &= \mathcal{L}^{n-2}(B_{n-2}(0,1)) \int_{-1}^1 \int_{-\sqrt{1 - x_1^2}}^{\sqrt{1 - x_1^2}} (1 - (x_1^2 + x_2^2))^{\frac{n-2}{2}} \, \dif x_2 \dif x_1 && \text{ by Tonelli's theorem} \\
+            &= 4\,\mathcal{L}^{n-2}(B_{n-2}(0,1)) \int_0^1 \int_0^{\sqrt{1 - x_1^2}} (1 - (x_1^2 + x_2^2))^{\frac{n-2}{2}} \, \dif x_2 \dif x_1 && \text{ by symmetry and homogeneity.} \\
+    \end{align*}</p>
+<p>For each $ s\in[-1,1]$ we define
+    \[ \psi(s) := \int_0^{\sqrt{1 - s^2}} (1 - (s^2 + x_2^2))^{\frac{n-2}{2}} \, \dif x_2. \]
+    Then the big computation above shows that
+    \[ \mathcal{L}^n(B_n(0,1)) = 4\,\mathcal{L}^{n-2}(B_{n-2}(0,1)) \int_0^1 \psi(s) \, \dif s. \tag{$\star$} \]</p>
+<p>We claim That
+    \[ \psi(s) = (1 - s^2)^{\frac{n}{2}} \int_0^1 (1 - t^2)^{\frac{n-2}{2}} \, \dif t \]
+    for each $s\in(-1,1)$.
+    To see this, we use the change of variables
+    \[ x(t) = t\sqrt{1 - s^2} \quad \Rightarrow \quad \dif x = \sqrt{1 - s^2} \, \dif t \]
+    to see that for $0 \leq x \leq \sqrt{1 - s^2}$, we have 
+    \[ (1-s^2 - x^2) = ( 1 - s^2 - t^2(1-s^2)) = (1 - s^2)(1 - t^2) \]
+    which implies
+    \begin{align*}
+        \int_0^{\sqrt{1-s^2}} (1 - s^2 - x^2)^{\frac{n-2}{2}} \, \dif x &= (1 - s^2)^{\frac{n-2}{2}} \int_0^1 (1 - t^2)^{\frac{n-2}{2}} \sqrt{1 - s^2} \, \dif t \\
+            &= (1 - s^2)^{\frac{n-1}{2}} \int_0^1 (1 - t^2)^{\frac{n-2}{2}} \, \dif t \\
+    \end{align*}
+    proving our claim.</p>
+<p>Returning to the computation in ($\star$), we have
+    \[ \mathcal{L}^n(B_n(0,1)) = 4\,\mathcal{L}^{n-2}(B_{n-2}(0,1)) \int_0^1 (1 - s^2)^{\frac{n-1}{2}} \, \dif s\, \int_0^1 (1 - t^2)^{\frac{n-2}{2}} \, \dif t \tag{$\star\star$}\]
+    by our claim and another application of Tonelli's theorem.</p>
+<p><span class="noindent"></span><em>Step 2:</em>
+We finish the computation.
+<div style="margin: 1em 0;"></div></p>
+<p>Let
+\[ C_m:=\int_{0}^{\pi/2}\cos^{m}\theta\,\mathrm{d}\theta \]
+for each integer $m\geq 0$.
+We notice that with the change of variables $s=\sin\theta$ and $t=\sin\phi$, we have
+\[ \int_0^1 (1 - s^2)^{\frac{n-1}{2}} \, \dif s = \int_0^{\pi/2} \cos^{n} \theta \, \dif \theta = C_{n} \]
+and
+\[ \int_0^1 (1 - t^2)^{\frac{n-2}{2}} \, \dif t = \int_0^{\pi/2} \cos^{n-1} \phi \, \dif \phi = C_{n-1}. \]
+Going back to ($\star\star$), we have
+\[ \mathcal{L}^n(B_n(0,1)) = 4\,\mathcal{L}^{n-2}(B_{n-2}(0,1)) C_{n} C_{n-1}. \]
+By exercise <span class="ref-unknown" title="Reference not found: ex:recurrance_relation_for_cosine_powers">[ex:recurrance_relation_for_cosine_powers?]</span>, we see that $2C_n C_{n-1} = \frac{\pi}{n}$ so that 
+\[ \mathcal{L}^n(B_n(0,1)) = \frac{2\pi}{n} \mathcal{L}^{n-2}(B_{n-2}(0,1)) \]
+as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>You see, it's a bit of work to avoid computing in polar coordinates.</p>
+<div class="theorem-box exercise-box" id="ex:recurrance_relation_for_cosine_powers">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Recurrance Relation for Cosine Powers)</div>
+  <div class="theorem-content">For each integer $m\geq 0$ we define
+    \[ C_m := \int_0^{\pi/2} \cos^m \theta \, \dif \theta. \]
+    Show that
+    \[ C_0 = \frac{\pi}{2}, \quad C_1 = 1, \quad \text{and} \quad C_m = \frac{m-1}{m} C_{m-2} \text{ for } m \geq 2. \]
+    From this, deduce that \[ 2C_m C_{m-1} = \frac{\pi}{m} \text{ for each integer } m \geq 1. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-7">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-7')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-7">
+    The base cases are straightforward:
+    \[ C_0 = \int_0^{\pi/2} 1 \,\dif \theta = \frac{\pi}{2}, \quad\text{ and }\quad C_1 = \int_0^{\pi/2} \cos \theta \, \dif \theta = \sin\left(\frac{\pi}{2}\right) - \sin(0)= 1. \]
+    Let's prove the recurrence relation for $m \geq 2$ using integration by parts.
+    See that
+    \begin{align*}
+        C_m &=\int_0^{\pi/2} \cos^m \theta \, \dif \theta\\
+            &= \int_0^{\pi/2} \cos^{m-1} \theta \cdot \cos \theta \, \dif \theta \\
+            &= \int_0^{\pi/2} \cos^{m-1} \theta \, \dif\,(\sin\theta) \\
+            &= \left[ \cos^{m-1} \theta \sin \theta \right]\Big|_0^{\pi/2} - \int_0^{\pi/2} \sin \theta \, \dif\,(\cos^{m-1} \theta) \\
+            &= 0 \,- (m-1) \int_0^{\pi/2} \sin \theta \cdot \cos^{m-2} \theta (-\sin \theta) \, \dif \theta \\
+            &= (m-1) \int_0^{\pi/2} \sin^2 \theta \cdot \cos^{m-2} \theta \, \dif \theta \\
+            &= (m-1) \int_0^{\pi/2} (1 - \cos^2 \theta) \cdot \cos^{m-2} \theta \, \dif \theta \\
+            &= (m-1) \left( \int_0^{\pi/2} \cos^{m-2} \theta \, \dif \theta - \int_0^{\pi/2} \cos^m \theta \, \dif \theta \right) \\
+            &= (m-1) (C_{m-2} - C_m)
+    \end{align*}
+    which implies 
+    \[ C_m = (m-1)C_{m-2} - (m-1)C_m \]
+    and hence
+    \begin{align*} C_m + (m-1)C_m = (m-1)C_{m-2} \\
+    \implies m C_m = (m-1) C_{m-2} \\
+    \implies C_m = \frac{m-1}{m} C_{m-2}. \end{align*}
+    This proves the recurrence relation.
+<p><div style="margin: 1em 0;"></div></p>
+<p>Now we prove that
+    \[ 2C_m C_{m-1} = \frac{\pi}{m} \]
+    for each integer $m \geq 1$ by induction on $m$.
+    The base case $m=1$ is true since
+    \[ 2C_1 C_0 = 2 \cdot 1 \cdot \frac{\pi}{2} = \pi = \frac{\pi}{1}. \]
+    For the induction hypothesis, assume that there is an integer $m-1 \geq 1$ such that for each integer $k$ with $1 \leq k \leq m-1$, we have
+    \[ 2C_k C_{k-1} = \frac{\pi}{k}. \]
+    Then 
+\begin{align*}
+    2C_m C_{m-1} &= 2 \cdot \frac{m-2}{m} C_{m-2} C_{m-3} \\
+        &= \frac{m-2}{m} \cdot 2C_{m-2} C_{m-3} \\
+        &= \frac{m-2}{m} \cdot \frac{\pi}{m-2} && \text{ by the induction hypothesis}\\
+        &= \frac{\pi}{m}
+\end{align*}
+    completing the induction.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:properties_of_gamma_function">
+  <div class="theorem-header"><strong>Exercise ?</strong></div>
+  <div class="theorem-content">Define the Gamma function $\Gamma:(0,\infty) \to (0,\infty)$ by
+\[  \Gamma(s) := \int_0^\infty t^{s-1} e^{-t} \, \dif t  \qquad \text{for } s > 0. \]
+    Show that $\Gamma(1) = 1$ and $\Gamma(s+1) = s\Gamma(s)$ for each $s > 0$.
+    Deduce that $\Gamma(n) = (n-1)!$ for each $n \in \Z^+$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-8">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-8')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-8">
+    We compute $\Gamma(1)$ directly:
+    \[ \Gamma(1) = \int_0^\infty t^{1-1} e^{-t} \, \dif t = \int_0^\infty e^{-t} \, \dif t = \lim_{R\to\infty} \int_0^R e^{-t} \, \dif t = \lim_{R\to\infty} (- e^{-R} - (-e^0)) = 0 + 1 = 1. \]
+<p>Now let $s > 0$.
+    We compute $\Gamma(s+1)$ using integration by parts:
+    \begin{align*}
+        \Gamma(s+1) &= \int_0^\infty t^{(s+1)-1} e^{-t} \, \dif t = \int_0^\infty t^s e^{-t} \, \dif t \\
+            &= \lim_{R\to\infty} \int_0^R t^s e^{-t} \, \dif t \\
+            &= \lim_{R\to\infty} \left( \left[ -t^s e^{-t} \right]\Big|_0^R + \int_0^R s t^{s-1} e^{-t} \, \dif t \right) \\
+            &= 0 + \int_0^\infty s t^{s-1} e^{-t} \, \dif t \\
+            &= s \int_0^\infty t^{s-1} e^{-t} \, \dif t = s \Gamma(s).
+    \end{align*}
+    This proves the desired identity.</p>
+<p>Finally, note that $\Gamma(1) = 1 = 0!$, which is the base case of an induction argument.
+    Now let $n \in \Z^+$ and assume that $\Gamma(k) = (k-1)!$ for each $1 \leq k < n$.
+    Then
+    \[ \Gamma(n) = (n-1) \Gamma(n-1) = (n-1)(n-2)! = (n-1)! \]
+    by the induction hypothesis.
+    Thus by induction, we conclude that $\Gamma(n) = (n-1)!$ for each $n \in \Z^+$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:volume_of_n_dimensional_ball_formula">
+  <div class="theorem-header"><strong>Exercise ?</strong></div>
+  <div class="theorem-content">Show that for each integer $n \geq 1$, we have
+    \[ \mathcal{L}^n(B_n(0,1)) = \frac{\pi^{n/2}}{\Gamma\left(\frac{n}{2} + 1\right)}. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-9">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-9')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-9">
+    We prove this by induction on $n$.
+    The base case $n=1$ is true since
+    \[ \mathcal{L}^1(B_1(0,1)) = \mathcal{L}^1((-1,1)) = 2 \]
+    and 
+    \begin{align*}
+    \Gamma\left(\frac{1}{2} + 1\right) &= \Gamma\left(\frac{3}{2}\right) = \frac{1}{2} \Gamma\left(\frac{1}{2}\right)  \\
+        &= \frac{1}{2} \int_0^\infty t^{\frac{1}{2} - 1} e^{-t} \, \dif t = \frac{1}{2} \int_0^\infty t^{-\frac{1}{2}} e^{-t} \, \dif t \\
+        &= \frac{1}{2} \int_0^\infty \frac{e^{-t}}{\sqrt{t}} \, \dif t \\
+        &= \frac{1}{2} \int_0^\infty \frac{e^{-x^2}}{x} 2x \, \dif x && \text{ by the change of variables }t = x^2 \\
+        &= \int_0^\infty e^{-x^2} \, \dif x = \frac{\sqrt{\pi}}{2} && \text{ by the Gaussian Identity [prop:gaussian_integral_identity?]}.
+    \end{align*}
+    Thus
+    \[ \frac{\pi^{1/2}}{\Gamma\left(\frac{1}{2} + 1\right)} = \frac{\pi^{1/2}}{\frac{\sqrt{\pi}}{2}} = 2 = \mathcal{L}^1(B_1(0,1)). \]
+<p>Now let $n \geq 2$ and assume that the result holds for each integer $1 \leq k < n$.
+    Then by the induction hypothesis, we have
+    \[ \mathcal{L}^{n-2}(B_{n-2}(0,1)) = \frac{\pi^{(n-2)/2}}{\Gamma\left(\frac{n-2}{2} + 1\right)}. \]
+    By the volume recurrence relation <span class="ref-unknown" title="Reference not found: ex:volume_of_n_dimensional_ball">[ex:volume_of_n_dimensional_ball?]</span>, we have
+    \begin{align*}
+        \mathcal{L}^n(B_n(0,1)) &= \frac{2\pi}{n} \mathcal{L}^{n-2}(B_{n-2}(0,1)) \\
+            &= \frac{2\pi}{n} \cdot \frac{\pi^{(n-2)/2}}{\Gamma\left(\frac{n-2}{2} + 1\right)} && \text{ by the induction hypothesis} \\
+            &= \frac{2\pi^{n/2}}{n \Gamma\left(\frac{n-2}{2} + 1\right)} \\
+            &= \frac{\pi^{n/2}}{\left(\frac{n}{2}\right) \Gamma\left(\frac{n-2}{2} + 1\right)} \\
+            &= \frac{\pi^{n/2}}{\Gamma\left(\frac{n}{2} + 1\right)} && \text{ by exercise [ex:properties_of_gamma_function?].}
+    \end{align*}
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+    </main>
+  </div>
+  
+  <script>
+    function toggleChapter(element) {
+      element.parentElement.classList.toggle('expanded');
+    }
+    
+    // Highlight current page in sidebar
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPath = window.location.pathname;
+      const links = document.querySelectorAll('.section-link');
+      links.forEach(link => {
+        if (currentPath.endsWith(link.getAttribute('href').split('/').pop())) {
+          link.classList.add('active');
+          // Expand parent chapter
+          const group = link.closest('.chapter-group');
+          if (group) group.classList.add('expanded');
+        }
+      });
+    });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('Restoring proof collapse states...');
+      try {
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        const currentPage = window.location.pathname;
+        const pageOpen = openProofs[currentPage] || [];
+        
+        console.log('Current page:', currentPage);
+        console.log('Open proof IDs stored:', pageOpen);
+        console.log('Found ' + pageOpen.length + ' open proofs for this page');
+        
+        document.querySelectorAll('.proof-box').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          console.log('Checking proof:', proofId, 'Should be open:', pageOpen.includes(proofId));
+          if (pageOpen.includes(proofId)) {
+            box.classList.remove('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'true');
+          } else {
+            box.classList.add('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        const pageBoxes = openBoxes[currentPage] || [];
+        
+        console.log('Open box IDs stored:', pageBoxes);
+        
+        document.querySelectorAll('.collapsible-box').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          console.log('Checking box:', boxId, 'Should be open:', pageBoxes.includes(boxId));
+          if (pageBoxes.includes(boxId)) {
+            box.classList.remove('collapsed');
+          } else {
+            box.classList.add('collapsed');
+          }
+        });
+        
+        console.log('Proof states restored');
+      } catch (e) {
+        console.error('Error restoring collapse state:', e);
+      }
+    });
+    
+    function toggleProof(proofId) {
+      const proofContent = document.getElementById(proofId);
+      const proofBox = proofContent.closest('.proof-box');
+      proofBox.classList.toggle('collapsed');
+      
+      const button = proofBox.querySelector('.proof-toggle');
+      button.setAttribute('aria-expanded', !proofBox.classList.contains('collapsed'));
+      
+      saveProofState();
+    }
+    
+    function toggleSubproof(subproofId) {
+      const subproofContent = document.getElementById(subproofId);
+      const subproof = subproofContent.closest('.subproof');
+      subproof.classList.toggle('collapsed');
+      
+      const button = subproof.querySelector('.subproof-toggle');
+      button.setAttribute('aria-expanded', !subproof.classList.contains('collapsed'));
+    }
+    
+    function saveProofState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        if (!openProofs[currentPage]) {
+          openProofs[currentPage] = [];
+        }
+        
+        openProofs[currentPage] = [];
+        document.querySelectorAll('.proof-box:not(.collapsed)').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          if (proofId) {
+            openProofs[currentPage].push(proofId);
+          }
+        });
+        
+        localStorage.setItem('openProofs', JSON.stringify(openProofs));
+        console.log('Saved proof state (open proofs):', openProofs[currentPage]);
+      } catch (e) {
+        console.error('Error saving collapse state:', e);
+      }
+    }
+    
+    function toggleCollapsible(collapsibleId) {
+      const content = document.getElementById(collapsibleId);
+      const box = content.closest('.collapsible-box');
+      box.classList.toggle('collapsed');
+      
+      saveCollapsibleState();
+    }
+    
+    function saveCollapsibleState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        if (!openBoxes[currentPage]) {
+          openBoxes[currentPage] = [];
+        }
+        
+        openBoxes[currentPage] = [];
+        document.querySelectorAll('.collapsible-box:not(.collapsed)').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          if (boxId) {
+            openBoxes[currentPage].push(boxId);
+          }
+        });
+        
+        localStorage.setItem('openBoxes', JSON.stringify(openBoxes));
+      } catch (e) {
+        console.error('Error saving box state:', e);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        const proofBoxes = document.querySelectorAll('.proof-box');
+        const anyExpanded = Array.from(proofBoxes).some(box => !box.classList.contains('collapsed'));
+        
+        proofBoxes.forEach(box => {
+          if (anyExpanded) {
+            box.classList.add('collapsed');
+          } else {
+            box.classList.remove('collapsed');
+          }
+        });
+        
+        saveProofState();
+      }
+    });
+    
+    document.querySelectorAll('a.ref-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.background = '#fef3c7';
+          target.style.transition = 'background 0.3s ease';
+          setTimeout(() => { target.style.background = ''; }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real Analysis Notes - Navigation</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #2c3e50;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+      padding: 40px 20px;
+    }
+    
+    .header h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      font-weight: 700;
+    }
+    
+    .header p {
+      font-size: 1.2em;
+      opacity: 0.95;
+      font-weight: 300;
+    }
+    
+    .filter-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .filter-tab {
+      background: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #2c3e50;
+    }
+    
+    .filter-tab:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    
+    .filter-tab.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+    }
+    
+    .chapters-grid {
+      display: grid;
+      gap: 20px;
+    }
+    
+    .chapter-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .chapter-card.hidden {
+      display: none;
+    }
+    
+    .chapter-header {
+      padding: 20px 25px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-left: 5px solid;
+      transition: background 0.3s ease;
+    }
+    
+    .chapter-header:hover {
+      background: #f8f9fa;
+    }
+    
+    .chapter-title-area {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex: 1;
+    }
+    
+    .chapter-number {
+      font-size: 2em;
+      font-weight: 700;
+      opacity: 0.3;
+      min-width: 50px;
+    }
+    
+    .chapter-title {
+      font-size: 1.5em;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    
+    .chapter-toggle {
+      font-size: 1.5em;
+      transition: transform 0.3s ease;
+      color: #7f8c8d;
+    }
+    
+    .chapter-card.expanded .chapter-toggle {
+      transform: rotate(180deg);
+    }
+    
+    .chapter-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      background: #f8f9fa;
+    }
+    
+    .chapter-card.expanded .chapter-content {
+      max-height: 2000px;
+    }
+    
+    .sections-list {
+      padding: 20px 25px;
+    }
+    
+    .section-item {
+      background: white;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .section-item:hover {
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transform: translateX(5px);
+    }
+    
+    .section-link {
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      text-decoration: none;
+      color: #2c3e50;
+      gap: 12px;
+    }
+    
+    .section-order {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.9em;
+      flex-shrink: 0;
+    }
+    
+    .section-title {
+      font-weight: 500;
+      font-size: 1.05em;
+      flex: 1;
+    }
+    
+    .section-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    
+    .tag {
+      font-size: 0.75em;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .tag.first-course {
+      background: #d4edda;
+      color: #155724;
+    }
+    
+    .tag.advanced {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    
+    .tag.road-to-gmt {
+      background: #e2d9f3;
+      color: #4a148c;
+    }
+    
+    .tag.euclidean {
+      background: #d1ecf1;
+      color: #0c5460;
+    }
+    
+    .tag.foundations {
+      background: #fff3cd;
+      color: #856404;
+    }
+    
+    .empty-message {
+      text-align: center;
+      padding: 60px 20px;
+      color: white;
+      font-size: 1.2em;
+    }
+    
+    .footer {
+      text-align: center;
+      color: white;
+      padding: 40px 20px;
+      opacity: 0.8;
+      margin-top: 40px;
+    }
+    
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2em;
+      }
+      
+      .filter-tabs {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .chapter-title {
+        font-size: 1.2em;
+      }
+      
+      .section-link {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📐 Real Analysis Notes</h1>
+      <p>An Interactive Guide to Measure Theory and Integration</p>
+    </div>
+    
+    <div class="filter-tabs">
+      
+        <button class="filter-tab active" data-filter="all">
+          <span>📖</span>
+          <span>All Chapters</span>
+        </button>
+      
+        <button class="filter-tab " data-filter="first-course">
+          <span>📚</span>
+          <span>First Course (Focus on ℝⁿ)</span>
+        </button>
+      
+        <button class="filter-tab " data-filter="advanced">
+          <span>🎓</span>
+          <span>Advanced Topics</span>
+        </button>
+      
+        <button class="filter-tab " data-filter="road-to-gmt">
+          <span>🔬</span>
+          <span>Road to Geometric Measure Theory</span>
+        </button>
+      
+    </div>
+    
+    <div class="chapters-grid" id="chaptersGrid">
+      
+          <div class="chapter-card" data-chapter="01-measure-theory">
+            <div class="chapter-header" style="border-left-color: #2ecc71;" onclick="toggleChapter('01-measure-theory')">
+              <div class="chapter-title-area">
+                <div class="chapter-number">1</div>
+                <div class="chapter-title">Measure Theory Foundations</div>
+              </div>
+              <div class="chapter-toggle">▼</div>
+            </div>
+            <div class="chapter-content">
+              <div class="sections-list">
+                
+                    <div class="section-item" data-tags="first-course,foundations">
+                      <a href="01-measure-theory/basics.html" class="section-link">
+                        <div class="section-order">1</div>
+                        <div class="section-title">Outer Measures and σ-Algebras</div>
+                        <div class="section-tags">
+                          <span class="tag first-course">first course</span><span class="tag foundations">foundations</span>
+                        </div>
+                      </a>
+                    </div>
+                  
+                    <div class="section-item" data-tags="first-course,euclidean">
+                      <a href="01-measure-theory/lebesgue-meas.html" class="section-link">
+                        <div class="section-order">2</div>
+                        <div class="section-title">Lebesgue Measure on ℝⁿ</div>
+                        <div class="section-tags">
+                          <span class="tag first-course">first course</span><span class="tag euclidean">euclidean</span>
+                        </div>
+                      </a>
+                    </div>
+                  
+                    <div class="section-item" data-tags="advanced">
+                      <a href="01-measure-theory/cantor.html" class="section-link">
+                        <div class="section-order">3</div>
+                        <div class="section-title">The Cantor Set</div>
+                        <div class="section-tags">
+                          <span class="tag advanced">advanced</span>
+                        </div>
+                      </a>
+                    </div>
+                  
+                    <div class="section-item" data-tags="first-course,foundations">
+                      <a href="01-measure-theory/measure-spaces.html" class="section-link">
+                        <div class="section-order">4</div>
+                        <div class="section-title">Measure Spaces and Measurable Functions</div>
+                        <div class="section-tags">
+                          <span class="tag first-course">first course</span><span class="tag foundations">foundations</span>
+                        </div>
+                      </a>
+                    </div>
+                  
+              </div>
+            </div>
+          </div>
+        
+          <div class="chapter-card" data-chapter="02-integration">
+            <div class="chapter-header" style="border-left-color: #3498db;" onclick="toggleChapter('02-integration')">
+              <div class="chapter-title-area">
+                <div class="chapter-number">2</div>
+                <div class="chapter-title">Integration Theory</div>
+              </div>
+              <div class="chapter-toggle">▼</div>
+            </div>
+            <div class="chapter-content">
+              <div class="sections-list">
+                
+                    <div class="section-item" data-tags="first-course">
+                      <a href="02-integration/integrals-1.html" class="section-link">
+                        <div class="section-order">1</div>
+                        <div class="section-title">Integration I: Simple Functions</div>
+                        <div class="section-tags">
+                          <span class="tag first-course">first course</span>
+                        </div>
+                      </a>
+                    </div>
+                  
+                    <div class="section-item" data-tags="first-course">
+                      <a href="02-integration/integrals-2.html" class="section-link">
+                        <div class="section-order">2</div>
+                        <div class="section-title">Integration II: General Functions</div>
+                        <div class="section-tags">
+                          <span class="tag first-course">first course</span>
+                        </div>
+                      </a>
+                    </div>
+                  
+                    <div class="section-item" data-tags="first-course">
+                      <a href="02-integration/convergence.html" class="section-link">
+                        <div class="section-order">3</div>
+                        <div class="section-title">Convergence Theorems</div>
+                        <div class="section-tags">
+                          <span class="tag first-course">first course</span>
+                        </div>
+                      </a>
+                    </div>
+                  
+                    <div class="section-item" data-tags="advanced">
+                      <a href="02-integration/inequality-party.html" class="section-link">
+                        <div class="section-order">4</div>
+                        <div class="section-title">Integral Inequalities</div>
+                        <div class="section-tags">
+                          <span class="tag advanced">advanced</span>
+                        </div>
+                      </a>
+                    </div>
+                  
+                    <div class="section-item" data-tags="advanced">
+                      <a href="02-integration/lp_spaces.html" class="section-link">
+                        <div class="section-order">5</div>
+                        <div class="section-title">Lᵖ Spaces</div>
+                        <div class="section-tags">
+                          <span class="tag advanced">advanced</span>
+                        </div>
+                      </a>
+                    </div>
+                  
+              </div>
+            </div>
+          </div>
+        
+    </div>
+    
+    <div class="empty-message" id="emptyMessage" style="display: none;">
+      <p>No chapters match this filter</p>
+    </div>
+    
+    <div class="footer">
+      <p>Built with ❤️ using LaTeX and JavaScript</p>
+      <p style="font-size: 0.9em; margin-top: 10px;">Auto-reload enabled • Last updated: 11/19/2025, 1:26:39 PM</p>
+    </div>
+  </div>
+  
+  <script>
+    // Auto-reload functionality
+    (function() {
+      const eventSource = new EventSource('http://localhost:35729/reload-stream');
+      
+      eventSource.onmessage = function(event) {
+        if (event.data === 'reload') {
+          console.log('📝 Content updated, reloading...');
+          window.location.reload();
+        }
+      };
+      
+      eventSource.onerror = function() {
+        console.log('⚠️  Auto-reload server not available');
+        eventSource.close();
+      };
+      
+      console.log('🔄 Auto-reload enabled');
+    })();
+    
+    // Chapter toggle functionality
+    function toggleChapter(chapterKey) {
+      const card = document.querySelector(`[data-chapter="${chapterKey}"]`);
+      card.classList.toggle('expanded');
+    }
+    
+    // Filter functionality
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const chapterCards = document.querySelectorAll('.chapter-card');
+    const emptyMessage = document.getElementById('emptyMessage');
+    
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const filter = tab.dataset.filter;
+        
+        // Update active tab
+        filterTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Filter chapters
+        let visibleCount = 0;
+        chapterCards.forEach(card => {
+          if (filter === 'all') {
+            card.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            const sections = card.querySelectorAll('.section-item');
+            let hasMatchingSection = false;
+            
+            sections.forEach(section => {
+              const tags = section.dataset.tags.split(',');
+              if (tags.includes(filter)) {
+                hasMatchingSection = true;
+                section.style.display = 'block';
+              } else {
+                section.style.display = 'none';
+              }
+            });
+            
+            if (hasMatchingSection) {
+              card.classList.remove('hidden');
+              visibleCount++;
+            } else {
+              card.classList.add('hidden');
+            }
+          }
+        });
+        
+        // Show/hide empty message
+        if (visibleCount === 0) {
+          emptyMessage.style.display = 'block';
+        } else {
+          emptyMessage.style.display = 'none';
+          // Reset section visibility if showing all
+          if (filter === 'all') {
+            document.querySelectorAll('.section-item').forEach(s => s.style.display = 'block');
+          }
+        }
+      });
+    });
+    
+    // Restore expanded chapters from localStorage
+    window.addEventListener('DOMContentLoaded', () => {
+      const expandedChapters = JSON.parse(localStorage.getItem('expandedChapters') || '[]');
+      expandedChapters.forEach(chapterKey => {
+        const card = document.querySelector(`[data-chapter="${chapterKey}"]`);
+        if (card) {
+          card.classList.add('expanded');
+        }
+      });
+    });
+    
+    // Save expanded chapters to localStorage
+    window.addEventListener('beforeunload', () => {
+      const expandedChapters = Array.from(document.querySelectorAll('.chapter-card.expanded'))
+        .map(card => card.dataset.chapter);
+      localStorage.setItem('expandedChapters', JSON.stringify(expandedChapters));
+    });
+  </script>
+</body>
+</html>

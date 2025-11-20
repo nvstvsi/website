@@ -1,0 +1,299 @@
+\section{Vitali Covering Theorems}
+
+In this section we present some important covering theorems which will be useful in later sections.
+
+\begin{notation}
+    \label{not:dil_ball}
+    Let $(X,d)$ be a metric space.
+    For each ball $B \subset X$ and each $\lambda > 0$, we denote by $\lambda B$ the ball with the same center as $B$ and radius $\lambda$ times the radius of $B$.
+\end{notation}
+
+\begin{lemma}[Vitali's Finite $3$-times Covering Lemma]
+    \label{lem:finite_3r_covering_lemma}
+    Let $(X,d)$ be a metric space. 
+    Let $\{ B_j \}_{j=1}^N$ be a finite collection of closed balls in $X$.
+    Then there exists a disjoint subcollection $\{ B_{j_k} \}_{k=1}^M$ such that
+    \[ \bigcup_{j=1}^N B_j \subseteq \bigcup_{k=1}^M 3 B_{j_k}. \]
+\end{lemma}
+
+Basically if we are given a finite collection of balls, there exists a disjoint subcollection which, when we triple the radii of the balls in the subcollection, covers all the original balls. 
+
+\begin{proof}
+    If the number of balls $N = 0$, then the result is trivial.
+    Assume $N \geq 1$.
+    Let $B_{j_1}$ be a ball of largest radius in the collection $\{ B_j \}_{j=1}^N$.
+    If there are multiple such balls, choose one arbitrarily.
+
+    Now let $B_{j_2}$ be a ball of largest radius in the collection $\{ B_j \}_{j=1}^N$ which is disjoint from $B_{j_1}$.
+    If there is no such ball, then we stop without defining $B_{j_2}$.
+    If there are multiple such balls, choose one arbitrarily.
+
+    Continuing in this manner, at step $k \geq 2$, assume that we have already defined disjoint balls $B_{j_1}, B_{j_2}, \ldots, B_{j_{k-1}}$.
+    Let $B_{j_k}$ be a ball of largest radius in the collection $\{ B_j \}_{j=1}^N$ which is disjoint from each of the previously defined balls $B_{j_1}, B_{j_2}, \ldots, B_{j_{k-1}}$.
+    If there is no such ball, then we stop without defining $B_{j_k}$.
+    If there are multiple such balls, choose one arbitrarily.
+    Since the original collection $\{ B_j \}_{j=1}^N$ is finite, this process must stop after a finite number of steps.
+    Suppose the process stops after $M$ steps, so that we have defined disjoint balls $B_{j_1}, B_{j_2}, \ldots, B_{j_M}$.
+
+    It remains to prove the desired inclusion.
+    Let $B_j$ be an arbitrary ball in the original collection $\{ B_j \}_{j=1}^N$.
+    If $B_j$ is one of the selected balls $B_{j_1}, B_{j_2}, \ldots, B_{j_M}$, then clearly $B_j \subseteq 3 B_j$.
+    Otherwise, if $B_j$ is not one of the selected balls, then by construction $B_j$ must intersect at least one of the selected balls --- let $B_{j_k}$ be the selected ball which $B_j$ intersects with minimal possible index $k \in \{ 1,2,\ldots,M \}$.
+    Note that the radius of $B_j$ is at most the radius of $B_{j_k}$ by construction --- otherwise we would have selected $B_j$ instead of $B_{j_k}$ at step $k$.
+    Now for each point $x \in B_j$, we have
+    \[ d(x, \text{center}(B_{j_k})) \leq d(x, \text{center}(B_j)) + d(\text{center}(B_j), \text{center}(B_{j_k})) \leq r_j + (r_j + r_{j_k}) \leq 3 r_{j_k}, \]
+    where $r_j$ and $r_{j_k}$ denote the radii of $B_j$ and $B_{j_k}$ respectively.
+    This shows that $x \in 3 B_{j_k}$, and hence $B_j \subseteq 3 B_{j_k}$.
+    Since $B_j$ was arbitrary, this completes the proof. 
+
+    \vspace{3mm}
+    \textit{A pedantic point about centers and radii of balls.}
+
+    Okay extremely pedantic point here: the center and radius of a closed ball is not necessarily unique in an arbitrary metric space.
+    That is, there exists metric spaces $(X,d)$ and points $x,y \in X$ with $x \neq y$ such that
+    \[ \overline{B}(x,r) = \overline{B}(y,r), \qquad\forall r>0. \]
+    The $p$-adic numbers (for any prime $p$) have this property. Very weird, I know.
+
+    Here's why you might think this is a problem.
+    We have not defined the balls by reference to their centers and radii, so by ``a ball in $X$'' we mean a set $B \subseteq X$ such that there exists $x \in X$ and $r > 0$ with $ B = \overline{B} (x,r).$
+    These $x$ and $r$ are not necessarily unique, but we have used them in the proof above --- in the estimates --- and have been speaking of ``the center'' and ``the radius'' of a ball as if they were well-defined.
+    If you go through the proof with a particular choice of center and radius for each ball, you will see that the proof works out fine regardless of which choices you make.
+\end{proof}
+
+\begin{exercise}
+    \label{ex:vitali_finite_best_constant}
+    Show that in Lemma \ref{lem:finite_3r_covering_lemma}, the constant $3$ is the best possible.
+\end{exercise}
+\begin{proof}
+    Let $(X,d) = (\R, |\cdot|)$ be the real line with the usual metric, and let
+    \[ \mathcal{F} := \{ [-1,1], [1,3] \}. \] 
+    Then any disjoint subcollection $\mathcal{C} \subseteq \mathcal{F}$ can contain at most one interval, since the two intervals in $\mathcal{F}$ are disjoint.
+    If $\mathcal{C} = \{ [-1,1] \}$, then for each $r < 3$, we have
+    \[ [1,3] \not\subseteq r[-1,1] = [-r,r] \]
+    Similarly, if $\mathcal{C} = \{ [1,3] \}$, then for each $r < 3$, we have
+    \[ [-1,1] \not\subseteq r[1,3] = [2-r, 2+r]. \]
+    Draw the picture on a number line. 
+
+    This shows that the conclusion of Lemma \ref{lem:finite_3r_covering_lemma} fails if we replace the constant $3$ by any smaller constant.
+\end{proof} 
+
+This is cool, but what if we have an infinite collection of balls?
+
+\begin{lemma}[Vitali's Infinite $5$-times Covering Lemma]
+    \label{lem:infinite_5r_covering_lemma}
+    Let $(X,d)$ be a seperable metric space.
+    Let $\mathcal{F}$ be an arbitrary collection of closed balls in $X$ with uniformly bounded radii, i.e.,
+    \[ R := \sup \{ \text{radius}(B) : B \in \mathcal{F} \} < \infty. \]
+    Then there exists a countable disjoint subcollection $\{ B_j \}_{j=1}^\infty \subseteq \mathcal{F}$ such that
+    \[ \bigcup_{B \in \mathcal{F}} B \subseteq \bigcup_{j=1}^\infty 5 B_j. \]
+\end{lemma}
+
+Note that the seperability assumption on $(X,d)$ is necessary to ensure that we can extract a countable subcollection of balls (as no uncountable disjoint collection of balls can exist in a seperable metric space).
+
+\begin{proof}
+    For each integer $k \geq 0$, define
+    \[ \mathcal{F}_k := \{ B \in \mathcal{F} : 2^{-k-1} R < \text{radius}(B) \leq 2^{-k} R \} \]
+    so that $\mathcal{F}_k$ is the collection of balls in $\mathcal{F}$ whose radii lie in the interval $( 2^{-k-1} R, 2^{-k} R ]$.
+
+    This defines a partition of $\mathcal{F}$, i.e., we have
+    \[ \mathcal{F} = \bigcup_{k=0}^\infty \mathcal{F}_k. \]
+    We define a sequence $\{ \mathcal{C}_k \}_{k=0}^\infty$ as follows.
+    First, we set $\mathcal{C}_0$ to be a maximal disjoint subcollection of $\mathcal{F}_0$ (which exists by Zorn's Lemma).
+    Let $\mathcal{C}_1$ be a maximal disjoint subcollection of
+    \[ \{ B \in \mathcal{F}_1 : B \cap C = \emptyset \text{ for all } C \in \mathcal{C}_0 \}. \]
+    Continuing in this manner, for each integer $k \geq 1$, we define $\mathcal{C}_k$ to be a maximal disjoint subcollection of
+    \[ \{ B \in \mathcal{F}_k : B \cap C = \emptyset \text{ for all } C \in \bigcup_{j=0}^{k-1} \mathcal{C}_j \}. \]
+    Finally, we define
+    \[ \mathcal{C} := \bigcup_{k=0}^\infty \mathcal{C}_k. \]
+    By construction, $\mathcal{C}$ is a disjoint collection of balls in $\mathcal{F}$.
+    Since $(X,d)$ is seperable, this implies that $\mathcal{C}$ is countable, so we may write $\mathcal{C} = \{ B_j \}_{j=1}^\infty$.
+
+    It remains to prove the desired inclusion.
+    Let $B \in \mathcal{F}$ be arbitrary.
+    Then there exists a unique integer $k \geq 0$ such that $B \in \mathcal{F}_k$.
+    There are two possibilities --- either $B$ satisfies
+    \[ B \cap \hat{B} = \emptyset \quad\text{ for all }\  \hat{B} \in \bigcup_{j=0}^{k-1} \mathcal{C}_j \]
+    or not.
+
+    If $B\cap \hat{B} = \emptyset$ for all $\hat{B} \in \bigcup_{j=0}^{k-1} \mathcal{C}_j$, then by maximality of $\mathcal{C}_k$, we must have $B \in \mathcal{C}_k$.
+    Otherwise, if there exists some $\hat{B} \in \bigcup_{j=0}^{k-1} \mathcal{C}_j$ such that $B \cap \hat{B} \neq \emptyset$, then $B$ intersects a ball from the union of $\mathcal{C}_0, \mathcal{C}_1, \ldots, \mathcal{C}_{k-1}$.
+    In either case, the ball $B$ intersects some ball $\hat{B}$ that belongs to the union of the collections $\mathcal{C}_0, \mathcal{C}_1, \ldots, \mathcal{C}_k$.
+    Note that such a ball $\hat{B}$ must have radius at least $2^{-k-1} R$ since it belongs to one of the collections $\mathcal{C}_0, \mathcal{C}_1, \ldots, \mathcal{C}_k$.
+    Meanwhile, the radius of $B$ is at most $2^{-k} R$ since $B \in \mathcal{F}_k$.
+    Thus for each point $x \in B$, we have
+    \begin{align*}
+        d(x, \text{center}(\hat{B})) &\leq d(x, \text{center}(B)) + d(\text{center}(B), \text{center}(\hat{B})) \\
+            &\leq r_B + (r_B + r_{\hat{B}}) \\
+            &= 2 r_B + r_{\hat{B}} \\
+            &\leq 2 \cdot 2^{-k} R + r_{\hat{B}} \\
+            &= 4\cdot 2^{-k-1} R + r_{\hat{B}} \\
+            &\leq 4 r_{\hat{B}} + r_{\hat{B}} = 5 r_{\hat{B}},
+    \end{align*}
+    where $r_B$ and $r_{\hat{B}}$ denote the radii of $B$ and $\hat{B}$ respectively.
+    This shows that $x \in 5 \hat{B}$, and hence $B \subseteq 5 \hat{B}$.
+    Since $B\in \mathcal{F}$ was arbitrary, this completes the proof.
+\end{proof}
+
+\begin{exercise}[Best Constant in Infinite Vitali Covering Lemma]
+    \label{ex:vitali_infinite_best_constant}
+    Show that in Lemma \ref{lem:infinite_5r_covering_lemma}, the constant $5$ can be replaced by any constant larger than $3$, but not by $3$ itself.
+\end{exercise}
+Why $5$? We like $5$. $5$ is cool. 
+\begin{proof}
+    Fix $b>1$. 
+    For each integer $k \geq 0$, define
+    \[ \mathcal{F}_k := \{ B \in \mathcal{F} : b^{-k-1} R < \text{radius}(B) \leq b^{-k} R \} \]
+    instead of the dyadic definition in the proof of Lemma \ref{lem:infinite_5r_covering_lemma}.
+
+    Following the exact same proof as in Lemma \ref{lem:infinite_5r_covering_lemma}, we can construct a countable disjoint subcollection $\mathcal{C} \subseteq \mathcal{F}$.
+    We claim that 
+    \[ \bigcup_{B \in \mathcal{F}} B \subseteq \bigcup_{B \in \mathcal{C}} (1 + 2b)B. \]
+
+    Let $B \in \mathcal{F}$ be arbitrary.
+    Then there exists a unique integer $k \geq 0$ such that $B \in \mathcal{F}_k$.
+    There are two possibilities --- either $B$ satisfies
+    \[ B \cap \hat{B} = \emptyset \quad\text{ for all }\  \hat{B} \in \bigcup_{j=0}^{k-1} \mathcal{C}_j \]
+    or not.
+
+    If $B\cap \hat{B} = \emptyset$ for all $\hat{B} \in \bigcup_{j=0}^{k-1} \mathcal{C}_j$, then by maximality of $\mathcal{C}_k$, we must have $B \in \mathcal{C}_k$.
+    Otherwise, if there exists some $\hat{B} \in \bigcup_{j=0}^{k-1} \mathcal{C}_j$ such that $B \cap \hat{B} \neq \emptyset$, then $B$ intersects a ball from the union of $\mathcal{C}_0, \mathcal{C}_1, \ldots, \mathcal{C}_{k-1}$.
+    In either case, the ball $B$ intersects some ball $\hat{B}$ that belongs to the union of the collections $\mathcal{C}_0, \mathcal{C}_1, \ldots, \mathcal{C}_k$.
+    Note that such a ball $\hat{B}$ must have radius at least $c^{-k-1} R$ since it belongs to one of the collections $\mathcal{C}_0, \mathcal{C}_1, \ldots, \mathcal{C}_k$.
+    Meanwhile, the radius of $B$ is at most $c^{-k} R$ since $B \in \mathcal{F}_k$.
+    Thus for each point $x \in B$, we have
+    \begin{align*}
+        d(x, \text{center}(\hat{B})) &\leq d(x, \text{center}(B)) + d(\text{center}(B), \text{center}(\hat{B})) \\
+            &\leq r_B + (r_B + r_{\hat{B}}) \\
+            &= 2 r_B + r_{\hat{B}} \\
+            &\leq 2 \cdot c^{-k} R + r_{\hat{B}} \\
+            &= 2c\cdot c^{-k-1} R + r_{\hat{B}} \\
+            &\leq 2c r_{\hat{B}} + r_{\hat{B}} = (1 + 2c) r_{\hat{B}},
+    \end{align*}
+    where $r_B$ and $r_{\hat{B}}$ denote the radii of $B$ and $\hat{B}$ respectively.
+    This shows that $x \in (1 + 2c) \hat{B}$, and hence $B \subseteq (1 + 2c) \hat{B}$.
+    Since $B\in \mathcal{F}$ was arbitrary, this proves the claim. 
+
+    This also proves that the constant $5$ in Lemma \ref{lem:infinite_5r_covering_lemma} can be replaced by any constant larger than $3$ by choosing $b > 1$ such that $1 + 2b$ equals the desired constant.
+
+    \vspace{2mm}
+
+    Now we show that the constant $3$ cannot be achieved.
+    Let $(X,d) = (\R, |\cdot|)$ be the real line with the usual metric, and let
+    \[ \mathcal{F} := \{ ( x - r, x + r ) : |x| < 1/2, 0 < r < (|x|+1)/3 \}. \]
+    Then each interval in $\mathcal{F}$ contains $0$ so any disjoint subcollection $\mathcal{C} \subseteq \mathcal{F}$ can contain at most one interval.
+    However see that 
+    \[ (-1,1) = \bigcup_{|x| < 1/2} ( x - (|x|+1)/3, x + (|x|+1)/3 ) \]
+    but for each interval $( x - r, x + r ) \in \mathcal{F}$, we have
+    \[ (-1,1) \not\subseteq 3( x - r, x + r ) = ( x - 3r, x + 3r ). \]
+    Let's check this --- if $0\leq x < 1/2$, then $x - 3r > x - (|x|+1) = -1$, so $( x - 3r, x + 3r )$ does not contain $(-1,1)$, and if $-1/2 < x < 0$, then $x + 3r < x + (|x|+1) = 1$, so again $( x - 3r, x + 3r )$ does not contain $(-1,1)$.
+    This shows that the conclusion of Lemma \ref{lem:infinite_5r_covering_lemma} fails if we replace the constant $5$ by $3$.
+\end{proof}
+
+\begin{exercise}[Unbounded Radii in Infinite Vitali Covering Lemma]
+    \label{ex:vitali_infinite_no_bounded_radii}
+    Show that if we remove the assumption that the radii of the balls in $\mathcal{F}$ are uniformly bounded in Lemma \ref{lem:infinite_5r_covering_lemma}, then the conclusion of the lemma may fail.
+\end{exercise}
+\begin{proof}
+    Let $(X,d) = (\R, |\cdot|)$ be the real line with the usual metric, and let
+    \[ \mathcal{F} := \{ [-r,r] : r > 0 \}. \]
+    Then $\mathcal{F}$ is the collection of all closed intervals centered at the origin.
+    Then any disjoint subcollection $\mathcal{C} \subseteq \mathcal{F}$ can contain at most one interval, since any two intervals in $\mathcal{F}$ intersect.
+    But for each interval $[-R,R] \in \mathcal{F}$ with $R > 0$, we have
+    \[ \R = \bigcup_{r > 0} [-r,r] \not\subseteq 5[-R,R] = [-5R, 5R]. \]
+    This shows that the conclusion of Lemma \ref{lem:infinite_5r_covering_lemma} fails in this case.
+\end{proof}
+
+\begin{exercise}[Non-Separability in Infinite Vitali Covering Lemma]
+    \label{ex:vitali_infinite_no_separability}
+    Show that if we drop the assumption that $(X,d)$ is separable in Lemma \ref{lem:infinite_5r_covering_lemma}, then the set $\mathcal{C}$ may not be countable, but retains the other properties stated in the lemma.
+\end{exercise}
+\begin{proof}
+    The only place in the proof of Lemma \ref{lem:infinite_5r_covering_lemma} where we used the separability of $(X,d)$ was to conclude that the disjoint collection $\mathcal{C}$ is countable.
+    If we drop the separability assumption, then $\mathcal{C}$ may be uncountable, but the rest of the proof remains unchanged.
+    We still have that $\mathcal{C}$ is a disjoint collection of balls in $\mathcal{F}$ such that
+    \[ \bigcup_{B \in \mathcal{F}} B \subseteq \bigcup_{B \in \mathcal{C}} 5 B. \]
+\end{proof}
+
+\begin{lemma}[Vitali Covering Lemma Technical Variant]
+    \label{lem:vitali_covering_lemma_variant}
+    Let $(X,d)$ be a separable metric space and let $A\subset X$. 
+    Let $\mathcal{F}$ be a collection of closed balls in $X$ which covers $A$ and has uniformly bounded radii, i.e.,
+    \[ R := \sup \{ \text{radius}(B) : B \in \mathcal{F} \} < \infty. \]
+    Also assume that for each point $x \in A$ and each $\delta > 0$, there exists a ball $B \in \mathcal{F}$ such that $x \in B$ and $\text{radius}(B) < \delta$.
+    Then there exists a countable disjoint subcollection $\mathcal{C} \subseteq \mathcal{F}$ such that for each finite collection of balls $\{ B_j \}_{j=1}^N \subseteq \mathcal{F}$, we have
+    \[ A \setminus \bigcup_{j=1}^N B_j \subseteq \bigcup_{B \in \mathcal{C}\setminus \{B_1, \ldots, B_N\}} 5B. \]
+\end{lemma}
+
+\begin{proof}
+    Let $\mathcal{C}$ be the countable disjoint subcollection of balls constructed in the proof of Lemma \ref{lem:infinite_5r_covering_lemma}.
+    Let $\{ B_j \}_{j=1}^N \subseteq \mathcal{F}$ be an arbitrary finite collection of balls.
+    
+    If $A \subset \bigcup_{j=1}^N B_j$, then the desired inclusion is trivial as the set on the left side is empty.
+    Thus we suppose $A$ is not contained in $\bigcup_{j=1}^N B_j$, and let $x \in A \setminus \bigcup_{j=1}^N B_j$ be arbitrary.
+    By assumption that there exist balls in $\mathcal{F}$ of arbitrarily small radius covering each point in $A$, there exists a ball $B \in \mathcal{F}$ such that $x \in B$ and the radius of $B$ is less than the distance from $x$ to the set $\bigcup_{j=1}^N B_j$.
+    In particular, this implies that $B$ does not intersect any of the balls $B_1, B_2, \ldots, B_N$, as all these balls are closed.
+    But from the proof of Lemma \ref{lem:infinite_5r_covering_lemma}, we know that there exists some ball $\hat{B} \in \mathcal{C}$ which intersects $B$ and hence $B \subseteq 5 \hat{B}$.
+    That is, we have found some ball $\hat{B} \in \mathcal{C}$ such that $x \in B \subseteq 5 \hat{B}$ and $\hat{B} \notin \{ B_1, B_2, \ldots, B_N \}$.
+    Since $x \in A \setminus \bigcup_{j=1}^N B_j$ was arbitrary, this completes the proof.
+\end{proof}
+
+\begin{lemma}[Filling Open Sets with Balls]
+    \label{lem:filling_open_sets_with_balls}
+    Let $\delta > 0$.
+    For each open set $U \subset \R^n$, there exists a disjoint collection of closed balls $\{ B_j \}_{j=1}^\infty$ such that
+    $\bigcup_{j=1}^\infty B_j \subseteq U$ , $\diam(B_j) \leq \delta$ for each $j\geq 1$, and
+    \[ \mathcal{L}^n\left( U \setminus \bigcup_{j=1}^\infty B_j \right) = 0. \]
+\end{lemma}
+In other words, for each $\delta > 0$ we can fill up an open set $U$ with disjoint balls of diameter at most $\delta$ so that the leftover set has Lebesgue measure zero.
+\begin{proof}
+    Fix $\theta \in ( 1 - \frac{1}{5^n}, 1 )$. Assume first that $\mathcal{L}^n(U) < \infty$.
+    
+    \textit{Step 1:} We claim there exists a finite collection of disjoint balls $\{ B_j \}_{j=1}^{N_1}$ such that $\diam(B_j) \leq \delta$ for each $j = 1,2,\ldots,N_1$ and
+    \[ \mathcal{L}^n\left( U \setminus \bigcup_{j=1}^{N_1} B_j \right) \leq \ \theta \mathcal{L}^n(U). \tag{$\diamondsuit$}\]
+
+    To see this, let $\mathcal{F} := \{ B \subseteq U : B\text{ is a closed ball with } \diam B < \delta \}$. 
+    Then $\mathcal{F}$ is a collection of closed balls which covers $U$ and has uniformly bounded radii, so by Lemma \ref{lem:infinite_5r_covering_lemma}, there exists a countable disjoint subcollection $\{ B_j \}_{j=1}^\infty \subseteq \mathcal{F}$ such that
+    \[ U \subseteq \bigcup_{j=1}^\infty 5 B_j. \]
+    Thus we have 
+    \begin{align*}
+        \mathcal{L}^n(U) &\leq \mathcal{L}^n\left( \bigcup_{j=1}^\infty 5 B_j \right) \leq \sum_{j=1}^\infty \mathcal{L}^n(5 B_j) \\
+            &= \sum_{j=1}^\infty 5^n \mathcal{L}^n(B_j) \\
+            &= 5^n \sum_{j=1}^\infty \mathcal{L}^n(B_j) \\
+            &= 5^n \mathcal{L}^n\left( \bigcup_{j=1}^\infty B_j \right)
+    \end{align*}
+    since the balls $\{ B_j \}_{j=1}^\infty$ are disjoint.
+    Rearranging gives
+    \[ \frac{1}{5^n} \mathcal{L}^n(U) \leq \mathcal{L}^n\left( \bigcup_{j=1}^\infty B_j \right) \] 
+    which implies that 
+    \[ \mathcal{L}^n\left( U \setminus \bigcup_{j=1}^\infty B_j \right) \leq \left( 1 - \frac{1}{5^n} \right) \mathcal{L}^n(U) \] 
+    Since $\theta > 1 - \frac{1}{5^n}$, we can choose $N_1$ sufficiently large so that the finite collection of disjoint balls $\{ B_j \}_{j=1}^{N_1}$ satisfies ($\diamondsuit$).
+    This proves the claim in Step 1.
+
+    \vspace{2mm}
+    \textit{Step 2:} Now let 
+    \[ U_1 := U \setminus \bigcup_{j=1}^{N_1} B_j \] 
+    and \[ \mathcal{F}_1 := \{ B \subseteq U_1 : B\text{ is a closed ball with } \diam B < \delta \}. \]
+    As in Step 1, there exists finitely many disjoint balls $\{ B_j \}_{j=N_1+1}^{N_2} \subseteq \mathcal{F}_1$ such that $\diam(B_j) \leq \delta$ for each $j = N_1+1, N_1+2, \ldots, N_2$ and
+    \[ \mathcal{L}^n\left( U_1 \setminus \bigcup_{j=N_1+1}^{N_2} B_j \right) \leq \theta \mathcal{L}^n(U_1). \]
+    Thus we obtain
+    \begin{align*}
+        \mathcal{L}^n \left( U \setminus \bigcup_{j=1}^{N_2} B_j \right) &= \mathcal{L}^n\left( U_1 \setminus \bigcup_{j=N_1+1}^{N_2} B_j \right) \\
+            &\leq \theta \mathcal{L}^n(U_1) \\
+            &= \theta \mathcal{L}^n\left( U \setminus \bigcup_{j=1}^{N_1} B_j \right) \\
+            &\leq \theta^2 \mathcal{L}^n(U).
+    \end{align*}
+
+    By iterating this process, we obtain for each integer $m \geq 1$ a finite collection of disjoint balls $\{ B_j \}_{j=N_{m-1}+1}^{N_m}$ such that $\diam(B_j) \leq \delta$ for each $j = N_{m-1}+1, N_{m-1}+2, \ldots, N_m$ and
+    \[ \mathcal{L}^n \left( U \setminus \bigcup_{j=1}^{N_m} B_j \right) \leq \theta^m \mathcal{L}^n(U). \]
+    Since $\theta \in ( 1 - \frac{1}{5^n}, 1 )$, we have $\theta^m \to 0$ as $m \to \infty$, which implies that
+    \[ \mathcal{L}^n\left( U \setminus \bigcup_{j=1}^\infty B_j \right) = 0. \]
+    This completes the proof when $\mathcal{L}^n(U) < \infty$.
+
+    \vspace{2mm}
+    \textit{Step 3:} Finally, if $\mathcal{L}^n(U) = \infty$, we can write $U$ as a countable union of bounded open sets 
+    \[ U = \bigcup_{j=1}^\infty ( U \cap \{ x \in \R^n : (j-1) \leq |x| < j \} ). \]
+    Applying the previous case to each bounded open set $U \cap \{ x \in \R^n : (j-1) \leq |x| < j \}$ for $j = 1,2,\ldots$ and taking the union of all the resulting collections of balls gives the desired result.
+\end{proof}
+
+This ends the section on Vitali Covering Lemmas.
+We will use these in the next section to investigate the Hardy-Littlewood Maximal Function, and later on to study Hausdorff measure.

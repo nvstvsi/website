@@ -1,0 +1,117 @@
+\documentclass[12pt]{book}
+\input{preamble}
+\begin{document}
+
+\tableofcontents
+\mainmatter
+
+% Include your chapters from src/
+ \include{src/01-measure-theory/measure-theory}
+ \include{src/02-integration/integration}
+ \include{src/03-fubini/fubini_ch}
+ \include{src/04-differentiation-1/differentiation}
+ \include{src/05-differentiation-2/diff-2}
+ \include{src/06-riesz/riesz}
+ %\include{src/07-formulas/formulas}
+ \include{src/08-ext-res/ext-res}
+ % \include{src/09-sobolev/sobolev}
+ % \include{src/10-bv/bv}
+
+% \include{src/monotone}
+% \include{src/rademacher}
+
+% MISSING THEOREMS
+% Kirszbraun Extension Theorem for R^n
+% Differentiation under the integral sign
+% Area Formula
+% Coarea Formula
+% Stepanov Theorem (Rademacher generalization)
+
+% FILL IN DETAILS FOR LCH SPACES
+% Urysohn's Lemma for Normal spaces --- put in LCH spaces note
+
+% TO-DO LIST
+% Check that all L^p_{\text{loc}} looks good - defined for Borel outer reg measures which are finite on compact sets (metric spaces?)
+% write introduction to ch. 3
+% FINISH TWO EXAMPLES IN AC SECTION OF BV ON R / ftoc 
+% example of strict inequality of Rademacher's theorem
+% in lippy.tex, need to write the proof that the hausdorff dim of a Lipschitz graph is the same as the dimension of the domain
+% show L^p_{\text{loc}} is a Frechet space
+
+% add file about C^m space NO CLOSURE
+%       prove banach if bounded derivatives, and frechet in general
+%       topology does not depend on choice of compact exhaustion
+%       meaning of convergence
+%       re-organize stuff in whitney extension applications
+
+% largely unfinished files - Lp spaces, modes of convergence, inequality party
+%                            area fomula, coarea formula,
+
+
+
+
+% Analysis 1 - real line
+    % ch 1 -- the real numbers
+
+    % ch 2 --- sequences and series
+
+    % ch 3 --- Limits and continuity
+
+    % ch 4 --- differentiation on the real line
+        % Taylor with remainder
+        
+    % ch 5 --- Riemann integration
+        % fundamental theorem of calculus, lebesgue criterion for riemann integrability, improper integrals
+
+
+        % specific facts: 
+            % if f is a concave function [0,\infty) \to [0,\infty), then f is continuous on  (0,\infty)
+            % if f is a concave function [0,\infty) \to [0,\infty) and f(0) = 0, then f is increasing and continuous on [0,\infty)
+            % for this DO NOT ASSUME THAT THE CONCAVE FUNCTION IS DIFFERENTIABLE, go straight from defn of concavity to the desired properties
+
+            % Hadamard's lemma
+
+
+% Analysis 2 - topology, metric spaces, normed spaces, differential calculus on normed spaces, inverse function theorem
+    % ch 1 - topology / metric spaces
+        % Urysohn lemma for normal spaces, Tietze extension theorem
+        % Cantor set lore
+        % Baire category theorem
+        % topology of uniform convergence
+        % topology of R^n, Heine-Borel theorem in R^n
+        % uppoer/lower semicontinuity , equiv characterizations, Dini theorem
+        
+    % ch 2 - normed spaces, Banach spaces
+        % continuous linear maps, bounded linear maps, operator norm
+        % examples l^p, C^0(K) for K compact, C^{0,s}(K) for K compact
+        % norm equivalence in finite dimensions
+
+        % Frechet spaces, topology of uniform convergence on compact sets
+            % only example is maybe C^0(X) for X sigma-compact metric space
+            % show that the topology does not depend on the choice of compact exhaustion
+    
+    % ch 3 - differential calculus on normed spaces
+        % follow your notes
+        % taylor with remainder in Euclidean space
+
+            % show that C^m_b(U) is a Banach space w the C^m norm
+            % show that C^{m,s}(U) is a Banach space w the C^{m,s} norm
+            % show that C^m(U) is a Frechet space w the C^m topology
+
+    % ch 4 - inverse function theorem, implicit function theorem, rank theorem
+        % follow your notes
+
+% Complex Analysis
+
+    % define curves by letter \sigma ?????
+    % define rectifiable curves in \R^n, and the line integral of a function along a curve
+    % Riemann Stieltjes integral
+
+
+
+ 
+% Functional Analysis
+
+
+
+\end{document}

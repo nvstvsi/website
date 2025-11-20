@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>riesz_functional</title>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '0.8em',
+      packages: {'[+]': ['ams']},
+      macros: {
+        R: '\\mathbb{R}',
+        C: '\\mathbb{C}',
+        N: '\\mathbb{N}',
+        Z: '\\mathbb{Z}',
+        Q: '\\mathbb{Q}',
+        E: '\\mathbb{E}',
+        F: '\\mathbb{F}',
+        S: '\\mathbb{S}',
+        H: '\\mathcal{H}',
+        L: '\\mathcal{L}',
+        dif: '\\,\\mathrm{d}',
+        supp: '\\operatorname{supp}',
+        proj: '\\operatorname{proj}',
+        Id: '\\operatorname{Id}',
+        Span: '\\operatorname{span}',
+        graph: '\\operatorname{graph}',
+        dist: '\\operatorname{dist}',
+        diam: '\\operatorname{diam}',
+        avg: '\\operatorname{avg}',
+        div: '\\operatorname{div}',
+        vol: '\\operatorname{vol}',
+        ord: '\\operatorname{ord}',
+        Chi: '\\mathbf{1}',
+        sub: '\\subseteq',
+        mres: '\\downharpoonright',
+        ddag: '\\ddagger',
+        dag: '\\dagger',
+        norm: ['\\left\\| #1 \\right\\|', 1],
+        abs: ['\\left| #1 \\right|', 1],
+        set: ['\\left\\{ #1 \\right\\}', 1],
+        inner: ['\\langle #1, #2 \\rangle', 2],
+        floor: ['\\lfloor #1 \\rfloor', 1],
+        ceil: ['\\lceil #1 \\rceil', 1],
+        llbracket: '\\unicode{x27E6}',
+        rrbracket: '\\unicode{x27E7}',
+        bigskull: '\\unicode{x1F480}',
+        skull: '\\unicode{x2620}',
+        mathwitch: '\\unicode{x1F9D9}',
+        pumpkin: '\\unicode{x1F383}',
+        mathpumpkin: '\\unicode{x1F383}',
+        bigpumpkin: '\\unicode{x1F383}',
+        mathghost: '\\unicode{x1F47B}',
+        mathcat: '\\unicode{x1F408}',
+        mathbat: '\\unicode{x1F987}',
+        esssup: '\\operatorname{ess\\,sup}',
+        essinf: '\\operatorname{ess\\,inf}',
+        Lip: '\\operatorname{Lip}',
+        pd: ['\\frac{\\partial#1}{\\partial#2}', 2],
+        od: ['\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}', 2],
+        dashint: '\\mathchoice{\\rlap{-}\\!\\int}{\\rlap{\\raise.15ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}',
+        eurologo: '\\unicode{x20AC}',
+        starredbullet: '\\unicode{x2726}',
+        grimace: '\\unicode{x1F62C}',
+        textthing: '\\unicode{x2639}',
+        noway: '\\unicode{x26D4}',
+        warning: '\\unicode{x26A0}',
+        danger: '\\unicode{x26A0}',
+        textxswup: '\\unicode{x2195}',
+        textxswdown: '\\unicode{x2195}',
+        decoone: '\\unicode{x2756}',
+        decotwo: '\\unicode{x2767}',
+        decothreeleft: '\\unicode{x2619}',
+        decothreeright: '\\unicode{x2767}',
+        decofourleft: '\\unicode{x261A}',
+        decofourright: '\\unicode{x261B}',
+        floweroneleft: '\\unicode{x2740}',
+        floweroneright: '\\unicode{x2740}',
+        lefthand: '\\unicode{x261C}',
+        righthand: '\\unicode{x261E}',
+        decosix: '\\unicode{x2766}',
+        bomb: '\\unicode{x1F4A3}',
+        caution: '\\unicode{x2621}',
+        leftblackhand: '\\unicode{x261A}',
+        rightblackhand: '\\unicode{x261B}',
+        leafleft: '\\unicode{x2618}',
+        leafright: '\\unicode{x2618}',
+        leafNW: '\\unicode{x2618}',
+        leafNE: '\\unicode{x2618}',
+        leafSE: '\\unicode{x2618}',
+        leafSW: '\\unicode{x2618}',
+        aldineleft: '\\unicode{x2619}',
+        aldineright: '\\unicode{x2767}',
+        aldine: '\\unicode{x2766}',
+        aldinesmall: '\\unicode{x2767}',
+        aldinesmallrevert: '\\unicode{x2619}',
+        aldinesmallup: '\\unicode{x2766}',
+        grappe: '\\unicode{x2766}',
+        rightgrappe: '\\unicode{x2767}',
+        leftgrappe: '\\unicode{x2619}',
+        oldpilcrowone: '\\unicode{x00B6}',
+        oldpilcrowtwo: '\\unicode{x00B6}',
+        oldpilcrowthree: '\\unicode{x00B6}',
+        oldpilcrowfour: '\\unicode{x00B6}',
+        oldpilcrowfive: '\\unicode{x00B6}',
+        oldpilcrowsix: '\\unicode{x00B6}'
+      }
+    },
+    startup: {
+      pageReady: () => {
+        return MathJax.startup.defaultPageReady().then(() => {
+          console.log('MathJax ready');
+        });
+      }
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+  <script>
+  (function() {
+    window.addEventListener('beforeunload', function() {
+      saveProofState();
+      saveCollapsibleState();
+    });
+    
+    const eventSource = new EventSource('http://localhost:35729/reload-stream');
+    
+    eventSource.onmessage = function(event) {
+      if (event.data === 'reload') {
+        console.log('📝 File updated, saving state and reloading...');
+        saveProofState();
+        saveCollapsibleState();
+        setTimeout(() => {
+          window.location.reload();
+        }, 50);
+      }
+    };
+    
+    eventSource.onerror = function() {
+      console.log('⚠️  Auto-reload server not available. Run node watch.js to enable auto-reload.');
+      eventSource.close();
+    };
+    
+    console.log('🔄 Auto-reload enabled');
+  })();
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+    
+    /* Layout with sidebar */
+    .page-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      width: 280px;
+      background: #fff;
+      border-right: 1px solid #e0e0e0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px 0;
+      font-size: 14px;
+    }
+    
+    .sidebar-header {
+      padding: 15px 20px 25px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .sidebar-header h1 {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 5px 0;
+    }
+    
+    .sidebar-header .subtitle {
+      font-size: 0.85em;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .sidebar-header .back-link {
+      display: block;
+      font-size: 0.8em;
+      color: #666;
+      text-decoration: none;
+      margin-top: 12px;
+    }
+    
+    .sidebar-header .back-link:hover {
+      color: #1a1a1a;
+    }
+    
+    .sidebar-nav {
+      padding: 10px 0;
+    }
+    
+    .chapter-group {
+      margin-bottom: 2px;
+    }
+    
+    .chapter-title {
+      padding: 12px 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chapter-title:hover {
+      background: #f5f5f5;
+    }
+    
+    .chapter-title .toggle {
+      font-size: 0.65em;
+      color: #999;
+      transition: transform 0.2s;
+    }
+    
+    .chapter-group.expanded .chapter-title .toggle {
+      transform: rotate(90deg);
+    }
+    
+    .section-list {
+      display: none;
+      padding: 5px 0;
+      background: #f8f8f8;
+    }
+    
+    .chapter-group.expanded .section-list {
+      display: block;
+    }
+    
+    .section-link {
+      display: block;
+      padding: 8px 20px 8px 35px;
+      font-size: 0.85em;
+      color: #555;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+    }
+    
+    .section-link:hover {
+      background: #f0f0f0;
+      color: #1a1a1a;
+    }
+    
+    .section-link.active {
+      background: #e8e8e8;
+      border-left-color: #333;
+      color: #000;
+      font-weight: 500;
+    }
+    
+    /* Main content area */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      max-width: 900px;
+      padding: 40px 60px;
+    }
+    
+    @media (max-width: 1100px) {
+      .sidebar {
+        width: 240px;
+      }
+      .main-content {
+        margin-left: 240px;
+        padding: 30px 40px;
+      }
+    }
+    
+    @media (max-width: 800px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+      .page-layout {
+        flex-direction: column;
+      }
+    }
+    
+    h2, h3, h4 {
+      margin-top: 2em;
+      margin-bottom: 0.75em;
+      color: #000;
+      font-weight: 600;
+    }
+    h2 { font-size: 1.5em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.1em; }
+    p {
+      margin: 1em 0;
+      text-indent: 2em;
+    }
+    p:first-of-type,
+    h2 + p,
+    h3 + p,
+    h4 + p,
+    .theorem-box + p,
+    .proof-box + p {
+      text-indent: 0;
+    }
+    .noindent + p,
+    p:has(> .noindent:first-child) {
+      text-indent: 0 !important;
+    }
+    .noindent {
+      display: none;
+    }
+    .theorem-box {
+      margin: 1.75em 0;
+      padding: 1.25em;
+      border-left: 5px solid #16a34a;
+      background: linear-gradient(to top, #bbf7d0 0%, #d1fae5 100%);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .definition-box { border-left-color: #16a34a; background: linear-gradient(to top, #d1fae5 0%, #ecfdf5 100%); }
+    .lemma-box { border-left-color: #1e3a8a; background: linear-gradient(to top, #bfdbfe 0%, #dbeafe 100%); }
+    .corollary-box { border-left-color: #9333ea; background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%); }
+    .proposition-box { border-left-color: #dc2626; background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%); }
+    .remark-box { border-left-color: #64748b; background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%); }
+    .example-box { border-left-color: #0891b2; background: linear-gradient(to top, #a5f3fc 0%, #cffafe 100%); }
+    .construction-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .notation-box { border-left-color: #ca8a04; background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%); }
+    .exercise-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .problem-box { border-left-color: #ec4899; background: linear-gradient(to top, #fbcfe8 0%, #fce7f3 100%); }
+    .theorem-header {
+      margin-bottom: 0.75em;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+    .theorem-header.clickable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .theorem-header.clickable:hover {
+      background: rgba(0,0,0,0.03);
+      margin: -0.5em -0.75em 0.75em -0.75em;
+      padding: 0.5em 0.75em;
+      border-radius: 4px;
+    }
+    .collapsible-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      margin-right: 0.5em;
+      color: #6b7280;
+    }
+    .collapsible-box.collapsed .collapsible-icon {
+      transform: rotate(-90deg);
+    }
+    .collapsible-content {
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+    }
+    .collapsible-box.collapsed .collapsible-content {
+      display: none;
+    }
+    .theorem-content {
+      padding-left: 0.5em;
+      line-height: 1.8;
+    }
+    .proof-box {
+      margin: 1.5em 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .proof-header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      border-radius: 6px 6px 0 0;
+    }
+    .proof-toggle {
+      width: 100%;
+      padding: 0.85em 1.25em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      transition: background 0.15s;
+    }
+    .proof-toggle:hover { background: rgba(0,0,0,0.03); }
+    .proof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      color: #6b7280;
+    }
+    .proof-box.collapsed .proof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .proof-content {
+      padding: 1.25em;
+      line-height: 1.8;
+    }
+    .proof-box.collapsed .proof-content {
+      display: none;
+    }
+    .proof-end {
+      float: right;
+      font-size: 1.3em;
+      margin-left: 0.5em;
+      color: #374151;
+    }
+    .subproof {
+      margin: 1em 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #f9fafb;
+    }
+    .subproof-header {
+      background: linear-gradient(to bottom, #f9fafb 0%, #f3f4f6 100%);
+      border-bottom: 1px solid #d1d5db;
+      border-radius: 4px 4px 0 0;
+    }
+    .subproof-toggle {
+      width: 100%;
+      padding: 0.6em 1em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: background 0.15s;
+    }
+    .subproof-toggle:hover {
+      background: rgba(0,0,0,0.03);
+    }
+    .subproof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.7em;
+      color: #6b7280;
+    }
+    .subproof.collapsed .subproof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .subproof-content {
+      padding: 1em;
+      line-height: 1.7;
+    }
+    .subproof.collapsed .subproof-content {
+      display: none;
+    }
+    .ref-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 0.15em;
+      border-radius: 2px;
+    }
+    .ref-link:hover {
+      background: #dbeafe;
+      text-decoration: underline;
+    }
+    .ref-unknown {
+      color: #dc2626;
+      font-weight: bold;
+      background: #fee2e2;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+    ol, ul {
+      margin: 1em 0;
+      padding-left: 2.5em;
+      line-height: 1.8;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    .latex-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5em auto;
+    }
+    .latex-figure .latex-image {
+      display: inline-block;
+      margin: 0.5em;
+      vertical-align: middle;
+    }
+    .latex-figure {
+      margin: 2em 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .latex-figure .figure-content {
+      margin-bottom: 0.75em;
+      line-height: normal;
+    }
+    .latex-figure .figure-content > * {
+      vertical-align: middle;
+    }
+    .latex-figure figcaption {
+      font-size: 0.9em;
+      color: #4b5563;
+      font-style: italic;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1>Analysis III</h1>
+        <div class="subtitle">Measure Theory &amp; Integration</div>
+        <a href="../index.html" class="back-link">← Table of Contents</a>
+      </div>
+      <div class="sidebar-nav">
+        <div class="chapter-group expanded">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>1. Measure Theory</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../01-measure-theory/measure-theory.html" class="section-link">Overview</a>
+            <a href="../01-measure-theory/basics.html" class="section-link">Outer Measures</a>
+            <a href="../01-measure-theory/lebesgue-meas.html" class="section-link">Lebesgue Measure</a>
+            <a href="../01-measure-theory/cantor.html" class="section-link">The Cantor Set</a>
+            <a href="../01-measure-theory/measure-spaces.html" class="section-link">Measure Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>2. Integration</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../02-integration/integration.html" class="section-link">Overview</a>
+            <a href="../02-integration/integrals-1.html" class="section-link">Simple Functions</a>
+            <a href="../02-integration/integrals-2.html" class="section-link">General Functions</a>
+            <a href="../02-integration/convergence.html" class="section-link">Convergence Theorems</a>
+            <a href="../02-integration/inequality-party.html" class="section-link">Integral Inequalities</a>
+            <a href="../02-integration/lp_spaces.html" class="section-link">Lᵖ Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>3. Product Measures</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../03-fubini/fubini_ch.html" class="section-link">Overview</a>
+            <a href="../03-fubini/fubini.html" class="section-link">Fubini-Tonelli</a>
+            <a href="../03-fubini/integrals-3.html" class="section-link">Product Measures</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>4. Differentiation I</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../04-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../04-differentiation-1/covering.html" class="section-link">Vitali Covering</a>
+            <a href="../04-differentiation-1/monotone.html" class="section-link">Monotone Functions</a>
+            <a href="../04-differentiation-1/BV_on_R.html" class="section-link">Bounded Variation</a>
+            <a href="../04-differentiation-1/FTOC.html" class="section-link">FTC for Lebesgue</a>
+            <a href="../04-differentiation-1/HL.html" class="section-link">Hardy-Littlewood</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>5. Differentiation I (cont)</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../05-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../05-differentiation-1/r-nik.html" class="section-link">Radon-Nikodym</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>6. Differentiation II</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-differentiation-2/diff-2.html" class="section-link">Overview</a>
+            <a href="../06-differentiation-2/vector-measures.html" class="section-link">Vector Measures</a>
+            <a href="../06-differentiation-2/r-nik.html" class="section-link">Radon-Nikodym</a>
+            <a href="../06-differentiation-2/besi.html" class="section-link">Besicovitch</a>
+            <a href="../06-differentiation-2/densities.html" class="section-link">Densities</a>
+            <a href="../06-differentiation-2/diff-measures.html" class="section-link">Measure Derivatives</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>7. Riesz Representation</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-riesz/riesz.html" class="section-link">Overview</a>
+            <a href="../06-riesz/riesz_functional.html" class="section-link">Riesz Representation</a>
+            <a href="../06-riesz/LCH_spaces.html" class="section-link">LCH Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>8. Integral Formulas</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../07-formulas/formulas.html" class="section-link">Overview</a>
+            <a href="../07-formulas/hausdorff_meas.html" class="section-link">Hausdorff Measures</a>
+            <a href="../07-formulas/lippy.html" class="section-link">Lipschitz Maps</a>
+            <a href="../07-formulas/rademacher.html" class="section-link">Rademacher</a>
+            <a href="../07-formulas/coarea-prereq.html" class="section-link">Coarea Prerequisites</a>
+            <a href="../07-formulas/coarea.html" class="section-link">Coarea Formula</a>
+            <a href="../07-formulas/area-prereq.html" class="section-link">Area Prerequisites</a>
+            <a href="../07-formulas/area-formula.html" class="section-link">Area Formula</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>9. Extension Results</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../08-ext-res/ext-res.html" class="section-link">Overview</a>
+            <a href="../08-ext-res/taylor_thm_integral_remainder.html" class="section-link">Taylor's Theorem</a>
+            <a href="../08-ext-res/whitney-cover.html" class="section-link">Whitney Covering</a>
+            <a href="../08-ext-res/whitney-partition-of-unity.html" class="section-link">Partition of Unity</a>
+            <a href="../08-ext-res/whitney-decomposition.html" class="section-link">Decomposition</a>
+            <a href="../08-ext-res/whitney-extension-theorem.html" class="section-link">Extension Theorem</a>
+            <a href="../08-ext-res/whitney-extension-proof.html" class="section-link">Extension Proof</a>
+            <a href="../08-ext-res/whitney-extension-applications.html" class="section-link">Applications</a>
+            <a href="../08-ext-res/whitney-extension.html" class="section-link">Summary</a>
+            <a href="../08-ext-res/more-bump.html" class="section-link">More Bump Functions</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <main class="main-content">
+      <h2>The Riesz Representation Theorem</h2>
+<p>In this section, we present and prove the Riesz Representation Theorem for linear functionals.
+There are actually several results which go by this name, and they are all closely related.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>Throughout this section, we let $X$ be an arbitrary nonempty LCH space.
+Recall that $C_c(X)$ is the set of all continuous, real-valued functions on $X$ with compact support.
+We define $C_c^+(X)$ to be the set of all nonnegative functions in $C_c(X)$.</p>
+<div class="theorem-box theorem-box" id="thm:riesz_representation_theorem_for_positive_linear_functionals">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Riesz Representation Theorem for Positive Linear Functionals)</div>
+  <div class="theorem-content">Let $L: C_c(X) \to \R$ be a positive linear functional, i.e. $L$ is linear and $L(f) \geq 0$ for each $f\in C_c^+(X)$.
+    Then there exists a unique Radon measure $\mu$ on $X$ such that
+    \[     L(f) = \int_X f \,\dif \mu, \qquad \forall f\in C^+_c(X). \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-0">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-0')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-0">
+    We begin with some remarks.
+    First, note that if $f,g \in C_c^+(X)$ are such that $f \leq g$, then $g - f \in C_c^+(X)$ and so
+    \begin{equation} L(f) = L(g) - L(g - f) \leq L(g). \end{equation}
+    Thus $L$ is monotone on $C_c^+(X)$.
+<p>Second, if $K\subseteq X$ is compact and $f\in C_c^+(X)$ is such that $\text{supp}(f) \subseteq K$, and if $g\in C_c^+(X)$ is such that $g \equiv 1$ on $K$, then we have $gf = f \leq (\sup f) g$ so we have 
+    \begin{equation} L(f) \leq (\sup f) L(g).  \end{equation}</p>
+<p>Notice that if $U$ is an arbitrary open subset of $X$ which contains $K$, then by Urysohn's lemma there exists an open set $V$ such that $K \subseteq V \subseteq \overline{V} \subseteq U$ and a function $g\in C_c^+(X)$ such that $g \equiv 1$ on an oen set containing $\overline{V}$, $g \leq 1$ on $X$, and $\supp(g) \subseteq U$.
+    Then for each $f\in C_c^+(X)$ such that $\supp(f) \subseteq V$ and $f \leq 1$, our previous remark implies
+    \[ L(f) \leq (\sup f) L(g) \leq L(g). \]
+    Taking the supremum over all such $f$ and the infimum over all such $g$, we obtain
+    \begin{equation}
+         \sup\{ L(f) : f\in C_c^+(X), f\leq 1, \supp f \subseteq V \} \leq \inf \{ L(g) : g\in C_c^+(X), g\leq 1, g \equiv 1 \text{ on an open set containing } \overline{V}, \supp g \subseteq U  \}  
+    \end{equation}</p>
+<p>This concludes our remarks.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p><span class="noindent"></span><em>Step 1:</em>
+    Definition of the measure $\mu$.
+    <div style="margin: 1em 0;"></div></p>
+<p>We begin by defining $\mu$ on open sets $U\subseteq X$ by
+    \[  \mu(U) := \sup \{ L(f) : f \in C^+_c(X), f \leq 1, \supp f \subseteq U \} \]
+    and for an arbitrary set $A\subseteq X$, we define
+    \[ \mu(A) := \inf \{ \mu(U) : U \supseteq A, U \text{ open} \}. \]
+    Note that these two definitions are consistent --- if $U\subseteq X$ is open, then for each open set $V\supseteq U$, we have
+    \[ \mu(U) := \sup \{ L(f) : f \in C^+_c(X), f \leq 1, \supp f \subseteq U \} \leq \sup \{ L(f) : f \in C^+_c(X), f \leq 1, \supp f \subseteq V \} =: \mu(V) \]
+    and this shows
+    \[ \mu(U) \leq \inf \{ \mu(V) : V \supseteq U, V \text{ open} \}. \]
+    For the other direction, note that $U$ is one of the open sets containing itself, so
+    \[ \inf \{ \mu(V) : V \supseteq U, V \text{ open} \} \leq \mu(U). \]
+    Thus we conclude that
+    \[ \mu(U) = \inf \{ \mu(V) : V \supseteq U, V \text{ open} \} \]
+    for each open set $U\subseteq X$.</p>
+<p>Also note that for each compact set $K\subseteq X$, we have
+    \[ \mu(K) := \inf \{ \mu(U) : U \supseteq K, U \text{ open} \} = \inf \{ L(g) : g\in C_c^+(X), g\leq 1, g \equiv 1 \text{ on an open set containing } K \} < \infty \tag{$*$}\]
+    so the measure $\mu$ is finite on compact sets.</p>
+<p><div style="margin: 1em 0;"></div>    
+    <span class="noindent"></span><em>Step 2:</em>
+    Now we claim that $\mu$ is an outer measure on $X$.
+    <div style="margin: 1em 0;"></div></p>
+<p>To prove the claim, let $U\subseteq X$ be open and let $\{U_j\}_{j=1}^\infty$ be a countable collection of open subsets of $X$ such that $U \subseteq \bigcup_{j=1}^\infty U_j$.
+    Fix a $g\in C_c^+(X)$ with $g \leq 1$ and $\text{supp}(g) \subseteq U$. Since $\supp(g)$ is compact, there exists a $k\in \N$ such that $\supp(g) \subseteq \bigcup_{j=1}^k U_j$.
+    Let $\{\psi_j\}_{j=1}^k \subseteq C^+_c(X)$ be a partition of unity subordinate to the open cover $\{U_j\}_{j=1}^k$ of $\supp(g)$ (Theorem <span class="ref-unknown" title="Reference not found: thm:partition_of_unity">[thm:partition_of_unity?]</span>).
+    Then we have
+    \[ g = \sum_{j=1}^k \psi_j g \]
+    which implies that
+    \[ L(g) \leq \sum_{j=1}^k L(\psi_j g) \leq \sum_{j=1}^k \mu(U_j) \leq \sum_{j=1}^\infty \mu(U_j). \]
+    Taking the supremum over all such $g$, we obtain
+    \[ \mu(U) \leq \sum_{j=1}^\infty \mu(U_j). \]
+    This proves that $\mu$ is countably subadditive on open sets.</p>
+<p>Now let $\{A_j\}_{j=1}^\infty$ be an arbitrary countable collection of subset of $X$ and let $A \subseteq \bigcup_{j=1}^\infty A_j$.
+    Fix $\varepsilon > 0$. For each $j\in \Z^+$, the definition of $\mu(A_j)$ implies that there exists an open set $U_j$ such that $A_j \subseteq U_j$ and
+    \[ \mu(U_j) \leq \mu(A_j) + \frac{\varepsilon}{2^j}. \]
+    Then $A\subseteq \bigcup_{j=1}^\infty U_j$, and so
+    \[ \mu(A) \leq \mu\left( \bigcup_{j=1}^\infty U_j \right) \leq \sum_{j=1}^\infty \mu(U_j) \leq \sum_{j=1}^\infty \mu(A_j) + \varepsilon. \]
+    Since $\varepsilon > 0$ is arbitrary, we conclude that
+    \[ \mu(A) \leq \sum_{j=1}^\infty \mu(A_j). \]
+    This proves that $\mu$ is countably subadditive on all subsets of $X$.</p>
+<p>Since $\mu(\emptyset) = 0$ by definition, we conclude that $\mu$ is an outer measure on $X$.</p>
+<p><div style="margin: 1em 0;"></div>
+    <span class="noindent"></span><em>Step 3:</em>
+    We claim that $\mu$ is a Radon measure on $X$.
+    <div style="margin: 1em 0;"></div></p>
+<p>See that $\mu$ is an outer measure on $X$ which is finite on compact sets by Step 1, and conditions (i) and (ii) of the definition of a Radon measure are satisfied.
+    Thus, by Lemma <span class="ref-unknown" title="Reference not found: lem:outer_measure_is_radon_if_finitely_additive_on_compact_sets">[lem:outer_measure_is_radon_if_finitely_additive_on_compact_sets?]</span>, it suffices to show that $\mu$ is finitely additive on compact sets.</p>
+<p>Let $K_1, K_2 \subseteq X$ be disjoint compact sets and let $\varepsilon > 0$.
+    By $(*)$ in Step 1, since $K_1\cup K_2$ is compact, there exists a $g\in C^+_c(X)$ such that $g \leq 1$, $g \equiv 1$ on an open set $W$ containing $K_1 \cup K_2$, and
+    \[ L(g) \leq \mu(K_1 \cup K_2) + \varepsilon. \]
+    By Lemma <span class="ref-unknown" title="Reference not found: lem:disjoint_compact_sets_in_hausdorff_space">[lem:disjoint_compact_sets_in_hausdorff_space?]</span>, there exist disjoint open sets $U_1, U_2 \subseteq X$ such that $K_1 \subseteq U_1$ and $K_2 \subseteq U_2$.
+    Then Urysohn's lemma <span class="ref-unknown" title="Reference not found: lem:LCH_urysohns_lemma">[lem:LCH_urysohns_lemma?]</span> implies that there exist functions $f_1, f_2 \in C_c^+(X)$ such for $i=1,2$, we have $f_i \leq 1$, $\supp(f_i) \subseteq U_i$, and $f_i \equiv 1$ on an open set containting $K_i$.
+    Now $(*)$ implies that
+    \begin{align*}
+        \mu(K_1) + \mu(K_2) &\leq L(f_1g) + L(f_2g) = L((f_1 + f_2)g) \\
+            &\leq L(g) \leq \mu(K_1 \cup K_2) + \varepsilon.
+    \end{align*}
+    Since $\varepsilon > 0$ is arbitrary, we conclude that
+    \[ \mu(K_1) + \mu(K_2) \leq \mu(K_1 \cup K_2). \]
+    The reverse inequality follows from countable subadditivity of $\mu$.
+    Thus $\mu$ is finitely additive on compact sets, and we conclude that $\mu$ is a Radon measure on $X$ by Lemma <span class="ref-unknown" title="Reference not found: lem:outer_measure_is_radon_if_finitely_additive_on_compact_sets">[lem:outer_measure_is_radon_if_finitely_additive_on_compact_sets?]</span>.</p>
+<p><div style="margin: 1em 0;"></div>
+    <span class="noindent"></span><em>Step 4:</em>
+    It remains to show that $L(f) = \int_X f \,\dif \mu$ for each $f\in C_c^+(X)$.
+    <div style="margin: 1em 0;"></div></p>
+<p>By (2) it follows that for each $h\in C^+_c(X)$,
+    by taking an arbitrary $g\in C^+_c(X)$ such that $g\leq 1$, and $g \equiv 1$ on an open set containing $\supp(h)$, we have
+    \[ L(h) \leq (\sup h) L(g) \]
+    and by taking the infimum over all such $g$, we obtain
+    \[ L(h) \leq (\sup h) \mu(\supp(h)) < \infty. \]
+    By observing that $h$ is the uniform limit of the functions $\{ \max\{ h - 1/n ,0 \} \}_{n=1}^\infty \subseteq C_c^+(X)$, we see that
+    \[ L(h) \leq (\sup h) \mu(\{ x \in X : h(x) > 0 \}). \tag{$\star$}\]
+    Note that this inequality holds for each $h\in C^+_c(X)$.</p>
+<p>Now we will show that the integral identity holds. Let $f\in C_c^+(X)$ be and let $\varepsilon > 0$.
+    If $f \equiv 0$, then the integral identity holds trivially, so we may assume that $\sup f > 0$.
+    Then choose numbers $t_0, t_1, \ldots, t_N$ such that
+    \[ 0 = t_0 < t_1 < \cdots < t_{N-1} < \sup f < t_N \]
+    and \[ \max_{1\leq k \leq N} t_k - t_{k-1} < \varepsilon \]
+    and \[ \mu (f^{-1}(\{ t_k \})) = 0 \qquad \forall k=1,2,\ldots,N. \]
+    (This final requirement is no issue, as $\mu(f^{-1}(\{ t \})) = 0$ for all but countably many $t\in \R$, by virtue of the fact that
+    $\{x\in X: f(x)>0\}$ is contained in the compact set $\supp f$, which has finite $\mu$ measure.)</p>
+<p>For each $k=1,2,\ldots,N$, define 
+    \[ U_k := f^{-1}(\{(t_{k-1}, t_k)\}). \]
+    Note that the sets $U_1, U_2, \ldots, U_N$ are open and disjoint, and that each $U_k$ is contained in the compact set $\supp(f)$.
+    We define functions $\phi^-, \phi^+ : X \to [0,\infty)$ by
+    \[  \phi^-(x) := \sum_{k=1}^N t_{k-1} \chi_{U_k}(x), \quad \phi^+(x) := \sum_{k=1}^N t_k \chi_{U_k}(x) \]
+    for each $x\in X$.
+    Then we have
+    \[ \phi^-(x) \leq f(x) \leq \phi^+(x) \qquad \forall x\in X \]
+    because if $x\in U_k$ for some $k=1,2,\ldots,N$, then $t_{k-1} < f(x) < t_k$, and if $x\notin \bigcup_{k=1}^N U_k$, then $f(x) = 0$ and $\phi^-(x) = \phi^+(x) = 0$.
+    Monotonicity of the integral implies that
+    \[  \int_X \phi^-(x) \,\dif \mu \leq \int_X f(x) \,\dif \mu \leq \int_X \phi^+(x) \,\dif \mu \]
+    and the fact that $\phi^-$ and $\phi^+$ are simple functions and the sets $U_1, U_2, \ldots, U_N$ are disjoint implies that
+    \[  \sum_{k=1}^N t_{k-1} \mu(U_k) \leq \int_X f(x) \,\dif \mu \leq \sum_{k=1}^N t_k \mu(U_k). \tag{$\ddag$} \]</p>
+<p>By definition of the measure $\mu$ on open sets, for each $k=1,2,\ldots,N$, there exists a function $g_k \in C_c^+(X)$ such that $g_k \leq 1$, $\supp(g_k) \subseteq U_k$, and
+    \[ \mu(U_k) \leq L(g_k) + \frac{\varepsilon}{N}. \]
+    Also for each $k=1,2,\ldots,N$ and each compact set $K_k\subseteq U_k$, Urysohn's lemma implies that there exists a function $h_k \in C_c^+(X)$ such that $h_k \leq 1$, $h_k \equiv 1$ on an open set containing $K_k \cup \supp g_j$, and $\supp(h_k) \subseteq U_k$.
+    Then $g_k \leq h_k \leq 1$ and $\supp(h_k)$ is a compact subset of $U_k$ for each $k=1,2,\ldots,N$, and thus
+    \[ \mu(U_k) - \frac{\varepsilon}{N} \leq L(g_k) \leq L(h_k) \leq \mu(U_k) \quad\forall j=1,2,\ldots,N. \tag{$\star\star$}\]
+    Since $\mu$ is a Radon measure, we can choose the compact sets $K_1, K_2, \ldots, K_N$ such that $\mu(U_k \setminus K_k) < \varepsilon/N$ for each $k=1,2,\ldots,N$.
+    Then we have
+    \[ \left\{ x\in X : \left(f - f \sum_{k=1}^N h_k\right)(x) > 0 \right\} \subseteq \bigcup_{k=1}^N (U_k \setminus K_k) \]
+    so we use $(\star)$, subadditivity of $\mu$, and monotonicity of $L$ to deduce that
+    \begin{align*}
+        L\left( f - f\sum_{k=1}^N h_k \right) &\leq  \sup \left(f - f\sum_{k=1}^N h_k \right) \mu\left( \bigcup_{k=1}^N (U_k \setminus K_k) \right) \\
+            &\leq (\sup f) \sum_{k=1}^N \mu(U_k \setminus K_k) < (\sup f) \varepsilon. \qquad\qquad(\pumpkin)
+    \end{align*}</p>
+<p>Using $(\star\star)$ and the fact that $t_{k-1} h_k \leq fh_k \leq t_k h_k$ for each $k=1,2,\ldots,N$, we obtain
+    \begin{align*}
+        \sum_{k=1}^N t_{k-1} \mu(U_k) - \varepsilon\sup f &\leq L\left( \sum_{k=1} t_{k-1} h_k \right) \ \ \ \,\qquad\qquad\qquad\qquad\text{ by }(\star\star)\\
+            &\leq L\left( f\sum_{k=1}^N h_k \right) \qquad\qquad\qquad\qquad\qquad \text{ since  }t_{k-1}h_k \leq fh_k \text{ for all } k\\
+            &\leq \ L(f) \qquad\qquad\qquad\qquad\qquad\qquad\quad\ \ \ \text{by monotonicity of }L \\
+            &\leq L\left( f\sum_{k=1}^N h_k \right) + \varepsilon\sup f \ \qquad\qquad\qquad\text{by }(\pumpkin) \\
+            &\leq L\left( \sum_{k=1}^N t_kh_k \right) + \varepsilon\sup f \qquad\qquad\qquad\text{ since }t_kh_k \leq fh_k \text{ for all } k\\
+            &\leq \sum_{k=1}^N t_k \mu(U_k) + \varepsilon\sup f. \ \ \qquad\qquad\qquad\text{ by }(\star\star)
+    \end{align*}
+    from which we extract that
+    \[  \sum_{k=1}^N t_{k-1} \mu(U_k) - \varepsilon\sup f \leq L( f ) \leq \sum_{k=1}^N t_k \mu(U_k) + \varepsilon\sup f. \]</p>
+<p>Combining the above with $(\ddag)$, we obtain
+    \begin{align*}
+        -\varepsilon( \mu(\supp f) + \sup f ) &\leq - \sum_{k=1}^N (t_k - t_{k-1})\mu(U_j) - \varepsilon\sup f \\
+            &\leq \int_X f \,\dif \mu - L(f) \\
+            &\leq \sum_{k=1}^N (t_k - t_{k-1})\mu(U_j) + \varepsilon\sup f \leq \varepsilon( \mu(\supp f) + \sup f ).
+    \end{align*}
+    That is,
+    \[ \left| \int_X f \,\dif \mu - L(f) \right| \leq \varepsilon( \mu(\supp f) + \sup f ). \]
+    Since $\varepsilon > 0$ is arbitrary, we conclude that $L(f) = \int_X f \,\dif \mu$.
+    This completes the proof of the integral identity for each $f\in C_c^+(X)$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p></p>
+<p>Now we are ready to state and prove the Riesz Representation Theorem.</p>
+<p>In the theorem below, we let $H$ denote a finite-dimensional real Hilbert space with inner product $\langle \cdot, \cdot \rangle$ and induced norm $\| \cdot \|$.
+The set $C_c(X,H)$ is defined as the vector space of continuous maps $X\to H$ with compact support.</p>
+<div class="theorem-box theorem-box" id="thm:riesz_representation_theorem_for_CcX">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Riesz Representation Theorem for Bounded Linear Functionals on $C_c(X,H)$)</div>
+  <div class="theorem-content">Let $L: C_c(X,H) \to \R$ be a linear functional such that for each compact set $K\subseteq X$ we have
+    \[  \sup \left\{ L(f) : f \in C_c(X,H), \| f\| \leq 1, \supp f\subseteq K \right\} < \infty. \]
+    Then there exists a unique finite Radon measure $\mu$ on $X$ and a $\mu$-measurable map
+    \[ \sigma : X \to H \]
+    such that $\| \sigma(x) \| = 1$ for $\mu$-a.e. $x\in X$ and
+    \[ L(f) = \int_X \langle f(x), \sigma(x) \rangle \,\dif \mu(x) \qquad \forall f\in C_c(X,H). \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-1">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-1')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-1">
+    By using an orthonormal basis of $H$, we can identify $H$ with $\R^n$ for some $n\in \Z^+$.
+    Thus it suffices to prove the theorem in the case $H = \R^n$.
+<p><div style="margin: 1em 0;"></div>
+    <span class="noindent"></span><em>Step 1:</em>
+    We begin by defining
+    \[ \lambda:C^+_c(X)\to \R, \quad \lambda(f) := \sup\{ L(\omega) : \omega \in C_c(X,\R^n), \| \omega \| \leq f \}, \ \forall f\in C^+_c(X) \]
+    and we claim that $\lambda$ is a positive linear functional on $C_c^+(X)$.
+    <div style="margin: 1em 0;"></div></p>
+<p>It is clear that $\lambda$ is nonnegative and positively homogeneous, since 
+    \[ \lambda(cf) = \sup\{ L(\omega) : \omega \in C_c(X,\R^n), \| \omega \| \leq cf \} = c \sup\{ L(\omega) : \omega \in C_c(X,\R^n), \| \omega \| \leq f \} = c\lambda(f) \]
+    for each $c\geq 0$ and each $f\in C_c^+(X)$.
+    To see that $\lambda$ is additive, let $f_1, f_2 \in C_c^+(X)$ be given.
+    If $\omega_1, \omega_2 \in C_c(X,\R^n)$ are such that $\| \omega_1 \| \leq f_1$ and $\| \omega_2 \| \leq f_2$, then we have
+    $\| \omega_1 + \omega_2 \| \leq f_1 + f_2$ and so
+    \[ \lambda(f_1 + f_2) \geq L(\omega_1 + \omega_2) = L(\omega_1) + L(\omega_2). \]
+    Taking the supremum over all such $\omega_1$ and $\omega_2$, we obtain
+    \[ \lambda(f_1 + f_2) \geq \lambda(f_1) + \lambda(f_2). \]
+    For the reverse inequality, let $\omega\in C_c(X,\R^n)$ be such that $\| \omega \| \leq f_1 + f_2$, and define
+    \[ \omega_j := \begin{cases}
+        \frac{f_j}{f_1 + f_2} \omega & \text{on } \{f_1 + f_2 > 0\}, \\
+        0, & \text{on } \{f_1 + f_2 = 0\}
+    \end{cases} \quad \]
+    for $j=1,2$. It is easy to see that $\omega_1, \omega_2 \in C_c(X,\R^n)$.
+    Then $\omega = \omega_1 + \omega_2$, $\| \omega_1 \| \leq f_1$, and $\| \omega_2 \| \leq f_2$, so
+    \[ L(\omega) = L(\omega_1 + \omega_2) = L(\omega_1) + L(\omega_2) \leq \lambda(f_1) + \lambda(f_2). \]
+    By taking the supremum over all such $\omega$, we obtain
+    \[ \lambda(f_1 + f_2) \leq \lambda(f_1) + \lambda(f_2). \]
+    Therefore \[ \lambda(f_1 + f_2) = \lambda(f_1) + \lambda(f_2). \]
+    Since $f_1, f_2 \in C_c^+(X)$ were arbitrary, we conclude that $\lambda$ is additive.</p>
+<p>This proves the claim.</p>
+<p><div style="margin: 1em 0;"></div>
+    <span class="noindent"></span><em>Step 2:</em>
+    By Step 1 and the Riesz Representation Theorem for Positive Linear Functionals (Theorem <span class="ref-unknown" title="Reference not found: thm:riesz_representation_theorem_for_positive_linear_functionals">[thm:riesz_representation_theorem_for_positive_linear_functionals?]</span>), there exists a unique Radon measure $\mu$ on $X$ such that
+    \[ \lambda(f) = \int_X f \,\dif \mu \qquad \forall f\in C_c^+(X). \]
+    <div style="margin: 1em 0;"></div></p>
+<p>That is, we have
+    \[ \sup\{ L(\omega) : \omega \in C_c(X,\R^n), \| \omega \| \leq f \} = \int_X f \,\dif \mu \qquad \forall f\in C_c^+(X). \tag{$\dagger$}\]
+    Let $e_1, e_2, \ldots, e_n$ be the standard orthonormal basis of $\R^n$.
+    Then for each $j=1,2,\ldots,n$ and we have
+    \[ |L(f e_j)| \leq \int_X |f| \,\dif \mu =: \|f\|_{L^1}, \qquad \forall f\in C_c(X) \]
+    since $\| f e_j \| = |f|\in C^+_c(X)$ for each $f\in C_c(X)$.</p>
+<p>Thus for each $j=1,2,\ldots,n$, the map
+    \[ L_j : C_c(X) \to \R, \quad L_j(f) := L(f e_j) \ ,\forall f\in C_c(X) \]
+    can be extended to a bounded linear functional on $L^1(X,\mu)$ with operator norm at most $1$
+    by the previous inequality and density of $C_c(X)$ in $L^1(X,\mu)$ (Theorem <span class="ref-unknown" title="Reference not found: thm:density_of_Cc_in_Lp_on_lch_space">[thm:density_of_Cc_in_Lp_on_lch_space?]</span>).
+    By the Riesz Representation Theorem for Bounded Linear Functionals on $L^1(\mu)$, for each $j=1,2,\ldots,n$ there exists a bounded $\mu$-measurable function $\sigma_j : X \to \R$ such that
+    \[ L_j(f) = \int_X f \sigma_j \,\dif \mu \qquad \forall f\in L^1(X,\mu). \]
+    Hence for each $j=1,2,\ldots,n$ we have
+    \[ L(fe_j) = \int_X f \sigma_j \,\dif \mu \qquad \forall f\in C_c(X). \]
+    Since each vector-valued map $f\in C_c(X,\R^n)$ can be written as
+    \[ f = \sum_{j=1}^n f_j e_j \]
+    for some $f_1, f_2, \ldots, f_n \in C_c(X)$, it follows that
+    \[ L(f) = \sum_{j=1}^n L(f_j e_j) = \sum_{j=1}^n \int_X f_j \sigma_j \,\dif \mu = \int_X \langle f, \sigma \rangle \,\dif \mu \qquad \forall f\in C_c(X,\R^n) \]
+    where
+    \[ \sigma := \sum_{j=1}^n \sigma_j e_j : X \to \R^n. \]</p>
+<p><div style="margin: 1em 0;"></div>
+    <span class="noindent"></span><em>Step 3:</em>
+    It remains to show that $\| \sigma(x) \| = 1$ for $\mu$-a.e. $x\in X$.
+    <div style="margin: 1em 0;"></div></p>
+<p>To see this, note that by using Cauchy-Schwarz it follows that for each $f\in C^+_c(X)$ we have
+    \[ \sup \{ |L(g)| : g\in C_c(X,\R^n), \|g\|\leq f \} \leq \int_X f \|\sigma\| \,\dif \mu. \tag{$\bigskull$}\]
+    Define
+    \[ \hat{\sigma}(x) := \begin{cases}
+        \frac{\sigma(x)}{\|\sigma(x)\|}, & \text{if } \sigma(x) \neq 0, \\
+        0, & \text{if } \sigma(x) = 0.
+    \end{cases} \]
+    Then $\hat{\sigma}: X \to \R^n$ is a $\mu$-measurable map which belongs to $L^\infty(X,\R^n, \mu)$ with $\| \hat{\sigma} \|_{L^\infty} \leq 1$.
+    Since $C_c(X,\R^n)$ is dense in $L^1(X,\R^n,\mu)$ (Theorem <span class="ref-unknown" title="Reference not found: thm:density_of_Cc_in_Lp_on_lch_space">[thm:density_of_Cc_in_Lp_on_lch_space?]</span>), there exists a sequence $\{g_k\}_{k=1}^\infty \subseteq C_c(X,\R^n)$ such that $g_k \to \hat{\sigma}$ in $L^1(X,\R^n,\mu)$ as $k\to \infty$.
+    That is,
+    \[ \lim_{k\to \infty} \int_X \|g_k - \hat{\sigma}\| \,\dif \mu = 0. \]
+    Also define
+    \[ \Phi:\R^n\to \R^n, \quad \Phi(y) := \begin{cases}
+        \frac{y}{\|y\|}, & \text{if } \|y\|>1, \\
+        y, & \text{if } \|y\| \leq 1.
+    \end{cases} \]
+    and for each $k\in \Z^+$, define
+    \[ \hat{g}_k := \Phi \circ g_k \in C_c(X,\R^n). \]
+    Then for each $k\in \Z^+$, clearly $\| \hat{g}_k \| \leq 1$ by definition of $\Phi$.
+    Also for each $k\in \Z^+$ and each $x\in X$ such that $\hat{\sigma}(x) \neq 0$, we have $\|\hat{\sigma}(x)\| = 1$ which implies that
+    \[ \|\hat{g}_k(x) - \hat{\sigma}(x)\| \leq \|g_k(x) - \hat{\sigma}(x)\|. \]</p>
+<p>(To see this note that if $v\in \R^n$ is such that $\|v\|=1$ and $y$ is an arbitrary vector in $\R^n$, then
+    \[ \| \Phi(y) - v \| \leq \|y -v \|. \]
+    This follows from the fact that if $\|y\| \leq 1$, then $\Phi(y) = y$ and the inequality is trivial.
+    If $\|y\| > 1$, then write $y = r \frac{y}{\|y\|}$ where $r := \|y\| > 1$, and define a function
+    \[ \varphi:[1,\infty) \to \R, \quad \varphi(t) := \left\| t\frac{y}{\|y\|} - v \right\|^2 = t^2 - 2t \left\langle \frac{y}{\|y\|}, v \right\rangle + 1. \]
+    Then
+    \[ \varphi'(t) = 2t - 2\left\langle \frac{y}{\|y\|}, v \right\rangle = 2\left(t - \left\langle \frac{y}{\|y\|}, v \right\rangle\right). \]
+    In particular, for $t \geq 1$ we have
+    \[ \varphi'(t) = 2\left( t - \left\langle \frac{y}{\|y\|}, v \right\rangle \right) \geq 2\left(1 - \left\langle \frac{y}{\|y\|}, v \right\rangle\right) \geq 2 \left( 1 - \left\| \frac{y}{\|y\|} \right\| \|v\|\right) = 0 \]
+    by the Cauchy-Schwarz inequality.
+    Thus $\varphi$ is increasing on $[1,\infty)$, and so $r>1$ implies that $\varphi(r) \geq \varphi(1)$, which says that
+    \[ \left\| r\frac{y}{\|y\|} - v \right\|^2 \geq \left\| \frac{y}{\|y\|} - v \right\|^2 \]
+    which by definition of $\Phi$ and $r=\|y\|$ is exactly the desired inequality.)</p>
+<p>Therefore
+    \begin{align*}
+        \lim_{k\to \infty} \int_X \|\hat{g}_k - \hat{\sigma}\| \,\dif \mu &= \lim_{k\to \infty} \left( \int_{\{ x :\hat{\sigma}(x) \neq 0\}} \|\hat{g}_k(x) - \hat{\sigma}(x)\| \,\dif \mu + \int_{\{ x :\hat{\sigma}(x) = 0\}} \|\hat{g}_k(x) - \hat{\sigma}(x)\| \,\dif \mu \right) \\
+            &= \lim_{k\to \infty} \left( \int_{\{ x :\hat{\sigma}(x) \neq 0\}} \|\hat{g}_k(x) - \hat{\sigma}(x)\| \,\dif \mu + \int_{\{ x :\hat{\sigma}(x) = 0\}} \|\hat{g}_k(x) \| \,\dif \mu \right). \qquad (\pumpkin)
+    \end{align*}
+    We can estimate the first integral as
+    \[ \int_{\{ x :\hat{\sigma}(x) \neq 0\}} \|\hat{g}_k(x) - \hat{\sigma}(x)\| \,\dif \mu \leq \int_{\{ x :\hat{\sigma}(x) \neq 0\}} \|g_k(x) - \hat{\sigma}(x)\| \,\dif \mu \leq \int_X \|g_k - \hat{\sigma}\| \,\dif \mu \]
+    by the previous inequality.
+    For the second integral, note that the fact that $g_k \to \hat{\sigma}$ in $L^1(X,\R^n,\mu)$ implies that
+    \[ \lim_{k\to \infty} \int_{\{ x :\hat{\sigma}(x) = 0\}} \|g_k(x) \| \,\dif \mu = \int_{\{ x :\hat{\sigma}(x) = 0\}} \|\hat{\sigma} \| \,\dif \mu = 0 \]
+    so there exists $M\in \Z^+$ such that $\|g_k\|_{L^1} < 1$ for each $k\geq M$.
+    Thus for each $k\geq M$ and each $x\in X$ such that $\hat{\sigma}(x) = 0$, we have
+    \[ \hat{g}_k(x) = \Phi (g_k(x)) = g_k(x). \]
+    It follows that
+    \[ \lim_{k\to \infty}\int_{\{ x :\hat{\sigma}(x) = 0\}} \|\hat{g}_k(x) \| \,\dif \mu = \lim_{k\to \infty}\int_{\{ x :\hat{\sigma}(x) = 0\}} \|g_k(x) \| \,\dif \mu = 0. \]
+    Therefore the second integral in $(\pumpkin)$ also converges to $0$ as $k\to \infty$.
+    Combining these facts, we conclude that
+    \[ \lim_{k\to \infty} \int_X \|\hat{g}_k - \hat{\sigma}\| \,\dif \mu = 0. \]</p>
+<p><div style="margin: 1em 0;"></div>
+    We claim that we actually have equality in $(\bigskull)$, i.e.,
+    \[ \sup \{ |L(g)| : g\in C_c(X,\R^n), \|g\|\leq f \} = \int_X f \|\sigma\| \,\dif \mu, \qquad \forall f\in C^+_c(X). \tag{$\bigskull'$}\]
+    <div style="margin: 1em 0;"></div></p>
+<p>To see this, note that for each $f\in C_c^+(X)$ the sequence $\{f \hat{g}_k\}_{k=1}^\infty \subseteq C_c(X,\R^n)$ satisfies $\| f \hat{g}_k \| \leq f$ for each $k\in \Z^+$, and by the previous limit and the Dominated Convergence Theorem we have
+    \[ \lim_{k\to \infty} L(f \hat{g}_k) = \lim_{k\to \infty} \int_X f \langle\hat{g}_k,\sigma\rangle \,\dif \mu = \int_X f \langle \hat{\sigma},\sigma\rangle \,\dif \mu = \int_X f \|\sigma\| \,\dif \mu. \]
+    That is, for each $f\in C_c^+(X)$ there is a sequence of vector-valued maps satisfying the constraints in the supremum on the left side of $(\bigskull)$ whose $L$-values converge to the right side of $(\bigskull)$.
+    Thus we must have equality in $(\bigskull)$.</p>
+<p>By comparing the left side of $(\bigskull')$ with $(\dagger)$, we conclude that
+    \[ \int_X f \,\dif \mu = \int_X f \|\sigma\| \,\dif \mu, \qquad \forall f\in C^+_c(X). \]
+    By decomposing an arbitrary $f\in C_c(X)$ into its positive and negative parts, we see that 
+    \[ \int_X f \,\dif \mu = \int_X f \|\sigma\| \,\dif \mu, \qquad \forall f\in C_c(X). \]
+    Since $C_c(X)$ is dense in $L^1(X,\mu)$ (Theorem <span class="ref-unknown" title="Reference not found: thm:density_of_Cc_in_Lp_on_lch_space">[thm:density_of_Cc_in_Lp_on_lch_space?]</span>), we have
+    \[ \int_X g \,\dif \mu = \int_X g \|\sigma\| \,\dif \mu, \qquad \forall g\in L^1(X,\mu). \]
+    By taking $g = \Chi_{\{\|\sigma\| \neq 1\}}$ we conclude that
+    \[ \int_X \Chi_{\{\|\sigma\| \neq 1\}} \,\dif \mu = \int_X \Chi_{\{\|\sigma\| \neq 1\}} \|\sigma\| \,\dif \mu \]
+    which implies that either $\mu(\{\|\sigma\| \neq 1\}) = 0$ or $\|\sigma\| = 1$ $\mu$-a.e. on $\{\|\sigma\| \neq 1\}$.
+    The latter is impossible, so we must have $\mu(\{\|\sigma\| \neq 1\}) = 0$.
+    That is, $\|\sigma(x)\| = 1$ for $\mu$-a.e. $x\in X$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box remark-box collapsible-box collapsed" id="remark-?" data-collapsible-id="collapsible-remark-1">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-remark-1')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong>
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-remark-1">Theorem <span class="ref-unknown" title="Reference not found: thm:riesz_representation_theorem_for_CcX">[thm:riesz_representation_theorem_for_CcX?]</span> says that Radon measures are in one-to-one correspondence with bounded linear functionals on $C_c(X)$.
+    Every Radon measure $\mu$ on $X$ gives rise to an integral functional
+    \[ L_\mu : C_c(X) \to \R, \quad f \mapsto \int_X f \,\dif \mu \]
+    and the Riesz Representation Theorem says that every bounded linear functional on $C_c(X)$ arises in this way from a unique Radon measure on $X$.</div>
+</div>
+<p>The proof of the next theorem uses the Banach-Alaoglu theorem from linear functional analysis to prove a compactness result for Radon measures.
+There is a functional analysis interpretation of the Riesz Representation Theorem, but it is not needed for the rest of these notes so we omit it.</p>
+<div class="theorem-box theorem-box" id="thm:compactness_theorem_for_radon_measures">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Compactness Theorem for Radon Measures)</div>
+  <div class="theorem-content">Let $X$ be a LCH space which is the union of countably many compact sets.
+    Let $\{\mu_j\}_{j=1}^\infty$ be a sequence of Radon measures on $X$ such that
+    \[ \sup_{j\in \Z^+} \mu_j(K) < \infty \]
+    for each compact set $K\subseteq X$.
+    Then there exists a subsequence $\{\mu_{j_k}\}_{k=1}^\infty$ and a Radon measure $\mu$ on $X$ such that
+    \[ \lim_{k\to \infty} L_{\mu_{j_k}}(f) = L_{\mu}(f), \qquad \forall f\in C_c(X). \]</div>
+</div>
+<p><span class="noindent"></span>Here we use the notation $L_\mu(f) := \int_X f \,\dif \mu$ for each Radon measure $\mu$ on $X$ and each $f\in C_c(X)$.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-2">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-2')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-2">
+    Let $\{K_m\}_{m=1}^\infty$ be an increasing sequence of compact sets such that $X = \bigcup_{m=1}^\infty K_m$.
+    For $j,m\in \Z^+$ define
+    \[ L_{j,m}(f) := \int_{K_m} f \,\dif \mu_j, \qquad \forall f\in C_c(K_m). \]
+    For each $m\in \Z^+$, the sequence $\{L_{j,m}\}_{j=1}^\infty$ is a sequence of bounded linear functionals on the Banach space $C(K_m)$ since
+    \[ \sup_{j\in \Z^+} |L_{j,m}(f)| \leq \left(\sup_{x\in K_m} |f(x)|\right) \sup_{j\in \Z^+} \mu_j(K_m) < \infty, \qquad \forall f\in C(K_m). \]
+    Thus for each $m\in\Z^+$, applying the Banach-Alaoglu theorem to the sequence $\{L_{j,m}\}_{j=1}^\infty$ we see that there exists a subsequence $\{L_{j_k,m}\}_{k=1}^\infty$ that converges to a limit functional $L_m \in C(K_m)^*$.
+<p>By choosing the subsequences $\{L_{j_k,m}\}_{k=1}^\infty$ successively, so that $\{L_{j_k,m+1}\}_{k=1}^\infty$ is a subsequence of $\{L_{j_k,m}\}_{k=1}^\infty$ for each $m\in \Z^+$, we can use a diagonalization argument to obtain a single subsequence $\{L_{j_k,k}\}_{k=1}^\infty$ such that for each $m\in \Z^+$, the sequence $\{L_{j_k,m}\}_{k=m}^\infty$ converges to $L_m$ in $C(K_m)^*$ as $k\to \infty$.
+    Since the collection $\{K_m\}_{m=1}^\infty$ is increasing, it is easy to see that the limit functionals $L_m$ are compatible in the sense that
+    \[ L_{m+1}(f) = L_m(f), \qquad \forall f\in C(K_m), \ \forall m\in \Z^+. \]
+    Thus we can define a linear functional $L:C_c(X) \to \R$ by
+    \[ L(f) := L_m(f) \]
+    where $m\in \Z^+$ is such that $\supp(f) \subseteq K_m$.
+    It is easy to see that $L$ is well-defined, since $X = \bigcup_{m=1}^\infty K_m$ and the limit functionals $L_m$ are compatible.
+    Unravelling the definitions, we see that if $f\in C_c(X)$ and $m\in \Z^+$ is such that $\supp(f) \subseteq K_m$, then
+    \[ L(f) = L_m(f) = \lim_{k\to \infty} L_{j_k,m}(f) = \lim_{k\to \infty} L_{\mu_{j_k}}(f)\]
+    Now use the Riesz Representation Theorem for Bounded Linear Functionals on $C_c(X)$ to see that there exists a unique Radon measure $\mu$ on $X$ such that
+    \[ L(f) = \int_X f \,\dif \mu, \qquad \forall f\in C_c(X). \]
+    This completes the proof of the theorem.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+    </main>
+  </div>
+  
+  <script>
+    function toggleChapter(element) {
+      element.parentElement.classList.toggle('expanded');
+    }
+    
+    // Highlight current page in sidebar
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPath = window.location.pathname;
+      const links = document.querySelectorAll('.section-link');
+      links.forEach(link => {
+        if (currentPath.endsWith(link.getAttribute('href').split('/').pop())) {
+          link.classList.add('active');
+          // Expand parent chapter
+          const group = link.closest('.chapter-group');
+          if (group) group.classList.add('expanded');
+        }
+      });
+    });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('Restoring proof collapse states...');
+      try {
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        const currentPage = window.location.pathname;
+        const pageOpen = openProofs[currentPage] || [];
+        
+        console.log('Current page:', currentPage);
+        console.log('Open proof IDs stored:', pageOpen);
+        console.log('Found ' + pageOpen.length + ' open proofs for this page');
+        
+        document.querySelectorAll('.proof-box').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          console.log('Checking proof:', proofId, 'Should be open:', pageOpen.includes(proofId));
+          if (pageOpen.includes(proofId)) {
+            box.classList.remove('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'true');
+          } else {
+            box.classList.add('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        const pageBoxes = openBoxes[currentPage] || [];
+        
+        console.log('Open box IDs stored:', pageBoxes);
+        
+        document.querySelectorAll('.collapsible-box').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          console.log('Checking box:', boxId, 'Should be open:', pageBoxes.includes(boxId));
+          if (pageBoxes.includes(boxId)) {
+            box.classList.remove('collapsed');
+          } else {
+            box.classList.add('collapsed');
+          }
+        });
+        
+        console.log('Proof states restored');
+      } catch (e) {
+        console.error('Error restoring collapse state:', e);
+      }
+    });
+    
+    function toggleProof(proofId) {
+      const proofContent = document.getElementById(proofId);
+      const proofBox = proofContent.closest('.proof-box');
+      proofBox.classList.toggle('collapsed');
+      
+      const button = proofBox.querySelector('.proof-toggle');
+      button.setAttribute('aria-expanded', !proofBox.classList.contains('collapsed'));
+      
+      saveProofState();
+    }
+    
+    function toggleSubproof(subproofId) {
+      const subproofContent = document.getElementById(subproofId);
+      const subproof = subproofContent.closest('.subproof');
+      subproof.classList.toggle('collapsed');
+      
+      const button = subproof.querySelector('.subproof-toggle');
+      button.setAttribute('aria-expanded', !subproof.classList.contains('collapsed'));
+    }
+    
+    function saveProofState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        if (!openProofs[currentPage]) {
+          openProofs[currentPage] = [];
+        }
+        
+        openProofs[currentPage] = [];
+        document.querySelectorAll('.proof-box:not(.collapsed)').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          if (proofId) {
+            openProofs[currentPage].push(proofId);
+          }
+        });
+        
+        localStorage.setItem('openProofs', JSON.stringify(openProofs));
+        console.log('Saved proof state (open proofs):', openProofs[currentPage]);
+      } catch (e) {
+        console.error('Error saving collapse state:', e);
+      }
+    }
+    
+    function toggleCollapsible(collapsibleId) {
+      const content = document.getElementById(collapsibleId);
+      const box = content.closest('.collapsible-box');
+      box.classList.toggle('collapsed');
+      
+      saveCollapsibleState();
+    }
+    
+    function saveCollapsibleState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        if (!openBoxes[currentPage]) {
+          openBoxes[currentPage] = [];
+        }
+        
+        openBoxes[currentPage] = [];
+        document.querySelectorAll('.collapsible-box:not(.collapsed)').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          if (boxId) {
+            openBoxes[currentPage].push(boxId);
+          }
+        });
+        
+        localStorage.setItem('openBoxes', JSON.stringify(openBoxes));
+      } catch (e) {
+        console.error('Error saving box state:', e);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        const proofBoxes = document.querySelectorAll('.proof-box');
+        const anyExpanded = Array.from(proofBoxes).some(box => !box.classList.contains('collapsed'));
+        
+        proofBoxes.forEach(box => {
+          if (anyExpanded) {
+            box.classList.add('collapsed');
+          } else {
+            box.classList.remove('collapsed');
+          }
+        });
+        
+        saveProofState();
+      }
+    });
+    
+    document.querySelectorAll('a.ref-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.background = '#fef3c7';
+          target.style.transition = 'background 0.3s ease';
+          setTimeout(() => { target.style.background = ''; }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

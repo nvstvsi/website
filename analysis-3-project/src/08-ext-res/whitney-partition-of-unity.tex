@@ -1,0 +1,387 @@
+\subsection{Some Lemmas on Higher Order Derivatives and Bump Functions}
+
+\begin{exercise}[Higher Order Quotient Rule]
+        \label{ex:higher_order_quotient_rule}
+        Let $\Omega \subseteq \R^n$ be an open set, and let $f: \Omega \to \R$ be a $C^m$ function which is nonzero on $\Omega$.
+        Then for each multi-index $\beta \in\N^n$ with $0<|\beta| \leq m$, we have
+        \[ D^\beta\left( \frac{1}{f} \right) = -\frac{1}{f} \sum_{0< \gamma \leq \beta} \binom{\beta}{\gamma} D^\gamma f \cdot D^{\beta-\gamma} \left( \frac{1}{f} \right). \]
+\end{exercise}
+
+\begin{proof}
+    Let $\beta \in \N^n$ be a multi-index with $0<|\beta| \leq m$.
+    Since $f$ is nonzero on $\Omega$, we can write
+    \[ f(x)\frac{1}{f(x)} = 1 \qquad \forall x\in \Omega \]
+    so differentiating both sides gives
+    \[ D^\beta\left( f\cdot \frac{1}{f} \right) = D^\beta(1) = 0. \]
+    Hence the Leibniz rule says that
+    \[ \sum_{\gamma \leq \beta} \binom{\beta}{\gamma} D^\gamma f \cdot D^{\beta-\gamma} \left( \frac{1}{f} \right) = 0 \]
+    which implies that
+    \[ f\cdot D^\beta \left( \frac{1}{f}\right) + \sum_{0 <\gamma \leq \beta} \binom{\beta}{\gamma} D^\gamma f \cdot D^{\beta-\gamma} \left( \frac{1}{f} \right) = 0. \]
+    Rearranging this gives
+    \[ D^\beta\left( \frac{1}{f} \right) = - \frac{1}{f} \sum_{0 <\gamma \leq \beta} \binom{\beta}{\gamma} D^\gamma f \cdot D^{\beta-\gamma} \left( \frac{1}{f} \right) \]
+    as desired.
+\end{proof}
+
+\begin{definition}[Bump Function Adapted to an Interval or Cube]
+    \label{def:bump_function_adapted_to_interval_or_cube}
+    Fix $0 < \varepsilon < \frac{1}{4}$.
+    Let $\eta \in C^\infty_c(\R)$ be a non-negative even function such that 
+    \[ \eta(t) = \begin{cases}
+        0 & \text{if } |t| \geq \frac{1}{2} + \frac{\varepsilon}{2} \\
+        1 & \text{if } |t| \leq \frac{1}{2} \\
+    \end{cases} \]
+    and $\eta$ is strictly decreasing on $(-\frac{1}{2} - \frac{\varepsilon}{2}, -\frac{1}{2})$ and $(\frac{1}{2}, \frac{1}{2} + \frac{\varepsilon}{2})$.
+   
+    For each dyadic interval $I \subset \R$, we define the function $\eta_I:\R\to \R$ by
+    \[ \eta_I(t) := \eta\left( \frac{t - c_I}{\ell(I)} \right), \]
+    where $c_I$ is the center of the interval $I$ and $\ell(I)$ is the length of the interval $I$.
+
+    For each dyadic cube $Q \subset \R^n$, write $Q = I_1 \times \cdots \times I_n$ where $I_1, \ldots, I_n$ are dyadic intervals, and define the function $\eta_Q :\R^n\to \R$ by
+    \[ \eta_Q(x) := \eta_{I_1}(x_1) \cdots \eta_{I_n}(x_n). \]
+\end{definition}
+
+\begin{exercise}[Basic Facts]
+    \label{ex:bump_sanity_check}
+    Fix $0 < \varepsilon < \frac{1}{4}$ and let $\eta$ be a bump function as in Definition \ref{def:bump_function_adapted_to_interval_or_cube}.
+    Then for each dyadic interval $I \subset \R$ we let $I^* := (1+\varepsilon)I$ to be the interval with the same center as $I$ but with length $(1+\varepsilon)\ell(I)$, and for each dyadic cube $Q = I_1 \times \cdots \times I_n$ in $\R^n$ we let $Q^* := I_1^* \times \cdots \times I_n^*$.
+
+    Then for each dyadic interval $I \subset \R$, we have $\eta_I \in C^\infty_c(\R)$ and
+    \[ \eta_I(t) = \begin{cases}
+        0 & \text{if } t \notin I^* \\
+        1 & \text{if } t \in I \\
+    \end{cases} \]
+    so that $\supp \eta_I \subseteq I^*$ and $\eta_I|_I = 1$.
+
+    Similarly for each dyadic cube $Q = I_1 \times \cdots \times I_n$ in $\R^n$ we have $\eta_Q \in C^\infty_c(\R^n)$ and
+    \[ \eta_Q(x) = \begin{cases}
+        0 & \text{if } x \notin Q^* := I_1^* \times \cdots \times I_n^* \\
+        1 & \text{if } x \in Q \\
+    \end{cases} \]
+    so that $\supp \eta_Q \subseteq Q^*$ and $\eta_Q|_Q = 1$.
+\end{exercise}
+
+\begin{proof}
+    Let $I \subset \R$ be a dyadic interval.
+    The definition of $\eta_I$ shows that $\eta_I \in C^\infty_c(\R)$, and that $\eta_I(t) = 0$ if $|t - c_I| \geq \ell(I)\left(\frac{1}{2} + \frac{\varepsilon}{2}\right)$, which is equivalent to $t \notin I^*$.
+    Similarly, $\eta_I(t) = 1$ if $|t - c_I| \leq \frac{1}{2} \ell(I)$, which is equivalent to $t \in I$.
+
+    This shows that $\supp \eta_I \subseteq I^*$ and $\eta_I|_I = 1$.
+    
+    \vspace{2mm}
+
+    Let $Q = I_1 \times \cdots \times I_n$ be a dyadic cube in $\R^n$.
+    The definition of $\eta_Q$ shows that $\eta_Q \in C^\infty_c(\R^n)$, and that $\eta_Q(x) = 0$ if $|x_j - c_{I_j}| \geq \ell(I_j)\left(\frac{1}{2} + \frac{\varepsilon}{2}\right)$ for some $1 \leq j \leq n$, which is equivalent to $x \notin Q^*$.
+    Similarly, $\eta_Q(x) = 1$ if $|x_j - c_{I_j}| \leq \ell(I_j)/2$ for each $1 \leq j \leq n$, which is equivalent to $x \in Q$.
+
+    This shows that $\supp \eta_Q \subseteq Q^*$ and $\eta_Q|_Q = 1$.
+\end{proof}
+
+\begin{lemma}[Derivative Bounds]
+    \label{lem:derivative_bounds_1}
+    Fix $0<\varepsilon<\frac{1}{4}$, and let $\eta\in C_c^\infty(\R)$ be an even non-negative bump function as in Definition \ref{def:bump_function_adapted_to_interval_or_cube}. 
+    \begin{enumerate}
+        \item For each dyadic interval $I \subset \R$, and each $m \in\Z^+$, there is a constant $C_{m,\eta} > 0$ which depends only on $m$ and $\eta$ such that 
+            \[ \left| \eta_I^{(m)}(t) \right| \leq C_{m,\eta} \ell(I)^{-m} \]
+            for all $t \in \R$.
+        \item For each dyadic cube $Q \subset \R^n$, and each multi-index $\alpha \in \N^n$, there is a constant $C_{n,\alpha,\eta} > 0$ which depends only on $n, \alpha$ and $\eta$ such that
+            \[ |\partial^\alpha \eta_Q(x)| \leq C_{n,\alpha,\eta} (\diam Q)^{-|\alpha|} \]
+            for all $x \in \R^n$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \begin{enumerate}
+        \item See that for each dyadic interval $I$, and each $m \in\Z^+$, we have the $m$-th derivative of $\eta_I$ given by
+            \[  \eta_I^{(m)}(t) = \frac{1}{\ell(I)^m} \eta^{(m)}\left( \frac{t - c_I}{\ell(I)} \right) \]
+            by iterating the chain rule, which implies that
+            \[ \left| \eta_I^{(m)}(t) \right| \leq \|\eta^{(m)}\|_{L^\infty(\R)} \ell(I)^{-m} \tag{$\star$} \]
+            for all $t \in \R$.
+
+        \item Let $Q = I_1 \times \cdots \times I_n$ be a dyadic cube in $\R^n$, where $I_1, \ldots, I_n$ are dyadic intervals. 
+            Note that for each multi-index $\alpha = (\alpha_1, \ldots, \alpha_n) \in \N^n$, we have
+            \[ \partial^\alpha \eta_Q(x) = \partial^\alpha(  \eta_{I_1}(x_1) \cdots \eta_{I_n}(x_n) ) = \eta_{I_1}^{(\alpha_1)}(x_1) \cdots \eta_{I_n}^{(\alpha_n)}(x_n) \]
+            and so by $(\star)$ we have
+            \[ |\partial^\alpha \eta_Q(x)| \leq \|\eta^{(\alpha_1)}\|_{L^\infty(\R)} \cdots \|\eta^{(\alpha_n)}\|_{L^\infty(\R)} \ell(I_1)^{-\alpha_1} \cdots \ell(I_n)^{-\alpha_n} \]  
+            for all $x \in \R^n$.
+            By defining 
+            \[ C_{n,\alpha,\eta} := \|\eta^{(\alpha_1)}\|_{L^\infty(\R)} \cdots \|\eta^{(\alpha_n)}\|_{L^\infty(\R)} n^{\frac{|\alpha|}{2}} \]
+            and noting that $\ell(I_1) = \cdots = \ell(I_n) = \frac{\diam Q}{\sqrt{n}}$, we have
+            \[ |\partial^\alpha \eta_Q(x)| \leq C_{n,\alpha,\eta} (\diam Q)^{-|\alpha|} \]
+            for all $x \in \R^n$ as desired.
+    \end{enumerate}    
+\end{proof}
+
+\begin{lemma}[Integral Bounds]
+    \label{lem:dyadic_bump_integral_estimate}
+    Fix $0<\varepsilon<\frac{1}{4}$ and let $\eta$ be a bump function as in Definition \ref{def:bump_function_adapted_to_interval_or_cube}.
+    \begin{enumerate}
+        \item There is a constant $B_{\eta} > 0$ such that if $I,J \subset \R$ are dyadic intervals such that $\ell(I) \leq 4 \ell(J)$ and $\eta_I \eta_J$ is not identically zero, then
+            \[ \frac{1}{\ell(I)} \int_{\R} \eta_I(y) \eta_J(y) \,\dif y \geq B_{\eta}. \]
+        \item There is a constant $B_{n,\eta} > 0$ such that if $Q,R \subset \R^n$ are dyadic cubes such that $\ell(Q) \leq 4 \ell(R)$ and $\eta_Q \eta_R$ is not identically zero, then
+            \[ \frac{1}{\vol(Q)} \int_{\R^n} \eta_Q(y) \eta_R(y) \,\dif y \geq B_{n,\eta}. \]
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \begin{enumerate}
+        \item By assumption that $\eta_I \eta_J$ is not identically zero, we must have $J^* \cap I^* \neq \varnothing$, and hence $J \cap I$ is nonempty by the proof of Corollary \ref{cor:whitney_cover_dilation}.
+        Since $I$ and $J$ are dyadic intervals, they must be adjacent or one must be contained in the other.
+
+        By translating both $I$ and $J$ by a fixed number, we can assume without loss of generality that $I = [0,2^k]$ for some $k \in \Z$.
+        (As the expression we want to lower bound is invariant under translations, this does not change the value of the integral.)
+
+        By a dilation of both $I$ and $J$ by a factor of $\frac{1}{\ell(I)}$, we can assume without loss of generality that $I = [0,1]$.
+        (Since the expression we want to lower bound is invariant under dilations, this does not change the value of the integral.)
+        Then $J$ is a dyadic interval such that $\ell(J) \geq \frac{1}{4}$. 
+
+        Since either $J$ is adjacent to $[0,1]$, or $J$ is contained in $[0,1]$, or $[0,1]$ is contained in $J$, the only possibilities for $J$ are
+        \[ \left[ -\frac{1}{4} ,0 \right], \left[ 0, \frac{1}{4} \right], \left[ \frac{1}{4} ,\frac{1}{2} \right], \left[ \frac{1}{2} ,\frac{3}{4} \right], \left[ \frac{3}{4} ,1 \right], \left[ 1, \frac{5}{4} \right], \]
+        \[ \left[ -\frac{1}{2} ,\frac{1}{2} \right], \left[ 0 ,\frac{1}{2} \right], \left[ \frac{1}{2} ,1 \right], \left[ 1 ,\frac{3}{2} \right] \]
+        \[ [-1,0], [0,1], [1,2] \]
+        or 
+        \[ \left[-2^k,0\right], \left[0,2^k\right] \qquad \text{ for some } k \geq 1. \]
+
+        Now see that 
+        \[ \frac{1}{\ell(I)}\int_{\R} \eta_I(y) \eta_J(t) \,\dif t = \int_{\R} \eta\left( \frac{t - c_J}{\ell(J)} \right) \eta\left( t-\frac{1}{2}\right) \,\dif t. \]
+        Since the function $\eta\left(\cdot - \frac{1}{2} \right)$ is strictly decreasing and never vanishes on $\left[ 1 , 1 + \frac{\varepsilon}{2} \right]$, it follows that for each of the above choices of $J$, there is a constant $B_{\eta} > 0$ such that
+        \[ \int_{\R} \eta\left( \frac{t - c_J}{\ell(J)} \right) \eta\left( t-\frac{1}{2}\right) \,\dif t \geq B_{\eta}, \]
+        and choosing the minimum of these constants over all the above choices of $J$ (this occurs for the \emph{first} listed choice of $J$), we get a constant $B_{\eta} > 0$ which satisfies the desired bound.
+
+        \item Let $Q = I_1 \times \cdots \times I_n$ and $R = J_1 \times \cdots \times J_n$ be dyadic cubes in $\R^n$, where
+            \[ \ell(I_1) = \ell(I_2) = \cdots = \ell(I_n) = \ell(Q), \qquad \ell(J_1) = \ell(J_2) = \cdots = \ell(J_n) = \ell(R). \]
+        By the assumption that $\eta_Q \eta_R$ is not identically zero, we must have $R^* \cap Q^* \neq \varnothing$, and hence $R \cap Q$ is nonempty by the proof of Corollary \ref{cor:whitney_cover_dilation}.
+        Therefore, for each $1 \leq i \leq n$, we have $J_i \cap I_i \neq \varnothing$.
+
+        Also $\ell(Q) \leq 4 \ell(R)$, implies that $\ell(I_i) \leq 4 \ell(J_i)$ for each $1 \leq i \leq n$.
+        Then we see that 
+        \begin{align*}
+            \frac{1}{\vol(Q)} \int_{\R^n} \eta_Q(y) \eta_R(y) \,\dif y &= \prod_{i=1}^n \frac{1}{\ell(I_i)} \int_{\R} \eta_{I_i}(y_i) \eta_{J_i}(y_i) \,\dif y_i \\
+                &\geq \prod_{i=1}^n B_{\eta} = B_{\eta}^n =: B_{n,\eta}
+        \end{align*}
+        by the one-dimensional case, which gives the desired bound.
+    \end{enumerate}
+\end{proof}
+
+\subsection{Whitney Partition of Unity}
+
+\begin{proposition}[Whitney Partition of Unity]
+    \label{prop:whitney_partition_of_unity}
+    Let $A \subset \R^n$ be a non-empty proper closed subset, and let $\{Q_j\}_{j=1}^\infty$ be a Whitney decomposition of $A^c$.
+    Fix $0 < \varepsilon < \frac{1}{4}$, and for each $j\in\Z^+$ let $Q_j^* = (1+\varepsilon) Q_j$ be the cube obtained by dilating $Q_j$ by a factor of $1+\varepsilon$ about its center.
+    Then there exists a collection of bump functions $\{\psi_j\}_{j=1}^\infty \subset C_c^\infty(\R^n)$ such that
+    \begin{enumerate}[(i)]
+        \item $0 \leq \psi_j \leq 1$ for each $j\in\Z^+$;
+        \item $\supp \psi_j \subseteq Q_j^*$ for each $j\in\Z^+$;
+        \item the collection $\{\psi_j\}_{j=1}^\infty$ forms a partition of unity for $A^c$, i.e.
+            \[ \sum_{j=1}^\infty \psi_j = \Chi_{A^c} , \]
+        \item for each multi-index $\alpha$, there exists a constant $C_\alpha > 0$ such that for each $j\in\Z^+$ we have
+            \[   |\partial^\alpha \psi_j(x)| \leq C_\alpha (\diam Q_j)^{-|\alpha|} \]
+            for all $x\in  A^c$;
+        \item for each $j\geq 1$, we have
+            \[ \frac{1}{2^n} \leq \frac{1}{\vol(Q_j)} \int_{\R^n} \psi_j(y) \,\dif y \leq \left( 1 + \varepsilon \right)^n, \]
+        \item for each multi-index $\alpha$, there exists a constant $B_\alpha > 0$ such that for all $j,l \in \Z^+$ we have
+            \[  |\partial^\alpha (\psi_j\psi_l)(x)| \leq \frac{B_\alpha}{(\diam Q_l)^{|\alpha|+n}} \int_{\R^n} \psi_j(y)\psi_l(y)\,\dif y\]
+            for all $x\in  A^c$. 
+    \end{enumerate}
+    The collection $\{\psi_j\}_{j=1}^\infty$ is called a \textit{Whitney partition of unity} of the open set $A^c$, which is \textit{adapted} to the Whitney decomposition $\{Q_j\}_{j=1}^\infty$.
+\end{proposition}
+
+The most important properties of the Whitney partition of unity are (i), (ii), and (iii), which say that the functions $\{\psi_j\}_{j=1}^\infty$ form a smooth partition of unity for the open set $A^c$ subordinated to the Whitney decomposition $\{Q_j\}_{j=1}^\infty$.
+
+\begin{remark}
+    \label{rmk:whitney_partition_of_unity_constants}
+    The proof will begin with a non-negative even bump function $\eta\in C^\infty_c(\R)$, and all functions in the partition of unity will be built from this. 
+    Technically all constants will depend on the choice of $\eta$, but we will suppress this dependence in the notation.
+\end{remark}
+
+\begin{proof}
+    Let $\eta\in C^\infty_c(\R)$ be a non-negative even bump function such that $\eta(t) = 1$ for $|t| \leq \frac{1}{2}$ and $\eta(t) = 0$ for $|t| \geq \frac{1}{2} + \frac{\varepsilon}{2}$, 
+    as in Definition \ref{def:bump_function_adapted_to_interval_or_cube}.
+
+    Let $\{Q_j\}_{j=1}^\infty$ be a Whitney decomposition of the open set $A^c$.
+    For each $j\in\Z^+$, we define the function $\phi_j := \eta_{Q_j} \in C^\infty_c(\R^n)$, and notice that $\phi_j \leq \Chi_{Q_j^*}$, since $\eta_{Q_j}(x) = 1$ for all $x \in Q_j$ and $\eta_{Q_j}(x) = 0$ for all $x \notin (1+\varepsilon) Q_j$.    
+    Also see that if $x \in A^c$, then there is at least one $j\in\Z^+$ such that $x \in Q_j$, and so $\sum_{j=1}^\infty \phi_j(x) \geq 1$.
+    As a result, we have
+    \[ \Chi_{A^c} \leq \sum_{j=1}^\infty \phi_j \leq \sum_{j=1}^\infty \Chi_{Q_j^*} \leq 2^n \Chi_{A^c} \tag{$\bigpumpkin$}\]
+    by Corollary \ref{cor:whitney_cover_dilation}.
+
+    To obtain a partition of unity, we define the functions
+    \[ \psi_j:\R^n \to \R, \qquad \psi_j(x) := \begin{cases}
+        \frac{\phi_j(x)}{\sum_{k=1}^\infty \phi_k(x)} & \text{if } x \in A^c \\
+        0 & \text{if } x \in A
+    \end{cases} \]
+    for $j\in\Z^+$.
+    
+    Notice that if $x \in A^c$, then $\sum_{k=1}^\infty \phi_k(x) \geq 1$, but at most $12^n - 4^n$ of the terms in the sum are nonzero by Proposition \ref{thm:whitney_decomposition} (d), so this sum is also finite.
+    Thus $\psi_j(x)$ is well-defined for each $j\in\Z^+$ and $x \in A^c$.
+
+    See that for each $j\in\Z^+$, we have $\psi_j \geq 0$ and $\psi_j \leq 1$, so that (i) holds. 
+    Also see that $\supp \psi_j \subseteq Q_j^*$, since $\phi_j$ has support in $Q_j^*$, so (ii) holds.
+    Furthermore, since $\sum_{k=1}^\infty \phi_k(x) \geq 1$ for each $x \in A^c$, we have
+    \[ \sum_{j=1}^\infty \psi_j(x) = \sum_{j=1}^\infty \frac{\phi_j(x)}{\sum_{k=1}^\infty \phi_k(x)} = 1 \]
+    for each $x \in A^c$, and this sum consists of at most $12^n$ nonzero terms. Since $\sum_{j=1}^\infty \psi_j = 0$ on $A$, we have 
+    \[\sum_{j=1}^\infty \psi_j = \Chi_{A^c},\] 
+    so (iii) holds.
+
+    \vspace{2mm}
+
+    (iv). Fix a multi-index $\alpha = (\alpha_1, \ldots, \alpha_n) \in \N^n$, and let $j \in \Z^+$ be arbitrary.
+    Let $\ell(Q_j)$ be the length of the cube $Q_j$, so that $\sqrt{n} \ell(Q_j) = \diam Q_j$.
+    Then the Leibniz rule gives
+    \[ D^\alpha \psi_j = D^\alpha \left( \frac{\varphi_j}{\sum_{k=1}^\infty \varphi_k} \right) = \sum_{\beta\leq \alpha} \binom{\alpha}{\beta} D^\beta\left( \frac{1}{\sum_{k=1}^\infty \varphi_k} \right) D^{\alpha-\beta} \varphi_j \]
+    on $\R^n$.
+    Then using the Derivative Bounds from Lemma \ref{lem:derivative_bounds_1}, we have
+    \[ \left| D^\alpha \varphi_j(x) \right| \leq \sum_{\beta \leq \alpha} \binom{\alpha}{\beta} C_{n,\alpha - \beta}\left| D^\beta\left( \frac{1}{S} \right)(x) \right| \cdot \ell(Q_j)^{-|\alpha|+|\beta|} \tag{$\heartsuit$} \]
+    for all $x \in \R^n$.
+
+    For brevity, we let $S := \sum_{k=1}^\infty \varphi_k$.
+    We claim that for each $\beta \leq \alpha$ there is a constant $C^{\bullet}_{n,\beta} > 0$ such that if $l\in\Z^+$ and $x \in Q_l^*$, then
+        \[ \left| D^\beta \left( \frac{1}{S} \right)(x) \right| \leq C^{\bullet}_{n,\beta} \ell(Q_l)^{-|\beta|}. \tag{$\diamondsuit$}\]
+        
+        \begin{proof}[Proof of Claim]
+            \textit{Base case:} If $\beta = 0$, then the left-hand side of $(\diamondsuit)$ is just $\frac{1}{S(x)}$, and the right-hand side is $C^{\bullet}_{n,0}$, so the claim holds because $S(x) \geq 1$ for each $x \in A^c$.
+
+            \vspace{2mm}
+            \textit{Base case:}
+            If $\beta$ has $|\beta| = 1$, then $\beta = e_i$ for some $i\in\{1,\ldots,n\}$, and the left-hand side of $(\diamondsuit)$ is
+            \[ \left| D^\beta \left( \frac{1}{S} \right)(x) \right| = \left| -\frac{\partial_i S(x)}{(S(x))^2} \right| \leq \frac{|\partial_i S(x)|}{S(x)^2} \leq |\partial_i S(x)| \]
+            since $S(x) \geq 1$ for each $x \in A^c$.
+            Now if $l \in \Z^+$ and $x \in Q_l^*$, then there are at most $12^n$ nonzero terms in the sum $S(x) = \sum_{k=1}^\infty \varphi_k(x)$, and each of these nonzero terms corresponds to a cube $Q_k$ which is adjacent to $Q_l$;
+            for each such cube $Q_k$, we have $\frac{1}{4} \leq \frac{\diam Q_k}{\diam Q_l} \leq 4$ by \ref{thm:whitney_decomposition}, so that $\ell(Q_k) \leq 4 \ell(Q_l)$, and hence $\ell(Q_k)^{-1} \leq 4 \ell(Q_l)^{-1}$.
+            Therefore
+            \[ \left| D^\beta\left( \frac{1}{S} \right)(x)\right| \leq |\partial_i S(x) |\leq 12^n \max_{k\geq 1, x\in Q_k^*} |\partial_i \varphi_k(x)| \leq 12^n C_{n,e_i} \ \max_{k\geq 1, x\in Q_k^*} \ell(Q_k)^{-1} \leq 12^n C_{n,e_i} 4 \ell(Q_l)^{-1} \]
+            for all $x \in Q_l^*$.
+
+            Since $\beta$ was an arbitrary multi-index with $|\beta| = 1$, this proves the base case.
+
+            \vspace{2mm}
+            \textit{Inductive step:} Suppose that there is an integer $N$ such that for each multi-index with order $< N$, the claim holds.
+            \vspace{2mm}
+            
+            Let $\beta \in \N^n$ be a multi-index with $|\beta| = N$, and apply the Higher Order Quotient Rule to obtain
+            \[ D^\beta \left( \frac{1}{S} \right) = -\frac{1}{S} \sum_{0 <\gamma\leq\beta} \binom{\beta}{\gamma} D^\gamma S \cdot D^{\beta-\gamma} \left( \frac{1}{S} \right). \]
+            Then we estimate the right-hand side using the triangle inequality and the induction hypothesis --- if $l\in\Z^+$ and $x \in Q_l^*$, then
+            \begin{align*}
+                \left| D^\beta \left( \frac{1}{S} \right)(x) \right| &\leq \left|\frac{1}{S(x)}\right| \sum_{0 < \gamma \leq \beta} \binom{\beta}{\gamma} |D^\gamma S(x)| \cdot \left| D^{\beta-\gamma} \left( \frac{1}{S} \right)(x) \right| \\
+                    &\leq \sum_{0<\gamma\leq \beta} \binom{\beta}{\gamma} |D^\gamma S(x)| C^{\bullet}_{n,\beta-\gamma} \ell(Q_l)^{-|\beta| + |\gamma|} &&\text{by the induction hypothesis}\\
+            \end{align*}
+            and for each $0 < \gamma \leq \beta$, we have
+            \[ \left| D^\gamma S(x) \right| \leq 12^n \max_{k\geq 1, x\in Q_k^*} |D^\gamma \varphi_k(x)| \leq 12^n C_{n,\gamma} \max_{k\geq 1, x\in Q_k^*} \ell(Q_k)^{-|\gamma|} \leq 12^n C_{n,\gamma} \left(4^{|\gamma|} \ell(Q_l)^{-|\gamma|} \right), \]
+            similarly to the base case.
+
+            Putting these estimates together, we have
+            \begin{align*}
+                \left| D^\beta \left( \frac{1}{S} \right)(x) \right| &\leq \sum_{0<\gamma\leq \beta} \binom{\beta}{\gamma} \left[ 12^n C_{n,\gamma} \left( 4^{|\gamma|} \ell(Q_l)^{-|\gamma|} \right) \right] C^{\bullet}_{n,\beta-\gamma} \ell(Q_l)^{-|\beta| + |\gamma|} \\
+                    &= 12^n \sum_{0<\gamma\leq \beta} \binom{\beta}{\gamma} C_{n,\gamma} C^{\bullet}_{n,\beta-\gamma} 4^{|\gamma|} \ell(Q_l)^{-|\beta|} \\
+                    &= C^{\bullet}_{n,\beta} \ell(Q_l)^{-|\beta|}
+            \end{align*}
+            where we have defined the constant
+            \[ C^{\bullet}_{n,\beta} := 12^n \sum_{0<\gamma\leq \beta} \binom{\beta}{\gamma} C_{n,\gamma} C^{\bullet}_{n,\beta-\gamma} 4^{|\gamma|}. \]
+            This completes the inductive step, and hence the claim holds for all multi-indices $\beta \leq \alpha$.
+        \end{proof}
+    
+    Now let $x\in A^c$ be arbitrary, and let $l\in\Z^+$ be such that $x \in Q_l^*$.
+    Then there are at most $12^n$ nonzero terms in the sum $S(x) = \sum_{k=1}^\infty \varphi_k(x)$, and each of these nonzero terms corresponds to a cube $Q_k$ which is adjacent to $Q_l$.
+
+    To finish the proof of (iv), we split into two cases, depending on if $Q_j$ and $Q_l$ are equal or adjacent, or otherwise if $Q_j$ and $Q_l$ are not adjacent.
+
+    If the cubes $Q_j$ and $Q_l$ are not adjacent, then $x \in Q_l^*$ but $x \notin Q_j^*$, so $\varphi_j = 0$ on an open set containing $x$, and hence $\psi_j(x) = 0$; in this case the desired estimate holds trivially as the left-hand side is zero.
+
+    If the cubes $Q_j$ and $Q_l$ are adjacent, then by part (c) of \ref{thm:whitney_decomposition} we have $\frac{1}{4} \leq \frac{\diam Q_j}{\diam Q_l} \leq 4$, so that
+    \[ \ell(Q_j) \leq 4 \ell(Q_l) \]
+    and hence \[ \ell(Q_l)^{-|\beta|} \leq 4^{|\beta|} \ell(Q_j)^{-|\beta|} \]
+    for each $\beta\leq \alpha$, which implies that
+    \[ \left|D^\beta \left(\frac{1}{S}\right)(x) \right| \leq C^{\bullet}_{n,\beta} \ell(Q_l)^{-|\beta|} \leq 4^{|\beta|} C^{\bullet}_{n,\beta} \ell(Q_j)^{-|\beta|} \tag{$\diamondsuit_2$} \]
+    by using $(\diamondsuit)$. 
+
+    Putting $(\heartsuit)$ and $(\diamondsuit_2)$ together and using the triangle inequality, we have
+    \[ |D^\alpha \psi_j(x)| \leq \sum_{\beta \leq \alpha} \binom{\alpha}{\beta} C_{n,\alpha - \beta} \left(4^{|\beta|} C^{\bullet}_{n,\beta} \ell(Q_l)^{-|\beta|} \right) \ell(Q_j)^{-|\alpha| + |\beta|} \leq C^{\diamond}_{n,\alpha} \ell(Q_j)^{-|\alpha|} \]
+    where we have defined the constant
+    \[ C^{\diamond}_{n,\alpha} := \sum_{\beta \leq \alpha} \binom{\alpha}{\beta} 4^{|\beta|} C_{n,\alpha - \beta} C^{\bullet}_{n,\beta} \]
+    which depends only on $n$ and $\alpha$.
+
+    Since 
+    \[ \diam Q_j = \sqrt{n} \ell(Q_j) \]
+    we have
+    \[ |D^\alpha \psi_j(x)| \leq C^{\diamond}_{n,\alpha} \ell(Q_j)^{-|\alpha|} = C^{\diamond}_{n,\alpha} n^{\frac{|\alpha|}{2}} (\diam Q_j)^{-|\alpha|} \]
+    for all $x \in A^c$, which completes the proof of (iv) with the constant $C_\alpha := C^{\diamond}_{n,\alpha} n^{\frac{|\alpha|}{2}}$.
+
+    \vspace{2mm}
+
+    (v). For each $j\in\Z^+$, we have
+    \begin{align*}
+        1 \leq \frac{1}{\vol(Q_j)} \int_{\R^n} \eta_{Q_j}(y) \,\dif y &= \prod_{i=1}^n \frac{1}{\ell(I_i)} \int_{\R} \eta_{I_i}(y_i) \,\dif y_i \\
+            &= \prod_{i=1}^n \frac{1}{\ell(I_i)} \int_{\R} \eta\left( \frac{y_i - c_{I_i}}{\ell(I_i)} \right) \,\dif y_i \\
+            &\leq (1+\varepsilon)^n &&(\mathwitch)
+        \end{align*}
+    where the first equality holds by Fubini's theorem \ref{cor:fubini_tonelli_theorem}, and the last inequality holds for the following reason ---
+    since $\eta$ is supported in the interval $[-\frac{1}{2} - \frac{\varepsilon}{2}, \frac{1}{2} + \frac{\varepsilon}{2}]$, it follows that for each $i\in\{1,\ldots,n\}$ we have
+    \[ \int_{\R} \eta\left( \frac{y_i - c_{I_i}}{\ell(I_i)} \right) \,\dif y_i = \ell(I_i) \int_{-\frac{1}{2} - \frac{\varepsilon}{2}}^{\frac{1}{2} + \frac{\varepsilon}{2}} \eta(t) \,\dif t \leq \ell(I_i) \left(1 + \varepsilon \right) \]
+    since $\eta(t) = 1$ for $|t| \leq \frac{1}{2}$.
+
+    Thus for each $j\in\Z^+$ we have
+    \begin{align*}
+        \frac{1}{\vol(Q_j)} \int_{\R^n} \psi_j(y) \,\dif y &= \frac{1}{\vol(Q_j)} \int_{A^c} \frac{\phi_j(y)}{\sum_{k=1}^\infty \phi_k(y)} \,\dif y &&\text{ by definition of } \psi_j\\
+            &\leq \frac{1}{\vol(Q_j)} \int_{A^c} \phi_j(y) \,\dif y \\
+            &= \frac{1}{\vol(Q_j)} \int_{A^c} \eta_{Q_j}(y) \,\dif y \\
+            &= \frac{1}{\vol(Q_j)} \int_{\R^n} \eta_{Q_j}(y) \,\dif y &&\text{ since } \supp\left( \eta_{Q_j} \right) \subseteq Q_j^* \subset A^c \\
+            &\leq (1+\varepsilon)^n &&\text{ by the upper bound in } (\mathwitch).
+    \end{align*}
+
+    This establishes the upper bound in (v).
+    To establish the lower bound in (v), we recall $(\bigpumpkin)$, which says that
+    \[  \Chi_{A^c} \leq \sum_{j=1}^\infty \phi_j \leq 2^n \Chi_{A^c}. \]
+    Thus for each $j\in\Z^+$ we have
+    \begin{align*}
+        \frac{1}{\vol(Q_j)} \int_{\R^n} \psi_j(y) \,\dif y &= \frac{1}{\vol(Q_j)} \int_{A^c} \frac{\phi_j(y)}{\sum_{k=1}^\infty \phi_k(y)} \,\dif y \\
+            &\geq \frac{1}{2^n} \frac{1}{\vol(Q_j)} \int_{A^c} \phi_j(y) \,\dif y \\
+            &= \frac{1}{2^n} \frac{1}{\vol(Q_j)} \int_{\R^n} \eta_{Q_j}(y) \,\dif y \\
+            &\geq \frac{1}{2^n} \cdot 1
+    \end{align*}
+    by the lower bound in $(\mathwitch)$, which completes the proof of (v).
+
+    \vspace{2mm}
+
+    
+    (vi). Fix a multi-index $\alpha \in \N^n$ and let $j,l\in\Z^+$ be arbitrary.
+    If $\psi_j \psi_l \equiv 0$, then the desired estimate holds trivially, so we may assume that $\psi_j \psi_l$ is not identically zero.
+    Then the cubes $Q_j$ and $Q_l$ are either equal or adjacent, so therefore
+    \[ \frac{1}{4} \leq \frac{\diam Q_j}{\diam Q_l} \leq 4. \]
+    Thus we have $\ell(Q_j) \geq \frac{1}{4} \ell(Q_l)$ which implies 
+    \[ \ell(Q_j)^{-|\beta|} \leq 4^{|\beta|} \ell(Q_l)^{-|\beta|} \qquad \qquad\forall \,\beta\leq \alpha \]
+    so we estimate
+    \begin{align*}
+        |\partial^\alpha (\psi_j\psi_l)(x)| &\leq \sum_{\beta \leq \alpha} \binom{\alpha}{\beta} |\partial^\beta \psi_j(x)| |\partial^{\alpha - \beta} \psi_l(x)| && \text{by the Leibniz rule and triangle inequality} \\
+            &\leq \sum_{\beta\leq \alpha} \binom{\alpha}{\beta} C_{\alpha - \beta} \ell(Q_j)^{-|\beta|} C_\beta \ell(Q_l)^{-|\alpha| + |\beta|} && \text{by part (iv)} \\
+            &\leq \sum_{\beta\leq \alpha} \binom{\alpha}{\beta} C_{\alpha - \beta} C_\beta 4^{|\beta|} \ell(Q_l)^{-|\alpha|} && \text{since } \ell(Q_j)^{-|\beta|} \leq 4^{|\beta|} \ell(Q_l)^{-|\beta|} \\
+            &= C^{\ddag}_{n,\alpha} (\diam Q_l)^{-|\alpha|} 
+    \end{align*}
+    where we have defined the constant
+    \[ C^{\ddag}_{n,\alpha} := n^{|\alpha|/2}\sum_{\beta\leq \alpha} \binom{\alpha}{\beta} C_{\alpha - \beta} C_\beta 4^{|\beta|} \]
+    which depends only on $n$ and $\alpha$.
+
+    That is, we have shown that for each $j,l\in\Z^+$ and $x \in A^c$ we have
+    \[ |\partial^\alpha (\psi_j\psi_l)(x)| \leq C^{\ddag}_{n,\alpha} ( \diam Q_l)^{-|\alpha|}. \tag{$\clubsuit$} \]
+    (Keep this fact in mind for a moment, as we will use it to finish the proof of (vi).)
+
+    Also, we see that $\psi_j \geq 2^{-n} \eta_{Q_j}$ and $\psi_l \geq 2^{-n} \eta_{Q_l}$ by $(\bigpumpkin)$, so that
+    \begin{align*}
+        \int_{\R^n} \psi_j(y) \psi_l(y) \,\dif y &\geq 2^{-2n} \int_{\R^n} \eta_{Q_j}(y) \eta_{Q_l}(y) \,\dif y \\
+            &\geq 2^{-2n} B_{n,\eta} \vol(Q_l) &&\text{ by Lemma \ref{lem:integral_of_product_of_bump_functions}} \\
+            &= B^{\star}_{n} (\diam Q_l)^n
+    \end{align*}
+    where we have defined the constant 
+    \[ B^{\star}_{n} := 2^{-2n} B_{n,\eta} \,n^{-n/2} \]
+    which depends only on $n$ and $\eta$.
+    That is, we have shown that for each $j,l\in\Z^+$ we have
+    \[ \int_{\R^n} \psi_j(y) \psi_l(y) \,\dif y \geq B^{\star}_{n} (\diam Q_l)^n. \tag{$\spadesuit$} \]
+
+    Putting $(\clubsuit)$ and $(\spadesuit)$ together, we have
+    \begin{align*}
+        |\partial^\alpha (\psi_j\psi_l)(x)| &\leq C^{\ddag}_{n,\alpha} ( \diam Q_l)^{-|\alpha|} &&\text{by} (\clubsuit) \\
+            &= \frac{C^{\ddag}_{n,\alpha} }{(\diam Q_l)^{|\alpha|}} \cdot \frac{1}{B_n^{\star} (\diam Q_l)^n} \cdot B_n^{\star} (\diam Q_l)^n \\
+            &= \frac{C^{\ddag}_{n,\alpha}}{B^{\star}_n} \cdot \frac{1}{(\diam Q_l)^{|\alpha|+n}} \cdot B_n^{\star} (\diam Q_l)^n \\
+            &\leq \frac{C^{\ddag}_{n,\alpha}}{B^{\star}_n} \cdot \frac{1}{(\diam Q_l)^{|\alpha|+n}} \cdot \int_{\R^n} \psi_j(y) \psi_l(y) \,\dif y &&\text{by} (\spadesuit)
+    \end{align*}
+    which completes the proof of (vi) with the constant $B_\alpha := \frac{C^{\ddag}_{n,\alpha}}{B^{\star}_n}$.
+\end{proof}

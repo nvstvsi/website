@@ -1,0 +1,281 @@
+\section{Functions of Bounded Variation on $\R$}
+
+\noindent In this section, we study functions of bounded variation on $\R$, and absolutely continuous functions on $\R$.
+
+In this section $[a,b]$ will always denote a closed, bounded interval in $\R$ with $a < b$. 
+
+\begin{definition}[Total Variation, Bounded Variation]
+    \label{def:BV_on_interval}
+    Let $f:[a,b]\to \R$ be a function.
+    For each partition $P = \{ a = x_0 < x_1 < \cdots < x_N = b \}$ of $[a,b]$, we define the \textit{total variation} of $f$ with respect to the partition $P$ to be
+    \[ V(f,P) := \sum_{k=1}^N |f(x_k) - f(x_{k-1})|. \]
+    The \textit{total variation} of $f$ on $[a,b]$ is
+    \[ V_a^b(f) := \sup \{ V(f,P) : P \text{ is a partition of } [a,b] \} \in [0,\infty]. \]
+    If $[c,d] \subseteq [a,b]$ is a subinterval, then $V_c^d(f)$ is the total variation of the restriction $f|_{[c,d]}$.
+
+    \vspace{2mm}
+
+    \noindent We say that $f$ is of \textit{bounded variation} on $[a,b]$ if $V_a^b(f) < \infty$.
+
+    \vspace{2mm}
+
+    \noindent The set of all functions of bounded variation on $[a,b]$ is denoted by $BV([a,b])$.
+\end{definition}
+
+\begin{remark}[BV Functions on a Closed, Bounded Interval are Bounded]
+    \label{rem:BV_functions_on_a_closed_bounded_interval_are_bounded}
+    If $f:[a,b]\to\R$ is of bounded variation on $[a,b]$, then $f$ is bounded.
+    
+    The proof is easy.
+    For each $x \in [a,b]$ we consider the partition $P = \{ a, x, b \}$ of $[a,b]$.
+    Then we have
+    \[ V(f,P) = |f(x) - f(a)| + |f(b) - f(x)| \leq V_a^b(f) < \infty \]
+    which implies that
+    \[ |f(x)| \leq |f(x) - f(a)| + |f(a)| \leq |f(x) - f(a)| + |f(b) - f(x)| + |f(a)| \leq V_a^b(f) + |f(a)|. \]
+    Thus $f$ is bounded above by $V_a^b(f) + |f(a)|$ on $[a,b]$.
+\end{remark}
+
+\begin{remark}[Functions of Bounded Variation on $\R$]
+    \label{rem:BV_on_R}
+    We say that a function $f:\R\to\R$ is of bounded variation on $\R$ if it is of bounded variation on every closed, bounded interval $[a,b] \subseteq \R$ and 
+    \[ \sup_{ \substack{ a ,b \in \R \\ a < b } } V_a^b(f) < \infty. \]
+    This supremum is called the total variation of $f$ on $\R$ and is denoted by $V_{-\infty}^\infty(f)$.
+
+    \vspace{2mm}
+    
+    \noindent The set of all functions of bounded variation on $\R$ is denoted by $BV(\R)$.
+\end{remark}
+
+\begin{example}[Increasing Functions are BV]
+    \label{ex:increasing_functions_are_BV}
+    If $f:[a,b]\to\R$ is increasing, then for each partition $P = \{ a = x_0 < x_1 < \cdots < x_N = b \}$ of $[a,b]$, we have
+    \[ V(f,P) = \sum_{k=1}^N |f(x_k) - f(x_{k-1})| = \sum_{k=1}^N (f(x_k) - f(x_{k-1})) = f(b) - f(a). \]
+    Thus $V_a^b(f) = f(b) - f(a) < \infty$, so $f$ is of bounded variation on $[a,b]$.
+\end{example}
+
+\begin{example}[Lipschitz Functions are BV]
+    \label{ex:lipschitz_functions_are_BV}
+    If $f:[a,b]\to\R$ is Lipschitz with Lipschitz constant $L > 0$, then for each partition $P = \{ a = x_0 < x_1 < \cdots < x_N = b \}$ of $[a,b]$, we have
+    \[ V(f,P) = \sum_{k=1}^N |f(x_k) - f(x_{k-1})| \leq \sum_{k=1}^N L |x_k - x_{k-1}| = L(b-a). \]
+    Thus $V_a^b(f) \leq L(b-a) < \infty$, so $f$ is of bounded variation on $[a,b]$.
+\end{example}
+
+\begin{example}[Differences of Increasing Functions are BV]
+    \label{ex:differences_of_increasing_functions_are_BV}
+    If $f,g:[a,b]\to\R$ are increasing functions, then for each partition $P = \{ a = x_0 < x_1 < \cdots < x_N = b \}$ of $[a,b]$, we have
+    \begin{align*}
+        V(f-g,P) &= \sum_{k=1}^N |(f-g)(x_k) - (f-g)(x_{k-1})| \\
+            &= \sum_{k=1}^N |(f(x_k) - f(x_{k-1})) - (g(x_k) - g(x_{k-1}))| \\
+            &\leq \sum_{k=1}^N |f(x_k) - f(x_{k-1})| + \sum_{k=1}^N |g(x_k) - g(x_{k-1})| \\
+            &= V(f,P) + V(g,P).
+    \end{align*}
+    Taking the supremum over all partitions $P$ of $[a,b]$ gives
+    \[ V_a^b(f-g) \leq V_a^b(f) + V_a^b(g) < \infty, \]
+    so $f-g$ is of bounded variation on $[a,b]$.
+\end{example}
+
+\begin{example}[A Function of Unbounded Variation]
+    \label{ex:function_of_unbounded_variation}
+    The function ...
+    
+\end{example}
+
+\begin{exercise}[$BV$ is a Vector Space]
+    \label{ex:BV_is_a_vector_space}
+    Let $[a,b]$ be a closed, bounded interval in $\R$ with $a < b$.
+    Then $BV([a,b])$ is a vector space over $\R$.
+    Also $BV(\R)$ is closed under products.
+\end{exercise}
+
+\begin{proof}
+    First it is obvious that the zero function is in $BV([a,b])$ since $V_a^b(0) = 0 < \infty$.
+    Now let $f,g\in BV([a,b])$ and let $\alpha\in\R$.
+    We need to show that $f+g$ and $\alpha f$ are in $BV([a,b])$.
+
+    Let $P = \{ a = x_0 < x_1 < \cdots < x_N = b \}$ be a partition of $[a,b]$.
+    Then we have
+    \begin{align*}
+        V(f+g,P) &= \sum_{k=1}^N |(f+g)(x_k) - (f+g)(x_{k-1})| \\
+            &= \sum_{k=1}^N |(f(x_k) - f(x_{k-1})) + (g(x_k) - g(x_{k-1}))| \\
+            &\leq \sum_{k=1}^N |f(x_k) - f(x_{k-1})| + \sum_{k=1}^N |g(x_k) - g(x_{k-1})| \\
+            &= V(f,P) + V(g,P)
+    \end{align*}
+    by the triangle inequality.
+    Taking the supremum over all partitions $P$ of $[a,b]$ gives
+    \[ V_a^b(f+g) \leq V_a^b(f) + V_a^b(g) < \infty, \]
+    so $f+g$ is in $BV([a,b])$.
+
+    Now let $P = \{ a = x_0 < x_1 < \cdots < x_N = b \}$ be a partition of $[a,b]$.
+    Then we have
+    \begin{align*}
+        V(\alpha f,P) &= \sum_{k=1}^N |\alpha f(x_k) - \alpha f(x_{k-1})| \\
+            &= \sum_{k=1}^N |\alpha| |f(x_k) - f(x_{k-1})| \\
+            &= |\alpha| V(f,P).
+    \end{align*}
+    Taking the supremum over all partitions $P$ of $[a,b]$ gives
+    \[ V_a^b(\alpha f) = |\alpha| V_a^b(f) < \infty, \]
+    so $\alpha f$ is in $BV([a,b])$.
+
+    This shows that $BV([a,b])$ is closed under addition and scalar multiplication, and so $BV([a,b])$ is a vector space over $\R$.
+
+    \vspace{2mm}
+
+    To see that $BV([a,b])$ is closed under products, let $f,g\in BV([a,b])$.
+    Not that both $f$ and $g$ are bounded on $[a,b]$ since for each $x\in[a,b]$ we have
+    \[ |f(x)| \leq |f(x) - f(a)| + |f(a)| \leq V_a^b(f) + |f(a)| < \infty \]
+    and similarly for $g$.
+    Thus 
+    \[ \sup_{x\in[a,b]} |f(x)| \leq V_a^b(f) + |f(a)| < \infty \quad \text{and} \quad \sup_{x\in[a,b]} |g(x)| \leq V_a^b(g) + |g(a)| < \infty. \]
+
+    Let $P = \{ a = x_0 < x_1 < \cdots < x_N = b \}$ be a partition of $[a,b]$.
+    Then we have
+    \begin{align*}
+        V(fg,P) &= \sum_{k=1}^N |(fg)(x_k) - (fg)(x_{k-1})| \\
+            &= \sum_{k=1}^N |f(x_k)g(x_k) - f(x_{k-1})g(x_{k-1})| \\
+            &= \sum_{k=1}^N |f(x_k)g(x_k) - f(x_k)g(x_{k-1}) + f(x_k)g(x_{k-1}) - f(x_{k-1})g(x_{k-1})| \\
+            &\leq \sum_{k=1}^N |f(x_k)| |g(x_k) - g(x_{k-1})| + \sum_{k=1}^N |g(x_{k-1})| |f(x_k) - f(x_{k-1})| &&\text{by the triangle inequality}\\
+            &\leq \left( \sup_{x\in[a,b]} |f(x)| \right) V(g,P) + \left( \sup_{x\in[a,b]} |g(x)| \right) V(f,P). \\
+    \end{align*}
+    Taking the supremum over all partitions $P$ of $[a,b]$ gives
+    \[ V_a^b(fg) \leq \left( \sup_{x\in[a,b]} |f(x)| \right) V_a^b(g) + \left( \sup_{x\in[a,b]} |g(x)| \right) V_a^b(f) < \infty, \]
+    so $fg$ is in $BV([a,b])$.
+
+    This shows that $BV([a,b])$ is closed under products.
+\end{proof}
+
+\begin{proposition}[Additivity of Total Variation]
+    \label{prop:additivity_of_total_variation}
+    Let $f:[a,b]\to\R$ be a function and let $c\in (a,b)$. Then
+    \[ V_a^b(f) = V_a^c(f) + V_c^b(f). \]
+\end{proposition}
+\begin{proof}
+    \textit{Step 1:} We show that if $P$ is a partition of $[a,b]$ and $P'$ is a refinement of $P$ obtained by adding the point $c$ to $P$, then
+    \[ V(f,P) \leq V(f,P'). \]
+
+    Let $P = \{ a = x_0 < x_1 < \cdots < x_N = b \}$ be a partition of $[a,b]$, and suppose that $x_{j-1} < c < x_j$ for some $j\in\{1,2,\ldots,N\}$.
+    Then the refinement $P'$ of $P$ obtained by adding the point $c$ is given by the points
+    \[ a = x_0 < x_1 < \cdots < x_{j-1} < c < x_j < \cdots < x_N = b \]
+    and we have
+    \begin{align*}
+        V(f,P') &= \sum_{k=1}^{j-1} |f(x_k) - f(x_{k-1})| + |f(c) - f(x_{j-1})| + |f(x_j) - f(c)| + \sum_{k=j+1}^N |f(x_k) - f(x_{k-1})| \\
+            &\geq \sum_{k=1}^{j-1} |f(x_k) - f(x_{k-1})| + |f(x_j) - f(x_{j-1})| + \sum_{k=j+1}^N |f(x_k) - f(x_{k-1})| \\
+            &= V(f,P)
+    \end{align*}
+    by the triangle inequality.
+
+    Thus adding a point to a partition can only increase the total variation with respect to that partition.
+
+    \vspace{2mm}
+    \textit{Step 2:} Let $P_1$ be a partition of $[a,c]$ and let $P_2$ be a partition of $[c,b]$.
+    Then the union $P = P_1 \cup P_2$ is a partition of $[a,b]$, and we have
+    \[ V(f,P) = V(f,P_1) + V(f,P_2). \]
+    Taking the supremum over all partitions $P_1$ of $[a,c]$ and all partitions $P_2$ of $[c,b]$ gives
+    \[ V_a^b(f) \geq V_a^c(f) + V_c^b(f). \]
+    To see the reverse inequality, let $P$ be a partition of $[a,b]$.
+    Whether or not $c$ is in $P$, we can form a refinement $P' := P \cup \{c\}$, and by Step 1 we have
+    \[ V(f,P) \leq V(f,P') = V(f,P_1) + V(f,P_2) \leq V_a^c(f) + V_c^b(f) \]
+    where $P_1 := P' \cap [a,c]$ is a partition of $[a,c]$ and $P_2 := P' \cap [c,b]$ is a partition of $[c,b]$.
+    Taking the supremum over all partitions $P$ of $[a,b]$ gives
+    \[ V_a^b(f) \leq V_a^c(f) + V_c^b(f). \]
+    Combining the two inequalities gives the desired result.
+\end{proof}
+
+\begin{corollary}[Total Variation Function is Increasing]
+    \label{cor:total_variation_function_is_increasing}
+    Let $f:[a,b]\to\R$ be a function of bounded variation.
+    Then the function
+    \[ [a,b] \ni x \longmapsto V_a^x(f) \in [0, V_a^b(f)] \]
+    is increasing.
+\end{corollary}
+
+\begin{proof}
+    First of all see that by definition, $V_a^x(f)\geq 0$ for all $x\in[a,b]$.
+    Thus the additivity of total variation (Proposition \ref{prop:additivity_of_total_variation}) implies that $V_a^x(f) \leq V_a^b(f)$ for all $x\in[a,b]$.
+
+    Now let $x,y\in[a,b]$ be such that $x < y$.
+    Then by the additivity of total variation, we have
+    \[ V_a^y(f) - V_a^x(f) = V_x^y(f) \geq 0. \]
+    Thus $V_a^x(f) \leq V_a^y(f)$, which shows that the function $x\mapsto V_a^x(f)$ is increasing.
+\end{proof}
+
+\begin{theorem}[Jordan Decomposition]
+    \label{thm:jordan_decomposition}
+    Let $f:[a,b]\to\R$ be a function.
+    Then $f$ is of bounded variation on $[a,b]$ if and only if there exist increasing functions $f_1,f_2:[a,b]\to\R$ such that
+    \[ f = f_1 - f_2. \]
+    In this case, we can take
+    \[ f_1(x) := f(x) + V_a^x(f) \quad\text{and}\quad f_2(x) := V_a^x(f) \]
+    which are both increasing functions.
+\end{theorem}
+\begin{proof}
+    ($\Rightarrow$) Suppose that $f$ is of bounded variation on $[a,b]$.
+    Define the functions $f_1,f_2:[a,b]\to\R$ by 
+    \[ f_1(x) := f(x) + V_a^x(f) \quad\text{and}\quad f_2(x) := V_a^x(f) \qquad\forall x\in[a,b]. \]
+    By Corollary \ref{cor:total_variation_function_is_increasing}, we know that $f_2$ is increasing.
+
+    Now we show that $f_1$ is increasing.
+    See that for each $x,y\in[a,b]$ such that $x < y$, we have
+    \[ f(x) - f(y) \leq |f(x) - f(y)| = V(f|_{[x,y]},\{x,y\}) \leq V_x^y(f) = V_a^y(f) - V_a^x(f) \]
+    which implies that
+    \[ V_a^x(f) + f(x) \leq V_a^y(f) + f(y). \]
+    That is, $a\leq x < y \leq b$ implies that $f_1(x) \leq f_1(y)$, so $f_1$ is increasing.
+
+    For each $x\in[a,b]$ we trivially have $f(x) = f_1(x) - f_2(x)$.
+
+    ($\Leftarrow$) Suppose that there exist increasing functions $f_1,f_2:[a,b]\to\R$ such that $f = f_1 - f_2$.
+    Then by Example \ref{ex:differences_of_increasing_functions_are_BV}, we see that $f$ is of bounded variation on $[a,b]$.
+\end{proof}
+
+\begin{corollary}[BV Functions are Differentiable a.e.]
+    \label{cor:BV_functions_are_differentiable_a_e}
+    Let $f:[a,b]\to\R$ be a function of bounded variation.
+    Then the derivative $f'$ exists and is finite almost everywhere on $(a,b)$, and $f'$ is integrable.
+\end{corollary}
+\begin{proof}
+    Since $f$ is of bounded variation on $[a,b]$, by the Jordan decomposition (Theorem \ref{thm:jordan_decomposition}) there exist increasing functions $f_1,f_2:[a,b]\to\R$ such that $f = f_1 - f_2$.
+    By Theorem \ref{thm:increasing_functions_are_differentiable_a_e}, both $f_1$ and $f_2$ are differentiable almost everywhere on $(a,b)$, and their derivatives $f_1'$ and $f_2'$ are integrable.
+    Thus $f' = f_1' - f_2'$ exists and is finite almost everywhere on $(a,b)$, and $f' = f_1' - f_2'$ is integrable.
+\end{proof}
+
+This fact is pretty shocking --- much more so than the fact that monotone functions are differentiable almost everywhere.
+In particular, since Lipschitz functions are of bounded variation (Example \ref{ex:lipschitz_functions_are_BV}), we see that Lipschitz functions are differentiable almost everywhere, which is a very strong regularity property.
+
+\begin{exercise}[Rademacher's Theorem in One Dimension]
+    \label{ex:rademachers_theorem_in_one_dimension}
+    Let $I \subseteq \R$ be an interval, and let $f:I\to\R$ be a Lipschitz function.
+    Then $f$ is differentiable almost everywhere on $I$.
+\end{exercise}
+\begin{proof}
+    Let $I \subseteq \R$ be an interval, and let $f:I\to\R$ be a Lipschitz function.
+    If $I$ is closed and bounded, then by Example \ref{ex:lipschitz_functions_are_BV} and Corollary \ref{cor:BV_functions_are_differentiable_a_e}, we know that $f$ is differentiable almost everywhere on $I$.
+
+    Now suppose that $I$ is not closed and bounded, so is one of the forms
+    \[ (-\infty,b),(a,\infty) ,(-\infty,b], [a,\infty), (a,b), [a,b), (a,b], \text{ or } \R. \]
+    Then we can write $I$ as a countable union of closed, bounded intervals $\{[a_k,b_k]\}_{k=1}^\infty$ such that $[a_k,b_k] \subseteq I$ for all $k\in\N$.
+    For each $k\in\N$, the restriction $f|_{[a_k,b_k]}:[a_k,b_k]\to\R$ is Lipschitz, so by Example \ref{ex:lipschitz_functions_are_BV} and Corollary \ref{cor:BV_functions_are_differentiable_a_e}, we know that $f|_{[a_k,b_k]}$ is differentiable almost everywhere on $[a_k,b_k]$.
+
+    Thus for each $k\in\N$, there exists a set $N_k \subseteq [a_k,b_k]$ with measure zero such that $f|_{[a_k,b_k]}$ is differentiable at every point in $[a_k,b_k] \setminus N_k$.
+    Let
+    \[ N := \bigcup_{k=1}^\infty N_k. \]
+    Then $N$ has measure zero since it is a countable union of measure zero sets.
+    Also if $x\in I \setminus N$, then there exists some $k\in\N$ such that $x\in[a_k,b_k]$, and since $x\notin N$, we have $x\notin N_k$, so $f|_{[a_k,b_k]}$ is differentiable at $x$.
+    Thus $f$ is differentiable at every point in $I \setminus N$, which shows that $f$ is differentiable almost everywhere on $I$.
+\end{proof}
+
+\begin{exercise}[BV Functions on $\R$ are Differentiable a.e.]
+    \label{ex:BV_on_R_are_differentiable_a_e}
+    Every function of bounded variatin on $\R$ is differentiable almost everywhere.
+\end{exercise}
+\begin{proof}
+    Let $f:\R\to\R$ be a function of bounded variation on $\R$.
+    Then by Remark \ref{rem:BV_on_R}, we know that $f$ is of bounded variation on every closed, bounded interval $[a,b] \subseteq \R$.
+    Thus by Corollary \ref{cor:BV_functions_are_differentiable_a_e}, we know that $f$ is differentiable almost everywhere on every closed, bounded interval $[a,b] \subseteq \R$.
+
+    Now consider the collection $\{ [-k,k] : k\in\Z^+ \}$ which is a collection of closed, bounded intervals that cover $\R$.
+    For each $k\in\Z^+$, there exists a set $N_k \subseteq [-k,k]$ with measure zero such that $f$ is differentiable at every point in $[-k,k] \setminus N_k$.
+    Let
+    \[ N := \bigcup_{k=1}^\infty N_k. \]
+    Then $N$ has measure zero since it is a countable union of measure zero sets.
+    Also if $x\in \R \setminus N$, then there exists some $k\in\Z^+$ such that $x\in[-k,k]$, and since $x\notin N$, we have $x\notin N_k$, so $f$ is differentiable at $x$.
+    Thus $f$ is differentiable at every point in $\R \setminus N$, which shows that $f$ is differentiable almost everywhere on $\R$.    
+\end{proof}

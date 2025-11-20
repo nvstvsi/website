@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vector-measures</title>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '0.8em',
+      packages: {'[+]': ['ams']},
+      macros: {
+        R: '\\mathbb{R}',
+        C: '\\mathbb{C}',
+        N: '\\mathbb{N}',
+        Z: '\\mathbb{Z}',
+        Q: '\\mathbb{Q}',
+        E: '\\mathbb{E}',
+        F: '\\mathbb{F}',
+        S: '\\mathbb{S}',
+        H: '\\mathcal{H}',
+        L: '\\mathcal{L}',
+        dif: '\\,\\mathrm{d}',
+        supp: '\\operatorname{supp}',
+        proj: '\\operatorname{proj}',
+        Id: '\\operatorname{Id}',
+        Span: '\\operatorname{span}',
+        graph: '\\operatorname{graph}',
+        dist: '\\operatorname{dist}',
+        diam: '\\operatorname{diam}',
+        avg: '\\operatorname{avg}',
+        div: '\\operatorname{div}',
+        vol: '\\operatorname{vol}',
+        ord: '\\operatorname{ord}',
+        Chi: '\\mathbf{1}',
+        sub: '\\subseteq',
+        mres: '\\downharpoonright',
+        ddag: '\\ddagger',
+        dag: '\\dagger',
+        norm: ['\\left\\| #1 \\right\\|', 1],
+        abs: ['\\left| #1 \\right|', 1],
+        set: ['\\left\\{ #1 \\right\\}', 1],
+        inner: ['\\langle #1, #2 \\rangle', 2],
+        floor: ['\\lfloor #1 \\rfloor', 1],
+        ceil: ['\\lceil #1 \\rceil', 1],
+        llbracket: '\\unicode{x27E6}',
+        rrbracket: '\\unicode{x27E7}',
+        bigskull: '\\unicode{x1F480}',
+        skull: '\\unicode{x2620}',
+        mathwitch: '\\unicode{x1F9D9}',
+        pumpkin: '\\unicode{x1F383}',
+        mathpumpkin: '\\unicode{x1F383}',
+        bigpumpkin: '\\unicode{x1F383}',
+        mathghost: '\\unicode{x1F47B}',
+        mathcat: '\\unicode{x1F408}',
+        mathbat: '\\unicode{x1F987}',
+        esssup: '\\operatorname{ess\\,sup}',
+        essinf: '\\operatorname{ess\\,inf}',
+        Lip: '\\operatorname{Lip}',
+        pd: ['\\frac{\\partial#1}{\\partial#2}', 2],
+        od: ['\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}', 2],
+        dashint: '\\mathchoice{\\rlap{-}\\!\\int}{\\rlap{\\raise.15ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}',
+        eurologo: '\\unicode{x20AC}',
+        starredbullet: '\\unicode{x2726}',
+        grimace: '\\unicode{x1F62C}',
+        textthing: '\\unicode{x2639}',
+        noway: '\\unicode{x26D4}',
+        warning: '\\unicode{x26A0}',
+        danger: '\\unicode{x26A0}',
+        textxswup: '\\unicode{x2195}',
+        textxswdown: '\\unicode{x2195}',
+        decoone: '\\unicode{x2756}',
+        decotwo: '\\unicode{x2767}',
+        decothreeleft: '\\unicode{x2619}',
+        decothreeright: '\\unicode{x2767}',
+        decofourleft: '\\unicode{x261A}',
+        decofourright: '\\unicode{x261B}',
+        floweroneleft: '\\unicode{x2740}',
+        floweroneright: '\\unicode{x2740}',
+        lefthand: '\\unicode{x261C}',
+        righthand: '\\unicode{x261E}',
+        decosix: '\\unicode{x2766}',
+        bomb: '\\unicode{x1F4A3}',
+        caution: '\\unicode{x2621}',
+        leftblackhand: '\\unicode{x261A}',
+        rightblackhand: '\\unicode{x261B}',
+        leafleft: '\\unicode{x2618}',
+        leafright: '\\unicode{x2618}',
+        leafNW: '\\unicode{x2618}',
+        leafNE: '\\unicode{x2618}',
+        leafSE: '\\unicode{x2618}',
+        leafSW: '\\unicode{x2618}',
+        aldineleft: '\\unicode{x2619}',
+        aldineright: '\\unicode{x2767}',
+        aldine: '\\unicode{x2766}',
+        aldinesmall: '\\unicode{x2767}',
+        aldinesmallrevert: '\\unicode{x2619}',
+        aldinesmallup: '\\unicode{x2766}',
+        grappe: '\\unicode{x2766}',
+        rightgrappe: '\\unicode{x2767}',
+        leftgrappe: '\\unicode{x2619}',
+        oldpilcrowone: '\\unicode{x00B6}',
+        oldpilcrowtwo: '\\unicode{x00B6}',
+        oldpilcrowthree: '\\unicode{x00B6}',
+        oldpilcrowfour: '\\unicode{x00B6}',
+        oldpilcrowfive: '\\unicode{x00B6}',
+        oldpilcrowsix: '\\unicode{x00B6}'
+      }
+    },
+    startup: {
+      pageReady: () => {
+        return MathJax.startup.defaultPageReady().then(() => {
+          console.log('MathJax ready');
+        });
+      }
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+  <script>
+  (function() {
+    window.addEventListener('beforeunload', function() {
+      saveProofState();
+      saveCollapsibleState();
+    });
+    
+    const eventSource = new EventSource('http://localhost:35729/reload-stream');
+    
+    eventSource.onmessage = function(event) {
+      if (event.data === 'reload') {
+        console.log('📝 File updated, saving state and reloading...');
+        saveProofState();
+        saveCollapsibleState();
+        setTimeout(() => {
+          window.location.reload();
+        }, 50);
+      }
+    };
+    
+    eventSource.onerror = function() {
+      console.log('⚠️  Auto-reload server not available. Run node watch.js to enable auto-reload.');
+      eventSource.close();
+    };
+    
+    console.log('🔄 Auto-reload enabled');
+  })();
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+    
+    /* Layout with sidebar */
+    .page-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      width: 280px;
+      background: #fff;
+      border-right: 1px solid #e0e0e0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px 0;
+      font-size: 14px;
+    }
+    
+    .sidebar-header {
+      padding: 15px 20px 25px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .sidebar-header h1 {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 5px 0;
+    }
+    
+    .sidebar-header .subtitle {
+      font-size: 0.85em;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .sidebar-header .back-link {
+      display: block;
+      font-size: 0.8em;
+      color: #666;
+      text-decoration: none;
+      margin-top: 12px;
+    }
+    
+    .sidebar-header .back-link:hover {
+      color: #1a1a1a;
+    }
+    
+    .sidebar-nav {
+      padding: 10px 0;
+    }
+    
+    .chapter-group {
+      margin-bottom: 2px;
+    }
+    
+    .chapter-title {
+      padding: 12px 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chapter-title:hover {
+      background: #f5f5f5;
+    }
+    
+    .chapter-title .toggle {
+      font-size: 0.65em;
+      color: #999;
+      transition: transform 0.2s;
+    }
+    
+    .chapter-group.expanded .chapter-title .toggle {
+      transform: rotate(90deg);
+    }
+    
+    .section-list {
+      display: none;
+      padding: 5px 0;
+      background: #f8f8f8;
+    }
+    
+    .chapter-group.expanded .section-list {
+      display: block;
+    }
+    
+    .section-link {
+      display: block;
+      padding: 8px 20px 8px 35px;
+      font-size: 0.85em;
+      color: #555;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+    }
+    
+    .section-link:hover {
+      background: #f0f0f0;
+      color: #1a1a1a;
+    }
+    
+    .section-link.active {
+      background: #e8e8e8;
+      border-left-color: #333;
+      color: #000;
+      font-weight: 500;
+    }
+    
+    /* Main content area */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      max-width: 900px;
+      padding: 40px 60px;
+    }
+    
+    @media (max-width: 1100px) {
+      .sidebar {
+        width: 240px;
+      }
+      .main-content {
+        margin-left: 240px;
+        padding: 30px 40px;
+      }
+    }
+    
+    @media (max-width: 800px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+      .page-layout {
+        flex-direction: column;
+      }
+    }
+    
+    h2, h3, h4 {
+      margin-top: 2em;
+      margin-bottom: 0.75em;
+      color: #000;
+      font-weight: 600;
+    }
+    h2 { font-size: 1.5em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.1em; }
+    p {
+      margin: 1em 0;
+      text-indent: 2em;
+    }
+    p:first-of-type,
+    h2 + p,
+    h3 + p,
+    h4 + p,
+    .theorem-box + p,
+    .proof-box + p {
+      text-indent: 0;
+    }
+    .noindent + p,
+    p:has(> .noindent:first-child) {
+      text-indent: 0 !important;
+    }
+    .noindent {
+      display: none;
+    }
+    .theorem-box {
+      margin: 1.75em 0;
+      padding: 1.25em;
+      border-left: 5px solid #16a34a;
+      background: linear-gradient(to top, #bbf7d0 0%, #d1fae5 100%);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .definition-box { border-left-color: #16a34a; background: linear-gradient(to top, #d1fae5 0%, #ecfdf5 100%); }
+    .lemma-box { border-left-color: #1e3a8a; background: linear-gradient(to top, #bfdbfe 0%, #dbeafe 100%); }
+    .corollary-box { border-left-color: #9333ea; background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%); }
+    .proposition-box { border-left-color: #dc2626; background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%); }
+    .remark-box { border-left-color: #64748b; background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%); }
+    .example-box { border-left-color: #0891b2; background: linear-gradient(to top, #a5f3fc 0%, #cffafe 100%); }
+    .construction-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .notation-box { border-left-color: #ca8a04; background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%); }
+    .exercise-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .problem-box { border-left-color: #ec4899; background: linear-gradient(to top, #fbcfe8 0%, #fce7f3 100%); }
+    .theorem-header {
+      margin-bottom: 0.75em;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+    .theorem-header.clickable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .theorem-header.clickable:hover {
+      background: rgba(0,0,0,0.03);
+      margin: -0.5em -0.75em 0.75em -0.75em;
+      padding: 0.5em 0.75em;
+      border-radius: 4px;
+    }
+    .collapsible-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      margin-right: 0.5em;
+      color: #6b7280;
+    }
+    .collapsible-box.collapsed .collapsible-icon {
+      transform: rotate(-90deg);
+    }
+    .collapsible-content {
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+    }
+    .collapsible-box.collapsed .collapsible-content {
+      display: none;
+    }
+    .theorem-content {
+      padding-left: 0.5em;
+      line-height: 1.8;
+    }
+    .proof-box {
+      margin: 1.5em 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .proof-header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      border-radius: 6px 6px 0 0;
+    }
+    .proof-toggle {
+      width: 100%;
+      padding: 0.85em 1.25em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      transition: background 0.15s;
+    }
+    .proof-toggle:hover { background: rgba(0,0,0,0.03); }
+    .proof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      color: #6b7280;
+    }
+    .proof-box.collapsed .proof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .proof-content {
+      padding: 1.25em;
+      line-height: 1.8;
+    }
+    .proof-box.collapsed .proof-content {
+      display: none;
+    }
+    .proof-end {
+      float: right;
+      font-size: 1.3em;
+      margin-left: 0.5em;
+      color: #374151;
+    }
+    .subproof {
+      margin: 1em 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #f9fafb;
+    }
+    .subproof-header {
+      background: linear-gradient(to bottom, #f9fafb 0%, #f3f4f6 100%);
+      border-bottom: 1px solid #d1d5db;
+      border-radius: 4px 4px 0 0;
+    }
+    .subproof-toggle {
+      width: 100%;
+      padding: 0.6em 1em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: background 0.15s;
+    }
+    .subproof-toggle:hover {
+      background: rgba(0,0,0,0.03);
+    }
+    .subproof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.7em;
+      color: #6b7280;
+    }
+    .subproof.collapsed .subproof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .subproof-content {
+      padding: 1em;
+      line-height: 1.7;
+    }
+    .subproof.collapsed .subproof-content {
+      display: none;
+    }
+    .ref-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 0.15em;
+      border-radius: 2px;
+    }
+    .ref-link:hover {
+      background: #dbeafe;
+      text-decoration: underline;
+    }
+    .ref-unknown {
+      color: #dc2626;
+      font-weight: bold;
+      background: #fee2e2;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+    ol, ul {
+      margin: 1em 0;
+      padding-left: 2.5em;
+      line-height: 1.8;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    .latex-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5em auto;
+    }
+    .latex-figure .latex-image {
+      display: inline-block;
+      margin: 0.5em;
+      vertical-align: middle;
+    }
+    .latex-figure {
+      margin: 2em 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .latex-figure .figure-content {
+      margin-bottom: 0.75em;
+      line-height: normal;
+    }
+    .latex-figure .figure-content > * {
+      vertical-align: middle;
+    }
+    .latex-figure figcaption {
+      font-size: 0.9em;
+      color: #4b5563;
+      font-style: italic;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1>Analysis III</h1>
+        <div class="subtitle">Measure Theory &amp; Integration</div>
+        <a href="../index.html" class="back-link">← Table of Contents</a>
+      </div>
+      <div class="sidebar-nav">
+        <div class="chapter-group expanded">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>1. Measure Theory</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../01-measure-theory/measure-theory.html" class="section-link">Overview</a>
+            <a href="../01-measure-theory/basics.html" class="section-link">Outer Measures</a>
+            <a href="../01-measure-theory/lebesgue-meas.html" class="section-link">Lebesgue Measure</a>
+            <a href="../01-measure-theory/cantor.html" class="section-link">The Cantor Set</a>
+            <a href="../01-measure-theory/measure-spaces.html" class="section-link">Measure Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>2. Integration</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../02-integration/integration.html" class="section-link">Overview</a>
+            <a href="../02-integration/integrals-1.html" class="section-link">Simple Functions</a>
+            <a href="../02-integration/integrals-2.html" class="section-link">General Functions</a>
+            <a href="../02-integration/convergence.html" class="section-link">Convergence Theorems</a>
+            <a href="../02-integration/inequality-party.html" class="section-link">Integral Inequalities</a>
+            <a href="../02-integration/lp_spaces.html" class="section-link">Lᵖ Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>3. Product Measures</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../03-fubini/fubini_ch.html" class="section-link">Overview</a>
+            <a href="../03-fubini/fubini.html" class="section-link">Fubini-Tonelli</a>
+            <a href="../03-fubini/integrals-3.html" class="section-link">Product Measures</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>4. Differentiation I</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../04-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../04-differentiation-1/covering.html" class="section-link">Vitali Covering</a>
+            <a href="../04-differentiation-1/monotone.html" class="section-link">Monotone Functions</a>
+            <a href="../04-differentiation-1/BV_on_R.html" class="section-link">Bounded Variation</a>
+            <a href="../04-differentiation-1/FTOC.html" class="section-link">FTC for Lebesgue</a>
+            <a href="../04-differentiation-1/HL.html" class="section-link">Hardy-Littlewood</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>5. Differentiation I (cont)</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../05-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../05-differentiation-1/r-nik.html" class="section-link">Radon-Nikodym</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>6. Differentiation II</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-differentiation-2/diff-2.html" class="section-link">Overview</a>
+            <a href="../06-differentiation-2/vector-measures.html" class="section-link">Vector Measures</a>
+            <a href="../06-differentiation-2/r-nik.html" class="section-link">Radon-Nikodym</a>
+            <a href="../06-differentiation-2/besi.html" class="section-link">Besicovitch</a>
+            <a href="../06-differentiation-2/densities.html" class="section-link">Densities</a>
+            <a href="../06-differentiation-2/diff-measures.html" class="section-link">Measure Derivatives</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>7. Riesz Representation</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-riesz/riesz.html" class="section-link">Overview</a>
+            <a href="../06-riesz/riesz_functional.html" class="section-link">Riesz Representation</a>
+            <a href="../06-riesz/LCH_spaces.html" class="section-link">LCH Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>8. Integral Formulas</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../07-formulas/formulas.html" class="section-link">Overview</a>
+            <a href="../07-formulas/hausdorff_meas.html" class="section-link">Hausdorff Measures</a>
+            <a href="../07-formulas/lippy.html" class="section-link">Lipschitz Maps</a>
+            <a href="../07-formulas/rademacher.html" class="section-link">Rademacher</a>
+            <a href="../07-formulas/coarea-prereq.html" class="section-link">Coarea Prerequisites</a>
+            <a href="../07-formulas/coarea.html" class="section-link">Coarea Formula</a>
+            <a href="../07-formulas/area-prereq.html" class="section-link">Area Prerequisites</a>
+            <a href="../07-formulas/area-formula.html" class="section-link">Area Formula</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>9. Extension Results</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../08-ext-res/ext-res.html" class="section-link">Overview</a>
+            <a href="../08-ext-res/taylor_thm_integral_remainder.html" class="section-link">Taylor's Theorem</a>
+            <a href="../08-ext-res/whitney-cover.html" class="section-link">Whitney Covering</a>
+            <a href="../08-ext-res/whitney-partition-of-unity.html" class="section-link">Partition of Unity</a>
+            <a href="../08-ext-res/whitney-decomposition.html" class="section-link">Decomposition</a>
+            <a href="../08-ext-res/whitney-extension-theorem.html" class="section-link">Extension Theorem</a>
+            <a href="../08-ext-res/whitney-extension-proof.html" class="section-link">Extension Proof</a>
+            <a href="../08-ext-res/whitney-extension-applications.html" class="section-link">Applications</a>
+            <a href="../08-ext-res/whitney-extension.html" class="section-link">Summary</a>
+            <a href="../08-ext-res/more-bump.html" class="section-link">More Bump Functions</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <main class="main-content">
+      <h2>Signed and Vector-Valued Measures, Decomposition Theorems</h2>
+<h3>Motivation</h3>
+<p>In the previous chapter, we studied generalizations of the fundamental theorem of calculus --- in particular, we found that 
+<ul><li>(First Fundamental Theorem of Calculus) If $f : [a,b] \to \R$ is absolutely continuous, then $f$ is differentiable almost everywhere, $f' \in L^1([a,b])$, and
+        \[ f(x) - f(a) = \int_a^x f'(t) \,\dif t \quad\text{ for all } x \in [a,b]. \]
+    </li><li>(Second Fundamental Theorem of Calculus) If $f \in L^1([a,b])$, then the function $F$ defined by
+        \[ F(x) = \int_a^x f(t) \,\dif t \]
+        is absolutely continuous, differentiable almost everywhere, and $F' = f$ almost everywhere.</li></ul>
+In spirit, the Radon-Nikodym Theorem is a generalization of these results.</p>
+<h3>Signed and Vector-Valued Measures</h3>
+<div class="theorem-box definition-box" id="def:signed_measure">
+  <div class="theorem-header"><strong>Definition ?</strong> (Signed Measure)</div>
+  <div class="theorem-content">A <em>signed measure</em> on a measurable space $(X,\mathcal{A})$ is a function $\nu : \mathcal{A} \to \R$ such that
+    for each countable collection $\{ A_j \}_{j=1}^\infty$ of pairwise disjoint sets in $\mathcal{A}$, we have
+            \[ \nu\left( \bigcup_{j=1}^\infty A_j \right) = \sum_{j=1}^\infty \nu(A_j). \]</div>
+</div>
+<p>Note the <em>by definition</em> a signed measure is finite on the whole space, i.e., $|\nu|(X) < \infty$.
+That is, we do not allow any signed measures that take on infinite values.</p>
+<p>In particular, many measures are <em>not</em> signed measures, since they take on infinite values.
+A measure $\mu$ is a signed measure if and only if it is finite on all measurable sets, i.e., $\mu(A) < \infty$ for all $A \in \mathcal{A}$.</p>
+<p>The following is the key example of a signed measure.</p>
+<div class="theorem-box example-box collapsible-box collapsed" id="ex:signed_measure_from_L1_function" data-collapsible-id="collapsible-ex:signed_measure_from_L1_function">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-ex:signed_measure_from_L1_function')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Example ?</strong> (Signed Measure from an $L^1$ Function)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-ex:signed_measure_from_L1_function">Let $(X,\mathcal{A},\mu)$ be a measure space, and let $f \in L^1(X,\mu)$.
+    Define $\nu : \mathcal{A} \to \R$ by
+    \[ \nu(A) = \int_A f \,\dif \mu. \]
+    Then $\nu$ is a signed measure on $(X,\mathcal{A})$.
+<p>We check this.
+    Let $\{ A_j \}_{j=1}^\infty$ be a countable collection of pairwise disjoint sets in $\mathcal{A}$.
+    Then
+    \begin{align*}
+        \nu\left( \bigcup_{j=1}^\infty A_j \right) &= \int_{\bigcup_{j=1}^\infty A_j} f \,\dif \mu \\
+        &= \sum_{j=1}^\infty \int_{A_j} f \,\dif \mu \qquad\text{ by countable additivity of the integral } \\
+        &= \sum_{j=1}^\infty \nu(A_j).
+    \end{align*}
+    Thus, $\nu$ is a signed measure.</div>
+</div></p>
+<div class="theorem-box remark-box collapsible-box collapsed" id="ref:signed_measure_as_charge" data-collapsible-id="collapsible-ref:signed_measure_as_charge">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-ref:signed_measure_as_charge')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong> (Signed Measures as ``Charges'')
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-ref:signed_measure_as_charge">Some authors, particularly the older Russian literature, refer to signed measures as <em>charges</em>.
+    The idea is that in the case of an electrical charge distributed over a surface, each region of the surface can have either positive or negative charge, so the charge distribution is naturally modeled by a signed measure.
+    This is a nice intuition to keep in mind.</div>
+</div>
+<div class="theorem-box lemma-box" id="lem:signed_measure_absolute_convergence">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Absolute Convergence for Disjoint Unions)</div>
+  <div class="theorem-content">Let $\nu$ be a signed measure on a measurable space $(X,\mathcal{A})$.
+    Then for each countable collection $\{ A_j \}_{j=1}^\infty$ of pairwise disjoint sets in $\mathcal{A}$ we have
+    \[ \sum_{j=1}^\infty | \nu(A_j) | < \infty. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-0">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-0')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-0">
+    First note that $\nu(\varnothing) = 0$ since 
+    \[ \nu(\varnothing) = \nu\left( \bigcup_{j=1}^\infty \varnothing \right) = \sum_{j=1}^\infty \nu(\varnothing) \]
+    is a countable disjoint union of sets in $\mathcal{A}$, so 
+    \[ \nu(\varnothing) = \sum_{j=1}^\infty \nu(\varnothing) \]
+    and this can only hold if $\nu(\varnothing) = 0$.
+<p><div style="margin: 1em 0;"></div></p>
+<p>Now let $\{ A_j \}_{j=1}^\infty$ be a countable collection of pairwise disjoint sets in $\mathcal{A}$.
+    Then 
+    \[ \nu\left( \bigcup_{ \{ j \,:\, \nu(A_j) > 0 \} } A_j \right) = \sum_{ \{ j \,:\, \nu(A_j) > 0 \} } \nu(A_j) = \sum_{ \{ k \,:\, \nu(A_k) > 0 \} } |\nu(A_k)| \]
+    and
+    \[ -\nu\left( \bigcup_{ \{ j \,:\, \nu(A_j) < 0 \} } A_j \right) = \sum_{ \{ j \,:\, \nu(A_j) < 0 \} } -\nu(A_j) = \sum_{ \{ k \,:\, \nu(A_k) < 0 \} } |\nu(A_k)|. \]
+    Since $\nu(A) \in \R$ for each $A \in \mathcal{A}$, the right-hand side of both of these sums must be finite.
+    Therefore the total sum
+    \[ \sum_{j=1}^\infty | \nu(A_j) | < \infty \] 
+    converges absolutely as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box definition-box" id="def:vector_measure">
+  <div class="theorem-header"><strong>Definition ?</strong> (Complex Measure, Vector Measure)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space.
+    A <em>complex measure</em> on $(X,\mathcal{A})$ is a function $\nu : \mathcal{A} \to \C$ such that for each countable collection $\{ A_j \}_{j=1}^\infty$ of pairwise disjoint sets in $\mathcal{A}$, we have
+            \[ \nu\left( \bigcup_{j=1}^\infty A_j \right) = \sum_{j=1}^\infty \nu(A_j). \]  
+    A <em>vector measure</em> on $(X,\mathcal{A})$ taking values in $\R^m$ is a function $\nu : \mathcal{A} \to \R^m$ such that for each countable collection $\{ A_j \}_{j=1}^\infty$ of pairwise disjoint sets in $\mathcal{A}$, we have
+            \[ \nu\left( \bigcup_{j=1}^\infty A_j \right) = \sum_{j=1}^\infty \nu(A_j). \]</div>
+</div>
+<p>Technically we could define vector measures taking values in any Banach space, but we will only consider $\R^m$-valued vector measures.</p>
+<p>The following exercise shows that vector and complex measures can be understood component-wise as signed measures.</p>
+<div class="theorem-box exercise-box" id="ex:vector_measure_components">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Components of a Vector Measure)</div>
+  <div class="theorem-content">Show that a function $\nu : \mathcal{A} \to \R^m$ is a vector measure if and only if each of its component functions $\nu_k : \mathcal{A} \to \R$ defined by
+    \[ \nu_k(A) = \text{the $k$-th component of } \nu(A) \]
+    is a signed measure.
+<p>Similarly, show that a function $\nu : \mathcal{A} \to \C$ is a complex measure if and only if its real and imaginary parts are signed measures.</div>
+</div></p>
+<div class="proof-box collapsed" data-proof-id="proof-num-1">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-1')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-1">
+    Fix $m\geq 1$ and for each $1 \leq k \leq m$, let $\pi_k : \R^m \to \R$ be the projection onto the $k$-th coordinate, 
+    \[ \pi_k(x_1,x_2,\ldots,x_m) = x_k. \]
+    Suppose that $\nu : \mathcal{A} \to \R^m$ is a vector measure and let $\{ A_j \}_{j=1}^\infty$ be a countable collection of pairwise disjoint sets in $\mathcal{A}$.
+    Then for each $1 \leq k \leq m$, we have
+    \[  \nu_k\left( \bigcup_{j=1}^\infty A_j \right) = \pi_k\circ \nu \left( \bigcup_{j=1}^\infty A_j \right) = \pi_k\left( \sum_{j=1}^\infty \nu(A_j) \right) = \sum_{j=1}^\infty \nu_k(A_j). \]
+    Thus, each component function $\nu_k$ is a signed measure.
+<p>Conversely, suppose that each component function $\nu_k$ is a signed measure.
+    Then for each countable collection $\{ A_j \}_{j=1}^\infty$ of pairwise disjoint sets in $\mathcal{A}$, we have
+    \begin{align*}
+        \nu\left( \bigcup_{j=1}^\infty A_j \right) &= \left( \nu_1\left( \bigcup_{j=1}^\infty A_j \right), \nu_2\left( \bigcup_{j=1}^\infty A_j \right), \ldots, \nu_m\left( \bigcup_{j=1}^\infty A_j \right) \right) \\
+            &= \left( \sum_{j=1}^\infty \nu_1(A_j), \sum_{j=1}^\infty \nu_2(A_j), \ldots, \sum_{j=1}^\infty \nu_m(A_j) \right) \\
+            &= \sum_{j=1}^\infty \left( \nu_1(A_j), \nu_2(A_j), \ldots, \nu_m(A_j) \right) \\
+            &= \sum_{j=1}^\infty \nu(A_j).  
+    \end{align*}
+    Thus, $\nu$ is a vector measure as desired.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>The complex measure case is similar, using the projections onto the real and imaginary parts.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>We generalize Example <span class="ref-unknown" title="Reference not found: ex:signed_measure_from_L1_function">[ex:signed_measure_from_L1_function?]</span> as follows.</p>
+<div class="theorem-box example-box collapsible-box collapsed" id="ex:vector_measure_from_L1_function" data-collapsible-id="collapsible-ex:vector_measure_from_L1_function">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-ex:vector_measure_from_L1_function')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Example ?</strong> (Vector Measure from a Vector-Valued $L^1$ Function)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-ex:vector_measure_from_L1_function">Let $f \in L^1(X,\mu;\R^m)$ be a vector-valued $L^1$ function.
+    That is, for each $1 \leq k \leq m$, the $k$-th component function $f_k$ is in $L^1(X,\mu)$.
+    Define $\nu : \mathcal{A} \to \R^m$ by
+    \[ \nu(A) = \int_A f \,\dif \mu. \]
+    Then $\nu$ is a vector measure on $(X,\mathcal{A})$ by Exercise <span class="ref-unknown" title="Reference not found: ex:vector_measure_components">[ex:vector_measure_components?]</span> and Example <span class="ref-unknown" title="Reference not found: ex:signed_measure_from_L1_function">[ex:signed_measure_from_L1_function?]</span>.</div>
+</div>
+<div class="theorem-box proposition-box" id="prop:vector_measure_properties">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Properties of Vector Measures)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space and let $\nu$ be a vector measure or a complex measure on $(X,\mathcal{A})$.
+    Then 
+    <ul><li>$\nu(A\setminus B) = \nu(A) - \nu(B)$ for all $A,B \in \mathcal{A}$ with $B \subseteq A$,
+        </li><li>$\nu(A\cup B) = \nu(A) + \nu(B) - \nu(A \cap B)$ for all $A,B \in \mathcal{A}$,
+        </li><li>if $\{ A_j \}_{j=1}^\infty$ is a countable collection of sets in $\mathcal{A}$ with $A_j \subseteq A_{j+1}$ for all $j\geq 1$, then
+            \[ \nu\left( \bigcup_{j=1}^\infty A_j \right) = \lim_{j\to\infty} \nu(A_j), \]
+        </li><li>if $\{ A_j \}_{j=1}^\infty$ is a countable collection of sets in $\mathcal{A}$ with $A_{j+1} \subseteq A_j$ for all $j\geq 1$, then
+            \[ \nu\left( \bigcap_{j=1}^\infty A_j \right) = \lim_{j\to\infty} \nu(A_j). \]</li></ul></div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-2">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-2')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-2">
+    By Exercise <span class="ref-unknown" title="Reference not found: ex:vector_measure_components">[ex:vector_measure_components?]</span>, it suffices to prove these properties for signed measures.
+<p><div style="margin: 1em 0;"></div></p>
+<p>(i) Let $A,B \in \mathcal{A}$ with $B \subseteq A$.
+    Then
+    \[ \nu(A) = \nu(B \cup (A\setminus B)) = \nu(B) + \nu(A\setminus B) \]
+    since $B$ and $A\setminus B$ are disjoint, so rearranging gives the desired result.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>(ii) Let $A,B \in \mathcal{A}$.
+    Then
+    \begin{align*}
+        \nu(A\cup B) &= \nu(A \setminus B) + \nu(B) \\
+            &= \nu(A) - \nu(A \cap B) + \nu(B)
+    \end{align*}
+    by part (i), giving the desired result.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>The proofs of (iii) and (iv) are identical to as in <span class="ref-unknown" title="Reference not found: prop:sequences_of_measurable_sets">[prop:sequences_of_measurable_sets?]</span>. Note that the assumptions that $\nu(A_1)<\infty$ or $\nu(A_1)>-\infty$ are not needed here since $\nu$ is a signed measure and thus finite on all measurable sets.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<h3>Hahn and Jordan Decompositions, Total Variation</h3>
+<p>In the case of an electrical charge distributed on a surface, we can divide the surface into regions of positive and negative charge.
+This idea is formalized in the following decomposition theorems for signed measures.</p>
+<div class="theorem-box definition-box" id="def:negative_set_positive_set">
+  <div class="theorem-header"><strong>Definition ?</strong> (Positive and Negative Sets)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space and let $\nu$ be a signed measure on $(X,\mathcal{A})$.
+    A set $A \in \mathcal{A}$ is called <em>positive</em> (with respect to $\nu$) if for every measurable subset $E \subseteq A$, we have $\nu(E) \geq 0$.
+    Similarly, a set $A \in \mathcal{A}$ is called <em>negative</em> if for every measurable subset $E \subseteq A$, we have $\nu(E) \leq 0$.</div>
+</div>
+<div class="theorem-box theorem-box" id="thm:hahn_decomposition">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Hahn Decomposition)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space and let $\nu$ be a signed measure on $(X,\mathcal{A})$.
+    Then there exists sets $A^+, A^- \in \mathcal{A}$ such that
+    <ol style="list-style-type: lower-alpha;"><li>$A^+ \cup A^- = X$ and $A^+ \cap A^- = \varnothing$,
+        </li><li>$A^+$ is positive and $A^-$ is negative (with respect to $\nu$).</li></ol></div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-3">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-3')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-3">
+    As we remarked after the definition of signed measure, $\nu$ is finite on all measurable sets.
+    Therefore we let 
+    \[ a := \inf \{ \nu( A ) : A \in \mathcal{A}, A\text{ is negative } \} \]
+    and know that $a \in \R$ is well-defined. 
+    Let $\{ A_j^- \}_{j=1}^\infty$ be a sequence of negative sets such that
+    \[ \lim_{j\to\infty} \nu(A_j^-) = a. \]
+    Define the set
+    \[ A^- := \bigcup_{j=1}^\infty A_j^- \]
+    which is measurable since $\mathcal{A}$ is a $\sigma$-algebra, and satisfies $\nu(A^-) = a$ by Proposition <span class="ref-unknown" title="Reference not found: prop:vector_measure_properties">[prop:vector_measure_properties?]</span>.(iv).
+    We also define the set
+    \[ A^+ := X \setminus A^- \]
+    which is measurable since $\mathcal{A}$ is a $\sigma$-algebra.
+<p>We see that $A^-$ is negative by construction.
+    It remains to show that $A^+$ is positive.
+    Suppose for the sake of contradiction that $A^+$ is not positive.
+    Then there exists a measurable set $E_0 \subseteq A^+$ such that $\nu(E_0) < 0$.
+    But then the set $E_0$ cannot be negative --- otherwise the set $A^\star := A^- \cup E_0$ would be negative with
+    \[ \nu(A^{\star}) = \nu(A^-) + \nu(E_0) < \nu(A^-) = a \]
+    contradicting the definition of $a$.</p>
+<p>Therefore there is a smallest positive integer $k_1 \geq 1$ such that there exists a measurable set $E_1 \subseteq E_0$ with
+    \[\nu(E_1) > \frac{1}{k_1}.\]
+    Clearly we cannot have $E_0 = E_1$ since $\nu(E_0) < 0$.
+    Now by applying the same reasoning to the nonempty set $E_0 \setminus E_1$, we can find a smallest positive integer $k_2 \geq 1$ and a measurable set $E_2 \subseteq E_0 \setminus E_1$ such that
+    \[ \nu(E_2) > \frac{1}{k_2}. \]
+    Continuing in this manner, we obtain a sequence of measurable sets $\{ E_j \}_{j=1}^\infty$ that are pairwise disjoint and satisfy
+    \[ \nu(E_j) > \frac{1}{k_j} \]
+    for some positive integer $k_j \geq 1$ for each $j \geq 1$.
+    We let \[ F := E_0 \setminus \bigcup_{j=1}^\infty E_j \]
+    and see that $F\neq \varnothing$ since $\nu(E_0) < 0$ but $\nu(E_j) > 0$ for all $j \geq 1$.
+    Also see that $F$ is negative --- see that if there were a measurable set $G \subseteq F$ with $\nu(G) > 0$, then $G$ would be a subset of $E_0$ contradicting the definition of $E_1$.
+    Hence the set \[ A^{\dagger} := A^- \cup F \] is negative with
+    \[ \nu(A^{\dagger}) = \nu(A^-) + \nu(F) < \nu(A^-) = a \]
+    contradicting the definition of $a$.
+    Therefore $A^+$ is positive as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box remark-box collapsible-box collapsed" id="rem:hahn_decomposition_nonunique" data-collapsible-id="collapsible-rem:hahn_decomposition_nonunique">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-rem:hahn_decomposition_nonunique')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong> (Non-uniqueness of the Hahn Decomposition)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-rem:hahn_decomposition_nonunique">In general, the Hahn decomposition is not unique.
+    We can always modify a Hahn decomposition $(A^+,A^-)$ by changing $A^+$ and $A^-$ on a set of $\nu$-measure zero to obtain a different Hahn decomposition.
+    In fact, this is the only way to obtain a different Hahn decomposition as will be shown in the proof of the Jordan decomposition.</div>
+</div>
+<div class="theorem-box corollary-box" id="thm:jordan_decomposition_signed_measure">
+  <div class="theorem-header"><strong>Corollary ?</strong> (Jordan Decomposition)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space and let $\nu$ be a signed measure on $(X,\mathcal{A})$.
+    Then there exist unique measures $\nu^+,\nu^- : \mathcal{A} \to [0,\infty)$ such that
+    \[ \nu = \nu^+ - \nu^-. \]</div>
+</div>
+<p>Maybe this reminds you of the Jordan decomposition <span class="ref-unknown" title="Reference not found: thm:jordan_decomposition">[thm:jordan_decomposition?]</span> for functions of bounded variation on an interval.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-4">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-4')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-4">
+    <em>Step 1:</em> We begin by investigating the uniqueness of the Hahn decomposition.
+    <div style="margin: 1em 0;"></div>
+<p>Assume that 
+    \[ X = A^+_1 \cup A^-_1 \quad\text{ and }\quad X = A^+_2 \cup A^-_2 \]
+    are two Hahn decompositions of $X$ with respect to $\nu$.
+    Then we claim that 
+    \[ \nu(E \cap A^+_1) = \nu(E \cap A_2^+) \quad\text{ and }\quad \nu(E \cap A^-_1) = \nu(E \cap A_2^-) \tag{$\star$} \]
+    for each set $E \in \mathcal{A}$.</p>
+<p>To see this, let $E \in \mathcal{A}$ be arbitrary.
+    Then we have 
+    \[ E \cap ( A_1^- \setminus A_2^- ) \subset E \cap A_1^- \]
+    and at the same time 
+    \[ E \cap ( A_1^- \setminus A_2^- ) \subset E \cap A_2^+ \]
+    so that 
+    \[ \nu(E \cap ( A_1^- \setminus A_2^- )) \leq 0 \quad \text{ and }\quad \nu(E \cap ( A_1^- \setminus A_2^- )) \geq 0 \]
+    which implies that
+    \[ \nu(E \cap ( A_1^- \setminus A_2^- )) = 0. \]
+    A symmetric argument shows that
+    \[ \nu(E \cap ( A_2^- \setminus A_1^- )) = 0. \]
+    Therefore we have
+    \begin{align*}
+        \nu( E \cap A_1^- ) &= \nu( E \cap ( A_1^- \setminus A_2^- ) ) + \nu( E \cap ( A_1^- \cap A_2^- ) ) \\
+            &= 0 + \nu( E \cap ( A_2^- \setminus A_1^- ) ) + \nu( E \cap ( A_1^- \cap A_2^- ) ) \\
+            &= \nu( E \cap A_2^- )
+    \end{align*}
+    as claimed. 
+    A similar argument shows that $\nu(E \cap A_1^+) = \nu(E \cap A_2^+)$.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 2:</em> Now we prove the existence of the Jordan decomposition.
+    <div style="margin: 1em 0;"></div></p>
+<p>We define the measures $\nu^+$ and $\nu^-$ by
+    \[ \nu^+(A) := \nu(A \cap A^+) \quad\text{ and }\quad \nu^-(A) := -\nu(A \cap A^-) \]
+    for each $A \in \mathcal{A}$, where $(A^+,A^-)$ is a Hahn decomposition of $X$ with respect to $\nu$.
+    It is clear that $\nu^+$ and $\nu^-$ are well-defined, and do not depend on the choice of Hahn decomposition by $(\star)$ in Step 1.</p>
+<p>Let's check that $\nu^+$ is a measure --- the proof for $\nu^-$ is similar.
+    Let $\{ A_j \}_{j=1}^\infty$ be a countable collection of pairwise disjoint sets in $\mathcal{A}$.
+    Then
+    \begin{align*}
+        \nu^+\left( \bigcup_{j=1}^\infty A_j \right) &= \nu\left( \left( \bigcup_{j=1}^\infty A_j \right) \cap A^+ \right) \\
+            &= \nu\left( \bigcup_{j=1}^\infty (A_j \cap A^+) \right) \\
+            &= \sum_{j=1}^\infty \nu( A_j \cap A^+ ) \\
+            &= \sum_{j=1}^\infty \nu^+( A_j )
+    \end{align*}
+    as desired.</p>
+<p>Finally, we check that $\nu = \nu^+ - \nu^-$.
+    Let $A \in \mathcal{A}$ be arbitrary.
+    Then
+    \begin{align*}
+        \nu^+(A) - \nu^-(A) &= \nu(A \cap A^+) + \nu(A \cap A^-) \\
+            &= \nu(A \cap (A^+ \cup A^-)) \\
+            &= \nu(A)
+    \end{align*}
+    as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box definition-box" id="def:variation_of_signed_measure">
+  <div class="theorem-header"><strong>Definition ?</strong> (Positive and Negative Variation of a Signed Measure)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space and let $\nu$ be a signed measure on $(X,\mathcal{A})$.
+    The <em>positive variation</em> of $\nu$ is the measure $\nu^+$ from the Jordan decomposition, and the <em>negative variation</em> of $\nu$ is the measure $\nu^-$ from the Jordan decomposition.</div>
+</div>
+<div class="theorem-box exercise-box" id="ex:total_variation_is_measure">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Positive plus Negative Variation is a Measure)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space and let $\nu$ be a signed measure on $(X,\mathcal{A})$.
+    Show that $\nu^+ + \nu^-$ is a measure on $(X,\mathcal{A})$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-5">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-5')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-5">
+    Let $\{ A_j \}_{j=1}^\infty$ be a countable collection of pairwise disjoint sets in $\mathcal{A}$.
+    Then
+    \begin{align*}
+        (\nu^+ + \nu^-)\left( \bigcup_{j=1}^\infty A_j \right) &= \nu^+\left( \bigcup_{j=1}^\infty A_j \right) + \nu^-\left( \bigcup_{j=1}^\infty A_j \right) \\
+            &= \sum_{j=1}^\infty \nu^+( A_j ) + \sum_{j=1}^\infty \nu^-( A_j ) \\
+            &= \sum_{j=1}^\infty ( \nu^+( A_j ) + \nu^-( A_j ) ) \\
+            &= \sum_{j=1}^\infty (\nu^+ + \nu^-)( A_j )
+    \end{align*}
+    as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<div class="theorem-box definition-box" id="def:total_variation_vector_measure">
+  <div class="theorem-header"><strong>Definition ?</strong> (Total Variation of a Vector Measure)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space and let $\nu$ be a vector measure on $(X,\mathcal{A})$ taking values in $\R^m$.
+    The <em>total variation</em> of $\nu$ is the function $|\nu| : \mathcal{A} \to [0,\infty]$ defined by
+    \[ |\nu|(A) := \sup \left\{ \sum_{j=1}^n \| \nu(A_j) \| : \{ A_j \}_{j=1}^n \text{ is a finite measurable partition of } A \right\} \]
+    for each $A \in \mathcal{A}$, where $\| \cdot \|$ is the standard Euclidean norm on $\R^m$.</div>
+</div>
+<div class="theorem-box lemma-box" id="lem:properties_of_total_variation_vector_measure">
+  <div class="theorem-header"><strong>Lemma ?</strong></div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space and let $\nu$ be a vector measure on $(X,\mathcal{A})$ taking values in $\R^m$.
+    Then
+    <ol style="list-style-type: lower-roman;"><li>$\|\nu (A) \| \leq |\nu|(A)$ for all $A \in \mathcal{A}$,
+        </li><li>$|\nu|(A) = \nu(A)$ for all $A \in \mathcal{A}$ if and only if $\nu$ is a measure,
+        </li><li>$|\nu|(A) = 0$ if and only if $\nu(C) = 0$ for all $C \subseteq A$, $C \in \mathcal{A}$
+        </li><li>if $\nu$ is a signed measure, then 
+            \[ |\nu|(A) = \sup \{ |\nu(C_1)| + |\nu(C_2)| : C_1, C_2 \text{ are disjoint measurable subsets of } A \}. \]</li></ol></div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-6">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-6')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-6">
+    <ol style="list-style-type: lower-roman;"><li>Let $A \in \mathcal{A}$ be arbitrary.
+            Then the partition $\{ A \}$ is a finite measurable partition of $A$, so
+            \[ |\nu|(A) = \sup \left\{ \sum_{j=1}^n \| \nu(A_j) \| : \{ A_j \}_{j=1}^n \text{ is a finite measurable partition of } A \right\} \geq \| \nu(A) \|. \]
+<p></li><li>Assume that $\nu$ is a measure.
+            Then for each finite measurable partition $\{ A_j \}_{j=1}^n$ of $A$, we have
+            \[ \sum_{j=1}^n \| \nu(A_j) \| = \sum_{j=1}^n \nu(A_j) = \nu(A) \]
+            so taking the supremum over all such partitions gives $|\nu|(A) = \nu(A)$.</p>
+<p>Conversely, assume that $|\nu|(A) = \nu(A)$ for all $A \in \mathcal{A}$.
+            Let $\{ A_j \}_{j=1}^\infty$ be a countable collection of pairwise disjoint sets in $\mathcal{A}$.
+            Then for each $n\geq 1$, we have
+            \[ \sum_{j=1}^n \nu(A_j) = \nu\left( \bigcup_{j=1}^n A_j \right) = |\nu|\left( \bigcup_{j=1}^n A_j \right) \leq |\nu|\left( \bigcup_{j=1}^\infty A_j \right) = \nu\left( \bigcup_{j=1}^\infty A_j \right). \]
+            Taking the limit as $n\to\infty$ gives
+            \[ \sum_{j=1}^\infty \nu(A_j) \leq \nu\left( \bigcup_{j=1}^\infty A_j \right). \]
+            The reverse inequality follows from Proposition <span class="ref-unknown" title="Reference not found: prop:vector_measure_properties">[prop:vector_measure_properties?]</span>.(ii), so $\nu$ is a measure.</p>
+<p></li><li>Assume that $|\nu|(A) = 0$.
+            Then for each measurable subset $C \subseteq A$, we have
+            \[ \| \nu(C) \| \leq |\nu|(C) \leq |\nu|(A) = 0 \]
+            so that $\nu(C) = 0$.</p>
+<p>Conversely, assume that $\nu(C) = 0$ for all measurable subsets $C \subseteq A$.
+            Then for each finite measurable partition $\{ A_j \}_{j=1}^n$ of $A$, we have
+            \[ \sum_{j=1}^n \| \nu(A_j) \| = 0 \]
+            so taking the supremum over all such partitions gives $|\nu|(A) = 0$.</p>
+<p></li><li>Assume that $\nu$ is a signed measure.
+            Let $n\in \Z^+$ and let $A_1 , A_2, \ldots, A_n \in\mathcal{A}$ be disjoint subsets of $A$.
+            Let \[ C_1 := \bigcup_{ \{ k\,:\, \nu(A_k) > 0 \} } A_k \quad\text{and}\quad C_2 := \bigcup_{ \{ k\,:\, \nu(A_k) < 0 \} } A_k. \]
+            Then $C_1$ and $C_2$ are disjoint measurable subsets of $A$ with
+            \[ |\nu(C_1)| + |\nu(C_2)| = \sum_{k=1}^n |\nu(A_k)|. \]
+            Taking the supremum over all such collections $\{ A_j \}_{j=1}^n$ gives
+            \[ |\nu|(A) \leq \sup \left\{ |\nu(C_1)| + |\nu(C_2)| : C_1, C_2 \text{ are disjoint measurable subsets of } A \right\}. \]
+            The reverse inequality follows trivially. 
+            Therefore we have the desired equality.</li></ol>
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>We return to our key example.</p>
+<div class="theorem-box proposition-box" id="prop:total_variation_of_vector_measure_from_L1_function">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Total Variation of Vector Measure from $L^1$ Function)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A},\mu)$ be a measure space.
+    Let $f \in L^1(X,\mu;\R^m)$ be a vector-valued $L^1$ function, and let $\nu$ be the vector measure defined by
+    \[ \nu(A) = \int_A f \,\dif \mu. \]
+    Then the total variation of $\nu$ is given by
+    \[ |\nu|(A) = \int_A \| f \| \,\dif \mu. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-7">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-7')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-7">
+    Let $A \in \mathcal{A}$ be arbitrary.
+    First, let $A_1, A_2, \ldots, A_n$ be a disjoint collection of measurable subsets of $A$.
+    Then by the triangle inequality, we have
+    \[ \sum_{k=1}^n \|\nu(A_k)\| = \sum_{k=1}^n \left\| \int_{A_k} f \,\dif \mu \right\| \leq \sum_{k=1}^n \int_{A_k} \| f \| \,\dif \mu = \int_A \| f \| \,\dif \mu. \]
+    Hence taking the supremum over all such collections $\{ A_k \}_{k=1}^n$ gives
+    \[ |\nu|(A) \leq \int_A \| f \| \,\dif \mu. \]
+<p>To prove the reverse inequality, suppose first that $\nu$ is a signed measure (i.e., $m=1$).
+    See that $\{ x\in A : f(x) > 0 \}$ and $\{ x\in A : f(x) < 0 \}$ are disjoint measurable subsets of $A$ and that
+    \[ |\nu\left( \{ x\in A : f(x) > 0 \} \right)| + |\nu\left( \{ x\in A : f(x) < 0 \} \right)| = \int_{\{x\,:\,f(x) > 0\}} |f| \,\dif \mu + \int_{\{x\,:\,f(x) < 0\}} |f| \,\dif \mu = \int_A |f| \,\dif \mu. \]
+    Therefore we have
+    \[ |\nu|(A) \geq \int_A |f| \,\dif \mu \]
+    which gives the desired result in this case by Lemma <span class="ref-unknown" title="Reference not found: lem:properties_of_total_variation_vector_measure">[lem:properties_of_total_variation_vector_measure?]</span>.(iv).</p>
+<p>Now suppose that $\nu$ is a vector measure taking values in $\R^m$ for some $m\geq 1$.
+    Let $\epsilon > 0$ be arbitrary.
+    Since simple functions are dense in $L^1(X,\mu;\R^m)$ (<span class="ref-unknown" title="Reference not found: prop:l1_approximation_by_simple_functions">[prop:l1_approximation_by_simple_functions?]</span>), we can find a simple function $s : X \to \R^m$ such That
+    \[ \| f - s \|_{L^1(X,\mu;\R^m)} < \frac{\epsilon}{2}. \]
+    Write $s|_A$ in the form
+    \[ s|_A = \sum_{j=1}^N c_j \chi_{E_j} \]
+    where $E_1, E_2, \ldots, E_N$ are disjoint measurable subsets of $A$ and $c_1, c_2, \ldots, c_N \in \R^m$.
+    Then we have
+    \begin{align*}
+        \sum_{j=1}^N\|\nu(E_j)\| &= \sum_{j=1}^N \left\| \int_{E_j} f \,\dif \mu \right\| \\
+            &\geq \sum_{j=1}^N \left\| \int_{E_j} s \,\dif \mu \right\| - \sum_{j=1}^N \left\| \int_{E_j} (f - s) \,\dif \mu \right\| \\
+            &= \sum_{j=1}^N \| c_j \| \mu(E_j) - \sum_{j=1}^N \left\|\int_{E_j}  (f - s)  \,\dif \mu \right\| \\
+            &= \int_A \| s \| \,\dif \mu - \left\| \int_A (f - s ) \,\dif \mu \right\| \\
+            &\geq \int_A \| s \| \,\dif \mu - \int_A \| f - s \| \,\dif \mu \\
+            &\geq \int_A \| s \| \,\dif \mu - \frac{\epsilon}{2} \\
+            &\geq \int_A \| f \| \,\dif \mu - \int_A \| f - s \| \,\dif \mu - \frac{\epsilon}{2} \\
+            &\geq \int_A \| f \| \,\dif \mu - \epsilon
+    \end{align*}
+    which implies that 
+    \[ |\nu|(A) \geq \int_A \| f \| \,\dif \mu - \epsilon. \]
+    Since $\epsilon > 0$ was arbitrary, we obtain the desired result.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box lemma-box" id="lem:total_variation_is_measure">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Total Variation is a Measure)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space and let $\nu$ be a vector measure on $(X,\mathcal{A})$ taking values in $\R^m$.
+    Then the total variation $|\nu|$ is a measure on $(X,\mathcal{A})$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-8">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-8')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-8">
+    First note that $|\nu|(\varnothing) = 0$ since the only partition of $\varnothing$ is the empty partition and $\nu(\varnothing) = 0$.
+    Now let $\{ A_j \}_{j=1}^\infty$ be a countable collection of disjoint sets in $\mathcal{A}$. Fix $m\in \Z^+$.
+    Then for each $1 \leq j \leq m$, let $A_{j,1}, A_{j,2}, \ldots, A_{j,n_j}$ be a finite disjoint collection of measurable subsets of $A_j$.
+    Then the collection
+    \[ \{ A_{j,k} : 1 \leq j \leq m, 1 \leq k \leq n_j \} \]
+    is a finite disjoint collection of measurable subsets of $\bigcup_{j=1}^\infty A_j$, so we have
+    \[ \sum_{j=1}^m \sum_{k=1}^{n_j} |\nu(A_{j,k})| \leq |\nu|\left( \bigcup_{j=1}^\infty A_j \right). \]
+    Taking the supremum over all such collections $\{ A_{j,k} \}_{k=1}^{n_j}$ gives
+    \[ \sum_{j=1}^m |\nu|(A_j) \leq |\nu|\left( \bigcup_{j=1}^\infty A_j \right). \]
+    Finally, taking the limit as $m\to\infty$ gives
+    \[ \sum_{j=1}^\infty |\nu|(A_j) \leq |\nu|\left( \bigcup_{j=1}^\infty A_j \right). \]
+<p>To prove the reverse inequality, let $E_1, E_2, \ldots, E_n$ be a finite disjoint collection of measurable subsets of $\bigcup_{j=1}^\infty A_j$.
+    Then 
+    \begin{align*}
+        \sum_{j=1}^\infty |\nu| ( A_j) &\geq \sum_{j=1}^\infty \sum_{k=1}^n |\nu( E_k \cap A_j )| \\
+            &= \sum_{k=1}^n \sum_{j=1}^\infty |\nu( E_k \cap A_j )| \\
+            &\geq \sum_{k=1}^n \left| \sum_{j=1}^\infty \nu( E_k \cap A_j ) \right| \\
+            &= \sum_{k=1}^n |\nu( E_k )|
+    \end{align*}
+    where we have used the definition of $|\nu|(A_j)$ in the first inequality, the triangle inequality in the second inequality, and the countable additivity of $\nu$ in the last equality.
+    Taking the supremum over all such collections $\{ E_k \}_{k=1}^n$ gives
+    \[ \sum_{j=1}^\infty |\nu| ( A_j) \geq |\nu|\left( \bigcup_{j=1}^\infty A_j \right). \]
+    Therefore $|\nu|$ is a measure on $(X,\mathcal{A})$ as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:total_variation_signed_measure">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Total Variation of Signed Measure is Positive plus Negative Variation)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space and let $\nu$ be a signed measure on $(X,\mathcal{A})$.
+    Show that the total variation of $\nu$ is given by
+    \[ |\nu| = \nu^+ + \nu^- \]
+    where $\nu^+$ and $\nu^-$ are the positive and negative variations of $\nu$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-9">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-9')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-9">
+    Recall from Lemma <span class="ref-unknown" title="Reference not found: lem:properties_of_total_variation_vector_measure">[lem:properties_of_total_variation_vector_measure?]</span>.(iv) that
+    \[ |\nu|(A) = \sup \{ |\nu(C_1)| + |\nu(C_2)| : C_1, C_2 \text{ are disjoint measurable subsets of } A \} \]
+    for each $A \in \mathcal{A}$.
+<p>Let \[ X = A^+ \cup A^- \]
+    be a Hahn decomposition of $X$ with respect to $\nu$.
+    Then by definition of $\nu^+$ and $\nu^-$, we have
+    \[ \nu^+(A) = \nu(A \cap A^+) \quad \text{and} \quad \nu^-(A) = -\nu(A \cap A^-) \]
+    for each $A \in \mathcal{A}$.</p>
+<p>Let $A \in \mathcal{A}$ be arbitrary.
+    Then we see that
+    \[ \nu^+(A) + \nu^-(A) = \nu(A \cap A^+) - \nu(A \cap A^-) = |\nu(A\cap A^+)| + |\nu(A\cap A^-)| \leq |\nu|(A) \]
+    since $A\cap A^+$ and $A\cap A^-$ are disjoint measurable subsets of $A$.
+    To prove the reverse inequality, let $\epsilon > 0$ be arbitrary.
+    Then by the definition of $|\nu|(A)$, there exist disjoint measurable subsets $C_1, C_2 \subseteq A$ such that
+    \[ |\nu|(A) < |\nu(C_1)| + |\nu(C_2)| + \epsilon. \]
+    Now we have
+    \begin{align*}
+        |\nu(C_1)| &\leq |\nu(C_1\cap A^+) + \nu(C\cap A^-)| \\
+            &\leq \nu(C_1 \cap A^+) - \nu(C_1 \cap A^-)
+    \end{align*}
+    and similarly
+    \[ |\nu(C_2)| \leq \nu(C_2 \cap A^+) - \nu(C_2 \cap A^-). \]
+    Therefore we have
+    \begin{align*}
+        |\nu|(A) &< |\nu(C_1)| + |\nu(C_2)| + \epsilon \\
+            &\leq \nu(C_1 \cap A^+) - \nu(C_1 \cap A^-) + \nu(C_2 \cap A^+) - \nu(C_2 \cap A^-) + \epsilon \\
+            &= \nu( (C_1 \cup C_2) \cap A^+ ) - \nu( (C_1 \cup C_2) \cap A^- ) + \epsilon \\
+            &\leq \nu(A \cap A^+) - \nu(A \cap A^-) + \epsilon \\
+            &= \nu^+(A) + \nu^-(A) + \epsilon
+    \end{align*}
+    by disjoint additivity of $\nu$ and since $C_1 \cup C_2 \subseteq A$.
+    Since $\epsilon > 0$ was arbitrary, obtain
+    \[ |\nu|(A) \leq \nu^+(A) + \nu^-(A). \]
+    Therefore we have shown that
+    \[ |\nu|(A) = \nu^+(A) + \nu^-(A) \]
+    for each $A \in \mathcal{A}$ as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<h3>Absolute Continuity and Lebesgue Decomposition Theorem</h3>
+<div class="theorem-box definition-box" id="def:absolute_continuity_of_measures">
+  <div class="theorem-header"><strong>Definition ?</strong> (Absolutely Continuous)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A},\mu)$ be a measure space, and let $\nu$ be a vector measure on $(X,\mathcal{A})$ taking values in $\R^m$.
+    We say that $\nu$ is <em>absolutely continuous</em> with respect to $\mu$, denoted $\nu \ll \mu$, if for each $A \in \mathcal{A}$ with $\mu(A) = 0$, we have $\nu(A) = 0$.
+    That is,
+    \[ A\in \mathcal{A} \ \ \text{and} \ \ \mu(A) = 0 \implies \nu(A) = 0. \]
+    Similarly, if $\nu$ is a measure on $(X,\mathcal{A})$, we say that $\nu$ is absolutely continuous with respect to $\mu$ if
+    \[ A\in \mathcal{A} \ \ \text{and} \ \ \mu(A) = 0 \implies \nu(A) = 0. \]</div>
+</div>
+<p>Notice that we really have to include the second definition for measures since only finite measures are vector measures taking values in $\R$.</p>
+<div class="theorem-box example-box collapsible-box collapsed" id="ex:absolute_continuity_of_vector_measure_from_L1_function" data-collapsible-id="collapsible-ex:absolute_continuity_of_vector_measure_from_L1_function">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-ex:absolute_continuity_of_vector_measure_from_L1_function')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Example ?</strong>
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-ex:absolute_continuity_of_vector_measure_from_L1_function">Let $(X,\mathcal{A},\mu)$ be a measure space.
+    Let $f \in L^1(X,\mu;\R^m)$ be a vector-valued $L^1$ function, and let $\nu$ be the vector measure defined by
+    \[ \nu(A) = \int_A f \,\dif \mu. \]
+    Then $\nu$ is absolutely continuous with respect to $\mu$.
+<p>To see this, let $A \in \mathcal{A}$ be such that $\mu(A) = 0$.
+    Then we have
+    \[ \| \nu(A) \| \leq |\nu|(A) = \int_A \|f\| \,\dif \mu = 0 \]
+    by Proposition <span class="ref-unknown" title="Reference not found: prop:total_variation_of_vector_measure_from_L1_function">[prop:total_variation_of_vector_measure_from_L1_function?]</span>, so that $\nu(A) = 0$ as desired.</div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:absolute_continuity_examples">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Absolute Continuity of Variations)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space.
+    <ol style="list-style-type: lower-roman;"><li>If $\nu$ is a signed measure, then $v^+ \ll |\nu|$ and $v^- \ll |\nu|$.
+        </li><li>If $\nu$ is a vector measure taking values in $\R^m$, then each component measure $\nu_k$ is absolutely continuous with respect to $|\nu|$ and also $\nu \ll |\nu|$.</li></ol></div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-10">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-10')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-10">
+    <ol><li>Assume $\nu$ is a signed measure.
+            Let $A \in \mathcal{A}$ be such that $|\nu|(A) = 0$.
+            Then by Exercise <span class="ref-unknown" title="Reference not found: ex:total_variation_signed_measure">[ex:total_variation_signed_measure?]</span>, we have
+            \[ \nu^+(A) + \nu^-(A) = |\nu|(A) = 0 \]
+            so that $\nu^+(A) = 0$ and $\nu^-(A) = 0$.
+            Since $A$ was an arbitrary measurable set with $|\nu|(A) = 0$, we conclude that $\nu^+ \ll |\nu|$ and $\nu^- \ll |\nu|$ as desired.
+<p></li><li>Assume $\nu$ is a vector measure taking values in $\R^m$.
+            Let $A \in \mathcal{A}$ be such that $|\nu|(A) = 0$.
+            Then by Lemma <span class="ref-unknown" title="Reference not found: lem:properties_of_total_variation_vector_measure">[lem:properties_of_total_variation_vector_measure?]</span>.(i) we have
+            \[ | \nu_k(A) | \leq \| \nu(A) \| \leq |\nu|(A) = 0 \]
+            for each $1 \leq k \leq m$, so that $\nu_k(A) = 0$ for each $1 \leq k \leq m$.
+            Since $A$ was an arbitrary measurable set with $|\nu|(A) = 0$, we conclude that $\nu_k \ll |\nu|$ for each $1 \leq k \leq m$.
+            Finally, since $\nu(A) = ( \nu_1(A), \nu_2(A), \ldots, \nu_m(A) )$, we also have $\nu(A) = 0$.
+            Therefore we have $\nu \ll |\nu|$ as desired.</li></ol>
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box definition-box" id="def:mutually_singular_measures">
+  <div class="theorem-header"><strong>Definition ?</strong> (Mutually Singular)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space, and let $\nu$ and $\mu$ be two countably additive set functions on $\mathcal{A}$ of the same type, i.e. both measures, both signed measures, or both vector measures taking values in $\R^m$.
+    We say that $\nu$ and $\mu$ are <em>mutually singular</em>, denoted $\nu \perp \mu$, if there exist disjoint measurable sets $A,B \in \mathcal{A}$ such that
+    \[ X = A \cup B, \qquad\text{and}\qquad \nu(E) = \nu( E \cap A ), \quad \mu(E) = \mu( E \cap B ) \]
+    for all $E \in \mathcal{A}$.</div>
+</div>
+<p>That is, the measure $\nu$ only "sees" the set $A$ while the measure $\mu$ only "sees" the set $B$, and the two sets do not overlap.</p>
+<div class="theorem-box exercise-box" id="ex:positive_negative_variations_mutually_singular">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Positive and Negative Variations of Signed Measure are Mutually Singular)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space and let $\nu$ be a signed measure.
+    Show that $\nu^+$ and $\nu^-$ from the Jordan decomposition are mutually singular.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-11">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-11')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-11">
+    By the proof of the Jordan decomposition (Theorem <span class="ref-unknown" title="Reference not found: thm:jordan_decomposition">[thm:jordan_decomposition?]</span>), let \[ X = A^+ \cup A^- \] be a Hahn decomposition of $X$ with respect to $\nu$.
+    Then by definition of $\nu^+$ and $\nu^-$, we have
+    \[ \nu^+(E) = \nu(E \cap A^+) \quad \text{and} \quad \nu^-(E) = -\nu(E \cap A^-) \]
+    for each $E \in \mathcal{A}$.
+    Therefore $\nu^+$ only "sees" the set $A^+$ while $\nu^-$ only "sees" the set $A^-$, and since $A^+$ and $A^-$ are disjoint, we conclude that $\nu^+$ and $\nu^-$ are mutually singular as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<p>Absolute continuity and mutual singularity are in a sense "opposites" of each other, as shown by the following lemma.</p>
+<div class="theorem-box lemma-box" id="ex:absolute_continuity_and_mutually_singular_implies_zero">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Absolutely Continuous and Mutually Singular implies Zero Measure)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A},\mu)$ be a measure space and let $\nu$ be a vector measure on $(X,\mathcal{A})$.
+    Then $\nu \ll \mu$ and $\nu \perp \mu$ implies that $\nu = 0$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-12">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-12')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-12">
+    Assume that $\nu \ll \mu$ and $\nu \perp \mu$.
+    Then by definition of mutual singularity, there exist disjoint measurable sets $A,B \in \mathcal{A}$ such that
+    \[ X = A \cup B, \qquad \nu(E) = \nu( E \cap A ), \quad \mu(E) = \mu( E \cap B ) \]
+    for all $E \in \mathcal{A}$.
+<p>Let $E \in \mathcal{A}$ be arbitrary.
+    Then \[ \mu(E\cap A) = \mu((E\cap A)\cap B) = \mu(\varnothing) = 0. \]
+    Since $\nu \ll \mu$, we have $\nu(E\cap A) = 0$.
+    Therefore we have
+    \[ \nu(E) = \nu(E\cap A) = 0. \]
+    Since $E$ was an arbitrary measurable set, we conclude that $\nu = 0$ as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box theorem-box" id="thm:lebsegue_decomposition">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Lebesgue Decomposition Theorem)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A},\mu)$ be a measure space, and let $\nu$ be a vector measure on $(X,\mathcal{A})$ taking values in $\R^m$.
+    Then there exist unique vector measures $\nu_{\text{ac}}$ and $\nu_{\text{s}}$ on $(X,\mathcal{A})$ taking values in $\R^m$ such that
+    $\nu = \nu_{\text{ac}} + \nu_{\text{s}}$ and
+    \[ \nu_{\text{ac}} \ll \mu \quad\text{and}\quad \nu_{\text{s}} \perp \mu. \]
+    The measures $\nu_{\text{ac}}$ and $\nu_{\text{s}}$ are called the <em>absolutely continuous</em> and <em>singular</em> parts of $\nu$ with respect to $\mu$, respectively.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-13">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-13')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-13">
+    Let \[ b := \sup\{ |\nu|(A) : A \in \mathcal{A}, \mu(A) = 0 \}. \]
+    Then for each $j \in \Z^+$, we can find a measurable set $A_j \in \mathcal{A}$ such that $\mu(A_j) = 0$ and
+    \[ |\nu|(A_j) > b - \frac{1}{j}. \]
+    Let \[ A := \bigcup_{j=1}^\infty A_j. \]
+    Then $\mu(A) = 0$ since countable unions of $\mu$ measure zero sets have $\mu$ measure zero.
+    Moreover, by countable subadditivity of $|\nu|$ (Lemma <span class="ref-unknown" title="Reference not found: lem:total_variation_is_measure">[lem:total_variation_is_measure?]</span>), we have
+    \[ |\nu|(A) \leq \sum_{j=1}^\infty |\nu|(A_j) \leq b. \]
+    On the other hand, since $A_j \subseteq A$ for each $j\in \Z^+$, we have
+    \[ |\nu|(A) \geq |\nu|(A_j) > b - \frac{1}{j} \]
+    for each $j\in \Z^+$, so that taking the limit as $j\to\infty$ gives $|\nu|(A) \geq b$.
+    Therefore we have shown that $|\nu|(A) = b$.
+<p>Define vector measures $\nu_{\text{ac}}$ and $\nu_{\text{s}}$ on $(X,\mathcal{A})$ by
+    \[ \nu_{\text{ac}}(E) := \nu(E \cap A^c), \quad \nu_{\text{s}}(E) := \nu(E \cap A) \]
+    for each $E \in \mathcal{A}$.
+    Then it is clear that $\nu = \nu_{\text{ac}} + \nu_{\text{s}}$ by disjoint additivity of $\nu$.</p>
+<p>If $E \in \mathcal{A}$, then 
+    \[ \mu(E) = \mu(E\cap A) + \mu(E\cap A^c) = 0 + \mu(E\cap A^c) = \mu(E\cap A^c) \]
+    since $\mu(A) = 0$.
+    This shows that $\nu_{\text{s}} \perp \mu$.</p>
+<p>To see that $\nu_{\text{ac}} \ll \mu$, let $E \in \mathcal{A}$ be such that $\mu(E) = 0$.
+    Then $\mu(E\cup A) = 0$, so by definition of $b$ we have
+    \[ b \geq |\nu|(E\cup A) = |\nu|(E) + |\nu|(A) = |\nu|(E) + b = b \]
+    which forces $|\nu|(E\setminus A) = 0$.
+    Therefore
+    \[ \nu_{\text{ac}}(E) = \nu(E\cap A^c) = \nu(E\setminus A) = 0. \]
+    Since $E$ was an arbitrary measurable set with $\mu(E) = 0$, we conclude that $\nu_{\text{ac}} \ll \mu$.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Note:</em> The construction of $\nu_{\text{ac}}$ and $\nu_{\text{s}}$ shows that if $\nu$ is a (finite) measure, then so are $\nu_{\text{ac}}$ and $\nu_{\text{s}}$.
+    That is, if $\nu$ never takes on negative values, then neither do $\nu_{\text{ac}}$ and $\nu_{\text{s}}$.
+    <div style="margin: 1em 0;"></div></p>
+<p>To prove uniqueness, suppose that there exist vector measures $\tilde{\nu}_{\text{ac}}$ and $\tilde{\nu}_{\text{s}}$ on $(X,\mathcal{A})$ taking values in $\R^m$ such that
+    \[ \nu = \tilde{\nu}_{\text{ac}} + \tilde{\nu}_{\text{s}} \]
+    and
+    \[ \tilde{\nu}_{\text{ac}} \ll \mu \quad\text{and}\quad \tilde{\nu}_{\text{s}} \perp \mu. \]
+    Then we have
+    \[ \nu_{\text{ac}} + \nu_{\text{s}} = \tilde{\nu}_{\text{ac}} + \tilde{\nu}_{\text{s}} \]
+    which implies that
+    \[ \nu_{\text{ac}} - \tilde{\nu}_{\text{ac}} = \tilde{\nu}_{\text{s}} - \nu_{\text{s}}. \]
+    Since the left-hand side is absolutely continuous with respect to $\mu$ and the right-hand side is mutually singular with respect to $\mu$, we conclude from Lemma <span class="ref-unknown" title="Reference not found: ex:absolute_continuity_and_mutually_singular_implies_zero">[ex:absolute_continuity_and_mutually_singular_implies_zero?]</span> that
+    \[ \nu_{\text{ac}} - \tilde{\nu}_{\text{ac}} = 0 \quad\text{and}\quad \tilde{\nu}_{\text{s}} - \nu_{\text{s}} = 0. \]
+    Therefore we have shown that $\nu_{\text{ac}} = \tilde{\nu}_{\text{ac}}$ and $\nu_{\text{s}} = \tilde{\nu}_{\text{s}}$, completing the proof.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+    </main>
+  </div>
+  
+  <script>
+    function toggleChapter(element) {
+      element.parentElement.classList.toggle('expanded');
+    }
+    
+    // Highlight current page in sidebar
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPath = window.location.pathname;
+      const links = document.querySelectorAll('.section-link');
+      links.forEach(link => {
+        if (currentPath.endsWith(link.getAttribute('href').split('/').pop())) {
+          link.classList.add('active');
+          // Expand parent chapter
+          const group = link.closest('.chapter-group');
+          if (group) group.classList.add('expanded');
+        }
+      });
+    });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('Restoring proof collapse states...');
+      try {
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        const currentPage = window.location.pathname;
+        const pageOpen = openProofs[currentPage] || [];
+        
+        console.log('Current page:', currentPage);
+        console.log('Open proof IDs stored:', pageOpen);
+        console.log('Found ' + pageOpen.length + ' open proofs for this page');
+        
+        document.querySelectorAll('.proof-box').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          console.log('Checking proof:', proofId, 'Should be open:', pageOpen.includes(proofId));
+          if (pageOpen.includes(proofId)) {
+            box.classList.remove('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'true');
+          } else {
+            box.classList.add('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        const pageBoxes = openBoxes[currentPage] || [];
+        
+        console.log('Open box IDs stored:', pageBoxes);
+        
+        document.querySelectorAll('.collapsible-box').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          console.log('Checking box:', boxId, 'Should be open:', pageBoxes.includes(boxId));
+          if (pageBoxes.includes(boxId)) {
+            box.classList.remove('collapsed');
+          } else {
+            box.classList.add('collapsed');
+          }
+        });
+        
+        console.log('Proof states restored');
+      } catch (e) {
+        console.error('Error restoring collapse state:', e);
+      }
+    });
+    
+    function toggleProof(proofId) {
+      const proofContent = document.getElementById(proofId);
+      const proofBox = proofContent.closest('.proof-box');
+      proofBox.classList.toggle('collapsed');
+      
+      const button = proofBox.querySelector('.proof-toggle');
+      button.setAttribute('aria-expanded', !proofBox.classList.contains('collapsed'));
+      
+      saveProofState();
+    }
+    
+    function toggleSubproof(subproofId) {
+      const subproofContent = document.getElementById(subproofId);
+      const subproof = subproofContent.closest('.subproof');
+      subproof.classList.toggle('collapsed');
+      
+      const button = subproof.querySelector('.subproof-toggle');
+      button.setAttribute('aria-expanded', !subproof.classList.contains('collapsed'));
+    }
+    
+    function saveProofState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        if (!openProofs[currentPage]) {
+          openProofs[currentPage] = [];
+        }
+        
+        openProofs[currentPage] = [];
+        document.querySelectorAll('.proof-box:not(.collapsed)').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          if (proofId) {
+            openProofs[currentPage].push(proofId);
+          }
+        });
+        
+        localStorage.setItem('openProofs', JSON.stringify(openProofs));
+        console.log('Saved proof state (open proofs):', openProofs[currentPage]);
+      } catch (e) {
+        console.error('Error saving collapse state:', e);
+      }
+    }
+    
+    function toggleCollapsible(collapsibleId) {
+      const content = document.getElementById(collapsibleId);
+      const box = content.closest('.collapsible-box');
+      box.classList.toggle('collapsed');
+      
+      saveCollapsibleState();
+    }
+    
+    function saveCollapsibleState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        if (!openBoxes[currentPage]) {
+          openBoxes[currentPage] = [];
+        }
+        
+        openBoxes[currentPage] = [];
+        document.querySelectorAll('.collapsible-box:not(.collapsed)').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          if (boxId) {
+            openBoxes[currentPage].push(boxId);
+          }
+        });
+        
+        localStorage.setItem('openBoxes', JSON.stringify(openBoxes));
+      } catch (e) {
+        console.error('Error saving box state:', e);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        const proofBoxes = document.querySelectorAll('.proof-box');
+        const anyExpanded = Array.from(proofBoxes).some(box => !box.classList.contains('collapsed'));
+        
+        proofBoxes.forEach(box => {
+          if (anyExpanded) {
+            box.classList.add('collapsed');
+          } else {
+            box.classList.remove('collapsed');
+          }
+        });
+        
+        saveProofState();
+      }
+    });
+    
+    document.querySelectorAll('a.ref-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.background = '#fef3c7';
+          target.style.transition = 'background 0.3s ease';
+          setTimeout(() => { target.style.background = ''; }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

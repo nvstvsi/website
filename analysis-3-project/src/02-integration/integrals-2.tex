@@ -1,0 +1,617 @@
+\subsection{Almost Everywhere}
+
+\begin{definition}[Almost Everywhere]
+    \label{def:almost_everywhere}
+    Let $(X,\mu)$ be a measure space.
+    We say that a property holds \textit{almost everywhere} (a.e.) if the set of points where the property fails to hold has $\mu$ measure zero.
+
+   \vspace{2mm}
+   
+    \noindent If the property depends on a point $x \in X$, we sometimes say that the property $P(x)$ holds for $\mu$-almost every $x \in X$.
+\end{definition}
+
+\begin{exercise}
+    \label{ex:measurable_if_equal_ae}
+    Let $(X,\mu)$ be a measure space such that $\mu$ is complete, i.e. every subset of $\mu$-measure zero set is measurable.
+    (This is true for all outer measures, for instance.)
+    Let $Y$ be a topological space with Borel $\sigma$-algebra $\mathcal{B}_Y$.
+
+    Suppose that $f: X \to Y$ is a measurable function and that $g : X \to Y$ is a function such that $f(x) = g(x)$ for $\mu$-almost every $x \in X$.
+    Then $g$ is measurable.
+\end{exercise}
+\begin{proof}
+    Let $N := \{ x \in X : f(x) \neq g(x) \}$, which has measure zero by assumption, and is hence a measurable subset of $X$ by completeness of $\mu$.
+    Let $E \in \mathcal{B}_Y$ be a Borel set.
+    Then
+    \[ g^{-1}(E) = \left( g^{-1}(E) \setminus N \right) \cup \left( g^{-1}(E) \cap N \right) = \left( f^{-1}(E) \setminus N \right) \cup \left( g^{-1}(E) \cap N \right). \]
+    Since $f$ is measurable, $f^{-1}(E)$ is a measurable subset of $X$, so the set $f^{-1}(E) \setminus N$ is also a measurable subset of $X$.
+    Since $N$ has $\mu$-measure zero, every subset of $N$ also has $\mu$-measure zero by monotonicity, so $g^{-1}(E) \cap N$ is a measurable subset of $X$ by completeness of $\mu$.
+    Thus $g^{-1}(E)$ is a union of two measurable sets, and hence is measurable.
+    Since $E \in \mathcal{B}_Y$ was arbitrary, we have that $g$ is measurable.
+\end{proof}
+
+We again use the notation $\F$ to denote either $\R$ or $\C$, and we let $\F_\infty$ be $[-\infty,\infty]$ if $\F = \R$ and $\C \cup \{\infty\}$ if $\F = \C$.
+
+\begin{definition}[Lebesgue Integral over a Measurable Set]
+    \label{def:lebesgue_integral_over_measurable_set}
+    Let $(X,\mu)$ be a measure space, let $E\sub X$ be a measurable set, and let $f$ be a measurable function $X \to \F_\infty$.
+    Then we define the \textit{Lebesgue integral} of $f$ \textit{over} $E$ with respect to $\mu$ to be
+    \[ \int_E f \,\dif\mu := \int_X f \Chi_E \,\dif\mu \]
+    if the integral on the right-hand side is defined.
+\end{definition}
+
+\begin{remark}[Notation for Integrals over Intervals]
+    \label{rem:integral_over_interval}
+One should be careful with this notation in the case that $E$ is an interval $[a,b]$ and $X = [-\infty,\infty]$.
+Following tradition, we would like to write $\int_a^b f(x) \dif x$ to denote the Lebesgue integral of $f$ over $[a,b]$, but this notation suggests that the integral is ``oriented'' from $a$ to $b$, so that 
+\[ \int_a^b f(x) \,\dif x = - \int_b^a f(x) \,\dif x. \]
+In the Lebesgue theory, this is not the case; there is no orientation, and so while it is proper to write $\int_{ [a,b] } f(x) \,\dif x$, we will take the more traditional notation $\int_a^b f(x) \,\dif x$ 
+and just be careful to always have $a \leq b$ and never swap the limits of integration.
+\end{remark}
+
+\begin{remark}[All Functions are Integrable over Sets of Measure Zero]
+    \label{rem:integral_over_zero}
+If $\mu(E)=0$ then every measurable function is integrable over $E$ with integral $0$.
+We check this --- let $f : X \to [-\infty,\infty]$ be a measurable function.
+Then $f^+$ and $f^-$ are nonnegative measurable functions, and $\Chi_E f^+$ and $\Chi_E f^-$ are also nonnegative measurable functions.
+Notice that each simple function $s : X \to [0,\infty)$ satisfying $s \leq \Chi_E f^+$ must have standard form $s = \sum_{j=0}^N a_j \Chi_{A_j}$ where $A_j \sub E$ for each $j=1,2,\ldots,N$ and $A_0 = X \setminus E$;
+hence $\mu(A_j) = 0$ for each $j=1,2,\ldots,N$.
+Thus by Lemma \ref{lem:integral_of_simple_function_2} for each such simple function $s$ we have
+\[ \int_X s \,\dif\mu = \sum_{j=0}^N a_j \mu(A_j) = a_0 \mu(A_0) + \sum_{j=1}^N a_j \mu(A_j) = 0. \]
+Taking the supremum over all such simple functions $s$ gives
+\[ \int_X \Chi_E f^+ \,\dif\mu = 0. \]
+Similarly, we have
+\[ \int_X \Chi_E f^- \,\dif\mu = 0. \]
+Thus the integral $\int_E f \,\dif\mu = \int_X \Chi_E f \,\dif\mu$ is defined and equal to $0$.
+
+In the case that $f : X \to \C \cup \{\infty\}$ is a complex-valued measurable function, we can write $f = u + iv$ where $u,v : X \to [-\infty,\infty]$ are measurable functions.
+Then by the above argument, the integrals $\int_E u \,\dif\mu$ and $\int_E v \,\dif\mu$ are both defined and equal to $0$, so the integral $\int_E f \,\dif\mu = \int_E u \,\dif\mu + i \int_E v \,\dif\mu$ is also defined and equal to $0$.
+\end{remark}
+
+\begin{exercise}[Bounding an Integral]
+    \label{ex:bounding_an_integral}
+    Let $(X,\mu)$ be a measure space, let $E\sub X$ be a measurable set, and let $f$ be a measurable function $X\to \F_\infty$, such that the integral $\int_E |f| \,\dif\mu$ is defined.
+    Then 
+    \[ \abs{ \int_E f\,\dif\mu } \leq \mu(E) \sup_{x \in E} |f(x)|. \]
+\end{exercise}
+\begin{proof}
+    Let $c := \sup_{x \in E} |f(x)| \in [0,\infty]$.
+    If $c = \infty$, then the inequality is trivial.
+    If $c < \infty$, then 
+    \begin{align*}
+        \abs{ \int_E f\,\dif\mu } &= \abs{ \int_X f \Chi_E \,\dif\mu } \\
+            &\leq \int_X |f| \Chi_E \,\dif\mu \\
+            &\leq \int_X c \Chi_E \,\dif\mu \\
+            &= c \mu(E) \\
+    \end{align*}
+    where we have used the triangle inequality for integrals in the second line, the definition of $c$ in the third line, and Lemma \ref{lem:integral_of_simple_function} in the fourth line.
+\end{proof}
+
+\begin{exercise}[Integral of Functions Equal Almost Everywhere]
+    \label{ex:integral_of_function_equal_ae}
+    Let $(X,\mu)$ be a measure space, and let $f,g : X \to \F_\infty$ be measurable functions such that $f(x) = g(x)$ for $\mu$-almost every $x \in X$.
+    If the integral $\int_X f \,\dif\mu$ is defined, then the integral $\int_X g \,\dif\mu$ is also defined, and
+    \[ \int_X f \,\dif\mu = \int_X g \,\dif\mu. \]
+\end{exercise}
+\begin{proof}
+    First we assume that $\F = \R$.
+    Then $f^+, f^-, g^+, g^- : X \to [0,\infty]$ are nonnegative measurable functions.
+    Let $E := \{ x \in X : f(x) \neq g(x) \}$ so that $\mu(E) = 0$.
+    Then $f(x) = g(x)$ for each $x \in X \setminus E$.
+    Note that $f^+(x) = g^+(x)$ and $f^-(x) = g^-(x)$ for each $x \in X \setminus E$.
+
+    Since the integral $\int_X f \,\dif\mu$ is defined, at least one of the integrals $\int_X f^+ \,\dif\mu$ or $\int_X f^- \,\dif\mu$ is finite.
+    Assume without loss of generality that $\int_X f^+ \,\dif \mu < \infty$.
+    Then 
+    \[ \int_E f^+ \,\dif\mu \leq \mu(E) \sup_{E} f^+ = 0 \]
+    by Exercise \ref{ex:bounding_an_integral}; 
+    we have that 
+    \begin{align*}
+        \int_X f^+ \,\dif\mu &= \int_{X \setminus E} f^+ \,\dif\mu + \int_E f^+ \,\dif\mu \\
+            &= \int_{X \setminus E} g^+ \,\dif\mu + 0 \\
+            &= \int_X g^+ \,\dif\mu - \int_E g^+ \,\dif\mu \\
+            &= \int_X g^+ \,\dif\mu
+    \end{align*}
+    where we have used the fact that $f^+ = g^+$ on $X \setminus E$ in the second line, and that $\int_E g^+ \,\dif\mu$ is defined and equal to $0$ by remark \ref{rem:integral_over_zero} in the fourth line.
+    Similarly, we have
+    \[ \int_X f^- \,\dif\mu = \int_X g^- \,\dif\mu. \]
+    Thus the integral of $g$ is defined, and
+    \[ \int_X g \,\dif\mu = \int_X g^+ \,\dif\mu - \int_X g^- \,\dif\mu = \int_X f^+ \,\dif\mu - \int_X f^- \,\dif\mu = \int_X f \,\dif\mu. \]
+
+    In the case that $\F = \C$, we can write $f = u + iv$ and $g = s + it$ where $u,v,s,t : X \to [-\infty,\infty]$ are measurable functions.
+    Then $u(x) = s(x)$ and $v(x) = t(x)$ for $\mu$-almost every $x \in X$, so by the above argument we have
+    \[ \int_X u \,\dif\mu = \int_X s \,\dif\mu, \qquad \int_X v \,\dif\mu = \int_X t \,\dif\mu. \]
+    Thus the integral of $g$ is defined, and
+    \[ \int_X g \,\dif\mu = \int_X s \,\dif\mu + i \int_X t \,\dif\mu = \int_X u \,\dif\mu + i \int_X v \,\dif\mu = \int_X f \,\dif\mu. \]
+\end{proof}
+
+\begin{exercise}[Almost Everywhere Monotonicity]
+    \label{ex:almost_everywhere_monotonicity}
+    Let $(X,\mu)$ be a measure space, and let $f,g : X \to [-\infty,\infty]$ be measurable functions such that $f(x) \leq g(x)$ for $\mu$-almost every $x \in X$.
+    If the integrals $\int_X f \,\dif\mu$ and $\int_X g \,\dif\mu$ are both defined, then
+    \[ \int_X f \,\dif\mu \leq \int_X g \,\dif\mu. \]
+\end{exercise}
+
+\begin{proof}
+    Let $E := \{ x \in X : f(x) > g(x) \}$ so that $\mu(E) = 0$.
+    Then $f(x) \leq g(x)$ for each $x \in X \setminus E$.
+    Define the function $h : X \to [-\infty,\infty]$ by
+    \[ h(x) := \begin{cases}
+        -\infty, & x \in E \\
+        f(x), & x \in X \setminus E
+    \end{cases} \]
+    so that $h(x) \leq g(x)$ for each $x \in X$, and $h(x) = f(x)$ for $\mu$-almost every $x \in X$.
+    Since the integral $\int_X f \,\dif\mu$ is defined, the integral $\int_X h \,\dif\mu$ is also defined and equal to $\int_X f \,\dif\mu$ by Exercise \ref{ex:integral_of_function_equal_ae}.
+    Thus by monotonicity of the Lebesgue integral we have
+    \[ \int_X f \,\dif\mu = \int_X h \,\dif\mu \leq \int_X g \,\dif\mu \]
+    as desired.
+\end{proof}
+
+\begin{lemma}[Integral on Small Sets is Small]
+    \label{lem:integral_on_small_sets_is_small}
+    Let $(X,\mu)$ be a measure space, and let $f : X \to [0,\infty]$ be an integrable function.
+    Then for each $\epsilon>0$, there exists $\delta>0$ such that for each measurable set $E \subseteq X$ with $\mu(E) < \delta$, we have
+    \[ \abs{ \int_E f \, \dif \mu } < \epsilon. \]
+\end{lemma}
+
+\begin{proof}\textbf{Exercise.}
+    Recall $f$ is integrable means that $f$ is measurable and $\int_X f\,\dif \mu < \infty$. 
+    Let $\epsilon>0$. Let $s: X \to [0,\infty)$ be a simple function such that $0 \leq h\leq f$ and
+    \[ \int_X f\,\dif \mu - \int_X s\,\dif \mu < \frac{\epsilon}{2} \]
+    which exists by Lemma \ref{lem:integrals_via_simple_functions}. Let $M:= \sup_X s < \infty$.
+    Now choose $\delta < \frac{\epsilon}{2M}$.
+
+    Let $E \subseteq X$ be a measurable set with $\mu(E) < \delta$.
+    Then
+    \begin{align*}
+        \int_E f \, \dif \mu &= \int_E (f-s) \,\dif\mu + \int_E s \, \dif \mu \\
+            &\leq \frac{\epsilon}{2} + M \mu(E) \\
+            &< \frac{\epsilon}{2} + M \frac{\epsilon}{2M} = \epsilon
+    \end{align*}
+    as desired.
+\end{proof}
+
+\begin{lemma}[Absolute Continuity of the Integral]
+    \label{lem:finite_integral_helper_1}
+    Let $(X,\mu)$ be a measure space, and let $f : X \to [0,\infty]$ be an integrable function.
+    Then for each $\epsilon>0$, there exists a measurable set $E \subseteq X$ such that $\mu(E) < \infty$ and
+    \[ \int_{X\setminus E} f \, \dif \mu < \epsilon. \]
+\end{lemma}
+\begin{proof}
+    Let $\epsilon>0$.
+    Let $P$ be a $\mu$-partition of $X$ into disjoint measurable sets $A_1, A_2, \ldots, A_n$ such that
+    \[ \int_X g\,\dif\mu < \epsilon + L(f,P). \]
+    Let $E = \bigcup \{ A_j : \inf_{A_j} f >0, 1\leq j\leq n \}$.
+    Then $\mu(E) < \infty$, because other wise we would have $L(f,P) = \infty$ which would imply $\int_X f\,\dif'mu = \infty$ which
+    contradicts the integrability of $f$.
+
+    Now
+    \begin{align*}
+        \int_{X\setminus E} f\,\dif\mu &= \int_X f\,\dif\mu - \int_E f\,\dif\mu \\
+            &< (\epsilon + L(f,P)) - L(\Chi_E f, P) \\
+            &= \epsilon
+    \end{align*}
+    where the last line holds because $\inf_{A_j} f = 0 $ for each $A_j$ that is not contained in $E$.
+\end{proof}
+
+\begin{exercise}[Integral of a Positive Function is Zero iff Function is Zero a.e.]
+    \label{ex:integral_of_positive_function_is_zero_iff_function_is_zero_ae}
+    Let $(X,\mu)$ be a measure space, and let $f : X \to [0,\infty]$ be a nonnegative measurable function.
+    Then $\int_X f \,\dif\mu = 0$ if and only if $f(x) = 0$ for $\mu$-almost every $x \in X$.
+\end{exercise}
+\begin{proof}
+    The reverse direction is easy: if $f(x) = 0$ for $\mu$-almost every $x \in X$, then by Remark \ref{rem:integral_of_function_equal_ae} we have $\int_X f \,\dif\mu = 0$.
+
+    We prove the reverse direction in a few steps.
+    If $f$ is a simple function
+    \[ f = \sum_{j=1}^n a_j \Chi_{E_j} \]
+    with $a_j \geq 0$ for each $j=1,2,\ldots,n$, then by Lemma \ref{lem:integral_of_simple_function_2} we have
+    \[ \int_X f \,\dif\mu = \sum_{j=1}^n a_j \mu(E_j). \]
+    Thus the integral of $f$ is zero if and only if for eah $j=1,2,\ldots,n$ either $a_j = 0$ or $\mu(E_j) = 0$.
+    In this case, $f(x) = 0$ for $\mu$-almost every $x \in X$.
+
+    In general, we prove the contrapositive.
+    Let $f : X \to [0,\infty]$ be a nonnegative measurable function.
+    Then we have
+    \[ \{ x\in X : f(x) > 0 \} = \bigcup_{j=1}^\infty \{ x\in X : f(x) > \frac{1}{j} \}. \]
+    Since $f$ is not zero almost everywhere, then there exists $j \geq 1$ such that the set $E_j := \{ x\in X : f(x) > \frac{1}{j} \}$ has positive measure.
+    Then $f > \frac{1}{j} \Chi_{E_j}$, so by monotonicity of the Lebesgue integral we have
+    \[ \int_X f \,\dif\mu \geq \int_X \frac{1}{j} \Chi_{E_j} \,\dif\mu = \frac{1}{j} \mu(E_j) > 0.\]
+    Thus if $f$ is not zero almost everywhere, then $\int_X f \,\dif\mu > 0$.
+\end{proof}
+
+We end this section with a few comments, which will be useful later.
+
+Note that if $f : X \to \F_\infty$ is an integrable function, i.e. the integral $\int_X f \,\dif\mu$ is defined and finite, then the definitions require that the integral $\int_X |f| \,\dif\mu$ is also defined and finite (go and check).
+In particular, this implies that $f$ is finite $\mu$-almost everywhere, because if $f$ were infinite on a set of positive measure, then $|f|$ would also be infinite on that set, and hence the integral $\int_X |f| \,\dif\mu$ would be infinite.
+Thus if $f : X \to \F_\infty$ is an integrable function, then $f$ is finite $\mu$-almost everywhere.
+
+In view of this comment and the results about functions that are equal almost everywhere, we can often treat integrable functions as if they were finite-valued functions.
+In particular, it is really no loss of generality to say things like ``let $f : X \to \F$ be an integrable function'' instead of the more correct ``let $f : X \to \F_\infty$ be an integrable function''.
+This is becuase if $f : X \to \F_\infty$ is an integrable function, then $f$ is finite $\mu$-almost everywhere, so we can define a function $g : X \to \F$ which is equal to $f$ on the set where $f$ is finite and equal to $0$ (or any other finite value) on the set where $f$ is infinite.
+Then $g$ is a finite-valued function which is equal to $f$ almost everywhere, so by Exercise \ref{ex:integral_of_function_equal_ae} the integral of $g$ is defined and equal to the integral of $f$.
+We will be slightly lazy and conform to the convention of saying ``let $f : X \to \F$ be an integrable function'' and proving theorems in that case.
+However, we should remember that this is just a notational convenience, and that the theorems about integrable functions still hold for integrable functions $f : X \to \F_\infty$, as they must be finite-valued almost everywhere.
+
+
+\section{Limits and Integration}
+
+In this section, we prove some classical results about limits and integration.
+In the previous section, we proved the Monotone Convergence Theorem (Theorem \ref{thm:monotone_convergence_theorem}).
+Now we prove the famous Dominated Convergence Theorem.
+
+\subsection{Dominated Convergence Theorem}
+
+\begin{exercise}[Fatou's Lemma, Pointwise a.e. Version]
+    \label{ex:fatous_lemma}
+    Let $(X,\mu)$ be a measure space, and let $\{f_k\}_{k=1}^\infty$ be a sequence of nonnegative measurable functions.
+    Suppose that $f$ is a measurable function such that
+    \[ f(x) = \liminf_{k \to \infty} f_k(x) , \qquad \text{ for $\mu$-a.e. } x\in X. \]
+    Then 
+    \[ \int_X f \, \dif \mu \leq \liminf_{k \to \infty} \int_X f_k \, \dif \mu. \]
+    Give an example where equality does not hold.
+\end{exercise}
+
+\begin{proof}
+    First we see that $f$ is measurable --- the limit inferior of measurable functions $\liminf_{k \to \infty} f_k$ is measurable by Proposition \ref{prop:properties_of_measurable_functions}, and changing a function on a set of measure zero does not affect measurability, so $f$ is measurable.
+    Also $f$ must be nonnegative $\mu$-almost everywhere, so the integrals in the statement are well-defined.
+
+    For each $k\in \Z^+$ and each $n\geq k$, we have
+    \[ \inf_{n \geq k} f_n(x) \leq f_k(x) \qquad \forall x\in X \]
+    which implies
+    \[ \int_X \inf_{n \geq k} f_n \,\dif \mu \leq \int_X f_k \, \dif \mu \]
+    for each $n\geq k$.
+    Since the left side does not depend on $n$, we have
+    \[ \int_X \inf_{n \geq k} f_n \,\dif \mu \leq \inf_{m\geq k} \int_X f_m \, \dif \mu. \tag{$*$}\]
+
+    The sequence of functions $\{ \inf_{n \geq k} f_n \}_{k=1}^\infty$ is increasing in $k$ and converges pointwise to $f$ as $k \to \infty$.
+    Thus by the Monotone Convergence Theorem (Theorem \ref{thm:monotone_convergence_theorem}), we have
+    \begin{align*}
+        \int_X f \, \dif \mu &= \int_X \lim_{k \to \infty} \inf_{n \geq k} f_n \, \dif \mu \\
+            &= \lim_{k \to \infty} \int_X \inf_{n \geq k} f_n \, \dif \mu \\
+            &\leq \lim_{k \to \infty} \inf_{m\geq k} \int_X f_m \, \dif \mu \\
+            &= \liminf_{k \to \infty} \int_X f_k \, \dif \mu
+    \end{align*}
+    where the inequality follows from ($*$). 
+
+    \vspace{2mm}
+
+    For an example where equality does not hold, let $X=[0,1]$ and consider the Lebesgue outer measure on $X$.
+    For each $k\in \Z^+$, define the function $f_k : [0,1] \to [0,\infty)$ by
+    \[ f_k(x) = \begin{cases} k, & x \in (0,1/k) \\
+        0, & \text{otherwise} \end{cases}. \]
+    Then for each $x \in [0,1]$, we have $\liminf_{k \to \infty} f_k(x) = 0$.
+    Thus $f(x) = 0$ for all $x \in [0,1]$, so $\int_{[0,1]} f \, \dif x = 0$.
+    However, for each $k\in \Z^+$, we have
+    \[ \int_{[0,1]} f_k \, \dif x = \int_0^{1/k} k \, \dif x = 1. \]
+\end{proof}
+
+Our limit results are not as general as we would like --- the Monotone Convergence Theorem requires the sequence of functions to be nonnegative and increasing, and Fatou's Lemma requires the functions to be nonnegative (or at least uniformly bounded below) and we only get an inequality.
+The dominated convergence theorem removes these restrictions.
+
+\begin{theorem}[Dominated Convergence Theorem, Pointwise a.e. Version]
+    \label{thm:dominated_convergence_theorem_1}
+    Let $(X,\mu)$ be a measure space, and let $\{f_k\}_{k=1}^\infty$ be a sequence of measurable functions that converge pointwise $\mu$-almost everywhere to a function $f$.
+    Suppose that there exists an integrable function $g : X \to [0,\infty]$ such that $|f_k(x)| \leq g(x)$ for all $k\in \Z^+$ and $\mu$-almost every $x\in X$.
+    Then $f$ is integrable and
+    \[ \lim_{k \to \infty} \int_X |f_k - f| \, \dif \mu = 0, \]
+    and in particular
+    \[ \lim_{k \to \infty} \int_X f_k \, \dif \mu = \int_X f \, \dif \mu. \]
+\end{theorem}
+
+Before the proof, we remark that there are several versions of the Dominated Convergence Theorem, as well as Fatou's Lemma.
+We will not attempt to prove the most general versions, but we will state several versions of practical importance.
+See the appendix about Modes of Convergence for details. 
+
+\begin{proof}
+    See that by assumption that $|f_k(x)| \leq g(x)$ for all $k\in \Z^+$ and $\mu$-almost every $x\in X$, and that $\{f_k\}_{k=1}^\infty$ converges pointwise $\mu$-almost everywhere to $f$, 
+    so we must have $|f(x)| \leq g(x)$ for $\mu$-almost every $x\in X$ as well.
+    As a result, $f$ is measurable and integrable by Exercise \ref{ex:integral_of_function_equal_ae} and Exercise \ref{ex:almost_everywhere_monotonicity}.
+    Also the sequence of functions $\{ 2g - |f_k - f| \}_{k=1}^\infty$ is a sequence of nonnegative measurable functions that converges pointwise $\mu$-almost everywhere to the function $2g$.
+
+    By Fatou's Lemma (Exercise \ref{ex:fatous_lemma}), we have
+    \begin{align*}
+        \int_X 2g \,\dif\mu &= \int_X \liminf_{k\to\infty} (2g - |f_k - f|) \, \dif \mu \\
+            &\leq \liminf_{k\to\infty} \int_X (2g - |f_k - f|) \, \dif \mu \\
+            &= \int_X 2g \, \dif \mu - \limsup_{k\to\infty} \int_X |f_k - f| \, \dif \mu
+    \end{align*}
+    which implies
+    \[ \limsup_{k\to\infty} \int_X |f_k - f| \, \dif \mu \leq 0. \]
+    Since $\int_X |f_k - f| \, \dif \mu \geq 0$ for each $k\in \Z^+$, we have
+    \[ \lim_{k\to\infty} \int_X |f_k - f| \, \dif \mu = 0 \]
+    as desired. 
+    
+    By the triangle inequality for the integral, we have that 
+    \[ \lim_{k\to\infty} \int_X f_k \, \dif \mu = \lim_{k\to\infty} \int_X f \, \dif \mu \]
+    which is the second desired conclusion.
+\end{proof}
+
+\begin{exercise}[Dominated Convergence Theorem Variant]
+    \label{ex:dominated_convergence_theorem_2}
+    Let $(X,\mu)$ be a measure space, and let $\{f_k\}_{k=1}^\infty$ be a sequence of measurable functions that converge pointwise $\mu$-almost everywhere to a function $f$.
+    Let $\{g_k\}_{k=1}^\infty$ be a sequence of integrable functions that converge pointwise $\mu$-almost everywhere to an integrable function $g : X \to [0,\infty]$.
+    Suppose that $|f_k(x)| \leq g_k(x)$ for all $k\in \Z^+$ and $\mu$-almost every $x\in X$, and that 
+    \[ \lim_{k\to\infty} \int_X g_k \, \dif \mu = \int_X g\,\dif \mu. \]
+    Then $f$ is integrable and
+    \[ \lim_{k \to \infty} \int_X |f_k - f| \, \dif \mu = 0, \]
+    and in particular
+    \[ \lim_{k \to \infty} \int_X f_k \, \dif \mu = \int_X f \, \dif \mu. \]
+\end{exercise}
+
+\begin{proof}
+    See that by assumption that $|f_k(x)| \leq g_k(x)$ for all $k\in \Z^+$ and $\mu$-almost every $x\in X$, and that $\{f_k\}_{k=1}^\infty$ converges pointwise $\mu$-almost everywhere to $f$,
+    and that $\{g_k\}_{k=1}^\infty$ converges pointwise $\mu$-almost everywhere to $g$, so we must have $|f(x)| \leq g(x)$ for $\mu$-almost every $x\in X$ as well.
+    As a result, $f$ is measurable and integrable by Exercise \ref{ex:integral_of_function_equal_ae} and Exercise \ref{ex:almost_everywhere_monotonicity}.
+    Also the sequence of functions $\{ g + g_k - |f_k - f| \}_{k=1}^\infty$ is a sequence of nonnegative measurable functions that converges pointwise $\mu$-almost everywhere to the function $2g$.
+
+    By Fatou's Lemma (Exercise \ref{ex:fatous_lemma}), we have
+    \begin{align*}
+        \int_X 2g \,\dif\mu &= \int_X \liminf_{k\to\infty} (g + g_k - |f_k - f|) \, \dif \mu \\
+            &\leq \liminf_{k\to\infty} \int_X (g + g_k - |f_k - f|) \, \dif \mu \\
+            &= \int_X g \, \dif \mu + \liminf_{k\to\infty} \int_X g_k \, \dif \mu - \limsup_{k\to\infty} \int_X |f_k - f| \, \dif \mu \\
+            &= \int_X 2g \, \dif \mu - \limsup_{k\to\infty} \int_X |f_k - f| \, \dif \mu
+    \end{align*}
+    where the last equality follows from the assumption that $\lim_{k\to\infty} \int_X g_k \, \dif \mu = \int_X g\,\dif \mu$.
+    This implies
+    \[ \limsup_{k\to\infty} \int_X |f_k - f| \, \dif \mu \leq 0. \]
+    Since $\int_X |f_k - f| \, \dif \mu \geq 0$ for each $k\in \Z^+$, we have
+    \[ \lim_{k\to\infty} \int_X |f_k - f| \, \dif \mu = 0 \]
+    as desired, and the conclusion $\lim_{k \to \infty} \int_X f_k \, \dif \mu = \int_X f \, \dif \mu$ follows from the triangle inequality for the integral. 
+\end{proof}
+
+\begin{exercise}[Bounded Convergence Theorem]
+    \label{ex:bounded_convergence_theorem}
+    Let $(X,\mu)$ be a measure space with $\mu(X) < \infty$, and let $\{f_k\}_{k=1}^\infty$ be a sequence of measurable functions that converge pointwise $\mu$-almost everywhere to a function $f$.
+    Suppose that there exists $M>0$ such that $|f_k(x)| \leq M$ for all $k\in \Z^+$ and $\mu$-almost every $x\in X$.
+    Then $f$ is integrable and
+    \[ \lim_{k \to \infty} \int_X |f_k - f| \, \dif \mu = 0, \]
+    and in particular
+    \[ \lim_{k \to \infty} \int_X f_k \, \dif \mu = \int_X f \, \dif \mu. \]
+\end{exercise}  
+\begin{proof}
+    This is a special case of the Dominated Convergence Theorem --- since $\mu(X) < \infty$, the constant function $x\longmapsto M$ is integrable, so we can apply Theorem \ref{thm:dominated_convergence_theorem_1} with $g(x) = M$ for each $x\in X$.
+\end{proof}
+
+\subsection{Connection to Riemann Integral}
+
+In this section, we review the result that a function on a closed interval is Riemann integrable if and only if it is bounded on that interval and continuous almost everywhere, and we will prove that in this case the Riemann integral equals the Lebesgue integral.
+We then extend this result to unbounded intervals and unbounded positive functions.
+
+\begin{lemma}[Upper and Lower Riemann Sums via Dyadic Partitions]
+    \label{lem:dyadic_partitions}
+    Let $f : [a,b] \to \R$ be a bounded function.
+    For each $n\in \Z^+$, let $P_n$ be the partition of $[a,b]$ into $2^n$ closed almost disjoint subintervals of equal length $\frac{b-a}{2^n}$.
+    Then \[ \lim_{n\to \infty} L(f,P_n) = L(f,[a,b]) \quad\text{ and }\quad \lim_{n\to \infty} U(f,P_n) = U(f,[a,b]). \]
+\end{lemma}
+Here we are using the notation $L(f,P)$ and $U(f,P)$ for the lower and upper Riemann sums of $f$ with respect to the partition $P$ of $[a,b]$.
+The notation $L(f,[a,b])$ and $U(f,[a,b])$ denotes the lower and upper Riemann integrals of $f$ on $[a,b]$, i.e. the supremum of the lower Riemann sums and the infimum of the upper Riemann sums, respectively, over all partitions of $[a,b]$.
+
+\begin{proof}
+    Let $n\in \Z^+$.
+    Then $P_n$ is a refinement of $P_{n-1}$, so we have 
+    \[ L(f,P_{n-1}) \leq L(f,P_n) \leq L(f,[a,b]) \quad\text{and}\quad U(f,[a,b]) \leq U(f,P_n) \leq U(f,P_{n-1}). \]
+    Thus the sequence $\{ L(f,P_n) \}_{n=1}^\infty$ is increasing and bounded above by $L(f,[a,b])$, so it converges to a limit $L_*$ with $L_* \leq L(f,[a,b])$.
+    Similarly, the sequence $\{ U(f,P_n) \}_{n=1}^\infty$ is decreasing and bounded below by $U(f,[a,b])$, so it converges to a limit $U_*$ with $U_* \geq U(f,[a,b])$.
+
+    Let
+    \[ B := \sup_{x \in [a,b]} |f(x)| < \infty \]
+    so that $|f(x)| \leq B$ for each $x \in [a,b]$.
+    For each $n \geq 1$ we let $\delta_n := \frac{b-a}{2^n}$ be the length of each subinterval in the partition $P_n$.
+    Then for each $n \geq 1$, each subinterval in the partition $P_n$ is given by 
+    \[ [ t_{k-1}, t_k ] = \left[ a+(k-1)\delta_n, a+k\delta_n \right] \] 
+    for some $k=1,2,\ldots,2^n$.
+
+    Let $\epsilon>0$ and choose a partition $P_\epsilon$ of $[a,b]$ given by 
+    \[ a = x_0 < x_1 < \cdots < x_m = b \]
+    such that \[ L(f,[a,b]) - \frac{\epsilon}{2} < L(f,P_\epsilon). \]
+    Let $N \in \Z^+$ be such that \[ 3 m B \cdot\frac{(b-a)}{2^N} < \frac{\epsilon}{2}. \]
+    
+    Fix an interval $[x_{j-1}, x_j]$ in the partition $P_\epsilon$ for some $1 \leq j \leq m$.
+    Let \[ j_L := \min\{ k : x_{j-1} \leq t_k \} \quad\text{ and } \quad j_R := \max\{ k : t_k \leq x_j \}. \]
+    Notice these sets are nonempty since $t_0 = a \leq x_{j-1}$ and $t_{2^N} = b \geq x_j$ for each $j=1,2,\ldots,m$.
+    The index $j_L$ is the index of the leftmost point in $P_N$ that is in $[x_{j-1}, x_j]$, and $j_R$ is the index of the rightmost point in $P_N$ that is in $[x_{j-1}, x_j]$.
+    By choice of $N$, there must be at least one subinterval in $P_N$ that is strictly contained in $[x_{j-1}, x_j]$, so we have $j_L < j_R$.
+    Then we have $ [t_{j_L}, t_{j_R}] \subset [x_{j-1}, x_j]$ and we claim that
+    \[  t_{j_L} - x_{j-1} \leq \delta_N \quad\text{ and }\quad x_j - t_{j_R} \leq \delta_N. \]
+    To see this, note that by definition of $j_L$ we have $t_{j_L-1} < x_{j-1} \leq t_{j_L}$, so
+    \[ t_{j_L} - x_{j-1} < t_{j_L} - t_{j_L-1} = \delta_N. \]
+    Similarly, by definition of $j_R$ we have $t_{j_R} \leq x_j < t_{j_R+1}$, so
+    \[ x_j - t_{j_R} < t_{j_R+1} - t_{j_R} = \delta_N. \]
+    Therefore 
+    \[ \mathcal{L}^1([x_{j-1}, x_j] \setminus [t_{j_L}, t_{j_R}]) = (x_j - x_{j-1}) - (t_{j_R} - t_{j_L}) = (x_j - t_{j_R}) + (t_{j_L} - x_{j-1}) \leq 2 \delta_N. \tag{$\star$}\]
+    
+    Let $P'$ be the partition of $[a,b]$ given by 
+    \[ P' := \{ t_{j_L}, t_{j_R} : j = 1,2,\ldots,m \}. \]
+    (Sanity check - see that $t_{1_L} = t_0 = a$ and $t_{m_R} = t_{2^N} = b$, so $P'$ includes the endpoints of $[a,b]$.
+    Also, since $j_L < j_R$ and 
+    \[ j_R = (j+1)_L \iff x_j \in P_N  \quad\text{ and }\quad j_R + 1 = (j+1)_L \text{ otherwise } \]
+    we see that the points in $P'$ are in increasing order, after removing the duplicate points $t_{j_R} = t_{(j+1)_L}$ when $x_j \in P_N$.)
+    
+    We claim that \[ L(f,P_\epsilon) \leq L(f,P') + \frac{\epsilon}{2}. \]
+    By definition we have
+    \begin{align*}
+        L(f,P') = \sum_{j=1}^m \inf_{x \in [t_{j_L}, t_{j_R}]} f(x) \cdot (t_{j_R} - t_{j_L}) + \sum_{j=1}^{m-1} \inf_{x \in [t_{j_R}, t_{(j+1)_L}]} f(x) \cdot (t_{(j+1)_L} - t_{j_R})
+    \end{align*}
+    and the terms $(t_{(j+1)_L} - t_{j_R})$ in the sum on the right are either $0$ if $x_j \in P_n$ or equal to $\delta_N$ otherwise.
+    Thus we have
+    \[ L(f,P') \geq \sum_{j=1}^m \inf_{x \in [t_{j_L}, t_{j_R}]} f(x) \cdot (t_{j_R} - t_{j_L}) - (m-1) B \delta_N \tag{$\star\star$}\]
+    since $\inf_{x \in [t_{j_R}, t_{(j+1)_L}]} f(x) \geq - B$ for each $j=1,2,\ldots,m-1$.
+    Now we can estimate
+    \begin{align*}
+        L(f,P_\epsilon) - L(f,P') &\leq \sum_{j=1}^m \inf_{x \in [x_{j-1}, x_j]} f(x) \cdot (x_j - x_{j-1}) \\
+            &\qquad\qquad - \sum_{j=1}^m \inf_{x \in [t_{j_L}, t_{j_R}]} f(x) \cdot (t_{j_R} - t_{j_L}) + (m-1) B \delta_N &&\text{ by }(\star\star)\\
+            &\leq B \sum_{j=1}^m (x_j - x_{j-1}) - B\sum_{j=1}^m (t_{j_R} - t_{j_L}) + (m-1) B \delta_n &&\text{ by definition of } B\\
+            &= B \sum_{j=1}^m \left( (x_j - x_{j-1}) - (t_{j_R} - t_{j_L}) \right) + (m-1) B \delta_n \\
+            &= B \sum_{j=1}^m 2 \delta_N + (m-1) B \delta_N &&\text{ by }(\star)\\
+            &= 2 m B \delta_N +  (m-1) B \delta_N \\
+            &< 3 m B \delta_N \\
+            &< \frac{\epsilon}{2} &&\text{ by choice of } N.
+    \end{align*}
+    This implies \[ L(f,P_\epsilon) \leq L(f,P') + \frac{\epsilon}{2} \]
+    as claimed.
+
+    Now we notice that $P'$ only consists of points in $P_N$, so the partition $P_N$ is a refinement of $P'$.
+    Thus we have the estimate
+    \[ L(f,P_\epsilon) \leq L(f,P') + \frac{\epsilon}{2} \leq L(f,P_N) + \frac{\epsilon}{2} \] 
+    By choice of the partition $P_\epsilon$ we have that
+    \[ L(f,[a,b]) - \frac{\epsilon}{2} < L(f,P_\epsilon) < L(f,P_N) + \frac{\epsilon}{2} \]
+    which implies
+    \[ L(f,[a,b]) - \epsilon < L(f,P_N). \]
+
+    Since $\epsilon>0$ was arbitrary, we have $L(f,[a,b]) \leq L_*$.
+    Since we already had $L_* \leq L(f,[a,b])$, we conclude that $L_* = L(f,[a,b])$.
+    A similar argument shows that $U_* = U(f,[a,b])$.
+    This proves
+    \[ \lim_{n\to \infty} L(f,P_n) = L(f,[a,b]) \quad\text{ and }\quad \lim_{n\to \infty} U(f,P_n) = U(f,[a,b]). \]
+\end{proof}
+
+
+\begin{theorem}[Lebesgue Criterion for Riemann Integrability]
+    \label{thm:lebesgue_criterion_for_riemann_integrability}
+    Let $f : [a,b] \to \R$ be a function.
+    Then $f$ is Riemann integrable if and only if $f$ is bounded on $[a,b]$ and the set of discontinuities of $f$ has Lebesgue measure zero.
+\end{theorem}
+This fact was proven in Analysis 1, so we do not repeat it here.
+As a corollary, we remark that every Riemann integrable function is measurable, since every function that is continuous almost everywhere is measurable.
+
+\begin{theorem}[Riemann-Lebesgue Theorem]
+    \label{thm:riemann_lebesgue_theorem}
+    Let $f : [a,b] \to \R$ be a bounded measurable function.
+    If $f$ is Riemann integrable, then the Riemann integral equals the Lebesgue integral,
+    \[ \int_a^b f(x) \, \dif x = \int_{[a,b]} f \, \dif x. \]
+\end{theorem}
+
+\begin{proof}
+    First note that by assumption, $f$ is a bounded measurable function on a set of finite measure, so $f$ is Lebesgue integrable by Exercise \ref{ex:bounding_an_integral}.
+
+    Let $n\in \Z^+$. Consider the partition $P_n$ of $[a,b]$ into $2^n$ closed almost disjoint subintervals $I_1, I_2, \ldots, I_{2^n}$ of equal length $\frac{b-a}{2^n}$.
+    Let 
+    \[ g_n := \sum_{j=1}^{2^n} \inf_{x \in I_j} f(x) \Chi_{I_j} \quad\text{ and }\quad h_n := \sum_{j=1}^{2^n} \sup_{x \in I_j} f(x) \Chi_{I_j}. \]
+
+    See that for each $g_n$ and $h_n$ are simple functions, and that $g_n(x) \leq f(x) \leq h_n(x)$ for each $x \in [a,b]$.
+    Furthermore, the Lebesgue integrals of $g_n$ and $h_n$ are the lower and upper Riemann sums of $f$ with respect to the partition $P_n$, since
+    \[ \int_{[a,b]} g_n \, \dif x = \sum_{j=1}^{2^n} \inf_{x \in I_j} f(x) \mu(I_j) = \sum_{j=1}^{2^n} \inf_{x \in I_j} f(x) \frac{b-a}{2^n} = L(f,P_n,[a,b]) \]
+    and similarly
+    \[ \int_{[a,b]} h_n \, \dif x = \sum_{j=1}^{2^n} \sup_{x \in I_j} f(x) \mu(I_j) = \sum_{j=1}^{2^n} \sup_{x \in I_j} f(x) \frac{b-a}{2^n} = U(f,P_n,[a,b]). \]
+
+    Now we see that the sequence of functions $\{g_n\}_{n=1}^\infty$ is increasing, and the sequence of functions $\{h_n\}_{n=1}^\infty$ is decreasing; since $\{ g_n \}_{n=1}^\infty$ is bounded above by $\sup_{x \in [a,b]} |f(x)|$, it converges pointwise to a function $g$, and since $\{ h_n \}_{n=1}^\infty$ is bounded below by $\inf_{x \in [a,b]} |f(x)|$, it also converges pointwise to a function $h$.
+    Since $g_n(x) \leq f(x) \leq h_n(x)$ for each $n\in \Z^+$ and each $x \in [a,b]$, monotonicity of the Lebesgue integral implies that
+    \[ L(f,P_n,[a,b]) = \int_{[a,b]} g_n \, \dif x \leq \int_{[a,b]} f \, \dif x \leq \int_{[a,b]} h_n \, \dif x = U(f,P_n,[a,b]). \]
+    Now Lemma \ref{lem:dyadic_partitions} implies that
+    \[ L(f,[a,b]) \leq \int_{[a,b]} f \, \dif x \leq U(f,[a,b]). \]
+
+    Since $\{ g_n \}_{n=1}^\infty$ converges pointwise to $g$ and $\{ h_n \}_{n=1}^\infty$ converges pointwise to $h$ and the sequences $\{g_n\}_{n=1}^\infty$ and $\{h_n\}_{n=1}^\infty$ are bounded above by $\sup_{x \in [a,b]} |f(x)|$, 
+    we take limits as $n\to \infty$ and apply the Bounded Convergence Theorem to interchange the limits and the integrals to obtain
+    \[ \lim_{n \to \infty} L(f,P_n,[a,b]) = \int_{ [a,b] } g\,\dif x \leq \int_{[a,b]} f \, \dif x \leq \int_{ [a,b] } h\,\dif x = \lim_{n \to \infty} U(f,P_n,[a,b]). \]
+    Since $f$ is Riemann integrable if and only if $L(f,[a,b]) = U(f,[a,b])$, and in this case the common value equals the Riemann integral, we have that $f$ is Riemann integrable if and only if $L(f,[a,b]) = U(f,[a,b]) = \int_{[a,b]} f \, \dif x$.
+
+    This proves that if $f$ is a bounded measurable function on $[a,b]$, then $f$ is also Lebesgue integrable on $[a,b]$ and the Riemann integral equals the Lebesgue integral.
+\end{proof}
+
+\begin{corollary}[Improper Riemann Integral of Nonnegative Function is Lebesgue Integral]
+    \label{cor:improper_riemann_integral}
+    Let $f : [0,\infty) \to [0,\infty)$ be a nonnegative function such that the improper Riemann integral $\int_0^\infty f(x) \,\dif x$ converges.
+    That is, we require that the limit
+    \[ \int_0^\infty f(x) \,\dif x := \lim_{R \to \infty} \int_0^R f(x) \,\dif x \]
+    exists and is finite.
+    Then $f$ is Lebesgue integrable over $[0,\infty)$, and the improper Riemann integral equals the Lebesgue integral,
+    \[ \int_0^\infty f(x) \,\dif x = \int_{[0,\infty)} f \,\dif x. \]
+
+    A similar result holds if the domain $[0,\infty)$ is replaced by $(-\infty,0]$ or $\R$.
+\end{corollary}
+
+\begin{remark}[Other Improper Riemann Integrals]
+    \label{rem:other_improper_riemann_integrals}
+    In the above, we have only defined Riemann integrals in the special case where we take the limit of one or both endpoints of a closed interval to infinity.
+    There are more cases in which we could do something similar.
+
+    Say we have a function $f : (a,b) \to \R$ where $-\infty \leq a < b \leq \infty$, so $f$ is not defined at one or both endpoints.
+    We define the improper Riemann integral $\int_a^b f(x) \,\dif x$ to be convergent if there exists $c \in (a,b)$ such that both improper Riemann integrals
+    \[ \int_a^c f(x) \,\dif x := \lim_{t \to a^+} \int_t^c f(x) \,\dif x \quad\text{ and }\quad \int_c^b f(x) \,\dif x := \lim_{t \to b^-} \int_c^t f(x) \,\dif x \]
+    converge, and in this case we define
+    \[ \int_a^b f(x) \,\dif x := \int_a^c f(x) \,\dif x + \int_c^b f(x) \,\dif x. \]
+    (The choice of $c$ does not matter, as can be seen by splitting the integral at a different point $d \in (a,b)$ --- see that if $c < d$, then
+    \[ \int_a^c f(x) \,\dif x + \int_c^d f(x) \,\dif x = \int_a^d f(x) \,\dif x \]
+    which implies 
+    \[ \int_a^c f(x) \,\dif x + \int_c^b f(x) \,\dif x = \int_a^c f(x)\,\dif x + \int_c^d f(x) \,\dif x + \int_d^b f(x) \,\dif x = \int_a^d f(x) \,\dif x + \int_d^b f(x) \,\dif x. \]
+    The case $d < c$ is similar.)
+
+    Of course, for these limits to make sense, we need to assume that $f$ is Riemann integrable on each closed subinterval of $(a,b)$.
+    Otherwise, these limits will not be defined.
+
+    The same result as in Corollary \ref{cor:improper_riemann_integral} holds in this more general setting, with basically the same proof.
+    That is, if $f : (a,b) \to [0,\infty)$ is a nonnegative function such that the improper Riemann integral $\int_a^b f(x) \,\dif x$ converges, then $f$ is Lebesgue integrable over $(a,b)$, and the improper Riemann integral equals the Lebesgue integral,
+    \[ \int_a^b f(x) \,\dif x = \int_{(a,b)} f \,\dif x. \]
+\end{remark}
+
+\begin{proof}
+    Let $f:[0,\infty) \to [0,\infty)$ be such that the limit
+    \[ \lim_{R \to \infty} \int_0^R f(x) \,\dif x \]
+    exists and is finite. Then for each $R > 0$, the function $f$ is Riemann integrable on the closed interval $[0,R]$.
+    By Theorem \ref{thm:riemann_lebesgue_theorem}, we know that $f$ is continuous almost everywhere on $[0,R]$, and that the Riemann integral equals the Lebesgue integral, i.e.
+    \[ \int_0^R f(x) \,\dif x = \int_{[0,R]} f \,\dif x. \]
+    Since $f$ is nonnegative, the sequence of function $\{ \Chi_{[0,k]} f \}_{k=1}^\infty$ is an increasing sequence of nonnegative measurable functions that converges pointwise to $f$ as $k \to \infty$.
+    Thus by the Monotone Convergence Theorem (Theorem \ref{thm:monotone_convergence_theorem}), we have
+    \begin{align*}
+        \int_{[0,\infty)} f \,\dif x &= \int_{[0,\infty)} \lim_{k \to \infty} \Chi_{[0,k]} f \, \dif x \\
+            &= \lim_{k \to \infty} \int_{[0,k]} f \, \dif x \\
+            &= \lim_{k \to \infty} \int_0^k f(x) \,\dif x
+    \end{align*}
+    which is finite by assumption.
+
+    (The Monotone Convergence Theorem is used in the first line, the definition of the Lebesgue integral over $[0,k]$ is used in the second line, and the equality of the Riemann and Lebesgue integrals over $[0,k]$ is used in the third line.)
+
+    The other cases are similar, and follow from the first.
+    If $f : (-\infty,0] \to [0,\infty)$ is such that the improper Riemann integral $\int_{-\infty}^0 f(x) \,\dif x$ converges, then define $g : [0,\infty) \to [0,\infty)$ by $g(x) := f(-x)$.
+    Then the improper Riemann integral $\int_0^\infty g(x) \,\dif x$ converges, so by the above result $g$ is Lebesgue integrable over $[0,\infty)$ and
+    \[ \int_0^\infty g(x) \,\dif x = \int_{[0,\infty)} g \,\dif x. \]
+    By a change of variables, we have
+    \[ \int_{-\infty}^0 f(x) \,\dif x = \int_0^\infty g(x) \,\dif x = \int_{[0,\infty)} g \,\dif x = \int_{(-\infty,0]} f \,\dif x \]
+    as desired.
+
+    If $f : \R \to [0,\infty)$ is such that the improper Riemann integral $\int_{-\infty}^\infty f(x) \,\dif x$ converges, then both improper Riemann integrals $\int_{-\infty}^0 f(x) \,\dif x$ and $\int_0^\infty f(x) \,\dif x$ converge;
+    thus by the above results, $f$ is Lebesgue integrable over both $(-\infty,0]$ and $[0,\infty)$, and
+    \[ \int_{-\infty}^0 f(x) \,\dif x = \int_{(-\infty,0]} f \,\dif x, \qquad \int_0^\infty f(x) \,\dif x = \int_{[0,\infty)} f \,\dif x. \]
+    Since $f$ is nonnegative, it is integrable over $\R$, and
+    \begin{align*}
+        \int_{-\infty}^\infty f(x) \,\dif x &= \int_{-\infty}^0 f(x) \,\dif x + \int_0^\infty f(x) \,\dif x \\
+            &= \int_{(-\infty,0]} f \,\dif x + \int_{[0,\infty)} f \,\dif x \\
+            &= \int_{\R} f \,\dif x
+    \end{align*}
+    as desired.
+\end{proof}
+
+\begin{exercise}[Example where Improper Riemann Integral Converges but not Lebesgue Integral]
+    \label{ex:improper_riemann_integral_negative}
+    Show that the conclusion of Corollary \ref{cor:improper_riemann_integral} can fail if $f$ is allowed to take negative values.
+    In particular, there is a continuous function $f:[0,\infty) \to \R$ such that the improper Riemann integral $\int_0^\infty f(x) \,\dif x$ converges, but $f$ is not Lebesgue integrable over $[0,\infty)$.
+\end{exercise}
+
+\begin{proof}
+    Let \[ f(x) = \frac{\sin x}{x} \] for $x>1$ and $f(x)=\sin(1)$ for $0 \leq x \leq 1$.
+    Then $f$ is continuous on $[0,\infty)$, and for each $R>1$ we have
+    \begin{align*}
+    \int_1^R f(x) \,\dif x &= \int_1^R \frac{\sin x}{x} \,\dif x \\
+        &= -\frac{\cos x}{x}\Big|_1^R - \int_1^R \frac{\cos(x)}{x^2} \,\dif x \\
+        &= -\frac{\cos(R)}{R} + \cos(1) - \int_1^R \frac{\cos(x)}{x^2} \,\dif x
+    \end{align*}
+    by using integration by parts.
+    Thus for each $R>1$ we estimate
+    \begin{align*}
+        \abs{ \int_1^R \frac{\sin x}{x}\,\dif x } &\leq \abs{ \frac{\cos(R)}{R} } + \cos(1) + \abs{ \int_1^R \frac{\cos(x)}{x^2} \,\dif x } \\
+            &\leq \frac{1}{R} + \cos(1) + \int_1^R \frac{1}{x^2} \,\dif x \\
+            &\leq 1 + \cos(1) + \int_1^\infty \frac{1}{x^2} \,\dif x. \\
+    \end{align*}
+    In particular, the function 
+    \[ [1,\infty)\ni R \mapsto \abs{ \int_1^R \frac{\sin x}{x} \,\dif x } \]
+    is increasing and bounded above, so the limit as $R\to \infty$ exists and is finite.
+    Thus the improper Riemann integral $\int_1^\infty f(x) \,\dif x$ converges. The (proper) Riemann integral $\int_0^1 f(x) \,\dif x$ also converges, so the improper Riemann integral $\int_0^\infty f(x) \,\dif x$ converges.
+
+    However, the Lebesgue integral $\int_{[0,\infty)} f \,\dif x$ does not converge.
+    To see this, note that for each integer $k\geq 1$ we have
+    \[ \int_{k\pi}^{(k+1)\pi} \frac{ |\sin x| }{x} \,\dif x \geq \frac{1}{(k+1)\pi} \int_{k\pi}^{(k+1)\pi} |\sin x| \,\dif x = \frac{1}{(k+1)\pi} \int_{0}^{\pi} \sin t \,\dif t = \frac{2}{(k+1)\pi}. \]
+    Thus we have
+    \[ \int_{[0,\infty)} \frac{|\sin x|}{x} \,\dif x \geq \int_{[\pi,\infty)} \frac{|\sin x|}{x} \,\dif x \geq \sum_{k=1}^\infty \int_{k\pi}^{(k+1)\pi} \frac{|\sin x|}{x} \,\dif x \geq \sum_{k=1}^\infty \frac{2}{(k+1)\pi} = \infty \]
+    since the last series on the right is a constant multiple of the harmonic series and thus diverges.
+    Thus the Lebesgue integral $\int_{[0,\infty)} f \,\dif x$ does not converge, so $f$ is not Lebesgue integrable over $[0,\infty)$.
+\end{proof}

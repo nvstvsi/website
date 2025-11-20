@@ -1,0 +1,531 @@
+\section{Densities}
+
+Now that we are armed with the powerful Besicovich Covering Theorem, we can show that the Radon-Nikodym derivative can be expressed as a limit of ratios of measures in many cases of interest.
+For this, we will need to define the notion of \textit{density} of a measure at a point.
+
+\vspace{2mm}
+In this entire section, $(X,d)$ will be a metric space.
+
+\subsection{Definitions and the Upper Density Theorem}
+
+\begin{definition}[$n$-Dimensional Upper and Lower Densities]
+    \label{def:n_dim_upper_lower_density}
+    Let $\mu$ be an outer measure on $X$, and let $n \in \Z^+$.
+    For a subset $A \subseteq X$ and a point $x \in X$, the \textit{$n$-dimensional upper density} of $\mu$ at $x$ with respect to $A$ is defined as
+    \[ \Theta^{*n}(\mu,A,x) := \limsup_{r \to 0} \frac{\mu\big( A \cap \overline{B}(x,r) \big)}{\omega_n r^n}, \]
+    and the \textit{$n$-dimensional lower density} of $\mu$ at $x$ with respect to $A$ is defined as
+    \[ \Theta_*^n(\mu,A,x) := \liminf_{r \to 0} \frac{\mu\big( A \cap \overline{B}(x,r) \big)}{\omega_n r^n}, \]
+    where $\omega_n$ is the volume of the unit ball in $\R^n$.
+
+    \vspace{2mm}
+    In the case $A=X$, we simply write $\Theta^{*n}(\mu,x)$ and $\Theta_*^n(\mu,x)$ for the upper and lower densities, respectively.
+
+    \vspace{2mm}
+    If the upper and lower densities at a point $x\in X$ are equal, we call the common value the \textit{$n$-dimensional density} of $\mu$ at $x$ with respect to $A$, denoted
+    \[ \Theta^n(\mu,A,x) := \lim_{r \to 0} \frac{\mu\big( A \cap \overline{B}(x,r) \big)}{\omega_n r^n}. \]
+\end{definition}
+
+\begin{exercise}[Measurability of Densities]
+    \label{ex:density_measurable}
+    Let $\mu$ be a Borel outer measure on $X$ such that $\mu(B) < \infty$ for each closed ball $B \subseteq X$.
+    Then for each $r > 0$ and each $x \in X$, we have
+    \[ \mu(A \cap \overline{B}(x,r)) \geq \limsup_{y\to x} \mu( A \cap \overline{B}(y,r) ). \]
+    That is, for each $r>0$ the function
+    \[ X\ni x\longmapsto \frac{\mu(A \cap \overline{B}(x,r))}{\omega_n r^n} \in [0,\infty] \]
+    is upper semicontinuous.
+
+    Conclude that the lower $n$-dimensional density $\Theta^{n}_*(\mu,A,\cdot) : X \to [0,\infty]$ is a Borel measurable function.
+
+    \vspace{2mm}
+    Also the upper $n$-dimensional density $\Theta^{*n}(\mu,A,\cdot) : X \to [0,\infty]$ is a Borel measurable function.
+\end{exercise}
+\begin{proof}
+    Fix $r > 0$ and let $x \in X$.
+    Let $\{ y_k \}_{k=1}^\infty \subseteq X$ be a sequence such that $y_k \to x$ as $k \to \infty$.
+    Then for each $\epsilon > 0$, there exists $N \in \Z^+$ such that 
+    \[ \overline{B}(y_k,r) \subseteq \overline{B}(x,r+\epsilon) \quad \forall k \geq N \]
+    and hence
+    \[ \mu( A \cap \overline{B}(y_k,r) ) \leq \mu( A \cap \overline{B}(x,r+\epsilon) ) \]
+    by monotonicity of $\mu$.
+    Taking the limit superior as $k \to \infty$ gives
+    \[ \limsup_{k\to\infty} \mu( A \cap \overline{B}(y_k,r) ) \leq \mu( A \cap \overline{B}(x,r+\epsilon) ). \]
+    Since this holds for each $\epsilon > 0$, we get
+    \[ \limsup_{r \to 0} \frac{\mu( A \cap \overline{B}(x,r) )}{\omega_n r^n} \leq \mu( A \cap \overline{B}(x,r) ) \]
+    by \ref{prop:sequences_of_measurable_sets}.
+    Since $\{ y_k \}_{k=1}^\infty$ was an arbitrary sequence which converged to $x$, we have shown that
+    \[ \mu(A \cap \overline{B}(x,r)) \geq \limsup_{y\to x} \mu( A \cap \overline{B}(y,r) ). \]
+    Since $x\in X$ was arbitrary and $r > 0$ is fixed, this shows that the function
+    \[ X\ni x\longmapsto \frac{\mu(A \cap \overline{B}(x,r))}{\omega_n r^n} \in [0,\infty] \]
+    is upper semicontinuous.
+
+    Thus for each $m \in \Z^+$, the function
+    \[ X\ni x \longmapsto \inf_{0 < r < \frac{1}{m}} \frac{\mu(A \cap \overline{B}(x,r))}{\omega_n r^n} \]
+    is also upper semicontinuous, and hence Borel measurable.
+    As a result, the lower $n$-dimensional density
+    \[ \Theta^{n}_*(\mu,A,x) = \lim_{m \to \infty} \inf_{0 < r < \frac{1}{m}} \frac{\mu(A \cap \overline{B}(x,r))}{\omega_n r^n} \]
+    is a Borel measurable function on $X$. 
+
+    \vspace{2mm}
+
+    We claim that for each $r > 0$ the map 
+    \[ X\ni x \longmapsto \frac{\mu(A \cap B(x,r))}{\omega_n r^n} \in [0,\infty] \]
+    is lower semicontinuous.
+
+    To see this, let $x \in X$ and let $\{ y_k \}_{k=1}^\infty \subseteq X$ be a sequence such that $y_k \to x$ as $k \to \infty$.
+    Then for each $\epsilon > 0$, there exists $N \in \Z^+$ such that
+    \[ B(x,r-\epsilon) \subseteq B(y_k,r) \quad \forall k \geq N \]
+    and hence
+    \[ \mu(A \cap B(y_k,r)) \geq \mu(A \cap B(x,r-\epsilon)) \]
+    by monotonicity of $\mu$. Taking the limit infimum as $k \to \infty$ gives
+    \[ \liminf_{k\to\infty} \mu( A \cap B(y_k,r) ) \geq \mu( A \cap B(x,r-\epsilon) ). \]
+    Since this holds for each $\epsilon > 0$, we get
+    \[ \liminf_{r \to 0} \frac{\mu( A \cap B(x,r) )}{\omega_n r^n} \geq \mu( A \cap B(x,r) ) \]
+    by \ref{prop:sequences_of_measurable_sets}.
+    Since $\{ y_k \}_{k=1}^\infty$ was an arbitrary sequence which converged to $x$, we have shown that
+    \[ \mu(A \cap B(x,r)) \leq \liminf_{y\to x} \mu( A \cap B(y,r) ). \]
+    Since $x\in X$ was arbitrary and $r > 0$ is fixed, this shows that the function
+    \[ X\ni x\longmapsto \frac{\mu(A \cap B(x,r))}{\omega_n r^n} \in [0,\infty] \]
+    is lower semicontinuous.
+
+    As a result, for each $m \in \Z^+$, the function
+    \[ X\ni x \longmapsto \sup_{0 < r < \frac{1}{m}} \frac{\mu(A \cap B(x,r))}{\omega_n r^n} \]
+    is also lower semicontinuous, and hence Borel measurable.
+    Thus the upper $n$-dimensional density
+    \[ \Theta^{*n}(\mu,A,x) = \lim_{m \to \infty} \sup_{0 < r < \frac{1}{m}} \frac{\mu(A \cap B(x,r))}{\omega_n r^n} \]
+    is a Borel measurable function on $X$.
+\end{proof}
+
+If we have a certain inquality for the $n$-dimensional upper density, then we can relate the measure $\mu$ to the $n$-dimensional Hausdorff measure $\mathcal{H}^n$.
+
+\begin{lemma}[Comparison Lemma]
+    \label{lem:baby_comparison_lemma}
+    Let $\mu$ be a Borel regular outer measure on $X$, and let $t\geq 0$ and $A_1 \subseteq A_2 \subseteq X$.
+    Then
+    \[ \Theta^{*n}(\mu,A_2,x) \geq t \quad\forall x \in A_1 \ \implies t \mathcal{H}^n(A_1) \leq \mu(A_2). \]
+\end{lemma}
+Of course an important special case is when $A_1 = A_2$. Note that we \emph{do not} assume that $A_1$ and $A_2$ are Borel measurable.
+
+\begin{proof}
+    If either $t=0$ or $\mu(A_2) = \infty$, the inequality is trivial, so we may assume that $t > 0$ and $\mu(A_2) < \infty$.
+
+    Fix $\tau \in (0,t)$ so that 
+    \[  \Theta^{*n}(\mu,A_2,x) \geq \tau \quad\forall x \in A_1 .\] 
+    Also let $\delta > 0$ be arbitrary and define
+    \[ \mathcal{B}_\delta := \left\{ \overline{B}(x,r) : x\in A_1, 0 < r < \frac{\delta}{2}, \mu(A_2 \cap \overline{B}(x,r)) \geq \tau \omega_nr^n \right\}. \]
+    Then $\mathcal{B}_\delta$ is a collection of closed balls which covers $A_1$, the diameters of the balls in $\mathcal{B}_\delta$ are uniformly bounded above by $\delta$, and for each $a \in A_1$ we have
+    \[ \inf\{ r : \overline{B}(a,r) \in \mathcal{B}_\delta \} = 0. \]
+    By the Vitali Covering Lemma \ref{lem:infinite_5r_covering_lemma}, there exists a disjoint subcover $\mathcal{B}'_\delta \subseteq \mathcal{B}_\delta$ such that
+    \[ A_1 \subseteq \bigcup_{ B \in \mathcal{B}'_\delta } 5B. \]
+    
+    We claim that $\mathcal{B}'_\delta$ is countable.
+    If $X$ is separable, then this is immediate as no uncountable collection of disjoint balls can exist in a separable metric space.
+    If $X$ is not separable, then we can argue as follows.
+    Since $ \mu(A_2 \cap B) > 0 $ for each $B \in \mathcal{B}'_\delta$, and 
+    \[ B_1, B_2, \ldots, B_N \in \mathcal{B}'_\delta \implies \sum_{j=1}^N \mu(A_2 \cap B_j) = \mu(A_2 \cap \bigcup_{j=1}^N B_j) \leq \mu(A_2) < \infty \]
+    it follows that $\mathcal{B}'_\delta$ is at most countable.
+    Thus 
+    \[ A_1 \setminus \bigcup_{j=1}^N B_j \subseteq \bigcup_{B \in \mathcal{B}'_\delta\setminus\{ B_1,\ldots,B_N \}} 5B \]
+    for each $N \in \Z^+$ because $\inf\{ r : \overline{B}(a,r) \in \mathcal{B}_\delta \} = 0$ for each $a \in A_1$.
+    Also 
+    \begin{align*}
+        \tau\sum_{j=1}^\infty \omega_n r_j^n &\leq \sum_{j=1}^\infty \mu(A_2 \cap \overline{B}(x_j,r_j)) \\
+            &= \mu\left( A_2 \cap \bigcup_{j=1}^\infty \overline{B}(x_j,r_j) \right) \\
+            &\leq \mu(A_2) < \infty.
+    \end{align*}
+    As a result, we see that 
+    \[ A_2 \subseteq \left(\bigcup_{j=1}^N B_j \right) \cup \left(\bigcup_{j=N+1}^\infty 5B_j \right) \]
+    for each $N \in \Z^+$, and hence the definition of $\mathcal{H}^n_{5\delta}$ gives
+    \[ \mathcal{H}^n_{5\delta} (A_1) \leq \sum_{j=1}^N \omega_n r_j^n + 5^n \sum_{j=N+1}^\infty \omega_n r_j^n. \]
+    Taking the limit as $N \to \infty$, the first term converges to $\sum_{j=1}^\infty \omega_n r_j^n$ and the second term converges to $0$, so we get
+    \[ \mathcal{H}^n_{5\delta}(A_1) \leq \sum_{j=1}^\infty \omega_n r_j^n \leq \frac{1}{\tau} \mu(A_2). \]
+    Since $\delta > 0$ was arbitrary, taking the limit as $\delta \to 0^+$ and then letting $\tau \to t^-$ gives
+    \[  \mathcal{H}^n_{5\delta}(A_1) \leq \frac{1}{t} \mu(A_2) \]
+    which completes the proof.
+\end{proof}
+
+\begin{theorem}[Upper Density Theorem]
+    \label{thm:upper_density_theorem}
+    Let $\mu$ be a Borel regular outer measure on $X$, and let $A \subseteq X$ be a Borel measurable set with $\mu(A) < \infty$.
+    Then for $\mathcal{H}^n$-almost every $x \in X\setminus A$, we have
+    \[ \Theta^{*n}(\mu,A,x) = 0. \]
+\end{theorem}
+
+\begin{proof}
+    Let $t \geq 0$ and define
+    \[ E_t := \{ x \in X\setminus A : \Theta^{*n}(\mu,A,x) > t \} \]
+    and let $C \subseteq A$ be an arbitrary closed subset.
+    Since $X \setminus C$ is an open set and 
+    \[ E_t \subseteq X \setminus A \subseteq X \setminus C \]
+    we see that
+    \[ \Theta^{*n}(\mu, A\cap (X\setminus C),x) = \Theta^{*n}(\mu, A,x) \geq t \]
+    for each $x \in E_t$.
+    Thus by the Comparison Lemma \ref{lem:baby_comparison_lemma}, we have
+    \[ t\mathcal{H}^n( E_t ) \leq \mu(A\setminus C). \]
+    Since $C \subseteq A$ was an arbitrary closed subset, we note this holds for each closed subset of $A$.
+
+    By Borel regularity of $\mu$, there exists a sequence of closed sets $\{ C_j \}_{j=1}^\infty$ such that $C_j \subseteq A$ for each $j \in \Z^+$ and
+    \[ \mu(A) = \lim_{j\to\infty} \mu(C_j). \]
+    Thus taking the limit as $j \to \infty$ gives
+    \[ t\mathcal{H}^n( E_t ) \leq \lim_{j\to\infty} \mu(A\setminus C_j) = \mu(A) - \lim_{j\to\infty} \mu(C_j) = 0. \]
+    Since $t \geq 0$ was arbitrary, we conclude that
+    \[ \mathcal{H}^n( E_t ) = 0 \qquad\forall\, t > 0 \]
+    which implies that
+    \[ \mathcal{H}^n( \{ x \in X\setminus A : \Theta^{*n}(\mu,A,x) > 0 \} ) = 0. \]
+    and hence
+    \[ \Theta^{*n}(\mu,A,x) = 0 \quad\text{for $\mathcal{H}^n$-a.e. } x \in X\setminus A. \]
+\end{proof}
+
+\begin{exercise}[Upper Density Theorem for $\sigma$-Finite Measures]
+    \label{ex:upper_density_theorem_sigma_finite}
+    Show that in the previous theorem, you can drop the hypothesis $\mu(A) < \infty$ if you assume that $(X,\mu)$ is open $\sigma$-finite.
+\end{exercise}
+
+\begin{proof}
+    Assume that $(X,\mu)$ is open $\sigma$-finite, so there exists a countable collection of open sets $\{ U_j \}_{j=1}^\infty$ such that $X = \bigcup_{j=1}^\infty U_j$ and $\mu(U_j) < \infty$ for each $j \in \Z^+$.
+    Then for each $j \in \Z^+$, we consider the measure $\mu \mres U_j$ which satisfies $(\mu\mres U_j)(X) = \mu(U_j) < \infty$; thus we may apply Theorem \ref{thm:upper_density_theorem} to conclude that
+    \[ \Theta^{*n}(\mu\mres U_j,A,x) = \Theta^{*n}(\mu,A\cap U_j,x) = 0 \quad\text{for $\mathcal{H}^n$-a.e. } x \in U_j\setminus A. \]
+    Then we have $X\setminus A = \bigcup_{j=1}^\infty (U_j\setminus A)$, so it follows that
+    \[ \Theta^{*n}(\mu,A,x) = 0 \quad\text{for $\mathcal{H}^n$-a.e. } x \in X\setminus A. \]
+\end{proof}
+
+\begin{corollary}[Density of Lebesgue Measure]
+    \label{cor:density_of_lebesgue_measure}
+    If $A \subset \mathcal{L}^n$ is Lebesgue measurable, then the density $\Theta^n(\mathcal{L}^n,A,x)$ exists for $\mathcal{L}^n$-almost every $x \in \R^n$, and
+    \[ \Theta^n(\mathcal{L}^n,A,x) = 1 \quad\text{for $\mathcal{L}^n$-a.e. } x \in A, \]
+    and
+    \[ \Theta^n(\mathcal{L}^n,A,x) = 0 \quad\text{for $\mathcal{L}^n$-a.e. } x \in \R^n\setminus A. \]
+\end{corollary}
+
+\begin{proof}
+    Since $A$ is Lebesgue measurable, we have
+    \[ \mathcal{L}^n(\overline{B}(x,r)) = \mathcal{L}^n(A\cap \overline{B}(x,r)) + \mathcal{L}^n( \overline{B}(x,r)\setminus A) \qquad\forall\, x\in \R^n, r > 0 \]
+    which implies that
+    \[ 1 = \frac{\mathcal{L}^n(\overline{B}(x,r))}{\omega_n r^n} = \frac{\mathcal{L}^n(A\cap \overline{B}(x,r))}{\omega_n r^n} + \frac{\mathcal{L}^n(A\setminus \overline{B}(x,r))}{\omega_n r^n} \qquad \forall\, x\in \R^n, r>0. \]
+    Taking the limit superior as $r \to 0^+$, the Upper Density Theorem \ref{thm:upper_density_theorem} implies that the first term on the right-hand side converges to $\Theta^{*n}(\mathcal{L}^n,A,x)$ and the second term converges to $\Theta^{*n}(\mathcal{L}^n,\R^n\setminus A,x)$ for $\mathcal{L}^n$-almost every $x \in \R^n$.
+    That is, 
+    \[ 1 = \Theta^{*n}(\mathcal{L}^n,A,x) + 0 \qquad\text{ for $\mathcal{L}^n$-a.e. } x \in A \]
+    and
+    \[ 1 = 0 + \Theta^{*n}(\mathcal{L}^n,\R^n\setminus A,x) \qquad\text{ for $\mathcal{L}^n$-a.e. } x \in \R^n\setminus A. \]
+    Thus the limit defining the density $\Theta^n(\mathcal{L}^n,A,x)$ exists for $\mathcal{L}^n$-almost every $x \in \R^n$, and the desired equalities hold.
+\end{proof}
+
+\subsection{The Symmetric Vitali Property}
+We want to generalize the Comparison Lemma \ref{lem:baby_comparison_lemma} and the Upper Density Theorem \ref{thm:upper_density_theorem}.
+
+\begin{exercise}[The Set where a Measure Vanishes is Open]
+    \label{ex:set_where_measure_vanishes_are_open}
+    Let $\mu$ be a Borel regular outer measure on $X$.
+    Then the set \[ U_{\mu} := \{ x\in X : \mu(\overline{B}(x,r)) = 0 \text{ for some } r > 0 \} \] is open.
+    If $X$ is a separable metric space, then $\mu(U_{\mu}) = 0$.
+\end{exercise}
+
+\begin{proof}
+    Let $x \in U_{\mu}$ be arbitrary.
+    Then there exists $r > 0$ such that $\mu(\overline{B}(x,r)) = 0$.
+    If $y \in B(x,r)$, then $d(x,y) < r$ and $\overline{B}(y,r - d(x,y)) \subseteq \overline{B}(x,r)$ by the triangle inequality, so by monotonicity of $\mu$ we have
+    \[ \mu(\overline{B}(y,r - d(x,y))) \leq \mu(\overline{B}(x,r)) = 0 \]
+    which implies that $y \in U_{\mu}$.
+    Thus $B(x,r) \subseteq U_{\mu}$, showing that $U_{\mu}$ is open.
+
+    \vspace{2mm}
+
+    Now assume that $X$ is a separable metric space.
+    Then $U_{\mu}$ is also separable, so there exists a countable dense subset $\{ x_j \}_{j=1}^\infty \subseteq U_{\mu}$.
+    For each $j \in \Z^+$, there exists $r_j > 0$ such that $\mu(\overline{B}(x_j,r_j)) = 0$.
+    Thus
+    \[ U_{\mu} = \bigcup_{j=1}^\infty \overline{B}(x_j,r_j) \]
+    by density of $\{ x_j \}_{j=1}^\infty$ in $U_{\mu}$, so by countable subadditivity of $\mu$ we have
+    \[ \mu(U_{\mu}) \leq \sum_{j=1}^\infty \mu(\overline{B}(x_j,r_j)) = 0. \]
+\end{proof}
+
+\begin{definition}[Upper Densities with respect to a Measure]
+    \label{def:upper_lower_density_wrt_measure}
+    Let $\mu$ and $\mu_0$ be Borel regular outer measures on $X$, and assume that $\mu_0$ is locally finite. 
+    Let
+    \[ U_{\mu_0} := \{ x\in X : \mu_0(\overline{B}(x,r)) = 0 \text{ for some } r > 0 \} \]
+    and \[ U_{\mu} := \{ x\in X : \mu(\overline{B}(x,r)) = 0 \text{ for some } r > 0 \}. \]
+    We define the \textit{upper density} of $\mu$ with respect to $\mu_0$ by
+    \[ \Theta^{*\mu_0}(\mu,x) := \begin{cases}
+        \displaystyle\limsup_{r \to 0^+} \frac{\mu(\overline{B}(x,r))}{\mu_0(\overline{B}(x,r))}, & \text{ if } x \in X \setminus (U_{\mu_0} \cup U_{\mu}), \\
+        \infty, & \text{ if } x \in U_{\mu_0} \setminus U_{\mu}, \\
+        0, & \text{ if } x \in U_{\mu}.
+    \end{cases} \]
+\end{definition}
+
+Note that the set $U_{\mu_0}\setminus U_{\mu}$ in the above definition is not the only way that $\Theta^{*\mu_0}(\mu,x)$ can be infinite; it can also be infinite if the limit superior diverges to infinity.
+
+\begin{remark}[Upper Densities with respect to Lebesgue Measure on $\R^n$]
+    \label{rem:upper_densities_wrt_measure_generalize_n_dimensional_upper_densities}
+    Notice that if $X = \R^n$ and $\mu_0 = \mathcal{L}^n$ is Lebesgue measure on $\R^n$, then the definition of $\Theta^{*\mu_0}(\mu,x)$ agrees with the definition of the $n$-dimensional upper density $\Theta^{*n}(\mu,x)$ from Definition \ref{def:n_dim_upper_lower_density}, i.e., we have
+    \[ \Theta^{*\mathcal{L}^n}(\mu,x) = \Theta^{*n}(\mu,x) \qquad\forall x \in \R^n. \]
+\end{remark}
+
+\begin{remark}[Conditions to Ensure $\mu_0(U_{\mu_0}) = 0$.]
+    There are various conditions one can impose on $\mu_0$ to ensure that $\mu_0(U_{\mu_0}) = 0$.
+    For example, if $X$ is a seperable metric space then this was shown in Exercise \ref{ex:set_where_measure_vanishes_are_open}.
+
+    Also if $(X,\mu_0)$ is open $\sigma$-finite and $\mu_0$ has the Symmetric Vitali Property (Definition \ref{def:symmetric_vitali_property} below), then $\mu_0(U_{\mu_0}) = 0$.
+    See Exercise \ref{ex:measure_of_set_where_measure_vanishes_is_zero} for the proof.
+\end{remark}
+
+\begin{definition}[Symmetric Vitali Property]
+    \label{def:symmetric_vitali_property}
+    Let $\mu$ be a Borel outer measure on $X$. 
+    We say that $\mu$ has the \textit{symmetric Vitali property} if for each subset $A \subseteq X$ such that $\mu(A) < \infty$, and for each collection $\mathcal{B}$ of closed balls in $X$ such that the center of each ball in $\mathcal{B}$ is in $A$ and 
+    \[ \inf\{ r : \overline{B}(a,r) \in\mathcal{B}\} = 0 \]
+    for each $a \in A$, there exists a countable disjoint subcollection $\{ B_j \}_{j=1}^\infty \subseteq \mathcal{B}$ such that
+    \[ \mu\left( A \setminus \bigcup_{j=1}^\infty B_j \right) = 0. \]
+\end{definition}
+An informal way to think about the symmetric Vitali property is that we can ``almost'' cover an arbitrary finite measure set $A$ by disjoint balls with centers in $A$.
+
+
+\begin{example}[Borel Regular Measures on $\R^n$ have the Symmetric Vitali Property]
+    \label{ex:radon_measures_on_Rn_have_symmetric_vitali_property}
+    Each Borel regular outer measure on $\R^n$ which is finite on compact sets has the symmetric Vitali property --- this is exactly what was proven in Lemma \ref{lem:filling_finite_measure_sets_with_balls} by using the Besicovich Covering Theorem \ref{thm:besicovitch_covering_theorem}.
+\end{example}
+
+\begin{exercise}[Finite Borel Regular Measures with a Doubling Condition have the Symmetric Vitali Property]
+    \label{ex:finite_borel_regular_measures_with_doubling_condition_have_symmetric_vitali_property}
+    Let $\mu$ be a Borel regular outer measure on $X$ such that $\mu(X) < \infty$, and assume that there exists a constant $\mathbf{b} > 0$ such that 
+    \[ \mu( 2B ) \leq \mathbf{b}\mu(B) \qquad \text{ for each closed ball } B \subseteq X. \tag{$\ddag$}\]
+    Then $\mu$ has the symmetric Vitali property.
+\end{exercise}
+
+The condition $(\ddag)$ is called a \textit{doubling condition}, and it says that we can uniformly control the measure of a ball by the measure of a ball with half the radius.
+The constant $\mathbf{b}$ is called a \textit{doubling constant} for $\mu$.
+Also note that some people prefer to state the doubling condition in terms tripling the radius (which is cleaner for using things like Vitali's Covering Theorem), but the two versions are equivalent up to changing the constant $\mathbf{b}$.
+
+\begin{proof}
+    Let $A \subseteq X$ be such that $\mu(A) < \infty$, and let $\mathcal{B}$ be a collection of closed balls in $X$ such that the center of each ball in $\mathcal{B}$ is in $A$ and
+    \[ \inf\{ r : \overline{B}(a,r) \in\mathcal{B}\} = 0 \]
+    for each $a \in A$.
+    By Vitali's Covering Lemma (Infinite Version) \ref{lem:infinite_5r_covering_lemma}, there exists a countable disjoint subcollection $\{ B_j \}_{j=1}^\infty \subseteq \mathcal{B}$ such that
+    \[ A \subseteq \bigcup_{j=1}^\infty 5B_j. \]
+    Since
+    \[ \mu(5B_j) \leq \mu(8B_j) \leq \mathbf{b}^3 \mu(B_j) \]
+    for each $j \in \Z^+$ by applying the doubling condition $(\ddag)$ three times, we have
+    \[ \mu\left( A \setminus \bigcup_{j=1}^N B_j \right) \leq \mu\left( \bigcup_{j=N+1}^\infty 5B_j \right) \leq \mathbf{b}^3 \sum_{j=N+1}^\infty \mu(B_j) \]
+    for each $N \in \Z^+$.
+    Since $\sum_{j=1}^\infty \mu(B_j) \leq \mu(X) < \infty$, we have
+    \[ \lim_{N \to \infty} \mu\left( A \setminus \bigcup_{j=1}^N B_j \right) = \lim_{N \to \infty} \sum_{j=N+1}^\infty \mu(B_j) = 0, \]
+    which implies that
+    \[ \mu\left( A \setminus \bigcup_{j=1}^\infty B_j \right) = 0. \]
+    Since $\mathcal{B}$ and $A$ were arbitrary, we conclude that $\mu$ has the symmetric Vitali property.
+\end{proof}
+
+\begin{exercise}[Measure of Set Where Measure Vanishes is Zero]
+    \label{ex:measure_of_set_where_measure_vanishes_is_zero}
+    Let $\mu$ be a Borel regular outer measure on $X$ which is open $\sigma$-finite and has the symmetric Vitali property.
+    Show that $\mu(U_{\mu}) = 0$ where 
+    \[ U_{\mu} := \{ x\in X : \mu(\overline{B}(x,r)) = 0 \text{ for some } r > 0 \}. \]
+\end{exercise}
+\begin{proof}
+    First we assume that $\mu(U_{\mu}) < \infty$.
+    See that the collection of closed balls
+    \[ \mathcal{B} := \{ \overline{B}(x,r) : x \in U_{\mu}, r > 0, \mu(\overline{B}(x,r)) = 0 \} \]
+    satisfies
+    \[ \inf\{ r : \overline{B}(a,r) \in\mathcal{B}\} = 0 \]
+    for each $a \in U_{\mu}$.
+    Since $\mu$ has the symmetric Vitali property, there exists a countable disjoint subcollection $\{ B_j \}_{j=1}^\infty \subseteq \mathcal{B}$ such that
+    \[ \mu\left( U_{\mu} \setminus \bigcup_{j=1}^\infty B_j \right) = 0. \]
+    But $\mu(B_j) = 0$ for each $j \in \Z^+$ by construction, so by countable subadditivity of $\mu$ we have
+    \[ \mu(U_{\mu}) \leq \mu\left( U_{\mu} \setminus \bigcup_{j=1}^\infty B_j \right) + \sum_{j=1}^\infty \mu(B_j) = 0. \]
+
+\vspace{2mm}
+
+    Now if $\mu(U_{\mu}) = \infty$, since $\mu$ is open $\sigma$-finite there exists a countable collection of open sets $\{ U_k \}_{k=1}^\infty$ such that $X = \bigcup_{k=1}^\infty U_k$ and $\mu(U_k) < \infty$ for each $k \in \Z^+$.
+    Then we have
+    \[ U_{\mu} = \bigcup_{k=1}^\infty (U_{\mu} \cap U_k) \]
+    and $\mu(U_{\mu} \cap U_k) \leq \mu(U_k) < \infty$ for each $k \in \Z^+$, so by the previous case we have $\mu(U_{\mu} \cap U_k) = 0$ for each $k \in \Z^+$.
+    Thus by countable subadditivity of $\mu$ we have
+    \[ \mu(U_{\mu}) \leq \sum_{k=1}^\infty \mu(U_{\mu} \cap U_k) = 0. \]
+
+\end{proof}
+
+\begin{exercise}[Symmetric Vitali Property and Open $\sigma$-Finiteness]
+    \label{ex:symmetric_vitali_property_extends_to_infinite_measure_sets_when_open_sigma_finite}
+    Let $\mu$ be a Borel regular outer measure on $X$ which is open $\sigma$-finite and has the symmetric Vitali property.
+    Then the symmetric Vitali property holds for all subsets $A \subseteq X$ such that $\mu(A) = \infty$ as well.
+\end{exercise}
+\begin{proof}
+    Let $A \subseteq X$ be such that $\mu(A) = \infty$.
+    Since $\mu$ is open $\sigma$-finite, there exists a countable collection of open sets $\{ U_k \}_{k=1}^\infty$ such that $X = \bigcup_{k=1}^\infty U_k$ and $\mu(U_k) < \infty$ for each $k \in \Z^+$.
+    Then we have
+    \[ A = \bigcup_{k=1}^\infty (A \cap U_k) \]
+    and $\mu(A \cap U_k) \leq \mu(U_k) < \infty$ for each $k \in \Z^+$.
+    By the symmetric Vitali property for finite measure sets, for each $k \in \Z^+$ there exists a countable disjoint subcollection $\left\{ B_j^{(k)} \right\}_{j=1}^\infty$ of closed balls in $\mathcal{B}$ with centers in $A \cap U_k$ such that
+    \[ \mu\left( (A \cap U_k) \setminus \bigcup_{j=1}^\infty B_j^{(k)} \right) = 0. \]
+    Then the collection
+    \[ \left\{ B_j^{(k)} : j,k \in \Z^+ \right\} \]
+    is a countable disjoint subcollection of $\mathcal{B}$ with centers in $A$ such that
+    \begin{align*}
+        \mu\left( A \setminus \bigcup_{k=1}^\infty \bigcup_{j=1}^\infty B_j^{(k)} \right) &\leq \mu\left( \bigcup_{k=1}^\infty \left( (A \cap U_k) \setminus \bigcup_{j=1}^\infty B_j^{(k)} \right) \right) \\   
+        &\leq \sum_{k=1}^\infty \mu\left( (A \cap U_k) \setminus \bigcup_{j=1}^\infty B_j^{(k)} \right) = 0.
+    \end{align*}
+
+\end{proof}
+
+\begin{lemma}[General Comparison Lemma]
+    \label{lem:comparison_lemma_general}
+    Let $\mu$ and $\mu_0$ be Borel regular outer measures on $X$ which are both open $\sigma$-finite, and assume that $\mu_0$ has the symmetric Vitali property.
+    Also let $t \geq 0$ and $A \subseteq X$.
+    Then
+    \[ \Theta^{*\mu_0}(\mu,x) \geq t \quad\forall \,x \in A \quad \implies \mu(A) \geq t \cdot \mu_0(A). \]
+\end{lemma}
+
+\begin{proof}
+    The proof is similar to that of the Comparison Lemma \ref{lem:baby_comparison_lemma}, but we use the Symmetric Vitali Property in place of the Vitali Covering Lemma.
+    
+    \vspace{2mm}
+
+    Let $U_{\mu_0}$ and $U_{\mu}$ be as in Definition \ref{def:upper_lower_density_wrt_measure}.
+    Because $(X,\mu_0)$ is open $\sigma$-finite and $\mu_0$ has the symmetric Vitali property, we have $\mu_0(U_{\mu_0}) = 0$ by Exercise \ref{ex:measure_of_set_where_measure_vanishes_is_zero}.
+    Also the desired inequality is trivial if $t = 0$ so we assume that $t > 0$. Let $ A \subseteq X$ be a subset such that 
+    \[ \Theta^{*\mu_0}(\mu,x) \geq t \quad\forall \,x \in A. \]
+    Let $U \subseteq X$ be an open set such that $A \subseteq U$; 
+    fix $\tau \in (0,t)$.
+    
+    We consider the collection of closed balls
+    \[ \mathcal{B} := \left\{ \overline{B}(x,r) : x\in X \cap (X\setminus U_{\mu_0}), \overline{B}(x,r) \subset U, \text{ and } \mu(\overline{B}(x,r)) > \tau \mu_0(\overline{B}(x,r)) \right\}. \]
+    See that for each $a \in A \setminus U_{\mu_0}$, we have
+    \[\Theta^{*\mu_0}(\mu,a) = \limsup_{r\to 0^+} \frac{\mu(\overline{B}(a,r))}{\mu_0(\overline{B}(a,r))} \geq t > \tau \]
+    which implies that there exists $r_a > 0$ such that for all $0 < r < r_a$ we have
+    \[ \mu(\overline{B}(a,r)) > \tau \mu_0(\overline{B}(a,r)). \]
+    Thus
+    \[ \inf\{ r : \overline{B}(a,r) \in\mathcal{B}\} = 0 \]
+    for each $a \in A \setminus U_{\mu_0}$.
+
+    Since $\mu_0$ has the symmetric Vitali property, there exists a countable disjoint subcollection $\{ B_j \}_{j=1}^\infty \subseteq \mathcal{B}$ such that
+    \[  \mu_0\left( (A\setminus U_{\mu_0}) \setminus \bigcup_{j=1}^\infty B_j \right) = 0. \]
+    (By Exercise \ref{ex:symmetric_vitali_property_extends_to_infinite_measure_sets_when_open_sigma_finite}, we can apply the symmetric Vitali property even if $\mu_0(A) = \infty$.)
+    Thus
+    \[ \mu_0\left( A \setminus \bigcup_{j=1}^\infty B_j \right) \leq \mu_0\left( (A\setminus U_{\mu_0}) \setminus \bigcup_{j=1}^\infty B_j \right) + \mu_0(U_{\mu_0}) = 0 \]
+    by using that $\mu_0(U_{\mu_0}) = 0$.
+    By definition of $\mathcal{B}$, we have
+    \[ \mu(B_j) > \tau \mu_0(B_j) \]
+    for each $j \in \Z^+$, so by adding we obtain
+    \begin{align*}
+        \tau \mu_0(A) &\leq \tau\mu_0\left( A \setminus \bigcup_{j=1}^\infty B_j \right) + \tau \mu_0\left( \bigcup_{j=1}^\infty B_j \right)  \\
+            &= 0 + \tau \sum_{j=1}^\infty \mu_0(B_j) &&\text{ by disjointness of } \{ B_j \}_{j=1}^\infty \\
+            &< \sum_{j=1}^\infty \mu(B_j) &&\text{ by definition of } \mathcal{B} \\
+            &= \mu\left( \bigcup_{j=1}^\infty B_j \right) \leq \mu(U) && \text{ since } B_j \subseteq U \text{ for each } j \in \Z^+.
+    \end{align*}
+    Since $U \supseteq A$ was an arbitrary open set, Borel regularity of $\mu$ gives
+    \[ \mu(A) \geq \tau \mu_0(A). \]
+    Taking the limit as $\tau \to t^-$ completes the proof.
+\end{proof}
+
+
+\begin{corollary}[Upper Density Finite almost everywhere]
+    \label{cor:upper_density_finite}
+    Let $\mu$ and $\mu_0$ be Borel regular outer measures on $X$ which are both open $\sigma$-finite, and assume that $\mu_0$ has the symmetric Vitali property.
+    Then
+    \[ \Theta^{*\mu_0}(\mu,x) < \infty \]
+    for $\mu_0$-almost every $x \in X$.
+\end{corollary}
+
+\begin{proof}
+    Before the proof, maybe you are na\"ive and think that this is obvious because our assumptions guaruntee that $\mu_0(U_{\mu_0}) = 0$ by Exercise \ref{ex:measure_of_set_where_measure_vanishes_is_zero}, so we are done.
+    A moments thought reveals that this is not the only way that $\Theta^{*\mu_0}(\mu,x)$ can be infinite; it can also be infinite if the limit superior diverges to infinity.
+    Thus we need to do some work.
+
+    \vspace{2mm}
+
+    Since $X$ is open $\sigma$-finite with respect to $\mu_0$, there exists a countable collection of open sets $\{ U_k \}_{k=1}^\infty$ such that $X = \bigcup_{k=1}^\infty U_k$ and $\mu_0(U_k) < \infty$ for each $k \in \Z^+$.
+    For each $m \in \Z^+$, we consider $\mu \mres U_j$ which is a Borel regular outer measure on $X$ satisfying $(\mu \mres U_j)(X) = \mu(U_j) < \infty$.
+
+    Fix $m \in \Z^+$ and $t > 0$ and define
+    \[ A_{m,t} := \{ x\in U_m \setminus U_{\mu_0} : \Theta^{*\mu_0}(\mu,x) \geq t \}. \]
+    By the General Comparison Lemma \ref{lem:comparison_lemma_general}, we have
+    \[ t \mu_0 (A_{m,t}) \leq \mu_m(A_{m,t}) \leq \mu(U_m) < \infty \]
+    and thus
+    \[ \mu_0 (\{x \in U_m : \Theta^{*\mu_0}(\mu,x) = \infty \}) \leq \frac{1}{t} \mu(U_m). \]
+    Since this holds for each $t > 0$, we conclude that
+    \[ \mu_0 (\{x \in U_m : \Theta^{*\mu_0}(\mu,x) = \infty \}) = 0. \]
+    Since $X = \bigcup_{m=1}^\infty U_m$, by countable subadditivity of $\mu_0$ we have
+    \[ \mu_0 (\{x \in X : \Theta^{*\mu_0}(\mu,x) = \infty \}) \leq \sum_{m=1}^\infty \mu_0 (\{x \in U_m : \Theta^{*\mu_0}(\mu,x) = \infty \}) = 0. \]
+\end{proof}
+
+\begin{theorem}[General Upper Density Theorem]
+    \label{thm:upper_density_theorem_general}
+    Let $\mu$ and $\mu_0$ be Borel regular outer measures on $X$, and assume that $(X,\mu_0)$ is open $\sigma$-finite and that $\mu_0$ has the symmetric Vitali property.
+    If $A \subseteq X$ is a $\mu$-measurable set with $\mu(A) < \infty$, then 
+    \[ \Theta^{*\mu_0}(\mu\mres A,x) = 0 \]
+    for $\mu_0$-almost every $x \in X\setminus A$.
+\end{theorem}
+
+\begin{proof}
+    Assume that $A \subseteq X$ is a $\mu$-measurable set with $\mu(A) < \infty$.
+
+    Let $t \geq 0$ and define
+    \[ E_t := \{ x \in X\setminus A : \Theta^{*\mu_0}(\mu\mres A,x) > t \} \]
+    and let $C \subseteq A$ be an arbitrary closed subset.
+    Since $X \setminus C$ is open and
+    \[ E_t \subset X \setminus A \subset X\setminus C \]
+    we see that
+    \[ \Theta^{*\mu_0}(\mu\mres(A\cap(X\setminus C))) = \Theta^{*\mu_0}(\mu\mres A,x) \geq t \]
+    for each $x \in E_t$.
+    By the General Comparison Lemma \ref{lem:comparison_lemma_general}, we have
+    \[ t\mu_0(E_t) \leq \mu\mres(A\cap(X\setminus C))(E_t) \leq \mu(A\setminus C) \]
+    and we note that this holds for each closed subset $C \subseteq A$.
+
+    Sincce $\mu$ is Borel regular, there is a sequence of closed sets $\{ C_j \}_{j=1}^\infty$ such that $C_j \subseteq A$ for each $j \in \Z^+$ and
+    \[ \lim_{j\to\infty} \mu(C_j) = \mu(A). \]
+    Thus
+    \[ t \mu_0(E_t) \leq \lim_{j\to\infty} \mu(A \setminus C_j) = \mu(A) - \lim_{j\to\infty}\mu(C_j) = 0. \]
+
+    Since $t \geq 0$ was arbitrary, we conclude that \[ \mu_0(E_t) = 0 \qquad\forall \, t>0. \]
+    Thus
+    \[ \mu_0( \{ x \in X\setminus A : \Theta^{*\mu_0}(\mu\mres A,x) > 0 \}) = \mu_0\left( \bigcup_{n=1}^\infty E_{1/n} \right) \leq \sum_{n=1}^\infty \mu_0(E_{1/n}) = 0 \]
+    and hence
+    \[ \Theta^{*\mu_0}(\mu\mres A,x) = 0 \]
+    for $\mu_0$-almost every $x \in X\setminus A$.
+\end{proof}
+
+We come to the final result in this section.
+\begin{theorem}[General Density Theorem]
+    \label{thm:density_theorem_general}
+    Let $\mu$ be a Borel regular outer measure on $X$ which is open $\sigma$-finite and has the symmetric Vitali property.
+    Then for each $\mu$-measurable set $A \subseteq X$, we have
+    \[ \lim_{r\to 0^+} \frac{\mu(\overline{B}(x,r) \cap A)}{\mu(\overline{B}(x,r))} = \begin{cases}
+        1, & \text{ for } \mu\text{-almost every } x \in A, \\
+        0, & \text{ for } \mu\text{-almost every } x \in X\setminus A.
+    \end{cases} \]
+\end{theorem}
+
+\begin{proof}
+    Letting $U_{\mu}$ be the set 
+    \[ U_{\mu} = \{ x\in X : \mu(\overline{B}(x,r))=0 \text{ for some } r > 0 \} \]
+    we see that by Exercise \ref{ex:measure_of_set_where_measure_vanishes_is_zero}, we have $\mu(U_{\mu}) = 0$.
+    
+    We assume first that $\mu(X) < \infty$, and let $A \subseteq X$ be a $\mu$-measurable set.
+    For each $x \in X\setminus U_{\mu}$, since $A$ is $\mu$-measurable we have
+    \[ \mu(\overline{B}(x,r)) = \mu(\overline{B}(x,r) \cap A) + \mu(\overline{B}(x,r) \setminus A) \qquad \forall\, r > 0 \]
+    which implies that
+    \[ 1 = \frac{\mu(\overline{B}(x,r))}{\mu(\overline{B}(x,r))} = \frac{\mu(\overline{B}(x,r) \cap A)}{\mu(\overline{B}(x,r))} + \frac{\mu(\overline{B}(x,r) \setminus A)}{\mu(\overline{B}(x,r))} \]
+    for all $r > 0$.
+
+    Taking the limit superior as $r \to 0^+$, the General Upper Density Theorem \ref{thm:upper_density_theorem_general} implies that the first term on the right converges to $0$ for $\mu$-almost every $x \in X\setminus A$ and the second term converges to $0$ for $\mu$-almost every $x \in A$.
+    That is,
+    \[ 1 = 0 + \Theta^{*\mu}(\mu\mres(X\setminus A),x) \qquad\text{ for $\mu$-a.e. } x \in X\setminus A \]
+    and
+    \[ 1 = \Theta^{*\mu}(\mu\mres A,x) + 0 \qquad\text{ for $\mu$-a.e. } x \in A. \]
+    Thus the limit defining the density
+    \[ \Theta^{\mu}(\mu,A,x) := \lim_{r\to 0^+} \frac{\mu(\overline{B}(x,r) \cap A)}{\mu(\overline{B}(x,r))} \]
+    exists for $\mu$-almost every $x \in X$, and the desired equalities hold.
+
+    \vspace{2mm}
+
+    Removing the assumption that $\mu(X) < \infty$, we assume instead that $\mu$ is open $\sigma$-finite.
+    Then there exists a countable collection of open sets $\{ U_k \}_{k=1}^\infty$ such that $X = \bigcup_{k=1}^\infty U_k$ and $\mu(U_k) < \infty$ for each $k \in \Z^+$.
+    For each $k \in \Z^+$, by the previous case we have
+    \[ \Theta^{\mu}(\mu\mres U_k,x) = \begin{cases}
+        1, & \text{ for } \mu\text{-almost every } x \in A\cap U_k, \\
+        0, & \text{ for } \mu\text{-almost every } x \in U_k\setminus A.
+    \end{cases} \]
+    Since $X = \bigcup_{k=1}^\infty U_k$, we know that
+    \[ \Theta^{\mu}(\mu,A,x) = \begin{cases}
+        1, & \text{ for } \mu\text{-almost every } x \in A, \\
+        0, & \text{ for } \mu\text{-almost every } x \in X\setminus A.
+    \end{cases} \]
+\end{proof}

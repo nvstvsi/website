@@ -1,0 +1,811 @@
+\section{Monotone Functions}
+
+Recall the definition of monotone functions.
+
+\begin{definition}[Increasing, Decreasing, and Monotone Function]
+    \label{def:increasing_decreasing_monotone_function}
+    Let $I\subseteq\R$ be an interval and consider a function $f:I\to\R$.
+    The function $f$ is \emph{increasing} if for all $x,y\in I$, we have 
+    \[ x \leq y \implies f(x) \leq f(y). \]
+    The function $f$ is \emph{decreasing} if for all $x,y\in I$, we have
+    \[ x \leq y \implies f(x) \geq f(y). \]
+    The function $f$ is \emph{monotone} if it is either increasing or decreasing.
+\end{definition}
+
+Clearly a function $f$ is increasing if and only if $-f$ is decreasing, and vice versa.
+This observation allows us to often reduce questions about monotone functions to questions about increasing functions.
+
+\begin{exercise}[Monotone Functions Have Left and Right Limits]
+    \label{ex:monotone_functions_have_left_and_right_limits}
+    If $f:[a,b]\to\R$ is monotone, then for each $x\in(a,b)$, the left and right limits
+    \[ f(x^-) := \lim_{t\to x^-} f(t) \quad\text{and}\quad f(x^+) := \lim_{t\to x^+} f(t) \]
+    exist, and we have
+    \[ f(x^-) \leq f(x) \leq f(x^+) \]
+    if $f$ is increasing, and the reversed inequalities if $f$ is decreasing.
+    Also $f(a^+) := \lim_{t\to a^+} f(t)$ and $f(b^-) := \lim_{t\to b^-} f(t)$ exist.
+\end{exercise}
+\begin{proof}
+    Let $f:[a,b]\to\R$ be an increasing function, and fix $x\in[a,b)$.
+    Then the set $\{f(t) : t\in[a,x)\}$ is bounded above by $f(x)$ since $f$ is increasing, so by the completeness axiom of $\R$, the supremum
+    \[ f(x^+) := \sup\{f(t) : t\in[a,x)\} \]
+    exists.
+    We claim that $f(x^+) = \lim_{t\to x^+} f(t)$.
+    To see this, let $\varepsilon > 0$.
+    By the definition of supremum, there exists $t_0 \in [a,x)$ such that
+    \[ f(x^+) - \varepsilon < f(t_0) \leq f(x^+) \]
+    since $f(x^+)$ is the least upper bound of $\{f(t) : t\in[a,x)\}$.
+    Since $f$ is increasing, for each $t\in(t_0,x)$ we have
+    \[ f(x^+) - \varepsilon < f(t_0) \leq f(t) \leq f(x^+). \]
+    This shows that for all $t$ sufficiently close to $x$ from the left, $f(t)$ is within $\varepsilon$ of $f(x^+)$, proving the limit.
+
+    Similarly, for each $x\in(a,b]$, the set $\{f(t) : t\in(x,b]\}$ is bounded below by $f(x)$ since $f$ is increasing, so by the completeness axiom of $\R$, the infimum
+    \[ f(x^-) := \inf\{f(t) : t\in(x,b]\} \]
+    exists and is the limit $f(x^-) = \lim_{t\to x^-} f(t)$ by a similar argument.
+
+    Finally, since $f$ is increasing, for each $x\in(a,b)$ we have
+    \[ f(x^-) = \inf\{f(t) : t\in(x,b]\} \leq f(x) \leq \sup\{f(t) : t\in[a,x)\} = f(x^+). \]
+
+    In the case that $f$ is decreasing, then $-f$ is increasing, so the left and right limits of $f$ exist by the above argument.
+    Also for each $x\in(a,b)$ we have
+    \[ f(x^-) = -(-f)(x^-) \geq -f(x) = f(x) \geq -(-f)(x^+) = f(x^+) \]
+    since $-f$ is increasing.
+\end{proof}
+
+\begin{lemma}[Increasing Functions are Integrable]
+    \label{lem:increasing_functions_are_integrable}
+    If $f:[a,b]\to\R$ is increasing, then $f$ is measurable and bounded, and hence integrable.
+\end{lemma}
+\begin{proof}
+    The boundedness of $f$ follows immediately from the fact that for each $x\in[a,b]$, we have
+    \[ f(a) \leq f(x) \leq f(b). \]
+    
+    For each $c\in\R$, the set $E_c :=\{x\in[a,b] : f(x) < c\}$ is either empty or its not; if $E_c$ is nonempty, let $ x_c := \sup E_c$.
+    Then we see that 
+    \[ \{x\in[a,b] : f(x) < c\} = [a,x_c) \text{ if } x_c \notin E_c, \]
+    and
+    \[ \{x\in[a,b] : f(x) < c\} = [a,x_c] \text{ if } x_c \in E_c. \]
+    In any case, $E_c$ is either empty, or a closed, or a half-open interval, so $E_c$ is Borel measurable.
+    This shows that $f$ is measurable by Proposition \ref{prop:equivalent_definitions_of_measurable_function}.
+
+    Since $f$ is bounded and measurable, we see that $f$ is integrable by Exercise \ref{ex:bounding_an_integral} (Bounding an Integral).
+\end{proof}
+
+It is obvious that monotone functions need not be continuous. 
+However, we have the following.
+
+\begin{lemma}[Monotone Functions can only have Jump Discontinuities]
+    \label{lem:monotone_functions_can_only_have_jump_discontinuities}
+    Let $I$ be an interval in $\R$.
+    If $f:I\to\R$ is monotone, then $f$ can only have jump discontinuities.
+    That is, if $f$ is increasing and $x_0 \in I$ is a point of discontinuity of $f$, then
+    \[ f(x_0^-) < f(x_0^+). \]
+    Similarly, if $f$ is decreasing and $x_0 \in I$ is a point of discontinuity of $f$, then
+    \[ f(x_0^-) > f(x_0^+). \]
+\end{lemma}
+
+\begin{proof}
+    Without loss of generality, suppose that $f$ is increasing.
+    Also without loss of generality, suppose that $I = [a,b]$ is a closed interval (if $I$ is open or half-open, we can restrict $f$ to a closed subinterval of $I$ and apply the argument there; since $I$ can be written as a countable union of closed intervals, the result will hold for $I$ as well).
+    
+    Let $x_0 \in (a,b)$ be a point of discontinuity of $f$.
+    Then by Exercise \ref{ex:monotone_functions_have_left_and_right_limits}, the left and right limits $f(x_0^-)$ and $f(x_0^+)$ exist, and we have
+    \[ f(x_0^-) \leq f(x_0) \leq f(x_0^+). \]
+    Since $f$ is discontinuous at $x_0$, we must have either $f(x_0^-) < f(x_0)$ or $f(x_0) < f(x_0^+)$.
+    In either case, we see that
+    \[ f(x_0^-) < f(x_0^+). \]
+    Thus $f$ has a jump discontinuity at $x_0$.
+    
+    We also check that
+    \[ f(a) \leq f(a^+) \quad \text{and} \quad f(b^-) \leq f(b) \]
+    which shows that $f$ can only have jump discontinuities at the endpoints $a$ and $b$ as well.
+    Therefore $f$ can only have jump discontinuities on $[a,b]$.
+\end{proof}
+
+\begin{theorem}[Monotone Functions have at most Countably Many Discontinuities]
+    \label{thm:monotone_functions_have_at_most_countably_many_discontinuities}
+    Let $I$ be an interval in $\R$.
+    If $f:[a,b]\to\R$ is monotone, then $f$ has at most countably many points of discontinuity.
+\end{theorem}
+
+\begin{proof}
+        Without loss of generality, we may assume that $f$ is increasing.
+    Also without loss of generality, assume that $I$ is a closed, bounded interval $[a,b]$. 
+    (If $I$ is not closed and bounded, we can restrict to a closed, bounded subinterval of $I$ and apply the argument there;
+    since $I$ can be covered by a countable collection of closed, bounded intervals, the result will follow for $I$ as well.)
+
+    Let $D$ be the set of discontinuities of $f$ in $(a,b)$.
+    For each $x\in (a,b)$, define 
+    \begin{align*}
+        f(x^-) &= \lim_{t\to x^-} f(t) = \sup_{t < x} f(t), \\
+        f(x^+) &= \lim_{t\to x^+} f(t) = \inf_{t > x } f(t).
+    \end{align*}
+    Since $f$ is increasing, we have $f(x^-) \leq f(x)\leq f(x^+)$ for all $x\in (a,b)$.
+    Moreover, $f$ is continuous at $x$ if and only if $f(x^-) = f(x^+)$.
+
+    If $x\in D$, then $f(x^-) < f(x^+)$ and we define the \textit{jump interval} of $f$ at $x$ to be 
+    \[ J_x = (f(x^-), f(x^+)). \]
+    Note that for each $x\in D$, the jump interval $J_x$ is a nonempty open interval contained in the interval $[f(a), f(b)]$,
+    and the collection of jump intervals $\{J_x : x\in D\}$ is pairwise disjoint.
+    Therefore for each $k\in\Z^+$ there are at most finitely many $x\in D$ such that the length of $J_x$ is at least $1/k$.
+    As a result, the set of discontinuities $D$ is a countable union of finite sets, and is therefore countable.
+\end{proof}
+
+Since all countable subsets of $\R$ have Lebesgue measure zero, by the Lebesgue Criterion for Measurability (Theorem \ref{thm:lebesgue_criterion_for_measurability}), we have the following corollary.
+\begin{corollary}[Monotone Functions are Riemann Integrable]
+    \label{cor:monotone_functions_are_riemann_integrable}
+    If $f:[a,b]\to\R$ is monotone, then $f$ is Riemann integrable.
+\end{corollary}
+
+From this observation, one can actually show that the Lebesgue integral of a positive measurable function can be computed as an improper Riemann integral!
+\begin{remark}[The Lebesgue Integral is actually an Improper Riemann Integral]
+    \label{rem:the_lebesgue_integral_is_an_improper_riemann_integral}
+    Let $X$ be a set with a measure $\mu$, such that $(X,\mu)$ is $\sigma$-finite.
+    Then by Exercise \ref{area_under_graph_formula}, we know that for each $\mu$-measurable function $f:X\to[0,\infty]$, we have
+    \[ \int_X f \, d\mu = \int_0^\infty \mu(\{x\in X : t < f(x)\}) \, dt. \]
+    However, for each $\mu$-measurable function $f:X\to[0,\infty]$, the function $t \mapsto \mu(\{x\in X : t < f(x)\})$ is a decreasing function from $[0,\infty)$ to $[0,\infty]$ --- see \ref{ex:increasing_measure_function}.
+    Thus if $f:X\to[0,\infty]$ is $\mu$-measurable, then the function $t \mapsto \mu(\{x\in X : t < f(x)\})$ is Riemann integrable on each closed interval $[0,R]$ for each $R > 0$ by Corollary \ref{cor:monotone_functions_are_riemann_integrable}.
+    Therefore we can write the Lebesgue integral of $f$ as an improper Riemann integral,
+    \[ \int_X f \, d\mu = \int_0^\infty \mu(\{x\in X : t < f(x)\}) \, dt = \lim_{R\to\infty} \int_0^R \mu(\{x\in X : t < f(x)\}) \, dt \]
+    by Corollary \ref{cor:improper_riemann_integral}.
+
+    This formula is what some people take as the definition of the Lebesgue integral, so they can rely on a theory of Riemann integrals.
+    For us, it is a theorem. 
+\end{remark}
+
+\begin{exercise}[Jump Function]
+    \label{ex:jump_function}
+    Let $C$ be a finite or countable subset of $[a,b]$, which we enumerate as $C = \{x_1,x_2,\ldots\}$.
+    For each $x_n \in C$, let $c_n > 0$ be a positive real number in such a way that the series $\sum_{n=1}^\infty c_n$ converges.
+    Define the function $f:[a,b]\to\R$ by
+    \[ f(x) := \sum_{ \{ n \,:\, x_n < x \}} c_n. \]
+    Then the function $f$ is increasing, continuous from the left on $[a,b]$, and has a jump discontinuity of size $c_n$ at each point $x_n \in C$, and is continuous at each point in $[a,b]\setminus C$.
+    
+    The function $f$ constructed in this way is the \emph{jump function} with jumps $c_n$ at the points $x_n$ for each $n\in\Z^+$.
+
+\end{exercise}
+
+In other words, for any finite or countable set of points in $[a,b]$, we can construct an increasing function that has jump discontinuities at exactly those points.
+
+\begin{proof}
+    First we check that $f$ is well-defined.
+    For each $x\in[a,b]$, the set $\{x_n : x_n < x\}$ is finite or countable, and the series $\sum_{x_n < x} c_n$ converges since it is a subseries of the convergent series $\sum_{n=1}^\infty c_n$.
+    Thus $f(x)$ is a well-defined real number for each $x\in[a,b]$.
+
+    Next we check that $f$ is increasing.
+    Let $x,y\in[a,b]$ such that $x < y$.
+    Then the set $\{n : x_n < x\}$ is a subset of the set $\{n : x_n < y\}$, so
+    \[ f(x) = \sum_{\{n \,:\, x_n < x\}} c_n \leq \sum_{\{n \,:\, x_n < y\}} c_n = f(y). \]
+    Thus $f$ is increasing.
+
+    Now we check that $f$ is continuous from the left. Let $x\in(a,b]$. 
+    Then by definition of the limit from the left we have 
+    \[ f(x^-) = \lim_{t \to x^-} f(t) = \lim_{\substack{\epsilon \to 0, \\ \epsilon >0}} f(x-\epsilon) = \lim_{\epsilon \to 0^+} \sum_{\{n \,:\, x_n < x-\epsilon\}} c_n. \]
+    If $x_n\in C$ is such that $x_n < x$, then there exists $\epsilon > 0$ such that $x_n < x - \epsilon$.
+    Therefore \[ \lim_{\epsilon \to 0^+} \sum_{\{n \,:\, x_n < x-\epsilon\}} c_n = \sum_{\{n \,:\, x_n < x\}} c_n = f(x) \]
+    which proves that $f(x^-) = f(x)$.
+    Thus $f$ is continuous from the left at each point in $(a,b]$
+
+    We also check that $f$ has a jump discontinuity of size $c_n$ at each point $x_n \in C$.
+    Then we have
+    \[ f(x_n^+) = \lim_{ \substack{ \epsilon\to 0 \\ \epsilon>0 } } f(x+\epsilon) = \lim_{\epsilon\to 0^+} \sum_{ \{ k\, :\, x_k < x_n + \epsilon \} } c_k = \sum_{\{k \,:\, x_k \leq x_n\}} c_k = f(x_n) + c_n. \] 
+    Thus we have
+    \[ f(x_n^+) - f(x_n^-) = f(x_n^+) - f(x_n) = c_n \]
+    so $f$ has a jump discontinuity of size $c_n$ at $x_n$.
+
+    Finally, we check that $f$ is continuous at each point in $[a,b]\setminus C$.
+    Since the sum $\sum_{n=1}^\infty c_n$ converges, we have $c_n \to 0$ as $n\to\infty$.
+    Let $\epsilon > 0$ and choose $N\in\Z^+$ such that $c_n < \epsilon$ for all $n > N$.
+    Then for each $x\in[a,b]\setminus C$ and each $n > N$, there is an interval $[x,x+\delta)$ that contains none of the points $x_1,x_2,\ldots,x_n$.
+    Now we see that for each $y\in[x,x+\delta)$, we have
+    \[ f(y) - f(x) = \sum_{\{k \,:\, x_k < y\}} c_k - \sum_{\{k \,:\, x_k < x\}} c_k = \sum_{\{k \,:\, x_k \in [x,y)\}} c_k \leq \sum_{k=N+1}^\infty c_k < \epsilon. \]
+    Since $f$ is increasing, that is 
+    \[ | f(y) - f(x) | < \epsilon \]
+    for all $y\in[x,x+\delta)$, proving that $f$ is continuous from the right at $x$.
+    Since we already showed that $f$ is continuous from the left at $x$, we see that $f$ is continuous at $x$.
+    Thus $f$ is continuous at each point in $[a,b]\setminus C$.
+\end{proof}
+
+\begin{lemma}
+    \label{lem:increasing_function_is_sum_of_continuous_increasing_and_jump_function}
+    Let $f:[a,b]\to\R$ be an increasing function which is continuous from the left.
+    Then $f$ is the sum of a continuous increasing function and a jump function.
+\end{lemma}
+\begin{proof}
+    Since $f$ is increasing, by Theorem \ref{thm:monotone_functions_have_at_most_countably_many_discontinuities}, the set of discontinuities of $f$ is at most countable.
+    Enumerate the set of discontinuities as $\{x_1,x_2,\ldots\}$ if it is infinite, or $\{x_1,x_2,\ldots,x_N\}$ if it is finite.
+    For each $n\in\Z^+$, define the jump size at $x_n$ to be
+    \[ c_n := f(x_n^+) - f(x_n^-) = f(x_n^+) - f(x_n) \]
+    since $f$ is continuous from the left --- note that $c_n > 0 $ since monotone functions only have jump discontinuities \ref{lem:monotone_functions_can_only_have_jump_discontinuities}.
+    
+    Define the jump function $\psi:[a,b]\to\R$ with jumps $c_n$ at the points $x_n$ for each $n\in\Z^+$ as in Exercise \ref{ex:jump_function},
+    \[ \psi(x) := \sum_{\{n\,:\, x_n < x\}} c_n. \]
+    Then $\psi$ is increasing, continuous from the left, and has a jump discontinuity of size $c_n$ at each point $x_n$ for each $n\in\Z^+$, and is continuous at each point in $[a,b]\setminus\{x_1,x_2,\ldots\}$.
+    Let $\varphi:[a,b]\to\R$ be defined by
+    \[ \varphi(x) := f(x) - \psi(x). \]
+
+    We claim that $\varphi$ is continuous and increasing.
+    To see that $\varphi$ is increasing, let $x,y\in[a,b]$ such that $x < y$.
+    Then we have
+    \[ \varphi(y) - \varphi(x) = (f(y) - \psi(y)) - (f(x) - \psi(x)) = (f(y) - f(x)) - (\psi(y) - \psi(x)) \]
+    which is non-negative --- since $f$ is increasing, the quantity $f(y) - f(x)$ is greater that the sum of the jumps of $f$ at the points $x_n$ in the interval $(x,y)$, which is exactly $\psi(y) - \psi(x)$.
+    Thus $\varphi(y) - \varphi(x) \geq 0$, proving that $\varphi$ is increasing.
+
+    To see that $\varphi$ is continuous, let $x\in[a,b]$.
+    Then we have
+    \begin{align*}
+        \varphi(x^-) &= \lim_{ \substack{\epsilon\to 0 \\ \epsilon > 0 } } \varphi(x-\epsilon) = \lim_{ \substack{\epsilon\to 0 \\ \epsilon > 0 } } f(x-\epsilon) - \lim_{ \substack{\epsilon\to 0 \\ \epsilon > 0 } } \psi(x-\epsilon) \\
+            &= f(x^-) - \psi(x^-) \\
+            &= f(x) - \psi(x) = \varphi(x)
+    \end{align*}
+    since both $f$ and $\psi$ are continuous from the left.
+    Thus $\varphi$ is continuous from the left at $x$.
+    If $x\notin\{x_1,x_2,\ldots\}$, then both $f$ and $\psi$ are continuous at $x$, so $\varphi$ is continuous at $x$.
+    If $x = x_n$ for some $n\in\Z^+$, then we have a jump discontinuity of size $c_n$ at $x_n$ for both $f$ and $\psi$, so
+    \[ \varphi(x_n^+) = f(x_n^+) - \psi(x_n^+) = (f(x_n) + c_n) - (\psi(x_n) + c_n) = f(x_n) - \psi(x_n) = \varphi(x_n). \]
+    Thus $\varphi$ is continuous from the right at $x_n$.
+\end{proof}
+
+\subsection{Derivatives of Monotone Functions}
+
+In this section we study the differentiability properties of monotone functions.
+We need to introduce the following generalization of the usual notion of derivative.
+
+\begin{definition}[Upper and Lower Derivative from Left and Right]
+    \label{def:upper_and_lower_derivative_from_left_and_right}
+    Let $[a,b]\subseteq\R$ be an interval and let $f:[a,b]\to\R$ be a function.
+    We define the \emph{upper derivative from the right} of $f$ at $x\in[a,b)$ to be
+    \[ D^+f(x) := \limsup_{h\to 0^+} \frac{f(x+h) - f(x)}{h}, \]
+    and the \emph{lower derivative from the right} of $f$ at $x\in[a,b)$ to be
+    \[ D_+f(x) := \liminf_{h\to 0^+} \frac{f(x+h) - f(x)}{h}. \]
+    Similarly, we define the \emph{upper derivative from the left} of $f$ at $x\in(a,b]$ to be
+    \[ D^-f(x) := \limsup_{h\to 0^-} \frac{f(x+h) - f(x)}{h}, \]
+    and the \emph{lower derivative from the left} of $f$ at $x\in(a,b]$ to be
+    \[ D_-f(x) := \liminf_{h\to 0^-} \frac{f(x+h) - f(x)}{h}. \]
+    
+    If $D^+f(x) = D_+f(x)$, we say that $f$ is \emph{differentiable from the right} at $x$, and we denote the common value by $f'(x^+)$.
+    If $D^-f(x) = D_-f(x)$, we say that $f$ is \emph{differentiable from the left} at $x$, and we denote the common value by $f'(x^-)$.
+    If $f$ is differentiable from both the left and the right at $x$, and $f'(x^+) = f'(x^-)$, then we say that $f$ is \emph{differentiable} at $x$, and we denote the common value by $f'(x)$.    
+\end{definition}
+
+
+\begin{remark}[Basic Observations]
+    \label{rmk:upper_and_lower_derivative_from_left_and_right}
+    There are a few basic facts about the upper and lower derivatives from the left and right that are worth noting.
+    \begin{itemize}
+        \item While many functions $f$ fail to be differentiable, the one-sided upper and lower derivatives always exist (though they may be infinite).
+        \item We trivially have $D_-f(x) \leq D^- f(x)$ and $D_+f(x) \leq D^+f(x)$ for each $x\in(a,b)$.
+            Also $f'(x)$ exists if and only if $D_-f(x) = D^-f(x) = D_+f(x) = D^+f(x)$.
+        \item If $f$ is increasing, then $D_-f(x), D_+f(x) \geq 0$ for each $x\in(a,b)$, and by the first line of this remark, we also have $D^-f(x), D^+f(x) \geq 0$ for each $x\in(a,b)$.
+        \item Similarly, if $f$ is decreasing, then $D^-f(x), D^+f(x) \leq 0$ for each $x\in(a,b)$, and by the first line of this remark, we also have $D_-f(x), D_+f(x) \leq 0$ for each $x\in(a,b)$.
+        \item Since the one-sided upper and lower derivatives are defined using $\limsup$ and $\liminf$, we see that if $f$ is measurable, then the functions $D^-f, D_+f, D^-f, D_+f : (a,b) \to [-\infty,\infty]$ are all measurable.
+            For instance, the upper derivative from the right $D^+f$ is the pointwise limit of the sequence of measurable functions $\{ D^+_n f \}_{n=1}^\infty$ defined by
+            \[ D^+_n f(x) := \sup_{0 < h < 1/n} \frac{f(x+h) - f(x)}{h} \qquad \forall x\in(a,b). \]
+    \end{itemize}
+\end{remark}
+
+\begin{definition}[Invisible from the Left and Right]
+    \label{def:invisible_from_left_and_right}
+    Let $f:[a,b]\to\R$ be a continuous function.
+    We say that a point $x\in[a,b]$ is \textit{invisible from the right} if there is a number $t$ such that $x < t \leq b$ and $f(x) < f(t)$.
+    Similarly, we say that a point $x\in[a,b]$ is \textit{invisible from the left} if there is a number $t$ such that $a \leq t < x$ and $f(x) < f(t)$.
+\end{definition}
+
+Spivak calls these \textit{shadow points}, which I think fits the picture.
+
+\begin{figure}
+    \centering
+    \label{fig:rising_sun_lemma}
+\includegraphics[width=0.7\textwidth]{figures/rising-sun.png}
+\end{figure}
+
+\begin{lemma}[Rising Sun Lemma]
+    \label{lem:rising_sun_lemma}
+    Let $f:[a,b]\to\R$ be a continuous function.
+    Then the set of points in $[a,b]$ that are invisible from the right is the union of at most countably many disjoint open intervals $\{(a_n,b_n)\}_{n=1}^\infty$ such that for each $n\in\Z^+$, we have $f(a_n) \leq f(b_n)$.
+
+    Similarly, the set of points in $[a,b]$ that are invisible from the left is the union of at most countably many disjoint open intervals $\{(c_n,d_n)\}_{n=1}^\infty$ such that for each $n\in\Z^+$, we have $f(c_n) \geq f(d_n)$.
+\end{lemma}
+
+It's called the rising sun lemma because if you imagine the graph of $f$ as a landscape, and the sun rising from the right (east), then the points that are invisible from the right are those in shadow.
+
+\begin{proof}
+    We only prove the first assertion; the second follows by a symmetric argument. See that $b$ is not invisible from the right since there is no $t$ such that $b < t \leq b$.
+
+    \vspace{2mm}
+
+    First see that if $x\in[a,b)$ is invisible from the right, then by continuity of $f$, there exists $\delta>0$ such that $x < y < x+\delta \leq b$ and $y$ is also invisible from the right.
+    To see this, let $t$ be such that $x < t \leq b$ and $f(x) < f(t)$.
+    By continuity of $f$ at $x$, there exists $\delta > 0$ such that for each $y\in(x,x+\delta) \cap [a,b]$, we have
+    \[ f(y) - f(x) \leq |f(y) - f(x)|  < \frac{f(t) - f(x)}{2}. \]
+    Thus for each $y\in(x,x+\delta)$, we have
+    \[ f(y) \leq \frac{f(t) - f(x)}{2} + f(x) = \frac{f(t) + f(x)}{2} < f(t). \]
+    Thus each $y\in[x,x+\delta) \cap [a,b]$ is invisible from the right.
+    By taking $\delta$ small enough so that $x+\delta \leq b$, we that each $y\in[x,x+\delta)$ is invisible from the right.
+
+    Since $x\in [a,b)$ was an arbitrary point which is invisible from the right, we see that the set of points in $[a,b]$ that are invisible from the right is open; 
+    Hence this set can be written as a countable union of disjoint open intervals $\{(a_n,b_n)\}_{n=1}^\infty$.
+    
+    Notice that for each $n\in\Z^+$, the point $b_n$ is not invisible from the right --- if it were, then the above argument shows that $b_n$ belongs to another of the open intervals $(a_m,b_m)$ for some $m\neq n$, and by openness of $(a_m,b_m)$, the intersection $(a_n,b_n) \cap (a_m,b_m)$ is nonempty, contradicting the fact that the intervals are disjoint.
+    Thus for each $n\in\Z^+$, the point $b_n$ is not invisible from the right.
+
+    Let $n\in\Z^+$ and suppose towards a contradiction that the interval $(a_n,b_n)$ is nonempty and such that $f(a_n) > f(b_n)$.
+    Then there is a point $x_0\in (a_n,b_n)$ such that $f(a_n) > f(x_0) > f(b_n)$ by the intermediate value theorem.
+    Define \[ x_* := \sup\{x \in (a_n,b_n) : f(x) = f(x_0) \} \]
+    to be the least upper bound of the set of points in $(a_n,b_n)$ where $f$ takes the value $f(x_0)$.
+    We claim that $x_* < b_n$ and hence $x_* \in (a_n,b_n)$. 
+    To see this, note that since $f$ is continuous, if $x_* = b_n$, then we would have
+    \[ f(x_*) = f(b_n), \]
+    which contradicts the fact that $f(x_0) > f(b_n)$ and $f(x_0) = f(x_*)$ by definition of $x_*$.
+    Thus $x_* < b_n$ and hence $x_* \in (a_n,b_n)$.
+    As a result of $x_*$ being in the interval $(a_n,b_n)$, we see that $x_*$ is invisible from the right, which we claim leads to a contradiction.
+    
+    As $x_*$ is invisible from the right, there is a point $t$ such that $x_* < t \leq b$ and $f(x_*) < f(t)$.
+    Clearly we cannot have $t \in (a_n,b_n)$.
+    To see this note that since $x_*$ is the supremum of the set of points in $(a_n,b_n)$ where $f$ takes the value $f(x_0) = f(x_*)$, but $f(b_n) < f(x_0)$, so $t\in (a_n,b_n)$ would imply there is a point in $(a_n,b_n)$ greater than $x_*$ where $f$ takes the value $f(x_0)$, contradicting the definition of $x_*$.
+    On the other hand, we cannot have $ t > b_n $ since this would imply that $f(b_n) < f(x_0) = f(x_*) < f(t)$, contradicting the fact that $b_n$ is not invisible from the right.
+    Thus no such $t$ exists, contradicting the fact that $x_*$ is invisible from the right.
+    Therefore our assumption that $f(a_n) > f(b_n)$ must be false, and we conclude that for each $n\in\Z^+$, we have $f(a_n) \leq f(b_n)$.
+\end{proof}
+
+\begin{exercise}[Vitali Covering Lemma for Intervals]
+    \label{ex:vitali_covering_lemma_intervals}
+    Let $I_1,I_2,\ldots I_n$ be a finite collection of bounded nonempty open intervals in $\R$.
+    Then there exists a disjoint subcollection $I_{j_1},I_{j_2},\ldots,I_{j_k}$ such that
+    \[ \bigcup_{m=1}^n I_m \subseteq \bigcup_{m=1}^k 3I_{j_m}. \]
+
+    Here if $I$ is an interval, we use the notation $3I$ to denote the interval with the same center as $I$ but three times the length of $I$.
+\end{exercise}
+\begin{proof}
+    Use a greedy algorithm. 
+
+    Select $I_{j_1}$ to be an interval of maximum length among the intervals $I_1,I_2,\ldots,I_n$.
+    (We say ``an'' instead of ``the'' because such an interval may not be unique.)
+
+    Suppose that the intervals $I_{j_1},I_{j_2},\ldots,I_{j_m}$ have been selected.
+    Let $I_{j_{m+1}}$ be an interval of maximum length among the intervals $I_1,I_2,\ldots,I_n$ that are disjoint from $I_{j_1},I_{j_2},\ldots,I_{j_m}$.
+    If no such interval exists, then we stop the process.
+    Because we began with a finite collection of intervals, this process must eventually terminate after a finite number of steps, say $k$ steps.
+
+    By construction, the intervals $I_{j_1},I_{j_2},\ldots,I_{j_k}$ are disjoint.
+    To see the claimed inclusion holds, let $j\in\{1,2,\ldots,n\}$.
+    If $j = j_m$ for some $m\in\{1,2,\ldots,k\}$, then clearly $I_j \subseteq 3I_{j_m}$, so we have $I_j \subseteq \bigcup_{m=1}^k 3I_{j_m}$.
+
+    Thus assume that $j \notin \{j_1,j_2,\ldots,j_k\}$.
+    Then because the process terminated without selecting $I_j$, we see that $I_j$ is not disjoint from at least one of the intervals $I_{j_1},I_{j_2},\ldots,I_{j_k}$.
+    Let $m\in\{1,2,\ldots,k\}$ be such that $I_j$ is not disjoint from $I_{j_m}$.
+    Then the length of $I_j$ is at most the length of $I_{j_m}$ by construction, as $I_{j_m}$ was selected to be an interval of maximum length among the intervals that are disjoint from $I_{j_1},I_{j_2},\ldots,I_{j_{m-1}}$.
+    Write $I_j = (a_j,b_j)$ and $I_{j_m} = (a_{j_m},b_{j_m})$.
+    Then we must have
+    \[ b_j - a_j \leq b_{j_m} - a_{j_m} \]
+    since the length of $I_j$ is at most the length of $I_{j_m}$.
+    Thus we must have $I_j\subseteq 3I_{j_m}$.
+
+    [ This last sentence requires a moment of thought; draw a picture if necessary.
+    For simplicity, assume that $I_{j_m}$ is centered at the origin, so $I_{j_m} = (-r,r)$ where $r = (b_{j_m} - a_{j_m})/2$ is half the length of $I_{j_m}$.
+    Then $3I_{j_m} = (-3r,3r)$.
+    If $I_j$ intersects $I_{j_m}$, then $I_j$ must contain a point in $(-r,r)$.
+    Since the length of $I_j$ is at most $2r$, it follows that $I_j$ is contained in $(-3r,3r)$. ]
+
+    Therefore we have shown that for each $j\in\{1,2,\ldots,n\}$, we have $I_j \subseteq \bigcup_{m=1}^k 3I_{j_m}$.
+    Hence
+    \[ \bigcup_{m=1}^n I_m \subseteq \bigcup_{m=1}^k 3I_{j_m} \]
+    as desired. 
+\end{proof}
+
+\begin{lemma}[Derivatives of Jump Functions are a.e. Zero]
+    \label{lem:derivatives_of_jump_functions_are_ae_zero}
+    Let $f:[a,b]\to\R$ be a jump function.
+    Then the derivative $f'$ exists and vanishes almost everywhere on $[a,b]$.
+\end{lemma}
+
+\begin{proof}
+    Let $\{ c_n \}_{n=1}^\infty$ be a sequence of positive real numbers such that the series $\sum_{n=1}^\infty c_n$ converges, and let $\{ x_n \}_{n=1}^\infty$ be a sequence of points in $[a,b]$.
+    Define the jump function $f:[a,b]\to\R$ by
+    \[ f(x) := \sum_{\{ n : x_n < x \}} c_n. \]
+    Then $f$ is increasing, continuous from the left, and has a jump discontinuity of size $c_n$ at each point $x_n$ for each $n\in\Z^+$, and is continuous at each point in $[a,b]\setminus\{x_1,x_2,\ldots\}$ by Exercise \ref{ex:jump_function}.
+
+    For each $n\in\Z^+$, we let 
+    \[ j_n(x) := \begin{cases}
+        1 & \text{if } x_n < x, \\
+        0 & \text{if } x \leq x_n
+    \end{cases} \]
+    for each $x\in[a,b]$.
+    Then we have
+    \[ f(x) = \sum_{n=1}^\infty c_n j_n(x) \]
+    for each $x\in[a,b]$ by definition of $f$.
+    This expression for $f$ is easier to analyze in what follows.
+
+
+    Since $f$ is increasing, we know it is measurable and bounded by Lemma \ref{lem:increasing_functions_are_integrable}. Thus $D^+f$ is measurable, as it is a limit superior of measurable functions.
+    Fix $\epsilon > 0$. Then
+    \[  E_\epsilon := \{ x \in [a,b] : D^+f(x) > \epsilon \} \]
+    is a measurable set by Proposition \ref{prop:equivalent_definitions_of_measurable_function}.
+    We claim that this set has measure zero.
+
+    Let $\eta > 0$. Since the series $\sum_{n=1}^\infty c_n$ converges, there exists $N\in\Z^+$ such that $\sum_{n=N+1}^\infty c_n < \eta $.
+    Then we let 
+    \[ f_0(x) := \sum_{n=N+1}^\infty c_n j_n(x) \qquad\forall x \in [a,b]. \]
+    Because of our choice of $N$, we see see that
+    \[ f_0(b) - f_0(a) = \sum_{n=N+1}^\infty c_n < \eta. \tag{$\star$}\]
+    (We will use this fact later.)
+
+    Notice the function $f-f_0$ is a finite sum of the terms $\sum_{n=1}^N c_n j_n$. 
+    Therefore the set of points
+    \[ E_{\epsilon,0} := \{ x \in [a,b] : D^+f_0(x) > \epsilon \} \]
+    differs from $E_\epsilon$ by at most finitely many points, namely the points $x_1,x_2,\ldots,x_N$.
+    In particular, $E_{\epsilon,0}$ is measurable and $\mathcal{L}^1(E_\epsilon) = \mathcal{L}^1(E_{\epsilon,0})$, so it suffices to show that $\mathcal{L}^1(E_{\epsilon,0}) = 0$.
+
+    Since $\mathcal{L}^1$ is a Borel regular outer measure, there exists a compact set $K \subseteq E_{\epsilon,0}$ such that
+    \[ \mathcal{L}^1(K) \geq \frac{\mathcal{L}^1(E_{\epsilon,0})}{2}. \]
+    Then for each $x\in K$, we have $D^+f_0(x) > \epsilon$.
+    Hence for each $x\in K$, there is an interval $(a_x,b_x) \subset [a,b]$ such that $x\in(a_x,b_x)$ and
+    \[ f_0(b_x) - f_0(a_x) > \epsilon (b_x - a_x). \]
+    Then the collection of open intervals $\{(a_x,b_x) : x\in K\}$ is an open cover of $K$, so by by compactness there are finitely many such intervals $(a_1,b_1),\ldots,(a_M,b_M)$ that cover $K$.
+    By the Vitali Covering Lemma \ref{ex:vitali_covering_lemma_intervals}, there is a finite disjoint subcollection of intervals $(a_{i_1},b_{i_1}),\ldots,(a_{i_L},b_{i_L})$ such that the intervals $3(a_{i_1},b_{i_1}),\ldots,3(a_{i_L},b_{i_L})$ cover $K$.
+    Then we have
+    \begin{align*}
+        \mathcal{L}^1(K) \leq \sum_{n=1}^M (b_n - a_n) &\leq 3 \sum_{\ell=1}^L (b_{i_\ell} - a_{i_\ell}) \\
+            &\leq \frac{3}{\epsilon} \sum_{\ell=1}^L (f_0(b_{i_\ell}) - f_0(a_{i_\ell})) \\
+            &\leq \frac{3}{\epsilon} (f_0(b) - f_0(a)) \\
+            &< \frac{3\eta}{\epsilon} && \text{by } (\star)
+    \end{align*}
+    since the intervals $(a_{i_1},b_{i_1}),\ldots,(a_{i_L},b_{i_L})$ are disjoint subintervals of $[a,b]$; hence
+    \[ \mathcal{L}^1(E_{\epsilon,0}) \leq 2 \mathcal{L}^1(K) < \frac{6\eta}{\epsilon}. \]
+    Since $\eta > 0$ was arbitrary, we conclude that $\mathcal{L}^1(E_{\epsilon,0}) = 0$.
+    Thus the set $\{ x \in [a,b] : D^+f(x) > \epsilon \}$ has measure zero for each $\epsilon > 0$.
+    Therefore the set \[\{ x \in [a,b] : D^+f(x) > 0 \} = \bigcup_{n=1}^\infty \{ x \in [a,b] : D^+f(x) > 1/n \}\]
+    has measure zero as well.
+    Hence $D^+f(x) = 0$ for almost every $x\in[a,b]$.
+    Since $D_+f(x) \leq D^+f(x)$ for each $x\in[a,b)$, we also have $D_+f(x) = 0$ for almost every $x\in[a,b]$, 
+    so $f$ is differentiable from the right at almost every $x\in[a,b)$ with $f'(x^+) = 0$.
+    A similar argument shows that $f$ is differentiable from the left at almost every $x\in(a,b]$ with $f'(x^-) = 0$.
+    Thus $f$ is differentiable at almost every $x\in(a,b)$ with $f'(x) = 0$.
+\end{proof}
+
+Putting everything in this section together, we arrive at the main result.
+
+\begin{theorem}[Monotone Functions are Differentiable a.e.]
+    \label{thm:monotone_functions_are_differentiable_ae}
+    Let $f:[a,b]\to\R$ be a monotone function.
+    Then the derivative $f'$ exists and is finite almost everywhere on $[a,b]$.
+\end{theorem}
+
+\begin{proof}
+    Without loss of generality, we may prove this for increasing functions.
+    We note that because $f$ is increasing, all of the one-sided upper and lower derivatives are non-negative by Remark \ref{rmk:upper_and_lower_derivative_from_left_and_right}.
+
+    \textit{Step 1:} We first assume that $f$ is continuous. This assumption will be removed later.
+    \vspace{2mm}
+    
+    Let $f:[a,b]\to\R$ be a continuous increasing function. We claim that is it enough to show that
+    \[ D^+f(x) < \infty \quad\text{ and }\quad D^+f(x) \leq D_-f(x) \text{ for almost every } x \in [a,b] \tag{$\bigskull$}\]
+    If this is true, then we may apply the same argument to the function $g(y) := -f(-y)$, which is also a continuous increasing function on $[-b,-a]$.
+    Then we would have $D^+g(y) < \infty$ and $D^+g(y) \leq D_-g(y)$ for almost every $y\in[-b,-a]$.
+    That is, for almost every $x\in[a,b]$, we have
+    \[ \limsup_{h\to 0^+} \frac{g(-x+h) - g(-x)}{h} < \infty \quad\text{ and }\quad \limsup_{h\to 0^+} \frac{g(-x+h) - g(-x)}{h} \leq \liminf_{h\to 0^-} \frac{g(-x+h) - g(-x)}{h} \]
+    which is equivalent to
+    \[ \limsup_{h\to 0^+} \frac{ f( x-h ) - f(x) }{ -h } < \infty \quad\text{ and }\quad \limsup_{h\to 0^+} \frac{ f( x-h ) - f(x) }{ -h } \leq \liminf_{h\to 0^-} \frac{ f( x-h ) - f(x) }{ -h } \]
+    which is equivalent to
+    \[ D^-f(x) < \infty \quad\text{ and }\quad D^-f(x) \leq D_+f(x). \]
+    Putting this together with the first inequality, we would have
+    \[ D^-f(x), D^+f(x) < \infty \quad\text{ and }\quad D^+f(x) \leq D_-f(x) \quad\text{and} \quad D^-f(x) \leq D_+f(x). \]
+    That is, for almost every $x\in[a,b]$, we have
+    \[ D^+ f(x) \leq D_- f(x) \leq D^- f(x) \leq D_+ f(x) \leq D^+ f(x) < \infty.  \]
+    Hence all of the quantities $D_- f(x), D^- f(x), D_+ f(x), D^+ f(x)$ are finite and equal for almost every $x\in[a,b]$, so $f$ is differentiable at almost every $x\in[a,b]$ with finite derivative.
+    Thus it suffices to prove the two inequalities in ($\bigskull$).
+
+
+    \vspace{2mm}
+    \textit{Step 2:} We show that $D^+f < \infty$ almost everywhere.
+    \vspace{2mm}
+    
+    For each $M > 0$, define the function $g_M:[a,b]\to\R$ by
+    \[ g_M(x) := f(x) - Mx \qquad\forall x\in[a,b]. \]
+    For each $M > 0$, let $E_M$ be the set of points in $[a,b]$ that are invisible from the right for the function $g_M$.
+    Then by the Rising Sun Lemma \ref{lem:rising_sun_lemma}, we can write $E_M$ as the union of at most countably many disjoint open intervals $\{(a_n,b_n)\}_{n=1}^\infty$ such that for each $n\in\Z^+$, we have
+    \[ g_M(a_n) \leq g_M(b_n) \]
+    or equivalently
+    \[ f(a_n) - Ma_n \leq f(b_n) - Mb_n \]
+    which rearranges to be
+    \[ M(b_n - a_n)  \leq f(b_n) - f(a_n). \]
+    Summing over all $n\in\Z^+$ and dividing by $M$, we have
+    \[ \sum_{n=1}^\infty (b_n - a_n ) \leq \frac{1}{M} \sum_{n=1}^\infty (f(b_n) - f(a_n)) \leq \frac{f(b) - f(a)}{M}. \tag{$\pumpkin$}\]
+        
+    If $x_0\in [a,b)$ is such that $D^+f(x_0) = \infty$, then by definition of $D^+f(x_0)$, for each $M > 0$, there exists $\delta > 0$ such that for each $x\in [x_0,x_0+\delta)$, we have
+    \[ \frac{f(x) - f(x_0)}{x - x_0} > M \]
+    or equivalently \[ f(x) - f(x_0) > M(x - x_0) \]
+    which rearranges to be \[ f(x) - Mx > f(x_0) - Mx_0. \]
+    This inequality shows that $x_0$ is invisible from the right for the function $g_M$.
+    That is, 
+    \[ x_0 \in \{ D^+f = \infty \} \implies (x_0 \in E_M, \ \forall M > 0). \]
+    Thus for each $M>0$ the set $\{ D^+f = \infty \}$ is contained in $E_M$.
+    Since $E_M$ is the union of at most countably many disjoint open intervals $\{(a_n,b_n)\}_{n=1}^\infty$ satisfying ($\pumpkin$), we see that
+    \[ \mathcal{L}^1(\{ D^+f = \infty \}) \leq \mathcal{L}^1(E_M) = \sum_{n=1}^\infty (b_n - a_n) \leq \frac{f(b) - f(a)}{M}. \]
+    Since $M > 0$ was arbitrary, we conclude that $\mathcal{L}^1(\{ D^+f = \infty \}) = 0$, which means that $D^+f(x) < \infty$ for almost every $x\in[a,b]$.
+
+    \vspace{2mm}
+    \textit{Step 3:} We show that $D^+f(x) \leq D_-f(x)$ for almost every $x\in[a,b]$.
+    \vspace{2mm}
+
+    For each pair of positive rational numbers $\alpha,\beta\in\Q^+$ such that $\beta > \alpha$, define the set
+    \[ E_{\alpha,\beta} := \{ x\in(\alpha,\beta) : D^+f(x) > \beta > \alpha > D_-f(x) \}. \]
+    This set may be empty, but is in any case is measurable since $D^+f$ and $D_-f$ are measurable.
+    Notice that 
+    \[ \{ x\in (a,b) : D^+ f(x) > D_- f(x) \} = \bigcup_{\substack{\alpha,\beta \in \Q^+ \\ \beta > \alpha}} E_{\alpha,\beta} \]
+    by density of the rationals.
+
+    We claim that $\mathcal{L}^1(E_{\alpha,\beta}) = 0$ for each pair of positive rational numbers $\alpha,\beta\in\Q^+$ satisfying $\beta > \alpha$.
+    To see this, we suppose that $\mathcal{L}^1(E_{\alpha,\beta}) > 0$ for some pair of positive rational numbers $\alpha,\beta\in\Q^+$ and derive a contradiction.
+    Since $\frac{\beta}{\alpha} > 1$, by Borel regularity of $\mathcal{L}^1$, there exists an open set $U\subset \R$ such that $E_{\alpha,\beta} \subseteq U \subseteq (a,b)$ and 
+    \[ \mathcal{L}^1(U) < \frac{\beta}{\alpha} \mathcal{L}^1(E_{\alpha,\beta}). \]
+    Since $U$ is open, we can write $U$ as a countable union of disjoint open intervals $ U = \bigcup_{k=1}^\infty (a_k,b_k) $.
+    By countable disjoint additivity of $\mathcal{L}^1$, we have
+    \[ \mathcal{L}^1( E_{\alpha,\beta} ) = \mathcal{L}^1 \left( \bigcup_{k=1}^\infty (E_{\alpha,\beta}\cap (a_k,b_k)) \right) = \sum_{k=1}^\infty \mathcal{L}^1(E_{\alpha,\beta}\cap (a_k,b_k)). \tag{$\star$} \]
+
+    We claim that for each $k\in\Z^+$, we have
+    \[ \mathcal{L}^1(E_{\alpha,\beta}\cap (a_k,b_k)) \leq \frac{\alpha}{\beta} (b_k - a_k). \tag{$\dagger$}\]
+    To see this, let $k\in\Z^+$.
+    If $E_{\alpha,\beta}\cap (a_k,b_k) = \emptyset$, then ($\dagger$) is trivially true, so assume that $E_{\alpha,\beta}\cap (a_k,b_k) \neq \emptyset$.
+    Then for each $x_0\in E_{\alpha,\beta}\cap (a_k,b_k)$, we have $D_- f(x_0) < \alpha$, which implies that there exists $\delta > 0$ such that for each $x\in (x_0 - \delta, x_0)$, we have
+    \[ \frac{f(x_0) - f(x)}{x_0 - x} < \alpha \]
+    or equivalently
+    \[ f(x_0) - f(x) < \alpha (x_0 - x) \]
+    which rearranges to be
+    \[ f(x_0) - \alpha x_0 < f(x) - \alpha x. \tag{$\heartsuit$}\]
+    This inequality shows that $x_0$ is invisible from the left for the function $g_\alpha(x) = f(x) - \alpha x$ from step 2.
+
+    Thus, by this argument and the Rising Sun Lemma \ref{lem:rising_sun_lemma}, the set $E_{\alpha,\beta}\cap (a_k,b_k)$ can be written as the union of at most countably many disjoint open intervals $\{(c_n,d_n)\}_{n=1}^\infty$ such that for each $n\in\Z^+$, we have
+    \[ f(c_n) - \alpha c_n \geq f(d_n) - \alpha d_n \]
+    or equivalently
+    \[ \alpha (d_n - c_n) \geq f(d_n) - f(c_n). \]
+    For each $n\in\Z^+$, we let $G_n := \{ D^+ f > \beta \} \cap (c_n,d_n)$ which is a measurable set.
+    Then for each $n\in \Z^+$, we see that $x_0 \in G_n$ implies that there exists $\delta > 0$ such that for each $x\in (x_0,x_0+\delta)$, we have
+    \[ \frac{f(x) - f(x_0)}{x - x_0} > \beta \]
+    or equivalently
+    \[ f(x) - f(x_0) > \beta (x - x_0) \]
+    which rearranges to be
+    \[ f(x) - \beta x > f(x_0) - \beta x_0. \]
+    This inequality shows that $x_0$ is invisible from the right for the function $g_\beta(x) = f(x) - \beta x$ from step 2.
+    Thus, by this argument and the Rising Sun Lemma \ref{lem:rising_sun_lemma}, the set $G_n$ can be written as the union of at most countably many disjoint open intervals $\{(\tilde{a}_{n,m},\tilde{b}_{n,m})\}_{m=1}^\infty$ such that for each $m\in\Z^+$, we have
+    \[ f(\tilde{a}_{n,m}) - \beta \tilde{a}_{n,m} \leq f(\tilde{b}_{n,m}) - \beta \tilde{b}_{n,m} \]
+    or equivalently
+    \[ \beta (\tilde{b}_{n,m} - \tilde{a}_{n,m}) \leq f(\tilde{b}_{n,m}) - f(\tilde{a}_{n,m}). \]
+    Summing over all $m\in\Z^+$ and dividing by $\beta$, we have
+    \[ \sum_{m=1}^\infty (\tilde{b}_{n,m} - \tilde{a}_{n,m}) \leq \frac{1}{\beta} \sum_{m=1}^\infty (f(\tilde{b}_{n,m}) - f(\tilde{a}_{n,m})) \leq \frac{f(d_n) - f(c_n)}{\beta}. \tag{$\spadesuit$}\]
+
+    \noindent Putting this all together gives
+    \begin{align*}
+        \mathcal{L}^1(E_{\alpha,\beta}\cap (a_k,b_k)) &= \mathcal{L}^1\left( \bigcup_{n=1}^\infty (E_{\alpha,\beta}\cap (c_n,d_n)) \right) \quad&& \text{ since } E_{\alpha,\beta}\cap (a_k,b_k) = \cup_{n=1}^\infty (E_{\alpha,\beta}\cap (c_n,d_n)) \\
+            &= \sum_{n=1}^\infty \mathcal{L}^1(E_{\alpha,\beta}\cap (c_n,d_n)) \quad&& \text{ by countable disjoint additivity }\\
+            &\leq \sum_{n=1}^\infty \mathcal{L}^1( G_n ) \quad&& \text{ by definition of the sets } G_n\\
+            &= \sum_{n=1}^\infty \mathcal{L}^1\left( \bigcup_{m=1}^\infty (\tilde{a}_{n,m},\tilde{b}_{n,m}) \right) \quad&&\text{ since } G_n = \bigcup_{m=1}^\infty (\tilde{a}_{n,m},\tilde{b}_{n,m}) \text{ for each } n\\
+            &= \sum_{n=1}^\infty \sum_{m=1}^\infty (\tilde{b}_{n,m} - \tilde{a}_{n,m}) \quad&& \text{ by countable disjoint additivity }\\
+            &\leq  \frac{1}{\beta} \sum_{n,m=1}^\infty (f(\tilde{b}_{n,m}) - f(\tilde{a}_{n,m})) &&\text{by } (\spadesuit) \\
+            &\leq \frac{1}{\beta} \sum_{n=1}^\infty (f(d_n) - f(c_n)) \quad&& \text{ since } f \text{ is increasing and } \{(\tilde{a}_{n,m},\tilde{b}_{n,m})\}_{m=1}^\infty \text{ are disjoint subintervals of } (c_n,d_n) \\
+            &\leq \frac{\alpha}{\beta} \sum_{n=1}^\infty (d_n - c_n) \quad&& \text{by } (\heartsuit) \\
+            &\leq \frac{\alpha}{\beta} (b_k - a_k) \quad&& \text{ since } \{(c_n,d_n)\}_{n=1}^\infty \text{ are disjoint subintervals of } (a_k,b_k).
+    \end{align*}
+    which proves our claim ($\dagger$).
+
+    Combining ($\star$) and ($\dagger$), using countable disjoint additivity and the definition of $U = \bigcup_{k=1}^\infty (a_k,b_k)$ gives
+    \[ \mathcal{L}^1(E_{\alpha,\beta}) \leq \frac{\alpha}{\beta} \sum_{k=1}^\infty (b_k - a_k) = \frac{\alpha}{\beta} \mathcal{L}^1\left( \bigcup_{k=1}^\infty (a_k,b_k) \right) = \frac{\alpha}{\beta} \mathcal{L}^1(U) < \mathcal{L}^1(E_{\alpha,\beta}). \]
+    But wait, this says that $\mathcal{L}^1(E_{\alpha,\beta}) < \mathcal{L}^1(E_{\alpha,\beta})$, which is a contradiction!
+
+    Thus our assumption that $\mathcal{L}^1(E_{\alpha,\beta}) > 0$ for some pair of positive rational numbers $\alpha,\beta\in\Q^+$ satisfying $\beta > \alpha$ must be false.
+    Therefore $\mathcal{L}^1(E_{\alpha,\beta}) = 0$ for each pair of positive rational numbers $\alpha,\beta\in\Q^+$ satisfying $\beta > \alpha$.
+
+    After all this work, we now use countable subadditivity to obtain 
+    \[ \mathcal{L}^1(\{ D^+ f > D_- f \}) = \mathcal{L}^1\left(\bigcup_{\substack{\alpha,\beta \in \Q^+ \\ \beta > \alpha}} E_{\alpha,\beta}\right) \leq \sum_{\substack{\alpha,\beta \in \Q^+ \\ \beta > \alpha}} \mathcal{L}^1(E_{\alpha,\beta}) = 0. \]
+    Thus $D^+f(x) \leq D_-f(x)$ for almost every $x\in[a,b]$.
+
+    By the discussion in step 1 ($\skull$), this completes the proof under the assumption that $f$ is continuous.
+
+    \vspace{2mm}
+    \textit{Step 4:} We now remove the assumption that $f$ is continuous.
+    \vspace{2mm}
+
+    Let $f:[a,b]\to\R$ be an arbitrary increasing function.
+    Let $J$ be the set of jump discontinuities of $f$.
+    Then $J$ is at most countable by Theorem \ref{thm:monotone_functions_have_at_most_countably_many_discontinuities}.
+    We define another function $\tilde{f}:[a,b]\to\R$ by
+    \[ \tilde{f}(x) := f(x^-) = \sup_{y < x} f(y) \qquad\forall x\in(a,b], \]
+    and $\tilde{f}(a) := f(a)$.
+    Then $\tilde{f}$ is an increasing function that is continuous from the left at each point in $[a,b]$ and satisfies $\tilde{f}(x) = f(x)$ for each $x\in[a,b]\setminus J$.
+    That is, if $f$ has a jump discontinuity at $x\in(a,b]$ and for some reason $f(x)$ is strictly between $f(x^-)$ and $f(x^+)$, then we define $\tilde{f}(x)$ to be $f(x^-)$ instead of $f(x)$.
+    Thus $f$ and $\tilde{f}$ differ at only countably many points.
+
+    Then since $\tilde{f}$ is an increasing function that is continuous from the left, by Lemma
+    \ref{lem:increasing_function_is_sum_of_continuous_increasing_and_jump_function}, we can write $\tilde{f}$ as the sum of a continuous increasing function $\varphi:[a,b]\to\R$ and a jump function $\psi:[a,b]\to\R$,
+    \[ \tilde{f}(x) = \varphi(x) + \psi(x) \qquad\forall x\in[a,b]. \]
+    By Step 1, the derivative $\varphi'$ exists and is finite almost everywhere on $[a,b]$.
+    By Lemma \ref{lem:derivatives_of_jump_functions_are_ae_zero}, the derivative $\psi'$ exists and vanishes almost everywhere on $[a,b]$.
+    Therefore the derivative $\tilde{f}' = \varphi' + \psi'$ exists and is finite almost everywhere on $[a,b]$.
+    But since $f$ and $\tilde{f}$ differ at only countably many points, we conclude that the derivative $f'$ exists and is finite almost everywhere on $[a,b]$ as well.
+\end{proof}
+
+\begin{remark}[Monotone Functions on other Intervals]
+    \label{rem:monotone_functions_on_other_intervals}
+    What happens if the domain of a monotone function is not a closed bounded interval $[a,b]$?
+    Say the domain is an open bounded interval $(a,b)$ or a half-open bounded interval $[a,b)$ or $(a,b]$.
+    Or more generally, what if the domain is an unbounded interval such as $(-\infty,b)$, $(a,\infty)$, or $(-\infty,\infty)$, or the half-open unbounded intervals $(-\infty,b]$ or $[a,\infty)$ or even all of $\R$?
+
+    It is still true that monotone functions on an arbitrary interval have at most countably many discontinuities.
+    This follows from the fact that any interval - bounded, unbounded, open, half-open, or closed - can be written as a countable union of closed bounded intervals, and that the countable union of countable sets is countable.
+
+    The story for derivatives is the same. Suppose that $I\subseteq\R$ is any interval - bounded, unbounded, open, half-open, closed, or all of $\R$ - and let $f:I\to\R$ be a monotone function.
+    Then for each closed interval $[c,d]\subset I$, the restriction of $f$ to $[c,d]$ is a monotone function on a closed bounded interval, so by Theorem \ref{thm:monotone_functions_are_differentiable_ae}, the derivative of $f$ exists and is finite almost everywhere on $[c,d]$.
+    Since $I$ can be written as a countable union of closed bounded intervals, we conclude that the derivative of $f$ exists and is finite almost everywhere on $I$.
+\end{remark}
+
+The following example shows that this is the best we can do; monotone functions can have an uncountable number of points where they fail to be differentiable.
+
+\begin{exercise}[Fundamental Theorem of Calculus Inequality]
+    \label{ex:fundamental_theorem_of_calculus_inequality}
+    Let $f:[a,b]\to\R$ be an increasing function.
+    Then the derivative $f'$ is integrable and satisfies
+    \[ \int_a^b f'(x)\,\dif x \leq f(b) - f(a). \]
+
+    \vspace{2mm}
+
+    \noindent Show the Devil's staircase is an increasing continuous function $f:[a,b]\to\R$ such that the inequality is strict.
+\end{exercise}
+\begin{proof}
+    (What integral theorem allows us to get an inequality by commuting the integral and limit? Fatou, that's who!)
+    For technical reasons, we first extend the domain of $f$ to $[a,b+1]$ by defining $f(x) := f(b)$ for each $x\in(b,b+1]$.
+
+    For each $k\in\Z^+$ we define a function 
+    \[  g_k(x) := \frac{f(x + 1/k) - f(x)}{1/k}, \qquad x\in [a,b]. \]
+    Since $f$ is increasing, we know that $f$ is differentiable almost everywhere on $(a,b)$ by Theorem \ref{thm:monotone_functions_are_differentiable_ae}
+    and that $g_k(x) \geq 0$ for each $x\in[a,b]$.
+    Also, for each $x\in[a,b]$ we have
+    \[ \lim_{k\to\infty} g_k(x) = f'(x) \]
+    if $f$ is differentiable at $x$, and $\lim_{k\to\infty} g_k(x)$ does not exist otherwise.
+    Thus $\lim_{k\to\infty} g_k(x) = f'(x)$ for almost every $x\in[a,b]$.
+
+    That is $\{ g_k \}_{k=1}^\infty$ is a sequence of nonnegative measurable functions that converges pointwise almost everywhere to the nonnegative measurable function $f'$.
+    Thus by Fatou's Lemma (\ref{ex:fatous_lemma}), we have
+    \[ \int_a^b f'(x)\,\dif x \leq \liminf_{k\to\infty} \int_a^b g_k(x)\,\dif x. \]
+    For each $k\in\Z^+$, we have
+    \begin{align*}
+        \int_a^b g_k(x)\,\dif x &= \int_a^b \frac{f(x + 1/k) - f(x)}{1/k} \, \dif x \\
+            &= k \int_a^b f(x + 1/k) - f(x) \, \dif x \\
+            &= k \left( \int_{a + 1/k}^{b + 1/k} f(t) \, \dif t - \int_a^b f(x) \, \dif x \right) &&\text{by the substitution } t = x + 1/k\\
+            &= k \left( \int_b^{b + 1/k} f(t) \, \dif t - \int_a^{a + 1/k} f(x) \, \dif x \right) &&\text{by splitting the integral}\\
+            &\leq k \left( f(b) (1/k) - f(a) (1/k) \right) &&\text{since $f$ is increasing}\\
+            &= f(b) - f(a).
+    \end{align*}
+    Putting these two inequalities together gives
+    \[ \int_a^b f'(x)\,\dif x \leq \liminf_{k\to\infty} \int_a^b g_k(x)\,\dif x \leq f(b) - f(a) \]
+    as desired.
+
+    \vspace{2mm}
+
+    For an example, consider the Devil's staircase function $f:[0,1]\to[0,1]$ from Example \ref{ex:devils_staircase}.
+    This function is increasing, but has derivative $f'(x) = 0$ at each point $x\in[0,1]\setminus C$, where $C$ is the Cantor set, which has Lebesgue measure zero.
+    Thus $f'$ is integrable and satisfies
+    \[ \int_0^1 f'(x)\,\dif x = 0 < 1 = f(1) - f(0). \]
+\end{proof}
+
+\begin{example}[The Devil's Staircase]
+    \label{ex:devil_staircase_2}
+    Recall that in Example \ref{ex:devils_staircase}, we constructed the Devil's staircase function $f:[0,1]\to[0,1]$, which is an increasing continuous function with $f(0) = 0$ and $f(1) = 1$, and that $f$ is differentiable with at each point in $[0,1]\setminus C$ with zero derivative, where $C$ is the Cantor set.
+    However, we did not show that the derivative $f'$ fails to exist on a set of points that is uncountable.
+
+    It is actually not fully understood exactly where the derivative $f'$ fails to exist on the Cantor set $C$, 
+    however it is known that $f'$ fails to exist at uncountably many points in $C$.
+\end{example}
+
+\subsection{The Second Fundamental Theorem of Calculus}
+
+To finish off this section, we prove a generalization of the Second Fundamental Theorem of Calculus.
+
+\begin{lemma}
+    \label{lem:antiderivative_is_ae_defined_and_finite}
+    Let $f:[a,b]\to\R$ be an integrable function, and define the function $F:[a,b]\to\R$ by
+    \[ F(x) := \int_a^x f(t) \, \dif t \qquad\forall x\in[a,b]. \]
+    Then $F$ is differentiable and $F'(x)$ is finite for almost every $x\in[a,b]$.
+\end{lemma}
+\begin{proof}
+    Write $f = f^+ - f^-$ where $f^+,f^-:[a,b]\to[0,\infty)$ are integrable functions, so that
+    \[ F(x) = \int_a^x f(t)\,\dif t = \int_a^x f^+(t)\,\dif t - \int_a^x f^-(t)\,\dif t. \]
+    Defining 
+    \[ F_1(x) := \int_a^x f^+(t)\,\dif t \quad\text{and}\quad F_2(x) := \int_a^x f^-(t)\,\dif t \]
+    for each $x\in[a,b]$, we see that $F = F_1 - F_2$.
+    Furthermore, the functions $F_1$ and $F_2$ are increasing since $f^+$ and $f^-$ are non-negative.
+
+    We check this for $F_1$; the argument for $F_2$ is similar.
+    Let $x,y\in[a,b]$ with $x < y$.
+    Then $\Chi_{[a,x]}(t) \leq \Chi_{[a,y]}(t)$ for each $t\in[a,b]$, so by monotonicity of the Lebesgue integral we Have
+    \begin{align*}
+        F_1(x) &= \int_a^x f^+(t)\,\dif t = \int_{[a,x]} f^+(t)\,\dif t = \int_\R \Chi_{[a,x]}(t) f^+(t)\,\dif t \\
+            &\leq \int_\R \Chi_{[a,y]}(t) f^+(t)\,\dif t = \int_{[a,y]} f^+(t)\,\dif t = \int_a^y f^+(t)\,\dif t = F_1(y).
+    \end{align*}
+    Hence $F_1(x) \leq F_1(y)$ whenever $x < y$, so $F_1$ is increasing.
+
+    Thus the functions $F_1$ and $F_2$ are differentiable and have finite derivatives almost everywhere on $[a,b]$ by Theorem \ref{thm:monotone_functions_are_differentiable_ae}.
+    Therefore the function $F = F_1 - F_2$ is differentiable and has finite derivative $F' = F_1' - F_2'$ almost everywhere on $[a,b]$ as well.
+\end{proof}
+
+With this lemma in hand, we can prove the Second Fundamental Theorem of Calculus.
+
+\begin{theorem}[Second Fundamental Theorem of Calculus]
+    \label{thm:second_fundamental_theorem_of_calculus}
+    Let $f:[a,b]\to\R$ be an integrable function, and define the function $F:[a,b]\to\R$ by
+    \[ F(x) := \int_a^x f(t) \, \dif t \qquad\forall x\in[a,b]. \]
+    Then $F$ is continuous on $[a,b]$ and differentiable for almost every $x\in[a,b]$, and $F'(x) = f(x)$ for almost every $x\in[a,b]$.
+\end{theorem}
+
+\begin{proof}
+    \textit{Step 0:} We show that $F$ is continuous on $[a,b]$.
+    \vspace{2mm}
+
+    Let $\epsilon > 0$. By using the fact from Lemma \ref{lem:integral_on_small_sets_is_small}, there exists $\delta > 0$ such that for each measurable set $E \subseteq [a,b]$ with $\mathcal{L}^1(E) < \delta$, we have
+    \[ \int_E |f(t)| \, \dif t < \epsilon. \]
+    The triangle inequality then gives that for each measurable set $E \subseteq [a,b]$ with $\mathcal{L}^1(E) < \delta$, we have
+    \[ \left| \int_E f(t) \, \dif t \right| \leq \int_E |f(t)| \, \dif t < \epsilon. \]
+    If $x_0\in[a,b]$ and $x\in[a,b]$ with $|x - x_0| < \delta$, then letting $E = [x,x_0]$ or $E = [x_0,x]$ as appropriate gives
+    \[ |F(x) - F(x_0)| = \left| \int_{x_0}^x f(t) \, \dif t \right| = \left| \int_E f(t) \, \dif t \right| < \epsilon. \]
+    Since $\epsilon > 0$ was arbitrary, this shows $F$ is continuous at $x_0$, and since $x_0$ was arbitrary, $F$ is continuous on $[a,b]$.
+
+    \vspace{2mm}
+    \textit{Step 1:} We claim that it is enough to show $f(x) \geq F'(x)$ for almost every $x\in[a,b]$.
+    \vspace{2mm}
+
+    If this is true, then we may apply the same argument to the function $-f$, which is also integrable.
+    Then we would have $-f(x) \geq (-F)'(x) = -F'(x)$ for almost every $x\in[a,b]$, which is equivalent to $f(x) \leq F'(x)$ for almost every $x\in[a,b]$.
+    Together with the first inequality, this would give $f(x) = F'(x)$ for almost every $x\in[a,b]$.
+    Thus it suffices to prove the first inequality.
+
+    \vspace{2mm}
+    \textit{Step 2:} For each pair of positive rational numbers $\alpha,\beta\in\Q^+$ such that $\beta > \alpha$, define the set
+    \[ E_{\alpha,\beta} := \{ x\in(\alpha,\beta) : F'(x) > \beta > \alpha > f(x) \}. \]
+    We claim that $\mathcal{L}^1(E_{\alpha,\beta}) = 0$ for each pair of positive rational numbers $\alpha,\beta\in\Q^+$ satisfying $\beta > \alpha$.
+    
+    Before proving this claim, observe that $\{ x\in (a,b) : F'(x) > f(x) \} = \bigcup_{\substack{\alpha,\beta \in \Q^+ \\ \beta > \alpha}} E_{\alpha,\beta}$ by density of the rationals.
+    Thus by countable subadditivity our claim implies that
+    \[ \mathcal{L}^1(\{ F' > f \}) = \mathcal{L}^1\left(\bigcup_{\substack{\alpha,\beta \in \Q^+ \\ \beta > \alpha}} E_{\alpha,\beta}\right) \leq \sum_{\substack{\alpha,\beta \in \Q^+ \\ \beta > \alpha}} \mathcal{L}^1(E_{\alpha,\beta}) = 0. \]
+    Hence the claim implies $F'(x) \leq f(x)$ for almost every $x\in[a,b]$.
+
+    \vspace{2mm}
+    To prove the claim, fix $\alpha,\beta\in\Q^+$ with $\beta > \alpha$. Note that $E_{\alpha,\beta}$ is measurable since $F'$ and $f$ are measurable.
+
+    Let $\epsilon > 0$, and as in step 0, let $\delta > 0$ be such that for each measurable set $E \subseteq [a,b]$ with $\mathcal{L}^1(E) < \delta$, we have
+    \[ \left| \int_E f(t) \, \dif t \right| < \epsilon. \]
+    By Borel regularity of $\mathcal{L}^1$, there exists an open set $U\subset \R$ such that $E_{\alpha,\beta} \subseteq U \subseteq (a,b)$ and
+    \[ \mathcal{L}^1(U) < \mathcal{L}^1(E_{\alpha,\beta}) + \delta. \]
+    Since $U$ is open, we can write $U$ as a countable union of disjoint open intervals $ U = \bigcup_{k=1}^\infty (a_k,b_k) $.
+    By countable disjoint additivity of $\mathcal{L}^1$, we have
+    \[ \mathcal{L}^1( E_{\alpha,\beta} ) = \mathcal{L}^1 \left( \bigcup_{k=1}^\infty (E_{\alpha,\beta}\cap (a_k,b_k)) \right) = \sum_{k=1}^\infty \mathcal{L}^1(E_{\alpha,\beta}\cap (a_k,b_k)). \tag{$\star$} \]
+
+    For the moment, fix $k\in\Z^+$. If $x_0 \in E_{\alpha,\beta}\cap (a_k,b_k)$ then by definition of $E_{\alpha,\beta}$ we have $F'(x_0) > \beta$, so there exists $\delta_0 > 0$ such that for each $x\in(x_0 - \delta_0, x_0 + \delta_0)$, we have
+    \[ \frac{F(x) - F(x_0)}{x - x_0} > \beta \]
+    which rearranges to be
+    \[ F(x) - \beta x > F(x_0) - \beta x_0. \]
+    This inequality shows that each $x_0 \in E_{\alpha,\beta}\cap (a_k,b_k)$ is invisible from the right with respect to the function $ x\mapsto F(x) - \beta x $, which is continuous on $[a,b]$ by step 0.
+    Thus, by this argument and the Rising Sun Lemma \ref{lem:rising_sun_lemma}, the set $E_{\alpha,\beta}\cap (a_k,b_k)$ can be covered by at most countably many disjoint open intervals $\{(c_{k,j},d_{k,j})\}_{j=1}^\infty$ such that for each $j\in\Z^+$, we have
+    \[ F(c_{k,j}) - \beta c_{k,j} \leq F(d_{k,j}) - \beta d_{k,j} \]
+    or equivalently
+    \[ \beta (d_{k,j} - c_{k,j}) \leq F(d_{k,j}) - F(c_{k,j}) = \int_{c_{k,j}}^{d_{k,j}} f(t) \,\dif t. \tag{$\star\star$} \]
+    Then we see that 
+    \[ E_{\alpha,\beta} \cap (a_k,b_k) \subseteq \bigcup_{j=1}^\infty (c_{k,j},d_{k,j}) \]
+    which implies
+    \[ \mathcal{L}^1(E_{\alpha,\beta} \cap (a_k,b_k)) \leq \sum_{j=1}^\infty (d_{k,j} - c_{k,j}) \leq \frac{1}{\beta} \sum_{j=1}^\infty \int_{c_{k,j}}^{d_{k,j}} f(t) \,\dif t = \frac{1}{\beta} \int_{ \bigcup_{j=1}^\infty (c_{k,j},d_{k,j}) } f(t) \,\dif t \]
+    by monotonicity, using ($\star\star$), and countable disjoint additivity of the Lebesgue integral.
+
+    By summing this inequality over all $k\in\Z^+$, using ($\star$), and countable disjoint additivity we obtain
+    \[ \mathcal{L}^1(E_{\alpha,\beta}) \leq \frac{1}{\beta} \sum_{k=1}^\infty \int_{ \bigcup_{j=1}^\infty (c_{k,j},d_{k,j}) } f(t) \,\dif t = \frac{1}{\beta} \int_{ \bigcup_{k,j=1}^\infty (c_{k,j},d_{k,j}) } f(t) \,\dif t. \]
+    On the other hand we have
+    \begin{align*}
+        \int_{ \bigcup_{k,j=1}^\infty (c_{k,j},d_{k,j}) } f(t) \,\dif t &= \int_{ E_{\alpha,\beta} } f(t) \,\dif t + \int_{ \left( \bigcup_{k,j=1}^\infty (c_{k,j},d_{k,j}) \right) \setminus E_{\alpha,\beta} } f(t) \,\dif t. \\
+            &< \alpha \cdot\mathcal{L}^1(E_{\alpha,\beta}) + \epsilon
+    \end{align*}
+    where the inequality for the first term follows from definition of $E_{\alpha,\beta}$ and Exercise \ref{ex:bounding_an_integral}, the inequality for the second term follows from the fact that $\mathcal{L}^1\left( \left( \bigcup_{k,j=1}^\infty (c_{k,j},d_{k,j}) \right) \setminus E_{\alpha,\beta} \right) \leq \mathcal{L}^1(U\setminus E_{\alpha,\beta}) < \delta$ and our choice of $\delta$.
+
+    Combinging these last two inequalities gives
+    \[ \mathcal{L}^1(E_{\alpha,\beta}) < \frac{1}{\beta} \left( \alpha \cdot\mathcal{L}^1(E_{\alpha,\beta}) + \epsilon \right) = \frac{\alpha}{\beta} \mathcal{L}^1(E_{\alpha,\beta}) + \frac{\epsilon}{\beta}. \]
+    Since $\epsilon > 0$ was arbitrary, this implies
+    \[ \mathcal{L}^1(E_{\alpha,\beta}) \leq \frac{\alpha}{\beta} \mathcal{L}^1(E_{\alpha,\beta}). \]
+    But since $\beta > \alpha$, this is only possible if $\mathcal{L}^1(E_{\alpha,\beta}) = 0$, which proves our claim.
+
+    As observed in the beginning of step 2, this completes the proof.
+\end{proof}

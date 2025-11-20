@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>r-nik</title>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '0.8em',
+      packages: {'[+]': ['ams']},
+      macros: {
+        R: '\\mathbb{R}',
+        C: '\\mathbb{C}',
+        N: '\\mathbb{N}',
+        Z: '\\mathbb{Z}',
+        Q: '\\mathbb{Q}',
+        E: '\\mathbb{E}',
+        F: '\\mathbb{F}',
+        S: '\\mathbb{S}',
+        H: '\\mathcal{H}',
+        L: '\\mathcal{L}',
+        dif: '\\,\\mathrm{d}',
+        supp: '\\operatorname{supp}',
+        proj: '\\operatorname{proj}',
+        Id: '\\operatorname{Id}',
+        Span: '\\operatorname{span}',
+        graph: '\\operatorname{graph}',
+        dist: '\\operatorname{dist}',
+        diam: '\\operatorname{diam}',
+        avg: '\\operatorname{avg}',
+        div: '\\operatorname{div}',
+        vol: '\\operatorname{vol}',
+        ord: '\\operatorname{ord}',
+        Chi: '\\mathbf{1}',
+        sub: '\\subseteq',
+        mres: '\\downharpoonright',
+        ddag: '\\ddagger',
+        dag: '\\dagger',
+        norm: ['\\left\\| #1 \\right\\|', 1],
+        abs: ['\\left| #1 \\right|', 1],
+        set: ['\\left\\{ #1 \\right\\}', 1],
+        inner: ['\\langle #1, #2 \\rangle', 2],
+        floor: ['\\lfloor #1 \\rfloor', 1],
+        ceil: ['\\lceil #1 \\rceil', 1],
+        bigskull: '\\unicode{x1F480}',
+        skull: '\\unicode{x2620}',
+        mathwitch: '\\unicode{x1F9D9}',
+        pumpkin: '\\unicode{x1F383}',
+        mathpumpkin: '\\unicode{x1F383}',
+        bigpumpkin: '\\unicode{x1F383}',
+        mathghost: '\\unicode{x1F47B}',
+        mathcat: '\\unicode{x1F408}',
+        mathbat: '\\unicode{x1F987}',
+        esssup: '\\operatorname{ess\\,sup}',
+        essinf: '\\operatorname{ess\\,inf}',
+        Lip: '\\operatorname{Lip}',
+        pd: ['\\frac{\\partial#1}{\\partial#2}', 2],
+        od: ['\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}', 2],
+        dashint: '\\mathchoice{\\rlap{-}\\!\\int}{\\rlap{\\raise.15ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}'
+      }
+    },
+    startup: {
+      pageReady: () => {
+        return MathJax.startup.defaultPageReady().then(() => {
+          console.log('MathJax ready');
+        });
+      }
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+  <script>
+  // Auto-reload when watch.js signals a rebuild
+  (function() {
+    // Save state before unload
+    window.addEventListener('beforeunload', function() {
+      saveProofState();
+      saveCollapsibleState();
+    });
+    
+    const eventSource = new EventSource('http://localhost:35729/reload-stream');
+    
+    eventSource.onmessage = function(event) {
+      if (event.data === 'reload') {
+        console.log('📝 File updated, saving state and reloading...');
+        // Save state before reload
+        saveProofState();
+        saveCollapsibleState();
+        // Small delay to ensure localStorage flush
+        setTimeout(() => {
+          window.location.reload();
+        }, 50);
+      }
+    };
+    
+    eventSource.onerror = function() {
+      console.log('⚠️  Auto-reload server not available. Run node watch.js to enable auto-reload.');
+      eventSource.close();
+    };
+    
+    console.log('🔄 Auto-reload enabled');
+  })();
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+    h2, h3, h4 {
+      margin-top: 2em;
+      margin-bottom: 0.75em;
+      color: #000;
+      font-weight: 600;
+    }
+    h2 { font-size: 1.5em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.1em; }
+    p {
+      margin: 1em 0;
+      text-indent: 2em;
+    }
+    p:first-of-type,
+    h2 + p,
+    h3 + p,
+    h4 + p,
+    .theorem-box + p,
+    .proof-box + p {
+      text-indent: 0;
+    }
+    .noindent + p,
+    p:has(> .noindent:first-child) {
+      text-indent: 0 !important;
+    }
+    .noindent {
+      display: none;
+    }
+    .theorem-box {
+      margin: 1.75em 0;
+      padding: 1.25em;
+      border-left: 5px solid #16a34a;
+      background: linear-gradient(to top, #bbf7d0 0%, #d1fae5 100%);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .definition-box { border-left-color: #16a34a; background: linear-gradient(to top, #d1fae5 0%, #ecfdf5 100%); }
+    .lemma-box { border-left-color: #1e3a8a; background: linear-gradient(to top, #bfdbfe 0%, #dbeafe 100%); }
+    .corollary-box { border-left-color: #9333ea; background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%); }
+    .proposition-box { border-left-color: #dc2626; background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%); }
+    .remark-box { border-left-color: #64748b; background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%); }
+    .example-box { border-left-color: #0891b2; background: linear-gradient(to top, #a5f3fc 0%, #cffafe 100%); }
+    .construction-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .notation-box { border-left-color: #ca8a04; background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%); }
+    .exercise-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .problem-box { border-left-color: #ec4899; background: linear-gradient(to top, #fbcfe8 0%, #fce7f3 100%); }
+    .theorem-header {
+      margin-bottom: 0.75em;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+    .theorem-header.clickable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .theorem-header.clickable:hover {
+      background: rgba(0,0,0,0.03);
+      margin: -0.5em -0.75em 0.75em -0.75em;
+      padding: 0.5em 0.75em;
+      border-radius: 4px;
+    }
+    .collapsible-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      margin-right: 0.5em;
+      color: #6b7280;
+    }
+    .collapsible-box.collapsed .collapsible-icon {
+      transform: rotate(-90deg);
+    }
+    .collapsible-content {
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+    }
+    .collapsible-box.collapsed .collapsible-content {
+      display: none;
+    }
+    .theorem-content {
+      padding-left: 0.5em;
+      line-height: 1.8;
+    }
+    .proof-box {
+      margin: 1.5em 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .proof-header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      border-radius: 6px 6px 0 0;
+    }
+    .proof-toggle {
+      width: 100%;
+      padding: 0.85em 1.25em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      transition: background 0.15s;
+    }
+    .proof-toggle:hover { background: rgba(0,0,0,0.03); }
+    .proof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      color: #6b7280;
+    }
+    .proof-box.collapsed .proof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .proof-content {
+      padding: 1.25em;
+      line-height: 1.8;
+    }
+    .proof-box.collapsed .proof-content {
+      display: none;
+    }
+    .proof-end {
+      float: right;
+      font-size: 1.3em;
+      margin-left: 0.5em;
+      color: #374151;
+    }
+    .subproof {
+      margin: 1em 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #f9fafb;
+    }
+    .subproof-header {
+      background: linear-gradient(to bottom, #f9fafb 0%, #f3f4f6 100%);
+      border-bottom: 1px solid #d1d5db;
+      border-radius: 4px 4px 0 0;
+    }
+    .subproof-toggle {
+      width: 100%;
+      padding: 0.6em 1em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: background 0.15s;
+    }
+    .subproof-toggle:hover {
+      background: rgba(0,0,0,0.03);
+    }
+    .subproof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.7em;
+      color: #6b7280;
+    }
+    .subproof.collapsed .subproof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .subproof-content {
+      padding: 1em;
+      line-height: 1.7;
+    }
+    .subproof.collapsed .subproof-content {
+      display: none;
+    }
+    .ref-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 0.15em;
+      border-radius: 2px;
+    }
+    .ref-link:hover {
+      background: #dbeafe;
+      text-decoration: underline;
+    }
+    .ref-unknown {
+      color: #dc2626;
+      font-weight: bold;
+      background: #fee2e2;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+    ol, ul {
+      margin: 1em 0;
+      padding-left: 2.5em;
+      line-height: 1.8;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    .latex-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5em auto;
+    }
+    .latex-figure .latex-image {
+      display: inline-block;
+      margin: 0.5em;
+      vertical-align: middle;
+    }
+    .latex-figure {
+      margin: 2em 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .latex-figure .figure-content {
+      margin-bottom: 0.75em;
+      line-height: normal;
+    }
+    .latex-figure .figure-content > * {
+      vertical-align: middle;
+    }
+    .latex-figure figcaption {
+      font-size: 0.9em;
+      color: #4b5563;
+      font-style: italic;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <h2>The Radon-Nikodym Theorem</h2>
+<p>The Radon-Nikodym Theorem is a fundamental result in measure theory that generalizes the concept of derivatives to measures.</p>
+<p>First we need a lemma.</p>
+<div class="theorem-box lemma-box" id="lem:radon_nik_lemma">
+  <div class="theorem-header"><strong>Lemma ?</strong></div>
+  <div class="theorem-content">Let $(X,\mathcal{A},\mu)$ be a measure space, and let $\lambda$ be another measure on $(X,\mathcal{A})$ that is absolutely continuous with respect to $\mu$ and is not the zero measure.
+    Then there exists a positive number $\epsilon > 0$ and a measurable set $A_0 \in \mathcal{A}$ such that
+    $\mu(A_0) > 0$ and $A_0$ is positive with respect to the signed measure $\lambda - \epsilon \mu$, i.e.
+    \[ \lambda( A ) - \epsilon \mu( A ) \geq 0 \quad\text{ for all } A \in \mathcal{A} \text{ such that } A \subseteq A_0. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-0">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-0')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-0">
+    Let $N \in \mathbb{Z}^+$ be arbitrary; consider the signed measure $\lambda - \frac{1}{N} \mu$.
+    Then let 
+    \[ X = A^+_N \cup A_N^- \]
+    be a Hahn decomposition (<span class="ref-unknown" title="Reference not found: thm:hahn_decomposition">[thm:hahn_decomposition?]</span>) for this signed measure.
+<p>Let 
+    \[ A^+ = \bigcap_{N=1}^\infty A_N^+ \quad\text{ and }\quad A^- = \bigcap_{N=1}^\infty A_N^-. \]
+    Then for each $N \in \Z^+$ we have \[ \lambda(A^-) \leq \frac{1}{N} \mu(A^-) \]
+    which implies that $\lambda(A^-) = 0$. 
+    Hence we must have $\lambda(A^+) > 0$ since $\lambda$ is not the zero measure.
+    But then absolute continuity of $\lambda$ with respect to $\mu$ implies that $\mu(A^+) > 0$.
+    By <span class="ref-unknown" title="Reference not found: properties_of_signed_measures">[properties_of_signed_measures?]</span>, we see that
+    \[ \lim_{N \to \infty} \mu(A_N^+) = \mu(A^+) \]
+    because the sets $A_N^+$ are decreasing and $A^+ = \bigcap_{N=1}^\infty A_N^+$.
+    Thus there exists some $N \in \Z^+$ such that $\mu(A_N^+) > 0$, and we may take $A_0 = A_N^+$.</p>
+<p>That is, for this choice of $N$, we have
+    \[ \lambda(A) - \frac{1}{N} \mu(A) \geq 0 \quad\text{ for all } A \in \mathcal{A} \text{ such that } A \subseteq A_0. \]
+    The proof is complete.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box theorem-box" id="thm:radon_nikodym_signed_measure">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Radon-Nikodym Theorem for Signed Measures)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A},\mu)$ be a measure space, and let $\nu$ be a signed measure on $(X,\mathcal{A})$ that is absolutely continuous with respect to $\mu$.
+    Then there exists a unique $f \in L^1(X,\mu)$ such that
+    \[ \nu(A) = \int_A f \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]</div>
+</div>
+<p>Thus our primary example is essentially the only example.
+After the proof, we will discuss how this is a generalization of the fundamental theorem of calculus.</p>
+<p>The more popular proof is by John von Neumann using Hilbert spaces, but we will present the more elementary proof found in Kolmogorov and Fomin.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-1">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-1')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-1">
+    If $\nu$ is the zero measure, then $f = 0$ works, and uniqueness $\mu$-almost everywhere is clear.
+    Thus we may assume that $\nu$ is not the zero measure. We let
+    \[ \mathcal{K} := \left\{ f\in L^1(X,\mu) : \int_A f\,\dif\mu \leq \nu(A) \ \ \text{ for all }\  A \in \mathcal{A} \right\} \]
+    and let
+    \[ M := \sup \left\{ \int_X f \,\dif \mu : f \in \mathcal{K} \right\}. \]
+    Then there exists a sequence of functions $\{ f_k \}_{k=1}^\infty \subseteq \mathcal{K}$ such that
+    \[ \lim_{k\to\infty} \int_X f_k \,\dif \mu = M. \]
+    For each $n \in \Z^+$ we define
+    \[ g_n := \max \{ f_1, f_2, \ldots, f_n \}. \]
+    Then we obtain an increasing sequence $\{ g_n \}_{n=1}^\infty$ of measurable functions on $X$ and we claim that
+    \[ g_n \in \mathcal{K} \quad\text{ for all } n \in \Z^+. \]
+<p>To see this, fix $n\in \Z^+$ and let $A \in \mathcal{A}$ be arbitrary.
+    Then there are disjoint sets $A_{n,1},A_{n,2},\ldots,A_{n,n} \in \mathcal{A}$ such that
+    \[ A = \bigcup_{k=1}^n A_{n,k} \quad\text{ and }\quad g_n(x) = f_k(x) \text{ for all } x \in A_{n,k}. \]
+    Thus we have
+    \begin{align*}
+        \int_A g_n \,\dif \mu &= \int_{\bigcup_{k=1}^n A_{n,k}} g_n\,\dif \mu = \sum_{k=1}^n \int_{A_{n,k}} f_k \,\dif \mu \\
+        &\leq \sum_{k=1}^n \nu(A_{n,k}) = \nu(A)
+    \end{align*}
+    since $f_k \in \mathcal{K}$ for all $k \in \{1,2,\ldots,n\}$.
+    Since $A\in \mathcal{A}$ was arbitrary, this shows $g_n \in \mathcal{K}$.
+    Since $n \in \Z^+$ was arbitrary, the claim is proved.</p>
+<p>Since $\{ g_n \}_{n=1}^\infty$ is an increasing sequence of measurable functions in $\mathcal{K}$ we must have
+    \[ \lim_{n\to\infty} \int_X g_n \,\dif \mu = M. \]
+    We check this --- by virtue of $\{ g_n \}_{n=1}^\infty \subseteq \mathcal{K}$, the inequality $\lim_{n\to\infty} \int_X g_n \,\dif \mu \leq M$ is clear.
+    If we had a strict inequality $\lim_{n\to\infty} \int_X g_n \,\dif \mu < M$, then monotonicity of the integral would imply that
+    \[ \lim_{k\to\infty} \int_X f_k \,\dif \mu \leq \lim_{n\to\infty} \int_X g_n \,\dif \mu < M, \]
+    contradicting our choice of $\{ f_k \}_{k=1}^\infty$.
+    Thus we have equality as desired.</p>
+<p>We now define
+    \[ f(x) := \lim_{n\to\infty} g_n(x) = \sup_{n\in \Z^+} g_n(x) \]
+    for all $x \in X$.
+    Then $f$ is a measurable function on $X$, as a limit of measurable functions, and the Bounded Convergence Theorem <span class="ref-unknown" title="Reference not found: thm:bounded_convergence_theorem">[thm:bounded_convergence_theorem?]</span> implies that $f\in L^1(X,\mu)$ and
+    \[ \int_X f \,\dif \mu = \int_X \lim_{n\to\infty} g_n \,\dif \mu = \lim_{n\to\infty} \int_X g_n \,\dif \mu = M < \infty. \]</p>
+<p>We now show that $f$ is the required function.</p>
+<p>We define a set function $\lambda : \mathcal{A} \to \R$ by
+    \[ \lambda(A) := \nu(A) - \int_A f \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]
+    Then $\lambda$ is a signed measure on $(X,\mathcal{A})$.
+    Since we must have $f \in \mathcal{K}$, it follows that $\lambda$ is a nonnegative measure, i.e. $\lambda(A) \geq 0$ for all $A \in \mathcal{A}$.
+    We claim that $\lambda$ is the zero measure.</p>
+<p>Assume towards a contradiction that this is not the case, and there is a set $E\in \mathcal{A}$ for which $\lambda(E) > 0$.
+    Then by Lemma <span class="ref-unknown" title="Reference not found: lem:radon_nik_lemma">[lem:radon_nik_lemma?]</span> there exists $\epsilon > 0$ and a measurable set $A_0 \in \mathcal{A}$ such that $\mu(A_0) > 0$ and
+    \[ \lambda(A) - \epsilon \mu(A) \geq 0 \quad\text{ for all } A \in \mathcal{A} \text{ such that } A \subseteq A_0. \]
+    That is, 
+    \[ \epsilon \mu(A) \leq \lambda(A) \quad \text{ for all } A \in \mathcal{A} \text{ such that } A \subseteq A_0. \]
+    We define
+    \[ h(x) := f(x) + \epsilon \chi_{A_0}(x) \qquad \forall x \in X. \]
+    Then for each $A \in \mathcal{A}$ we have
+    \begin{align*}
+        \int_A h \,\dif \mu &= \int_A f\,\dif \mu + \int_A \epsilon \chi_{A_0} \,\dif \mu = \int_A f \,\dif \mu + \epsilon \mu(A \cap A_0) \\
+            &\leq \nu(A) - \lambda(A) + \lambda(A \cap A_0) = \nu(A)
+    \end{align*}
+    which shows that $h \in \mathcal{K}$.
+    However, we also have
+    \[ \int_X h \,\dif \mu = \int_X f \,\dif \mu + \epsilon \mu(A_0) > M \]
+    since $\mu(A_0) > 0$.
+    This contradicts the definition of $M$ as a supremum, and implies that $\lambda$ is the zero measure.
+    As a result, we have
+    \[ \nu(A) = \int_A f \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]</p>
+<p>It remains to show that the integrable function $f$ is unique in $L^1(X,\mu)$.
+    Recall that $L^1(X,\mu)$ is defined as the set of equivalence classes of functions that are equal $\mu$-almost everywhere, so we need to show that if $f^\star \in L^1(X,\mu)$ is another function such that
+    \[ \nu(A) = \int_A f^\star \,\dif \mu \quad\text{ for all } A \in \mathcal{A}, \]
+    then $f = f^\star$ $\mu$-almost everywhere.</p>
+<p>We let
+    \[ E := \{ x \in X : f(x) \neq f^\star(x) \} \]
+    and see that
+    \[ E = \bigcup_{n=1}^\infty \left( \left\{ x\in X : f(x) - f^\star(x) > \frac{1}{n} \right\} \cup \left\{ x \in X : f^\star(x) - f(x) > \frac{1}{n} \right\} \right). \]
+    For each $n \in \Z^+$ Chebyshev's inequality <span class="ref-unknown" title="Reference not found: lem:chebyshevs_inequality">[lem:chebyshevs_inequality?]</span> implies that
+    \[ \mu\left( \left\{ x\in X: f(x) - f^\star(x) > \frac{1}{n} \right\} \right) \leq n \cdot\int_{ \left\{ x\,:\, f(x) - f^\star(x) > \frac{1}{n} \right\} } |f - f^\star| \,\dif \mu = 0 \]
+    and similarly
+    \[ \mu\left( \left\{ x\in X: f^\star(x) - f(x) > \frac{1}{n} \right\} \right) = 0. \]
+    Thus we have $\mu(E) = 0$, as the countable union of $\mu$ measure zero sets has $\mu$ measure zero.
+    This shows that $f = f^\star$ $\mu$-almost everywhere, and the proof is complete.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box corollary-box" id="cor:radon_nikodym_vector_measure">
+  <div class="theorem-header"><strong>Corollary ?</strong> (Radon-Nikodym Theorem for Vector Measures)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A},\mu)$ be a measure space, and let $\nu$ be a vector measure on $(X,\mathcal{A})$ taking values in $\R^m$ that is absolutely continuous with respect to $\mu$.
+    Then there exists a unique function $f \in L^1(X,\mu;\R^m)$ such that
+    \[ \nu(A) = \int_A f \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-2">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-2')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-2">
+    For each $k \in \{1,2,\ldots,m\}$ we define the signed measure $\nu_k : \mathcal{A} \to \R$ by
+    \[ \nu_k(A) := \langle \nu(A), e_k \rangle \quad\text{ for all } A \in \mathcal{A} \]
+    where $e_1, e_2, \ldots, e_m$ is the standard basis for $\R^m$.
+    Then for each $k \in \{1,2,\ldots,m\}$ the signed measure $\nu_k$ is absolutely continuous with respect to $\mu$ since 
+    \[ |\nu_k(A)| = | \langle \nu(A), e_k \rangle | \leq \| \nu(A) \| \cdot \| e_k \| = \| \nu(A) \| \]
+    for all $A \in \mathcal{A}$.
+    Thus for each $k \in \{1,2,\ldots,m\}$ we may apply Theorem <span class="ref-unknown" title="Reference not found: thm:radon_nikodym_signed_measure">[thm:radon_nikodym_signed_measure?]</span> to obtain a unique $f_k \in L^1(X,\mu)$ such that
+    \[ \nu_k(A) = \int_A f_k \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]
+    We then define the function $f : X \to \R^m$ by
+    \[ f(x) := \sum_{k=1}^m f_k(x) e_k \quad\text{ for all } x \in X. \]
+    Then $f \in L^1(X,\mu;\R^m)$ since each $f_k \in L^1(X,\mu)$, and for each $A \in \mathcal{A}$ we have
+    \begin{align*}
+        \int_A f \,\dif \mu &= \int_A \sum_{k=1}^m f_k(x) e_k \,\dif \mu(x) = \sum_{k=1}^m \left( \int_A f_k(x) \,\dif \mu(x) \right) e_k \\
+            &= \sum_{k=1}^m \nu_k(A) e_k = \sum_{k=1}^m \langle \nu(A), e_k \rangle e_k = \nu(A)
+    \end{align*}
+    which shows existence.
+    Uniqueness follows from the uniqueness in Theorem <span class="ref-unknown" title="Reference not found: thm:radon_nikodym_signed_measure">[thm:radon_nikodym_signed_measure?]</span> applied to each component.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<div class="theorem-box definition-box" id="def:radon_nikodym_derivative">
+  <div class="theorem-header"><strong>Definition ?</strong></div>
+  <div class="theorem-content">Let $(X,\mathcal{A},\mu)$ be a measure space, and let $\nu$ be a vector measure on $(X,\mathcal{A})$ that is absolutely continuous with respect to $\mu$.
+    The <em>Radon-Nikodym derivative</em> of $\nu$ with respect to $\mu$ is the unique function $f \in L^1(X,\mu;\R^m)$ such that
+    \[ \nu(A) = \int_A f \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]
+    We denote the Radon-Nikodym derivative by $D_\mu \nu$ or $\pd{\nu}{\mu}$.</div>
+</div>
+<p>Some people also write $ \nu = \mu \mres f $ or $\dif \nu = f \,\dif \mu$ to denote this relationship, but we will not use this notation.</p>
+<p>With our preferred notation, the Radon-Nikodym theorem states that if $\nu$ is a signed measure absolutely continuous with respect to $\mu$, then
+\[ \pd{\nu}{\mu} \in L^1(X,\mu) \quad\text{ and }\quad \nu(A) = \int_A \pd{\nu}{\mu} \,\dif \mu \text{ for all } A \in \mathcal{A} \]
+which shows how it can be viewed as a generalization of the fundamental theorem of calculus.</p>
+<div class="theorem-box corollary-box" id="cor:radon_nikodym_derivative_unit_norm">
+  <div class="theorem-header"><strong>Corollary ?</strong> ($\pd{\nu}{|\nu|}$ has Unit Norm)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A},\mu)$ be a measure space, and let $\nu$ be a vector measure on $(X,\mathcal{A})$ taking values in $\R^m$ that is absolutely continuous with respect to $\mu$.
+    Then the Radon-Nikodym derivative $\pd{\nu}{|\nu|} : X \to \R^m$ satisfies
+    $ \left\| \pd{\nu}{|\nu|}(x) \right\| = 1$
+    for $|\nu|$-almost every $x \in X$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-3">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-3')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-3">
+    Since $\nu \ll |\nu|$, the Radon-Nikodym Theorem for Vector Measures <span class="ref-unknown" title="Reference not found: cor:radon_nikodym_vector_measure">[cor:radon_nikodym_vector_measure?]</span> implies that there exists a unique function $f \in L^1(X,|\nu|;\R^m)$ such that
+    \[ \nu(A) = \int_A f \,\dif |\nu| \quad\text{ for all } A \in \mathcal{A}. \]
+    By <span class="ref-unknown" title="Reference not found: prop:total_variation_of_vector_measure_from_L1_function">[prop:total_variation_of_vector_measure_from_L1_function?]</span>, we have
+    \[ |\nu|(A) = \int_A \| f(x) \| \,\dif |\nu|(x) \quad\text{ for all } A \in \mathcal{A}. \]
+    In particular, taking $A = X$ gives
+    \[ |\nu|(X) = \int_X \| f(x) \| \,\dif |\nu|(x). \]
+    Thus we must have $\| f(x) \| = 1$ for $|\nu|$-almost every $x \in X$.
+    By definition, $f$ is the Radon-Nikodym derivative $\pd{\nu}{|\nu|}$, so we are done.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<p>In the case that we have two $\sigma$-finite measures, we have the following version of the Radon-Nikodym theorem.</p>
+<div class="theorem-box corollary-box" id="cor:radon_nikodym_finite_sigma_finite">
+  <div class="theorem-header"><strong>Corollary ?</strong> (Radon-Nikodym Theorem for $\sigma$-Finite Measures)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A},\mu)$ be a $\sigma$-finite measure space, and let $\nu$ be a $\sigma$-finite measure on $(X,\mathcal{A})$ that is absolutely continuous with respect to $\mu$.
+    Then there exists a unique measurable function $f : X \to [0,\infty)$ such that
+    \[ \nu(A) = \int_A f \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]</div>
+</div>
+<p>Notice that we need <em>both</em> measures to be $\sigma$-finite, and we lose the conclusion of integrability of $f$ in this case.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-4">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-4')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-4">
+    In the case that $\nu$ is a finite measure, then $\nu$ is also a signed measure, and we may apply Theorem <span class="ref-unknown" title="Reference not found: thm:radon_nikodym_signed_measure">[thm:radon_nikodym_signed_measure?]</span> to obtain the desired result.
+<p>Now assume that $\nu$ is a $\sigma$-finite measure.
+    Then there exists a disjoint sequence of sets $\{ X_k \}_{k=1}^\infty \subseteq \mathcal{A}$ such that
+    \[ X = \bigcup_{k=1}^\infty X_k \quad\text{ and }\quad \nu(X_k) < \infty \quad\text{ for all } k \in \Z^+. \]
+    For each $k \in \Z^+$ we define the measure $\nu \mres X_k$ which is a finite measure on $(X,\mathcal{A})$.
+    Then $\nu \mres X_k$ is absolutely continuous with respect to $\mu$ since $\nu$ is absolutely continuous with respect to $\mu$.
+    Thus by the finite measure case, there exists a unique function $f_k \in L^1(X,\mu)$ such that
+    \[ \nu(A \cap X_k) = \int_{A \cap X_k} f_k \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]
+    We then define the function $f : X \to \R$ by
+    \[ f(x) := f_k(x) \]
+    if $x\in X$ is such that $x \in X_k$.
+    More formally, we have
+    \[ f(x) := \sum_{k=1}^\infty f_k(x) \chi_{X_k}(x) \quad\text{ for all } x \in X. \]
+    Then $f$ is a measurable function on $X$, as a countable sum of measurable functions.</p>
+<p>We compute that for each $A \in \mathcal{A}$ we have
+    \begin{align*}
+        \int_A f \,\dif \mu &= \sum_{k=1}^\infty \int_{A \cap \left( X_k \setminus \bigcup_{j=1}^{k-1} X_j \right)} f_k \,\dif \mu \\
+            &= \sum_{k=1}^\infty \nu\left( A \cap \left( X_k \setminus \bigcup_{j=1}^{k-1} X_j \right) \right) = \nu(A)
+    \end{align*}
+    which shows existence.</p>
+<p>Now suppose that $f^\star : X \to [0,\infty)$ is another measurable function such that
+    \[ \nu(A) = \int_A f^\star \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]
+    Then for each $k \in \Z^+$ we have
+    \[ \nu(A \cap X_k) = \int_{A \cap X_k} f^\star \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]
+    By uniqueness in the finite measure case, it follows that $f_k = f^\star$ $\mu$-almost everywhere on $X_k$ for each $k \in \Z^+$.
+    Thus $f = f^\star$ $\mu$-almost everywhere on $X$, and the proof is complete.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:properties_of_radon_nikodym_derivative">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Properties of the Radon-Nikodym Derivative)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space, and let $\mu$ and $\lambda$ be measures on $(X,\mathcal{A})$, and let $\nu$ and $\sigma$ be vector measures on $(X,\mathcal{A})$ taking values in $\R^m$.
+    The Radon-Nikodym derivatives satisfy the following properties:
+    <ol><li>If $\nu \ll \mu$ and $\sigma \ll \mu$, then
+        \[ \pd{ (\nu + \sigma) }{\mu} = \pd{\nu}{\mu} + \pd{\sigma}{\mu}. \]
+    </li><li>If $\lambda \ll \mu$ and $g \in L^1(X,\lambda)$, then
+        \[ \int_X g\,\dif \lambda = \int_X g \pd{\lambda}{\mu} \,\dif \mu. \]
+    </li><li>If $\nu \ll \lambda$ and $\lambda \ll \mu$, then
+        \[ \pd{\nu}{\mu} = \pd{\nu}{\lambda} \pd{\lambda}{\mu}. \]
+    </li><li>If $\nu$ and $\mu$ are mutually absolutely continuous, then
+        \[ \pd{\nu}{\mu} = \frac{1}{\left( \pd{\mu}{\nu} \right)} \]</li></ol></div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-5">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-5')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-5">
+    <ol><li>Assume that $\nu \ll \mu$ and $\sigma \ll \mu$.
+            Then for each $A \in \mathcal{A}$ we have
+            \begin{align*}
+                (\nu + \sigma)(A) &= \nu(A) + \sigma(A) = \int_A \pd{\nu}{\mu} \,\dif \mu + \int_A \pd{\sigma}{\mu} \,\dif \mu \\
+                    &= \int_A \left( \pd{\nu}{\mu} + \pd{\sigma}{\mu} \right) \,\dif \mu
+            \end{align*}
+            which shows the desired result by uniqueness of the Radon-Nikodym derivative.
+<p></li><li>Assume that $\lambda \ll \mu$.
+            Then for each $A \in \mathcal{A}$ we have
+            \[ \lambda(A) = \int_A 1 \,\dif \lambda = \int_A 1 \cdot \pd{\lambda}{\mu} \,\dif \mu = \int_X \Chi_A \pd{\lambda}{\mu} \,\dif \mu \]
+            and \[ \lambda(A) = \int_X \Chi_A \,\dif \lambda \]
+            so the result is true for characteristic functions.
+            By the linearity of the integral, we see that if $s = \sum_{j = 1}^n a_j \Chi_{A_j}$
+            is a simple function on $X$, then
+            \[ \int_X s \,\dif \lambda = \sum_{j=1}^n a_j \lambda(A_j) = \int_X s \pd{\lambda}{\mu} \,\dif \mu. \]
+            Thus the result is true for simple functions.</p>
+<p>Now let $g\in L^1(X,\lambda)$ be arbitrary.
+            Then there exists a sequence of simple functions $\{ s_k \}_{k=1}^\infty$ on $X$ such that
+            \[ \lim_{k\to\infty} \int_X | g - s_k | \,\dif \lambda = 0. \]
+            By the Dominated Convergence Theorem <span class="ref-unknown" title="Reference not found: thm:dominated_convergence_theorem">[thm:dominated_convergence_theorem?]</span>, we have
+            \begin{align*}
+                \int_X g \,\dif \lambda &= \int_X \lim_{k\to\infty} s_k \,\dif \lambda = \lim_{k\to\infty} \int_X s_k \,\dif \lambda \\
+                    &= \lim_{k\to\infty} \int_X s_k \pd{\lambda}{\mu} \,\dif \mu = \int_X \lim_{k\to\infty} s_k \pd{\lambda}{\mu} \,\dif \mu = \int_X g \pd{\lambda}{\mu} \,\dif \mu
+            \end{align*}
+            which shows the desired result.</p>
+<p></li><li>Assume that $\nu \ll \lambda$ and $\lambda \ll \mu$.
+            Then for each $A \in \mathcal{A}$ we have
+            \[ \nu(A) = \int_A \pd{\nu}{\lambda} \,\dif \lambda = \int_A \pd{\nu}{\lambda} \pd{\lambda}{\mu} \,\dif \mu \]
+            where the second equality follows from part (2).
+            By uniqueness of the Radon-Nikodym derivative, we obtain the desired result.</p>
+<p></li><li>Assume that $\nu$ and $\mu$ are mutually absolutely continuous.
+            Then for each $A \in \mathcal{A}$ we have
+            \[ \mu(A) = \int_A \pd{\mu}{\nu} \,\dif \nu = \int_A \pd{\mu}{\nu} \pd{\nu}{\mu} \,\dif \mu \]
+            where the second equality follows from part (2).
+            Since we also have \[ \mu(A) = \int_A 1 \,\dif \mu, \]
+            for each $A\in \mathcal{A}$, uniqueness of the Radon-Nikodym derivative implies that
+            \[ 1 = \pd{\mu}{\nu} \pd{\nu}{\mu} \quad\text{ $\mu$-almost everywhere, } \]
+            which shows the desired result.</li></ol>
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>This finishes our discussion of the abstract Radon-Nikodym theorem.</p>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('Restoring proof collapse states...');
+      try {
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        const currentPage = window.location.pathname;
+        const pageOpen = openProofs[currentPage] || [];
+        
+        console.log('Current page:', currentPage);
+        console.log('Open proof IDs stored:', pageOpen);
+        console.log('Found ' + pageOpen.length + ' open proofs for this page');
+        
+        document.querySelectorAll('.proof-box').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          console.log('Checking proof:', proofId, 'Should be open:', pageOpen.includes(proofId));
+          if (pageOpen.includes(proofId)) {
+            // This proof should be open
+            box.classList.remove('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'true');
+          } else {
+            // This proof should be collapsed (default)
+            box.classList.add('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        const pageBoxes = openBoxes[currentPage] || [];
+        
+        console.log('Open box IDs stored:', pageBoxes);
+        
+        document.querySelectorAll('.collapsible-box').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          console.log('Checking box:', boxId, 'Should be open:', pageBoxes.includes(boxId));
+          if (pageBoxes.includes(boxId)) {
+            box.classList.remove('collapsed');
+          } else {
+            box.classList.add('collapsed');
+          }
+        });
+        
+        console.log('Proof states restored');
+      } catch (e) {
+        console.error('Error restoring collapse state:', e);
+      }
+    });
+    
+    function toggleProof(proofId) {
+      const proofContent = document.getElementById(proofId);
+      const proofBox = proofContent.closest('.proof-box');
+      proofBox.classList.toggle('collapsed');
+      
+      const button = proofBox.querySelector('.proof-toggle');
+      button.setAttribute('aria-expanded', !proofBox.classList.contains('collapsed'));
+      
+      saveProofState();
+    }
+    
+    function toggleSubproof(subproofId) {
+      const subproofContent = document.getElementById(subproofId);
+      const subproof = subproofContent.closest('.subproof');
+      subproof.classList.toggle('collapsed');
+      
+      const button = subproof.querySelector('.subproof-toggle');
+      button.setAttribute('aria-expanded', !subproof.classList.contains('collapsed'));
+    }
+    
+    function saveProofState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        if (!openProofs[currentPage]) {
+          openProofs[currentPage] = [];
+        }
+        
+        // Get all OPEN (not collapsed) proofs
+        openProofs[currentPage] = [];
+        document.querySelectorAll('.proof-box:not(.collapsed)').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          if (proofId) {
+            openProofs[currentPage].push(proofId);
+          }
+        });
+        
+        localStorage.setItem('openProofs', JSON.stringify(openProofs));
+        console.log('Saved proof state (open proofs):', openProofs[currentPage]);
+      } catch (e) {
+        console.error('Error saving collapse state:', e);
+      }
+    }
+    
+    function toggleCollapsible(collapsibleId) {
+      const content = document.getElementById(collapsibleId);
+      const box = content.closest('.collapsible-box');
+      box.classList.toggle('collapsed');
+      
+      saveCollapsibleState();
+    }
+    
+    function saveCollapsibleState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        if (!openBoxes[currentPage]) {
+          openBoxes[currentPage] = [];
+        }
+        
+        // Get all OPEN (not collapsed) boxes
+        openBoxes[currentPage] = [];
+        document.querySelectorAll('.collapsible-box:not(.collapsed)').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          if (boxId) {
+            openBoxes[currentPage].push(boxId);
+          }
+        });
+        
+        localStorage.setItem('openBoxes', JSON.stringify(openBoxes));
+      } catch (e) {
+        console.error('Error saving box state:', e);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        const proofBoxes = document.querySelectorAll('.proof-box');
+        const anyExpanded = Array.from(proofBoxes).some(box => !box.classList.contains('collapsed'));
+        
+        proofBoxes.forEach(box => {
+          if (anyExpanded) {
+            box.classList.add('collapsed');
+          } else {
+            box.classList.remove('collapsed');
+          }
+        });
+        
+        saveProofState();
+      }
+    });
+    
+    document.querySelectorAll('a.ref-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.background = '#fef3c7';
+          target.style.transition = 'background 0.3s ease';
+          setTimeout(() => { target.style.background = ''; }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

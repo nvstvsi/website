@@ -1,0 +1,824 @@
+\documentclass[BV_Finite_Perimeter.tex]{subfiles}
+
+\begin{document}
+\section{The Hausdorff Outer Measure}
+
+In this section, we explore our second concrete example of an outer measure, the Hausdorff outer measure.
+This outer measure is defined on any metric space, but we are mostly interested in the case of $\R^n$. 
+
+\vspace{5mm}
+
+\noindent Throughout this section, let $X$ be a metric space with metric $d$, and we let
+\[ \omega_\alpha :=  \frac{\pi^{\alpha/2}}{\Gamma\left( \frac{\alpha}{2} + 1 \right)} \]
+for each $\alpha \geq 0$.
+
+Recall that for an integer $n\geq 1$, the constant $\omega_n$ is the volume (Lebesgue outer measure) of the unit ball in $\R^n$ --- see Exercise \ref{ex:volume_of_n_dimensional_ball_formula}.
+
+\subsection{Definition of the Hausdorff Outer Measure}
+
+\begin{definition}[Hausdorff Outer Measure]
+    \label{def:hausdorff_outer_measure}
+    Let $\alpha \geq 0$.
+    For each $\delta > 0$ and $A \subseteq X$, we define the \textit{$\delta$-approximated $\alpha$-dimensional Hausdorff outer measure} of $A$ by
+    \[ \mathcal{H}^\alpha_\delta(A) := \omega_\alpha \inf \left\{ \sum_{j=1}^\infty \left( \frac{\diam(C_j)}{2}  \right)^\alpha :  A \sub \bigcup_{j=1}^\infty C_j, \,\text{and } \diam(C_j) \leq \delta \text{ for all } j\geq 1 \right\}. \]
+    If there is no such cover of $A$ with sets of diameter less than $\delta$, we set $\mathcal{H}^\alpha_\delta(A) := \infty$.
+
+    \vspace{2mm}
+
+    \noindent The \textit{$\alpha$-dimensional Hausdorff outer measure} of $A$ is then defined by
+    \[ \mathcal{H}^\alpha(A) := \lim_{\delta \to 0^+} \mathcal{H}^\alpha_\delta(A) \in [0, \infty]. \]
+\end{definition}
+
+If we are dealing with two metric spaces, we may add a subscript to clearly indicate which metric space we are considering the Hausdorff outer measure on, for instance $\mathcal{H}^\alpha_{\delta,X}$ or $\mathcal{H}^\alpha_X$.
+
+\begin{remark}[Well-Definedness of the Hausdorff Outer Measure]
+    \label{rmk:def_of_hausdorff_outer_measure}
+    Quick sanity check: if $\delta_1 < \delta_2$, then $\mathcal{H}^\alpha_{\delta_1}(A) \geq \mathcal{H}^\alpha_{\delta_2}(A)$ because the infimum is taken over a smaller set of covers.
+    Thus the function $\delta \mapsto \mathcal{H}^\alpha_\delta(A)$ is decreasing, so the limit as $\delta \to 0^+$ is well-defined (possibly infinite).
+
+    Also we can without loss of generality restrict to covers by closed bounded sets --- for each set $C_j$, we have $\diam(C_j) = \diam(\overline{C_j})$, so we can replace $C_j$ by its closure without changing the diameter.
+\end{remark}
+
+\begin{theorem}
+    \label{thm:hausdorff_outer_measure_is_outer_measure}
+    Let $\alpha \geq 0$.
+    Then $\mathcal{H}^\alpha$ is a Borel regular outer measure on $X$.
+\end{theorem}
+
+\begin{proof}
+    \textit{Step 1:} Let $\delta > 0$.
+    We claim that $\mathcal{H}^\alpha_\delta$ is an outer measure on $X$.
+    \vspace{2mm}
+
+    It is clear that $\mathcal{H}^\alpha_\delta(\emptyset) = 0$, since a set of arbitrarily small diameter covers the empty set.
+    Let $A \sub B \sub X$.
+    Then any cover of $B$ by sets of diameter at most $\delta$ is also a cover of $A$ by sets of diameter at most $\delta$, so $\mathcal{H}^\alpha_\delta(A) \leq \mathcal{H}^\alpha_\delta(B)$.
+    Finally, let $\{A_j\}_{j=1}^\infty$ be a countable collection of subsets of $X$.
+    For each $j \geq 1$, let $\{U_{j,k}\}_{k=1}^\infty$ be a cover of $A_j$ by sets of diameter at most $\delta$. Then $\{U_{j,k} : j,k \geq 1\}$ is a cover of $\bigcup_{j=1}^\infty A_j$ by sets of diameter at most $\delta$, so that
+    \[ \mathcal{H}^\alpha_\delta\left( \bigcup_{j=1}^\infty A_j \right) \leq \omega_\alpha \sum_{j=1}^\infty \sum_{k=1}^\infty (\diam(U_{j,k})/2)^\alpha \]
+    Taking the infimum over all such covers of each $A_j$ gives
+    \[ \mathcal{H}^\alpha_\delta\left( \bigcup_{j=1}^\infty A_j \right) \leq \sum_{j=1}^\infty \mathcal{H}^\alpha_\delta(A_j). \]
+    Thus $\mathcal{H}^\alpha_\delta$ is an outer measure on $X$.
+
+    \vspace{2mm}
+    \textit{Step 2:} Now we show that $\mathcal{H}^\alpha$ is an outer measure on $X$.
+    \vspace{2mm}
+
+    We have \[ \mathcal{H}^\alpha(\emptyset) = \lim_{\delta \to 0^+} \mathcal{H}^\alpha_\delta(\emptyset) = 0. \]
+    Also if $A \sub B \sub X$, then $\mathcal{H}^\alpha_\delta(A) \leq \mathcal{H}^\alpha_\delta(B)$ for each $\delta > 0$, so taking limits as $\delta \to 0^+$ gives $\mathcal{H}^\alpha(A) \leq \mathcal{H}^\alpha(B)$.
+
+    Finally, let $\{A_j\}_{j=1}^\infty$ be a countable collection of subsets of $X$.
+    Then for each $\delta > 0$ we have
+    \[ \mathcal{H}^\alpha_\delta\left( \bigcup_{j=1}^\infty A_j \right) \leq \sum_{j=1}^\infty \mathcal{H}^\alpha_\delta(A_j) \leq \sum_{j=1}^\infty \mathcal{H}^\alpha_\delta(A_j). \]
+    Taking limits as $\delta \to 0^+$ gives
+    \[ \mathcal{H}^\alpha\left( \bigcup_{j=1}^\infty A_j \right) \leq \sum_{j=1}^\infty \mathcal{H}^\alpha(A_j). \]
+
+    \vspace{2mm}
+    \textit{Step 3:} We claim that $\mathcal{H}^\alpha$ is a metric outer measure.
+    \vspace{2mm}
+
+    Let $A,B \sub X$ with $d(A,B) > 0$.
+    Then choose $\delta > 0$ such that $\delta < \frac{1}{4} \dist(A,B)$. 
+    Let $\{C_j\}_{j=1}^\infty$ be a cover of $A\cup B$ by sets of diameter at most $\delta$.
+    
+    Then we define collections of sets 
+    \[ \mathcal{A} := \{ C_j : C_j \cap A \neq \emptyset \} \quad \text{and} \quad \mathcal{B} := \{ C_j : C_j \cap B \neq \emptyset \}. \]
+    Then $\mathcal{A}$ is a cover of $A$ by sets of diameter at most $\delta$, and $\mathcal{B}$ is a cover of $B$ by sets of diameter at most $\delta$,
+    and the fact that $A$ and $B$ are at least $4\delta$ apart implies that no set in $\mathcal{A}$ intersects any set in $\mathcal{B}$.
+    Therefore
+    \begin{align*}
+        H^\alpha_\delta(A) + H^\alpha_\delta(B) &\leq \omega_\alpha \sum_{ C_j \in\mathcal{A} } \left( \frac{\diam(C_j)}{2} \right)^\alpha + \omega_\alpha \sum_{ C_j \in\mathcal{B} } \left( \frac{\diam(C_j)}{2} \right)^\alpha \\
+            &\leq \omega_\alpha \sum_{j=1}^\infty \left( \frac{\diam(C_j)}{2} \right)^\alpha.
+    \end{align*}
+    Taking the infimum over all such covers $\{C_j\}_{j=1}^\infty$ of $A \cup B$ gives
+    \[ \mathcal{H}^\alpha_\delta(A) + \mathcal{H}^\alpha_\delta(B) \leq \mathcal{H}^\alpha_\delta(A \cup B). \]
+    Since this holds for all $\delta < \frac{1}{4} \dist(A,B)$, taking limits as $\delta \to 0^+$ gives
+    \[ \mathcal{H}^\alpha(A) + \mathcal{H}^\alpha(B) \leq \mathcal{H}^\alpha(A \cup B). \]
+    The reverse inequality follows from the fact that $\mathcal{H}^\alpha$ is an outer measure, so we conclude that
+    \[ \mathcal{H}^\alpha(A \cup B) = \mathcal{H}^\alpha(A) + \mathcal{H}^\alpha(B). \]
+
+    Since $A$ and $B$ were arbitrary sets with $\dist(A,B) > 0$, we conclude that $\mathcal{H}^\alpha$ is a metric outer measure on $X$.
+
+    \vspace{2mm}
+
+    Thus by the Carath\'eodory criterion (Theorem \ref{thm:caratheodory_criterion}), $\mathcal{H}^\alpha$ is a Borel outer measure on $X$.
+
+    \vspace{2mm}
+    \textit{Step 4:} Finally, we show that $\mathcal{H}^\alpha$ is a Borel regular outer measure.
+    \vspace{2mm}
+
+    Note that for each $C\subset X$, we have $\diam(C) = \diam(\overline{C})$.
+    Thus for each $\delta > 0$ and $A \subseteq X$, we can modify the definition of $\mathcal{H}^\alpha_\delta(A)$ to take the infimum over covers by closed sets of diameter at most $\delta$.
+    
+    Now let $A \subseteq X$ be such that $\mathcal{H}^\alpha(A) < \infty$.
+    Then for each $\delta > 0$, we have $\mathcal{H}^\alpha_\delta(A) < \infty$.
+    For each $k\geq 1$, we choose a cover $\{C_{k,j}\}_{j=1}^\infty$ of $A$ by closed sets of diameter at most $1/k$ such that
+    \[ \omega_\alpha \sum_{j=1}^\infty \left( \frac{\diam(C_{k,j})}{2} \right)^\alpha \leq \mathcal{H}^\alpha_{1/k}(A) + \frac{1}{k}. \]
+    Then we define
+    \[ B := \bigcap_{k=1}^\infty \bigcup_{j=1}^\infty C_{k,j} \]
+    which is a Borel set.
+    Also note that $A \sub B$ since $A \sub \bigcup_{j=1}^\infty C_{k,j}$ for each $k\geq 1$.
+    Finally, we have
+    \[ \mathcal{H}^\alpha_{1/k}(B) \leq \omega_\alpha \sum_{j=1}^\infty \left( \frac{\diam(C_{k,j})}{2} \right)^\alpha \leq \mathcal{H}^\alpha_{1/k}(A) + \frac{1}{k}, \qquad \forall k\geq 1 \]
+    so taking limits as $k \to \infty$ gives
+    \[ \mathcal{H}^\alpha(B) \leq \mathcal{H}^\alpha(A). \]
+    Since $A \sub B$, we also have $\mathcal{H}^\alpha(A) \leq \mathcal{H}^\alpha(B)$, so $\mathcal{H}^\alpha(A) = \mathcal{H}^\alpha(B)$.
+    That is, $A$ is contained in a Borel set $B$ with the same Hausdorff outer measure.
+
+    Since $A$ was arbitrary, we conclude that $\mathcal{H}^\alpha$ is a Borel regular outer measure on $X$.
+\end{proof}
+
+\begin{remark}[What Hausdorff Measure do we use on Subsets?]
+    \label{rmk:which_hausdorff_measure_on_subsets}
+Ok lets clarify something. 
+Say $(X,d)$ is a metric space, and let $\alpha \geq 0$.
+
+\noindent Let $A\subset X$ be arbitrary.
+Then we have three different things we could call the Hausdorff measure on $A$:
+\begin{itemize}
+    \item By considering $A$ as a subset of the metric space $(X,d)$, we get a metric space $(A,d|_{A\times A})$ and we can define the Hausdorff outer measure on this metric space.
+        Call this measure $\mathcal{H}^\alpha_{A}$ to agree with our previous notation.
+    \item By considering $A$ as a subset of the metric space $(X,d)$, we can define the Hausdorff outer measure on $X$ and then restrict this outer measure to $A$.
+        Call this measure $\mathcal{H}^\alpha_{X}\mres A$, and remember that $\mathcal{H}^\alpha_{X}\mres A$ is still defined on all subsets of $X$, but only measures subsets of $A$ non-trivially.
+    \item By considering $A$ as a subset of the metric space $(X,d)$, we can define the Hausdorff outer measure on $X$ and then consider the restriction of this measure to the measurable subsets of $A$.
+        Call this measure $\mathcal{H}^\alpha_{X}|_{\mathcal{M}_A}$, where $\mathcal{M}_A$ is the $\sigma$-algebra of $\mathcal{H}^\alpha_X$-measurable subsets of $A$.
+\end{itemize}
+Which one should we use? We claim that the first and third options are literally the same.
+
+Indeed, both $\mathcal{H}^\alpha_A$ and $\mathcal{H}^\alpha_X|_{\mathcal{M}_A}$ are Borel regular measures on the metric space $(A,d|_{A\times A})$, and they agree on all Borel subsets of $A$.
+They actually agree on all subsets of $A$ though --- let $B\subset A$ be arbitrary; then Borel regularity of $\mathcal{H}^\alpha_A$ gives a Borel set $C\subset A$ with $B\subset C$ and $\mathcal{H}^\alpha_A(B) = \mathcal{H}^\alpha_A(C)$, and since $C$ is Borel in $A$, it is also $\mathcal{H}^\alpha_X$-measurable, so
+\[ \mathcal{H}^\alpha_X|_{\mathcal{M}_A}(B) \leq \mathcal{H}^\alpha_X|_{\mathcal{M}_A}(C) = \mathcal{H}^\alpha_A(C) = \mathcal{H}^\alpha_A(B). \]
+Similarly, Borel regularity of $\mathcal{H}^\alpha_X|_{\mathcal{M}_A}$ gives a Borel set $D\subset A$ with $B\subset D$ and $\mathcal{H}^\alpha_X|_{\mathcal{M}_A}(B) = \mathcal{H}^\alpha_X|_{\mathcal{M}_A}(D)$, and since $D$ is Borel in $A$, it is also Borel in $X$, so
+\[ \mathcal{H}^\alpha_A(B) \leq \mathcal{H}^\alpha_A(D) = \mathcal{H}^\alpha_X|_{\mathcal{M}_A}(D) = \mathcal{H}^\alpha_X|_{\mathcal{M}_A}(B). \]
+Since $B$ was an arbitrary subset of $A$, we conclude that $\mathcal{H}^\alpha_A$ and $\mathcal{H}^\alpha_X|_{\mathcal{M}_A}$ agree on all subsets of $A$.
+
+Ok so we are down to two options - the first and second.
+These are \emph{not} the same if $A$ is a proper subset of $X$, because the measure $\mathcal{H}^\alpha_X\mres A$ is defined on all subsets of $X$, while $\mathcal{H}^\alpha_A$ is only defined on subsets of $A$.
+However, they do agree on all subsets of $A$.
+
+To see this, let $B \sub A$ be arbitrary.
+Then for each $\delta > 0$, any cover of $B$ by sets of diameter at most $\delta$ in $A$ is also a cover of $B$ by sets of diameter at most $\delta$ in $X$, so
+\[ \mathcal{H}^\alpha_X\mres A(B) = \mathcal{H}^\alpha_X(B) \leq \mathcal{H}^\alpha_A(B). \]
+Conversely, any cover of $B$ by sets of diameter at most $\delta$ in $X$ can be intersected with $A$ to get a cover of $B$ by sets of diameter at most $\delta$ in $A$, so
+\[ \mathcal{H}^\alpha_A(B) \leq \mathcal{H}^\alpha_X\mres A(B). \]
+Since $B$ was arbitrary, we conclude that $\mathcal{H}^\alpha_A$ and $\mathcal{H}^\alpha_X\mres A$ agree on all subsets of $A$.
+
+\vspace{2mm}
+
+In summary, if we want to consider the Hausdorff measure on a subset $A$ of a metric space $(X,d)$, we can either consider the Hausdorff measure on the metric space $(A,d|_{A\times A})$, or we can consider the restriction of the Hausdorff measure on $X$ to $A$.
+Both options have their uses. For instance, we use the first option when stating a version of the Fubini-Tonelli Theorem for Hausdorff measures \ref{prop:fubini_tonelli_for_hausdorff_measures_on_orthogonal_subspaces}, and we will use the second option when dealing with Lipschitz domains and other geometric sets in the future. 
+
+\end{remark}
+
+\vspace{2mm}
+
+\subsection{Properties of the Hausdorff Outer Measure}
+
+Now that we have seen that $\mathcal{H}^\alpha$ is an outer measure, let's see what it's actually measuring.
+We begin with the simplest case, $\alpha = 0$.
+
+\begin{exercise}[$\mathcal{H}^0$ is the Counting Measure]
+    \label{ex:H0_is_counting_measure}
+    Let $(X,d)$ be a metric space.
+    Show that $\mathcal{H}^0$ is the counting measure on $X$, i.e. that for each $A \sub X$,
+    \[ \mathcal{H}^0(A) = \begin{cases}
+        \#(A), & \text{if $A$ is finite}, \\
+        \infty, & \text{if $A$ is infinite}.
+    \end{cases} \]
+\end{exercise}
+
+\begin{proof}
+    First see that 
+    \[ \omega_0 := \frac{1}{\Gamma(1)} = 1 \]
+    by Exercise \ref{ex:properties_of_gamma_function}.
+
+    Let $(X,d)$ be an arbitrary metric space.
+    It follows that $\mathcal{H}^0_\delta(\{x\}) = 1$ for each $x \in X$ and $\delta > 0$, so $\mathcal{H}^0(\{x\}) = 1$ for each $x \in X$.
+    If $A \sub X$ is finite with $n$ elements, then $\mathcal{H}^0(A) = n$ by countable disjoint additivity and the fact that finite sets are closed, and hence Borel measurable.
+    Finally, if $A \sub X$ is countably infinite, then $A$ is also Borel measurable, and we can write $A$ as a countable union of singletons, so $\mathcal{H}^0(A) = \infty$
+    by countable disjoint additivity.
+    If $A \sub X$ is uncountable, then there is a countable subset $B \sub A$, so $\mathcal{H}^0(A) \geq \mathcal{H}^0(B) = \infty$.
+    Thus $\mathcal{H}^0$ is the counting measure on $X$.
+\end{proof}
+
+It is also easy to see that the Hausdorff outer measure is invariant under isometries.
+
+\begin{lemma}[Isometry Invariance of the Hausdorff Outer Measure]
+    \label{lem:isometry_invariance_of_hausdorff_outer_measure}
+    Let $\alpha \geq 0$, and let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces.
+    If $f : X \to Y$ is an isometry, then
+    \[ \mathcal{H}_Y^\alpha(f(A)) = \mathcal{H}_X^\alpha(A) \]
+    for each $A \sub X$.
+\end{lemma}
+
+\begin{proof}
+    Let $f : X \to Y$ be an isometry, meaning that
+    \[ d_Y(f(x_1), f(x_2)) = d_X(x_1,x_2), \qquad \forall x_1,x_2 \in X. \]
+    We will use the fact that if $C\sub X$, then $\diam(f(C)) = \diam(C)$, which follows immediately from the definitions --- see that
+    \begin{align*}
+        \diam(f(C)) &= \sup\{ d_Y(y_1, y_2) : y_1,y_2 \in f(C) \} = \sup\{ d_Y(f(x_1), f(x_2)) : x_1,x_2 \in C \} \\ 
+            &= \sup\{ d_X(x_1,x_2) : x_1,x_2 \in C \} = \diam(C).
+    \end{align*}
+
+    Let $A\sub X$ be an arbitrary set.
+    Fix $\delta > 0$.
+    Then for each cover $\{C_j\}_{j=1}^\infty$ of $A$ by sets of diameter at most $\delta$, we have that $\{f(C_j)\}_{j=1}^\infty$ is a cover of $f(A)$ by sets of diameter at most $\delta$.
+    Thus
+    \[ \mathcal{H}^\alpha_{Y,\delta}(f(A)) \leq \omega_\alpha \sum_{j=1}^\infty \left( \frac{\diam(f(C_j))}{2} \right)^\alpha = \omega_\alpha \sum_{j=1}^\infty \left( \frac{\diam(C_j)}{2} \right)^\alpha. \]
+    Taking the infimum over all such covers of $A$ gives
+    \[ \mathcal{H}^\alpha_{Y,\delta}(f(A)) \leq \mathcal{H}^\alpha_{X,\delta}(A). \]
+    Since $f$ is an isometry, the inverse $f^{-1}$ is also an isometry; so the same argument applied to $f^{-1}$ and the set $f(A)$ gives the reverse inequality,
+    so $\mathcal{H}^\alpha_{Y,\delta}(f(A)) = \mathcal{H}^\alpha_{X,\delta}(A)$ for each $\delta > 0$.
+    By taking limits as $\delta \to 0^+$ we see that $\mathcal{H}^\alpha_Y(f(A)) = \mathcal{H}^\alpha_X(A)$.
+\end{proof}
+
+With these two properties alone, there is not much we can do.
+Our main interest is in the case of $\R^n$, where we can relate the Hausdorff outer measure to Lebesgue measure and volume.
+To this end, we can show that Hausdorff measures on $\R^n$ are homogeneous with respect to scaling.
+
+\begin{lemma}[Homogeneity of the Hausdorff Outer Measure]
+    \label{lem:scaling_property_of_hausdorff_outer_measure}
+    Let $\alpha \geq 0$.
+    Then $\mathcal{H}^\alpha(tA) = t^\alpha \mathcal{H}^\alpha(A)$ for each $t > 0$ and $A \sub \R^n$.
+\end{lemma}
+\begin{proof}
+    Let $A \sub \R^n$ and $t > 0$.
+    Then for each cover $\{C_j\}_{j=1}^\infty$ of $A$ by sets of diameter at most $\delta$, we have that $\{tU_j\}_{j=1}^\infty$ is a cover of $tA$ by sets of diameter at most $t\delta$.
+    Thus
+    \[ \mathcal{H}^\alpha_{\delta}(tA) \leq \omega_\alpha \sum_{j=1}^\infty \left( \frac{\diam(tU_j)}{2} \right)^\alpha = \omega_\alpha \sum_{j=1}^\infty \left( t \frac{\diam(C_j)}{2} \right)^\alpha = t^\alpha \omega_\alpha \sum_{j=1}^\infty \left( \frac{\diam(C_j)}{2} \right)^\alpha. \]
+    Taking the infimum over all such covers of $A$ gives
+    \[ \mathcal{H}^\alpha_{\delta}(tA) \leq t^\alpha \mathcal{H}^\alpha_\delta(A). \]
+    The reverse inequality follows by applying the same argument to $t^{-1}$ instead of $t$, so we conclude that
+    \[ \mathcal{H}^\alpha_{\delta}(tA) = t^\alpha \mathcal{H}^\alpha_\delta(A) \qquad \forall t > 0, \, \delta > 0. \]
+    Taking limits as $\delta \to 0^+$ gives $\mathcal{H}^\alpha(tA) = t^\alpha \mathcal{H}^\alpha(A)$.
+\end{proof}
+
+Now we can relate the Hausdorff outer measure to Lebesgue measure in the case $\alpha = 1$.
+\begin{proposition}[$\mathcal{H}^1$ is Lebesgue Measure on $\R$]
+    \label{prop:H1_is_lebesgue_on_R}
+    The $1$-dimensional Hausdorff outer measure $\mathcal{H}^1$ on $\R$ coincides with the Lebesgue outer measure $\mathcal{L}^1$ on $\R$.
+\end{proposition}
+Thus $\mathcal{H}^1$ is measuring length in $\R$; we should expect that in more general metric spaces, $\mathcal{H}^1$ is measuring the length of curves.
+
+\begin{proof}
+    First note that $\omega_1 = 2$ by Exercise \ref{ex:volume_of_n_dimensional_ball_formula}.
+    
+    Let $A \sub \R$ be arbitrary, and let $\delta > 0$.
+    Then we have
+    \begin{align*}
+        \mathcal{L}^1(A) &= \inf \left\{ \sum_{j=1}^\infty (b_j - a_j) : A \sub \bigcup_{j=1}^\infty [a_j, b_j] \right\} \\
+            &\leq \inf \left\{ \sum_{j=1}^\infty (b_j - a_j) : A \sub \bigcup_{j=1}^\infty [a_j, b_j]\ \  \text{ and } b_j - a_j \leq \delta \text{ for all } j\geq 1 \right\} \\
+            &= \inf \left\{ 2 \sum_{j=1}^\infty \left( \frac{\diam([a_j, b_j])}{2} \right) : A \sub \bigcup_{j=1}^\infty [a_j, b_j]\ \  \text{ and } \diam([a_j, b_j]) \leq \delta \text{ for all } j\geq 1 \right\} \\
+            &= \mathcal{H}^1_\delta(A)
+    \end{align*}
+    since the diameter of the interval $[a_j, b_j]$ is $b_j - a_j$ and $\omega_1 = 2$.
+    Because this holds for each $\delta > 0$, it follows that $\mathcal{L}^1(A) \leq \mathcal{H}^1(A)$.
+
+    To prove the reverse inequality, for each $k\in \Z$ let $I_k := [k\delta, (k+1)\delta)$.
+    Then $\{I_k\}_{k\in \Z}$ is a partition of $\R$ into intervals of length $\delta$; if $C\subseteq \R$ is an arbitrary set then 
+    $\diam(C\cap I_k) \leq \delta$ for each $k\in \Z$ and
+    \[ \sum_{k\in \Z} \diam(C\cap I_k) \leq \diam(C). \]
+    Hence 
+    \begin{align*}
+        \mathcal{L}^1(A) &= \inf \left\{ \sum_{j=1}^\infty (b_j - a_j) : A \sub \bigcup_{j=1}^\infty [a_j, b_j] \right\} \\
+            &\geq \inf \left\{ \sum_{j=1}^\infty \sum_{k\in \Z} \diam([a_j, b_j] \cap I_k) : A \sub \bigcup_{j=1}^\infty [a_j, b_j] \right\} \\
+            &= \inf \left\{ 2 \sum_{j=1}^\infty \sum_{k\in \Z} \left( \frac{\diam([a_j, b_j] \cap I_k)}{2} \right) : A \sub \bigcup_{j=1}^\infty [a_j, b_j] \right\} \\
+            &\geq \inf \left\{ 2 \sum_{m=1}^\infty \left( \frac{\diam(U_m)}{2} \right) : A \sub \bigcup_{m=1}^\infty U_m\ \  \text{ and } \diam(U_m) \leq \delta \text{ for all } m\geq 1 \right\} \\
+            &= \mathcal{H}^1_\delta(A).
+    \end{align*}
+    Since this holds for each $\delta > 0$, it follows that $\mathcal{L}^1(A) \geq \mathcal{H}^1(A)$.
+
+    Thus we conclude that $\mathcal{H}^1(A) = \mathcal{L}^1(A)$ for each $A \sub \R$.
+    Since $A$ was arbitrary, we have shown that $\mathcal{H}^1$ coincides with $\mathcal{L}^1$ on $\R$.
+
+    As a corollary of the proof above, we also see that for each $A \sub \R$ and each $\delta > 0$, we actually have $\mathcal{H}^1_\delta(A) = \mathcal{L}^1(A)$.
+\end{proof}
+
+
+\subsection{Hausdorff Dimension}
+
+In this section, we explore the idea of Hausdorff dimension, which gets us closer to understanding what the Hausdorff outer measure is measuring.
+
+\begin{lemma}
+    \label{lem:hausdorff_outer_measure_zero}
+    Let $(X, d)$ be a metric space and let $\alpha\geq 0$.
+    If $A \sub X$ is such that $\mathcal{H}^\alpha_\delta(A) = 0 $ for some $\delta > 0$, then $\mathcal{H}^\alpha(A) = 0$.
+\end{lemma}
+
+\begin{proof}
+    In the case that $\alpha = 0$, this follows immediately from Exercise \ref{ex:H0_is_counting_measure}, so we may assume that $\alpha > 0$.
+
+    Let $A \subseteq X$ be such that $\mathcal{H}^\alpha_\delta(A) = 0$ for some $\delta > 0$.
+    Fix $\epsilon > 0$.
+    Then there exists a sequence of sets $\{C_j\}_{j=1}^\infty$ covering $A$ such that
+    \[ \omega_\alpha \sum_{j=1}^\infty \left( \frac{\diam(C_j)}{2} \right)^\alpha < \epsilon. \]
+    In particular, for each $j\geq 1$ we have
+    \[ \diam(C_j) \leq 2\left( \frac{\epsilon}{\omega_\alpha} \right)^{\frac{1}{\alpha}} := \delta(\epsilon). \]
+    This shows 
+    \[ \mathcal{H}^\alpha_{\delta(\epsilon)}(A) \leq \epsilon. \]
+    Since $\delta(\epsilon) \to 0$ as $\epsilon \to 0^+$, taking limits as $\epsilon \to 0^+$ gives $\mathcal{H}^\alpha(A) = 0$.
+\end{proof}
+
+The next lemma inspires the notion of Hausdorff dimension.
+It says that if the Hausdorff measure of a set is finite for some dimension, then it is zero for all higher dimensions.
+It also says that if the Hausdorff measure of a set is positive for some dimension, then it is infinite for all lower dimensions.
+This works well with our intution --- a solid square has positive $2$-dimensional measure (area), but zero $3$-dimensional measure (volume), and infinite $1$-dimensional measure (length of curves needed to cover it).
+
+\begin{lemma}
+    \label{lem:hausdorff_outer_measure_finite_or_positive}
+    Let $(X,d)$ be a metric space.
+    Let $\alpha, \beta \geq 0$ with $\alpha < \beta$.
+    \begin{enumerate}[(a)]
+        \item If $A \subseteq X$ is such that $\mathcal{H}^\alpha(A) < \infty$, then $\mathcal{H}^\beta(A) = 0$.
+        \item If $A \subseteq X$ is such that $\mathcal{H}^\beta(A) > 0$, then $\mathcal{H}^\alpha(A) = \infty$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    \begin{enumerate}[(a)]
+        \item Suppose $A\subseteq X$ is such that $\mathcal{H}^\alpha(A) < \infty$ and let $\delta>0$. 
+            Then there exist a countable cover $\{C_j\}_{j=1}^\infty$ of $A$ by sets of diameter at most $\delta$ such that
+            \[ \omega_\alpha \sum_{j=1}^\infty \left( \frac{\diam(C_j)}{2} \right)^\alpha \leq \mathcal{H}^\alpha_\delta(A) + 1 \leq \mathcal{H}^\alpha(A) + 1. \]
+            As a result, we have 
+            \begin{align*}
+                \omega_\beta \sum_{j=1}^\infty \left( \frac{\diam(C_j)}{2}\right)^\beta &= \frac{\omega_\beta}{\omega_\alpha} 2^{\beta - \alpha} \omega_\alpha \sum_{j=1}^\infty \left( \frac{\diam(C_j)}{2} \right)^\alpha \left( \frac{\diam(C_j)}{2} \right)^{\beta - \alpha} \\
+                    &\leq \frac{\omega_\beta}{\omega_\alpha} 2^{\beta - \alpha} \delta^{\beta - \alpha} (\mathcal{H}^\alpha(A) + 1).
+            \end{align*}
+            Since $\{C_j\}_{j=1}^\infty$ was an arbitrary cover of $A$ by sets of diameter at most $\delta$, we have
+            \[ \mathcal{H}^\beta_\delta(A) \leq \frac{\omega_\beta}{\omega_\alpha} 2^{\beta - \alpha} \delta^{\beta - \alpha} (\mathcal{H}^\alpha(A) + 1). \]
+            By taking $\delta \to 0^+$, we see that $\mathcal{H}^\beta(A) = 0$.
+        
+        \item This is just the contrapositive of part (a).
+    \end{enumerate}
+\end{proof}
+
+\begin{definition}[Hausdorff Dimension]
+    \label{def:hausdorff_dimension}
+    Let $(X,d)$ be a metric space, and let $A \sub X$.
+    The \textbf{Hausdorff dimension} of $A$ is defined as
+    \[ \mathcal{H}_{\operatorname{dim}}(A) := \inf\{ \alpha \geq 0 : \mathcal{H}^\alpha(A) = 0 \} = \sup\{ \alpha \geq 0 : \mathcal{H}^\alpha(A) = \infty \}. \]
+\end{definition}
+
+With this definition, Lemma \ref{lem:hausdorff_outer_measure_finite_or_positive} shows that the Hausdorff dimension is well-defined; 
+for $\alpha < \mathcal{H}_{\operatorname{dim}}(A)$ we have $\mathcal{H}^\alpha(A) = \infty$, and for $\alpha > \mathcal{H}_{\operatorname{dim}}(A)$ we have $\mathcal{H}^\alpha(A) = 0$.
+
+\begin{example}[Finite and Countable Sets have Hausdorff Dimension Zero]
+    \label{ex:hausdorff_dimension_of_finite_and_countable_sets}
+    Let $(X,d)$ be a metric space, and let $A \sub X$ be finite or countably infinite.
+    Then $\mathcal{H}_{\operatorname{dim}}(A) = 0$.
+    
+    If $A$ is finite with $n$ elements, then $\mathcal{H}^0(A) = n < \infty$, so $\mathcal{H}^\alpha(A) = 0$ for all $\alpha > 0$, and it follows that $\mathcal{H}_{\operatorname{dim}}(A) = 0$.
+    If $A$ is countably infinite, then $\mathcal{H}^0(A) = \infty$ but we can write $A$ as a countable union of finite sets, and for each $\alpha > 0$ we have
+    \begin{align*}
+        \mathcal{H}^\alpha(A) &\leq \sum_{n=1}^\infty \mathcal{H}^\alpha(\{a_n\}) = \sum_{n=1}^\infty 0 = 0
+    \end{align*}
+    where $A = \{a_1, a_2, \ldots\}$ and we have used the previous argument for finite sets and countable subadditivity.
+    Therefore $\mathcal{H}_{\operatorname{dim}}(A) = 0$.
+\end{example}
+
+The Hausdorff dimension can be non-integer, which is part of what makes it interesting.
+You can test what the Hausdorff dimension ``should be'' by looking at the scaling behaviour of the set and comparing it to the scaling behaviour of $\mathcal{H}^\alpha$ from Lemma \ref{lem:scaling_property_of_hausdorff_outer_measure}.
+\begin{example}[(How to Guess) the Hausdorff Dimension of the Cantor Set]
+    \label{ex:hausdorff_dimension_of_cantor_set}
+    The Cantor set $C \subset [0,1]$ has Hausdorff dimension $\frac{\log 2}{\log 3}$.
+
+    We will not prove this fact, but let us describe how this result could have been guessed.
+    Scaling the cantor set by a factor of $3$ produces two copies of itself --- the original Cantor set $C$ and a translated copy $2+C$ --- so we expect that the Hausdorff dimension $\alpha$ should satisfy
+    \[ \mathcal{H}^\alpha (3C) = 2 \mathcal{H}^\alpha(C) \]
+    by disjoint additivity, but scaling properties of the Hausdorff measure give
+    \[ \mathcal{H}^\alpha(3C) = 3^\alpha \mathcal{H}^\alpha(C). \]
+    Equating these two expressions for $\mathcal{H}^\alpha(3C)$ gives
+    \[ 3^\alpha = 2 \implies \alpha = \frac{\log 2}{\log 3}. \]
+    
+    This \emph{not} a proof, but it is a good way to guess the answer.
+    A full proof is more involved, and we will not give it here.
+\end{example}
+
+Later on, we will see that $\R^n$ has Hausdorff dimension $n$, and graphs of Lipschitz functions $\R^n \to \R^m$ have Hausdorff dimension $n$.
+\subsection{Isodiametric Inequality, Equality of Hausdorff and Lebesgue Measure on $\R^n$}
+In this section, we work exclusively in Euclidean space $\R^n$ with the standard Euclidean metric.
+
+\begin{theorem}[Isodiametric Inequality]
+    \label{thm:isodiametric_inequality}
+    \[ \mathcal{L}^n(E) \leq \omega_n \left( \frac{\diam A}{2}\right)^n \]
+    for each set $A \subseteq \R^n$.
+\end{theorem}
+
+This says that among all sets with a given diameter $\delta$, the $n$-dimensional volume is maximized by the $n$-dimensional ball with radius $\delta/2$.
+
+\begin{proof}
+    \textit{Step 0:} It suffices to prove the result for compact sets. 
+    \vspace{2mm}
+    
+    Indeed, if $A \subseteq \R^n$ is a set with diameter $\diam A = \infty$, then the right-hand side is infinite, so the inequality holds trivially.
+    If $\diam A < \infty$, then the set $\overline{A}$ is compact with $\diam \overline{A} = \diam A$, and $\mathcal{L}^n(A) \leq \mathcal{L}^n(\overline{A})$ by outer regularity of Lebesgue measure, so if the result holds for compact sets then
+    \[ \mathcal{L}^n(A) \leq \mathcal{L}^n(\overline{A}) \leq \omega_n \left( \frac{\diam \overline{A}}{2} \right)^n = \omega_n \left( \frac{\diam A}{2} \right)^n. \]
+    Thus we only need to prove the result for compact sets.
+
+    \vspace{2mm}
+    \textit{Step 1:} Steiner Symmetrization Definition.
+    \vspace{2mm}
+
+    For each compact set $A \subset \R^n$ and each $j\in \{1,2,\ldots,n\}$, we define the \textit{Steiner symmetrization} $S_j(A)$ of $A$ with respect to the hyperplane orthogonal to the $j$-th coordinate axis as follows: 
+    for each $\xi \in \R^n$ such that $\xi_j = 0$, we define the line
+    \[ \ell_{\xi,j} := \{ \xi + t e_j : t \in \R \} \]
+    and let 
+    \[ \pi_\xi : \ell_\xi \to \R, \quad \pi_\xi(\xi + t e_j) = t \]
+    which projects points on the line $\ell_\xi$ onto $\R$ ---- then we set
+    \[ S_j(A) := \bigcup_{ \{ \xi \in \R^n : \xi_j = 0 \text{ and } A \cap \ell_{\xi,j} \neq \emptyset \} } \left\{ \xi + t e_j : t \in \R, |t| \leq \frac{\mathcal{L}^1(\pi_\xi(A \cap \ell_{\xi,j}))}{2} \right\}. \]
+    In other words, the set $S_j(A)$ is obtained by replacing each slice $A \cap \ell_{\xi,j}$ with a line segment segment; this line segment has the same length as the slice $A \cap \ell_{\xi,j}$, but is centered at the hyperplane $\{ x \in \R^n : x_j = 0 \}$.
+
+    \vspace{2mm}
+    \textit{Step 2:} We claim that for each $j\in \{1,2,\ldots,n\}$ and each compact set $A \subset \R^n$, the Steiner symmetrization $S_j(A)$ is compact.
+    \vspace{2mm}
+
+    \begin{proof}
+    Let $A \subset \R^n$ be compact and fix $j \in \{1,2,\ldots,n\}$.
+    We need to show that $S_j(A)$ is bounded and closed.
+
+    Since $A$ is bounded, there exists $R > 0$ such that $A \sub B(0,R)$.
+    Let $\xi \in \R^n$ with $\xi_j = 0$.
+    If $\|\xi\| > R$, then the line $\ell_{\xi,j}$ does not intersect $B(0,R)$, and hence does not intersect $A$, so $A \cap \ell_{\xi,j} = \emptyset$.
+    If $\|\xi\| \leq R$, then $ A \cap \ell_{\xi,j} \sub B(0,R) \cap \ell_{\xi,j}$,  and $B(0,R) \cap \ell_{\xi,j}$ is a line segment of length at most $2\sqrt{R^2 - \|\xi\|^2} \leq 2R$.
+
+    Therefore the previous paragraph shows
+     \[ S_j(A) \subseteq \{ \xi + t e_j : \|\xi\| \leq R, \xi_j = 0, |t| \leq R \} \]
+    which is a bounded set, so $S_1(A)$ is bounded.
+
+    To see that $S_j(A)$ is closed, we define a function
+    \[ g_j : \{0 \} \times \R^{n-1} \to \R ,\qquad g_j(\xi) := \mathcal{L}^1(\pi_\xi(A \cap \ell_{\xi,j})). \]
+    We claim that $g_j$ is upper semi-continuous at each point $\xi \in \{0\} \times \R^{n-1}$.
+
+    To check this fix $\xi \in \{0\} \times \R^{n-1}$ and let $\epsilon > 0$ and note that Borel regularity of Lebesgue measure gives an open set $U \sub \R$ such that $\pi_\xi(A \cap \ell_{\xi,j}) \sub U$ and
+    \[  \mathcal{L}^1(U) \leq \mathcal{L}^1(\pi_\xi(A \cap \ell_{\xi,j})) + \epsilon. \]
+    Since $A$ is closed and $\pi_\xi^{-1}(U)$ is an open set which contains $A \cap \ell_{\xi,j}$, there exists $\delta > 0$ such that for each $\eta \in \{0\} \times \R^{n-1}$ with $|\eta - \xi| < \delta$, we have
+    \[ A \cap \ell_{\eta,j} \sub \pi_\eta^{-1}(U). \]
+    Thus for each such $\eta$, we have
+    \[ g_j(\eta) = \mathcal{L}^1(\pi_\eta(A \cap \ell_{\eta,j})) \leq \mathcal{L}^1(U) \leq \mathcal{L}^1(\pi_\xi(A \cap \ell_{\xi,j})) + \epsilon = g_j(\xi) + \epsilon. \]
+    This shows that $g_j$ is upper semi-continuous at $\xi$.
+    Since $\xi$ was arbitrary, we conclude that $g_j$ is upper semi-continuous on $\{0\} \times \R^{n-1}$.
+
+    Now let $\{x^{(k)}\}_{k=1}^\infty$ be a sequence in $S_j(A)$ which converges to some $x \in \R^n$.
+    We need to show that $x \in S_j(A)$.
+    For each $k\geq 1$, there exists $\xi^{(k)} \in \R^n$ with $\xi^{(k)}_j = 0$ such that
+    \[ x^{(k)} = \xi^{(k)} + t_k e_j \]
+    for some $t_k \in \R$ with
+    \[ |t_k| \leq \frac{\mathcal{L}^1(\pi_{\xi^{(k)}}(A \cap \ell_{\xi^{(k)},j}))}{2} = \frac{g_j(\xi^{(k)})}{2}. \]
+    Since $A$ is bounded, the sequence $\{\xi^{(k)}\}_{k=1}^\infty$ is bounded, so by passing to a subsequence if necessary we may assume that $\xi^{(k)} \to \xi$ for some $\xi \in \{0\} \times \R^{n-1}$.
+    By upper semi-continuity of $g_j$, we have
+    \[ \limsup_{k \to \infty} g_j(\xi^{(k)}) \leq g_j(\xi). \]
+    Since $x_k \to x$, we have $t_k \to t$ for some $t \in \R$ such that
+    \[ |t| = \lim_{k\to \infty} |t_k| \leq \limsup_{k\to \infty} \frac{g_j(\xi^{(k)})}{2} \leq \frac{g_j(\xi)}{2}. \]
+    Therefore
+    \[ x = \xi + t e_j \in S_j(A). \]
+    Since $\{x^{(k)}\}_{k=1}^\infty$ was an arbitrary convergent sequence in $S_j(A)$, we conclude that $S_j(A)$ is closed.
+    Thus $S_j(A)$ is compact.
+
+    In particular, the set $S_j(A)$ has finite diameter.
+    \end{proof}
+
+    \vspace{2mm}
+    \textit{Step 3:} We claim that for each $j\in \{1,2,\ldots,n\}$ and each compact set $A \subset \R^n$, we have
+    \[ \diam(S_j(A)) \leq \diam A \quad \text{and} \quad \mathcal{L}^n(S_j(A)) = \mathcal{L}^n(A). \]
+    \vspace{2mm}
+
+    \begin{proof}
+    Let $A \subset \R^n$ be compact and fix $j \in \{1,2,\ldots,n\}$.
+    Let $\epsilon > 0$ be arbitrary; choose points $x,y \in S_j(A)$ such that
+    \[ \diam(S_j(A)) \leq \|x - y\| + \epsilon \]
+    which exist by the compactness of $S_j(A)$ from Step 2.
+
+    We define
+    \begin{align*}
+        r_j^- &:= \inf \left\{ t\in \R : x_j + te_j \in A \right\} \\
+        r_j^+ &:= \sup \left\{ t\in \R : x_j + te_j \in A \right\} \\
+        s_j^- &:= \inf \left\{ t\in \R : y_j + te_j \in A \right\} \\
+        s_j^+ &:= \sup \left\{ t\in \R : y_j + te_j \in A \right\}.
+    \end{align*}
+    By symmetry of interchanging $x$ and $y$ if necessary, we may assume without loss of generality that $s_j^+ - r_j^{-} \geq s_j^- - r_j^+$.
+    Then we have
+    \begin{align*}
+        s_j^+ - r_j^- &\geq \frac{1}{2}(s_j^+ - r_j^-) + \frac{1}{2}(s_j^- - r_j^+) \\
+            &= \frac{1}{2} \left( (s_j^+ - s_j^-) + (r_j^+ - r_j^-) \right) \\
+            &= \frac{1}{2} \left( \mathcal{L}^1(\pi_{x - x_j e_j}(A \cap \ell_{x - x_j e_j, j})) + \mathcal{L}^1(\pi_{y - y_j e_j}(A \cap \ell_{y - y_j e_j, j})) \right) \\
+            &= |x_j| + |y_j| \\
+            &\geq |x_j - y_j|
+    \end{align*}
+    where we have used the definition of $S_j(A)$ in the third line, the fact that the line segment $\pi_{x - x_j e_j}(A \cap \ell_{x - x_j e_j, j})$ has length $2|x_j|$ and 
+    and the line segment $\pi_{y - y_j e_j}(A \cap \ell_{y - y_j e_j, j})$ has length $2|y_j|$ in the fourth line, and the triangle inequality in the last line.
+    
+    Hence
+    \begin{align*}
+        (\diam(S_j(A)) - \epsilon)^2 &\leq \|x - y\|^2 \\
+            &= \|\proj_{e_j^\perp}(x) - \proj_{e_j^\perp}(y) \|^2 + | x_j - y_j|^2 \\
+            &\leq \|\proj_{e_j^\perp}(x) - \proj_{e_j^\perp}(y) \|^2 + (s_j^+ - r_j^-)^2 \\
+            &= \|\proj_{e_j^\perp}(x) + r_j^- e_j - (\proj_{e_j^\perp}(y) + s_j^+ e_j) \|^2 \\
+            &\leq (\diam A)^2
+    \end{align*}
+    where we have used the previous inequality in the third line, and the fact that the points $\proj_{e_j^\perp}(x) + r_j^- e_j$ and $\proj_{e_j^\perp}(y) + s_j^+ e_j$ are both in $A$ in because by definition of $r_j^-$ and $s_j^+$ and the fact that $A$ is compact in the last line.
+    Thus \[\diam(S_j(A)) \leq \diam A + \epsilon. \]
+    Since $\epsilon > 0$ was arbitrary, we conclude that $\diam(S_j(A)) \leq \diam A$.
+
+    \vspace{2mm}
+
+    Now we define a map 
+    \[ f_j: \R^{n-1} \to \R, \quad f_j(\xi) := \frac{\mathcal{L}^1(\pi_{\xi}(A \cap \ell_{\xi,j}))}{2}. \]
+    By Tonelli's Theorem (Theorem \ref{thm:tonellis_theorem}), the map $f_j$ is $\mathcal{L}^{n-1}$-measurable, and we have
+    \[ \mathcal{L}^{n}(A) = \int_{\R^{n-1}} \mathcal{L}^1(\pi_{\xi}(A \cap \ell_{\xi,j})) \, d\mathcal{L}^{n-1}(\xi) = 2 \int_{\R^{n-1}} f_j(\xi) \, d\mathcal{L}^{n-1}(\xi). \]
+    Using the definition of $S_j(A)$ we have
+    \[ S_j(A) = \left\{ \xi + t e_j : \xi \in \R^n, \xi_j = 0, \text{ and } - \frac{f_j(\xi)}{2} \leq t \leq \frac{f_j(\xi)}{2} \right\} \]
+    so another application of Tonelli's Theorem gives
+    \begin{align*}
+        \mathcal{L}^n(S_j(A)) &= \int_{\R^{n-1}} \mathcal{L}^1\left( \left\{ t \in \R : -\frac{f_j(\xi)}{2} \leq t \leq \frac{f_j(\xi)}{2} \right\} \right) d\mathcal{L}^{n-1}(\xi) \\
+            &= \int_{\R^{n-1}} f_j(\xi) \, d\mathcal{L}^{n-1}(\xi) \\
+            &= \mathcal{L}^n(A).
+    \end{align*}
+
+    \end{proof}
+
+    \vspace{2mm}
+    \textit{Step 4:} Conclusion of the proof.
+    \vspace{2mm}
+
+    Let $A \subset \R^n$ be compact.
+    We define 
+    \[ A_1 := S_{1}(A), \quad  A_2 := S_{2}(A_1) \ \ , \ \ \ldots\ \ , \ \  A_n := S_{n}(A_{n-1}). \]
+    That is, $A_1$ is the Steiner symmetrization of $A$ with respect to the hyperplane orthogonal to $e_1$, $A_2$ is the Steiner symmetrization of $A_1$ with respect to the hyperplane orthogonal to $e_2$, and so on.
+    We use the Steiner symmetrization $n$ times, once for each standard basis vector of $\R^n$, and find ourselves with a (nice) set $A_n$.
+
+    \vspace{2mm}
+    \textit{Claim:} The set $A_n$ is symmetric about the origin, i.e. $A_n = -A_n$.
+    \vspace{2mm}
+
+    Clearly $A_1$ is symmetric about the hyperplane $\{ e_1 \}^\perp$, so suppose inductively that $A_{k-1}$ is symmetric about each of the hyperplanes $\{ e_1 \}^\perp, \{ e_2 \}^\perp, \ldots, \{ e_{k-1} \}^\perp$ for some $2 \leq k \leq n$.
+    Then $A_k$ is symmetric about the hyperplane $\{ e_k \}^\perp$ by definition of Steiner symmetrization. 
+    To see that $A_k$ is symmetric about the other hyperplanes, let $1 \leq j \leq k-1$ be arbitrary, and let $R_j : \R^n \to \R^n$ be the reflection across the hyperplane $\{ e_j \}^\perp$, i.e.
+    \[ R_j(x) := x - 2(x \cdot e_j)e_j. \]
+    Since $A_{k-1}$ is symmetric about $\{ e_j \}^\perp$, we have $R_j(A_{k-1}) = A_{k-1}$.
+    Thus for each $x\in \{ e_j \}^\perp$, we have
+    \[ \mathcal{H}^1( A_k \cap \ell_{j,x} ) = \mathcal{H}^1( R_j(A_k) \cap \ell_{j,R_j(x)} ). \]
+    which implies
+    \[ \{ t : x + t e_k \in A_k \} = \{ t : R_j(x) + t e_k \in A_k \}. \]
+    Therefore $A_k$ is symmetric about $\{ e_j \}^\perp$.
+    By induction, $A_n$ is symmetric about each of the hyperplanes $\{ e_1 \}^\perp, \{ e_2 \}^\perp, \ldots, \{ e_n \}^\perp$, which implies that $A_n$ is symmetric about the origin.
+    This proves the claim.
+
+    \vspace{2mm}
+    \textit{Claim:} We claim that \[ \mathcal{L}^n(A_n) \leq \omega_n \left( \frac{\diam(A_n)}{2} \right)^n. \]
+    \vspace{2mm}
+
+    For each $x \in A_n$, we have $-x \in A_n$ by the previous claim, so we have $\diam(A_n) \geq \| x - (-x) \| = 2\|x\|$.
+    Therefore $A_n \sub B\left(0, \frac{\diam(A_n)}{2}\right)$, and we estimate
+    \[ \mathcal{L}^n(A_n) \leq \mathcal{L}^n\left(B\left(0, \frac{\diam(A_n)}{2}\right)\right) = \omega_n \left( \frac{\diam(A_n)}{2} \right)^n. \]
+    This proves the claim.
+
+    \vspace{2mm}
+    Now we complete the proof of the theorem.
+    By the previous claim, we have
+    \begin{align*}
+        \mathcal{L}^n(A) &= \mathcal{L}^n( A_n ) \\
+            &\leq \omega_n \left( \frac{\diam( A_n )}{2} \right)^n \\
+            &\leq \omega_n \left( \frac{\diam(A)}{2} \right)^n.
+    \end{align*}
+    This completes the proof of the theorem.
+\end{proof}
+
+\begin{theorem}[Equality of Hausdorff and Lebesgue Measure on $\R^n$]
+    \label{thm:hn_equals_lebesgue_measure_on_rn}
+    \[ \mathcal{H}^n(A) = \mathcal{L}^n(A) \]
+    for each set $A \subseteq \R^n$. 
+
+    In short, $\mathcal{H}^n = \mathcal{L}^n$ on $\R^n$.
+\end{theorem}
+
+\begin{proof}
+    \textit{Step 1:} We claim that $\mathcal{L}^n(A) \leq \mathcal{H}^n(A)$ for each set $A \subseteq \R^n$.
+    \vspace{2mm}
+
+    Let $A \subseteq \R^n$ be arbitrary and let $\delta > 0$.
+    Let $\{C_j\}_{j=1}^\infty$ be a countable cover of $A$ by sets of diameter at most $\delta$.
+    Then by the Isodiametric inequality (Theorem \ref{thm:isodiametric_inequality}), we have
+    \begin{align*}
+        \mathcal{L}^n(A) &\leq \mathcal{L}^n\left( \bigcup_{j=1}^\infty C_j \right) \leq \sum_{j=1}^\infty \mathcal{L}^n(C_j) \\
+            &\leq \sum_{j=1}^\infty \omega_n \left( \frac{\diam(C_j)}{2} \right)^n.
+    \end{align*}
+    Taking the infimum over all such covers $\{C_j\}_{j=1}^\infty$ of $A$ gives
+    \[ \mathcal{L}^n(A) \leq \mathcal{H}^n_\delta(A). \]
+    Since $\delta > 0$ was arbitrary, taking limits as $\delta \to 0^+$ gives
+    \[ \mathcal{L}^n(A) \leq \mathcal{H}^n(A). \]
+    Since $A\subseteq \R^n$ was arbitrary, we have shown that $\mathcal{L}^n(A) \leq \mathcal{H}^n(A)$ for each $A \subseteq \R^n$.
+
+    \vspace{2mm}
+    \textit{Step 2:} We claim that $\mathcal{H}^n(A) = 0$ for each set $A \subseteq \R^n$ with $\mathcal{L}^n(A) = 0$.
+    That is, we claim that $\mathcal{H}^n$ is absolutely continuous with respect to $\mathcal{L}^n$.
+    \vspace{2mm}
+    
+    Assume that $A \subseteq \R^n$ is such that $\mathcal{L}^n(A) = 0$.
+    Let $\delta > 0$ be arbitrary.
+    Then we have
+    \begin{align*}
+        \mathcal{H}^n_\delta(A) &= \inf\left\{ \sum_{j=1}^\infty \omega_n \left( \frac{\diam(C_j)}{2} \right)^n : A \sub \bigcup_{j=1}^\infty B_j, \ \diam(B_j) \leq \delta \right\} \\
+            &\leq \inf\left\{ \sum_{j=1}^\infty \omega_n \left( \frac{\diam(Q_j)}{2} \right)^n : A \sub \bigcup_{j=1}^\infty Q_j, \ \diam(Q_j) \leq \delta, \text{ each } Q_j \text{ is a cube} \right\} \\
+            &= \inf\left\{ \sum_{j=1}^\infty \omega_n \left( \frac{\sqrt{n}}{2}\right)^n \mathcal{L}^n(Q_j) : A \sub \bigcup_{j=1}^\infty Q_j, \ \diam(Q_j) \leq \delta, \text{ each } Q_j \text{ is a cube} \right\} \\
+            &\leq \omega_n \left( \frac{\sqrt{n}}{2}\right)^n \inf\left\{ \sum_{j=1}^\infty \mathcal{L}^n(Q_j) : A \sub \bigcup_{j=1}^\infty Q_j, \text{ each } Q_j \text{ is a cube} \right\} \\
+            &= \omega_n \left( \frac{\sqrt{n}}{2}\right)^n \mathcal{L}^n(A) = 0.
+    \end{align*}
+    Since $\delta > 0$ was arbitrary, taking limits as $\delta \to 0^+$ gives
+    \[ \mathcal{H}^n(A) = 0. \]
+    This proves the claim.
+
+    \vspace{2mm}
+    \textit{Step 3:} We claim that $\mathcal{H}^n(A) \leq \mathcal{L}^n(A)$ for each set $A \subseteq \R^n$.
+    \vspace{2mm}
+
+    Let $A \subseteq \R^n$ be arbitrary. Fix $\epsilon , \delta > 0$. 
+    Then here exist closed cubes $\{Q_j\}_{j=1}^\infty$ such that $\diam(Q_j) \leq \delta$ for each $j \geq 1$ and 
+    \[ A \sub \bigcup_{j=1}^\infty Q_j \quad \text{and} \quad \sum_{j=1}^\infty \mathcal{L}^n(Q_j) \leq \mathcal{L}^n(A) + \epsilon. \]
+    By \ref{lem:filling_open_set_with_balls}, for each $j \geq 1$ there exists a countable collection of closed balls $\{B_{j,k}\}_{k=1}^\infty$ such that $\diam(B_{j,k}) \leq \diam(Q_j)$ for each $k \geq 1$,
+    and \[ \bigcup_{k=1}^\infty B_{j,k} \subset Q_j^\circ, \quad\text{and}\quad \mathcal{L}^n\left(Q_j^\circ \setminus \bigcup_{k=1}^\infty B_{j,k}\right) = 0. \]
+    Since $\mathcal{L}^n(Q_j) = \mathcal{L}^n(Q_j^\circ)$ for each $j \geq 1$, we have
+    \[ \mathcal{L}^n \left( Q_j \setminus \bigcup_{k=1}^\infty B_{j,k} \right) = 0. \]
+    By Step 2, we know that
+    \[ \mathcal{H}^n \left( Q_j \setminus \bigcup_{k=1}^\infty B_{j,k} \right) = 0. \]
+    Therefore
+    \begin{align*}
+        \mathcal{H}^n_\delta(A) &\leq \mathcal{H}^n_\delta\left( \bigcup_{j=1}^\infty Q_j \right) &&\text{since } A \subseteq \bigcup_{j=1}^\infty Q_j\\
+            &\leq \sum_{j=1}^\infty \mathcal{H}^n_\delta(Q_j) &&\text{by countable subadditivity}\\
+            &= \sum_{j=1}^\infty \mathcal{H}^n_\delta\left( \bigcup_{k=1}^\infty B_{j,k} \right) &&\text{since }\  \mathcal{H}^n\left(Q_j\setminus \bigcup_{k=1}^\infty B_{j,k}\right) = 0\\
+            &\leq \sum_{j,k=1}^\infty \mathcal{H}^n_\delta(B_{j,k}) &&\text{by countable subadditivity}\\
+            &\leq \sum_{j,k=1}^\infty \omega_n \left( \frac{\diam(B_{j,k})}{2} \right)^n &&\text{ by definition of } \mathcal{H}^n_\delta\\
+            &= \sum_{j,k=1}^\infty \mathcal{L}^n(B_{j,k}) &&\text{since } B_{j,k} \text{ are balls}\\
+            &= \sum_{j=1}^\infty \mathcal{L}^n\left( \bigcup_{k=1}^\infty B_{j,k} \right) &&\text{by countable disjoint additivity}\\
+            &= \sum_{j=1}^\infty \mathcal{L}^n(Q_j) &&\text{since } \ \bigcup_{k=1}^\infty B_{j,k} \subset Q_j^\circ \\
+            &\leq \mathcal{L}^n(A) + \epsilon && \text{by choice of } \{Q_j\}_{j=1}^\infty.
+    \end{align*}
+    Phew. This shows
+    \[ \mathcal{H}^n_\delta(A) \leq \mathcal{L}^n(A) + \epsilon. \]
+    Since $\epsilon > 0$ was arbitrary, we have
+    \[ \mathcal{H}^n_\delta(A) \leq \mathcal{L}^n(A). \]
+    Since $\delta > 0$ was arbitrary, taking limits as $\delta \to 0^+$ gives
+    \[ \mathcal{H}^n(A) \leq \mathcal{L}^n(A). \]
+    Since $A \subseteq \R^n$ was arbitrary, we have shown that $\mathcal{H}^n(A) \leq \mathcal{L}^n(A)$ for each $A \subseteq \R^n$.
+
+    \vspace{2mm}
+    Combining Steps 1 and 3, we conclude that $\mathcal{H}^n(A) = \mathcal{L}^n(A)$ for each set $A \subseteq \R^n$.
+    We remark that the proof actually shows that $\mathcal{L}^n = \mathcal{H}^n = \mathcal{H}^n_\delta$ on $\R^n$ for each $\delta > 0$.
+\end{proof}
+
+\begin{lemma}[Hausdorff Dimension Upper Bound of $\R^n$]
+    \label{lem:hausdorff_dimension_upper_bound_Rn}
+    Let $n \in \N$ and let $\alpha > n$.
+    Then $\mathcal{H}^\alpha(\R^n) = 0$.
+\end{lemma}
+
+\begin{proof}
+    Fix $\alpha > n$ and let $k\geq 1$ be an arbitrary integer.
+    The unit cube $[0,1]^n$ can be written as the almost disjoint union of $k^n$ cubes of side length $1/k$ and thus diameter $\sqrt{n}/k$.
+    Therefore
+    \[ \mathcal{H}^\alpha_{ \sqrt{n}/k }([0,1]^n) \leq \sum_{j=1}^{k^n} \omega_\alpha \left(\frac{\sqrt{n}}{2k}\right)^\alpha < \omega_\alpha \sum_{j=1}^{k^n} \frac{\sqrt{n}^\alpha}{k^\alpha} = \omega_\alpha \sqrt{n}^\alpha k^{n-\alpha}. \]
+    Since $\alpha > n$, we have $n - \alpha < 0$, so taking limits as $k \to \infty$ gives
+    \[ \mathcal{H}^\alpha([0,1]^n) = 0. \]
+    Since $\R^n$ can be written as a countable union of translates of $[0,1]^n$, countable subadditivity and invariance of Hausdorff measure under isometries implies that
+    \[ \mathcal{H}^\alpha(\R^n) = 0. \]
+\end{proof}
+
+\begin{exercise}[Hausdorff Dimension of $\R^n$]
+    \label{ex:hausdorff_dimension_of_rn}
+    Show that $\mathcal{H}_{\operatorname{dim}}(\R^n) = n$.
+\end{exercise}
+\begin{proof}
+    We have $\mathcal{H}^n(\R^n) = \mathcal{L}^n(\R^n) = +\infty$ by Theorem \ref{thm:hn_equals_lebesgue_measure_on_rn}, so $\mathcal{H}_{\operatorname{dim}}(\R^n) \geq n$.
+    By Lemma \ref{lem:hausdorff_dimension_upper_bound_Rn}, we have $\mathcal{H}^\alpha(\R^n) = 0$ for each $\alpha > n$, so $\mathcal{H}_{\operatorname{dim}}(\R^n) \leq n$.
+    Therefore $\mathcal{H}_{\operatorname{dim}}(\R^n) = n$.
+\end{proof}
+
+\begin{exercise}[Hausdorff Dimension of Linear Subspaces]
+    \label{ex:hausdorff_dimension_of_lin_subspace}
+    Let $V$ be a linear or affine subspace of $\R^n$ with $\dim(V) = k \leq n$.
+    Show that $\mathcal{H}_{\operatorname{dim}}(V) = k$.
+\end{exercise}
+\begin{proof}
+    Let $V$ be a linear or affine subspace of $\R^n$ with $\dim(V) = k \leq n$.
+    Then there exists an isometry $f : \R^k \to V$.
+    By isometry invariance of Hausdorff dimension (Exercise \ref{ex:isometry_invariance_of_hausdorff_dimension}), we have
+    \[ \mathcal{H}_{\operatorname{dim}}(V) = \mathcal{H}_{\operatorname{dim}}(\R^k). \]
+    By Exercise \ref{ex:hausdorff_dimension_of_rn}, we have $\mathcal{H}_{\operatorname{dim}}(\R^k) = k$.
+    Therefore $\mathcal{H}_{\operatorname{dim}}(V) = k$.
+\end{proof}
+
+Be really careful because true equations like $\mathcal{L}^k \otimes \mathcal{L}^{n-k} = \mathcal{L}^n$
+and the above theorem make it tempting to write things like
+\[ \mathcal{H}^k \otimes \mathcal{H}^{n-k} = \mathcal{H}^n \]
+which is \emph{not} true.
+In particular, without specifying which Hausdorff measures we are using on the left hand side, this should be interpreted as the $\mathcal{H}^k$ measure on $\R^n$ and the measure $\mathcal{H}^{n-k}$ on $\R^n$, which is not what we want.
+This has the product measure $\mathcal{H}^k \otimes \mathcal{H}^{n-k}$ being defined on $\R^n \times \R^n$, which is not what we want.
+
+What you can deduce from the equation $\mathcal{L}^k \otimes \mathcal{L}^{n-k} = \mathcal{L}^n$ and the above theorem is that
+\[ \mathcal{H}^k_{\R^k} \otimes \mathcal{H}^{n-k}_{\R^{n-k}} = \mathcal{H}^n. \]
+Notice how the product measure is now defined on $\R^k \times \R^{n-k} = \R^n$, which is what we want.
+Be careful. Add a subscript to the Hausdorff measures if it helps you keep things straight. 
+
+\subsection{Fubini-Tonelli Theorem for Hausdorff Measures}
+We work in Euclidean space $\R^n$ with the standard Euclidean metric.
+
+The following is a version of the Fubini-Tonelli Theorem for Hausdorff measures on orthogonal subspaces of $\R^n$.
+This is used often, but is not stated explicitly in many references, so we include a proof here for completeness.
+\begin{proposition}[Fubini-Tonelli for Hausdorff Measures on Orthogonal Subspaces]
+    \label{prop:fubini_tonelli_for_hausdorff_measures_on_orthogonal_subspaces}
+    Let $1 \leq k \leq n-1$ be an integer, and let $L$ be a $k$-dimensional affine subspace of $\R^n$, i.e.
+    \[ L = a + V \]
+    for some $a \in \R^n$ and some $k$-dimensional linear subspace $V$ of $\R^n$.
+    Then for each non-negative or integrable function $f : \R^n \to [-\infty, \infty]$, we have
+    \[ \int_{\R^n} f \, d\mathcal{H}^n = \int_L \left( \int_{V^\perp} f(x + y) \, d\mathcal{H}^{n-k}_{V^\perp}(y) \right) d\mathcal{H}^k_L(x) = \int_{V^\perp} \left( \int_L f(x + y) \, d\mathcal{H}^k_L(x) \right) d\mathcal{H}^{n-k}_{V^\perp}(y). \] 
+\end{proposition}
+When I asked Dr. Koch, he said ``obviously'' this is true by isometry invariance and Fubini-Tonelli for Lebesgue measure, so let's write that out carefully.
+It's not as easy as he thought, because of the subtlety in Remark \ref{rmk:which_hausdorff_measure_on_subsets} about which Hausdorff measure we are using on the subsets $L$ and $V^\perp$ of $\R^n$.
+
+\begin{proof}
+    Since $L$ and $V^\perp$ are subsets of the metric space $\R^n$, we can consider the Hausdorff measures $\mathcal{H}^k_L$ on the metric space $L$ and $\mathcal{H}^{n-k}_{V^\perp}$ on the metric space $V^\perp.$
+    Let $Q \in O(n)$ be an orthogonal transformation such that
+    \[  Q(\R^k \times \{0\}) = V \quad \text{and} \quad Q(\{0\} \times \R^{n-k}) = V^\perp. \]
+    Notice that for each $x\in \R^n$ there exists a unique $(z,t)\in \R^k \times \R^{n-k} = \R^n$ such that
+    \[ x - a = Q(z,t) \]
+    which implies that
+    \[ x = (a + Q(z,0)) + Q(0,t) \in L + V^\perp.\]
+
+    Now let $f : \R^n \to [-\infty, \infty]$ be a non-negative or integrable function.
+    Then by translation invariance \ref{ex:translation_invariance_of_lebesgue_integral} and isometry invariance of the Lebesgue integral \ref{ex:linear_change_of_variables}, we have
+        \[\int_{\R^n} f \, \dif\mathcal{L}^n = \int_{\R^n} f(a + Q(\cdot)) \,\dif \mathcal{L}^n. \]
+    Then by Fubini-Tonelli for Lebesgue measure this becomes
+    \[ \int_{\R^n} f \dif \mathcal{L}^n = \int_{\R^k} \left( \int_{\R^{n-k}} f(a + Q(z,t)) \, \dif \mathcal{L}^{n-k}(t) \right) \dif \mathcal{L}^k(z). \tag{$\dagger$} \]
+
+    \vspace{2mm}
+
+    See that the map 
+    \[ \R^{n-k} \to  V^\perp, \quad t \mapsto Q(0,t) \]
+    is an isometry between the metric spaces $\R^{n-k}$ and $V^\perp$ and has inverse $V^\perp \to \R^{n-k}, \, y \mapsto \operatorname{pr}_2 (Q^{-1}(y))$,
+    where $\operatorname{pr}_2 : \R^k \times \R^{n-k} \to \R^{n-k}$ is the projection onto the second factor, i.e.
+    \[ \operatorname{pr}_2(z,t) = t \qquad \forall (z,t) \in \R^k \times \R^{n-k}. \]
+    Thus by Isometry Invariance of Hausdorff Measure (Lemma \ref{lem:isometry_invariance_of_hausdorff_outer_measure}) and the fact that $\mathcal{H}^{n-k}_{\R^{n-k}} = \mathcal{L}^{n-k}$, we have
+    \[ \int_{\R^{n-k}} g(t) \dif\mathcal{L}^{n-k}(t) = \int_{V^\perp} g\left( \operatorname{pr}_2 (Q^{-1}(y)) \right) \dif\mathcal{H}^{n-k}_{V^\perp}(y) \tag{$\star$}\]
+    for each non-negative or integrable function $g : \R^{n-k} \to [-\infty, \infty]$.
+
+    Similarly, the map
+    \[ \R^k \to L, \quad z \mapsto a + Q(z,0) \]
+    is an isometry between the metric spaces $\R^k$ and $L$ and has inverse $L \to \R^k, \, x \mapsto \operatorname{pr}_1 (Q^{-1}(x - a))$,
+    where $\operatorname{pr}_1 : \R^k \times \R^{n-k} \to \R^k$ is the projection onto the first factor, i.e.
+    \[ \operatorname{pr}_1(z,t) = z \qquad \forall (z,t) \in \R^k \times \R^{n-k}. \]
+    Thus by Isometry Invariance of Hausdorff Measure (Lemma \ref{lem:isometry_invariance_of_hausdorff_outer_measure}) and the fact that $\mathcal{H}^k_{\R^k} = \mathcal{L}^k$, we have
+    \[ \int_{\R^k} h(z) \dif\mathcal{L}^k(z) = \int_{L} h\left( \operatorname{pr}_1(Q^{-1}(x - a)) \right) \dif\mathcal{H}^k_{L}(x) \tag{$\star\star$}\]
+    for each non-negative or integrable function $h : \R^k \to [-\infty, \infty]$.
+
+    Now for each $z\in \R^k$, define a function
+    \[ g_z:\R^{n-k} \to [-\infty, \infty], \quad g_z(t) := f(a + Q(z,t)) = f\left( (a+Q(z,0)) + Q(0,t) \right) \]
+    so that for each $y\in V^\perp$, we have
+    \[  y = Q(0,t) \text{ for some } t \in \R^{n-k} \implies \operatorname{pr}_2(Q^{-1}(y)) = t \]
+    which implies that
+    \[ g_z\left( \operatorname{pr}_2 (Q^{-1}(y))\right) = f\left( (a+Q(z,0)) + Q\left(0, \operatorname{pr}_2 (Q^{-1}(y))\right) \right) = f((a+Q(z,0)) + y) \qquad \forall y \in V^\perp. \]
+    Hence for each fixed $z\in \R^k$, we can use $(\star)$ on the function $g_z$ to get
+    \[ \int_{\R^{n-k}} f(a + Q(z,t)) \dif\mathcal{L}^{n-k}(t) = \int_{V^\perp} f((a+Q(z,0)) + y) \dif\mathcal{H}^{n-k}_{V^\perp}(y). \tag{$\heartsuit$}\]
+
+    Now define a function
+    \[ h:\R^k \to [-\infty, \infty], \quad h(z) := \int_{V^\perp} f((a+Q(z,0)) + y) \dif\mathcal{H}^{n-k}_{V^\perp}(y) \]
+    so that for all $x \in L$ we have
+    \[ x\in L = a + V \implies x - a \in V \implies Q^{-1}(x - a) \in \R^k \times \{0\} \]
+    so that we have
+    \begin{align*}
+        h\left( \operatorname{pr}_1(Q^{-1}(x - a)) \right) &= \int_{V^\perp} f\left( (a+Q(\operatorname{pr}_1(Q^{-1}(x - a)),0)) + y \right) \dif\mathcal{H}^{n-k}_{V^\perp}(y) \\
+            &= \int_{V^\perp} f( a + (x-a) + y) \dif\mathcal{H}^{n-k}_{V^\perp}(y) \\
+            &= \int_{V^\perp} f(x + y) \dif\mathcal{H}^{n-k}_{V^\perp}(y).
+    \end{align*}
+    Since this is true for each $x\in L$, see that $(\star\star)$ applied to the function $h$ implies
+    \[ \int_{\R^k} \left( \int_{V^\perp} f((a+Q(z,0)) + y) \dif\mathcal{H}^{n-k}_{V^\perp}(y) \right) \dif\mathcal{L}^k(z) = \int_{L} \left( \int_{V^\perp} f(x + y) \dif\mathcal{H}^{n-k}_{V^\perp}(y) \right) \dif\mathcal{H}^k_{L}(x). \tag{$\clubsuit$}\]
+
+    Finally we can put it all together
+    \begin{align*}
+        \int_{\R^n} f \, \dif\mathcal{H}^n &= \int_{\R^n} f \, \dif\mathcal{L}^n &&\text{ since } \mathcal{H}^n = \mathcal{L}^n\\
+            &= \int_{\R^k} \left( \int_{\R^{n-k}} f(a + Q(z,t)) \, \dif \mathcal{L}^{n-k}(t) \right) \dif \mathcal{L}^k(z) &&\text{ by } (\dagger)\\
+            &= \int_{\R^k} \left( \int_{V^\perp} f((a+Q(z,0)) + y) \dif\mathcal{H}^{n-k}_{V^\perp}(y) \right) \dif\mathcal{L}^k(z) &&\text{ by } (\heartsuit)\\
+            &= \int_{L} \left( \int_{V^\perp} f(x + y) \dif\mathcal{H}^{n-k}_{V^\perp}(y) \right) \dif\mathcal{H}^k_{L}(x) &&\text{ by } (\clubsuit)
+    \end{align*}
+    as desired. 
+
+    The other equality follows by a symmetric argument.
+\end{proof}
+
+
+\begin{exercise}[Cavaleri's Principle]
+    \label{ex:cavalieris_principle}
+    Let $A\subseteq \R^n$ be a measurable set and let $1 \leq k \leq n-1$ be an integer.
+    Then
+    \[ \mathcal{L}^n(A) = \int_{\R^k} \mathcal{H}^{n-k}(A \cap (\{x\} \times \R^{n-k})) \, d\mathcal{L}^k(x) = \int_{\R^{n-k}} \mathcal{H}^k(A \cap (\R^k \times \{y\})) \, d\mathcal{L}^{n-k}(y). \]
+\end{exercise}
+\begin{proof}
+    See that
+    \begin{align*} 
+        \mathcal{L}^n(A) &= \mathcal{H}^n(A) = \int_{\R^n} \Chi_A \, \dif\mathcal{H}^n &&\text{ since } \mathcal{H}^n = \mathcal{L}^n\\
+            &= \int_{\R^k \times \{0\}} \left( \int_{\{0\} \times \R^{n-k}} \Chi_A((x,y)) \, \dif\mathcal{H}^{n-k}_{\{0\} \times \R^{n-k}}(0,y) \right) d\mathcal{H}^k_{\R^k \times \{0\}}(x,0) &&\text{ by Proposition \ref{prop:fubini_tonelli_for_hausdorff_measures_on_orthogonal_subspaces}}\\
+            &= \int_{\R^k} \left( \int_{\R^{n-k}} \Chi_A(x,y) \, \dif\mathcal{H}^{n-k}_{\R^{n-k}}(y) \right) d\mathcal{H}^k_{\R^k}(x) &&\text{ isometry invariance of Hausdorff measures }\\
+            &= \int_{\R^k} \mathcal{H}^{n-k}(A \cap (\{x\} \times \R^{n-k})) \, \dif\mathcal{H}^k_{\R^k}(x) \\
+            &= \int_{\R^k} \mathcal{H}^{n-k}(A \cap (\{x\} \times \R^{n-k})) \, \dif\mathcal{L}^k(x) &&\text{ since } \mathcal{H}^k_{\R^k} = \mathcal{L}^k
+    \end{align*}
+    and similarly the other way around. 
+\end{proof}
+
+\end{document}

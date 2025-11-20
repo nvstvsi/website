@@ -1,0 +1,289 @@
+\section{The Lebesgue $L^p$ Spaces}
+
+\subsection{Introduction}
+
+\subsection{$L^1$ Functions}
+
+\begin{definition}[$L^1$ Norm]
+    \label{def:l1_norm}
+    Let $(X,\mu)$ be a measure space. The \textit{$L^1$-norm} of a measurable function $f : X \to [-\infty,\infty]$ or $f: X \to \C \cup \{\infty\}$ is defined to be
+    \[ \|f\|_{L^1(X,\mu)} = \int_X |f| \, \dif \mu. \]
+    We define the space $L^1(X,\mu)$ to be the set of all equivalence classes of measurable functions $f : X \to [-\infty,\infty]$ or $f: X \to \C \cup \{\infty\}$ such that $\|f\|_{L^1} < \infty$, where two functions are considered equivalent if they are equal $\mu$-almost everywhere.
+\end{definition}
+
+We will commit the usual sin and write $f \in L^1(X,\mu)$ to mean that $f$ is a representative of an equivalence class in $L^1(X,\mu)$.
+That is, we will think about $L^1(X,\mu)$ as a set of functions for the most part.
+We must be careful to remember that if $f=g$ as equivalence classes in $L^1(X,\mu)$, then $f$ and $g$ may differ on a set of measure zero;
+however, this will not cause any issues in practice, as we only care about properties that hold almost everywhere.
+
+We also remark that by the Lebesgue philosophy we follow, we can allow function $f$ which take on the values $\pm \infty$ on sets of measure zero without causing any issues.
+As a result, for each equivalence class in $L^1(X,\mu)$, there exists a representative $f : X \to \R$ or $f : X \to \C$ such that $\|f\|_{L^1} < \infty$.
+Because of this fact, we usually state our result for real-valued or complex-valued functions, and the reader should understand that we are really working with equivalence classes in $L^1(X,\mu)$,
+and the results also hold for functions in $L^1(X,\mu)$ that take on the values $\pm \infty$ on sets of measure zero.
+
+Depending on context and what we want to emphasize, we also may omit the $\mu$ or both $X$ and $\mu$ in the notation when the measure space is clear from context.
+Also it should either not matter or be clear from context whether we are considering real-valued or complex-valued functions, so we may omit the field $\R$ or $\C$ in the notation as well.
+
+\begin{proposition}[$\|\cdot\|_{L^1}$ is a Norm on $L^1$]
+    Let $(X,\mu)$ be a measure space.
+    Then $\|\cdot\|_{L^1(X,\mu)}$ is a norm on $L^1(X,\mu)$.
+\end{proposition}
+
+\begin{proof}
+    We verify the three properties of a norm.
+    Note that $\|\cdot\|_{L^1}$ is well-defined on equivalence classes in $L^1(X,\mu)$ by Exercise \ref{ex:integral_of_function_equal_ae}.
+
+    \vspace{2mm}
+
+    Suppose that $f$ is a representative of an equivalence class in $L^1(X,\mu)$.
+    Then $f$ is measurable and $\|f\|_{L^1} < \infty$, and we have $\|f\|_{L^1} \geq 0$ by definition of the integral.
+
+    \vspace{2mm}
+    \textit{Positive Definiteness.}
+    See that $\|f\|_{L^1} = 0$ if and only if $\int_X |f| \, \dif \mu = 0$, which holds if and only if every simple function $s$ with $0 \leq s \leq |f|$ is zero $\mu$-almost everywhere.
+    This holds if and only if $|f| = 0$ $\mu$-almost everywhere by Exercise \ref{ex:integral_of_positive_function_is_zero_iff_function_is_zero_ae}.
+    Since $|f|=0$ $\mu$-almost everywhere if and only if $f=0$ $\mu$-almost everywhere, we have $\|f\|_{L^1} = 0$ if and only if $f$ is in the same equivalence class as the zero function in $L^1(X,\mu)$.
+
+    \vspace{2mm}
+    \textit{Homogeneity.}
+    For each $\alpha \in \R$ we see that 
+    \[ \|\alpha f\|_{L^1} = \int_X |\alpha f| \, \dif \mu = |\alpha| \int_X |f| \, \dif \mu = |\alpha| \|f\|_{L^1} \]
+    by homogeneity property of the integral.
+
+    \vspace{2mm}
+    \textit{Triangle Inequality.}
+    Now let $g$ be another representative of an equivalence class in $L^1(X,\mu)$.
+    Then $g$ is measurable and $\|g\|_{L^1} < \infty$.
+    See that $|f+g| \leq |f| + |g|$ pointwise, so by the additivity of the integral we have
+    \[ \|f+g\|_{L^1} = \int_X |f+g| \, \dif \mu \leq \int_X (|f| + |g|) \, \dif \mu = \int_X |f| \, \dif \mu + \int_X |g| \, \dif \mu = \|f\|_{L^1} + \|g\|_{L^1}. \]
+\end{proof}
+
+The above proof is one of the few times we will explicitly view $L^1(X,\mu)$ as a set of equivalence classes, but shows why we need to do so --- if we did not identify functions that are equal almost everywhere, then the positive definiteness property would fail.
+
+From now on, we will always furnish $L^1(X,\mu)$ with the $L^1$-norm and view it as a normed vector space.
+In particular, if $\{f_k\}_{k=1}^\infty$ is a sequence of functions in $L^1(X,\mu)$, we say that $\{f_k\}_{k=1}^\infty$ converges in $L^1$ to a function $f \in L^1(X,\mu)$ if
+\[ \lim_{k\to\infty} \|f_k - f\|_{L^1} = 0. \]
+
+\begin{theorem}[Restatement of Dominated Convergence Theorem]
+    \label{thm:dominated_convergence_theorem_1point5}
+    Let $(X,\mu)$ be a measure space, and let $\{f_k\}_{k=1}^\infty \subseteq L^1(X,\mu)$ be a sequence of functions that converge pointwise $\mu$-almost everywhere to a function $f$.
+    Suppose that there exists an integrable function $g : X \to [0,\infty]$ such that $|f_k(x)| \leq g(x)$ for all $k\in \Z^+$ and $\mu$-almost every $x\in X$.
+    Then $f \in L^1(X,\mu)$ and $\{f_k\}_{k=1}^\infty$ converges in $L^1$-norm to $f$.
+\end{theorem}
+
+\begin{proposition}[$L^1$ Convergence implies a Subsequence Converges a.e.]
+    \label{prop:l1_convergence_implies_subsequence_converges_ae}
+    Let $(X,\mu)$ be a measure space, and let $\{f_k\}_{k=1}^\infty\subseteq L^1(X,\mu)$ be a sequence of functions that converges in $L^1$-norm to a function $f \in L^1(X,\mu)$.
+    Then there exists a subsequence $\{f_{k_j}\}_{j=1}^\infty$ that converges pointwise $\mu$-almost everywhere to $f$.
+\end{proposition}
+\begin{proof}
+    Since $\{f_k\}_{k=1}^\infty$ converges in $L^1$-norm to $f$, we have
+    \[ \lim_{k\to\infty} \|f_k - f\|_{L^1} = 0 \]
+    which means \[ \lim_{k\to\infty} \int_X |f_k - f| \, \dif \mu = 0. \]
+
+    For each $j\in \Z^+$, we can find $k_j \in \Z^+$ such that
+    \[ \int_X |f_{k_j} - f| \, \dif \mu < 2^{-j}. \]
+    Then we have \[ \sum_{j=0}^\infty \int_X |f_{k_j} - f| \, \dif \mu < \sum_{j=0}^\infty 2^{-j} = 1 < \infty \]
+    so the Monotone Convergence Theorem (Theorem \ref{thm:monotone_convergence_theorem}) implies that
+    \[ \int_X \sum_{j=0}^\infty |f_{k_j} - f| \, \dif \mu < \infty. \]
+    Thus the function $\sum_{j=0}^\infty |f_{k_j} - f|$ is finite $\mu$-almost everywhere, so the sequence $\{|f_{k_j} - f|\}_{j=1}^\infty$ converges to zero $\mu$-almost everywhere; that is, the sequence $\{f_{k_j}\}_{j=1}^\infty$ converges pointwise $\mu$-almost everywhere to $f$.
+\end{proof}
+
+\begin{proposition}[$L^1$ Approximation by Simple Functions]
+    \label{prop:l1_approximation_by_simple_functions}
+    Let $(X,\mu)$ be a measure space, and let $f \in L^1(X,\mu)$.
+    Then there exists a sequence of simple functions $\{s_k\}_{k=1}^\infty$ such that
+    \[ \lim_{k\to\infty} \|f - s_k\|_{L^1} = 0. \]
+\end{proposition}
+
+For an approximation by continuous functions, we need LCH spaces --- look ahead to that section.
+
+\begin{proof}
+    First consider the case where the field is $\R$.
+    Then $f : X \to [-\infty,\infty]$ is a measurable function such that $\|f\|_{L^1} < \infty$.
+
+    Let $\epsilon>0$.
+    Then by Lemma \ref{lem:integrals_via_simple_functions}, there exist simple functions $s_1, s_2 : X \to [0,\infty)$ such that $0 \leq s_1 \leq f^+$, $0 \leq s_2 \leq f^-$, and
+    \[ \int_X (f^+ - s_1) \, \dif \mu < \epsilon/2 \quad \text{ and } \quad \int_X (f^- - s_2) \, \dif \mu < \epsilon/2. \]
+    Define the simple function $s : X \to [-\infty,\infty]$ by $s = s_1 - s_2$.
+    Then we have
+    \begin{align*}
+        \|f - s\|_{L^1} &= \| f^+ - f^- - (s_1 - s_2) \|_{L^1} \\
+            &\leq \|f^+ - s_1\|_{L^1} + \|f^- - s_2\|_{L^1} \\
+            &= \int_X |f^+ - s_1| \, \dif \mu + \int_X |f^- - s_2| \, \dif \mu \\
+            &= \int_X (f^+ - s_1) \, \dif \mu + \int_X (f^- - s_2) \, \dif \mu < \epsilon.
+    \end{align*}
+
+    In particular, we see that for each $k\in \Z^+$, there exists a simple function $s_k : X \to [-\infty,\infty]$ such that $\|f - s_k\|_{L^1} < 1/k$.
+    Then the sequence of simple functions $\{s_k\}_{k=1}^\infty$ satisfies
+    \[ \lim_{k\to\infty} \|f - s_k\|_{L^1} = 0 \]
+    as desired.
+
+    \vspace{2mm}
+
+    Now consider the case where the field is $\C$.
+    Then $f : X \to \C \cup \{\infty\}$ is a measurable function such that $\|f\|_{L^1} < \infty$.
+    Write $f = \Re(f) + i \Im(f)$, where $\Re(f), \Im(f) : X \to [-\infty,\infty]$ are measurable functions such that $\|\Re(f)\|_{L^1}, \|\Im(f)\|_{L^1} < \infty$.
+    By the above case, there exist sequences of simple functions $\{s_k\}_{k=1}^\infty$ and $\{t_k\}_{k=1}^\infty$ such that
+    \[ \lim_{k\to\infty} \|\Re(f) - s_k\|_{L^1} = 0 \quad \text{ and } \quad \lim_{k\to\infty} \|\Im(f) - t_k\|_{L^1} = 0. \]
+    Define the sequence of simple functions $\{u_k\}_{k=1}^\infty$ by $u_k = s_k + i t_k$ for each $k\in \Z^+$.
+    Then we have
+    \begin{align*}
+        \|f - u_k\|_{L^1} &\leq \|\Re(f) - s_k| + |\Im(f) - t_k| \\
+            &\leq \|\Re(f) - s_k\|_{L^1} + \|\Im(f) - t_k\|_{L^1}
+    \end{align*}
+    for each $k\in \Z^+$, so
+    \[ \lim_{k\to\infty} \|f - u_k\|_{L^1} = 0 \]
+    as desired.
+\end{proof}
+
+\begin{exercise}[Chebyshev's Inequality]
+    \label{lem:chebyshevs_inequality}
+    Let $(X,\mu)$ be a measure space, and let $f\in L^1(X,\mu)$.
+    Then for each $t>0$, we have
+    \[ \mu(\{ x \in X : |f(x)| \geq t \}) \leq \frac{1}{t} \|f\|_{L^1}. \]
+\end{exercise}
+
+\begin{proof}
+    Fix $t>0$.
+    Then
+    \begin{align*}
+        \mu( \{x\in X : |f(x)| \geq t \} ) &= \frac{1}{t} \int_{ \{ |f|\geq t \} } t\,\dif \mu \\
+        &\leq \frac{1}{t} \int_{ \{ |f|\geq t \} } |f| \, \dif \mu \\
+        &\leq \frac{1}{t} \int_X |f| \, \dif \mu = \frac{1}{t} \|f\|_{L^1}
+    \end{align*}
+    as desired.
+\end{proof}
+
+\subsection{$L^\infty$ Functions}
+
+\begin{definition}[$L^\infty$ Norm]
+    \label{def:linfty_norm}
+    Let $(X,\mu)$ be a measure space.
+    The \textit{$L^\infty$-norm} of a measurable function $f: X \to [-\infty,\infty]$ or $f: X \to \C \cup \{\infty\}$ is defined to be
+    \[ \|f\|_{L^\infty(X,\mu)} = \inf \{ M \geq 0 : |f(x)| \leq M \text{ for $\mu$-almost every } x\in X \}. \]
+    We define the space $L^\infty(X,\mu)$ to be the set of all equivalence classes of measurable functions $f: X \to [-\infty,\infty]$ such that $\|f\|_{L^\infty} < \infty$, where two functions are considered equivalent if they are equal $\mu$-almost everywhere.
+\end{definition}
+
+As with $L^1(X,\mu)$, we will often write $f \in L^\infty(X,\mu)$ to mean that $f$ is a representative of an equivalence class in $L^\infty(X,\mu)$.
+We may also omit the $\mu$ or both $X$ and $\mu$ in the notation when the measure space is clear from context.
+
+\begin{remark}[Essential Supremum]
+    \label{rem:essential_supremum}
+    The $L^\infty$ norm is also called the essential supremum norm.
+    The essential supremum of a set $A \subseteq \R$ is defined to be the infimum of all $M \in \R$ such that the set $\{ x \in A : x > M \}$ has Lebesgue measure zero.
+    With this terminology, we can rewrite the $L^\infty$ norm as
+    \[ \|f\|_{L^\infty(X,\mu)} = \esssup_{x\in X} |f(x)|. \]
+    Because of this language, sometimes people say that $L^\infty$ is the space of essentially bounded functions.
+\end{remark}
+
+\begin{proposition}[$\|\cdot\|_{L^\infty}$ is a Norm on $L^\infty$]
+    Let $(X,\mu)$ be a measure space.
+    Then $\|\cdot\|_{L^\infty(X,\mu)}$ is a norm on $L^\infty(X,\mu)$.
+\end{proposition}
+
+\begin{proof}
+    We verify the three properties of a norm.
+    Note that $\|\cdot\|_{L^\infty}$ is well-defined on equivalence classes in $L^\infty(X,\mu)$ since the essential supremum of two functions that are equal almost everywhere is the same.
+
+    \vspace{2mm}
+    Suppose that $f$ is a representative of an equivalence class in $L^\infty(X,\mu)$.
+    Then $f$ is measurable and $\|f\|_{L^\infty} < \infty$, and we have $\|f\|_{L^\infty} \geq 0$ by definition of the essential supremum.
+
+    \vspace{2mm}
+    \textit{Positive Definiteness.}
+    See that $\|f\|_{L^\infty} = 0$ if and only if $|f(x)| \leq 0$ for $\mu$-almost every $x\in X$, which holds if and only if $f=0$ $\mu$-almost everywhere, so $f$ is in the same equivalence class as the zero function in $L^\infty(X,\mu)$.
+
+    \vspace{2mm}
+    \textit{Homogeneity.}
+    For each $\alpha \in \R$ we see that 
+    \begin{align*}
+        \|\alpha f\|_{L^\infty} &= \inf \{ M \geq 0 : |\alpha f(x)| \leq M \text{ for $\mu$-almost every } x\in X \} \\
+            &= |\alpha| \inf \{ M \geq 0 : |f(x)| \leq M \text{ for $\mu$-almost every } x\in X \} \\
+            &= |\alpha| \|f\|_{L^\infty}.
+    \end{align*}
+
+    \vspace{2mm}
+    \textit{Triangle Inequality.}
+    Now let $g$ be another representative of an equivalence class in $L^\infty(X,\mu)$.
+    Then $g$ is measurable and $\|g\|_{L^\infty} < \infty$.
+    See that $|f(x) + g(x)| \leq |f(x)| + |g(x)|$ for each $x\in X$, and $|f(x)| \leq \|f\|_{L^\infty}$ and $|g(x)| \leq \|g\|_{L^\infty}$ for $\mu$-almost every $x\in X$, so
+    \[ |f(x) + g(x)| \leq \|f\|_{L^\infty} + \|g\|_{L^\infty} \]
+    for $\mu$-almost every $x\in X$.
+    Thus by definition of the $L^\infty$ norm, we have
+    \[ \|f + g\|_{L^\infty} = \inf \{ M \geq 0 : |f(x) + g(x)| \leq M \text{ for $\mu$-almost every } x\in X \} \leq \|f\|_{L^\infty} + \|g\|_{L^\infty}. \]
+    
+    \vspace{2mm}
+    This completes the verification that $\|\cdot\|_{L^\infty}$ is a norm on $L^\infty(X,\mu)$.
+
+    \vspace{2mm}
+
+    As before, this is one of the few times we will explicitly view $L^\infty(X,\mu)$ as a set of equivalence classes, but shows why we need to do so --- if we did not identify functions that are equal almost everywhere, then the positive definiteness property would fail.
+\end{proof}
+
+From now on, we will always furnish $L^\infty(X,\mu)$ with the $L^\infty$-norm and view it as a normed vector space.
+In particular, if $\{f_k\}_{k=1}^\infty$ is a sequence of functions in $L^\infty(X,\mu)$, we say that $\{f_k\}_{k=1}^\infty$ converges in $L^\infty$ to a function $f \in L^\infty(X,\mu)$ if
+\[ \lim_{k\to\infty} \|f_k - f\|_{L^\infty} = 0. \]
+
+
+
+
+
+\subsection{$L^p$ Spaces}
+
+We have already defined the $L^1$ and $L^\infty$ norms and spaces in Definitions \ref{def:l1_norm} and \ref{def:linfty_norm}.
+We now define the $L^p$ norms and spaces for $1 < p < \infty$.
+
+\begin{definition}[$L^p$ Norm, $L^p$ Space]
+    \label{def:lp_norm}
+    Let $(X,\mu)$ be a measure space and let $1 \leq p < \infty$.
+    For a measurable function $f : X \to [-\infty,\infty]$ or $f : X \to \C \cup \{\infty\}$, we define the \textit{$L^p$-norm} of $f$ to be
+    \[ \|f\|_{L^p(X,\mu)} = \left( \int_X |f|^p \,\dif\mu \right)^{1/p}, \]
+    where we interpret the integral as $+\infty$ if $|f|^p$ is not integrable.
+    We define the \textit{$L^p$ space} on $(X,\mu)$ to be the set of all equivalence classes of measurable functions $f : X \to [-\infty,\infty]$ such that $\|f\|_{L^p(X,\mu)} < \infty$, where two functions are considered equivalent if they are equal $\mu$-almost everywhere.
+\end{definition}
+For $p=1$ we see that this definition agrees with Definition \ref{def:l1_norm}.
+At this point, you should question whether the $L^p$ norm is actually a norm.
+The hard thing to verify is the triangle inequality, which in this case is known as Minkowski's Inequality.
+We will prove this in Theorem \ref{thm:minkowskis_inequality} in the appendix on inequalities.
+
+Also we note that since we are working with equivalence classes of functions, we can just look at functions which take values in $\R$ or $\C$ instead of $[-\infty,\infty]$ or $\C \cup \{\infty\}$, since if a function takes the value $\pm\infty$ or $\infty$ on a set of positive measure, then its $L^p$ norm is infinite.
+Thus we can think of $L^p(X,\mu)$ as a space of equivalence classes of functions $f : X \to \R$ or $f : X \to \C$ with finite $L^p$ norm.
+In reality, these equivalence classes also contain functions which are infinite on sets of measure zero, but this does not really matter.
+
+\begin{lemma}[$\|\cdot\|_{L^p}$ is a Norm on $L^p$]
+    Let $(X,\mu)$ be a measure space and let $1 \leq p < \infty$.
+    Then $\|\cdot\|_{L^p(X,\mu)}$ is a norm on $L^p(X,\mu)$.
+    \label{lem:lp_norm_is_a_norm}
+\end{lemma}
+
+\begin{proof}
+    Like we said, we defer the proof of the triangle inequality to Theorem \ref{thm:minkowskis_inequality} in the appendix on inequalities.
+    The other properties of a norm are easy to verify. First note that the $L^p$ norm is well-defined on equivalence classes of functions since if $f$ and $g$ are two representatives of the same equivalence class, then $f = g$ $\mu$-almost everywhere, so $|f|^p = |g|^p$ $\mu$-almost everywhere, so $\int_X |f|^p \,\dif\mu = \int_X |g|^p \,\dif\mu$, so $\|f\|_{L^p(X,\mu)} = \|g\|_{L^p(X,\mu)}$.
+
+    Let $f:X \to [-\infty,\infty]$ or $f : X \to \C \cup \{\infty\}$ be a representative of an equivalence class in $L^p(X,\mu)$.
+    Then $\|f\|_{L^p(X,\mu)} \geq 0$ since the integral of a nonnegative function is nonnegative.
+    Also, $\|f\|_{L^p(X,\mu)} = 0$ if and only if $\int_X |f|^p \,\dif\mu = 0$, which holds if and only if $|f|^p = 0$ $\mu$-almost everywhere, which holds if and only if $f = 0$ $\mu$-almost everywhere.
+    Thus $\|f\|_{L^p(X,\mu)} = 0$ if and only if $f$ is the zero equivalence class in $L^p(X,\mu)$.
+    This shows that the $L^p$ norm is positive definite.
+
+    Now we also let $\alpha \in \R$ and let $f:X \to [-\infty,\infty]$ or $f : X \to \C \cup \{\infty\}$ be a representative of an equivalence class in $L^p(X,\mu)$.
+    Then
+    \[ \|\alpha f\|_{L^p(X,\mu)} = \left( \int_X |\alpha f|^p \,\dif\mu \right)^{1/p} = \left( |\alpha|^p \int_X |f|^p \,\dif\mu \right)^{1/p} = |\alpha| \left( \int_X |f|^p \,\dif\mu \right)^{1/p} = |\alpha| \|f\|_{L^p(X,\mu)}. \]
+    This shows that the $L^p$ norm is absolutely homogeneous.
+\end{proof}
+
+This is one of the few times we will work with equivalence classes of functions instead of functions themselves, but the proof of the above theorem shows why we must do so --- if we do not identify functions that are equal almost everywhere, then the $L^p$ norm is not positive definite.
+From now on, we will commit the usual sin of writing $f \in L^p(X,\mu)$ to mean that $f$ is a function from $X$ to $\R$ or $\C$ which has finite $L^p$ norm.
+
+Also from this point on, we will think of $L^p(X,\mu)$ as a normed vector space with the $L^p$ norm.
+
+\begin{definition}[Convergence in $L^p$]
+    \label{def:convergence_in_lp}
+    Let $(X,\mu)$ be a measure space and let $1 \leq p < \infty$.
+    Let $\{f_n\}_{n=1}^\infty$ be a sequence of measurable functions and let $f$ be a measurable function.
+    We say that $\{f_n\}_{n=1}^\infty$ \textit{converges to $f$ in $L^p$ norm} if
+    \[ \lim_{n \to \infty} \|f_n - f\|_{L^p(X,\mu)} = 0. \]
+\end{definition}
+
+We will study the properties of convergence in $L^p$ norm in later sections.

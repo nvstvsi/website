@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cantor</title>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '0.8em',
+      packages: {'[+]': ['ams']},
+      macros: {
+        R: '\\mathbb{R}',
+        C: '\\mathbb{C}',
+        N: '\\mathbb{N}',
+        Z: '\\mathbb{Z}',
+        Q: '\\mathbb{Q}',
+        E: '\\mathbb{E}',
+        F: '\\mathbb{F}',
+        S: '\\mathbb{S}',
+        H: '\\mathcal{H}',
+        L: '\\mathcal{L}',
+        dif: '\\,\\mathrm{d}',
+        supp: '\\operatorname{supp}',
+        proj: '\\operatorname{proj}',
+        Id: '\\operatorname{Id}',
+        Span: '\\operatorname{span}',
+        graph: '\\operatorname{graph}',
+        dist: '\\operatorname{dist}',
+        diam: '\\operatorname{diam}',
+        avg: '\\operatorname{avg}',
+        div: '\\operatorname{div}',
+        vol: '\\operatorname{vol}',
+        ord: '\\operatorname{ord}',
+        Chi: '\\mathbf{1}',
+        sub: '\\subseteq',
+        mres: '\\downharpoonright',
+        ddag: '\\ddagger',
+        dag: '\\dagger',
+        norm: ['\\left\\| #1 \\right\\|', 1],
+        abs: ['\\left| #1 \\right|', 1],
+        set: ['\\left\\{ #1 \\right\\}', 1],
+        inner: ['\\langle #1, #2 \\rangle', 2],
+        floor: ['\\lfloor #1 \\rfloor', 1],
+        ceil: ['\\lceil #1 \\rceil', 1],
+        llbracket: '\\unicode{x27E6}',
+        rrbracket: '\\unicode{x27E7}',
+        bigskull: '\\unicode{x1F480}',
+        skull: '\\unicode{x2620}',
+        mathwitch: '\\unicode{x1F9D9}',
+        pumpkin: '\\unicode{x1F383}',
+        mathpumpkin: '\\unicode{x1F383}',
+        bigpumpkin: '\\unicode{x1F383}',
+        mathghost: '\\unicode{x1F47B}',
+        mathcat: '\\unicode{x1F408}',
+        mathbat: '\\unicode{x1F987}',
+        esssup: '\\operatorname{ess\\,sup}',
+        essinf: '\\operatorname{ess\\,inf}',
+        Lip: '\\operatorname{Lip}',
+        pd: ['\\frac{\\partial#1}{\\partial#2}', 2],
+        od: ['\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}', 2],
+        dashint: '\\mathchoice{\\rlap{-}\\!\\int}{\\rlap{\\raise.15ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}',
+        eurologo: '\\unicode{x20AC}',
+        starredbullet: '\\unicode{x2726}',
+        grimace: '\\unicode{x1F62C}',
+        textthing: '\\unicode{x2639}',
+        noway: '\\unicode{x26D4}',
+        warning: '\\unicode{x26A0}',
+        danger: '\\unicode{x26A0}',
+        textxswup: '\\unicode{x2195}',
+        textxswdown: '\\unicode{x2195}',
+        decoone: '\\unicode{x2756}',
+        decotwo: '\\unicode{x2767}',
+        decothreeleft: '\\unicode{x2619}',
+        decothreeright: '\\unicode{x2767}',
+        decofourleft: '\\unicode{x261A}',
+        decofourright: '\\unicode{x261B}',
+        floweroneleft: '\\unicode{x2740}',
+        floweroneright: '\\unicode{x2740}',
+        lefthand: '\\unicode{x261C}',
+        righthand: '\\unicode{x261E}',
+        decosix: '\\unicode{x2766}',
+        bomb: '\\unicode{x1F4A3}',
+        caution: '\\unicode{x2621}',
+        leftblackhand: '\\unicode{x261A}',
+        rightblackhand: '\\unicode{x261B}',
+        leafleft: '\\unicode{x2618}',
+        leafright: '\\unicode{x2618}',
+        leafNW: '\\unicode{x2618}',
+        leafNE: '\\unicode{x2618}',
+        leafSE: '\\unicode{x2618}',
+        leafSW: '\\unicode{x2618}',
+        aldineleft: '\\unicode{x2619}',
+        aldineright: '\\unicode{x2767}',
+        aldine: '\\unicode{x2766}',
+        aldinesmall: '\\unicode{x2767}',
+        aldinesmallrevert: '\\unicode{x2619}',
+        aldinesmallup: '\\unicode{x2766}',
+        grappe: '\\unicode{x2766}',
+        rightgrappe: '\\unicode{x2767}',
+        leftgrappe: '\\unicode{x2619}',
+        oldpilcrowone: '\\unicode{x00B6}',
+        oldpilcrowtwo: '\\unicode{x00B6}',
+        oldpilcrowthree: '\\unicode{x00B6}',
+        oldpilcrowfour: '\\unicode{x00B6}',
+        oldpilcrowfive: '\\unicode{x00B6}',
+        oldpilcrowsix: '\\unicode{x00B6}'
+      }
+    },
+    startup: {
+      pageReady: () => {
+        return MathJax.startup.defaultPageReady().then(() => {
+          console.log('MathJax ready');
+        });
+      }
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+  <script>
+  (function() {
+    window.addEventListener('beforeunload', function() {
+      saveProofState();
+      saveCollapsibleState();
+    });
+    
+    const eventSource = new EventSource('http://localhost:35729/reload-stream');
+    
+    eventSource.onmessage = function(event) {
+      if (event.data === 'reload') {
+        console.log('📝 File updated, saving state and reloading...');
+        saveProofState();
+        saveCollapsibleState();
+        setTimeout(() => {
+          window.location.reload();
+        }, 50);
+      }
+    };
+    
+    eventSource.onerror = function() {
+      console.log('⚠️  Auto-reload server not available. Run node watch.js to enable auto-reload.');
+      eventSource.close();
+    };
+    
+    console.log('🔄 Auto-reload enabled');
+  })();
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+    
+    /* Layout with sidebar */
+    .page-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      width: 280px;
+      background: #fff;
+      border-right: 1px solid #e0e0e0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px 0;
+      font-size: 14px;
+    }
+    
+    .sidebar-header {
+      padding: 15px 20px 25px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .sidebar-header h1 {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 5px 0;
+    }
+    
+    .sidebar-header .subtitle {
+      font-size: 0.85em;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .sidebar-header .back-link {
+      display: block;
+      font-size: 0.8em;
+      color: #666;
+      text-decoration: none;
+      margin-top: 12px;
+    }
+    
+    .sidebar-header .back-link:hover {
+      color: #1a1a1a;
+    }
+    
+    .sidebar-nav {
+      padding: 10px 0;
+    }
+    
+    .chapter-group {
+      margin-bottom: 2px;
+    }
+    
+    .chapter-title {
+      padding: 12px 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chapter-title:hover {
+      background: #f5f5f5;
+    }
+    
+    .chapter-title .toggle {
+      font-size: 0.65em;
+      color: #999;
+      transition: transform 0.2s;
+    }
+    
+    .chapter-group.expanded .chapter-title .toggle {
+      transform: rotate(90deg);
+    }
+    
+    .section-list {
+      display: none;
+      padding: 5px 0;
+      background: #f8f8f8;
+    }
+    
+    .chapter-group.expanded .section-list {
+      display: block;
+    }
+    
+    .section-link {
+      display: block;
+      padding: 8px 20px 8px 35px;
+      font-size: 0.85em;
+      color: #555;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+    }
+    
+    .section-link:hover {
+      background: #f0f0f0;
+      color: #1a1a1a;
+    }
+    
+    .section-link.active {
+      background: #e8e8e8;
+      border-left-color: #333;
+      color: #000;
+      font-weight: 500;
+    }
+    
+    /* Main content area */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      max-width: 900px;
+      padding: 40px 60px;
+    }
+    
+    @media (max-width: 1100px) {
+      .sidebar {
+        width: 240px;
+      }
+      .main-content {
+        margin-left: 240px;
+        padding: 30px 40px;
+      }
+    }
+    
+    @media (max-width: 800px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+      .page-layout {
+        flex-direction: column;
+      }
+    }
+    
+    h2, h3, h4 {
+      margin-top: 2em;
+      margin-bottom: 0.75em;
+      color: #000;
+      font-weight: 600;
+    }
+    h2 { font-size: 1.5em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.1em; }
+    p {
+      margin: 1em 0;
+      text-indent: 2em;
+    }
+    p:first-of-type,
+    h2 + p,
+    h3 + p,
+    h4 + p,
+    .theorem-box + p,
+    .proof-box + p {
+      text-indent: 0;
+    }
+    .noindent + p,
+    p:has(> .noindent:first-child) {
+      text-indent: 0 !important;
+    }
+    .noindent {
+      display: none;
+    }
+    .theorem-box {
+      margin: 1.75em 0;
+      padding: 1.25em;
+      border-left: 5px solid #16a34a;
+      background: linear-gradient(to top, #bbf7d0 0%, #d1fae5 100%);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .definition-box { border-left-color: #16a34a; background: linear-gradient(to top, #d1fae5 0%, #ecfdf5 100%); }
+    .lemma-box { border-left-color: #1e3a8a; background: linear-gradient(to top, #bfdbfe 0%, #dbeafe 100%); }
+    .corollary-box { border-left-color: #9333ea; background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%); }
+    .proposition-box { border-left-color: #dc2626; background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%); }
+    .remark-box { border-left-color: #64748b; background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%); }
+    .example-box { border-left-color: #0891b2; background: linear-gradient(to top, #a5f3fc 0%, #cffafe 100%); }
+    .construction-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .notation-box { border-left-color: #ca8a04; background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%); }
+    .exercise-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .problem-box { border-left-color: #ec4899; background: linear-gradient(to top, #fbcfe8 0%, #fce7f3 100%); }
+    .theorem-header {
+      margin-bottom: 0.75em;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+    .theorem-header.clickable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .theorem-header.clickable:hover {
+      background: rgba(0,0,0,0.03);
+      margin: -0.5em -0.75em 0.75em -0.75em;
+      padding: 0.5em 0.75em;
+      border-radius: 4px;
+    }
+    .collapsible-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      margin-right: 0.5em;
+      color: #6b7280;
+    }
+    .collapsible-box.collapsed .collapsible-icon {
+      transform: rotate(-90deg);
+    }
+    .collapsible-content {
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+    }
+    .collapsible-box.collapsed .collapsible-content {
+      display: none;
+    }
+    .theorem-content {
+      padding-left: 0.5em;
+      line-height: 1.8;
+    }
+    .proof-box {
+      margin: 1.5em 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .proof-header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      border-radius: 6px 6px 0 0;
+    }
+    .proof-toggle {
+      width: 100%;
+      padding: 0.85em 1.25em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      transition: background 0.15s;
+    }
+    .proof-toggle:hover { background: rgba(0,0,0,0.03); }
+    .proof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      color: #6b7280;
+    }
+    .proof-box.collapsed .proof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .proof-content {
+      padding: 1.25em;
+      line-height: 1.8;
+    }
+    .proof-box.collapsed .proof-content {
+      display: none;
+    }
+    .proof-end {
+      float: right;
+      font-size: 1.3em;
+      margin-left: 0.5em;
+      color: #374151;
+    }
+    .subproof {
+      margin: 1em 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #f9fafb;
+    }
+    .subproof-header {
+      background: linear-gradient(to bottom, #f9fafb 0%, #f3f4f6 100%);
+      border-bottom: 1px solid #d1d5db;
+      border-radius: 4px 4px 0 0;
+    }
+    .subproof-toggle {
+      width: 100%;
+      padding: 0.6em 1em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: background 0.15s;
+    }
+    .subproof-toggle:hover {
+      background: rgba(0,0,0,0.03);
+    }
+    .subproof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.7em;
+      color: #6b7280;
+    }
+    .subproof.collapsed .subproof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .subproof-content {
+      padding: 1em;
+      line-height: 1.7;
+    }
+    .subproof.collapsed .subproof-content {
+      display: none;
+    }
+    .ref-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 0.15em;
+      border-radius: 2px;
+    }
+    .ref-link:hover {
+      background: #dbeafe;
+      text-decoration: underline;
+    }
+    .ref-unknown {
+      color: #dc2626;
+      font-weight: bold;
+      background: #fee2e2;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+    ol, ul {
+      margin: 1em 0;
+      padding-left: 2.5em;
+      line-height: 1.8;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    .latex-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5em auto;
+    }
+    .latex-figure .latex-image {
+      display: inline-block;
+      margin: 0.5em;
+      vertical-align: middle;
+    }
+    .latex-figure {
+      margin: 2em 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .latex-figure .figure-content {
+      margin-bottom: 0.75em;
+      line-height: normal;
+    }
+    .latex-figure .figure-content > * {
+      vertical-align: middle;
+    }
+    .latex-figure figcaption {
+      font-size: 0.9em;
+      color: #4b5563;
+      font-style: italic;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1>Analysis III</h1>
+        <div class="subtitle">Measure Theory &amp; Integration</div>
+        <a href="../index.html" class="back-link">← Table of Contents</a>
+      </div>
+      <div class="sidebar-nav">
+        <div class="chapter-group expanded">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>1. Measure Theory</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../01-measure-theory/measure-theory.html" class="section-link">Overview</a>
+            <a href="../01-measure-theory/basics.html" class="section-link">Outer Measures</a>
+            <a href="../01-measure-theory/lebesgue-meas.html" class="section-link">Lebesgue Measure</a>
+            <a href="../01-measure-theory/cantor.html" class="section-link">The Cantor Set</a>
+            <a href="../01-measure-theory/measure-spaces.html" class="section-link">Measure Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>2. Integration</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../02-integration/integration.html" class="section-link">Overview</a>
+            <a href="../02-integration/integrals-1.html" class="section-link">Simple Functions</a>
+            <a href="../02-integration/integrals-2.html" class="section-link">General Functions</a>
+            <a href="../02-integration/convergence.html" class="section-link">Convergence Theorems</a>
+            <a href="../02-integration/inequality-party.html" class="section-link">Integral Inequalities</a>
+            <a href="../02-integration/lp_spaces.html" class="section-link">Lᵖ Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>3. Product Measures</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../03-fubini/fubini_ch.html" class="section-link">Overview</a>
+            <a href="../03-fubini/fubini.html" class="section-link">Fubini-Tonelli</a>
+            <a href="../03-fubini/integrals-3.html" class="section-link">Product Measures</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>4. Differentiation I</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../04-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../04-differentiation-1/covering.html" class="section-link">Vitali Covering</a>
+            <a href="../04-differentiation-1/monotone.html" class="section-link">Monotone Functions</a>
+            <a href="../04-differentiation-1/BV_on_R.html" class="section-link">Bounded Variation</a>
+            <a href="../04-differentiation-1/FTOC.html" class="section-link">FTC for Lebesgue</a>
+            <a href="../04-differentiation-1/HL.html" class="section-link">Hardy-Littlewood</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>5. Differentiation I (cont)</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../05-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../05-differentiation-1/r-nik.html" class="section-link">Radon-Nikodym</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>6. Differentiation II</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-differentiation-2/diff-2.html" class="section-link">Overview</a>
+            <a href="../06-differentiation-2/vector-measures.html" class="section-link">Vector Measures</a>
+            <a href="../06-differentiation-2/r-nik.html" class="section-link">Radon-Nikodym</a>
+            <a href="../06-differentiation-2/besi.html" class="section-link">Besicovitch</a>
+            <a href="../06-differentiation-2/densities.html" class="section-link">Densities</a>
+            <a href="../06-differentiation-2/diff-measures.html" class="section-link">Measure Derivatives</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>7. Riesz Representation</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-riesz/riesz.html" class="section-link">Overview</a>
+            <a href="../06-riesz/riesz_functional.html" class="section-link">Riesz Representation</a>
+            <a href="../06-riesz/LCH_spaces.html" class="section-link">LCH Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>8. Integral Formulas</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../07-formulas/formulas.html" class="section-link">Overview</a>
+            <a href="../07-formulas/hausdorff_meas.html" class="section-link">Hausdorff Measures</a>
+            <a href="../07-formulas/lippy.html" class="section-link">Lipschitz Maps</a>
+            <a href="../07-formulas/rademacher.html" class="section-link">Rademacher</a>
+            <a href="../07-formulas/coarea-prereq.html" class="section-link">Coarea Prerequisites</a>
+            <a href="../07-formulas/coarea.html" class="section-link">Coarea Formula</a>
+            <a href="../07-formulas/area-prereq.html" class="section-link">Area Prerequisites</a>
+            <a href="../07-formulas/area-formula.html" class="section-link">Area Formula</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>9. Extension Results</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../08-ext-res/ext-res.html" class="section-link">Overview</a>
+            <a href="../08-ext-res/taylor_thm_integral_remainder.html" class="section-link">Taylor's Theorem</a>
+            <a href="../08-ext-res/whitney-cover.html" class="section-link">Whitney Covering</a>
+            <a href="../08-ext-res/whitney-partition-of-unity.html" class="section-link">Partition of Unity</a>
+            <a href="../08-ext-res/whitney-decomposition.html" class="section-link">Decomposition</a>
+            <a href="../08-ext-res/whitney-extension-theorem.html" class="section-link">Extension Theorem</a>
+            <a href="../08-ext-res/whitney-extension-proof.html" class="section-link">Extension Proof</a>
+            <a href="../08-ext-res/whitney-extension-applications.html" class="section-link">Applications</a>
+            <a href="../08-ext-res/whitney-extension.html" class="section-link">Summary</a>
+            <a href="../08-ext-res/more-bump.html" class="section-link">More Bump Functions</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <main class="main-content">
+      <h2>Cantor Sets</h2>
+<h3>The Standard Cantor Set and Fat Cantor Sets</h3>
+<p>The <strong>standard Cantor set</strong> $C$ is constructed by starting with the closed interval $[0,1]$ and iteratively removing the open middle third of each remaining interval.
+The resulting set $C$ is compact, nonempty, perfect, totally disconnected, and has Lebesgue measure zero.</p>
+<div class="theorem-box exercise-box" id="ex:properties_of_cantor_set">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Cantor Set Properties)</div>
+  <div class="theorem-content">Prove the Cantor set $C$ is compact, nonempty, perfect, totally disconnected, and has uncountably many points.
+<p>Also show that $C$ is nowhere dense in $[0,1]$, and thus contains no intervals.</div>
+</div></p>
+<p>The fact that the Cantor set has Lebesgue measure zero was shown in Example <span class="ref-unknown" title="Reference not found: ex:cantor_set">[ex:cantor_set?]</span>.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-0">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-0')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-0">
+    By definition, the Cantor set $C$ is the intersection of a decreasing sequence of nonempty closed sets, so $C$ is itself a closed set.
+    Since $C$ is a closed subset of the compact set $[0,1]$, it follows that $C$ is compact.
+<p>To see that $C$ is nonempty, notice that if $n\geq 0$, then $0$ and $1$ are in the set $C_n$ obtained after $n$ steps of the construction, so $0$ and $1$ are in $C$.
+    More generally, for each $n\geq 0$, the endpoints of each of the $2^n$ intervals in $C_n$ are in $[0,1], C_1, \ldots, C_n$, because they have not been removed in any of the first $n$ steps of the construction;
+    because we are only removing the middle thirds open interval, these endpoints are never removed in any subsequent steps of the construction, so they are all in $C$.
+    That is, if $[a_{n,k}, b_{n,k}]$ is an interval in $C_n$ for some $n\geq 0$ and some $k\in\{1,\ldots,2^n\}$, then $a_{n,k}, b_{n,k} \in C$.
+    Thus we have shown that $C$ actually contains at least countably many points.</p>
+<p>Let $E$ be the set of all endpoints of the intervals in $C_n$ for all $n\geq 0$; that is,
+    \[ E = \bigcup_{n=0}^\infty \{ a_{n,k}, b_{n,k} : k=1,\ldots,2^n \}. \]</p>
+<p>To show that $C$ is perfect, let $x \in C$ and let $\epsilon > 0$.
+    Fix $n\geq 0$ large enough that $3^{-n} < \epsilon$.
+    Then $x\in C_n$, so $x$ is in one of the $2^n$ closed intervals in $C_n$, say $I_{n,k} := [a_{n,k}, b_{n,k}]$ for some $k\in\{1,\ldots,2^n\}$.
+    Then the set $ E \cap I_{n,k} $ contains infinitely many points because infinitely many intervals are removed from $I_{n,k}$ in subsequent steps of the construction of the Cantor set, and the end points of each of these removed intervals are in $E \cap I_{n,k}$.
+    By choice of $n$, we have $I_{n,k} \subseteq (x - \epsilon, x + \epsilon)$, so $E \cap (x - \epsilon, x + \epsilon)$ contains infinitely many points.
+    Since $\epsilon > 0$ was arbitrary, we conclude that $x$ is a cluster point of $E$ --- recall this means each open set containing $x$ contains infinitely many points of $E$.
+    Since $x\in C$ was arbitrary, we conclude that every point in $C$ is a cluster point of $E$, which means that $C$ is perfect.</p>
+<p>Finally to show that $C$ is totally disconnected, let $x\in C$ and let $\epsilon > 0$.
+    Fix $n\geq 0$ large enough that $3^{-n} < \epsilon$.
+    Then $x\in C_n$, so $x$ is in one of the $2^n$ closed intervals in $C_n$, say $I_{n,k} := [a_{n,k}, b_{n,k}]$ for some $k\in\{1,\ldots,2^n\}$.
+    The compliment $C_n \setminus I_{n,k}$ is a union of finitely many closed intervals, so it is closed.
+    Thus $I_{n,k}$ is open in the relative topology on $C_n$, as its compliment in $C_n$ is closed.
+    As a result, the set $C \cap I_{n,k}$ is both open and closed in the relative topology on $C$.
+    That is, $C\cap I_{n,k}$ is a clopen set in $C$ which is contained in the open interval $(x - \epsilon, x + \epsilon)$.
+    Since $\epsilon > 0$ and $x\in C$ were arbitrary, we conclude that $C$ is totally disconnected.</p>
+<p>Since $C$ is compact, it must be complete. Since every complete, nonempty, perfect metric space is uncountable, we conclude that $C$ is uncountable.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>To see that $C$ contains no intervals, suppose to the contrary that $C$ contains an interval $(a,b)$.
+    Then $(a,b) \subseteq C_n$ for all $n\geq 0$. Let $N\geq 0$ be large enough that $3^{-N} < b-a$.
+    Then $(a,b)$ cannot be contained in any of the $2^N$ closed intervals in $C_N$, each of which has length $3^{-N}$, a contradiction.
+    Thus $C$ contains no intervals.</p>
+<p>To see that $C$ is nowhere dense in $[0,1]$, suppose that $U$ is a nonempty open subset of $[0,1]$ such that $C$ is dense in $U$.
+    That is, we have $\overline{ C \cap U} \supseteq U$. Then $U$ contains an interval $(a,b)$, and 
+    \[ C = \overline{C} \supseteq \overline{ C\cap U } \supseteq U \supseteq (a,b)  \]
+    which contradicts the fact that $C$ contains no intervals.
+    Thus $C$ is nowhere dense in $[0,1]$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>We can do this construction in a slightly different way,  to obtain a <strong>fat Cantor set</strong>, which is like the standard Cantor set but has positive Lebesgue measure.
+Let's give an example.</p>
+<div class="theorem-box example-box collapsible-box collapsed" id="ex:fat_cantor_set" data-collapsible-id="collapsible-ex:fat_cantor_set">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-ex:fat_cantor_set')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Example ?</strong> (Fat Cantor Set)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-ex:fat_cantor_set">Start with the interval $[0,1]$ and remove the open middle $1/4$ from it, leaving the two closed intervals $[0,3/8]$ and $[5/8,1]$, each of length $3/8$.
+Call the union of these two intervals $C_1$.
+Next, remove the open middle $1/16$ from each of these two intervals, leaving four closed intervals, each of length $3/16$.
+Call the union of these four intervals $C_2$.
+Continue this process indefinitely, removing the open middle $1/4^n$ from each of the $2^n$ intervals in $C_n$ to form $C_{n+1}$.
+The resulting set
+\[ C^{\text{fat}} = \bigcap_{n=0}^\infty C_n \]
+is a fat Cantor set.
+The set $C^{\text{fat}}$ is closed as it is an intersection of closed sets, and it is totally disconnected (it contains no intervals) by construction.
+Moreover, the Lebesgue measure of $C^{\text{fat}}$ is positive.
+To see this, note that the total length of the intervals removed at each step is
+\[ \sum_{n=1}^\infty 2^{n-1} \cdot \frac{1}{4^n} = \sum_{n=1}^\infty \frac{1}{2^{n+1}} = \frac{1}{2}, \]
+so the Lebesgue measure of $C^{\text{fat}}$ is
+\[ \mathcal{L}^1(C^{\text{fat}}) = 1 - \frac{1}{2} = \frac{1}{2}. \]</div>
+</div>
+<p>In general, we can construct a fat Cantor set with any desired Lebesgue measure in the interval $(0,1)$ by adjusting the lengths of the intervals removed at each step.</p>
+<div class="theorem-box definition-box" id="def:fat_cantor_set">
+  <div class="theorem-header"><strong>Definition ?</strong> (Fat Cantor Set)</div>
+  <div class="theorem-content">Let $\{a_n\}_{n=1}^\infty$ be a sequence of positive numbers such that $\sum_{n=1}^\infty a_n < 1$.
+    A <strong>fat Cantor set</strong> $F$ can be constructed by starting with the interval $F_0 = [0,1]$, letting $F_1$ be the set obtained by removing the open middle interval of length $a_1$ from $F_0$, and letting $F_2$ be the set obtained by removing the open middle intervals of length $a_2$ from each of the two intervals in $F_1$, and so on.
+    For $n \geq 1$, the set $F_n$ is obtained by removing the open middle intervals of length $a_n$ from each of the $2^{n-1}$ intervals in $F_{n-1}$; by induction, $F_n$ consists of $2^n$ closed intervals of total length $1 - \sum_{k=1}^n a_k$.
+    Then the fat Cantor set $F$ is defined as
+    \[ F = \bigcap_{n=0}^\infty F_n. \]</div>
+</div>
+<p>By construction, a fat Cantor set $F$ is closed.
+Moreover, the Lebesgue measure of $F$ is
+\[ \mathcal{L}^1(F) = 1 - \sum_{n=1}^\infty a_n, \]
+which is positive by our assumption on the sequence $\{a_n\}_{n=1}^\infty$.</p>
+<p>These sets are just like the standard Cantor set in many ways.</p>
+<div class="theorem-box exercise-box" id="ex:fat_cantor_set_properties">
+  <div class="theorem-header"><strong>Exercise ?</strong></div>
+  <div class="theorem-content">Prove that a fat Cantor set $F$ is compact, nonempty, perfect, totally disconnected, has uncountably many points, contains no intervals, and is nowhere dense in $[0,1]$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-1">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-1')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-1">
+    The set $F$ is closed as it is an intersection of closed sets, and since $F$ is a closed subset of the compact set $[0,1]$, it follows that $F$ is compact.
+<p>To see that $F$ is nonempty, notice that if $n\geq 0$, then $0$ and $1$ are in the set $F_n$ obtained after $n$ steps of the construction, so $0$ and $1$ are in $F$.
+    More generally, for each $n\geq 0$, the endpoints of each of the $2^n$ intervals in $F_n$ are in $[0,1], F_1, \ldots, F_n$, because they have not been removed in any of the first $n$ steps of the construction;
+    because we are only removing open middle intervals, these endpoints are never removed in any subsequent steps of the construction, so they are all in $F$.
+    That is, if $[a_{n,k}, b_{n,k}]$ is an interval in $F_n$ for some $n\geq 0$ and some $k\in\{1,\ldots,2^n\}$, then $a_{n,k}, b_{n,k} \in F$.
+    Thus we have shown that $F$ actually contains at least countably many points.</p>
+<p>We show that $F$ is perfect, meaning every point of $F$ is a limit point of $F$.
+    Let $x \in F$ and let $\epsilon > 0$.     
+    Then for each $n\geq 0$ the set $F_n$ consists of $2^n$ closed intervals of length $(1 - \sum_{k=1}^n a_k)/2^n$, and since $\sum_{k=1}^\infty a_k$ converging to a number less than $1$, it follows that $(1 - \sum_{k=1}^n a_k)/2^n \to 0$ as $n \to \infty$.
+    As a result, we can fix $N \geq 0$ so that $(1 - \sum_{k=1}^N a_k)/2^N < \epsilon$.
+    That is, the length of each of the $2^N$ intervals in $F_N$ is $<\epsilon$.
+    Since $x \in F \subseteq F_N§$, the point $x$ lies in one of the $2^n$ intervals in $F_n$.
+    Since this interval has length less than $\epsilon$, both of its endpoints are in $F$ (as shown above) and lie within $\epsilon$ of $x$.
+    But this interval also has infinitely many other endpoints of intervals removed in subsequent steps of the construction of $F$, and these endpoints are also in $F$ and lie within $\epsilon$ of $x$.
+    In other words, the set $F \cap (x - \epsilon, x + \epsilon)$ contains infinitely many points.
+    Since $\epsilon > 0$ was arbitrary, we conclude that $x$ is a cluster point of $F$.
+    Since $x\in F$ was arbitrary, we conclude that every point in $F$ is a cluster point of $F$, which means that $F$ is perfect.</p>
+<p>Since $F$ is compact, it must be complete. Since every complete, nonempty, perfect metric space is uncountable, we conclude that $F$ is uncountable.</p>
+<p>To see that $F$ is totally disconnected, let $x\in F$ and let $\epsilon > 0$.
+    Again fix $N \geq 0$ so that each interval in $F_N$ has $<\epsilon$.
+    Then $x\in F_N$, so $x$ is in one of the $2^N$ closed intervals in $F_N$, say $I_{N,k} := [a_{N,k}, b_{N,k}]$ for some $k\in\{1,\ldots,2^N\}$.
+    The compliment $F_N \setminus I_{N,k}$ is a union of finitely many closed intervals, so it is closed.
+    Thus $I_{N,k}$ is open in the relative topology on $F_N$, as its compliment in $F_N$ is closed.
+    As a result, the set $F \cap I_{N,k}$ is both open and closed in the relative topology on $F$.
+    That is, $F\cap I_{N,k}$ is a clopen set in $F$ which is contained in the open interval $(x - \epsilon, x + \epsilon)$.
+    Since $\epsilon > 0$ and $x\in F$ were arbitrary, we conclude that $F$ is totally disconnected.</p>
+<p>Finally, to see that $F$ contains no intervals, suppose to the contrary that $F$ contains an interval $(a,b)$.
+    Then $(a,b) \subseteq F_n$ for all $n\geq 0$. Let $N\geq 0$ be large enough that each interval in $F_N$ has length $<b-a$.
+    Then $(a,b)$ cannot be contained in any of the $2^N$ closed intervals in $F_N$, each of which has length $<b-a$, a contradiction.
+    Thus $F$ contains no intervals.</p>
+<p>To see that $F$ is nowhere dense in $[0,1]$, suppose that $U$ is a nonempty open subset of $[0,1]$ such that $F$ is dense in $U$.
+    That is, we have $\overline{ F \cap U} \supseteq U$. Then $U$ contains an interval $(a,b)$, and since $F$ contains no intervals, this is a contradiction.
+    Thus $F$ is nowhere dense in $[0,1]$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<h3>The Devil's Staircase</h3>
+<p>We can also use the Cantor set to construct a pretty wild function.</p>
+<div class="theorem-box proposition-box" id="prop:singular_function">
+  <div class="theorem-header"><strong>Proposition ?</strong></div>
+  <div class="theorem-content">There exist continuous increasing functions $f : [0,1] \to [0,1]$ such that $f(0) = 0$ and $f(1) = 1$, but $f'(x) = 0$ for almost every $x\in[0,1]$.</div>
+</div>
+<p>There are actually many such functions, but one of the most famous is the <strong>Devil's Staircase</strong>, which is constructed using the standard Cantor set.
+Another famous example which we do not explore here is the Minkowski question mark function.</p>
+<div class="proof-box collapsed" data-proof-id="proof-construction-of-the-devil-s-staircase">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-construction-of-the-devil-s-staircase')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Construction of the Devil's Staircase</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-construction-of-the-devil-s-staircase">
+    \label{ex:devils_staircase}
+Let $C = \bigcup_{n=0}^\infty C_n$ be the standard Cantor set, where $C_n$ is the union of $2^n$ closed intervals of length $3^{-n}$ for each $n\geq 0$.
+<p>Define a sequence of functions $\{f_k\}_{k=0}^\infty$ as follows:
+Let $f_0(x) = x$ for all $x\in[0,1]$.
+For each $k \geq 1$, define a function $f_k$ by
+\[ f_k(x) = \begin{cases}
+    f_{k-1}(3x)/2 & \text{if } x \in [0,1/3], \\
+    1/2 & \text{if } x \in (1/3,2/3), \\
+    1/2 + f_{k-1}(3x - 2)/2 & \text{if } x \in [2/3,1].
+\end{cases} \]
+In other words, $f_k$ is obtained from $f_{k-1}$ by compressing the graph of $f_{k-1}$ horizontally by a factor of $3$, compressing it vertically by a factor of $2$, and placing two copies of this compressed graph on the left and right thirds of the interval $[0,1]$, with a flat segment at height $1/2$ in the middle third.</p>
+<p>We claim that for each $k \geq 0$, the function $f_k$ is continuous, increasing, $f_k(0) = 0$ and $f_k(1) = 1$, and thus maps $[0,1]$ onto $[0,1]$.</p>
+<div class="subproof collapsed" data-subproof-id="subproof-1763576799538-0">
+      <div class="subproof-header">
+        <button class="subproof-toggle" onclick="toggleSubproof('subproof-1763576799538-0')" aria-expanded="false">
+          <span class="subproof-toggle-icon">▼</span>
+          <strong>Proof of Claim</strong>
+        </button>
+      </div>
+      <div class="subproof-content" id="subproof-1763576799538-0">
+        We can prove this by induction on $k$.
+Since 
+\[ \lim_{ x\to \frac{1}{3}^- } f_0(x) = \frac{1}{2}f_0(1) = \frac{1}{2} \] 
+and
+\[ \lim_{ x\to \frac{2}{3}^+ } f_0(x) = \frac{1}{2} + \frac{1}{2}f_0(0) = \frac{1}{2}, \]
+we see that $f_1$ is continuous.
+Since $f_0$ is increasing, we have $f_1(x) \leq f_1(y)$ for all $x,y \in [0,1]$ with $x < y$.
+Moreover, $f_1(0) = 0$ and $f_1(1) = 1$, so $f_1$ maps $[0,1]$ onto $[0,1]$.
+<p>Now suppose that for some $k\geq 1$, the function $f_k$ is continuous, increasing, and $f_k(0) = 0$ and $f_k(1) = 1$.
+Then we see that
+\[ \lim_{ x\to \frac{1}{3}^- } f_{k+1}(x) = \frac{1}{2}f_k(1) = \frac{1}{2} \]
+since $f_k(1) = 1$ by the induction hypothesis, and
+\[ \lim_{ x\to \frac{2}{3}^+ } f_{k+1}(x) = \frac{1}{2} + \frac{1}{2}f_k(0) = \frac{1}{2} \]
+since $f_k(0) = 0$ by the induction hypothesis.
+Thus $f_{k+1}$ is continuous.
+Since $f_k$ is increasing, we have $f_{k+1}(x) \leq f_{k+1}(y)$ for all $x,y \in [0,1]$ with $x < y$.
+Moreover, $f_{k+1}(0) = 0$ and $f_{k+1}(1) = 1$ by the induction hypothesis, so $f_{k+1}$ maps $[0,1]$ onto $[0,1]$.
+By induction, we conclude that for each $k\geq 0$, the function $f_k$ is continuous, increasing, and maps $[0,1]$ onto $[0,1]$.
+        <span class="proof-end">□</span>
+      </div>
+    </div></p>
+<p>Now we claim that the sequence of functions $\{f_k\}_{k=0}^\infty$ satisfies
+\[ |f_k(x) - f_{k-1}(x)| \leq 2^{-k} \quad \forall x\in[0,1], \ k\geq 1. \]</p>
+<div class="subproof collapsed" data-subproof-id="subproof-1763576799538-1">
+      <div class="subproof-header">
+        <button class="subproof-toggle" onclick="toggleSubproof('subproof-1763576799538-1')" aria-expanded="false">
+          <span class="subproof-toggle-icon">▼</span>
+          <strong>Proof of Claim</strong>
+        </button>
+      </div>
+      <div class="subproof-content" id="subproof-1763576799538-1">
+        To see this, again we use induction on $k$.
+<p>For $k=1$, we have
+\[ |f_1(x) - f_0(x)| = \begin{cases}
+    |f_0(3x)/2 - x| & \text{if } 0 \leq x \leq 1/3, \\
+    |1/2 - x| & \text{if } 1/3 < x < 2/3, \\
+    |1/2 + f_0(3x - 2)/2 - x| & \text{if } 2/3 \leq x \leq 1.
+\end{cases} \]
+If $0 \leq x \leq \frac{1}{3}$, then
+\[ |f_1(x) - f_0(x)| = \left|\frac{3x}{2} - x\right| = \frac{x}{2} \leq \frac{1}{6} < \frac{1}{2}. \]
+If $\frac{1}{3} < x < \frac{2}{3}$, then
+\[ |f_1(x) - f_0(x)| = |1/2 - x| \leq \max\{ |1/2 - 1/3|, |1/2 - 2/3| \} = 1/6 < 1/2. \]
+If $\frac{2}{3} \leq x \leq 1$, then
+\[ |f_1(x) - f_0(x)| = \left| \frac{1}{2} + \frac{3x - 2}{2} - x \right| = \left| \frac{1}{2} - \frac{x}{2} \right| \leq 1 - \frac{1}{2}. \] 
+Thus for all $x\in[0,1]$, we have
+\[ |f_1(x) - f_0(x)| \leq \frac{1}{2} = 2^{-1}. \]
+This establishes the base case.</p>
+<p>Now suppose that for some $k\geq 1$, we have
+\[ |f_k(x) - f_{k-1}(x)| \leq 2^{-k} \quad \forall x\in[0,1]. \]</p>
+<p>If $\frac{1}{3} < x < \frac{2}{3}$, then
+\[ |f_{k+1}(x) - f_k(x)| = \left|\frac{1}{2} - \frac{1}{2} \right| = 0 \]</p>
+<p>If $0 \leq x \leq \frac{1}{3}$, then
+\[ |f_{k+1}(x) - f_k(x)| = \left|\frac{1}{2}f_k(3x) - f_k(x)\right| = \frac{1}{2} \left| f_k(3x) - f_{k-1}(3x) \right| \leq \frac{1}{2} \cdot 2^{-k} = 2^{-(k+1)}. \]
+If $\frac{1}{3} \leq x \leq \frac{2}{3}$, then 
+\[ |f_{k+1}(x) - f_k(x)| = \left|\frac{1}{2} - \frac{1}{2} \right| = 0. \]
+If $\frac{2}{3} \leq x \leq 1$, then
+\[ |f_{k+1}(x) - f_k(x)| = \left| \frac{1}{2} + \frac{1}{2}f_k(3x - 2) - f_k(x) \right| = \frac{1}{2} \left| f_k(3x - 2) - f_{k-1}(3x - 2) \right| \leq \frac{1}{2} \cdot 2^{-k} = 2^{-(k+1)}. \]
+Thus for all $x\in[0,1]$, we have
+\[ |f_{k+1}(x) - f_k(x)| \leq 2^{-(k+1)}. \]
+By induction, we conclude that for all $k\geq 1$ and all $x\in[0,1]$, we have
+\[ |f_k(x) - f_{k-1}(x)| \leq 2^{-k}. \]
+        <span class="proof-end">□</span>
+      </div>
+    </div></p>
+<p>In other words, for each $k\geq 1$ we have
+\[ \|f_k - f_{k-1}\|_\infty = \sup_{x\in[0,1]} |f_k(x) - f_{k-1}(x)| \leq 2^{-k}. \]
+By Exercise <span class="ref-unknown" title="Reference not found: ex:sufficient_condition_cauchy_sequence">[ex:sufficient_condition_cauchy_sequence?]</span>, this implies that the sequence of functions $\{f_k\}_{k=0}^\infty$ is a Cauchy sequence in $C^0([0,1])$ with the supremum norm $\|\cdot\|_\infty$.
+Since $C^0([0,1])$ is complete with respect to the supremum norm, there exists a continuous function $f:[0,1] \to \R$ such that
+\[ \|f_k - f\|_\infty \to 0 \quad \text{as } k \to \infty. \]
+In other words, the sequence $\{f_k\}_{k=0}^\infty$ converges uniformly to $f$ on $[0,1]$.</p>
+<p>The function $f$ is called the <strong>Devil's staircase</strong> or the <strong>Cantor function</strong>.</p>
+<p>By construction, the function $f$ is continuous.
+We claim that $f$ is increasing and that $f(0) = 0$ and $f(1) = 1$, so $f$ maps $[0,1]$ onto $[0,1]$.
+To see this, let $x,y \in [0,1]$ with $x < y$.
+Since each $f_k$ is increasing, we have $f_k(x) \leq f_k(y)$ for all $k\geq 0$.
+Taking the limit as $k \to \infty$, we get
+\[ f(x) = \lim_{k\to\infty} f_k(x) \leq \lim_{k\to\infty} f_k(y) = f(y). \]
+Thus $f$ is increasing.
+Moreover, since $f_k(0) = 0$ and $f_k(1) = 1$ for all $k\geq 0$, we have
+\[ f(0) = \lim_{k\to\infty} f_k(0) = 0 \quad\text{and}\quad f(1) = \lim_{k\to\infty} f_k(1) = 1. \]
+Thus $f$ maps $[0,1]$ onto $[0,1]$.</p>
+<p>Our final claim is that the function $f$ is differentiable at each point in $[0,1] \setminus C$ with derivative zero, and that $f$ is not differentiable at any point in the Cantor set $C$.
+To see this, let $x \in [0,1] \setminus C$.
+Then $x$ is in the interior of one of the intervals removed in the construction of $C$, say at the $N$-th step; for each $k \geq N$, the function $f_k$ is constant on this interval, so $f$ is also constant on this interval.
+Thus $f$ is differentiable at $x$ with derivative zero.
+That is, the derivative of $f$ exists and is equal to zero at each point in $[0,1] \setminus C$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<figure class="latex-figure" id="fig:devil_staircase">
+  <div class="figure-content"><img src="../../figures/figures/devil-step.png" alt="The Devil's Staircase" class="latex-image" style="width: 50%;" onerror="this.style.border='3px solid red'; this.style.padding='20px'; this.style.background='#fee'; this.alt='Image not found: ../../figures/figures/devil-step.png'; console.error('Failed to load: ../../figures/figures/devil-step.png');"></div>
+  <figcaption>The Devil's Staircase</figcaption>
+</figure>
+<div class="theorem-box exercise-box" id="ex:sufficient_condition_cauchy_sequence">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Sufficient Condition for Cauchy Sequence)</div>
+  <div class="theorem-content">Let $(X,d)$ be a metric space, let $\{ x_k \}_{k=1}^\infty$ be a sequence of points in $X$, and let $\{ r_k \}_{k=1}^\infty$ be a sequence of positive real numbers such that $\sum_{k=1}^\infty r_k < \infty$.
+    If \[ d(x_{k+1}, x_k) \leq r_k \quad \forall k \in \mathbb{Z}^+, \]
+    then $\{ x_n \}_{n=1}^\infty$ is a Cauchy sequence.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-3">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-3')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-3">
+    Let $\epsilon > 0$.
+    Since $\sum_{k=1}^\infty r_k < \infty$, there exists $N \in \mathbb{Z}^+$ such that
+    \[ \sum_{k=N+1}^\infty r_k < \epsilon. \]
+    Then for all $m\geq n > N$, we have
+    \[ d(x_m, x_n) \leq d(x_m, x_{m-1}) + d(x_{m-1}, x_{m-2}) + \cdots + d(x_{n+1}, x_n) \leq \sum_{k=n}^{m-1} r_k \leq \sum_{k=N+1}^\infty r_k < \epsilon. \]
+    Thus $\{ x_n \}_{n=1}^\infty$ is a Cauchy sequence.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<div class="theorem-box exercise-box" id="ex:symmetry_of_cantor_function">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Symmetry of the Cantor Function)</div>
+  <div class="theorem-content">Show that the Cantor function $f$ satisfies 
+    \[ f(1-x) = 1 - f(x) \quad \forall x \in [0,1] \]
+    and \[ f\left( \frac{x}{3} \right) = \frac{f(x)}{2} \quad \forall x \in [0,1] \]
+    and \[ f\left( \frac{2+x}{3} \right) = \frac{1}{2} + \frac{f(x)}{2} \quad \forall x \in [0,1]. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-4">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-4')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-4">
+    Let $x \in [0,1]$.
+<p><em>First identity:</em>
+We claim that $f_k(1-x) = 1 - f_k(x)$ for all $k\geq 0$ and all $x\in[0,1]$.
+We prove this by induction on $k$.</p>
+<p>For $k=0$, we have
+\[ f_0(1-x) = 1 - x = 1 - f_0(x) \]
+for each $x\in[0,1]$.</p>
+<p>Now suppose that for some $k\geq 0$, we have $f_k(1-x) = 1 - f_k(x)$ for each $x\in[0,1]$.
+Then we show the same is true for $f_{k+1}$. We consider three cases.</p>
+<p>If $0 \leq x \leq \frac{1}{3}$, then $1-x \in [\frac{2}{3},1]$ and
+\begin{align*}
+    f_{k+1}(1-x) &= \frac{1}{2} + \frac{1}{2}f_k(3(1-x) - 2) \\
+        &= \frac{1}{2} + \frac{1}{2}f_k(1 - 3x) \\
+        &= \frac{1}{2} + \frac{1}{2}(1 - f_k(3x)) \\
+        &= 1 - \frac{1}{2}f_k(3x) \\
+        &= 1 - f_{k+1}(x).
+\end{align*}</p>
+<p>If $\frac{1}{3} < x < \frac{2}{3}$, then $1-x \in (\frac{1}{3},\frac{2}{3})$ and
+\[ f_{k+1}(1-x) = \frac{1}{2} = 1 - \frac{1}{2} = 1 - f_{k+1}(x). \]</p>
+<p>If $\frac{2}{3} \leq x \leq 1$, then $1-x \in [0,\frac{1}{3}]$ and by using the first case we have
+\[ f_{k+1}(x) = f_{k+1}(1 - (1-x)) = 1 - f_{k+1}(1-x) \]
+which rearranges to
+\[ f_{k+1}(1-x) = 1 - f_{k+1}(x). \]</p>
+<p>By induction, we conclude that for all $k\geq 0$ and all $x\in[0,1]$, we have
+\[ f_k(1-x) = 1 - f_k(x). \]</p>
+<p>Taking the limit as $k \to \infty$, we get
+\[ f(1-x) = \lim_{k\to\infty} f_k(1-x) = \lim_{k\to\infty} (1 - f_k(x)) = 1 - f(x) \]
+for each $x\in[0,1]$, so the first identity holds.</p>
+<p><div style="margin: 1em 0;"></div>
+<em>Second Identity:</em>
+Suppose that $x \in [0,1]$.
+Then $\frac{x}{3}$ so we have
+\[ f\left( \frac{x}{3} \right) = \lim_{k\to\infty} f_k\left( \frac{x}{3} \right) = \lim_{k\to\infty} \frac{f_{k-1}(x)}{2} = \frac{f(x)}{2}. \]
+Since $x\in[0,1]$ was arbitrary, the second identity holds.</p>
+<p><div style="margin: 1em 0;"></div>
+<em>Third Identity:</em>
+Suppose that $x \in [0,1]$.
+Then $\frac{2+x}{3} \in [\frac{2}{3},1]$ so we have
+\begin{align*}
+    f\left( \frac{2+x}{3} \right) &= \lim_{k\to\infty} f_k\left( \frac{2+x}{3} \right) \\
+        &= \lim_{k\to\infty} \left( \frac{1}{2} + \frac{1}{2}f_{k-1}(x) \right) \\
+        &= \frac{1}{2} + \frac{{f(x)}}{2}.
+\end{align*}
+Since $x\in[0,1]$ was arbitrary, the third identity holds.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+    </main>
+  </div>
+  
+  <script>
+    function toggleChapter(element) {
+      element.parentElement.classList.toggle('expanded');
+    }
+    
+    // Highlight current page in sidebar
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPath = window.location.pathname;
+      const links = document.querySelectorAll('.section-link');
+      links.forEach(link => {
+        if (currentPath.endsWith(link.getAttribute('href').split('/').pop())) {
+          link.classList.add('active');
+          // Expand parent chapter
+          const group = link.closest('.chapter-group');
+          if (group) group.classList.add('expanded');
+        }
+      });
+    });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('Restoring proof collapse states...');
+      try {
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        const currentPage = window.location.pathname;
+        const pageOpen = openProofs[currentPage] || [];
+        
+        console.log('Current page:', currentPage);
+        console.log('Open proof IDs stored:', pageOpen);
+        console.log('Found ' + pageOpen.length + ' open proofs for this page');
+        
+        document.querySelectorAll('.proof-box').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          console.log('Checking proof:', proofId, 'Should be open:', pageOpen.includes(proofId));
+          if (pageOpen.includes(proofId)) {
+            box.classList.remove('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'true');
+          } else {
+            box.classList.add('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        const pageBoxes = openBoxes[currentPage] || [];
+        
+        console.log('Open box IDs stored:', pageBoxes);
+        
+        document.querySelectorAll('.collapsible-box').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          console.log('Checking box:', boxId, 'Should be open:', pageBoxes.includes(boxId));
+          if (pageBoxes.includes(boxId)) {
+            box.classList.remove('collapsed');
+          } else {
+            box.classList.add('collapsed');
+          }
+        });
+        
+        console.log('Proof states restored');
+      } catch (e) {
+        console.error('Error restoring collapse state:', e);
+      }
+    });
+    
+    function toggleProof(proofId) {
+      const proofContent = document.getElementById(proofId);
+      const proofBox = proofContent.closest('.proof-box');
+      proofBox.classList.toggle('collapsed');
+      
+      const button = proofBox.querySelector('.proof-toggle');
+      button.setAttribute('aria-expanded', !proofBox.classList.contains('collapsed'));
+      
+      saveProofState();
+    }
+    
+    function toggleSubproof(subproofId) {
+      const subproofContent = document.getElementById(subproofId);
+      const subproof = subproofContent.closest('.subproof');
+      subproof.classList.toggle('collapsed');
+      
+      const button = subproof.querySelector('.subproof-toggle');
+      button.setAttribute('aria-expanded', !subproof.classList.contains('collapsed'));
+    }
+    
+    function saveProofState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        if (!openProofs[currentPage]) {
+          openProofs[currentPage] = [];
+        }
+        
+        openProofs[currentPage] = [];
+        document.querySelectorAll('.proof-box:not(.collapsed)').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          if (proofId) {
+            openProofs[currentPage].push(proofId);
+          }
+        });
+        
+        localStorage.setItem('openProofs', JSON.stringify(openProofs));
+        console.log('Saved proof state (open proofs):', openProofs[currentPage]);
+      } catch (e) {
+        console.error('Error saving collapse state:', e);
+      }
+    }
+    
+    function toggleCollapsible(collapsibleId) {
+      const content = document.getElementById(collapsibleId);
+      const box = content.closest('.collapsible-box');
+      box.classList.toggle('collapsed');
+      
+      saveCollapsibleState();
+    }
+    
+    function saveCollapsibleState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        if (!openBoxes[currentPage]) {
+          openBoxes[currentPage] = [];
+        }
+        
+        openBoxes[currentPage] = [];
+        document.querySelectorAll('.collapsible-box:not(.collapsed)').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          if (boxId) {
+            openBoxes[currentPage].push(boxId);
+          }
+        });
+        
+        localStorage.setItem('openBoxes', JSON.stringify(openBoxes));
+      } catch (e) {
+        console.error('Error saving box state:', e);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        const proofBoxes = document.querySelectorAll('.proof-box');
+        const anyExpanded = Array.from(proofBoxes).some(box => !box.classList.contains('collapsed'));
+        
+        proofBoxes.forEach(box => {
+          if (anyExpanded) {
+            box.classList.add('collapsed');
+          } else {
+            box.classList.remove('collapsed');
+          }
+        });
+        
+        saveProofState();
+      }
+    });
+    
+    document.querySelectorAll('a.ref-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.background = '#fef3c7';
+          target.style.transition = 'background 0.3s ease';
+          setTimeout(() => { target.style.background = ''; }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

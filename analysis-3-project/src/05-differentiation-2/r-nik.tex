@@ -1,0 +1,335 @@
+
+
+\section{The Radon-Nikodym Theorem}
+
+The Radon-Nikodym Theorem is a fundamental result in measure theory that generalizes the concept of derivatives to measures.
+
+First we need a lemma.
+
+\begin{lemma}
+    \label{lem:radon_nik_lemma}
+    Let $(X,\mathcal{A},\mu)$ be a measure space, and let $\lambda$ be another measure on $(X,\mathcal{A})$ that is absolutely continuous with respect to $\mu$ and is not the zero measure.
+    Then there exists a positive number $\epsilon > 0$ and a measurable set $A_0 \in \mathcal{A}$ such that
+    $\mu(A_0) > 0$ and $A_0$ is positive with respect to the signed measure $\lambda - \epsilon \mu$, i.e.
+    \[ \lambda( A ) - \epsilon \mu( A ) \geq 0 \quad\text{ for all } A \in \mathcal{A} \text{ such that } A \subseteq A_0. \]
+\end{lemma}
+\begin{proof}
+    Let $N \in \mathbb{Z}^+$ be arbitrary; consider the signed measure $\lambda - \frac{1}{N} \mu$.
+    Then let 
+    \[ X = A^+_N \cup A_N^- \]
+    be a Hahn decomposition (\ref{thm:hahn_decomposition}) for this signed measure.
+
+    Let 
+    \[ A^+ = \bigcap_{N=1}^\infty A_N^+ \quad\text{ and }\quad A^- = \bigcap_{N=1}^\infty A_N^-. \]
+    Then for each $N \in \Z^+$ we have \[ \lambda(A^-) \leq \frac{1}{N} \mu(A^-) \]
+    which implies that $\lambda(A^-) = 0$. 
+    Hence we must have $\lambda(A^+) > 0$ since $\lambda$ is not the zero measure.
+    But then absolute continuity of $\lambda$ with respect to $\mu$ implies that $\mu(A^+) > 0$.
+    By \ref{properties_of_signed_measures}, we see that
+    \[ \lim_{N \to \infty} \mu(A_N^+) = \mu(A^+) \]
+    because the sets $A_N^+$ are decreasing and $A^+ = \bigcap_{N=1}^\infty A_N^+$.
+    Thus there exists some $N \in \Z^+$ such that $\mu(A_N^+) > 0$, and we may take $A_0 = A_N^+$.
+
+    That is, for this choice of $N$, we have
+    \[ \lambda(A) - \frac{1}{N} \mu(A) \geq 0 \quad\text{ for all } A \in \mathcal{A} \text{ such that } A \subseteq A_0. \]
+    The proof is complete.
+\end{proof}
+
+\begin{theorem}[Radon-Nikodym Theorem for Signed Measures]
+    \label{thm:radon_nikodym_signed_measure}
+    Let $(X,\mathcal{A},\mu)$ be a measure space, and let $\nu$ be a signed measure on $(X,\mathcal{A})$ that is absolutely continuous with respect to $\mu$.
+    Then there exists a unique $f \in L^1(X,\mu)$ such that
+    \[ \nu(A) = \int_A f \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]
+\end{theorem}
+
+Thus our primary example is essentially the only example.
+After the proof, we will discuss how this is a generalization of the fundamental theorem of calculus.
+
+The more popular proof is by John von Neumann using Hilbert spaces, but we will present the more elementary proof found in Kolmogorov and Fomin.
+\begin{proof}
+    If $\nu$ is the zero measure, then $f = 0$ works, and uniqueness $\mu$-almost everywhere is clear.
+    Thus we may assume that $\nu$ is not the zero measure. We let
+    \[ \mathcal{K} := \left\{ f\in L^1(X,\mu) : \int_A f\,\dif\mu \leq \nu(A) \ \ \text{ for all }\  A \in \mathcal{A} \right\} \]
+    and let
+    \[ M := \sup \left\{ \int_X f \,\dif \mu : f \in \mathcal{K} \right\}. \]
+    Then there exists a sequence of functions $\{ f_k \}_{k=1}^\infty \subseteq \mathcal{K}$ such that
+    \[ \lim_{k\to\infty} \int_X f_k \,\dif \mu = M. \]
+    For each $n \in \Z^+$ we define
+    \[ g_n := \max \{ f_1, f_2, \ldots, f_n \}. \]
+    Then we obtain an increasing sequence $\{ g_n \}_{n=1}^\infty$ of measurable functions on $X$ and we claim that
+    \[ g_n \in \mathcal{K} \quad\text{ for all } n \in \Z^+. \]
+
+    To see this, fix $n\in \Z^+$ and let $A \in \mathcal{A}$ be arbitrary.
+    Then there are disjoint sets $A_{n,1},A_{n,2},\ldots,A_{n,n} \in \mathcal{A}$ such that
+    \[ A = \bigcup_{k=1}^n A_{n,k} \quad\text{ and }\quad g_n(x) = f_k(x) \text{ for all } x \in A_{n,k}. \]
+    Thus we have
+    \begin{align*}
+        \int_A g_n \,\dif \mu &= \int_{\bigcup_{k=1}^n A_{n,k}} g_n\,\dif \mu = \sum_{k=1}^n \int_{A_{n,k}} f_k \,\dif \mu \\
+        &\leq \sum_{k=1}^n \nu(A_{n,k}) = \nu(A)
+    \end{align*}
+    since $f_k \in \mathcal{K}$ for all $k \in \{1,2,\ldots,n\}$.
+    Since $A\in \mathcal{A}$ was arbitrary, this shows $g_n \in \mathcal{K}$.
+    Since $n \in \Z^+$ was arbitrary, the claim is proved.
+
+    Since $\{ g_n \}_{n=1}^\infty$ is an increasing sequence of measurable functions in $\mathcal{K}$ we must have
+    \[ \lim_{n\to\infty} \int_X g_n \,\dif \mu = M. \]
+    We check this --- by virtue of $\{ g_n \}_{n=1}^\infty \subseteq \mathcal{K}$, the inequality $\lim_{n\to\infty} \int_X g_n \,\dif \mu \leq M$ is clear.
+    If we had a strict inequality $\lim_{n\to\infty} \int_X g_n \,\dif \mu < M$, then monotonicity of the integral would imply that
+    \[ \lim_{k\to\infty} \int_X f_k \,\dif \mu \leq \lim_{n\to\infty} \int_X g_n \,\dif \mu < M, \]
+    contradicting our choice of $\{ f_k \}_{k=1}^\infty$.
+    Thus we have equality as desired.
+
+    We now define
+    \[ f(x) := \lim_{n\to\infty} g_n(x) = \sup_{n\in \Z^+} g_n(x) \]
+    for all $x \in X$.
+    Then $f$ is a measurable function on $X$, as a limit of measurable functions, and the Bounded Convergence Theorem \ref{thm:bounded_convergence_theorem} implies that $f\in L^1(X,\mu)$ and
+    \[ \int_X f \,\dif \mu = \int_X \lim_{n\to\infty} g_n \,\dif \mu = \lim_{n\to\infty} \int_X g_n \,\dif \mu = M < \infty. \]
+    
+    We now show that $f$ is the required function.
+
+    We define a set function $\lambda : \mathcal{A} \to \R$ by
+    \[ \lambda(A) := \nu(A) - \int_A f \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]
+    Then $\lambda$ is a signed measure on $(X,\mathcal{A})$.
+    Since we must have $f \in \mathcal{K}$, it follows that $\lambda$ is a nonnegative measure, i.e. $\lambda(A) \geq 0$ for all $A \in \mathcal{A}$.
+    We claim that $\lambda$ is the zero measure.
+
+    Assume towards a contradiction that this is not the case, and there is a set $E\in \mathcal{A}$ for which $\lambda(E) > 0$.
+    Then by Lemma \ref{lem:radon_nik_lemma} there exists $\epsilon > 0$ and a measurable set $A_0 \in \mathcal{A}$ such that $\mu(A_0) > 0$ and
+    \[ \lambda(A) - \epsilon \mu(A) \geq 0 \quad\text{ for all } A \in \mathcal{A} \text{ such that } A \subseteq A_0. \]
+    That is, 
+    \[ \epsilon \mu(A) \leq \lambda(A) \quad \text{ for all } A \in \mathcal{A} \text{ such that } A \subseteq A_0. \]
+    We define
+    \[ h(x) := f(x) + \epsilon \chi_{A_0}(x) \qquad \forall x \in X. \]
+    Then for each $A \in \mathcal{A}$ we have
+    \begin{align*}
+        \int_A h \,\dif \mu &= \int_A f\,\dif \mu + \int_A \epsilon \chi_{A_0} \,\dif \mu = \int_A f \,\dif \mu + \epsilon \mu(A \cap A_0) \\
+            &\leq \nu(A) - \lambda(A) + \lambda(A \cap A_0) = \nu(A)
+    \end{align*}
+    which shows that $h \in \mathcal{K}$.
+    However, we also have
+    \[ \int_X h \,\dif \mu = \int_X f \,\dif \mu + \epsilon \mu(A_0) > M \]
+    since $\mu(A_0) > 0$.
+    This contradicts the definition of $M$ as a supremum, and implies that $\lambda$ is the zero measure.
+    As a result, we have
+    \[ \nu(A) = \int_A f \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]
+
+    It remains to show that the integrable function $f$ is unique in $L^1(X,\mu)$.
+    Recall that $L^1(X,\mu)$ is defined as the set of equivalence classes of functions that are equal $\mu$-almost everywhere, so we need to show that if $f^\star \in L^1(X,\mu)$ is another function such that
+    \[ \nu(A) = \int_A f^\star \,\dif \mu \quad\text{ for all } A \in \mathcal{A}, \]
+    then $f = f^\star$ $\mu$-almost everywhere.
+
+    We let
+    \[ E := \{ x \in X : f(x) \neq f^\star(x) \} \]
+    and see that
+    \[ E = \bigcup_{n=1}^\infty \left( \left\{ x\in X : f(x) - f^\star(x) > \frac{1}{n} \right\} \cup \left\{ x \in X : f^\star(x) - f(x) > \frac{1}{n} \right\} \right). \]
+    For each $n \in \Z^+$ Chebyshev's inequality \ref{lem:chebyshevs_inequality} implies that
+    \[ \mu\left( \left\{ x\in X: f(x) - f^\star(x) > \frac{1}{n} \right\} \right) \leq n \cdot\int_{ \left\{ x\,:\, f(x) - f^\star(x) > \frac{1}{n} \right\} } |f - f^\star| \,\dif \mu = 0 \]
+    and similarly
+    \[ \mu\left( \left\{ x\in X: f^\star(x) - f(x) > \frac{1}{n} \right\} \right) = 0. \]
+    Thus we have $\mu(E) = 0$, as the countable union of $\mu$ measure zero sets has $\mu$ measure zero.
+    This shows that $f = f^\star$ $\mu$-almost everywhere, and the proof is complete.
+\end{proof}
+
+\begin{corollary}[Radon-Nikodym Theorem for Vector Measures]
+    \label{cor:radon_nikodym_vector_measure}
+    Let $(X,\mathcal{A},\mu)$ be a measure space, and let $\nu$ be a vector measure on $(X,\mathcal{A})$ taking values in $\R^m$ that is absolutely continuous with respect to $\mu$.
+    Then there exists a unique function $f \in L^1(X,\mu;\R^m)$ such that
+    \[ \nu(A) = \int_A f \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]
+\end{corollary}
+\begin{proof}
+    For each $k \in \{1,2,\ldots,m\}$ we define the signed measure $\nu_k : \mathcal{A} \to \R$ by
+    \[ \nu_k(A) := \langle \nu(A), e_k \rangle \quad\text{ for all } A \in \mathcal{A} \]
+    where $e_1, e_2, \ldots, e_m$ is the standard basis for $\R^m$.
+    Then for each $k \in \{1,2,\ldots,m\}$ the signed measure $\nu_k$ is absolutely continuous with respect to $\mu$ since 
+    \[ |\nu_k(A)| = | \langle \nu(A), e_k \rangle | \leq \| \nu(A) \| \cdot \| e_k \| = \| \nu(A) \| \]
+    for all $A \in \mathcal{A}$.
+    Thus for each $k \in \{1,2,\ldots,m\}$ we may apply Theorem \ref{thm:radon_nikodym_signed_measure} to obtain a unique $f_k \in L^1(X,\mu)$ such that
+    \[ \nu_k(A) = \int_A f_k \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]
+    We then define the function $f : X \to \R^m$ by
+    \[ f(x) := \sum_{k=1}^m f_k(x) e_k \quad\text{ for all } x \in X. \]
+    Then $f \in L^1(X,\mu;\R^m)$ since each $f_k \in L^1(X,\mu)$, and for each $A \in \mathcal{A}$ we have
+    \begin{align*}
+        \int_A f \,\dif \mu &= \int_A \sum_{k=1}^m f_k(x) e_k \,\dif \mu(x) = \sum_{k=1}^m \left( \int_A f_k(x) \,\dif \mu(x) \right) e_k \\
+            &= \sum_{k=1}^m \nu_k(A) e_k = \sum_{k=1}^m \langle \nu(A), e_k \rangle e_k = \nu(A)
+    \end{align*}
+    which shows existence.
+    Uniqueness follows from the uniqueness in Theorem \ref{thm:radon_nikodym_signed_measure} applied to each component.
+\end{proof}
+
+By combining the Lebesgue Decomposition Theorem \ref{thm:lebesgue_decomposition_theorem} and the Radon-Nikodym Theorem for $\R^m$-valued vector measures, we obtain the following fundamental result.
+\begin{corollary}[Lebesgue-Radon-Nikodym Theorem]
+    \label{cor:lebesgue_radon_nikodym_theorem}
+    Let $(X,\mathcal{A},\mu)$ be a measure space, and let $\nu$ be a vector measure on $(X,\mathcal{A})$ taking values in $\R^m$.
+    Then there exist unique vector measures $\nu_{\text{ac}}$ and $\nu_{\text{s}}$ on $(X,\mathcal{A})$ such that
+    \begin{enumerate}
+        \item $\nu = \nu_{\text{ac}} + \nu_{\text{s}}$,
+        \item $\nu_{\text{ac}} \ll \mu$,
+        \item $\nu_{\text{s}} \perp \mu$,
+    \end{enumerate}
+    and there exists a unique function $f \in L^1(X,\mu;\R^m)$ such that
+    \[ \nu(A) = \int_A f \,\dif \mu + \nu_{\text{s}}(A) \quad\text{ for all } A \in \mathcal{A}. \]
+\end{corollary}
+
+\begin{proof}
+    The existence and uniqueness of the measures $\nu_{\text{ac}}$ and $\nu_{\text{s}}$ follow from the Lebesgue Decomposition Theorem \ref{thm:lebesgue_decomposition_theorem}.
+    Since $\nu_{\text{ac}} \ll \mu$, the Radon-Nikodym Theorem for Vector Measures \ref{cor:radon_nikodym_vector_measure} implies that there exists a unique function $f \in L^1(X,\mu;\R^m)$ such that
+    \[ \nu_{\text{ac}}(A) = \int_A f \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]
+    Thus we have
+    \begin{align*}
+        \nu(A) &= \nu_{\text{ac}}(A) + \nu_{\text{s}}(A) \\
+            &= \int_A f \,\dif \mu + \nu_{\text{s}}(A)
+    \end{align*}
+    for all $A \in \mathcal{A}$, and the proof is complete.
+\end{proof}
+
+\begin{definition}
+    \label{def:radon_nikodym_derivative}
+    Let $(X,\mathcal{A},\mu)$ be a measure space, and let $\nu$ be a vector measure on $(X,\mathcal{A})$ that is absolutely continuous with respect to $\mu$.
+    The \textit{Radon-Nikodym derivative} of $\nu$ with respect to $\mu$ is the unique function $f \in L^1(X,\mu;\R^m)$ such that
+    \[ \nu(A) = \int_A f \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]
+    We denote the Radon-Nikodym derivative by $D_\mu \nu$ or $\pd{\nu}{\mu}$.
+\end{definition}
+
+Some people also write $ \nu = \mu \mres f $ or $\dif \nu = f \,\dif \mu$ to denote this relationship, but we will not use this notation.
+
+With our preferred notation, the Radon-Nikodym theorem states that if $\nu$ is a signed measure absolutely continuous with respect to $\mu$, then
+\[ \pd{\nu}{\mu} \in L^1(X,\mu) \quad\text{ and }\quad \nu(A) = \int_A \pd{\nu}{\mu} \,\dif \mu \text{ for all } A \in \mathcal{A} \]
+which shows how it can be viewed as a generalization of the fundamental theorem of calculus.
+
+\begin{corollary}[$\pd{\nu}{|\nu|}$ has Unit Norm]
+    \label{cor:radon_nikodym_derivative_unit_norm}
+    Let $(X,\mathcal{A},\mu)$ be a measure space, and let $\nu$ be a vector measure on $(X,\mathcal{A})$ taking values in $\R^m$ that is absolutely continuous with respect to $\mu$.
+    Then the Radon-Nikodym derivative $\pd{\nu}{|\nu|} : X \to \R^m$ satisfies
+    $ \left\| \pd{\nu}{|\nu|}(x) \right\| = 1$
+    for $|\nu|$-almost every $x \in X$.
+\end{corollary}
+
+\begin{proof}
+    Since $\nu \ll |\nu|$, the Radon-Nikodym Theorem for Vector Measures \ref{cor:radon_nikodym_vector_measure} implies that there exists a unique function $f \in L^1(X,|\nu|;\R^m)$ such that
+    \[ \nu(A) = \int_A f \,\dif |\nu| \quad\text{ for all } A \in \mathcal{A}. \]
+    By \ref{prop:total_variation_of_vector_measure_from_L1_function}, we have
+    \[ |\nu|(A) = \int_A \| f(x) \| \,\dif |\nu|(x) \quad\text{ for all } A \in \mathcal{A}. \]
+    In particular, taking $A = X$ gives
+    \[ |\nu|(X) = \int_X \| f(x) \| \,\dif |\nu|(x). \]
+    Thus we must have $\| f(x) \| = 1$ for $|\nu|$-almost every $x \in X$.
+    By definition, $f$ is the Radon-Nikodym derivative $\pd{\nu}{|\nu|}$, so we are done.
+\end{proof}
+
+In the case that we have two $\sigma$-finite measures, we have the following version of the Radon-Nikodym theorem.
+\begin{corollary}[Radon-Nikodym Theorem for $\sigma$-Finite Measures]
+    \label{cor:radon_nikodym_finite_sigma_finite}
+    Let $(X,\mathcal{A},\mu)$ be a $\sigma$-finite measure space, and let $\nu$ be a $\sigma$-finite measure on $(X,\mathcal{A})$ that is absolutely continuous with respect to $\mu$.
+    Then there exists a unique measurable function $f : X \to [0,\infty)$ such that
+    \[ \nu(A) = \int_A f \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]
+\end{corollary}
+
+Notice that we need \emph{both} measures to be $\sigma$-finite, and we lose the conclusion of integrability of $f$ in this case.
+\begin{proof}
+    In the case that $\nu$ is a finite measure, then $\nu$ is also a signed measure, and we may apply Theorem \ref{thm:radon_nikodym_signed_measure} to obtain the desired result.
+
+    Now assume that $\nu$ is a $\sigma$-finite measure.
+    Then there exists a disjoint sequence of sets $\{ X_k \}_{k=1}^\infty \subseteq \mathcal{A}$ such that
+    \[ X = \bigcup_{k=1}^\infty X_k \quad\text{ and }\quad \nu(X_k) < \infty \quad\text{ for all } k \in \Z^+. \]
+    For each $k \in \Z^+$ we define the measure $\nu \mres X_k$ which is a finite measure on $(X,\mathcal{A})$.
+    Then $\nu \mres X_k$ is absolutely continuous with respect to $\mu$ since $\nu$ is absolutely continuous with respect to $\mu$.
+    Thus by the finite measure case, there exists a unique function $f_k \in L^1(X,\mu)$ such that
+    \[ \nu(A \cap X_k) = \int_{A \cap X_k} f_k \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]
+    We then define the function $f : X \to \R$ by
+    \[ f(x) := f_k(x) \]
+    if $x\in X$ is such that $x \in X_k$.
+    More formally, we have
+    \[ f(x) := \sum_{k=1}^\infty f_k(x) \chi_{X_k}(x) \quad\text{ for all } x \in X. \]
+    Then $f$ is a measurable function on $X$, as a countable sum of measurable functions.
+    
+    We compute that for each $A \in \mathcal{A}$ we have
+    \begin{align*}
+        \int_A f \,\dif \mu &= \sum_{k=1}^\infty \int_{A \cap \left( X_k \setminus \bigcup_{j=1}^{k-1} X_j \right)} f_k \,\dif \mu \\
+            &= \sum_{k=1}^\infty \nu\left( A \cap \left( X_k \setminus \bigcup_{j=1}^{k-1} X_j \right) \right) = \nu(A)
+    \end{align*}
+    which shows existence.
+    
+    Now suppose that $f^\star : X \to [0,\infty)$ is another measurable function such that
+    \[ \nu(A) = \int_A f^\star \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]
+    Then for each $k \in \Z^+$ we have
+    \[ \nu(A \cap X_k) = \int_{A \cap X_k} f^\star \,\dif \mu \quad\text{ for all } A \in \mathcal{A}. \]
+    By uniqueness in the finite measure case, it follows that $f_k = f^\star$ $\mu$-almost everywhere on $X_k$ for each $k \in \Z^+$.
+    Thus $f = f^\star$ $\mu$-almost everywhere on $X$, and the proof is complete.
+\end{proof}
+
+\begin{corollary}[Lebesgue-Radon-Nikodym Theorem for $\sigma$-Finite Measures]
+    \label{cor:lebeague_radon_nikodym_theorem_sigma_finite}
+    Let $(X,\mathcal{A},\mu)$ be a $\sigma$-finite measure space, and let $\nu$ be a $\sigma$-finite measure on $(X,\mathcal{A})$.
+    Then there exist unique measures $\nu_{\text{ac}}$ and $\nu_{\text{s}}$ on $(X,\mathcal{A})$ such that
+    $\nu = \nu_{\text{ac}} + \nu_{\text{s}}$,
+    $\nu_{\text{ac}} \ll \mu$,
+    and $\nu_{\text{s}} \perp \mu$,
+    and there exists a unique measurable function $f : X \to [0,\infty)$ such that
+    \[ \nu(A) = \int_A f \,\dif \mu + \nu_{\text{s}}(A) \quad\text{ for all } A \in \mathcal{A}. \]
+\end{corollary}
+
+The proof is the same as that of Corollary \ref{cor:lebesgue_radon_nikodym_theorem} using Corollary \ref{cor:radon_nikodym_finite_sigma_finite} in place of Theorem \ref{thm:radon_nikodym_signed_measure}.
+
+\begin{exercise}[Properties of the Radon-Nikodym Derivative]
+    \label{ex:properties_of_radon_nikodym_derivative}
+    Let $(X,\mathcal{A})$ be a measurable space, and let $\mu$ and $\lambda$ be measures on $(X,\mathcal{A})$, and let $\nu$ and $\sigma$ be vector measures on $(X,\mathcal{A})$ taking values in $\R^m$.
+    The Radon-Nikodym derivatives satisfy the following properties:
+    \begin{enumerate}
+    \item If $\nu \ll \mu$ and $\sigma \ll \mu$, then
+        \[ \pd{ (\nu + \sigma) }{\mu} = \pd{\nu}{\mu} + \pd{\sigma}{\mu}. \]
+    \item If $\lambda \ll \mu$ and $g \in L^1(X,\lambda)$, then
+        \[ \int_X g\,\dif \lambda = \int_X g \pd{\lambda}{\mu} \,\dif \mu. \]
+    \item If $\nu \ll \lambda$ and $\lambda \ll \mu$, then
+        \[ \pd{\nu}{\mu} = \pd{\nu}{\lambda} \pd{\lambda}{\mu}. \]
+    \item If $\nu$ and $\mu$ are mutually absolutely continuous, then
+        \[ \pd{\nu}{\mu} = \frac{1}{\left( \pd{\mu}{\nu} \right)} \]
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    \begin{enumerate}
+        \item Assume that $\nu \ll \mu$ and $\sigma \ll \mu$.
+            Then for each $A \in \mathcal{A}$ we have
+            \begin{align*}
+                (\nu + \sigma)(A) &= \nu(A) + \sigma(A) = \int_A \pd{\nu}{\mu} \,\dif \mu + \int_A \pd{\sigma}{\mu} \,\dif \mu \\
+                    &= \int_A \left( \pd{\nu}{\mu} + \pd{\sigma}{\mu} \right) \,\dif \mu
+            \end{align*}
+            which shows the desired result by uniqueness of the Radon-Nikodym derivative.
+
+        \item Assume that $\lambda \ll \mu$.
+            Then for each $A \in \mathcal{A}$ we have
+            \[ \lambda(A) = \int_A 1 \,\dif \lambda = \int_A 1 \cdot \pd{\lambda}{\mu} \,\dif \mu = \int_X \Chi_A \pd{\lambda}{\mu} \,\dif \mu \]
+            and \[ \lambda(A) = \int_X \Chi_A \,\dif \lambda \]
+            so the result is true for characteristic functions.
+            By the linearity of the integral, we see that if $s = \sum_{j = 1}^n a_j \Chi_{A_j}$
+            is a simple function on $X$, then
+            \[ \int_X s \,\dif \lambda = \sum_{j=1}^n a_j \lambda(A_j) = \int_X s \pd{\lambda}{\mu} \,\dif \mu. \]
+            Thus the result is true for simple functions.
+
+            Now let $g\in L^1(X,\lambda)$ be arbitrary.
+            Then there exists a sequence of simple functions $\{ s_k \}_{k=1}^\infty$ on $X$ such that
+            \[ \lim_{k\to\infty} \int_X | g - s_k | \,\dif \lambda = 0. \]
+            By the Dominated Convergence Theorem \ref{thm:dominated_convergence_theorem}, we have
+            \begin{align*}
+                \int_X g \,\dif \lambda &= \int_X \lim_{k\to\infty} s_k \,\dif \lambda = \lim_{k\to\infty} \int_X s_k \,\dif \lambda \\
+                    &= \lim_{k\to\infty} \int_X s_k \pd{\lambda}{\mu} \,\dif \mu = \int_X \lim_{k\to\infty} s_k \pd{\lambda}{\mu} \,\dif \mu = \int_X g \pd{\lambda}{\mu} \,\dif \mu
+            \end{align*}
+            which shows the desired result.
+
+        \item Assume that $\nu \ll \lambda$ and $\lambda \ll \mu$.
+            Then for each $A \in \mathcal{A}$ we have
+            \[ \nu(A) = \int_A \pd{\nu}{\lambda} \,\dif \lambda = \int_A \pd{\nu}{\lambda} \pd{\lambda}{\mu} \,\dif \mu \]
+            where the second equality follows from part (2).
+            By uniqueness of the Radon-Nikodym derivative, we obtain the desired result.
+
+        \item Assume that $\nu$ and $\mu$ are mutually absolutely continuous.
+            Then for each $A \in \mathcal{A}$ we have
+            \[ \mu(A) = \int_A \pd{\mu}{\nu} \,\dif \nu = \int_A \pd{\mu}{\nu} \pd{\nu}{\mu} \,\dif \mu \]
+            where the second equality follows from part (2).
+            Since we also have \[ \mu(A) = \int_A 1 \,\dif \mu, \]
+            for each $A\in \mathcal{A}$, uniqueness of the Radon-Nikodym derivative implies that
+            \[ 1 = \pd{\mu}{\nu} \pd{\nu}{\mu} \quad\text{ $\mu$-almost everywhere, } \]
+            which shows the desired result.
+    \end{enumerate}
+\end{proof}
+
+This finishes our discussion of the abstract Radon-Nikodym theorem.

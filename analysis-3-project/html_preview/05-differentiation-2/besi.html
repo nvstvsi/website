@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>besi</title>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '0.8em',
+      packages: {'[+]': ['ams']},
+      macros: {
+        R: '\\mathbb{R}',
+        C: '\\mathbb{C}',
+        N: '\\mathbb{N}',
+        Z: '\\mathbb{Z}',
+        Q: '\\mathbb{Q}',
+        E: '\\mathbb{E}',
+        F: '\\mathbb{F}',
+        S: '\\mathbb{S}',
+        H: '\\mathcal{H}',
+        L: '\\mathcal{L}',
+        dif: '\\,\\mathrm{d}',
+        supp: '\\operatorname{supp}',
+        proj: '\\operatorname{proj}',
+        Id: '\\operatorname{Id}',
+        Span: '\\operatorname{span}',
+        graph: '\\operatorname{graph}',
+        dist: '\\operatorname{dist}',
+        diam: '\\operatorname{diam}',
+        avg: '\\operatorname{avg}',
+        div: '\\operatorname{div}',
+        vol: '\\operatorname{vol}',
+        ord: '\\operatorname{ord}',
+        Chi: '\\mathbf{1}',
+        sub: '\\subseteq',
+        mres: '\\downharpoonright',
+        ddag: '\\ddagger',
+        dag: '\\dagger',
+        norm: ['\\left\\| #1 \\right\\|', 1],
+        abs: ['\\left| #1 \\right|', 1],
+        set: ['\\left\\{ #1 \\right\\}', 1],
+        inner: ['\\langle #1, #2 \\rangle', 2],
+        floor: ['\\lfloor #1 \\rfloor', 1],
+        ceil: ['\\lceil #1 \\rceil', 1],
+        llbracket: '\\unicode{x27E6}',
+        rrbracket: '\\unicode{x27E7}',
+        bigskull: '\\unicode{x1F480}',
+        skull: '\\unicode{x2620}',
+        mathwitch: '\\unicode{x1F9D9}',
+        pumpkin: '\\unicode{x1F383}',
+        mathpumpkin: '\\unicode{x1F383}',
+        bigpumpkin: '\\unicode{x1F383}',
+        mathghost: '\\unicode{x1F47B}',
+        mathcat: '\\unicode{x1F408}',
+        mathbat: '\\unicode{x1F987}',
+        esssup: '\\operatorname{ess\\,sup}',
+        essinf: '\\operatorname{ess\\,inf}',
+        Lip: '\\operatorname{Lip}',
+        pd: ['\\frac{\\partial#1}{\\partial#2}', 2],
+        od: ['\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}', 2],
+        dashint: '\\mathchoice{\\rlap{-}\\!\\int}{\\rlap{\\raise.15ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}',
+        eurologo: '\\unicode{x20AC}',
+        starredbullet: '\\unicode{x2726}',
+        grimace: '\\unicode{x1F62C}',
+        textthing: '\\unicode{x2639}',
+        noway: '\\unicode{x26D4}',
+        warning: '\\unicode{x26A0}',
+        danger: '\\unicode{x26A0}',
+        textxswup: '\\unicode{x2195}',
+        textxswdown: '\\unicode{x2195}',
+        decoone: '\\unicode{x2756}',
+        decotwo: '\\unicode{x2767}',
+        decothreeleft: '\\unicode{x2619}',
+        decothreeright: '\\unicode{x2767}',
+        decofourleft: '\\unicode{x261A}',
+        decofourright: '\\unicode{x261B}',
+        floweroneleft: '\\unicode{x2740}',
+        floweroneright: '\\unicode{x2740}',
+        lefthand: '\\unicode{x261C}',
+        righthand: '\\unicode{x261E}',
+        decosix: '\\unicode{x2766}',
+        bomb: '\\unicode{x1F4A3}',
+        caution: '\\unicode{x2621}',
+        leftblackhand: '\\unicode{x261A}',
+        rightblackhand: '\\unicode{x261B}',
+        leafleft: '\\unicode{x2618}',
+        leafright: '\\unicode{x2618}',
+        leafNW: '\\unicode{x2618}',
+        leafNE: '\\unicode{x2618}',
+        leafSE: '\\unicode{x2618}',
+        leafSW: '\\unicode{x2618}',
+        aldineleft: '\\unicode{x2619}',
+        aldineright: '\\unicode{x2767}',
+        aldine: '\\unicode{x2766}',
+        aldinesmall: '\\unicode{x2767}',
+        aldinesmallrevert: '\\unicode{x2619}',
+        aldinesmallup: '\\unicode{x2766}',
+        grappe: '\\unicode{x2766}',
+        rightgrappe: '\\unicode{x2767}',
+        leftgrappe: '\\unicode{x2619}',
+        oldpilcrowone: '\\unicode{x00B6}',
+        oldpilcrowtwo: '\\unicode{x00B6}',
+        oldpilcrowthree: '\\unicode{x00B6}',
+        oldpilcrowfour: '\\unicode{x00B6}',
+        oldpilcrowfive: '\\unicode{x00B6}',
+        oldpilcrowsix: '\\unicode{x00B6}'
+      }
+    },
+    startup: {
+      pageReady: () => {
+        return MathJax.startup.defaultPageReady().then(() => {
+          console.log('MathJax ready');
+        });
+      }
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+  <script>
+  (function() {
+    window.addEventListener('beforeunload', function() {
+      saveProofState();
+      saveCollapsibleState();
+    });
+    
+    const eventSource = new EventSource('http://localhost:35729/reload-stream');
+    
+    eventSource.onmessage = function(event) {
+      if (event.data === 'reload') {
+        console.log('📝 File updated, saving state and reloading...');
+        saveProofState();
+        saveCollapsibleState();
+        setTimeout(() => {
+          window.location.reload();
+        }, 50);
+      }
+    };
+    
+    eventSource.onerror = function() {
+      console.log('⚠️  Auto-reload server not available. Run node watch.js to enable auto-reload.');
+      eventSource.close();
+    };
+    
+    console.log('🔄 Auto-reload enabled');
+  })();
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+    
+    /* Layout with sidebar */
+    .page-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      width: 280px;
+      background: #fff;
+      border-right: 1px solid #e0e0e0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px 0;
+      font-size: 14px;
+    }
+    
+    .sidebar-header {
+      padding: 15px 20px 25px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .sidebar-header h1 {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 5px 0;
+    }
+    
+    .sidebar-header .subtitle {
+      font-size: 0.85em;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .sidebar-header .back-link {
+      display: block;
+      font-size: 0.8em;
+      color: #666;
+      text-decoration: none;
+      margin-top: 12px;
+    }
+    
+    .sidebar-header .back-link:hover {
+      color: #1a1a1a;
+    }
+    
+    .sidebar-nav {
+      padding: 10px 0;
+    }
+    
+    .chapter-group {
+      margin-bottom: 2px;
+    }
+    
+    .chapter-title {
+      padding: 12px 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chapter-title:hover {
+      background: #f5f5f5;
+    }
+    
+    .chapter-title .toggle {
+      font-size: 0.65em;
+      color: #999;
+      transition: transform 0.2s;
+    }
+    
+    .chapter-group.expanded .chapter-title .toggle {
+      transform: rotate(90deg);
+    }
+    
+    .section-list {
+      display: none;
+      padding: 5px 0;
+      background: #f8f8f8;
+    }
+    
+    .chapter-group.expanded .section-list {
+      display: block;
+    }
+    
+    .section-link {
+      display: block;
+      padding: 8px 20px 8px 35px;
+      font-size: 0.85em;
+      color: #555;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+    }
+    
+    .section-link:hover {
+      background: #f0f0f0;
+      color: #1a1a1a;
+    }
+    
+    .section-link.active {
+      background: #e8e8e8;
+      border-left-color: #333;
+      color: #000;
+      font-weight: 500;
+    }
+    
+    /* Main content area */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      max-width: 900px;
+      padding: 40px 60px;
+    }
+    
+    @media (max-width: 1100px) {
+      .sidebar {
+        width: 240px;
+      }
+      .main-content {
+        margin-left: 240px;
+        padding: 30px 40px;
+      }
+    }
+    
+    @media (max-width: 800px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+      .page-layout {
+        flex-direction: column;
+      }
+    }
+    
+    h2, h3, h4 {
+      margin-top: 2em;
+      margin-bottom: 0.75em;
+      color: #000;
+      font-weight: 600;
+    }
+    h2 { font-size: 1.5em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.1em; }
+    p {
+      margin: 1em 0;
+      text-indent: 2em;
+    }
+    p:first-of-type,
+    h2 + p,
+    h3 + p,
+    h4 + p,
+    .theorem-box + p,
+    .proof-box + p {
+      text-indent: 0;
+    }
+    .noindent + p,
+    p:has(> .noindent:first-child) {
+      text-indent: 0 !important;
+    }
+    .noindent {
+      display: none;
+    }
+    .theorem-box {
+      margin: 1.75em 0;
+      padding: 1.25em;
+      border-left: 5px solid #16a34a;
+      background: linear-gradient(to top, #bbf7d0 0%, #d1fae5 100%);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .definition-box { border-left-color: #16a34a; background: linear-gradient(to top, #d1fae5 0%, #ecfdf5 100%); }
+    .lemma-box { border-left-color: #1e3a8a; background: linear-gradient(to top, #bfdbfe 0%, #dbeafe 100%); }
+    .corollary-box { border-left-color: #9333ea; background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%); }
+    .proposition-box { border-left-color: #dc2626; background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%); }
+    .remark-box { border-left-color: #64748b; background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%); }
+    .example-box { border-left-color: #0891b2; background: linear-gradient(to top, #a5f3fc 0%, #cffafe 100%); }
+    .construction-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .notation-box { border-left-color: #ca8a04; background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%); }
+    .exercise-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .problem-box { border-left-color: #ec4899; background: linear-gradient(to top, #fbcfe8 0%, #fce7f3 100%); }
+    .theorem-header {
+      margin-bottom: 0.75em;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+    .theorem-header.clickable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .theorem-header.clickable:hover {
+      background: rgba(0,0,0,0.03);
+      margin: -0.5em -0.75em 0.75em -0.75em;
+      padding: 0.5em 0.75em;
+      border-radius: 4px;
+    }
+    .collapsible-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      margin-right: 0.5em;
+      color: #6b7280;
+    }
+    .collapsible-box.collapsed .collapsible-icon {
+      transform: rotate(-90deg);
+    }
+    .collapsible-content {
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+    }
+    .collapsible-box.collapsed .collapsible-content {
+      display: none;
+    }
+    .theorem-content {
+      padding-left: 0.5em;
+      line-height: 1.8;
+    }
+    .proof-box {
+      margin: 1.5em 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .proof-header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      border-radius: 6px 6px 0 0;
+    }
+    .proof-toggle {
+      width: 100%;
+      padding: 0.85em 1.25em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      transition: background 0.15s;
+    }
+    .proof-toggle:hover { background: rgba(0,0,0,0.03); }
+    .proof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      color: #6b7280;
+    }
+    .proof-box.collapsed .proof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .proof-content {
+      padding: 1.25em;
+      line-height: 1.8;
+    }
+    .proof-box.collapsed .proof-content {
+      display: none;
+    }
+    .proof-end {
+      float: right;
+      font-size: 1.3em;
+      margin-left: 0.5em;
+      color: #374151;
+    }
+    .subproof {
+      margin: 1em 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #f9fafb;
+    }
+    .subproof-header {
+      background: linear-gradient(to bottom, #f9fafb 0%, #f3f4f6 100%);
+      border-bottom: 1px solid #d1d5db;
+      border-radius: 4px 4px 0 0;
+    }
+    .subproof-toggle {
+      width: 100%;
+      padding: 0.6em 1em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: background 0.15s;
+    }
+    .subproof-toggle:hover {
+      background: rgba(0,0,0,0.03);
+    }
+    .subproof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.7em;
+      color: #6b7280;
+    }
+    .subproof.collapsed .subproof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .subproof-content {
+      padding: 1em;
+      line-height: 1.7;
+    }
+    .subproof.collapsed .subproof-content {
+      display: none;
+    }
+    .ref-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 0.15em;
+      border-radius: 2px;
+    }
+    .ref-link:hover {
+      background: #dbeafe;
+      text-decoration: underline;
+    }
+    .ref-unknown {
+      color: #dc2626;
+      font-weight: bold;
+      background: #fee2e2;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+    ol, ul {
+      margin: 1em 0;
+      padding-left: 2.5em;
+      line-height: 1.8;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    .latex-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5em auto;
+    }
+    .latex-figure .latex-image {
+      display: inline-block;
+      margin: 0.5em;
+      vertical-align: middle;
+    }
+    .latex-figure {
+      margin: 2em 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .latex-figure .figure-content {
+      margin-bottom: 0.75em;
+      line-height: normal;
+    }
+    .latex-figure .figure-content > * {
+      vertical-align: middle;
+    }
+    .latex-figure figcaption {
+      font-size: 0.9em;
+      color: #4b5563;
+      font-style: italic;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1>Analysis III</h1>
+        <div class="subtitle">Measure Theory &amp; Integration</div>
+        <a href="../index.html" class="back-link">← Table of Contents</a>
+      </div>
+      <div class="sidebar-nav">
+        <div class="chapter-group expanded">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>1. Measure Theory</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../01-measure-theory/measure-theory.html" class="section-link">Overview</a>
+            <a href="../01-measure-theory/basics.html" class="section-link">Outer Measures</a>
+            <a href="../01-measure-theory/lebesgue-meas.html" class="section-link">Lebesgue Measure</a>
+            <a href="../01-measure-theory/cantor.html" class="section-link">The Cantor Set</a>
+            <a href="../01-measure-theory/measure-spaces.html" class="section-link">Measure Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>2. Integration</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../02-integration/integration.html" class="section-link">Overview</a>
+            <a href="../02-integration/integrals-1.html" class="section-link">Simple Functions</a>
+            <a href="../02-integration/integrals-2.html" class="section-link">General Functions</a>
+            <a href="../02-integration/convergence.html" class="section-link">Convergence Theorems</a>
+            <a href="../02-integration/inequality-party.html" class="section-link">Integral Inequalities</a>
+            <a href="../02-integration/lp_spaces.html" class="section-link">Lᵖ Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>3. Product Measures</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../03-fubini/fubini_ch.html" class="section-link">Overview</a>
+            <a href="../03-fubini/fubini.html" class="section-link">Fubini-Tonelli</a>
+            <a href="../03-fubini/integrals-3.html" class="section-link">Product Measures</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>4. Differentiation I</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../04-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../04-differentiation-1/covering.html" class="section-link">Vitali Covering</a>
+            <a href="../04-differentiation-1/monotone.html" class="section-link">Monotone Functions</a>
+            <a href="../04-differentiation-1/BV_on_R.html" class="section-link">Bounded Variation</a>
+            <a href="../04-differentiation-1/FTOC.html" class="section-link">FTC for Lebesgue</a>
+            <a href="../04-differentiation-1/HL.html" class="section-link">Hardy-Littlewood</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>5. Differentiation I (cont)</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../05-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../05-differentiation-1/r-nik.html" class="section-link">Radon-Nikodym</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>6. Differentiation II</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-differentiation-2/diff-2.html" class="section-link">Overview</a>
+            <a href="../06-differentiation-2/vector-measures.html" class="section-link">Vector Measures</a>
+            <a href="../06-differentiation-2/r-nik.html" class="section-link">Radon-Nikodym</a>
+            <a href="../06-differentiation-2/besi.html" class="section-link">Besicovitch</a>
+            <a href="../06-differentiation-2/densities.html" class="section-link">Densities</a>
+            <a href="../06-differentiation-2/diff-measures.html" class="section-link">Measure Derivatives</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>7. Riesz Representation</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-riesz/riesz.html" class="section-link">Overview</a>
+            <a href="../06-riesz/riesz_functional.html" class="section-link">Riesz Representation</a>
+            <a href="../06-riesz/LCH_spaces.html" class="section-link">LCH Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>8. Integral Formulas</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../07-formulas/formulas.html" class="section-link">Overview</a>
+            <a href="../07-formulas/hausdorff_meas.html" class="section-link">Hausdorff Measures</a>
+            <a href="../07-formulas/lippy.html" class="section-link">Lipschitz Maps</a>
+            <a href="../07-formulas/rademacher.html" class="section-link">Rademacher</a>
+            <a href="../07-formulas/coarea-prereq.html" class="section-link">Coarea Prerequisites</a>
+            <a href="../07-formulas/coarea.html" class="section-link">Coarea Formula</a>
+            <a href="../07-formulas/area-prereq.html" class="section-link">Area Prerequisites</a>
+            <a href="../07-formulas/area-formula.html" class="section-link">Area Formula</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>9. Extension Results</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../08-ext-res/ext-res.html" class="section-link">Overview</a>
+            <a href="../08-ext-res/taylor_thm_integral_remainder.html" class="section-link">Taylor's Theorem</a>
+            <a href="../08-ext-res/whitney-cover.html" class="section-link">Whitney Covering</a>
+            <a href="../08-ext-res/whitney-partition-of-unity.html" class="section-link">Partition of Unity</a>
+            <a href="../08-ext-res/whitney-decomposition.html" class="section-link">Decomposition</a>
+            <a href="../08-ext-res/whitney-extension-theorem.html" class="section-link">Extension Theorem</a>
+            <a href="../08-ext-res/whitney-extension-proof.html" class="section-link">Extension Proof</a>
+            <a href="../08-ext-res/whitney-extension-applications.html" class="section-link">Applications</a>
+            <a href="../08-ext-res/whitney-extension.html" class="section-link">Summary</a>
+            <a href="../08-ext-res/more-bump.html" class="section-link">More Bump Functions</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <main class="main-content">
+      <h2>Besicovich Covering Theorem</h2>
+<h3>Introduction</h3>
+<p>In this section, we present the Besicovich Covering Theorem.
+It is similar in spirit to the Vitali Covering Theorem we proved earlier, but has different hypotheses and conclusions.
+The Besicovich Covering Theorem is particularly useful in differentiation theory and geometric measure theory, as it allows us to cover sets in $\R^n$ with families of balls in a controlled manner.</p>
+<p>The Vitali Covering Theorem says that given an arbitrary collection of balls with uniformly bounded radii, we can extract a disjoint subcollection such that if we scale these balls by a factor of $5$, they cover the same set as the original collection.
+This is a powerful obeservation, but does not really help us unless we have a way to control $\mu(5B)$ in terms of $\mu(B)$ for a measure $\mu$ --- this is known as a <em>doubling condition</em>, and is not satisfied by all measures.
+The Besicovich Covering Theorem, on the other hand, allows us to cover a set using a bounded number of disjoint subcollections of balls from the original collection, without needing to scale the balls.
+This is particularly useful when working with measures that do not satisfy a doubling condition.</p>
+<p>It is the Besicovich Covering Theorem that allows us to extend the Lebesgue Differentiation Theorem to Radon measures on $\R^n$.</p>
+<h3>Besicovich Covering Theorem</h3>
+<div class="theorem-box theorem-box" id="thm:besicovich_covering_theorem">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Besicovich Covering Theorem)</div>
+  <div class="theorem-content">For each $n\in \Z^+$, there exists an integer constant $M_n \in \Z^+$ such that the following holds.
+<p>Let $A \subseteq \R^n$ be a nonempty set, and let $\mathcal{B}$ be a collection of closed balls in $\R^n$ such that for each $a \in A$, there exists a ball $B \in \mathcal{B}$ centered at $a$ and the diameters are uniformly bounded, i.e.
+    \[ \sup \{ \operatorname{diam}(B) : B \in \mathcal{B} \} < \infty. \]
+    Then there exist subcollections $\mathcal{B}_1, \mathcal{B}_2, \ldots, \mathcal{B}_{M_n} \subseteq \mathcal{B}$ such that
+    <ol style="list-style-type: lower-roman;"><li>for each $1 \leq i \leq M_n$, the balls in $\mathcal{B}_i$ are disjoint, and
+        </li><li>we have \[A \subseteq \bigcup_{ i = 1 }^{ M_n } \bigcup_{ B \in \mathcal{B}_i } B. \]</li></ol></div>
+</div></p>
+<p>The conclusion is saying that within each subcollection, the balls do not overlap, but different subcollections may have overlapping balls; moreover, the number of subcollections needed to cover the set of centers is bounded by a constant depending only on the dimension.
+Our proof will give little indication on what the best possible value of $M_n$ is; we will only show that such a constant exists.</p>
+<p>The proof is pretty damn long, and apparently at least one popular account has a major flaw in its proof --- beware of <em>Geometric Integration Theory</em> by Krantz and Parks; they make a subtle claim (which they take as self-evident, and not even identified as something to be proved) that is actually false.
+We follow the proof by Evans and Gariepy in <em>Measure Theory and Fine Properties of Functions</em>.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-0">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-0')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-0">
+    We begin by assuming that the set of centers $A$ is bounded; we will remove this assumption in the very last step of the proof.
+<p><div style="margin: 1em 0;"></div>
+<em>Step 1:</em> First Greedy Algorithm.
+<div style="margin: 1em 0;"></div></p>
+<p>Start by selecting a ball $B_1$ from the collection $\mathcal{B}$ with radius satisfying
+    \[ \operatorname{radius}(B_1) > \frac{3}{4} \sup \{ \operatorname{radius}B : B \in \mathcal{B} \}. \]
+    Set $r_1 := \operatorname{radius}(B_1)$ and let $a_1$ be the center of $B_1$.
+    Then let $A_2 := A \setminus B_1$, and if $A_2$ is nonempty, select a ball $B_2 \in \mathcal{B}$ centered at a point $a_2\in A_2$ with radius $r_2$ satisfying
+    \[ r_2 > \frac{3}{4} \sup \{ r : \overline{B}(a,r) \in \mathcal{B}, a\in A_2 \}. \]
+    Continuing in this manner, for each $j \in \Z^+$, we define
+    \[ A_{j} := A \setminus \bigcup_{ k = 1 }^{ j - 1 } B_k, \]
+    and if $A_j$ is nonempty, we select a ball $B_j\in \mathcal{B}$ centered at a point $a_j \in A_j$ with radius $r_j$ satisfying
+    \[ r_j > \frac{3}{4} \sup \{ r : \overline{B}(a,r) \in \mathcal{B}, a\in A_j \} \]</p>
+<p>If $A_j \neq \emptyset$ for all $j \in \Z^+$, then we obtain an infinite sequence of balls $\{ B_j \}_{ j = 1 }^{ \infty }$, each selected from $\mathcal{B}$; in this case we set $J = \infty$. 
+    If at some step $N \in \Z^+$ we have $A_N = \emptyset$, then the process terminates and we obtain a finite sequence of balls $\{ B_j \}_{ j = 1 }^{ N - 1 }$, and in this case we set $J = N - 1$.</p>
+<p><div style="margin: 1em 0;"></div>
+<em>Step 2:</em> Properties of the First Greedy Algorithm.
+<div style="margin: 1em 0;"></div></p>
+<p><em>Claim 1:</em> If $j > k$, then $ r_j \leq \frac{4}{3} r_k $.</p>
+<div class="subproof collapsed" data-subproof-id="subproof-1763576799623-0">
+      <div class="subproof-header">
+        <button class="subproof-toggle" onclick="toggleSubproof('subproof-1763576799623-0')" aria-expanded="false">
+          <span class="subproof-toggle-icon">▼</span>
+          <strong>Proof of Claim 1</strong>
+        </button>
+      </div>
+      <div class="subproof-content" id="subproof-1763576799623-0">
+        Assume $j > k$. Then $a_j \in A_k$, so we have
+        \[ r_k \geq \frac{3}{4} \sup\{ r: \overline{B}(a,r) \in \mathcal{B}, a\in A_k \} \geq \frac{3}{4} r_j \]
+        as claimed.
+        <span class="proof-end">□</span>
+      </div>
+    </div>
+<p><em>Claim 2:</em> The collection of balls $\{ \frac{1}{3} B_j \}_{ j = 1 }^{ J }$ is disjoint.</p>
+<div class="subproof collapsed" data-subproof-id="subproof-1763576799623-1">
+      <div class="subproof-header">
+        <button class="subproof-toggle" onclick="toggleSubproof('subproof-1763576799623-1')" aria-expanded="false">
+          <span class="subproof-toggle-icon">▼</span>
+          <strong>Proof of Claim 2</strong>
+        </button>
+      </div>
+      <div class="subproof-content" id="subproof-1763576799623-1">
+        Let $1 \leq i < j \leq J$. Then $a_j \notin B_i$, so we have
+        \[ \| a_i - a_j \| \geq r_i = \frac{r_i}{3} + \frac{2r_i}{3} \geq \frac{r_i}{3} + \frac{2}{3}\frac{3}{4}r_j = \frac{r_i}{3} + \frac{1}{2}r_j > \frac{r_i}{3} + \frac{r_j}{3} \]
+        which shows that the distance between the centers of $B_i$ and $B_j$ is greater than the sum of the radii of the balls $\frac{1}{3} B_i$ and $\frac{1}{3} B_j$, and thus these two balls do not intersect.
+        <span class="proof-end">□</span>
+      </div>
+    </div>
+<p><em>Claim 3:</em> If $J = \infty$, then $r_j \to 0$ as $j \to \infty$.</p>
+<div class="subproof collapsed" data-subproof-id="subproof-1763576799623-2">
+      <div class="subproof-header">
+        <button class="subproof-toggle" onclick="toggleSubproof('subproof-1763576799623-2')" aria-expanded="false">
+          <span class="subproof-toggle-icon">▼</span>
+          <strong>Proof of Claim 3</strong>
+        </button>
+      </div>
+      <div class="subproof-content" id="subproof-1763576799623-2">
+        By the previous claim, we know that the balls $\{ \frac{1}{3} B_j \}_{ j = 1 }^{ \infty }$ are disjoint.
+        Since the set of centers $A$ is bounded, we must have $r_j \to 0$ as $j \to \infty$.
+        <span class="proof-end">□</span>
+      </div>
+    </div>
+<p><em>Claim 4:</em> We have $A \subseteq \bigcup_{ j = 1 }^{ J } B_j$.</p>
+<div class="subproof collapsed" data-subproof-id="subproof-1763576799623-3">
+      <div class="subproof-header">
+        <button class="subproof-toggle" onclick="toggleSubproof('subproof-1763576799623-3')" aria-expanded="false">
+          <span class="subproof-toggle-icon">▼</span>
+          <strong>Proof of Claim 4</strong>
+        </button>
+      </div>
+      <div class="subproof-content" id="subproof-1763576799623-3">
+        If $J$ is finite, then the greedy algorithm in Step 1 terminated because $A_{J+1} = \emptyset$, which implies that
+        \[ A \subseteq \bigcup_{ j = 1 }^{ J } B_j. \]
+        Thus we assume that $J = \infty$. If $a \in A$ then by assumption there exists $r > 0$ and a closed ball $\overline{B}(a,r) \in \mathcal{B}$.
+        By Claim 3, there exists $j \in \Z^+$ such that $r_j < \frac{3}{4}r$ --- in particular, this implies that $a \in \bigcup_{ i=1 }^{ j-1 } B_i$; otherwise, we would have selected a ball centered at $a$ with radius at least $r$ at step $j$ of the greedy algorithm, 
+        contradicting the choice of $r_j$.
+        <span class="proof-end">□</span>
+      </div>
+    </div>
+<p>Fix an integer $k > 1$ for the remainder of this step and the next step.
+    Define
+    \[ I_k := \{ j : 1\leq j < k, B_j \cap B_k \neq \emptyset \} \quad\text{ and }\quad K_k := I_k \cap \{ j : r_j \leq 3r_k \}. \]</p>
+<p><em>Claim 5:</em> We have $\#K_k \leq 20^n$.</p>
+<p>In words, we are claiming that there are at most $20^n$ balls from the first greedy algorithm that intersect $B_k$ and have radius at most $3r_k$.</p>
+<div class="subproof collapsed" data-subproof-id="subproof-1763576799623-4">
+      <div class="subproof-header">
+        <button class="subproof-toggle" onclick="toggleSubproof('subproof-1763576799623-4')" aria-expanded="false">
+          <span class="subproof-toggle-icon">▼</span>
+          <strong>Proof of Claim 5</strong>
+        </button>
+      </div>
+      <div class="subproof-content" id="subproof-1763576799623-4">
+        Let $j\in K_k$. Then $B_j \cap B_k \neq \emptyset$ and $r_j \leq 3r_k$.
+        For each point $x\in \overline{B}(a_j, \frac{r_j}{3})$ see that 
+        \begin{align*}
+            \| x - a_k \| &\leq \| x - a_j \| + \| a_j - a_k \| \leq \frac{r_j}{3} + r_j + r_k \\
+                &= \frac{4}{3} r_j + r_k \leq 4r_k  + r_k = 5r_k
+        \end{align*}
+        which shows that
+        \[ B\left( a_j, \frac{r_j}{3} \right) \subseteq \overline{B}(a_k, 5r_k). \]
+        By Claim 2, the balls $\{ \overline{B}(a_j, \frac{r_j}{3}) \}_{ j \in K }$ are disjoint, so we have
+        \begin{align*}
+            5^n \omega_n r_k^n &= \mathcal{L}^n\big( \overline{B}(a_k, 5r_k) \big) \\
+                &\geq \sum_{ j \in K } \mathcal{L}^n\left( B\left( a_j, \frac{r_j}{3} \right) \right) &&\text{by disjointness} \\
+                &= \sum_{ j \in K_k } \omega_n \left( \frac{r_j}{3} \right)^n \\
+                &\geq \sum_{ j \in K_k } \omega_n \left( \frac{r_k}{4} \right)^n &&\text{by Claim 1 and } r_j \leq 3r_k \text{ for each }j\in K_k \\
+                &= \#K_k \cdot \omega_n \left( \frac{r_k}{4} \right)^n.
+        \end{align*}
+        Dividing both sides by $\omega_n \left( \frac{r_k}{4} \right)^n$ gives
+        \[ \#K_k \leq 5^n \cdot 4^n = 20^n \]
+        as claimed.
+        <span class="proof-end">□</span>
+      </div>
+    </div>
+<p><div style="margin: 1em 0;"></div>
+<em>Step 3:</em> We now bound the number of elements in $I_k\setminus K_k$.
+<div style="margin: 1em 0;"></div></p>
+<p>Let $i,j \in I_k\setminus K_k$ with $i \neq j$.
+    Then $1\leq i,j < k$, both $B_i\cap B_k \neq \emptyset$ and $B_j \cap B_k \neq \emptyset$, and both $r_i > 3r_k$ and $r_j > 3r_k$.</p>
+<p>For distinct $i,j \in I_k\setminus K_k$, we let $\theta_{i,j} \in [0,\pi]$ be the angle between the vectors $a_i - a_k$ and $a_j - a_k$.
+    Since we know $i,j < k$, we know that $a_k \notin B_i \cup B_j$ which implies $r_i < \| a_i - a_k \|$ and $r_j < \| a_j - a_k \|$.
+    Since $B_i \cap B_k \neq \emptyset$ and $B_j \cap B_k \neq \emptyset$, we must have $\| a_i - a_k \| < r_i + r_k$ and $\| a_j - a_k \| < r_j + r_k$.
+    Finally without loss of generality we may assume that $\| a_i - a_k \| \leq \| a_j - a_k \|$.
+    In summary, 
+    \[\begin{cases}
+        3r_k < r_i < \| a_i - a_k \| < r_i + r_k, \\
+        3r_k < r_j < \| a_j - a_k \| < r_j + r_k, \\
+        \| a_i - a_k \| \leq \| a_j - a_k \|.
+    \end{cases}\]</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Claim 6:</em> For distinct $i,j \in I_k\setminus K_k$, if $\cos \theta_{i,j} > \frac{5}{6}$, then $a_i \in B_j$.
+    <div class="subproof collapsed" data-subproof-id="subproof-1763576799623-5">
+      <div class="subproof-header">
+        <button class="subproof-toggle" onclick="toggleSubproof('subproof-1763576799623-5')" aria-expanded="false">
+          <span class="subproof-toggle-icon">▼</span>
+          <strong>Proof of Claim 6</strong>
+        </button>
+      </div>
+      <div class="subproof-content" id="subproof-1763576799623-5">
+        We prove the contrapositive. Assume that $a_i \notin B_j$.
+        Then we consider two possibilities --- either $\| a_i - a_j \| \geq \| a_j - a_k \|$ or $\| a_i - a_j \| < \| a_j - a_k \|$.
+        If $\| a_i - a_j \| \geq \| a_j - a_k \|$, then the Law of Cosines gives
+        \begin{align*}
+            \cos \theta_{i,j} &= \frac{\| a_i - a_k \|^2 + \| a_j - a_k \|^2 - \| a_i - a_j \|^2}{2 \| a_i - a_k \| \| a_j - a_k \|} \\
+                &\leq \frac{ \| a_i - a_k \|^2}{ 2 \| a_i - a_k \| \| a_j - a_k \| } \\
+                &= \frac{\| a_i - a_k \|}{2 \| a_j - a_k \|} \leq \frac{1}{2} < \frac{5}{6}
+        \end{align*}
+        as desired.
+        If instead $\| a_i - a_j \| < \| a_j - a_k \|$, then $r_j < \| a_i - a_j \|$ since $a_i \notin B_j$, and thus 
+        \begin{align*}
+            \cos \theta_{i,j} &= \frac{\| a_i - a_k \|^2 + \| a_j - a_k \|^2 - \| a_i - a_j \|^2}{2 \| a_i - a_k \| \| a_j - a_k \|} \\
+                &= \frac{\| a_i - a_k \|^2}{2 \| a_i - a_k \| \| a_j - a_k \|} + \frac{( \|a_j - a_k\| - \|a_i - a_j\| )( \|a_j - a_k\| + \|a_i - a_j\|)}{2 \| a_i - a_k \| \| a_j - a_k \|} \\
+                &= \frac{\| a_i - a_k \|}{2 \| a_j - a_k \|} + \frac{((\|a_j - a_k\| - \|a_i - a_j\|)(\|a_j - a_k\| + \|a_i - a_j\|))}{2 \| a_i - a_k \| \| a_j - a_k \|} \\
+                &\leq \frac{ 1 }{ 2 } + \frac{ ( \|a_j - a_k\| - \|a_i - a_j\| )(2\|a_j - a_k\|) }{ 2\| a_i - a_k \| \| a_j - a_k \| } \\
+                &= \frac{1}{2} + \frac{ r_j + r_k - r_j }{ r_i } = \frac{1}{2} + \frac{ r_k }{ r_i } < \frac{1}{2} + \frac{1}{3} = \frac{5}{6}
+        \end{align*}
+        <span class="proof-end">□</span>
+      </div>
+    </div></p>
+<p><em>Claim 7:</em> If $a_i \in B_j$, then \[ 0 \leq \| a_i - a_j \| + \| a_i - a_k \| - \| a_j - a_k \| \leq \| a_j - a_k \| \cdot \frac{8}{3}\left( 1 - \cos\theta_{i,j} \right) \]
+    <div class="subproof collapsed" data-subproof-id="subproof-1763576799623-6">
+      <div class="subproof-header">
+        <button class="subproof-toggle" onclick="toggleSubproof('subproof-1763576799623-6')" aria-expanded="false">
+          <span class="subproof-toggle-icon">▼</span>
+          <strong>Proof of Claim 7</strong>
+        </button>
+      </div>
+      <div class="subproof-content" id="subproof-1763576799623-6">
+        Assume that $a_i \in B_j$.
+        Then we have
+        \begin{align*}
+            0 &\leq \frac{\|a_i - a_j\| + \|a_i - a_k\| - \|a_j - a_k\|}{\|a_j - a_k\|} \\
+                &\leq \frac{\|a_i - a_j\| + \|a_i - a_k\| - \|a_j - a_k\|}{\|a_j - a_k\|} \cdot \frac{\|a_i - a_j\| - \|a_i - a_k\| + \|a_j - a_k\|}{\|a_i - a_j\|} \\
+                &= \frac{\|a_i - a_j\|^2 - (\|a_i - a_k\| - \|a_j - a_k\|)^2}{\|a_j - a_k\| \|a_i - a_j\|} \\
+                &= \frac{\|a_i - a_k\|^2 - 2\|a_i - a_k\| \|a_j - a_k\|\cos \theta_{i,j} + \|a_j - a_k\|^2 - \|a_i -a_k\|^2 + 2\|a_i - a_k\|\|a_j - a_k\| - \|a_j - a_k\|^2}{ \|a_j - a_k\| \|a_i - a_j\| } \\
+                &= \frac{2\|a_i - a_k\| \|a_j - a_k\| (1 - \cos\theta_{i,j})}{\|a_j - a_k\| \|a_i - a_j\|} \\
+                &= \frac{2\|a_i - a_k\| (1 - \cos\theta_{i,j})}{\|a_i - a_j\|} \\
+                &\leq \frac{2(r_i + r_k)(1 - \cos\theta_{i,j})}{r_i} \\
+                &\leq \frac{2\left( 1 + \frac{1}{3} \right) r_i (1 - \cos\theta_{i,j})}{r_i} \\
+                &= \frac{8}{3} (1 - \cos\theta_{i,j}).
+            \end{align*}
+        Hence 
+        \[ 0 \leq \| a_i - a_j \| + \| a_i - a_k \| - \| a_j - a_k \| \leq \| a_j - a_k \| \cdot \frac{8}{3}\left( 1 - \cos\theta_{i,j} \right) \]
+        as desired.
+        <span class="proof-end">□</span>
+      </div>
+    </div></p>
+<p><em>Claim 8:</em> If $a_i \in B_j$, then $\cos \theta_{i,j} \leq \frac{61}{64}$.
+    <div class="subproof collapsed" data-subproof-id="subproof-1763576799623-7">
+      <div class="subproof-header">
+        <button class="subproof-toggle" onclick="toggleSubproof('subproof-1763576799623-7')" aria-expanded="false">
+          <span class="subproof-toggle-icon">▼</span>
+          <strong>Proof of Claim 8</strong>
+        </button>
+      </div>
+      <div class="subproof-content" id="subproof-1763576799623-7">
+        Since $a_i \in B_j$ and $a_j \notin B_i$, we have $r_i < \| a_i - a_j \| < r_j$.
+        Because $i < j$, we have $r_j \leq \frac{4}{3} r_i$ by Claim 1. Therefore
+        \begin{align*}
+            \| a_i - a_j \| + \| a_i - a_k \| - \| a_j - a_k \| &\geq r_i + r_i - r_j - r_k \\
+                &\geq \frac{3}{4} r_j + \frac{3}{4} r_j - r_j - \frac{1}{3} r_j \\
+                &= \frac{1}{2} r_j - r_k \geq \frac{1}{6} r_j \\
+                &= \frac{1}{6} \frac{3}{4} \left( r_j + \frac{1}{3} r_j \right) \\
+                &\geq \frac{1}{8} (r_j + r_k) \\
+                &\geq \frac{1}{8} \| a_j - a_k \|
+        \end{align*}
+        so by Claim 7 we have
+        \[ \frac{1}{8} \| a_j - a_k \| \leq \| a_i - a_j \| + \| a_i - a_k \| - \| a_j - a_k \| \leq \| a_j - a_k \| \cdot \frac{8}{3}\left( 1 - \cos\theta_{i,j} \right). \]
+        Hence \[ \frac{3}{64} \leq 1 - \cos\theta_{i,j} \]
+        which gives the desired result.
+        <span class="proof-end">□</span>
+      </div>
+    </div></p>
+<p><em>Claim 9:</em> There exists a constant $L_n$ depending only on $n$ such that $\#(I_k\setminus K_k) \leq L_n$.
+    <div class="subproof collapsed" data-subproof-id="subproof-1763576799623-8">
+      <div class="subproof-header">
+        <button class="subproof-toggle" onclick="toggleSubproof('subproof-1763576799623-8')" aria-expanded="false">
+          <span class="subproof-toggle-icon">▼</span>
+          <strong>Proof of Claim 9</strong>
+        </button>
+      </div>
+      <div class="subproof-content" id="subproof-1763576799623-8">
+        See that for distinct $i,j \in I_k\setminus K_k$, then either $a_i \notin B_j$ or $a_i \in B_j$, so we have either
+        $\cos \theta_{i,j} \leq \frac{5}{6}$ or $\cos \theta_{i,j} \leq \frac{61}{64}$ by Claims 6 and 8.
+        In either case, we have $\cos \theta_{i,j} \leq \frac{61}{64}$.
+        Thus the angle $\theta_{i,j}$ between the vectors $a_i - a_k$ and $a_j - a_k$ satisfies
+        \[ \theta_{i,j} \geq \arccos\left( \frac{61}{64} \right) > 0. \]</p>
+<p>Now fix a radius $r_0 > 0$ so small that if $x \in \S^{n-1}$ and $y,z\in B(x,r_0)$ then the angle between $y$ and $z$ is less than $\arccos\left( \frac{61}{64} \right)$.
+        Since $\S^{n-1}$ is compact, we can cover it with finitely many balls of radius $r_0$ with centers in $\S^{n-1}$; by the well-ordering principle, there exists a smallest number $L_n$ of such balls needed to cover $\S^{n-1}$.
+        Then $\partial B_k$ can be covered by $L_n$ balls of radius $r_0 r_k$ with centers on $\partial B_k$.
+        By the previous paragraph, if $i,j \in I_k\setminus K_k$ with $i \neq j$, then the angle between $a_i - a_k$ and $a_j - a_k$ is at least $\arccos\left( \frac{61}{64} \right)$, so the
+        points $\frac{a_i - a_k}{\| a_i - a_k \|}$ and $\frac{a_j - a_k}{\| a_j - a_k \|}$ lie in different balls of radius $r_0$ on $\S^{n-1}$.
+        Therefore, each ball of radius $r_0 r_k$ on $\partial B_k$ contains at most one of the points $a_i$ for $i \in I_k\setminus K_k$.
+        Hence we have $\#(I_k\setminus K_k) \leq L_n$ as desired.
+        <span class="proof-end">□</span>
+      </div>
+    </div></p>
+<p><div style="margin: 1em 0;"></div>
+<em>Step 4:</em> We now finish the proof in the case that $A$ is bounded.
+<div style="margin: 1em 0;"></div></p>
+<p>We set $C_n := 20^n + L_n + 1$, and see that by claims 5 and 9, we have
+    \[ \#I_k = \#K_k + \#(I_k\setminus K_k) \leq 20^n + L_n < C_n \]
+    for each integer $k > 1$.
+    We define a function $\sigma : \Z^+ \to \{ 1, 2, \ldots, C_n \}$ as follows ---
+    <ul><li>if $1 \leq j \leq C_n$, set $\sigma(j) := j$;
+        </li><li>if $k \geq C_n$, we can inductively define $\sigma(k+1)$ by noting that the previous estimate shows that
+            \[ \#\{ j : 1\leq j\leq k , B_j \cap B_{k+1} \neq \emptyset \} = \# I_k < C_n \]
+            so there exists $m\in \{1,2,\ldots,C_n\}$ such that $B_{k+1}\cap  B_j = \emptyset$ for all $j \in \{1,2,\ldots,k\}$ with $\sigma(j) = m$; we set $\sigma(k+1) := m$.</li></ul></p>
+<p>Now for each integer $1 \leq m \leq C_n$, define
+    \[ \mathcal{B}_m := \{ B_j : j \in \Z^+, \sigma(j) = m \}. \]
+    By definition of the function $\sigma$, the balls in each collection $\mathcal{B}_m$ are disjoint --- indeed, if $B_i, B_j \in \mathcal{B}_m$ with $i < j$ and $\sigma(i) = \sigma(j) = m$, then 
+    we must have $B_i \cap B_j = \emptyset$ by the definition of $\sigma(j)$.
+    Finally, by Claim 4, we have
+    \[ A \subseteq \bigcup_{ j = 1 }^{ J } B_j = \bigcup_{ m = 1 }^{ C_n } \bigcup_{ B \in \mathcal{B}_m } B \]
+    which completes the proof in the case that $A$ is bounded.</p>
+<p><div style="margin: 1em 0;"></div>
+<em>Step 5:</em> Finally we assume that $A$ is unbounded.
+<div style="margin: 1em 0;"></div></p>
+<p>Assume that $A$ is unbounded, for each integer $l \in \Z^+$ define
+\[ A_l := A \cap \left\{ x \in \R^n : 3(l-1) < \frac{\| x \|}{\sup_{B\in \mathcal B} \diam B} < 3l \right\} \]
+and \[ \mathcal{B}^l := \{ \overline{B}(a,r) \in \mathcal{B} : a\in A_l \}. \]
+Then for each $l \in \Z^+$, the set $A_l$ is bounded, so we may apply the reasoning from Steps 1 to 4 to the set $A_l$ and the collection $\mathcal{B}^l$ to obtain subcollections $\mathcal{B}^l_1, \mathcal{B}^l_2, \ldots, \mathcal{B}^l_{M_n} \subseteq \mathcal{B}^l$ such that
+<ol style="list-style-type: lower-roman;"><li>for each $1 \leq m \leq C_n$, the balls in $\mathcal{B}^l_m$ are disjoint, and
+    </li><li>we have \[ A_l \subseteq \bigcup_{ m = 1 }^{ C_n } \bigcup_{ B \in \mathcal{B}^l_m } B. \]</li></ol>
+For each integer $1 \leq m \leq C_n$, define
+\[ \mathcal{B}_j := \bigcup_{l = 1}^\infty \mathcal{B}^{2l-1}_j \]
+and \[ \mathcal{B}_{j+C_n} := \bigcup_{l = 1}^\infty \mathcal{B}^{2l}_j. \]
+Then for each $1 \leq j \leq 2C_n$, the balls in $\mathcal{B}_j$ are disjoint --- if $B, B' \in \mathcal{B}_j$ with $B \neq B'$, then there exists $l,l' \in \Z^+$ such that $B \in \mathcal{B}^l_j$ and $B' \in \mathcal{B}^{l'}_j$; 
+then if $l = l'$, we have $B \cap B' = \emptyset$ since the balls in $\mathcal{B}^l_j$ are disjoint, and if $l \neq l'$, then by construction of the sets $A_l$ and the collections $\mathcal{B}^l_j$, we have $B \cap B' = \emptyset$ as well.</p>
+<p>Finally, by construction of the sets $A_l$ for $l \in \Z^+$, we have
+\begin{align*}
+    A &= \bigcup_{ l = 1 }^{ \infty } A_l \\
+        &\subseteq \bigcup_{ l = 1 }^{ \infty } \bigcup_{ m = 1 }^{ C_n } \bigcup_{ B \in \mathcal{B}^l_m } B \\
+        &= \bigcup_{ m = 1 }^{ C_n } \bigcup_{ l = 1 }^{ \infty } \bigcup_{ B \in \mathcal{B}^l_m } B \\
+        &= \bigcup_{ m = 1 }^{ C_n } \bigcup_{ B \in \mathcal{B}_m \cup \mathcal{B}_{m+C_n} } B \\
+        &= \bigcup_{ j = 1 }^{ 2C_n } \bigcup_{ B \in \mathcal{B}_j } B
+\end{align*}
+The proof is now complete upon setting $M_n := 2C_n$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<h3>Applications</h3>
+<p>Next we would like to mimic some results that we had for the Lebesgue measure on $\R^n$, but now for Borel regular outer measures on $\R^n$ which are finite on compact subsets.</p>
+<div class="theorem-box lemma-box" id="lem:filling_finite_measure_sets_with_balls">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Filling Finite Measure Sets with Balls)</div>
+  <div class="theorem-content">Let $\mu$ be a Borel regular outer measure on $\R^n$ which is finite on compact subsets, and let $A\subset \R^n$ be such that $\mu(A) < \infty$.
+    Let $\mathcal{B}$ be a collection of closed balls such that the center of each ball in $\mathcal{B}$ belongs to $A$, and 
+    \[ \inf\{ r : \overline{B}(a,r) \in \mathcal{B}, a\in A \} = 0. \]
+    Then there is a countable subcollection of disjoint balls $\{ B_j \}_{ j = 1 }^{ \infty } \subseteq \mathcal{B}$ such that
+    \[ \mu\left( A \setminus \bigcup_{ j = 1 }^{ \infty } B_j \right) = 0. \]</div>
+</div>
+<p>Note that the set $A$ in the statement of the lemma is not assumed to be $\mu$-measurable.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-1">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-1')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-1">
+    <em>Step 1:</em>
+    Consider the family of closed balls 
+    \[ \mathcal{B}^{1} := \{ B\in \mathcal{B} : \diam B \leq 1 \} \]
+    which covers $A$ because if $a\in A$, then there exists a ball $\overline{B}(a,r) \in \mathcal{B}$ with radius $r \leq 1$ by the assumption on $\mathcal{B}$.
+    By the Besicovich Covering Theorem (Theorem <span class="ref-unknown" title="Reference not found: thm:besicovich_covering_theorem">[thm:besicovich_covering_theorem?]</span>), there exists subcollections $\mathcal{B}_1, \mathcal{B}_2, \ldots, \mathcal{B}_{M_n} \subseteq \mathcal{B}^{1}$ such that
+    each collection only contains disjoint balls and
+    \[ A \subseteq \bigcup_{ j = 1 }^{ M_n } \bigcup_{ B \in \mathcal{B}_j } B. \]
+    Thus
+    \[ \mu(A) \leq \sum_{ j = 1 }^{M_n} \mu\left( A \cap \bigcup_{ B \in \mathcal{B}_j } B \right) \]
+    so there is some $1 \leq j \leq M_n$ such that
+    \[ \mu\left( A \cap \bigcup_{ B \in \mathcal{B}_j } B \right) \geq \frac{1}{M_n} \mu(A). \]
+    Therefore by <span class="ref-unknown" title="Reference not found: prop:sequences_of_measurable_sets">[prop:sequences_of_measurable_sets?]</span>, there exist finitely many disjoint balls $B_1, B_2, \ldots, B_{N_1} \in \mathcal{B}_j$ such that
+    \[ \mu\left( A \cap \bigcup_{k=1}^{N_1} B_k \right) \geq \frac{1}{2M_n}\mu(A). \]
+    Since $\bigcup_{k=1}^{N_1} B_k$ is a measurable set, we have
+    \[ \mu(A) = \mu\left( A \cap \bigcup_{k=1}^{N_1} B_k \right) + \mu\left( A \setminus \bigcup_{k=1}^{N_1} B_k \right). \]
+    which implies that
+    \begin{align*}
+        \mu\left( A \setminus \bigcup_{k=1}^{N_1} B_k \right) &= \mu(A) - \mu\left( A \cap \bigcup_{k=1}^{N_1} B_k \right) \\
+            &\leq \mu(A) - \frac{1}{2M_n} \mu(A) = \left( 1 - \frac{1}{2M_n} \right) \mu(A).
+    \end{align*}
+<p><div style="margin: 1em 0;"></div></p>
+<p><em>Step 2:</em>
+    Now the collection of closed balls
+    \[ \mathcal{B}^2 := \left\{ B\in \mathcal{B}^1 : B \cap \left(\bigcup_{k=1}^{N_1} B_k\right) = \emptyset \right\} \]
+    clearly covers the set $A \setminus \bigcup_{k=1}^{N_1} B_k$, and we also have
+    \[ \inf\left\{ r : \overline{B}(a,r) \in \mathcal{B}^2, a\in A \setminus \bigcup_{k=1}^{N_1} B_k \right\} = 0 \]
+    for each $a \in A \setminus \bigcup_{k=1}^{N_1} B_k$ by the assumption on $\mathcal{B}$.
+    Repeating the above argument with the set $A \setminus \bigcup_{k=1}^{N_1} B_k$ and the collection $\mathcal{B}^2$, we obtain finitely many disjoint balls $B_{N_1+1}, B_{N_1+2}, \ldots, B_{N_2} \in \mathcal{B}^2$ such that
+    \[ \mu\left( A \setminus \bigcup_{k=1}^{N_2} B_k \right) \leq \left( 1 - \frac{1}{2M_n} \right) \mu\left( A \setminus \bigcup_{k=1}^{N_1} B_k \right) \leq \left( 1 - \frac{1}{2M_n} \right)^2 \mu(A). \]
+    Continuing in this manner, for each $k > 1$ we let $\mathcal{B}^k$ be the collection of closed balls in $\mathcal{B}^1$ which are disjoint from $\bigcup_{j=1}^{N_{k-1}} B_j$, and we obtain finitely many disjoint balls $B_{N_{k-1}+1}, B_{N_{k-1}+2}, \ldots, B_{N_k} \in \mathcal{B}^k$ such that
+    \[ \mu\left( A \setminus \bigcup_{j=1}^{N_k} B_j \right) \leq \left( 1 - \frac{1}{2M_n} \right)^k \mu(A). \]
+    Finally, taking the limit as $k \to \infty$, we have
+    \[ \mu\left( A \setminus \bigcup_{ j = 1 }^{ \infty } B_j \right) = \lim_{ k \to \infty } \mu\left( A \setminus \bigcup_{j=1}^{N_k} B_j \right) \leq \lim_{ k \to \infty } \left( 1 - \frac{1}{2M_n} \right)^k \mu(A) = 0 \]
+    as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box corollary-box" id="cor:more_on_filling_open_sets_with_balls">
+  <div class="theorem-header"><strong>Corollary ?</strong> (More on Filling Open Sets with Balls)</div>
+  <div class="theorem-content">Let $\mu$ be a Borel regular outer measure on $\R^n$ which is finite on compact subsets, and let $\mathcal{B}$ be a nonempty collection of closed balls.
+    Let $A$ be the set of centers of balls in $\mathcal{B}$, and assume that $\mu(A) < \infty$ and that
+    \[ \inf\{ r : \overline{B}(a,r) \in \mathcal{B}, a\in A \} = 0 \]
+    for each $a \in A$.
+<p>Then for each open set $U\subseteq \R^n$ there exists a countable subcollection of disjoint balls $\{ B_j \}_{ j = 1 }^{ \infty } \subseteq \mathcal{B}$ such that
+    \[ \bigcup_{j=1}^\infty B_j \subset U \]
+    and \[ \mu\left( (A\cap U) \setminus \bigcup_{j=1}^\infty B_j \right) = 0. \]</div>
+</div></p>
+<div class="proof-box collapsed" data-proof-id="proof-num-2">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-2')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-2">
+    Define the collection of closed balls
+    \[ \mathcal{B}_U := \{ B\in \mathcal{B} : B \subset U \}. \]
+    Then $\mathcal{B}_U$ covers the set $A\cap U$, and for each $a \in A\cap U$, we have
+    \[ \inf\{ r : \overline{B}(a,r) \in \mathcal{B}_U, a\in A\cap U \} = 0 \]
+    by the assumption on $\mathcal{B}$.
+    Since $\mu(A\cap U) < \infty$, we may apply Lemma <span class="ref-unknown" title="Reference not found: lem:filling_finite_measure_sets_with_balls">[lem:filling_finite_measure_sets_with_balls?]</span> to the set $A\cap U$ and the collection $\mathcal{B}_U$ to obtain a countable subcollection of disjoint balls $\{ B_j \}_{ j = 1 }^{ \infty } \subseteq \mathcal{B}_U$ such that
+    \[ \mu\left( (A\cap U) \setminus \bigcup_{ j = 1 }^{ \infty } B_j \right) = 0 \]
+    as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<div class="theorem-box definition-box" id="def:maximal_function_besicovich_version">
+  <div class="theorem-header"><strong>Definition ?</strong> (Maximal Function for Borel Regular Measures)</div>
+  <div class="theorem-content">Let $\mu$ be a Borel regular outer measure on $\R^n$ which is finite on compact subsets.
+    For each locally integrable function $f \in L^1_{\text{loc}}(\R^n,\mu)$, we define the <em>maximal function</em> $M_\mu f : \R^n \to [0,\infty]$ by
+    \[ M_\mu f(x) := \sup_{ r > 0 } \frac{1}{ \mu(\overline{B}(x,r)) } \int_{ \overline{B}(x,r) } |f| \,\dif \mu \]
+    for each $x \in \R^n$, where we interpret the expression $\frac{1}{0}$ as $\infty$ and use the convention that $\infty\cdot 0 = 0$.</div>
+</div>
+<div class="theorem-box remark-box collapsible-box collapsed" id="rmk:locally_integrable_function_besicovich_version" data-collapsible-id="collapsible-rmk:locally_integrable_function_besicovich_version">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-rmk:locally_integrable_function_besicovich_version')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong> (About the Definition of the Maximal Function)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-rmk:locally_integrable_function_besicovich_version">Recall that $f$ is said to be locally integrable with respect to $\mu$ if for each compact set $K \subseteq \R^n$, we have
+    \[ \int_K |f(y)| \,\dif \mu(y) < \infty. \]
+    We require that $\mu$ is finite on compact subsets to ensure that the fraction $\frac{1}{\mu(B)}$ is not zero. 
+    The locally integrability of $f$ with respect to $\mu$ ensures that the integral $\int_B |f(y)| \,\dif \mu(y)$ is finite for each closed ball $B \subseteq \R^n$, so that the expression defining $M_\mu f(x)$ is well-defined (possibly infinite) for each $x \in \R^n$.</div>
+</div>
+<p>Here we mimic the definition of the centered Hardy-Littlewood maximal function from before, but now using a general Borel regular outer measure $\mu$ on $\R^n$ which is finite on compact sets.</p>
+<div class="theorem-box exercise-box" id="ex:weak_11_inequality_for_maximal_function_besicovich_version">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Weak $(1,1)$ Inequality for the Maximal Function)</div>
+  <div class="theorem-content">Let $\mu$ be a Borel regular outer measure on $\R^n$ which is finite on compact subsets. Then there exists a constant $C_n > 0$ depending only on $n$ such that for each $f \in L^1_{\text{loc}}(\R^n,\mu)$ and each $t > 0$, we have
+    \[ \mu\left( \{ x \in \R^n : M_\mu f(x) > t \} \right) \leq \frac{C_n}{t} \int_{ \R^n } |f| \,\dif \mu. \]</div>
+</div>
+<p>I am not $100 \%$ sure if this statement and the following proof is correct, I am maybe $50 \%$ sure.
+I cannot find another reference --- the Wikipedia page on Besicovich's Covering Theorem is where I found the statement of the result, but their proof begins with the incorrect statement that $Mf$ is lower semicontinuous.
+(To see that $Mf$ is not necessarily lower semicontinuous, consider the measure $\mu = \delta_0$ (the Dirac delta at $0$) on $\R$, and the function $f = \chi_{\{0\}}$; then $Mf(0) = 1$, but for each $x \neq 0$, we have $Mf(x) = 0$, so $Mf$ is not lower semicontinuous at $0$.)
+Because the first statement is false (and not even acknowledged as something to be proved), I find it hard to trust the rest of their proof; their proof also uses a different version of Besicovich than the one I have stated.</p>
+<p>I also had several false starts by trying to invoke Besicovich at the wrong time in this proof.
+We will not use this result later, so it is not a big deal if the proof is wrong, but I would appreciate any feedback on this proof.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-3">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-3')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-3">
+    Let $f \in L^1_{\text{loc}}(\R^n,\mu)$. If $\int_{ \R^n } |f| \,\dif \mu = \infty$, then the inequality is trivial since the right-hand side is infinite.
+    Thus we assume that \[  \int_{ \R^n } |f| \,\dif \mu < \infty \]
+    i.e. that $\| f \|_{ L^1(\R^n,\mu) } < \infty$.
+<p>For each $t > 0$, define the set
+    \[ E_t := \{ x \in \R^n : M_\mu f(x) > t \}. \]
+    Let $K \subseteq E_t$ be a compact set.
+    Then for each $x \in K$, by definition of $E_t$ there exists a radius $r_x > 0$ such that
+    \[ \frac{1}{ \mu(\overline{B}(x,r_x)) } \int_{ \overline{B}(x,r_x) } |f| \,\dif \mu > t. \]</p>
+<p>[ It is tempting to say two false statments here, based on the following observation --- for each $x \in K$, by definition of $E_t$ there exists a radius $r_x > 0$ such that
+    \[ \frac{1}{ \mu(\overline{B}(x,r_x)) } \int_{ \overline{B}(x,r_x) } |f| \,\dif \mu > t. \]</p>
+<p>The <em>first mistake</em> is to state that compactness of $K$ implies that $\displaystyle \sup_{x\in K} r_x < \infty$. This is false; take a moment to think of an example.</p>
+<p>The <em>second mistake</em> is more subtle, and was my attempt at rectifying the first mistake --- I was tempted to get an open cover $\{ B(x,r_x) : x \in K \}$ of $K$ and then use compactness to extract a finite subcover to get a finite collection of balls covering $K$ ; this finite subcover then <em>does</em> have uniformly bounded diameters, since there are only finitely many balls.
+    However, the center of these balls is no longer guaranteed to be all of $K$, so we cannot apply Besicovich to this finite collection of balls with $K$ as the set of centers. 
+    This point is subtle, but important. ]</p>
+<p>For each integer $N\in\Z^+$, define
+    \[ K_N := \left\{ x\in K : \exists 0 < r \leq N \,\text{ such that }\, \frac{1}{\mu(\overline{B}(x,r))} \int_{ \overline{B}(x,r) } |f| \,\dif \mu > t \right\} \]
+    so that $K = \bigcup_{ N = 1 }^{ \infty } K_N$. 
+    Fix $N \in \Z^+$.
+    Then for each $x \in K_N$, there exists a radius $0 < r_x \leq N$ such that 
+    \[  \frac{1}{ \mu(\overline{B}(x,r_x)) } \int_{ \overline{B}(x,r_x) } |f| \,\dif \mu > t. \]
+    Thus the collection of closed balls
+    \[ \mathcal{B}_N := \{ \overline{B}(x,r_x) : x \in K_N \} \]
+    has $K_N$ as the set of centers, and the set of diameters of balls in $\mathcal{B}_N$ is bounded above by $2N$.
+    Therefore we may apply the Besicovich Covering Theorem (Theorem <span class="ref-unknown" title="Reference not found: thm:besicovich_covering_theorem">[thm:besicovich_covering_theorem?]</span>) to the set $K_N$ and the collection $\mathcal{B}_N$ to see that there exists disjoint subcollections $\mathcal{B}_{N,1}, \mathcal{B}_{N,2}, \ldots, \mathcal{B}_{N,C_n} \subseteq \mathcal{B}_N$ such that
+    \[ K_N \subseteq \bigcup_{ j = 1 }^{ C_n } \bigcup_{ B \in \mathcal{B}_{N,j} } B \]
+    where for each $1 \leq j \leq C_n$, the balls in $\mathcal{B}_{N,j}$ are disjoint.
+    We remark that the constant $C_n$ depends only on $n$ and not on $N$, $K$, $f$ or anything else.
+    Therefore, we have
+    \begin{align*}
+        \mu(K_N) &\leq \mu\left( \bigcup_{ j = 1 }^{ C_n } \bigcup_{ B \in \mathcal{B}_{N,j} } B \right) \\
+            &\leq \sum_{ j = 1 }^{ C_n } \mu\left( \bigcup_{ B \in \mathcal{B}_{N,j} } B \right) \\
+            &= \sum_{ j = 1 }^{ C_n } \sum_{ B \in \mathcal{B}_{N,j} } \mu(B) &&\text{by disjointness} \\
+            &< \sum_{ j = 1 }^{ C_n } \sum_{ B \in \mathcal{B}_{N,j} } \frac{1}{t} \int_B |f| \,\dif \mu &&\text{by choice of balls in } \mathcal{B}_N \\
+            &= \frac{1}{t} \sum_{ j = 1 }^{ C_n } \sum_{ B \in \mathcal{B}_{N,j} } \int_B |f| \,\dif \mu \\
+            &\leq \frac{1}{t} \sum_{ j = 1 }^{ C_n } \int_{ \R^n } |f| \,\dif \mu && \text{by disjointness of balls in each } \mathcal{B}_{N,j} \\
+            &= \frac{C_n}{t} \int_{ \R^n } |f| \,\dif \mu.
+    \end{align*}
+    Since $K = \bigcup_{ N = 1 }^{ \infty } K_N$ and this is an increasing union, by <span class="ref-unknown" title="Reference not found: prop:sequences_of_measurable_sets">[prop:sequences_of_measurable_sets?]</span> we have
+    \[ \mu(K) = \lim_{N \to\infty} \mu(K_N) \leq \frac{C_n}{t} \int_{ \R^n } |f| \,\dif \mu. \]
+    Since $K \subseteq E_t$ was an arbitrary compact subset, Borel regularity of $\mu$ implies that
+    \[ \mu(E_t) = \sup\{ \mu(K) : K \subseteq E_t , K \text{ compact} \} \leq \frac{C_n}{t} \int_{ \R^n } |f| \,\dif \mu \]
+    as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+    </main>
+  </div>
+  
+  <script>
+    function toggleChapter(element) {
+      element.parentElement.classList.toggle('expanded');
+    }
+    
+    // Highlight current page in sidebar
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPath = window.location.pathname;
+      const links = document.querySelectorAll('.section-link');
+      links.forEach(link => {
+        if (currentPath.endsWith(link.getAttribute('href').split('/').pop())) {
+          link.classList.add('active');
+          // Expand parent chapter
+          const group = link.closest('.chapter-group');
+          if (group) group.classList.add('expanded');
+        }
+      });
+    });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('Restoring proof collapse states...');
+      try {
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        const currentPage = window.location.pathname;
+        const pageOpen = openProofs[currentPage] || [];
+        
+        console.log('Current page:', currentPage);
+        console.log('Open proof IDs stored:', pageOpen);
+        console.log('Found ' + pageOpen.length + ' open proofs for this page');
+        
+        document.querySelectorAll('.proof-box').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          console.log('Checking proof:', proofId, 'Should be open:', pageOpen.includes(proofId));
+          if (pageOpen.includes(proofId)) {
+            box.classList.remove('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'true');
+          } else {
+            box.classList.add('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        const pageBoxes = openBoxes[currentPage] || [];
+        
+        console.log('Open box IDs stored:', pageBoxes);
+        
+        document.querySelectorAll('.collapsible-box').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          console.log('Checking box:', boxId, 'Should be open:', pageBoxes.includes(boxId));
+          if (pageBoxes.includes(boxId)) {
+            box.classList.remove('collapsed');
+          } else {
+            box.classList.add('collapsed');
+          }
+        });
+        
+        console.log('Proof states restored');
+      } catch (e) {
+        console.error('Error restoring collapse state:', e);
+      }
+    });
+    
+    function toggleProof(proofId) {
+      const proofContent = document.getElementById(proofId);
+      const proofBox = proofContent.closest('.proof-box');
+      proofBox.classList.toggle('collapsed');
+      
+      const button = proofBox.querySelector('.proof-toggle');
+      button.setAttribute('aria-expanded', !proofBox.classList.contains('collapsed'));
+      
+      saveProofState();
+    }
+    
+    function toggleSubproof(subproofId) {
+      const subproofContent = document.getElementById(subproofId);
+      const subproof = subproofContent.closest('.subproof');
+      subproof.classList.toggle('collapsed');
+      
+      const button = subproof.querySelector('.subproof-toggle');
+      button.setAttribute('aria-expanded', !subproof.classList.contains('collapsed'));
+    }
+    
+    function saveProofState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        if (!openProofs[currentPage]) {
+          openProofs[currentPage] = [];
+        }
+        
+        openProofs[currentPage] = [];
+        document.querySelectorAll('.proof-box:not(.collapsed)').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          if (proofId) {
+            openProofs[currentPage].push(proofId);
+          }
+        });
+        
+        localStorage.setItem('openProofs', JSON.stringify(openProofs));
+        console.log('Saved proof state (open proofs):', openProofs[currentPage]);
+      } catch (e) {
+        console.error('Error saving collapse state:', e);
+      }
+    }
+    
+    function toggleCollapsible(collapsibleId) {
+      const content = document.getElementById(collapsibleId);
+      const box = content.closest('.collapsible-box');
+      box.classList.toggle('collapsed');
+      
+      saveCollapsibleState();
+    }
+    
+    function saveCollapsibleState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        if (!openBoxes[currentPage]) {
+          openBoxes[currentPage] = [];
+        }
+        
+        openBoxes[currentPage] = [];
+        document.querySelectorAll('.collapsible-box:not(.collapsed)').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          if (boxId) {
+            openBoxes[currentPage].push(boxId);
+          }
+        });
+        
+        localStorage.setItem('openBoxes', JSON.stringify(openBoxes));
+      } catch (e) {
+        console.error('Error saving box state:', e);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        const proofBoxes = document.querySelectorAll('.proof-box');
+        const anyExpanded = Array.from(proofBoxes).some(box => !box.classList.contains('collapsed'));
+        
+        proofBoxes.forEach(box => {
+          if (anyExpanded) {
+            box.classList.add('collapsed');
+          } else {
+            box.classList.remove('collapsed');
+          }
+        });
+        
+        saveProofState();
+      }
+    });
+    
+    document.querySelectorAll('a.ref-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.background = '#fef3c7';
+          target.style.transition = 'background 0.3s ease';
+          setTimeout(() => { target.style.background = ''; }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

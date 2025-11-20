@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>convergence</title>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '0.8em',
+      packages: {'[+]': ['ams']},
+      macros: {
+        R: '\\mathbb{R}',
+        C: '\\mathbb{C}',
+        N: '\\mathbb{N}',
+        Z: '\\mathbb{Z}',
+        Q: '\\mathbb{Q}',
+        E: '\\mathbb{E}',
+        F: '\\mathbb{F}',
+        S: '\\mathbb{S}',
+        H: '\\mathcal{H}',
+        L: '\\mathcal{L}',
+        dif: '\\,\\mathrm{d}',
+        supp: '\\operatorname{supp}',
+        proj: '\\operatorname{proj}',
+        Id: '\\operatorname{Id}',
+        Span: '\\operatorname{span}',
+        graph: '\\operatorname{graph}',
+        dist: '\\operatorname{dist}',
+        diam: '\\operatorname{diam}',
+        avg: '\\operatorname{avg}',
+        div: '\\operatorname{div}',
+        vol: '\\operatorname{vol}',
+        ord: '\\operatorname{ord}',
+        Chi: '\\mathbf{1}',
+        sub: '\\subseteq',
+        mres: '\\downharpoonright',
+        ddag: '\\ddagger',
+        dag: '\\dagger',
+        norm: ['\\left\\| #1 \\right\\|', 1],
+        abs: ['\\left| #1 \\right|', 1],
+        set: ['\\left\\{ #1 \\right\\}', 1],
+        inner: ['\\langle #1, #2 \\rangle', 2],
+        floor: ['\\lfloor #1 \\rfloor', 1],
+        ceil: ['\\lceil #1 \\rceil', 1],
+        llbracket: '\\unicode{x27E6}',
+        rrbracket: '\\unicode{x27E7}',
+        bigskull: '\\unicode{x1F480}',
+        skull: '\\unicode{x2620}',
+        mathwitch: '\\unicode{x1F9D9}',
+        pumpkin: '\\unicode{x1F383}',
+        mathpumpkin: '\\unicode{x1F383}',
+        bigpumpkin: '\\unicode{x1F383}',
+        mathghost: '\\unicode{x1F47B}',
+        mathcat: '\\unicode{x1F408}',
+        mathbat: '\\unicode{x1F987}',
+        esssup: '\\operatorname{ess\\,sup}',
+        essinf: '\\operatorname{ess\\,inf}',
+        Lip: '\\operatorname{Lip}',
+        pd: ['\\frac{\\partial#1}{\\partial#2}', 2],
+        od: ['\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}', 2],
+        dashint: '\\mathchoice{\\rlap{-}\\!\\int}{\\rlap{\\raise.15ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}',
+        eurologo: '\\unicode{x20AC}',
+        starredbullet: '\\unicode{x2726}',
+        grimace: '\\unicode{x1F62C}',
+        textthing: '\\unicode{x2639}',
+        noway: '\\unicode{x26D4}',
+        warning: '\\unicode{x26A0}',
+        danger: '\\unicode{x26A0}',
+        textxswup: '\\unicode{x2195}',
+        textxswdown: '\\unicode{x2195}',
+        decoone: '\\unicode{x2756}',
+        decotwo: '\\unicode{x2767}',
+        decothreeleft: '\\unicode{x2619}',
+        decothreeright: '\\unicode{x2767}',
+        decofourleft: '\\unicode{x261A}',
+        decofourright: '\\unicode{x261B}',
+        floweroneleft: '\\unicode{x2740}',
+        floweroneright: '\\unicode{x2740}',
+        lefthand: '\\unicode{x261C}',
+        righthand: '\\unicode{x261E}',
+        decosix: '\\unicode{x2766}',
+        bomb: '\\unicode{x1F4A3}',
+        caution: '\\unicode{x2621}',
+        leftblackhand: '\\unicode{x261A}',
+        rightblackhand: '\\unicode{x261B}',
+        leafleft: '\\unicode{x2618}',
+        leafright: '\\unicode{x2618}',
+        leafNW: '\\unicode{x2618}',
+        leafNE: '\\unicode{x2618}',
+        leafSE: '\\unicode{x2618}',
+        leafSW: '\\unicode{x2618}',
+        aldineleft: '\\unicode{x2619}',
+        aldineright: '\\unicode{x2767}',
+        aldine: '\\unicode{x2766}',
+        aldinesmall: '\\unicode{x2767}',
+        aldinesmallrevert: '\\unicode{x2619}',
+        aldinesmallup: '\\unicode{x2766}',
+        grappe: '\\unicode{x2766}',
+        rightgrappe: '\\unicode{x2767}',
+        leftgrappe: '\\unicode{x2619}',
+        oldpilcrowone: '\\unicode{x00B6}',
+        oldpilcrowtwo: '\\unicode{x00B6}',
+        oldpilcrowthree: '\\unicode{x00B6}',
+        oldpilcrowfour: '\\unicode{x00B6}',
+        oldpilcrowfive: '\\unicode{x00B6}',
+        oldpilcrowsix: '\\unicode{x00B6}'
+      }
+    },
+    startup: {
+      pageReady: () => {
+        return MathJax.startup.defaultPageReady().then(() => {
+          console.log('MathJax ready');
+        });
+      }
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+  <script>
+  (function() {
+    window.addEventListener('beforeunload', function() {
+      saveProofState();
+      saveCollapsibleState();
+    });
+    
+    const eventSource = new EventSource('http://localhost:35729/reload-stream');
+    
+    eventSource.onmessage = function(event) {
+      if (event.data === 'reload') {
+        console.log('📝 File updated, saving state and reloading...');
+        saveProofState();
+        saveCollapsibleState();
+        setTimeout(() => {
+          window.location.reload();
+        }, 50);
+      }
+    };
+    
+    eventSource.onerror = function() {
+      console.log('⚠️  Auto-reload server not available. Run node watch.js to enable auto-reload.');
+      eventSource.close();
+    };
+    
+    console.log('🔄 Auto-reload enabled');
+  })();
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+    
+    /* Layout with sidebar */
+    .page-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      width: 280px;
+      background: #fff;
+      border-right: 1px solid #e0e0e0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px 0;
+      font-size: 14px;
+    }
+    
+    .sidebar-header {
+      padding: 15px 20px 25px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .sidebar-header h1 {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 5px 0;
+    }
+    
+    .sidebar-header .subtitle {
+      font-size: 0.85em;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .sidebar-header .back-link {
+      display: block;
+      font-size: 0.8em;
+      color: #666;
+      text-decoration: none;
+      margin-top: 12px;
+    }
+    
+    .sidebar-header .back-link:hover {
+      color: #1a1a1a;
+    }
+    
+    .sidebar-nav {
+      padding: 10px 0;
+    }
+    
+    .chapter-group {
+      margin-bottom: 2px;
+    }
+    
+    .chapter-title {
+      padding: 12px 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chapter-title:hover {
+      background: #f5f5f5;
+    }
+    
+    .chapter-title .toggle {
+      font-size: 0.65em;
+      color: #999;
+      transition: transform 0.2s;
+    }
+    
+    .chapter-group.expanded .chapter-title .toggle {
+      transform: rotate(90deg);
+    }
+    
+    .section-list {
+      display: none;
+      padding: 5px 0;
+      background: #f8f8f8;
+    }
+    
+    .chapter-group.expanded .section-list {
+      display: block;
+    }
+    
+    .section-link {
+      display: block;
+      padding: 8px 20px 8px 35px;
+      font-size: 0.85em;
+      color: #555;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+    }
+    
+    .section-link:hover {
+      background: #f0f0f0;
+      color: #1a1a1a;
+    }
+    
+    .section-link.active {
+      background: #e8e8e8;
+      border-left-color: #333;
+      color: #000;
+      font-weight: 500;
+    }
+    
+    /* Main content area */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      max-width: 900px;
+      padding: 40px 60px;
+    }
+    
+    @media (max-width: 1100px) {
+      .sidebar {
+        width: 240px;
+      }
+      .main-content {
+        margin-left: 240px;
+        padding: 30px 40px;
+      }
+    }
+    
+    @media (max-width: 800px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+      .page-layout {
+        flex-direction: column;
+      }
+    }
+    
+    h2, h3, h4 {
+      margin-top: 2em;
+      margin-bottom: 0.75em;
+      color: #000;
+      font-weight: 600;
+    }
+    h2 { font-size: 1.5em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.1em; }
+    p {
+      margin: 1em 0;
+      text-indent: 2em;
+    }
+    p:first-of-type,
+    h2 + p,
+    h3 + p,
+    h4 + p,
+    .theorem-box + p,
+    .proof-box + p {
+      text-indent: 0;
+    }
+    .noindent + p,
+    p:has(> .noindent:first-child) {
+      text-indent: 0 !important;
+    }
+    .noindent {
+      display: none;
+    }
+    .theorem-box {
+      margin: 1.75em 0;
+      padding: 1.25em;
+      border-left: 5px solid #16a34a;
+      background: linear-gradient(to top, #bbf7d0 0%, #d1fae5 100%);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .definition-box { border-left-color: #16a34a; background: linear-gradient(to top, #d1fae5 0%, #ecfdf5 100%); }
+    .lemma-box { border-left-color: #1e3a8a; background: linear-gradient(to top, #bfdbfe 0%, #dbeafe 100%); }
+    .corollary-box { border-left-color: #9333ea; background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%); }
+    .proposition-box { border-left-color: #dc2626; background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%); }
+    .remark-box { border-left-color: #64748b; background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%); }
+    .example-box { border-left-color: #0891b2; background: linear-gradient(to top, #a5f3fc 0%, #cffafe 100%); }
+    .construction-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .notation-box { border-left-color: #ca8a04; background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%); }
+    .exercise-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .problem-box { border-left-color: #ec4899; background: linear-gradient(to top, #fbcfe8 0%, #fce7f3 100%); }
+    .theorem-header {
+      margin-bottom: 0.75em;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+    .theorem-header.clickable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .theorem-header.clickable:hover {
+      background: rgba(0,0,0,0.03);
+      margin: -0.5em -0.75em 0.75em -0.75em;
+      padding: 0.5em 0.75em;
+      border-radius: 4px;
+    }
+    .collapsible-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      margin-right: 0.5em;
+      color: #6b7280;
+    }
+    .collapsible-box.collapsed .collapsible-icon {
+      transform: rotate(-90deg);
+    }
+    .collapsible-content {
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+    }
+    .collapsible-box.collapsed .collapsible-content {
+      display: none;
+    }
+    .theorem-content {
+      padding-left: 0.5em;
+      line-height: 1.8;
+    }
+    .proof-box {
+      margin: 1.5em 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .proof-header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      border-radius: 6px 6px 0 0;
+    }
+    .proof-toggle {
+      width: 100%;
+      padding: 0.85em 1.25em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      transition: background 0.15s;
+    }
+    .proof-toggle:hover { background: rgba(0,0,0,0.03); }
+    .proof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      color: #6b7280;
+    }
+    .proof-box.collapsed .proof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .proof-content {
+      padding: 1.25em;
+      line-height: 1.8;
+    }
+    .proof-box.collapsed .proof-content {
+      display: none;
+    }
+    .proof-end {
+      float: right;
+      font-size: 1.3em;
+      margin-left: 0.5em;
+      color: #374151;
+    }
+    .subproof {
+      margin: 1em 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #f9fafb;
+    }
+    .subproof-header {
+      background: linear-gradient(to bottom, #f9fafb 0%, #f3f4f6 100%);
+      border-bottom: 1px solid #d1d5db;
+      border-radius: 4px 4px 0 0;
+    }
+    .subproof-toggle {
+      width: 100%;
+      padding: 0.6em 1em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: background 0.15s;
+    }
+    .subproof-toggle:hover {
+      background: rgba(0,0,0,0.03);
+    }
+    .subproof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.7em;
+      color: #6b7280;
+    }
+    .subproof.collapsed .subproof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .subproof-content {
+      padding: 1em;
+      line-height: 1.7;
+    }
+    .subproof.collapsed .subproof-content {
+      display: none;
+    }
+    .ref-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 0.15em;
+      border-radius: 2px;
+    }
+    .ref-link:hover {
+      background: #dbeafe;
+      text-decoration: underline;
+    }
+    .ref-unknown {
+      color: #dc2626;
+      font-weight: bold;
+      background: #fee2e2;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+    ol, ul {
+      margin: 1em 0;
+      padding-left: 2.5em;
+      line-height: 1.8;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    .latex-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5em auto;
+    }
+    .latex-figure .latex-image {
+      display: inline-block;
+      margin: 0.5em;
+      vertical-align: middle;
+    }
+    .latex-figure {
+      margin: 2em 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .latex-figure .figure-content {
+      margin-bottom: 0.75em;
+      line-height: normal;
+    }
+    .latex-figure .figure-content > * {
+      vertical-align: middle;
+    }
+    .latex-figure figcaption {
+      font-size: 0.9em;
+      color: #4b5563;
+      font-style: italic;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1>Analysis III</h1>
+        <div class="subtitle">Measure Theory &amp; Integration</div>
+        <a href="../index.html" class="back-link">← Table of Contents</a>
+      </div>
+      <div class="sidebar-nav">
+        <div class="chapter-group expanded">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>1. Measure Theory</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../01-measure-theory/measure-theory.html" class="section-link">Overview</a>
+            <a href="../01-measure-theory/basics.html" class="section-link">Outer Measures</a>
+            <a href="../01-measure-theory/lebesgue-meas.html" class="section-link">Lebesgue Measure</a>
+            <a href="../01-measure-theory/cantor.html" class="section-link">The Cantor Set</a>
+            <a href="../01-measure-theory/measure-spaces.html" class="section-link">Measure Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>2. Integration</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../02-integration/integration.html" class="section-link">Overview</a>
+            <a href="../02-integration/integrals-1.html" class="section-link">Simple Functions</a>
+            <a href="../02-integration/integrals-2.html" class="section-link">General Functions</a>
+            <a href="../02-integration/convergence.html" class="section-link">Convergence Theorems</a>
+            <a href="../02-integration/inequality-party.html" class="section-link">Integral Inequalities</a>
+            <a href="../02-integration/lp_spaces.html" class="section-link">Lᵖ Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>3. Product Measures</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../03-fubini/fubini_ch.html" class="section-link">Overview</a>
+            <a href="../03-fubini/fubini.html" class="section-link">Fubini-Tonelli</a>
+            <a href="../03-fubini/integrals-3.html" class="section-link">Product Measures</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>4. Differentiation I</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../04-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../04-differentiation-1/covering.html" class="section-link">Vitali Covering</a>
+            <a href="../04-differentiation-1/monotone.html" class="section-link">Monotone Functions</a>
+            <a href="../04-differentiation-1/BV_on_R.html" class="section-link">Bounded Variation</a>
+            <a href="../04-differentiation-1/FTOC.html" class="section-link">FTC for Lebesgue</a>
+            <a href="../04-differentiation-1/HL.html" class="section-link">Hardy-Littlewood</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>5. Differentiation I (cont)</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../05-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../05-differentiation-1/r-nik.html" class="section-link">Radon-Nikodym</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>6. Differentiation II</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-differentiation-2/diff-2.html" class="section-link">Overview</a>
+            <a href="../06-differentiation-2/vector-measures.html" class="section-link">Vector Measures</a>
+            <a href="../06-differentiation-2/r-nik.html" class="section-link">Radon-Nikodym</a>
+            <a href="../06-differentiation-2/besi.html" class="section-link">Besicovitch</a>
+            <a href="../06-differentiation-2/densities.html" class="section-link">Densities</a>
+            <a href="../06-differentiation-2/diff-measures.html" class="section-link">Measure Derivatives</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>7. Riesz Representation</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-riesz/riesz.html" class="section-link">Overview</a>
+            <a href="../06-riesz/riesz_functional.html" class="section-link">Riesz Representation</a>
+            <a href="../06-riesz/LCH_spaces.html" class="section-link">LCH Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>8. Integral Formulas</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../07-formulas/formulas.html" class="section-link">Overview</a>
+            <a href="../07-formulas/hausdorff_meas.html" class="section-link">Hausdorff Measures</a>
+            <a href="../07-formulas/lippy.html" class="section-link">Lipschitz Maps</a>
+            <a href="../07-formulas/rademacher.html" class="section-link">Rademacher</a>
+            <a href="../07-formulas/coarea-prereq.html" class="section-link">Coarea Prerequisites</a>
+            <a href="../07-formulas/coarea.html" class="section-link">Coarea Formula</a>
+            <a href="../07-formulas/area-prereq.html" class="section-link">Area Prerequisites</a>
+            <a href="../07-formulas/area-formula.html" class="section-link">Area Formula</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>9. Extension Results</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../08-ext-res/ext-res.html" class="section-link">Overview</a>
+            <a href="../08-ext-res/taylor_thm_integral_remainder.html" class="section-link">Taylor's Theorem</a>
+            <a href="../08-ext-res/whitney-cover.html" class="section-link">Whitney Covering</a>
+            <a href="../08-ext-res/whitney-partition-of-unity.html" class="section-link">Partition of Unity</a>
+            <a href="../08-ext-res/whitney-decomposition.html" class="section-link">Decomposition</a>
+            <a href="../08-ext-res/whitney-extension-theorem.html" class="section-link">Extension Theorem</a>
+            <a href="../08-ext-res/whitney-extension-proof.html" class="section-link">Extension Proof</a>
+            <a href="../08-ext-res/whitney-extension-applications.html" class="section-link">Applications</a>
+            <a href="../08-ext-res/whitney-extension.html" class="section-link">Summary</a>
+            <a href="../08-ext-res/more-bump.html" class="section-link">More Bump Functions</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <main class="main-content">
+      <h2>Modes of Convergence</h2>
+<h3>Modes of Convergence</h3>
+<p>If one has a sequence of real or complex numbers $\{a_n\}_{n=1}^\infty$, then it is unambiguous what it means for $\{a_n\}_{n=1}^\infty$ to converge to a limit $a$ --- it means that for each $\epsilon>0$, there exists $N \in \Z^+$ such that for all $n \geq N$, we have $|a_n - a| < \epsilon$.
+The same works in $\R^n$ or $\C^n$ if we just replace the absolute value with a norm.</p>
+<p>The same cannot be said for sequences of functions though. There are many different ways for a sequence of functions $\{f_n\}_{n=1}^\infty$ to converge to a function $f$, and each has its own utility.
+In this note, we define and study several different modes of convergence for sequences of functions.
+We hope to do this in a unified manner for functions which take values in $\R$, $\C$, or even $[-\infty,\infty]$.</p>
+<p>To this end, let $\F$ be either $\R$ or $\C$, and let $\F_\infty$ be either $[-\infty,\infty]$ if $\F = \R$, or $\C \cup \{\infty\}$ if $\F = \C$.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>We now define several different modes of convergence for sequences of functions.
+The first two modes are standard in analysis, and are reviewed here for completeness.
+The next five modes are specific to measure theory and integration.</p>
+<div class="theorem-box definition-box" id="def:modes_of_convergence">
+  <div class="theorem-header"><strong>Definition ?</strong> (Modes of Convergence)</div>
+  <div class="theorem-content">Let $X$ be a set, and let $\{f_n\}_{n=1}^\infty$ be a sequence of functions $f_n : X \to \F$, and let $f : X \to \F$ be another function.
+    <ol><li>(Pointwise Convergence) We say that $\{f_n\}_{n=1}^\infty$ converges <strong>pointwise</strong> to $f$ if for each $x \in X$ and each $\epsilon>0$, there exists $N \in \Z^+$ (which depends on both $x$ and $\epsilon$)
+          such that for all $n \geq N$, we have $|f_n(x) - f(x)| < \epsilon$.
+        </li><li>(Uniform Convergence) We say that $\{f_n\}_{n=1}^\infty$ converges <strong>uniformly</strong> to $f$ if for each $\epsilon>0$, there exists $N \in \Z^+$ (which depends only on $\epsilon$)
+          such that for all $n \geq N$ and all $x \in X$, we have $|f_n(x) - f(x)| < \epsilon$.</li></ol>
+<p>Now suppose that $(X,\mu)$ is a measure space, and let $\{ f_n \}_{n=1}^\infty$ be a sequence of
+    measurable functions $X \to \F_\infty$ which are finite almost everywhere, and let $f$ be a measurable function $X \to \F_\infty$ which is finite almost everywhere.
+    Then we define the following five modes of convergence.</p>
+<ol start="3">
+        </li><li>(Pointwise a.e. Convergence) We say that $\{f_n\}_{n=1}^\infty$ converges <strong>pointwise almost everywhere</strong> to $f$ if for $\mu$-almost every $x \in X$, we have $f_n(x) \to f(x)$ as $n \to \infty$.
+        </li><li>($L^\infty$ Convergence) We say that $\{f_n\}_{n=1}^\infty$ converges <strong>in $L^\infty$ norm</strong> to $f$ if for each $\epsilon>0$, there exists $N$ (which depends only on $\epsilon$)
+          such that for all $n \geq N$, we have $|f_n(x) - f(x)| < \epsilon$ for $\mu$-almost every $x \in X$.
+        </li><li>(Almost Uniform Convergence) We say that $\{f_n\}_{n=1}^\infty$ converges <strong>almost uniformly</strong> to $f$ if for each $\epsilon>0$, there exists a measurable set $E \subseteq X$ with $\mu(E) < \epsilon$ such that $\{f_n\}_{n=1}^\infty$ converges uniformly to $f$ on $X \setminus E$.
+        </li><li>($L^1$ Convergence) We say that $\{f_n\}_{n=1}^\infty$ converges <strong>in $L^1$ norm</strong> to $f$ if
+          \[ \lim_{n \to \infty} \int_X |f_n - f| \,\dif\mu = 0. \]
+        </li><li>(Convergence in Measure) We say that $\{f_n\}_{n=1}^\infty$ converges <strong>in measure</strong> to $f$ if for each $\epsilon>0$,
+          \[ \lim_{n \to \infty} \mu(\{ x \in X : |f_n(x) - f(x)| \geq \epsilon \}) = 0. \]</li></ol></div>
+</div>
+<p>Instead of saying that $\{f_n\}_{n=1}^\infty$ is defined as a sequence of functions $X \to \F_\infty$ which are finite almost everywhere, we will often just say that $\{f_n\}_{n=1}^\infty$ is a sequence of measurable functions $X \to \F$.
+Similarly for the proposed limit function $f$.
+This is because we can always redefine the functions on sets of measure zero to make them finite-valued without changing any of the modes of convergence defined above, or any integrals involving these functions, or any properties of these functions that hold almost everywhere.
+Our mantra is that in measure theory, we only care about what happens almost everywhere.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>The utility of the almost everywhere modes of convergence is that we can modify functions on sets of measure zero without changing their convergence.
+Pointwise and uniform convergence are too rigid for this purpose.</p>
+<div class="theorem-box proposition-box" id="proposition-?">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Linearity of Convergence)</div>
+  <div class="theorem-content">Let $(X,\mu)$ be a measure space.
+    Let $\{f_n\}_{n=1}^\infty$ and $\{g_n\}_{n=1}^\infty$ be sequences of measurable functions and let $f$ and $g$ be measurable functions.
+<ol><li>The sequence $\{f_n\}_{n=1}^\infty$ converges to $f$ in one of the seven modes of convergence if and only if $\{|f_n - f|\}_{n=1}^\infty$ converges to $0$ in the same mode of convergence.
+        </li><li>If $\{f_n\}_{n=1}^\infty$ converges to $f$ in one of the seven modes of convergence, and $\{g_n\}_{n=1}^\infty$ converges to $g$ in the same mode of convergence, then $\{f_n + g_n\}_{n=1}^\infty$ converges to $f + g$ in the same mode of convergence.
+        </li><li>(Squeeze Theorem.) If $\{f_n\}_{n=1}^\infty$ converges to $0$ in one of the seven modes of convergence, and $|g_n| \leq f_n$ for all $n$, then $\{g_n\}_{n=1}^\infty$ converges to $0$ in the same mode of convergence.</li></ol></div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-0">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-0')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-0">
+    (i).
+<p><div style="margin: 1em 0;"></div>
+    <em>Pointwise Convergence.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $f$ pointwise.
+    Let $x \in X$ and let $\epsilon>0$.
+    Then there exists $N \in \Z^+$ such that for all $n \geq N$, we have $|f_n(x) - f(x)| < \epsilon$.
+    But this is equivalent to saying that for all $n \geq N$, we have $| |f_n(x) - f(x)| - 0 | < \epsilon$.
+    Since $x$ and $\epsilon$ were arbitrary, we have shown that $\{|f_n - f|\}_{n=1}^\infty$ converges pointwise to $0$.
+    The converse is similar.</p>
+<p><em>Uniform Convergence.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $f$ uniformly.
+    Let $\epsilon>0$.
+    Then there exists $N \in \Z^+$ such that for all $n \geq N$ and all $x \in X$, we have $|f_n(x) - f(x)| < \epsilon$.
+    But this is equivalent to saying that for all $n \geq N$ and all $x \in X$, we have $| |f_n(x) - f(x)| - 0 | < \epsilon$.
+    Since $\epsilon$ was arbitrary, we have shown that $\{|f_n - f|\}_{n=1}^\infty$ converges uniformly to $0$.
+    The converse is similar.</p>
+<p><em>Pointwise a.e. Convergence.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $f$ pointwise a.e.
+    Then there exists a measurable set $E \subseteq X$ with $\mu(E) = 0$ such that for each $x \in X \setminus E$, we have $f_n(x) \to f(x)$ as $n \to \infty$.
+    As we have already shown, this is equivalent to saying that for each $x \in X \setminus E$, we have $|f_n(x) - f(x)| \to 0$ as $n \to \infty$.
+    Since $E$ is a measurable set with $\mu(E) = 0$, we have shown that $\{|f_n - f|\}_{n=1}^\infty$ converges pointwise a.e. to $0$.</p>
+<p>Assume that $\{ | f_n - f | \}_{n=1}^\infty$ converges to $0$ pointwise a.e.
+    Then there exists a measurable set $E \subseteq X$ with $\mu(E) = 0$ such that for each $x \in X \setminus E$, we have $|f_n(x) - f(x)| \to 0$ as $n \to \infty$.
+    As we have already shown, this is equivalent to saying that for each $x \in X \setminus E$, we have $f_n(x) \to f(x)$ as $n \to \infty$.
+    Since $E$ is a measurable set with $\mu(E) = 0$, we have shown that $\{f_n\}_{n=1}^\infty$ converges pointwise a.e. to $f$.</p>
+<p><em>$L^\infty$ Convergence.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $f$ in $L^\infty$ norm.
+    Let $\epsilon>0$.
+    Then there exists $N \in \Z^+$ such that for all $n \geq N$, we have $|f_n(x) - f(x)| < \epsilon$ for $\mu$-almost every $x \in X$.
+    But this is equivalent to saying that for all $n \geq N$, we have $| |f_n(x) - f(x)| - 0 | < \epsilon$ for $\mu$-almost every $x \in X$.
+    Since $\epsilon$ was arbitrary, we have shown that $\{|f_n - f|\}_{n=1}^\infty$ converges to $0$ in $L^\infty$ norm.
+    The converse is similar.</p>
+<p><em>Almost Uniform Convergence.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $f$ almost uniformly.
+    Let $\epsilon>0$.
+    Then there exists a measurable set $E \subseteq X$ with $\mu(E)< \epsilon$ such that $\{f_n\}_{n=1}^\infty$ converges uniformly to $f$ on $X \setminus E$.
+    As we have already shown, this is equivalent to saying that $\{|f_n - f|\}_{n=1}^\infty$ converges uniformly to $0$ on $X \setminus E$.
+    Since $E$ is a measurable set with $\mu(E) < \epsilon$, we have shown that $\{|f_n - f|\}_{n=1}^\infty$ converges almost uniformly to $0$.
+    The converse is similar.</p>
+<p><em>$L^1$ Convergence.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $f$ in $L^1$ norm.
+    Then
+    \[ \lim_{n \to \infty} \int_X |f_n - f| \,\dif\mu = 0. \]
+    But this is equivalent to saying that
+    \[ \lim_{n \to \infty} \int_X ||f_n - f| - 0| \,\dif\mu = 0. \]
+    Thus $\{|f_n - f|\}_{n=1}^\infty$ converges to $0$ in $L^1$ norm.
+    The converse is similar.</p>
+<p><em>Convergence in Measure.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $f$ in measure.
+    Let $\epsilon>0$.
+    Then
+    \[ \lim_{n \to \infty} \mu(\{ x \in X : |f_n(x) - f(x)| \geq \epsilon \}) = 0. \]
+    But this is equivalent to saying that
+    \[ \lim_{n \to \infty} \mu(\{ x \in X : ||f_n(x) - f(x)| - 0| \geq \epsilon \}) = 0. \]
+    Thus $\{|f_n - f|\}_{n=1}^\infty$ converges to $0$ in measure.
+    The converse is similar.</p>
+<p><div style="margin: 1em 0;"></div>
+    (ii). For pointwise and uniform convergence, this is known, so we prove it for the other five modes.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Pointwise a.e. Convergence.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $f$ pointwise a.e. and $\{g_n\}_{n=1}^\infty$ converges to $g$ pointwise a.e.
+    Then there exist measurable sets $E_f, E_g \subseteq X$ with $\mu(E_f) = 0$ and $\mu(E_g) = 0$ such that for each $x \in X \setminus E_f$, we have $f_n(x) \to f(x)$ as $n \to \infty$, and for each $x \in X \setminus E_g$, we have $g_n(x) \to g(x)$ as $n \to \infty$.
+    Let $E = E_f \cup E_g$, which is a measurable set with $\mu(E) = 0$.
+    For each $x \in X \setminus E$, we have $x \in X \setminus E_f$ and $x \in X \setminus E_g$, so
+    we have $f_n(x) \to f(x)$ and $g_n(x) \to g(x)$ as $n \to \infty$.
+    Thus for each $x \in X \setminus E$, we have
+    \[ f_n(x) + g_n(x) \to f(x) + g(x) \]
+    as $n \to \infty$.
+    Since $E$ is a measurable set with $\mu(E) = 0$, we have shown that $\{f_n + g_n\}_{n=1}^\infty$ converges pointwise a.e. to $f + g$.</p>
+<p><em>$L^\infty$ Convergence.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $f$ in $L^\infty$ norm and $\{g_n\}_{n=1}^\infty$ converges to $g$ in $L^\infty$ norm.
+    Then for each $\epsilon>0$, there exist $N_f, N_g \in \Z^+$ such that for all $n \geq N_f$, we have $|f_n(x) - f(x)| < \epsilon/2$ for $\mu$-almost every $x \in X$, and for all $n \geq N_g$, we have $|g_n(x) - g(x)| < \epsilon/2$ for $\mu$-almost every $x \in X$.
+    Let $N = \max(N_f, N_g)$.
+    Then for all $n \geq N$ and for $\mu$-almost every $x \in X$, we have
+    \[ |(f_n(x) + g_n(x)) - (f(x) + g(x))| \leq |f_n(x) - f(x)| + |g_n(x) - g(x)| < \epsilon/2 + \epsilon/2 = \epsilon. \]
+    Since $\epsilon>0$ was arbitrary, we have shown that $\{f_n + g_n\}_{n=1}^\infty$ converges to $f + g$ in $L^\infty$ norm.</p>
+<p><em>Almost Uniform Convergence.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $f$ almost uniformly and $\{g_n\}_{n=1}^\infty$ converges to $g$ almost uniformly.
+    Let $\epsilon>0$.
+    Then there exist measurable sets $E_f, E_g \subseteq X$ with $\mu(E_f) < \epsilon/2$ and $\mu(E_g) < \epsilon/2$ such that $\{f_n\}_{n=1}^\infty$ converges uniformly to $f$ on $X \setminus E_f$, and $\{g_n\}_{n=1}^\infty$ converges uniformly to $g$ on $X \setminus E_g$.
+    Let $E = E_f \cup E_g$, which is a measurable set with $\mu(E) < \epsilon$.
+    Since $\{f_n\}_{n=1}^\infty$ converges uniformly to $f$ on $X \setminus E_f$ and $\{g_n\}_{n=1}^\infty$ converges uniformly to $g$ on $X \setminus E_g$, we have that $\{f_n + g_n\}_{n=1}^\infty$ converges uniformly to $f + g$ on $X \setminus E$.
+    Since $\epsilon>0$ was arbitrary, we have shown that $\{f_n + g_n\}_{n=1}^\infty$ converges almost uniformly to $f + g$.</p>
+<p><em>$L^1$ Convergence.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $f$ in $L^1$ norm and $\{g_n\}_{n=1}^\infty$ converges to $g$ in $L^1$ norm.
+    Then
+    \[ \lim_{n \to \infty} \int_X |f_n - f| \,\dif\mu = \lim_{n \to \infty} \int_X |g_n - g| \,\dif\mu = 0. \]
+    By the triangle inequality for integrals (Proposition <span class="ref-unknown" title="Reference not found: prop:properties_of_lebesgue_integral">[prop:properties_of_lebesgue_integral?]</span>), we have
+    \[ \int_X |(f_n + g_n) - (f + g)| \,\dif\mu \leq \int_X |f_n - f| \,\dif\mu + \int_X |g_n - g| \,\dif\mu \to 0 \quad\text{ as } n \to \infty. \]
+    Thus $\{f_n + g_n\}_{n=1}^\infty$ converges to $f + g$ in $L^1$ norm.</p>
+<p><em>Convergence in Measure.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $f$ in measure and $\{g_n\}_{n=1}^\infty$ converges to $g$ in measure.
+    Let $\epsilon>0$. See that for each $n \in \Z^+$, we have
+    \[  \mu(\{ x \in X : |(f_n(x) + g_n(x)) - (f(x) + g(x))| \geq \epsilon \}) \leq \mu(\{ x \in X : |f_n(x) - f(x)| \geq \epsilon/2 \}) + \mu(\{ x \in X : |g_n(x) - g(x)| \geq \epsilon/2 \}). \]
+    Taking limits as $n \to \infty$ and using the fact that $\{f_n\}_{n=1}^\infty$ converges to $f$ in measure and $\{g_n\}_{n=1}^\infty$ converges to $g$ in measure, we have
+    we see that the right-hand side tends to $0$ as $n \to \infty$.
+    Thus
+    \[ \lim_{n \to \infty} \mu(\{ x \in X : |(f_n(x) + g_n(x)) - (f(x) + g(x))| \geq \epsilon \}) = 0. \]
+    Since $\epsilon>0$ was arbitrary, we have shown that $\{f_n + g_n\}_{n=1}^\infty$ converges to $f + g$ in measure.</p>
+<p><div style="margin: 1em 0;"></div>
+    (iii). 
+    <div style="margin: 1em 0;"></div></p>
+<p><em>Pointwise Convergence.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $0$ pointwise and $|g_n| \leq f_n$ for all $n$.
+    Let $x \in X$ and let $\epsilon>0$.
+    Then there exists $N \in \Z^+$ such that for all $n \geq N$, we have $|f_n(x)| < \epsilon$.
+    Since $|g_n(x)| \leq |f_n(x)|$, we have $|g_n(x)| < \epsilon$ for all $n \geq N$.
+    Since $x$ and $\epsilon$ were arbitrary, we have shown that $\{g_n\}_{n=1}^\infty$ converges pointwise to $0$.</p>
+<p><em>Uniform Convergence.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $0$ uniformly and $|g_n| \leq f_n$ for all $n$.
+    Let $\epsilon>0$.
+    Then there exists $N \in \Z^+$ such that for all $n \geq N$ and all $x \in X$, we have $|f_n(x)| < \epsilon$.
+    Since $|g_n(x)| \leq |f_n(x)|$, we have $|g_n(x)| < \epsilon$ for all $n \geq N$ and all $x \in X$.
+    Since $\epsilon$ was arbitrary, we have shown that $\{g_n\}_{n=1}^\infty$ converges uniformly to $0$.</p>
+<p><em>Pointwise a.e. Convergence.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $0$ pointwise a.e. and $|g_n| \leq f_n$ for all $n$ and almost everywhere on $X$.
+    Then there exists a measurable set $E_f \subseteq X$ with $\mu(E_f) = 0$ such that for each $x \in X \setminus E_f$, we have $f_n(x) \to 0$ as $n \to \infty$.
+    There is also a measurable set $E_g \subseteq X$ with $\mu(E_g) = 0$ such that for each $n$, we have $|g_n(x)| \leq f_n(x)$ for each $x \in X \setminus E_g$.
+    Let $E = E_f \cup E_g$, which is a measurable set with $\mu(E) = 0$.
+    For each $x \in X \setminus E$, we have $x \in X \setminus E_f$ and $x \in X \setminus E_g$, so
+    we have $f_n(x) \to 0$ as $n \to \infty$ and $|g_n(x)| \leq f_n(x)$ for all $n$.
+    Thus we have $|g_n(x)| \to 0$ as $n \to \infty$ by the case for pointwise convergence.
+    Since $E$ is a measurable set with $\mu(E) = 0$, we have shown that $\{g_n\}_{n=1}^\infty$ converges pointwise a.e. to $0$.</p>
+<p><em>$L^\infty$ Convergence.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $0$ in $L^\infty$ norm and $|g_n| \leq f_n$ for all $n$ and almost everywhere on $X$.
+    Let $\epsilon>0$.
+    Then there exists $N \in \Z^+$ such that for all $n \geq N$, we have $|f_n(x)| < \epsilon$ for $\mu$-almost every $x \in X$.
+    There is also a measurable set $E_g \subseteq X$ with $\mu(E_g) = 0$ such that for each $n$, we have $|g_n(x)| \leq f_n(x)$ for each $x \in X \setminus E_g$.
+    Let $E = E_g$, which is a measurable set with $\mu(E) = 0$.
+    For all $n \geq N$ and for $\mu$-almost every $x \in X$, we have
+    $x \in X \setminus E$, so we have $|g_n(x)| \leq |f_n(x)| < \epsilon$.
+    Since $\epsilon>0$ was arbitrary, we have shown that $\{g_n\}_{n=1}^\infty$ converges to $0$ in $L^\infty$ norm.</p>
+<p><em>Almost Uniform Convergence.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $0$ almost uniformly and $|g_n| \leq f_n$ for all $n$ and almost everywhere on $X$.
+    Let $\epsilon>0$.
+    Then there exists a measurable set $E_f \subseteq X$ with $\mu(E_f) < \epsilon$ such that $\{f_n\}_{n=1}^\infty$ converges uniformly to $0$ on $X \setminus E_f$.
+    There is also a measurable set $E_g \subseteq X$ with $\mu(E_g) = 0$ such that for each $n$, we have $|g_n(x)| \leq f_n(x)$ for each $x \in X \setminus E_g$.
+    Let $E = E_f \cup E_g$, which is a measurable set with $\mu(E) < \epsilon$.
+    Since $\{f_n\}_{n=1}^\infty$ converges uniformly to $0$ on $X \setminus E_f$ and $|g_n(x)| \leq |f_n(x)|$ for each $x \in X \setminus E_g$, we have that $\{g_n\}_{n=1}^\infty$ converges uniformly to $0$ on $X \setminus E$.
+    Since $\epsilon>0$ was arbitrary, we have shown that $\{g_n\}_{n=1}^\infty$ converges almost uniformly to $0$.</p>
+<p><em>$L^1$ Convergence.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $0$ in $L^1$ norm and $|g_n| \leq f_n$ for all $n$ and almost everywhere on $X$.
+    Then
+    \[ \lim_{n \to \infty} \int_X |f_n| \,\dif\mu = 0. \]
+    Then monotonicity of the Lebesgue integral (Proposition <span class="ref-unknown" title="Reference not found: prop:properties_of_lebesgue_integral">[prop:properties_of_lebesgue_integral?]</span>) implies that
+    \[ \int_X |g_n| \,\dif\mu \leq \int_X |f_n| \,\dif\mu \to 0 \quad\text{ as } n \to \infty. \]
+    Thus $\{g_n\}_{n=1}^\infty$ converges to $0$ in $L^1$ norm.</p>
+<p><em>Convergence in Measure.</em>
+    Assume that $\{f_n\}_{n=1}^\infty$ converges to $0$ in measure and $|g_n| \leq f_n$ for all $n$ and almost everywhere on $X$.
+    Let $\epsilon>0$. See that for each $n \in \Z^+$, we have
+    \[  \mu(\{ x \in X : |g_n(x)| \geq \epsilon \}) \leq \mu(\{ x \in X : |f_n(x)| \geq \epsilon \}). \]
+    Taking limits as $n \to \infty$ and using the fact that $\{f_n\}_{n=1}^\infty$ converges to $0$ in measure, we have
+    we see that the right-hand side tends to $0$ as $n \to \infty$.
+    Thus
+    \[ \lim_{n \to \infty} \mu(\{ x \in X : |g_n(x)| \geq \epsilon \}) = 0. \]
+    Since $\epsilon>0$ was arbitrary, we have shown that $\{g_n\}_{n=1}^\infty$ converges to $0$ in measure.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box proposition-box" id="proposition-?">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Easy Implications)</div>
+  <div class="theorem-content">Let $(X,\mu)$ be a measure space.
+    Let $\{f_n\}_{n=1}^\infty$ and let $f$ be measurable functions.
+    Then the following implications hold:
+    <ol><li>Uniform convergence $\implies$ pointwise convergence.
+        </li><li>Uniform convergence $\implies$ $L^\infty$ convergence.
+        </li><li>$L^\infty$ convergence $\implies$ almost uniform convergence.
+        </li><li>Almost uniform convergence $\implies$ pointwise a.e. convergence.
+        </li><li>Pointwise convergence $\implies$ pointwise a.e. convergence.
+        </li><li>$L^1$ convergence $\implies$ convergence in measure.
+        </li><li>Almost uniform convergence $\implies$ convergence in measure.</li></ol></div>
+</div>
+<figure class="latex-figure">
+  <div class="figure-content"><img src="../../figures/figures/modes_of_1.png" alt="Figure" class="latex-image" style="width: 60%;" onerror="this.style.border='3px solid red'; this.style.padding='20px'; this.style.background='#fee'; this.alt='Image not found: ../../figures/figures/modes_of_1.png'; console.error('Failed to load: ../../figures/figures/modes_of_1.png');"></div>
+</figure>
+<div class="proof-box collapsed" data-proof-id="proof-num-1">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-1')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-1">
+    (1). Suppose that $\{f_n\}_{n=1}^\infty$ converges uniformly to $f$.
+    Then for each $\epsilon>0$, there exists $N \in \Z^+$ such that for all $n \geq N$ and all $x \in X$, we have $|f_n(x) - f(x)| < \epsilon$.
+    Let $x \in X$ and let $\epsilon>0$.
+    Then for all $n \geq N$, we have $|f_n(x) - f(x)| < \epsilon$.
+    Since $x$ and $\epsilon$ were arbitrary, we have shown that $\{f_n\}_{n=1}^\infty$ converges pointwise to $f$.
+<p><div style="margin: 1em 0;"></div>
+    (2). Suppose that $\{f_n\}_{n=1}^\infty$ converges uniformly to $f$.
+    Then for each $\epsilon>0$, there exists $N \in \Z^+$ such that for all $n \geq N$ and all $x \in X$, we have $|f_n(x) - f(x)| < \epsilon$.
+    Since this holds for all $x \in X$, it holds for $\mu$-almost every $x \in X$.
+    Since $\epsilon>0$ was arbitrary, we have shown that $\{f_n\}_{n=1}^\infty$ converges to $f$ in $L^\infty$ norm.</p>
+<p><div style="margin: 1em 0;"></div>
+    (3). Suppose that $\{f_n\}_{n=1}^\infty$ converges to $f$ in $L^\infty$ norm.
+    Let $\epsilon>0$.
+    Then there exists $N \in \Z^+$ such that for all $n \geq N$, we have $|f_n(x) - f(x)| < \epsilon$ for $\mu$-almost every $x \in X$.
+    Let $E = \{ x \in X : |f_N(x) - f(x)| \geq \epsilon \}$.
+    Then $E$ is a measurable set with $\mu(E) = 0$.
+    For all $n \geq N$ and all $x \in X \setminus E$, we have $|f_n(x) - f(x)| < \epsilon$.
+    Since $\epsilon>0$ was arbitrary, we have shown that $\{f_n\}_{n=1}^\infty$ converges almost uniformly to $f$.</p>
+<p><div style="margin: 1em 0;"></div>
+    (4). Suppose that $\{f_n\}_{n=1}^\infty$ converges almost uniformly to $f$.
+    Then for each $\epsilon>0$, there exists a measurable set $E_\epsilon \subseteq X$ with $\mu(E_\epsilon) < \epsilon$ such that $\{f_n\}_{n=1}^\infty$ converges uniformly to $f$ on $X \setminus E_\epsilon$.
+    Let $E = \bigcap_{m=1}^\infty E_{1/m}$.
+    Then $E$ is a measurable set with $\mu(E) = 0$ by countable subadditivity.
+    For each $x \in X \setminus E$, we have $x \in X \setminus E_{1/m}$ for some $m$, and since $\{f_n\}_{n=1}^\infty$ converges uniformly to $f$ on $X \setminus E_{1/m}$, we have $f_n(x) \to f(x)$ as $n \to \infty$.
+    Thus $\{f_n\}_{n=1}^\infty$ converges pointwise a.e. to $f$.</p>
+<p><div style="margin: 1em 0;"></div>
+    (5). Suppose that $\{f_n\}_{n=1}^\infty$ converges pointwise to $f$.
+    Then it is trivially true that $\{f_n\}_{n=1}^\infty$ converges pointwise a.e. to $f$.</p>
+<p><div style="margin: 1em 0;"></div>
+    (6). Suppose that $\{f_n\}_{n=1}^\infty$ converges to $f$ in $L^1$ norm.
+    Let $\epsilon>0$. By Chebyshev's Inequality (Lemma <span class="ref-unknown" title="Reference not found: lem:chebyshevs_inequality">[lem:chebyshevs_inequality?]</span>), we have
+    \[ \mu(\{ x \in X : |f_n(x) - f(x)| \geq \epsilon \}) \leq \frac{1}{\epsilon} \int_X |f_n - f| \,\dif\mu. \]
+    Since $\{f_n\}_{n=1}^\infty$ converges to $f$ in $L^1$ norm, the right-hand side tends to $0$ as $n \to \infty$.
+    Thus $\mu(\{|f_n-f| \geq \epsilon\}) \to 0$ as $n \to \infty$, so $\{f_n\}_{n=1}^\infty$ converges to $f$ in measure.</p>
+<p><div style="margin: 1em 0;"></div>
+    (7). Suppose that $\{f_n\}_{n=1}^\infty$ converges almost uniformly to $f$.
+    Let $\epsilon>0$ and $\delta>0$. By $L^\infty$ convergence, there exists a measurable set $E \subseteq X$ with $\mu(E) < \delta$ such that $\{f_n\}_{n=1}^\infty$ converges uniformly to $f$ on $X \setminus E$.
+    Thus there exists $N \in \Z^+$ such that for all $n \geq N$ and all $x \in X \setminus E$, we have 
+    $|f_n(x) - f(x)| < \epsilon$.
+    Thus for all $n \geq N$, we have
+    \[ \{ x \in X : |f_n(x) - f(x)| \geq \epsilon \} \subseteq E, \]
+    so $\mu(\{|f_n - f| \geq \epsilon\}) \leq \mu(E) < \delta$ for all $n \geq N$.
+    Since $\delta>0$ was arbitrary, we have shown that $\mu(\{|f_n - f| \geq \epsilon\}) \to 0$ as $n \to \infty$, so $\{f_n\}_{n=1}^\infty$ converges to $f$ in measure.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box remark-box collapsible-box collapsed" id="rem:extra_implications_in_finite_measure_spaces" data-collapsible-id="collapsible-rem:extra_implications_in_finite_measure_spaces">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-rem:extra_implications_in_finite_measure_spaces')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong> (Extra Implications in Finite Measure Spaces)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-rem:extra_implications_in_finite_measure_spaces">We remark that if the measure of the whole space is finite, then uniform convergence also implies $L^1$ convergence, and $L^\infty$ convergence also implies $L^1$ convergence.
+    Also pointwise almost everywhere convergence implies almost uniform convergence by Egorov's Theorem (Theorem <span class="ref-unknown" title="Reference not found: thm:egorovs_theorem">[thm:egorovs_theorem?]</span>).
+<figure class="latex-figure">
+  <div class="figure-content"><img src="figures/modes_of_2.png" alt="Figure" class="latex-image" style="width: 50%;"></div>
+</figure>
+<p>We prove these claims below.</p>
+<p>Let $(X,\mu)$ be a measure space with $\mu(X) < \infty$.
+    Let $\{f_n\}_{n=1}^\infty$ and let $f$ be measurable functions such that $\{f_n\}_{n=1}^\infty$ converges to $f$ uniformly or in $L^\infty$ norm.
+    Then we see that
+    \[ \int_X |f_n - f| \, d\mu \leq \mu(X) \|f_n - f\|_\infty \]
+    for each $n \in \Z^+$, and taking limits as $n \to \infty$ and using the uniform convergence or $L^\infty$ convergence of $\{f_n\}_{n=1}^\infty$ to $f$, we have
+    \[ \lim_{n \to \infty} \int_X |f_n - f| \, d\mu = 0. \]
+    Thus $\{f_n\}_{n=1}^\infty$ converges to $f$ in $L^1$ norm.</p>
+<p>Now suppose that $\{f_n\}_{n=1}^\infty$ converges to $f$ pointwise a.e.
+    Then by Egorov's Theorem (Theorem <span class="ref-unknown" title="Reference not found: thm:egorovs_theorem">[thm:egorovs_theorem?]</span>), for each $\epsilon>0$, there exists a measurable set $E_\epsilon \subseteq X$ with $\mu(E_\epsilon) < \epsilon$ such that $\{f_n\}_{n=1}^\infty$ converges uniformly to $f$ on $X \setminus E_\epsilon$.
+    Since $\epsilon>0$ was arbitrary, we have shown that $\{f_n\}_{n=1}^\infty$ converges almost uniformly to $f$.
+    This completes the proof of the claims.
+    Note that these implications do not hold in general if $\mu(X) = \infty$.</div>
+</div></p>
+<div class="theorem-box example-box collapsible-box collapsed" id="example-?" data-collapsible-id="collapsible-example-escape-to-horizontal-infinity">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-example-escape-to-horizontal-infinity')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Example ?</strong> (Escape to Horizontal Infinity)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-example-escape-to-horizontal-infinity"></div>
+</div>
+<div class="theorem-box example-box collapsible-box collapsed" id="example-?" data-collapsible-id="collapsible-example-escape-to-width-infinity">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-example-escape-to-width-infinity')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Example ?</strong> (Escape to Width Infinity)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-example-escape-to-width-infinity"></div>
+</div>
+<div class="theorem-box example-box collapsible-box collapsed" id="example-?" data-collapsible-id="collapsible-example-escape-to-vertical-infinity">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-example-escape-to-vertical-infinity')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Example ?</strong> (Escape to Vertical Infinity)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-example-escape-to-vertical-infinity"></div>
+</div>
+<div class="theorem-box example-box collapsible-box collapsed" id="example-?" data-collapsible-id="collapsible-example-typewriter-sequence">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-example-typewriter-sequence')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Example ?</strong> (Typewriter Sequence)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-example-typewriter-sequence"></div>
+</div>
+<h3>Uniqueness of Limits</h3>
+Even though the modes of convergence all differ from each other, they are all compatible in the sense that they never disagree about which function $f$ is the limit of a sequence $\{f_n\}_{n=1}^\infty$, 
+outside of a set of measure zero.
+<div class="theorem-box theorem-box" id="thm:uniqueness_of_limits">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Uniqueness of Limits)</div>
+  <div class="theorem-content">Let $(X,\mu)$ be a measure space.
+    Let $\{f_n\}_{n=1}^\infty$ be a sequence of measurable functions and let $f$ and $g$ be measurable functions.
+<p>If $\{f_n\}_{n=1}^\infty$ converges to $f$ in one of the seven modes of convergence, and $\{f_n\}_{n=1}^\infty$ converges to $g$ in another of the seven modes of convergence,
+    then $f = g$ almost everywhere.</div>
+</div></p>
+<p>height width tail</p>
+<h3>The Case of Step Functions</h3>
+<p>height width tail</p>
+<h3>Topologies of Convergence</h3>
+<p>Ok so as analysts, we are mainly interested in limits of sequences, but occasionally we want to talk topology.
+It is useful after all.</p>
+<p>By definition, for each $1\leq p \leq \infty$, convergence in $L^p$ norm is the convergence on $L^p(X,\mu)$ induced by the topology of the $L^p$ norm.
+Pointwise convergence is by definition the convergence induced by the product topology on $[-\infty,\infty]^X$.
+Prove this last sentence?</p>
+<p>There is also a topology for uniform convergence, the uniform norm topology.</p>
+<p>The others are more mysterious.</p>
+<p>There is no topology for pointwise a.e. convergence.</p>
+<p>is there a topology for almost uniform convergence?</p>
+<p>convergence in measure
+see Folland exercise</p>
+<h3>Variants of Convergence Theorems</h3>
+    </main>
+  </div>
+  
+  <script>
+    function toggleChapter(element) {
+      element.parentElement.classList.toggle('expanded');
+    }
+    
+    // Highlight current page in sidebar
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPath = window.location.pathname;
+      const links = document.querySelectorAll('.section-link');
+      links.forEach(link => {
+        if (currentPath.endsWith(link.getAttribute('href').split('/').pop())) {
+          link.classList.add('active');
+          // Expand parent chapter
+          const group = link.closest('.chapter-group');
+          if (group) group.classList.add('expanded');
+        }
+      });
+    });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('Restoring proof collapse states...');
+      try {
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        const currentPage = window.location.pathname;
+        const pageOpen = openProofs[currentPage] || [];
+        
+        console.log('Current page:', currentPage);
+        console.log('Open proof IDs stored:', pageOpen);
+        console.log('Found ' + pageOpen.length + ' open proofs for this page');
+        
+        document.querySelectorAll('.proof-box').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          console.log('Checking proof:', proofId, 'Should be open:', pageOpen.includes(proofId));
+          if (pageOpen.includes(proofId)) {
+            box.classList.remove('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'true');
+          } else {
+            box.classList.add('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        const pageBoxes = openBoxes[currentPage] || [];
+        
+        console.log('Open box IDs stored:', pageBoxes);
+        
+        document.querySelectorAll('.collapsible-box').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          console.log('Checking box:', boxId, 'Should be open:', pageBoxes.includes(boxId));
+          if (pageBoxes.includes(boxId)) {
+            box.classList.remove('collapsed');
+          } else {
+            box.classList.add('collapsed');
+          }
+        });
+        
+        console.log('Proof states restored');
+      } catch (e) {
+        console.error('Error restoring collapse state:', e);
+      }
+    });
+    
+    function toggleProof(proofId) {
+      const proofContent = document.getElementById(proofId);
+      const proofBox = proofContent.closest('.proof-box');
+      proofBox.classList.toggle('collapsed');
+      
+      const button = proofBox.querySelector('.proof-toggle');
+      button.setAttribute('aria-expanded', !proofBox.classList.contains('collapsed'));
+      
+      saveProofState();
+    }
+    
+    function toggleSubproof(subproofId) {
+      const subproofContent = document.getElementById(subproofId);
+      const subproof = subproofContent.closest('.subproof');
+      subproof.classList.toggle('collapsed');
+      
+      const button = subproof.querySelector('.subproof-toggle');
+      button.setAttribute('aria-expanded', !subproof.classList.contains('collapsed'));
+    }
+    
+    function saveProofState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        if (!openProofs[currentPage]) {
+          openProofs[currentPage] = [];
+        }
+        
+        openProofs[currentPage] = [];
+        document.querySelectorAll('.proof-box:not(.collapsed)').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          if (proofId) {
+            openProofs[currentPage].push(proofId);
+          }
+        });
+        
+        localStorage.setItem('openProofs', JSON.stringify(openProofs));
+        console.log('Saved proof state (open proofs):', openProofs[currentPage]);
+      } catch (e) {
+        console.error('Error saving collapse state:', e);
+      }
+    }
+    
+    function toggleCollapsible(collapsibleId) {
+      const content = document.getElementById(collapsibleId);
+      const box = content.closest('.collapsible-box');
+      box.classList.toggle('collapsed');
+      
+      saveCollapsibleState();
+    }
+    
+    function saveCollapsibleState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        if (!openBoxes[currentPage]) {
+          openBoxes[currentPage] = [];
+        }
+        
+        openBoxes[currentPage] = [];
+        document.querySelectorAll('.collapsible-box:not(.collapsed)').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          if (boxId) {
+            openBoxes[currentPage].push(boxId);
+          }
+        });
+        
+        localStorage.setItem('openBoxes', JSON.stringify(openBoxes));
+      } catch (e) {
+        console.error('Error saving box state:', e);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        const proofBoxes = document.querySelectorAll('.proof-box');
+        const anyExpanded = Array.from(proofBoxes).some(box => !box.classList.contains('collapsed'));
+        
+        proofBoxes.forEach(box => {
+          if (anyExpanded) {
+            box.classList.add('collapsed');
+          } else {
+            box.classList.remove('collapsed');
+          }
+        });
+        
+        saveProofState();
+      }
+    });
+    
+    document.querySelectorAll('a.ref-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.background = '#fef3c7';
+          target.style.transition = 'background 0.3s ease';
+          setTimeout(() => { target.style.background = ''; }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

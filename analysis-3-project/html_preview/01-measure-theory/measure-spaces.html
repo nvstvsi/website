@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>measure-spaces</title>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '0.8em',
+      packages: {'[+]': ['ams']},
+      macros: {
+        R: '\\mathbb{R}',
+        C: '\\mathbb{C}',
+        N: '\\mathbb{N}',
+        Z: '\\mathbb{Z}',
+        Q: '\\mathbb{Q}',
+        E: '\\mathbb{E}',
+        F: '\\mathbb{F}',
+        S: '\\mathbb{S}',
+        H: '\\mathcal{H}',
+        L: '\\mathcal{L}',
+        dif: '\\,\\mathrm{d}',
+        supp: '\\operatorname{supp}',
+        proj: '\\operatorname{proj}',
+        Id: '\\operatorname{Id}',
+        Span: '\\operatorname{span}',
+        graph: '\\operatorname{graph}',
+        dist: '\\operatorname{dist}',
+        diam: '\\operatorname{diam}',
+        avg: '\\operatorname{avg}',
+        div: '\\operatorname{div}',
+        vol: '\\operatorname{vol}',
+        ord: '\\operatorname{ord}',
+        Chi: '\\mathbf{1}',
+        sub: '\\subseteq',
+        mres: '\\downharpoonright',
+        ddag: '\\ddagger',
+        dag: '\\dagger',
+        norm: ['\\left\\| #1 \\right\\|', 1],
+        abs: ['\\left| #1 \\right|', 1],
+        set: ['\\left\\{ #1 \\right\\}', 1],
+        inner: ['\\langle #1, #2 \\rangle', 2],
+        floor: ['\\lfloor #1 \\rfloor', 1],
+        ceil: ['\\lceil #1 \\rceil', 1],
+        llbracket: '\\unicode{x27E6}',
+        rrbracket: '\\unicode{x27E7}',
+        bigskull: '\\unicode{x1F480}',
+        skull: '\\unicode{x2620}',
+        mathwitch: '\\unicode{x1F9D9}',
+        pumpkin: '\\unicode{x1F383}',
+        mathpumpkin: '\\unicode{x1F383}',
+        bigpumpkin: '\\unicode{x1F383}',
+        mathghost: '\\unicode{x1F47B}',
+        mathcat: '\\unicode{x1F408}',
+        mathbat: '\\unicode{x1F987}',
+        esssup: '\\operatorname{ess\\,sup}',
+        essinf: '\\operatorname{ess\\,inf}',
+        Lip: '\\operatorname{Lip}',
+        pd: ['\\frac{\\partial#1}{\\partial#2}', 2],
+        od: ['\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}', 2],
+        dashint: '\\mathchoice{\\rlap{-}\\!\\int}{\\rlap{\\raise.15ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}',
+        eurologo: '\\unicode{x20AC}',
+        starredbullet: '\\unicode{x2726}',
+        grimace: '\\unicode{x1F62C}',
+        textthing: '\\unicode{x2639}',
+        noway: '\\unicode{x26D4}',
+        warning: '\\unicode{x26A0}',
+        danger: '\\unicode{x26A0}',
+        textxswup: '\\unicode{x2195}',
+        textxswdown: '\\unicode{x2195}',
+        decoone: '\\unicode{x2756}',
+        decotwo: '\\unicode{x2767}',
+        decothreeleft: '\\unicode{x2619}',
+        decothreeright: '\\unicode{x2767}',
+        decofourleft: '\\unicode{x261A}',
+        decofourright: '\\unicode{x261B}',
+        floweroneleft: '\\unicode{x2740}',
+        floweroneright: '\\unicode{x2740}',
+        lefthand: '\\unicode{x261C}',
+        righthand: '\\unicode{x261E}',
+        decosix: '\\unicode{x2766}',
+        bomb: '\\unicode{x1F4A3}',
+        caution: '\\unicode{x2621}',
+        leftblackhand: '\\unicode{x261A}',
+        rightblackhand: '\\unicode{x261B}',
+        leafleft: '\\unicode{x2618}',
+        leafright: '\\unicode{x2618}',
+        leafNW: '\\unicode{x2618}',
+        leafNE: '\\unicode{x2618}',
+        leafSE: '\\unicode{x2618}',
+        leafSW: '\\unicode{x2618}',
+        aldineleft: '\\unicode{x2619}',
+        aldineright: '\\unicode{x2767}',
+        aldine: '\\unicode{x2766}',
+        aldinesmall: '\\unicode{x2767}',
+        aldinesmallrevert: '\\unicode{x2619}',
+        aldinesmallup: '\\unicode{x2766}',
+        grappe: '\\unicode{x2766}',
+        rightgrappe: '\\unicode{x2767}',
+        leftgrappe: '\\unicode{x2619}',
+        oldpilcrowone: '\\unicode{x00B6}',
+        oldpilcrowtwo: '\\unicode{x00B6}',
+        oldpilcrowthree: '\\unicode{x00B6}',
+        oldpilcrowfour: '\\unicode{x00B6}',
+        oldpilcrowfive: '\\unicode{x00B6}',
+        oldpilcrowsix: '\\unicode{x00B6}'
+      }
+    },
+    startup: {
+      pageReady: () => {
+        return MathJax.startup.defaultPageReady().then(() => {
+          console.log('MathJax ready');
+        });
+      }
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+  <script>
+  (function() {
+    window.addEventListener('beforeunload', function() {
+      saveProofState();
+      saveCollapsibleState();
+    });
+    
+    const eventSource = new EventSource('http://localhost:35729/reload-stream');
+    
+    eventSource.onmessage = function(event) {
+      if (event.data === 'reload') {
+        console.log('📝 File updated, saving state and reloading...');
+        saveProofState();
+        saveCollapsibleState();
+        setTimeout(() => {
+          window.location.reload();
+        }, 50);
+      }
+    };
+    
+    eventSource.onerror = function() {
+      console.log('⚠️  Auto-reload server not available. Run node watch.js to enable auto-reload.');
+      eventSource.close();
+    };
+    
+    console.log('🔄 Auto-reload enabled');
+  })();
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+    
+    /* Layout with sidebar */
+    .page-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      width: 280px;
+      background: #fff;
+      border-right: 1px solid #e0e0e0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px 0;
+      font-size: 14px;
+    }
+    
+    .sidebar-header {
+      padding: 15px 20px 25px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .sidebar-header h1 {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 5px 0;
+    }
+    
+    .sidebar-header .subtitle {
+      font-size: 0.85em;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .sidebar-header .back-link {
+      display: block;
+      font-size: 0.8em;
+      color: #666;
+      text-decoration: none;
+      margin-top: 12px;
+    }
+    
+    .sidebar-header .back-link:hover {
+      color: #1a1a1a;
+    }
+    
+    .sidebar-nav {
+      padding: 10px 0;
+    }
+    
+    .chapter-group {
+      margin-bottom: 2px;
+    }
+    
+    .chapter-title {
+      padding: 12px 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chapter-title:hover {
+      background: #f5f5f5;
+    }
+    
+    .chapter-title .toggle {
+      font-size: 0.65em;
+      color: #999;
+      transition: transform 0.2s;
+    }
+    
+    .chapter-group.expanded .chapter-title .toggle {
+      transform: rotate(90deg);
+    }
+    
+    .section-list {
+      display: none;
+      padding: 5px 0;
+      background: #f8f8f8;
+    }
+    
+    .chapter-group.expanded .section-list {
+      display: block;
+    }
+    
+    .section-link {
+      display: block;
+      padding: 8px 20px 8px 35px;
+      font-size: 0.85em;
+      color: #555;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+    }
+    
+    .section-link:hover {
+      background: #f0f0f0;
+      color: #1a1a1a;
+    }
+    
+    .section-link.active {
+      background: #e8e8e8;
+      border-left-color: #333;
+      color: #000;
+      font-weight: 500;
+    }
+    
+    /* Main content area */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      max-width: 900px;
+      padding: 40px 60px;
+    }
+    
+    @media (max-width: 1100px) {
+      .sidebar {
+        width: 240px;
+      }
+      .main-content {
+        margin-left: 240px;
+        padding: 30px 40px;
+      }
+    }
+    
+    @media (max-width: 800px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+      .page-layout {
+        flex-direction: column;
+      }
+    }
+    
+    h2, h3, h4 {
+      margin-top: 2em;
+      margin-bottom: 0.75em;
+      color: #000;
+      font-weight: 600;
+    }
+    h2 { font-size: 1.5em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.1em; }
+    p {
+      margin: 1em 0;
+      text-indent: 2em;
+    }
+    p:first-of-type,
+    h2 + p,
+    h3 + p,
+    h4 + p,
+    .theorem-box + p,
+    .proof-box + p {
+      text-indent: 0;
+    }
+    .noindent + p,
+    p:has(> .noindent:first-child) {
+      text-indent: 0 !important;
+    }
+    .noindent {
+      display: none;
+    }
+    .theorem-box {
+      margin: 1.75em 0;
+      padding: 1.25em;
+      border-left: 5px solid #16a34a;
+      background: linear-gradient(to top, #bbf7d0 0%, #d1fae5 100%);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .definition-box { border-left-color: #16a34a; background: linear-gradient(to top, #d1fae5 0%, #ecfdf5 100%); }
+    .lemma-box { border-left-color: #1e3a8a; background: linear-gradient(to top, #bfdbfe 0%, #dbeafe 100%); }
+    .corollary-box { border-left-color: #9333ea; background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%); }
+    .proposition-box { border-left-color: #dc2626; background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%); }
+    .remark-box { border-left-color: #64748b; background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%); }
+    .example-box { border-left-color: #0891b2; background: linear-gradient(to top, #a5f3fc 0%, #cffafe 100%); }
+    .construction-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .notation-box { border-left-color: #ca8a04; background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%); }
+    .exercise-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .problem-box { border-left-color: #ec4899; background: linear-gradient(to top, #fbcfe8 0%, #fce7f3 100%); }
+    .theorem-header {
+      margin-bottom: 0.75em;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+    .theorem-header.clickable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .theorem-header.clickable:hover {
+      background: rgba(0,0,0,0.03);
+      margin: -0.5em -0.75em 0.75em -0.75em;
+      padding: 0.5em 0.75em;
+      border-radius: 4px;
+    }
+    .collapsible-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      margin-right: 0.5em;
+      color: #6b7280;
+    }
+    .collapsible-box.collapsed .collapsible-icon {
+      transform: rotate(-90deg);
+    }
+    .collapsible-content {
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+    }
+    .collapsible-box.collapsed .collapsible-content {
+      display: none;
+    }
+    .theorem-content {
+      padding-left: 0.5em;
+      line-height: 1.8;
+    }
+    .proof-box {
+      margin: 1.5em 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .proof-header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      border-radius: 6px 6px 0 0;
+    }
+    .proof-toggle {
+      width: 100%;
+      padding: 0.85em 1.25em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      transition: background 0.15s;
+    }
+    .proof-toggle:hover { background: rgba(0,0,0,0.03); }
+    .proof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      color: #6b7280;
+    }
+    .proof-box.collapsed .proof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .proof-content {
+      padding: 1.25em;
+      line-height: 1.8;
+    }
+    .proof-box.collapsed .proof-content {
+      display: none;
+    }
+    .proof-end {
+      float: right;
+      font-size: 1.3em;
+      margin-left: 0.5em;
+      color: #374151;
+    }
+    .subproof {
+      margin: 1em 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #f9fafb;
+    }
+    .subproof-header {
+      background: linear-gradient(to bottom, #f9fafb 0%, #f3f4f6 100%);
+      border-bottom: 1px solid #d1d5db;
+      border-radius: 4px 4px 0 0;
+    }
+    .subproof-toggle {
+      width: 100%;
+      padding: 0.6em 1em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: background 0.15s;
+    }
+    .subproof-toggle:hover {
+      background: rgba(0,0,0,0.03);
+    }
+    .subproof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.7em;
+      color: #6b7280;
+    }
+    .subproof.collapsed .subproof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .subproof-content {
+      padding: 1em;
+      line-height: 1.7;
+    }
+    .subproof.collapsed .subproof-content {
+      display: none;
+    }
+    .ref-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 0.15em;
+      border-radius: 2px;
+    }
+    .ref-link:hover {
+      background: #dbeafe;
+      text-decoration: underline;
+    }
+    .ref-unknown {
+      color: #dc2626;
+      font-weight: bold;
+      background: #fee2e2;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+    ol, ul {
+      margin: 1em 0;
+      padding-left: 2.5em;
+      line-height: 1.8;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    .latex-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5em auto;
+    }
+    .latex-figure .latex-image {
+      display: inline-block;
+      margin: 0.5em;
+      vertical-align: middle;
+    }
+    .latex-figure {
+      margin: 2em 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .latex-figure .figure-content {
+      margin-bottom: 0.75em;
+      line-height: normal;
+    }
+    .latex-figure .figure-content > * {
+      vertical-align: middle;
+    }
+    .latex-figure figcaption {
+      font-size: 0.9em;
+      color: #4b5563;
+      font-style: italic;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1>Analysis III</h1>
+        <div class="subtitle">Measure Theory &amp; Integration</div>
+        <a href="../index.html" class="back-link">← Table of Contents</a>
+      </div>
+      <div class="sidebar-nav">
+        <div class="chapter-group expanded">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>1. Measure Theory</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../01-measure-theory/measure-theory.html" class="section-link">Overview</a>
+            <a href="../01-measure-theory/basics.html" class="section-link">Outer Measures</a>
+            <a href="../01-measure-theory/lebesgue-meas.html" class="section-link">Lebesgue Measure</a>
+            <a href="../01-measure-theory/cantor.html" class="section-link">The Cantor Set</a>
+            <a href="../01-measure-theory/measure-spaces.html" class="section-link">Measure Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>2. Integration</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../02-integration/integration.html" class="section-link">Overview</a>
+            <a href="../02-integration/integrals-1.html" class="section-link">Simple Functions</a>
+            <a href="../02-integration/integrals-2.html" class="section-link">General Functions</a>
+            <a href="../02-integration/convergence.html" class="section-link">Convergence Theorems</a>
+            <a href="../02-integration/inequality-party.html" class="section-link">Integral Inequalities</a>
+            <a href="../02-integration/lp_spaces.html" class="section-link">Lᵖ Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>3. Product Measures</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../03-fubini/fubini_ch.html" class="section-link">Overview</a>
+            <a href="../03-fubini/fubini.html" class="section-link">Fubini-Tonelli</a>
+            <a href="../03-fubini/integrals-3.html" class="section-link">Product Measures</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>4. Differentiation I</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../04-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../04-differentiation-1/covering.html" class="section-link">Vitali Covering</a>
+            <a href="../04-differentiation-1/monotone.html" class="section-link">Monotone Functions</a>
+            <a href="../04-differentiation-1/BV_on_R.html" class="section-link">Bounded Variation</a>
+            <a href="../04-differentiation-1/FTOC.html" class="section-link">FTC for Lebesgue</a>
+            <a href="../04-differentiation-1/HL.html" class="section-link">Hardy-Littlewood</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>5. Differentiation I (cont)</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../05-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../05-differentiation-1/r-nik.html" class="section-link">Radon-Nikodym</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>6. Differentiation II</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-differentiation-2/diff-2.html" class="section-link">Overview</a>
+            <a href="../06-differentiation-2/vector-measures.html" class="section-link">Vector Measures</a>
+            <a href="../06-differentiation-2/r-nik.html" class="section-link">Radon-Nikodym</a>
+            <a href="../06-differentiation-2/besi.html" class="section-link">Besicovitch</a>
+            <a href="../06-differentiation-2/densities.html" class="section-link">Densities</a>
+            <a href="../06-differentiation-2/diff-measures.html" class="section-link">Measure Derivatives</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>7. Riesz Representation</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-riesz/riesz.html" class="section-link">Overview</a>
+            <a href="../06-riesz/riesz_functional.html" class="section-link">Riesz Representation</a>
+            <a href="../06-riesz/LCH_spaces.html" class="section-link">LCH Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>8. Integral Formulas</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../07-formulas/formulas.html" class="section-link">Overview</a>
+            <a href="../07-formulas/hausdorff_meas.html" class="section-link">Hausdorff Measures</a>
+            <a href="../07-formulas/lippy.html" class="section-link">Lipschitz Maps</a>
+            <a href="../07-formulas/rademacher.html" class="section-link">Rademacher</a>
+            <a href="../07-formulas/coarea-prereq.html" class="section-link">Coarea Prerequisites</a>
+            <a href="../07-formulas/coarea.html" class="section-link">Coarea Formula</a>
+            <a href="../07-formulas/area-prereq.html" class="section-link">Area Prerequisites</a>
+            <a href="../07-formulas/area-formula.html" class="section-link">Area Formula</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>9. Extension Results</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../08-ext-res/ext-res.html" class="section-link">Overview</a>
+            <a href="../08-ext-res/taylor_thm_integral_remainder.html" class="section-link">Taylor's Theorem</a>
+            <a href="../08-ext-res/whitney-cover.html" class="section-link">Whitney Covering</a>
+            <a href="../08-ext-res/whitney-partition-of-unity.html" class="section-link">Partition of Unity</a>
+            <a href="../08-ext-res/whitney-decomposition.html" class="section-link">Decomposition</a>
+            <a href="../08-ext-res/whitney-extension-theorem.html" class="section-link">Extension Theorem</a>
+            <a href="../08-ext-res/whitney-extension-proof.html" class="section-link">Extension Proof</a>
+            <a href="../08-ext-res/whitney-extension-applications.html" class="section-link">Applications</a>
+            <a href="../08-ext-res/whitney-extension.html" class="section-link">Summary</a>
+            <a href="../08-ext-res/more-bump.html" class="section-link">More Bump Functions</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <main class="main-content">
+      <h2>Measure Spaces</h2>
+<p>We will use the machinery in this section to set up integration theory in the next section.</p>
+<h3>Measurable Spaces and Measure Spaces</h3>
+<div class="theorem-box definition-box" id="def:measure_space">
+  <div class="theorem-header"><strong>Definition ?</strong> (Measurable Space, Measure Space)</div>
+  <div class="theorem-content">A measurable space is a pair $(X, \mathcal{A})$ where $X$ is a set and $\mathcal{A}$ is a $\sigma$-algebra of subsets of $X$.
+The sets in $\mathcal{A}$ are called <em>measurable</em> sets.
+<p><div style="margin: 1em 0;"></div></p>
+<p><span class="noindent"></span>A measure space is a triple $(X, \mathcal{A}, \mu)$ where $(X, \mathcal{A})$ is a measurable space and $\mu: \mathcal{A} \to [0, \infty]$ is a measure on $\mathcal{A}$, 
+meaining that $\mu$ satisfies the following properties:
+<ul><li>$\mu(\emptyset) = 0$.
+    </li><li>(Countable Disjoint Additivity) For any countable collection $\{A_i\}_{i=1}^\infty$ of pairwise disjoint sets in $\mathcal{A}$, we have
+    \[ \mu\left(\bigcup_{i=1}^\infty A_i\right) = \sum_{i=1}^\infty \mu(A_i). \]</li></ul></p>
+<p><div style="margin: 1em 0;"></div></p>
+<p><span class="noindent"></span>A measure space is called $\sigma$-finite if there exists a countable collection $\{A_i\}_{j=1}^\infty$ of sets in $\mathcal{A}$ such that $X = \bigcup_{j=1}^\infty A_j$ and $\mu(A_j) < \infty$ for all $j\in\Z^+$.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p><span class="noindent"></span>If $X$ is a topological space and $\mu$ is defined on the Borel $\sigma$-algebra on $X$, then we say $\mu$ is a <em>Borel measure</em> on $X$.</div>
+</div></p>
+<p>Sometimes people just write $(X, \mu)$ to denote a measure space, as the $\sigma$-algebra $\mathcal{A}$ is technically the domain of the measure $\mu$ and is often clear from context.
+We will often do this as well, mainly because our most important examples of measure spaces will be $(X,\mathcal{M}_\mu, \mu)$ where $\mu$ is an outer measure on $X$ and $\mathcal{M}_\mu$ is the $\sigma$-algebra of all $\mu$-measurable sets, and so writing out the $\sigma$-algebra is redundant.
+If the $\sigma$-algebra is important (and sometimes it is), we will write it out explicitly.</p>
+<p>Basically the $\sigma$-algebra $\mathcal{A}$ tells us which sets we can measure, and the measure $\mu$ assigns a size to these sets in a consistent way.</p>
+<p>Be careful to differentiate between a Borel measure $\mu$ (which is defined only on the Borel $\sigma$-algebra) and a Borel outer measure $\mu$ (which is an outer measure such that every Borel set is $\mu$-measurable).</p>
+<div class="theorem-box example-box collapsible-box collapsed" id="ex:counting_measure" data-collapsible-id="collapsible-ex:counting_measure">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-ex:counting_measure')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Example ?</strong> (Counting Measure)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-ex:counting_measure">Let $X$ be any set, and let $\mathcal{A} = 2^X$ be the power set of $X$.
+    Define $\mu: \mathcal{A} \to [0,\infty]$ by
+    \[ \mu(A) = \begin{cases}
+        |A|, & \text{ if } A \text{ is finite} \\
+        \infty, & \text{ if } A \text{ is infinite}
+    \end{cases} \]
+    where $|A|$ denotes the cardinality of the set $A$.
+    Then $(X, \mu)$ is a measure space and $\mu$ is called the called the <em>counting measure</em> on $X$.</div>
+</div>
+<p>Here is our most important example which we will use over and over again.</p>
+<div class="theorem-box example-box collapsible-box collapsed" id="ex:outer_measure_induces_measure" data-collapsible-id="collapsible-ex:outer_measure_induces_measure">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-ex:outer_measure_induces_measure')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Example ?</strong> (Measure induced by an Outer Measure)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-ex:outer_measure_induces_measure">Let $\mu^*$ be an outer measure on a set $X$, and let $\mathcal{M}_\mu$ be the $\sigma$-algebra of all $\mu^*$-measurable sets, as in Definition <span class="ref-unknown" title="Reference not found: def:caratheodory_measurable">[def:caratheodory_measurable?]</span>.
+    Then $(X, \mathcal{M}_\mu, \mu)$ is a measure space, where $\mu$ is the restriction of $\mu^*$ to the $\sigma$-algebra $\mathcal{M}_\mu$.
+    We know that $\mu$ is a measure defined on the $\sigma$-algebra $\mathcal{M}_\mu$ because it satisfies countable disjoint additivity by Proposition <span class="ref-unknown" title="Reference not found: prop:sequences_of_measurable_sets">[prop:sequences_of_measurable_sets?]</span>.</div>
+</div>
+<p>In particular, if $X$ is $\R^n$ then the Lebesgue outer measure $\mathcal{L}^n$ is a measure on the $\sigma$-algebra of all Lebesgue measurable sets, and the Hausdorff outer measures $\mathcal{H}^\alpha$ (for $\alpha \geq 0$) are measures on the $\sigma$-algebra of all $\mathcal{H}^\alpha$-measurable sets.</p>
+<div class="theorem-box lemma-box" id="lem:sequences_of_measurable_sets_2">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Limits of Increasing and Decreasing Sequences of Measurable Sets)</div>
+  <div class="theorem-content">Let $(X,\mu)$ be a measure space.
+    <ol style="list-style-type: lower-roman;"><li>If $\{A_j\}_{j=1}^\infty$ is an increasing sequence of measurable sets, i.e. $A_j \sub A_{j+1}$ for all $j\in\Z^+$, then
+            \[ \mu\left( \bigcup_{j=1}^\infty A_j \right) = \lim_{j\to\infty} \mu(A_j). \]
+        </li><li>If $\{A_j\}_{j=1}^\infty$ is a decreasing sequence of measurable sets, i.e. $A_{j+1} \sub A_j$ for all $j\in\Z^+$, and if $\mu(A_1) < \infty$, then
+            \[ \mu\left( \bigcap_{j=1}^\infty A_j \right) = \lim_{j\to\infty} \mu(A_j). \]</li></ol></div>
+</div>
+<p>The proof is exactly the same as the proof of part (iii) and (iv) of Proposition <span class="ref-unknown" title="Reference not found: prop:sequences_of_measurable_sets">[prop:sequences_of_measurable_sets?]</span>, 
+where this property was proved for outer measures.</p>
+<p>We will also need the following useful result about $\sigma$-algebras.</p>
+<div class="theorem-box exercise-box" id="ex:restriction_of_sigma_algebra_and_measure">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Restriction of $\sigma$-algebra and Measure to a Measurable Set)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space, and let $A\in \mathcal{A}$ be a measurable set.
+    Then the collection $\{B\in\mathcal{A} : B\sub A\}$ is a $\sigma$-algebra on $A$.
+<p><span class="noindent"></span>Also if $(X,\mathcal{A},\mu)$ is a measure space, then the restriction of $\mu$ to this $\sigma$-algebra is a measure on $A$.</div>
+</div></p>
+<div class="proof-box collapsed" data-proof-id="proof-num-0">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-0')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-0">
+    Let $\mathcal{A}_A = \{B\in\mathcal{A} : B\sub A\}$.
+    First, since $A\in \mathcal{A}$, we have $A\in \mathcal{A}_A$.
+    Also if $B\in \mathcal{A}_A$, then $B\sub A$ and $B\in \mathcal{A}$, so $A\setminus B = B^c \cap A \in \mathcal{A}$ since $\mathcal{A}$ is a $\sigma$-algebra, and clearly $A\setminus B \sub A$ as well; hence $A\setminus B \in \mathcal{A}_A$.
+    Finally, if $\{B_j\}_{j=1}^\infty$ is a countable collection of sets in $\mathcal{A}_A$, then $B_j \sub A$ and $B_j \in \mathcal{A}$ for all $j\in\Z^+$, so
+    \[ \bigcup_{j=1}^\infty B_j \sub A \]
+    and \[ \bigcup_{j=1}^\infty B_j \in \mathcal{A} \]
+    since $\mathcal{A}$ is a $\sigma$-algebra; hence $\bigcup_{j=1}^\infty B_j \in \mathcal{A}_A$ as well.
+    This shows that $\mathcal{A}_A$ is a $\sigma$-algebra on $A$.
+<p>Now if $(X,\mathcal{A},\mu)$ is a measure space, then the restriction of $\mu$ to $\mathcal{A}_A$ is clearly a measure on $\mathcal{A}_A$ since it satisfies countable disjoint additivity by the same property for $\mu$ on $\mathcal{A}$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<h3>Measurable Functions</h3>
+<p>Now that we have measurable sets, we can define measurable functions.
+The starting point is the following definition.</p>
+<div class="theorem-box definition-box" id="def:characteristic_function">
+  <div class="theorem-header"><strong>Definition ?</strong> (Characteristic Function, Simple Function)</div>
+  <div class="theorem-content">Let $X$ be a set, and let $A\sub X$ be any subset.
+    The <em>characteristic function</em> of $A$ is the function $\Chi_A: X\to \{0,1\}$ defined by
+    \[ \Chi_A(x) = \begin{cases}
+        1, & \text{ if } x\in A \\
+        0, & \text{ if } x\notin A.
+    \end{cases} \]
+<p><div style="margin: 1em 0;"></div></p>
+<p>Now let $(X,\mu)$ be a measure space.
+    A <em>simple function</em> on $X$ is a finite linear combination of characteristic functions of sets of finite measure, i.e. a function $f: X\to \R$ of the form
+    \[ f = \sum_{j=1}^N a_j \Chi_{A_j} \]
+    where $N\in\Z^+$, $a_j\in\R$ for all $j=1,\ldots,N$, and $A_j \sub X$ with $\mu(A_j)<\infty$ for all $j=1,\ldots,N$.</div>
+</div></p>
+<p>We now define measurable functions.
+We begin with the general definition, and then we will specialize to the most important cases.</p>
+<div class="theorem-box definition-box" id="def:measurable_function">
+  <div class="theorem-header"><strong>Definition ?</strong> (Measurable Function)</div>
+  <div class="theorem-content">Let $(X, \mathcal{A})$ be a measurable space, and let $Y$ be a topological space.
+    A map $f: X\to Y$ is called $\mathcal{A}$<em>-measurable</em> if for every open set $V \subseteq Y$, the preimage $f^{-1}(V)$ is in $\mathcal{A}$.
+<p>If $(X,\mu)$ is a measure space, we say $f$ is <em>$\mu$-measurable</em> if it is measurable with respect to the $\sigma$-algebra $\mathcal{A}$ which is the domain of $\mu$.</div>
+</div></p>
+<div class="theorem-box remark-box collapsible-box collapsed" id="remark-?" data-collapsible-id="collapsible-remark-1">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-remark-1')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong>
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-remark-1">Okay, we now need to note something to beware of.
+    Let $X$ be a topological space and let $\mu$ be a Borel outer measure on $X$.
+    That is, $\mu$ is an outer measure on $X$ such that every Borel set is $\mu$-measurable, as in Definition <span class="ref-unknown" title="Reference not found: def:caratheodory_measurable">[def:caratheodory_measurable?]</span>.
+    That means $\mathcal{B}_X \sub \mathcal{M}_\mu$, where $\mathcal{B}_X$ is the Borel $\sigma$-algebra on $X$ and $\mathcal{M}_\mu$ is the $\sigma$-algebra of all $\mu$-measurable sets.
+<p>Now let $Y$ be another topological space, and let $f: X\to Y$ be a map.
+    There is a difference between the following two statements:
+    <ol style="list-style-type: lower-alpha;"><li>the map $f$ is $\mu$-measurable, i.e. for every open set $V\subseteq Y$, the preimage $f^{-1}(V)$ is in $\mathcal{M}_\mu$,
+        </li><li>the map $f$ is Borel measurable, i.e. for every open set $V\subseteq Y$, the preimage $f^{-1}(V)$ is in $\mathcal{B}_X$.</li></ol>
+    Since $\mathcal{B}_X \sub \mathcal{M}_\mu$, (b) implies (a), but (a) does not necessarily imply (b).
+    This is important to keep in mind, as many authors drop the $\sigma$-algebra from the notation and just say ``$f$ is measurable'' without specifying which $\sigma$-algebra they are using.
+    The property in (a) is more general, and what we will use most often, but the property in (b) is nice because then compositions of Borel measurable maps are Borel measurable, which is not necessarily true for maps satisfying (a).</p>
+<p>We will do our best to be careful, and write ``$f$ is Borel measurable'' when we mean (b) and ``$f$ is $\mu$-measurable'' when we mean (a).</div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:measurable_function_preimage_of_borel">
+  <div class="theorem-header"><strong>Exercise ?</strong></div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space, and let $Y$ be a topological space.
+    Let $f: X\to Y$ be an $\mathcal{A}$-measurable map.
+    Show that for every Borel set $B\subseteq Y$, the preimage $f^{-1}(B)$ is in $\mathcal{A}$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-1">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-1')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-1">
+    Let $\mathcal{B}_Y$ be the Borel $\sigma$-algebra on $Y$, and let
+    \[ \mathcal{C} = \{ B\in \mathcal{B}_Y : f^{-1}(B) \in \mathcal{A} \}. \]
+    We will show that $\mathcal{C}$ is a $\sigma$-algebra containing all open sets in $Y$.
+    Since $\mathcal{B}_Y$ is the smallest $\sigma$-algebra containing all open sets, this will imply that $\mathcal{B}_Y \sub \mathcal{C}$, which is what we want.
+<p>First, since $f^{-1}(Y) = X \in \mathcal{A}$, we have $Y\in \mathcal{C}$.
+    Also if $B\in \mathcal{C}$, then $f^{-1}(B) \in \mathcal{A}$, so $(f^{-1}(B))^c\in \mathcal{A}$ as well since $\mathcal{A}$ is a $\sigma$-algebra;
+    hence \[ (f^{-1}(B))^c = X \setminus f^{-1}(B) = f^{-1}(Y \setminus B) = f^{-1}(B^c) \in \mathcal{A}. \]
+    Thus $B^c \in \mathcal{C}$ as well. This shows that $\mathcal{C}$ is closed under complements; we have established the first two properties of a $\sigma$-algebra.</p>
+<p>Finally, if $\{B_j\}_{j=1}^\infty$ is a countable collection of sets in $\mathcal{C}$, then $f^{-1}(B_j) \in \mathcal{A}$ for all $j\in\Z^+$, so
+    \[ \bigcup_{j=1}^\infty f^{-1}(B_j) = f^{-1}\left(\bigcup_{j=1}^\infty B_j\right) \in \mathcal{A} \]
+    since $\mathcal{A}$ is a $\sigma$-algebra; hence $\bigcup_{j=1}^\infty B_j \in \mathcal{C}$ as well.
+    This shows that $\mathcal{C}$ is closed under countable unions, and so $\mathcal{C}$ is a $\sigma$-algebra as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box exercise-box" id="exercise-?">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Continuous Functions are Borel Measurable)</div>
+  <div class="theorem-content">Let $X$ and $Y$ be topological spaces, and let $f: X\to Y$ be continuous.
+    Show that $f$ is Borel measurable.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-2">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-2')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-2">
+    Since $f$ is continuous, for every open set $V\sub Y$, the preimage $f^{-1}(V)$ is open in $X$.
+    Since every open set in $X$ is a Borel set, we see that $f^{-1}(V)$ is a Borel set in $X$ as well.
+    This shows that $f$ is Borel measurable as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<p>Now we specialize to the most important case for us.</p>
+<div class="theorem-box remark-box collapsible-box collapsed" id="remark-?" data-collapsible-id="collapsible-remark-2">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-remark-2')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong>
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-remark-2">The most important case for us will be when $Y$ is either $[0,\infty]$, $[-\infty,\infty]$, $\C$ or $\R^n$ with the usual topology. 
+In the next proposition, we prove some useful properties of measurable functions in these cases.
+<p>To be precise, we need to specify the topology on $[-\infty,\infty]$.
+A set $U\sub [-\infty,\infty]$ is defined to be open if $U\cap \R$ is open in $\R$.
+(It is easy to see this defines a topology on $[-\infty,\infty]$ - just distribute the $\cap$ over unions and finite intersections.)
+With this topology, the real line $\R$ is an open subset of $[-\infty,\infty]$ and has the subspace topology.</p>
+<p>At this point, we focus on real-valued functions defined on $X$, but which are allowed to take on the values $\pm \infty$ as well.
+Thus a function $f: X\to [-\infty,\infty]$ is allowed, and takes on values
+\[ -\infty \leq f(x) \leq \infty ,\qquad x\in X \]
+in the extended real number line. We say that $f$ is <em>finite valued</em> if $f(x)\in\R$ for all $x\in X$.
+It will be convenient for us to think of functions $X\to \R$ as functions $X\to [-\infty,\infty]$ which are finite valued.
+In applications, we almost always are in a situation where a function takes on infinite values on a set of measure zero.</div>
+</div></p>
+<h3>Digression about Borel vs. Lebesgue</h3>
+<div class="theorem-box remark-box collapsible-box collapsed" id="remark-?" data-collapsible-id="collapsible-remark-3">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-remark-3')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong>
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-remark-3">In the case that $Y = \R$ or $Y=[-\infty,\infty]$, we could have taken the $\sigma$-algebra of <em>Lebesgue</em> measurable sets instead of the Borel $\sigma$-algebra.
+    You should ask: why didn't we?
+<p>Let's explore, and be precise.
+    Let $\mu$ be the Lebesgue outer measure on $\R$, which we know is a Borel regular outer measure.
+    Let $\mathcal{M}$ be the $\sigma$-algebra of all Lebesgue measurable sets, and let $\mathcal{B}$ be the Borel $\sigma$-algebra on $\R^n$.
+    Then $\mathcal{B} \sub \mathcal{M}$.
+    The difference is that $\mathcal{M}$ contains all subsets of measure zero, while $\mathcal{B}$ does not.</p>
+<p>Let $(X,\mathcal{A})$ be a measurable space. 
+    Let's say a function $f: X\to \R$ is <em>$\mathcal{A</em>$-Borel measurable} if for every Borel set $B\sub \R$, the preimage $f^{-1}(B)$ is in $\mathcal{A}$.
+    (This is the usual definition of measurable function.)</p>
+<p>Let's say $f$ is <em>$\mathcal{A</em>$-Lebesgue measurable} if for every Lebesgue measurable set $L\sub \R$, the preimage $f^{-1}(L)$ is in $\mathcal{A}$.
+    Since $\mathcal{B} \sub \mathcal{M}$, we see that if $f$ is $\mathcal{A}$-Lebesgue measurable, then it is also $\mathcal{A}$-Borel measurable.
+    But the converse is not necessarily true, and we will prove this in a moment.</p>
+<p>Thus for a function $f: \R^n\to \R$, there are four different notions of measurability:
+    <ol style="list-style-type: lower-roman;"><li>$f$ is Borel-Borel measurable: for every Borel set $B\sub \R$, the preimage $f^{-1}(B)$ is a Borel set,
+        </li><li>$f$ is Borel-Lebesgue measurable: for every Lebesgue measurable set $L\sub \R$, the preimage $f^{-1}(L)$ is a Borel set,
+        </li><li>$f$ is Lebesgue-Borel measurable: for every Borel set $B\sub \R$, the preimage $f^{-1}(B)$ is a Lebesgue measurable set,
+        </li><li>$f$ is Lebesgue-Lebesgue measurable: for every Lebesgue measurable set $L\sub \R$, the preimage $f^{-1}(L)$ is a Lebesgue measurable set.</li></ol></p>
+<p>Since every Borel set is Lebesgue measurable, we see that (i) implies (iii).
+    Also (ii) is useless, since the existance of Lebesgue measurable sets which are not Borel measurable implies that the identity map $\operatorname{id}: \R\to \R$ is not Lebesgue-Borel measurable.</p>
+<p>Also the existence of non-Lebesgue measurable sets implies that that there are continuous functions for which (iv) does not hold.
+    Let $C$ be the Cantor set; let $C^{\text{fat}}$ be a fat Cantor set, i.e. a closed set with positive Lebesgue measure and empty interior; and let 
+    $f: \R\to \R$ be a continuous function such that $f\left( C^{\text{fat}} \right) = C$ (that such a function exists is a classical result in topology).
+    Let $\mathcal{N}$ be a non-Lebesgue measurable subset of $C^{\text{fat}}$ (which exists by the Vitali construction).
+    Then $f(\mathcal{N})\sub C$ so $f(\mathcal{N})$ has Lebesgue outer measure zero, and hence is Lebesgue measurable.
+    However $f^{-1}(f(\mathcal{N})) \supseteq \mathcal{N}$ is not Lebesgue measurable.
+    This shows that (i) does not imply (iv).</p>
+<p>In summary, (i) implies (iii), but neither (i) nor (iii) implies (iv) or vice versa; and (ii) is useless.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>Okay, so I hope you see why we would prefer the definitions (i) and (iii) over (ii) and (iv).
+    But how do we choose between Borel measurable functions (i) and Lebesgue measurable functions (iii)?
+    When you are in $\R^n$ and say ``measurable set'', do you mean Borel measurable or Lebesgue measurable?
+    Well that's a matter of personal taste.</p>
+<p>I much prefer Lebesgue measurable sets, as all sets of measure zero are Lebesgue measurable, and this makes life easier.
+    However, there are people who prefer Borel measurable sets, such as Axler. 
+    He writes in <em>Measure, Integration \& Real Analysis</em> that ``Although there exist Lebesgue measurable sets that are not Borel sets, you are unlikely to encounter one.
+    Similarly, a Lebesgue measurable function that is not Borel measurable is unlikely to arise in anything you do.''</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>We will try to be precise and say ``Borel measurable'' or ``Lebesgue measurable'' when talking about sets or functions,
+    but let it be stated here that we prefer the $\sigma$-algebra of Lebesgue measurable sets over the Borel $\sigma$-algebra.</div>
+</div></p>
+<p></p>
+<h3>Properties of Measurable Functions</h3>
+<div class="theorem-box proposition-box" id="prop:equivalent_definitions_of_measurable_function">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Equivalent Definitions of Measurable Function)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space, and let $f: X\to [-\infty,\infty]$ be a function.
+    Then the following are equivalent:
+    <ol style="list-style-type: lower-roman;"><li>$f$ is $\mathcal{A}$-measurable,
+        </li><li>for each $a\in\R$, the set $f^{-1}([-\infty,a))$ is in $\mathcal{A}$,
+        </li><li>for each $a\in\R$, the set $f^{-1}([-\infty,a])$ is in $\mathcal{A}$,
+        </li><li>for each $a\in\R$, the set $f^{-1}((a,\infty])$ is in $\mathcal{A}$,
+        </li><li>for each $a\in\R$, the set $f^{-1}([a,\infty])$ is in $\mathcal{A}$,
+        </li><li>for each interval $I\sub \R$, the set $f^{-1}(I)$ is in $\mathcal{A}$,</li></ol></div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-3">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-3')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-3">
+    (i) $\iff$ (ii).
+    Suppose $f$ is $\mathcal{A}$-measurable, and let $a\in\R$.
+    Then $[-\infty,a) \sub [-\infty,\infty]$ is open, so $f^{-1}([-\infty,a)) \in \mathcal{A}$ by definition.
+<p>Conversely, suppose that for every $a\in\R$, the set $f^{-1}([-\infty,a))$ is in $\mathcal{A}$. We claim that the set
+    \[ \mathcal{A}':= \{ A \sub [-\infty,\infty] : f^{-1}(A) \in \mathcal{A} \} \]
+    is a $\sigma$-algebra containing all open sets in $[-\infty,\infty]$.
+    Since $f^{-1}([-\infty,\infty]) = X \in \mathcal{A}$, we see that $[-\infty,\infty]\in \mathcal{A}'$.
+    Similarly, we see that if $A\in \mathcal{A}'$, then $f^{-1}(A) \in \mathcal{A}$, so $(f^{-1}(A))^c = f^{-1}(A^c) \in \mathcal{A}$ as well, and hence $A^c \in \mathcal{A}'$.
+    Finally, if $\{A_j\}_{j=1}^\infty$ is a countable collection of sets in $\mathcal{A}'$, then $f^{-1}(A_j) \in \mathcal{A}$ for all $j\in\Z^+$, so 
+    \[ \bigcup_{j=1}^\infty f^{-1}(A_j) = f^{-1}\left(\bigcup_{j=1}^\infty A_j\right) \in \mathcal{A} \]
+    since $\mathcal{A}$ is a $\sigma$-algebra; hence $\bigcup_{j=1}^\infty A_j \in \mathcal{A}'$ as well.
+    This shows that $\mathcal{A}'$ is a $\sigma$-algebra.</p>
+<p>Now each open set $U\sub [-\infty,\infty]$ can be written as a countable union of basis elements, and each basis element is either of the form $(a,b)$, $[-\infty,b)$, or $(a,\infty]$ for some $a,b\in\R$.
+    Hence $\mathcal{A}'$ is a $\sigma$-algebra containing all open sets in $[-\infty,\infty]$.
+    Since the Borel $\sigma$-algebra on $[-\infty,\infty]$ is the smallest $\sigma$-algebra containing all open sets, we have $\mathcal{B}_{[-\infty,\infty]} \sub \mathcal{A}'$.
+    Thus for every open set $U\sub [-\infty,\infty]$, we have $f^{-1}(U) \in \mathcal{A}$, and so $f$ is $\mathcal{A}$-measurable.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>(ii) $\iff$ (iii). 
+    Suppose that for every $a\in\R$, the set $f^{-1}([-\infty,a))$ is in $\mathcal{A}$.
+    Then for each $a\in\R$, we have
+    \[[-\infty,a] = \bigcap_{j=1}^\infty \left[-\infty, a + \frac{1}{j}\right)\]
+    which is a countable intersection of open sets, so 
+    \[f^{-1}([-\infty,a]) = \bigcap_{j=1}^\infty f^{-1}\left(\left[-\infty, a + \frac{1}{j}\right)\right) \in \mathcal{A}\]
+    since $\mathcal{A}$ is a $\sigma$-algebra.</p>
+<p>Conversely, suppose that for every $a\in\R$, the set $f^{-1}([-\infty,a])$ is in $\mathcal{A}$.
+    Then for each $a\in(-\infty,\infty)$, we have
+    \[[-\infty,a) = \bigcup_{j=1}^\infty \left[-\infty, a - \frac{1}{j}\right]\]
+    which is a countable union of closed sets, so
+    \[f^{-1}([-\infty,a)) = \bigcup_{j=1}^\infty f^{-1}\left(\left[-\infty, a - \frac{1}{j}\right]\right) \in \mathcal{A}\]
+    since $\mathcal{A}$ is a $\sigma$-algebra.</p>
+<p>This shows that (ii) and (iii) are equivalent.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>(iii) $\iff$ (iv).
+    Note that for each $a\in\R$, we have
+    \[ (a,\infty] = [-\infty,a]^c \]
+    so
+    \[ f^{-1}((a,\infty]) = f^{-1}([-\infty,a]^c) = (f^{-1}([-\infty,a]))^c. \]
+    Since $\mathcal{A}$ is a $\sigma$-algebra, this shows that (iii) and (iv) are equivalent.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>(ii) $\iff$ (v).
+    Note that for each $a\in\R$, we have
+    \[ [a,\infty] = [-\infty,a)^c \]
+    so
+    \[ f^{-1}([a,\infty]) = f^{-1}([-\infty,a)^c) = (f^{-1}([-\infty,a)))^c. \]
+    Since $\mathcal{A}$ is a $\sigma$-algebra, this shows that (ii) and (v) are equivalent.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>To finish, we show that (i) $\iff$ (vi).
+    Suppose $f$ is $\mathcal{A}$-measurable, and let $I\sub \R$ be an interval.
+    Then $I$ is one of the following forms:
+    \[ (-\infty,a), (-\infty,a], [a,b), (a,b), (a,b], [a,b], [a,\infty), \text{ or } [a,\infty) \]
+    for some $a,b\in\R$ with $a<b$.
+    In the case that $I$ is of the form $(-\infty,a)$ or $(a,b)$ or $(a,\infty)$, then $I$ is open in $[-\infty,\infty]$, so $f^{-1}(I) \in \mathcal{A}$ by definition
+    and the fact that open sets in $\R$ are open in $[-\infty,\infty]$ as well.
+    If $I$ is of the form $(-\infty,a]$ or $[a,b]$ or $[a,\infty)$, then $I$ is closed in $[-\infty,\infty]$, so $f^{-1}(I) \in \mathcal{A}$ as well since $f^{-1}(I) = (f^{-1}(I^c))^c$ and $I^c$ is open.
+    Finally, if $I$ is of the form $[a,b)$ or $(a,b]$, then we can write
+    \[ [a,b) = [-\infty,b) \cap [a,\infty] \quad \text{ and } \quad (a,b] = (-\infty,b] \cap [a,\infty) \]
+    so $f^{-1}(I) \in \mathcal{A}$ as well since $\mathcal{A}$ is closed under finite intersections.
+    This shows that for every interval $I\sub \R$, the set $f^{-1}(I)$ is in $\mathcal{A}$.</p>
+<p>Conversely, suppose that for every interval $I\sub \R$, the set $f^{-1}(I)$ is in $\mathcal{A}$.
+    Then we have
+    \[ f^{-1}(\R) = \bigcup_{\substack{ a\lt b \\ a,b\in\Q }} f^{-1}([a,b]) \in \mathcal{A} \]
+    since $\R = \bigcup_{a< b, a,b\in\Q} [a,b]$ and $\mathcal{A}$ is closed under countable unions.
+    Since $\mathcal{A}$ is also closed under complements, we have $f^{-1}(\{\pm\infty\}) = f^{-1}(\R^c) = (f^{-1}(\R))^c \in \mathcal{A}$.</p>
+<p>Then for each open set $U\sub [-\infty,\infty]$, we can write $U$ as 
+    \[ U = ( U \cap \{\pm\infty\} ) \cup (U\cap \R) \]
+    where $U\cap \R$ is an open set in $\R$ and hence can be written as a countable union of open intervals in $\R$.
+    Since $f^{-1}(\{\pm\infty\}) \in \mathcal{A}$ and $f^{-1}(U\cap \R)$ is a countable union of sets of the form $f^{-1}(I)$ where $I$ is an open interval in $\R$, we have $f^{-1}(U) \in \mathcal{A}$ as well.
+    This shows that $f$ is $\mathcal{A}$-measurable as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:measurable_function_properties">
+  <div class="theorem-header"><strong>Exercise ?</strong></div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space.
+    <ol><li>Show that if $f: X\to\R^m$ and $g: X\to\R^k$ are $\mathcal{A}$-measurable, then the map $(f,g): X\to \R^{m+k}$ defined by $(f,g)(x) = (f(x), g(x))$ is also $\mathcal{A}$-measurable.
+        </li><li>If $A\in \mathcal{A}$ is a measurable set, then its characteristic function $\Chi_A: X\to \R$ is $\mathcal{A}$-measurable.</li></ol></div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-4">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-4')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-4">
+    (I) With the product topology on $\R^{m+k}$, a basis for the topology is given by all products $U\times V$ where $U\sub \R^m$ and $V\sub \R^k$ are open.
+    Let $h = (f,g): X\to \R^{m+k}$ be defined by $h(x) = (f(x), g(x))$. Then a nearly identical argument as in (I) shows that
+    \[ \mathcal{A}' := \{ A \sub \R^{m+k} : h^{-1}(A) \in \mathcal{A} \} \]
+    is a $\sigma$-algebra containing all open sets in $\R^{m+k}$.
+    Since $h^{-1}(U\times V) = f^{-1}(U) \cap g^{-1}(V)$, and $f^{-1}(U), g^{-1}(V) \in \mathcal{A}$ since $f,g$ are $\mathcal{A}$-measurable, we have $h^{-1}(U\times V) \in \mathcal{A}$ as well.
+    Thus $\mathcal{A}'$ contains all basis elements for the topology on $\R^{m+k}$, and hence contains all open sets in $\R^{m+k}$.
+    This shows that $h$ is $\mathcal{A}$-measurable as desired.
+<p>(II) Let $A\in \mathcal{A}$ be a measurable set, and let $\Chi_A: X\to \R$ be its characteristic function.
+    Then each we see that if $a<0$, then $\Chi_A^{-1}([-\infty,a)) = \emptyset \in \mathcal{A}$, and if $0\leq a < 1$, then $\Chi_A^{-1}([-\infty,a)) = A^c \in \mathcal{A}$, and if $a\geq 1$, then $\Chi_A^{-1}([-\infty,a)) = X \in \mathcal{A}$.
+    By the equivalence of (i) and (ii) in Proposition <span class="ref-unknown" title="Reference not found: prop:equivalent_definitions_of_measurable_function">[prop:equivalent_definitions_of_measurable_function?]</span>, this shows that $\Chi_A$ is $\mathcal{A}$-measurable as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box proposition-box" id="prop:properties_of_measurable_functions">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Properties of Measurable Functions)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ be a measurable space.
+    <ol style="list-style-type: lower-roman;"><li>If $f,g$ are $\mathcal{A}$-measurable functions $X\to [-\infty,\infty]$, then
+            \[ f+g, fg, |f|, \min(f,g), \max(f,g) \]
+            are all $\mathcal{A}$-measurable as well, where the operations are defined pointwise.
+            If $g$ is nowhere zero, then $f/g$ is $\mathcal{A}$-measurable as well.
+        </li><li>If $\{f_j\}_{j=1}^\infty$ is a countable collection of $\mathcal{A}$-measurable functions $X\to [-\infty,\infty]$, then
+            \[ \sup_{j\geq 1} f_j, \inf_{j\geq 1} f_j, \limsup_{j\to\infty} f_j, \liminf_{j\to\infty} f_j \]
+            are all $\mathcal{A}$-measurable as well.</li></ol></div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-5">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-5')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-5">
+    (i) Let $f,g: X\to [-\infty,\infty]$ be $\mathcal{A}$-measurable.
+    As noted in Proposition <span class="ref-unknown" title="Reference not found: prop:equivalent_definitions_of_measurable_function">[prop:equivalent_definitions_of_measurable_function?]</span> (ii), it suffices to show that for every $a\in\R$, the set $\{ x\in X : (f+g)(x) < a \}$ is in $\mathcal{A}$, and similarly for the other functions.
+<p>Let $a\in\R$.
+    Then we see that
+    \[ (f+g)^{-1}([-\infty,a)) = \bigcup_{\substack{r,s\in\Q \\ r+s<a}}  ( f^{-1}([-\infty,r)) \cap g^{-1}([-\infty,s)) ) \]
+    which is a countable union of sets in $\mathcal{A}$ since $f,g$ are $\mathcal{A}$-measurable, and hence is in $\mathcal{A}$ as well.
+    Therefore $f+g$ is $\mathcal{A}$-measurable.</p>
+<p>Since
+    \[ (f^2)^{-1}([-\infty,a)) = f^{-1}([-\infty,\sqrt{a}\,)) \setminus f^{-1}([-\infty,-\sqrt{a}\,]) \]
+    which is in $\mathcal{A}$ since $f$ is $\mathcal{A}$-measurable.
+    Therefore $f^2$ is $\mathcal{A}$-measurable.
+    As a result of the identity \[ fg = \frac{1}{2}((f+g)^2 - (f^2 + g^2)) \]
+    and the fact that sums and squares of $\mathcal{A}$-measurable functions are $\mathcal{A}$-measurable, we see that $fg$ is $\mathcal{A}$-measurable as well.</p>
+<p>Next observe that 
+    \[ \left( \frac{1}{g} \right)^{-1} ([-\infty,a)) = \begin{cases}
+        g^{-1}((1/a,0]) & \text{ if } a < 0 \\
+        g^{-1}((-\infty,0]) & \text{ if } a = 0 \\
+        g^{-1}((-\infty,0]) \cup g^{-1}((1/a,\infty)) & \text{ if } a > 0
+    \end{cases} \]
+    which is in $\mathcal{A}$ since $g$ is $\mathcal{A}$-measurable;
+    hence $1/g$ is $\mathcal{A}$-measurable. By the previous paragraph, we see that $f/g$ is $\mathcal{A}$-measurable as well.</p>
+<p>At this point note that $\{x\in X: f(x) \geq 0 \}$ is in $\mathcal{A}$ since it is equal to $f^{-1}([0,\infty])$, and hence $\Chi_{\{f\geq 0\}}$ is $\mathcal{A}$-measurable by Exercise <span class="ref-unknown" title="Reference not found: ex:measurable_function_properties">[ex:measurable_function_properties?]</span>(III).
+    Then 
+    \[ f^+ := f \cdot \Chi_{\{f\geq 0\}} = \max(f,0) \]
+    is $\mathcal{A}$-measurable as the product of two $\mathcal{A}$-measurable functions, and similarly
+    \[ f^- := -f \cdot \Chi_{\{f<0\}} = \max(-f,0) \]
+    is $\mathcal{A}$-measurable as well.
+    Since $|f| = f^+ + f^-$ we see that $|f|$ is $\mathcal{A}$-measurable.
+    Since 
+    \[ \max(f,g) = (f-g)^+ + g \quad\text{ and }\quad \min(f,g) = - (f-g)^- + g \]
+    we see that $\max(f,g)$ and $\min(f,g)$ are also $\mathcal{A}$-measurable.
+    This completes the proof of part (i).</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>Suppose $\{f_j\}_{j=1}^\infty$ is a sequence of $\mathcal{A}$-measurable functions $X\to [-\infty,\infty]$.
+    Then for every $a\in\R$, we have
+    \[ \left( \inf_{j\geq 1} f_j \right)^{-1}([-\infty,a]) = \bigcup_{j\geq 1} \left( f_j^{-1}([-\infty,a)) \right) \]
+    and \[ \left( \sup_{j\geq 1} f_j \right)^{-1}([-\infty,a]) = \bigcap_{j\geq 1} \left( f_j^{-1}([-\infty,a]) \right) \]
+    which are both in the $\sigma$-algebra $\mathcal{A}$ since each $f_j$ is $\mathcal{A}$-measurable.
+    This shows that $\inf_{j\geq 1} f_j$ and $\sup_{j\geq 1} f_j$ are $\mathcal{A}$-measurable functions.</p>
+<p>We complete the proof by noting that
+    \[ \liminf_{j\to\infty} f_j = \sup_{j\geq 1} \inf_{k\geq j} f_k \quad\text{ and } \quad \limsup_{j\to\infty} f_j = \inf_{j\geq 1} \sup_{k\geq j} f_k \]
+    which shows that $\liminf_{j\to\infty} f_j$ and $\limsup_{j\to\infty} f_j$ are both $\mathcal{A}$-measurable as well.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:derivative_is_measurable">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Derivatives are Measurable)</div>
+  <div class="theorem-content">Let $f: U\sub \R^n \to \R^m$ be a differentiable function defined on an open set $U$.
+    Show that the derivative $Df: U\to \R^{m\times n}$ is Borel measurable.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-6">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-6')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-6">
+    Let $f = (f_1, f_2, \ldots, f_m)$ where each $f_k: U\to \R$ is differentiable.
+    See that 
+    \[ Df(x) = \begin{pmatrix}
+        \partial_{1} f_1(x) & \partial_{2} f_1(x) & \cdots & \partial_{n} f_1(x) \\
+        \partial_{1} f_2(x) & \partial_{2} f_2(x) & \cdots & \partial_{n} f_2(x) \\
+        \vdots & \vdots & \ddots & \vdots \\
+        \partial_{1} f_m(x) & \partial_{2} f_m(x) & \cdots & \partial_{n} f_m(x)
+    \end{pmatrix} \]
+    for each $x\in U$.
+    By Proposition <span class="ref-unknown" title="Reference not found: prop:properties_of_measurable_functions">[prop:properties_of_measurable_functions?]</span>(ii), it suffices to show that each partial derivative $\partial_i f_j: U\to \R$ is Borel measurable.
+<p>Fix $1\leq j \leq n$ and $1\leq k \leq m$.
+    Since $f_k$ is differentiable, we have
+    \[ \partial_j f_k(x) = \lim_{h\to 0} \frac{f_k(x + h e_j) - f_k(x)}{h} ,\quad \forall x\in U \]
+    where $e_j$ is the $j$-th standard basis vector in $\R^n$.
+    Choose a sequence $h_l \to 0$ as $l\to\infty$ with $h_l \neq 0$ for all $l\in\Z^+$.
+    Then
+    \[ \partial_j f_k(x) = \lim_{l\to\infty} \frac{f_k(x + h_l e_j) - f_k(x)}{h_l} \]
+    for each $x\in U$. This expresses the partial derivative $\partial_j f_k$ as a pointwise limit of Borel measurable functions --- see that
+    \[ \partial_j f_k = \lim_{l\to\infty} \frac{f_k(\cdot + h_l e_j) - f_k}{h_l} \]
+    where each function in the sequence is Borel measurable since it is a sum and scalar multiple of a continuous function; the limit of Borel measurable functions is Borel measurable by Proposition <span class="ref-unknown" title="Reference not found: prop:properties_of_measurable_functions">[prop:properties_of_measurable_functions?]</span>(ii).
+    This shows that $\partial_j f_k$ is Borel measurable as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:increasing_measure_function">
+  <div class="theorem-header"><strong>Exercise ?</strong></div>
+  <div class="theorem-content">Let $(X,\mu)$ be a measure space.
+    If $f: X\to [-\infty,\infty]$ is $\mu$-measurable then the function
+    \[ [0,\infty) \ni t \longmapsto \mu( \{ x\in X : f(x) > t \} ) \]
+    is an increasing function.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-7">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-7')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-7">
+    Suppose $f$ is $\mu$-measurable, and let $0\leq s < t < \infty$.
+    Then $\{x\in X : f(x) > t \} \sub \{ x\in X : f(x) > s \}$ and these sets are both $\mu$-measurable since $f$ is $\mu$-measurable.
+    Thus
+    \[ \mu( \{ x\in X : f(x) > s \} ) \leq \mu( \{ x\in X : f(x) > t \} ) \]
+    which shows that the function $t\mapsto \mu(\{x\in X : f(x) > t \})$ is increasing.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<div class="theorem-box exercise-box" id="ex:usc_lsc_are_measurable">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Upper and Lower Semicontinuous Functions are Measurable)</div>
+  <div class="theorem-content">Let $(X,d)$ be a metric space, and let $f: X\to [-\infty,\infty]$ be a function.
+    Recall that $f$ is lower semicontinuous if for every $x\in X$ and every $\epsilon > 0$, there exists $\delta > 0$ such that
+    \[  f(y) > f(x) - \epsilon \quad \text{for all } y \in B(x,\delta). \]
+    Similarly, $f$ is upper semicontinuous if for every $x\in X$ and every $\epsilon > 0$, there exists $\delta > 0$ such that
+    \[ f(y) < f(x) + \epsilon \quad \text{for all } y \in B(x,\delta). \]
+    Show that if $f$ is lower semicontinuous or upper semicontinuous, then $f$ is Borel measurable.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-8">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-8')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-8">
+    Suppose $f$ is lower semicontinuous, and let $a\in\R$.
+    Then for each $x\in f^{-1}((a,\infty])$, we have $f(x) > a$.
+    By the definition of lower semicontinuity, there exists $\delta > 0$ such that $f(y) > a$ for all $y\in B(x,\delta)$.
+    This shows that $B(x,\delta) \sub f^{-1}((a,\infty])$, and hence $f^{-1}((a,\infty])$ is open in $X$ as it is a union of open balls.
+    Since $f^{-1}((a,\infty])$ is open for each $a\in\R$, we see that $f$ is Borel measurable by Proposition <span class="ref-unknown" title="Reference not found: prop:equivalent_definitions_of_measurable_function">[prop:equivalent_definitions_of_measurable_function?]</span>(v).
+<p>A similar argument shows that if $f$ is upper semicontinuous, then for each $a\in\R$, the set $f^{-1}([-\infty,a))$ is open in $X$, and hence $f$ is Borel measurable by Proposition <span class="ref-unknown" title="Reference not found: prop:equivalent_definitions_of_measurable_function">[prop:equivalent_definitions_of_measurable_function?]</span>(ii).
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>Let's look at one more equivalent characterization of measurable functions into $[-\infty,\infty]$.</p>
+<div class="theorem-box proposition-box" id="prop:measurable_approx_by_simple_functions">
+  <div class="theorem-header"><strong>Proposition ?</strong></div>
+  <div class="theorem-content">Let $(X,\mu)$ be a measure space, and let $f: X\to [-\infty,\infty]$ be a function.
+    Then $f$ is $\mu$-measurable if and only if there exists a sequence of simple functions $\{s_j\}_{j=1}^\infty$ such that $|s_j(x)|\leq |s_{j+1}(x)|$ and $ \lim_{j\to\infty} s_j(x) = f(x)$ for each $x\in X$.
+    If $f$ is bounded, then we can choose the sequence $\{s_j\}_{j=1}^\infty$ to converge uniformly to $f$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-9">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-9')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-9">
+    One direction is clear. Simple functions are $\mu$-measurable since they are finite linear combinations of characteristic functions of measurable sets --- each characteristic function is $\mu$-measurable by Exercise <span class="ref-unknown" title="Reference not found: ex:measurable_function_properties">[ex:measurable_function_properties?]</span>(II), and finite linear combinations of $\mu$-measurable functions are $\mu$-measurable by Proposition <span class="ref-unknown" title="Reference not found: prop:properties_of_measurable_functions">[prop:properties_of_measurable_functions?]</span>(i).
+    Thus if $\{s_j\}_{j=1}^\infty$ is a sequence of simple functions converging pointwise to $f$, then each $s_j$ is $\mu$-measurable, and hence $f$ is $\mu$-measurable by Proposition <span class="ref-unknown" title="Reference not found: prop:properties_of_measurable_functions">[prop:properties_of_measurable_functions?]</span>(ii).
+<p>Conversely, suppose $f$ is $\mu$-measurable.
+    The idea here is that for each $k\in \Z^+$ and each $n\in \Z$, we can divide the interval $[n,n+1)$ into $2^k$ half-open subintervals of length $2^{-k}$.
+    Specifically, for each $k\in \Z^+$ we define a collection of intervals 
+    \[\left\{I_{m,k} := \left[ \frac{m}{2^k} , \frac{m+1}{2^k} \right) : m\in\Z\right\}\]
+    which partitions the real line $\R$ into half-open intervals of length $2^{-k}$.
+    Since $f$ is $\mu$-measurable, we see that for each $k\in \Z^+$ and $m\in\Z$, the set $f^{-1}(I_{m,k})$ is $\mu$-measurable.</p>
+<p>For each $k\in\Z^+$ we define a simple function $s_k: X\to \R$ by
+    \[ s_k(x) := \begin{cases}
+        \frac{m}{2^k} & \text{ if } f(x) \in [0,k] \text{ and } m\in \Z \text{ is such that } f(x) \in I_{m,k}, \\   
+        \frac{m+1}{2^k} & \text{ if } f(x) \in [-k,0) \text{ and } m\in \Z \text{ is such that } f(x) \in I_{m,k}, \\
+        k & \text{ if } f(x) > k, \\
+        -k & \text{ if } f(x) < -k.
+    \end{cases}. \]
+    Note that in the first case, we have $0\leq m \leq k2^k - 1$ so that 
+    \[ 0 \leq \frac{m}{2^k} < \frac{m+1}{2^k} \leq \frac{k2^k}{2^k} = k \]
+    and in the second case, we have $-k2^k \leq m \leq -1$ so that
+    \[ -k \leq \frac{m+1}{2^k} < \frac{m}{2^k} \leq -\frac{1}{2^k} < 0. \]
+    That implies that we can rewrite $s_k$ as
+    \[ s_k = k\Chi_{\{f>k\}} - k\Chi_{\{f<-k\}} + \sum_{m=0}^{k2^k - 1} + \sum_{m=0}^{k2^k -1} \frac{m}{2^k}\Chi_{f^{-1}(I_{m,k})} + \sum_{m=-1}^{-k2^k} \frac{m}{2^k}\Chi_{f^{-1}(I_{m,k})}   \]
+    which is a finite linear combination of characteristic functions of $\mu$-measurable sets, and hence is a simple function.</p>
+<p>We claim that by construction $|s_k(x)| \leq |s_{k+1}(x)|\leq |f(x)|$ for each $x\in X$ and $k\in \Z^+$.
+    To see this, fix $x\in X$ and $k\in \Z^+$.
+    We first show that $|s_k(x)| \leq |f(x)|$.</p>
+<ul><li>If $f(x) \geq k$, then $s_k(x) = k \leq f(x)$.
+    </li><li>If $f(x) \leq -k$, then $s_k(x) = -k \geq f(x)$.
+    </li><li>If $-k < f(x) < k$, then $f(x) \in I_{m,k}$ for some $m\in\Z$ with $-k2^k \leq m < k2^k$, and hence
+        \[ \frac{m}{2^k} \leq f(x) < \frac{m+1}{2^k} \]
+        so that $|s_k(x)| = \left|\frac{m}{2^k}\right| \leq k < |f(x)|$.</li></ul>
+<p>This shows that $|s_k(x)| \leq |f(x)|$ for each $x\in X$ and $k\in \Z^+$.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>Now we show that $|s_k(x)| \leq |s_{k+1}(x)|$ for each $x\in X$ and $k\in \Z^+$.
+    Fix $x\in X$ and $k\in \Z^+$.</p>
+<ul><li>If $f(x) \geq k+1$, then $s_k(x) = k$ and $s_{k+1}(x) = k+1$, so that $|s_k(x)| < |s_{k+1}(x)|$.
+    </li><li>If $k\leq f(x) < k+1$, then $s_k(x) = k$ but $f(x) \in I_{m,k+1}$ for some $m\geq k2^{k+1}$, so that
+        \[ s_{k+1}(x) = \frac{m}{2^{k+1}} \geq \frac{k2^{k+1}}{2^{k+1}} = k = s_k(x). \]
+    </li><li>If $0 \leq f(x) < k$, then $f(x) \in I_{m,k}$ for some $m\in\Z$ with $0 \leq m < k2^k$.
+        Hence $f(x) \in I_{2m,k+1}$ or $I_{2m+1,k+1}$, so that
+        \[ s_{k+1}(x) \in \left\{ \frac{2m}{2^{k+1}}, \frac{2m+1}{2^{k+1}} \right\} \]
+        which implies that 
+        \[s_{k+1}(x) \geq \frac{2m}{2^{k+1}} = \frac{m}{2^k} = s_k(x).\]
+    </li><li>If $-k < f(x) < 0$, then $f(x) \in I_{m,k}$ for some $m\in\Z$ with $-k2^k \leq m < 0$.
+        Hence $f(x) \in I_{2m+1,k+1}$ or $I_{2m,k+1}$, so that
+        \[ s_{k+1}(x) \in \left\{ \frac{2m}{2^{k+1}}, \frac{2m-1}{2^{k+1}} \right\} \]
+        and $s_k(x) = \frac{m+1}{2^k}$, which implies that
+        \[ s_{k+1}(x) \leq \frac{2m}{2^{k+1}} = \frac{m}{2^k} < \frac{m+1}{2^k} = s_k(x) \]
+    </li><li>If $-k-1 < f(x) < -k$, then $s_k(x) = -k$ but $f(x) \in I_{m,k+1}$ for some $m \leq -k2^{k+1}-1$, so that
+        \[ s_{k+1}(x) = \frac{m+1}{2^{k+1}} \leq \frac{-k2^{k+1}}{2^{k+1}} = -k = s_k(x). \]
+    </li><li>If $f(x) \leq -k-1$, then $s_k(x) = -k$ and $s_{k+1}(x) = -k-1$, so that $s_{k+1}(x) < s_k(x)$.</li></ul>
+    In each case, we have shown that $|s_k(x)| \leq |s_{k+1}(x)|$.
+<p><div style="margin: 1em 0;"></div></p>
+<p>This shows that $|s_k(x)| \leq |s_{k+1}(x)| \leq |f(x)|$ for each $x\in X$ and $k\in \Z^+$ as claimed.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>Finally, we show that $\lim_{k\to\infty} s_k(x) = f(x)$ for each $x\in X$.
+    By construction, for each $k\in \Z^+$ and each $x\in X$ such that $0\leq f(x) \leq k$, we have $f(x) \in I_{m,k}$ for some $m\in\Z$ with $0 \leq m < k2^k$, and hence
+    \[ s_k(x) = \frac{m}{2^k} \leq f(x) < \frac{m+1}{2^k} = s_k(x) + \frac{1}{2^k} \]
+    and for each $x\in X$ such that $-k \leq f(x) < 0$, we have $f(x) \in I_{m,k}$ for some $m\in\Z$ with $-k2^k \leq m < 0$, and hence
+    \[ s_k(x) - \frac{1}{2^k} = \frac{m}{2^k} \leq f(x) < \frac{m+1}{2^k} = s_k(x). \]
+    Putting these two cases together, we see that for each $k\in \Z^+$ for each $x\in X$ such that $|f(x)| \leq k$, we have
+    \[ |s_k(x) - f(x)| < \frac{1}{2^k}. \]</p>
+<p>To see that $\lim_{k\to\infty} s_k(x) = f(x)$ for each $x\in X$ in the general case, fix $x\in X$.
+    If $f(x) \in \R$, then there exists some $N\in \Z^+$ such that $|f(x)| < N$.
+    Then for each $k\geq N$, we have
+    \[ |s_k(x) - f(x)| < \frac{1}{2^k} \leq \frac{1}{2^N} \]
+    which shows that $\lim_{k\to\infty} s_k(x) = f(x)$.
+    If $f(x) \in\{\pm\infty\}$, then the sequence $\{s_k\}_{k=1}^\infty$ is defined so that
+    \[ s_k(x) = \pm k \quad \forall k\in\Z^+ \]
+    so that $\lim_{k\to\infty} s_k(x) = f(x)$ as well.
+    This completes the proof.</p>
+<p>Now, if $f$ is a bounded function, then there exists some $M > 0$ such that $|f(x)| \leq M$ for each $x\in X$.
+    Choose $N\in \Z^+$ such that $N > M$.
+    Then for each $k\geq N$ and each $x\in X$, we have
+    \[ |s_k(x) - f(x)| < \frac{1}{2^k} \leq \frac{1}{2^N} \]
+    which shows that $s_k \to f$ uniformly as $k\to\infty$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>Now that we have developed the appropriate language, we can state and prove a famous result in measure theory.</p>
+<div class="theorem-box corollary-box" id="cor:luzins_theorem">
+  <div class="theorem-header"><strong>Corollary ?</strong> (Luzin's Theorem)</div>
+  <div class="theorem-content">Let $X$ be a topological space which has the property that every closed subset of $X$ is a countable intersection of open sets, let $\mu$ be a Borel regular outer measure on $X$, let $A$ be a $\mu$-measurable set with $\mu(A) < \infty$, and let $f: A\to \R$ be $\mu$-measurable.
+    Then for every $\varepsilon > 0$, there exists a closed set $C\sub A$ such that $\mu(A\setminus C) < \varepsilon$ and $f|_C$ is continuous.</div>
+</div>
+<p>In words, Luzin's theorem states that a measurable function is ``nearly'' continuous.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>The reason for the technical assumption on $X$ is so that we can apply Theorem <span class="ref-unknown" title="Reference not found: thm:borel_reg_implies_inner/outer_reg">[thm:borel_reg_implies_inner/outer_reg?]</span>.
+We remark that a large class of examples is given by separable metric spaces $(X,d)$ where the outer measure $\mu$ is locally finite and Borel regular.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-10">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-10')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-10">
+    First note that by assumption, the function $f$ is finite-valued and defined only on the set $A$.
+    By assuming that $f$ is $\mu$-measurable on $A$, we really mean that $f$ is measurable with respect to the $\sigma$-algebra on $A$ consisting of all $\mu$-measurable subsets of $A$ --- see Exercise <span class="ref-unknown" title="Reference not found: ex:restriction_of_sigma_algebra_and_measure">[ex:restriction_of_sigma_algebra_and_measure?]</span>.
+<p><div style="margin: 1em 0;"></div></p>
+<p>For each $j\in \Z^+$ and each $m\in \Z$, let 
+    \[ A_{j,m} := f^{-1} \left( \left[ \frac{m-1}{k}, \frac{m}{k} \right) \right) \]
+    which is a $\mu$-measurable set since $f$ is $\mu$-measurable.
+    Then for each $j\in \Z^+$, the sets $\{A_{j,m}\}_{m\in\Z}$ are disjoint and partition $X$.</p>
+<p>By Lemma <span class="ref-unknown" title="Reference not found: lem:restriction_of_borel_regular_outer_measure">[lem:restriction_of_borel_regular_outer_measure?]</span>, we know that $\mu(A)<\infty$ implies $\mu\mres A$ is a Borel regular outer measure on $A$.
+    Now we can apply Theorem <span class="ref-unknown" title="Reference not found: thm:borel_reg_implies_inner/outer_reg">[thm:borel_reg_implies_inner/outer_reg?]</span> to the measure $\mu\mres A$, which says that for each $\epsilon > 0$ and each $j\in \Z^+,m\in\Z$, there exists a closed set $C_{j,m} \sub A_{j,m}$ such that
+    \[ \mu(A_{j,m}\setminus C_{j,m}) = (\mu\mres A)(A_{j,m}\setminus C_{j,m}) < 2^{-j-|m|-2}\epsilon. \]
+    Therefore, for each $j\in \Z^+,m\in\Z$ we have
+    \[ \mu\left( A_{j,m} \setminus\left( \bigcup_{n\in\Z} C_{j,n} \right)\right) < 2^{-j-|m|-2}\epsilon. \]
+    As a result, for each $k\in \Z^+$ we have
+    \[ \mu\left( A \,\setminus \left( \bigcup_{m\in\Z} C_{k,m} \right) \right) < 2^{-k}\epsilon \]
+    so there exists an integer $N_k > 0$ such that
+    \[ \mu\left( A \,\setminus \left( \bigcup_{|m|\leq N_k} C_{k,m} \right) \right) < 2^{-k}\epsilon. \]
+    Since
+    \[ A\,\setminus \left( \bigcap_{k=1}^\infty \left( \bigcup_{|m|\leq N_k} C_{k,m} \right) \right) = \bigcup_{k=1}^\infty \left( A\,\setminus \left( \bigcup_{|m|\leq N_k} C_{k,m} \right) \right) \]
+    this implies that $\mu(A\setminus C) < \epsilon$ where
+    \[ C := \bigcap_{k=1}^\infty \left( \bigcup_{|m|\leq N_k} C_{k,m} \right). \]
+    Note that $C$ is a closed set since it is a countable intersection of finite unions of closed sets.</p>
+<p>For each $k\in \Z^+$, define 
+    \[ g_k : \bigcup_{|m|\leq N_k} C_{k,m} \to \R \]
+    by setting $g_k(x) = \frac{m-1}{k}$ for each $x\in C_{k,m}$ such that $|m| \leq N_k$.
+    Note that $g_k$ is well-defined since the sets $\{C_{k,m}\}_{|m|\leq N_k}$ are disjoint.
+    Also note that $g_k$ is continuous since it is constant on each closed set $C_{k,m}$, so its restriction to $C$ is continuous as well.</p>
+<p>Finally, we show that $g_k \to f$ uniformly on $C$ as $k\to\infty$.
+    By construction of the function $g_k$, we see that for each $x\in C$ we have $|g_k(x) - f(x)| < 1/k$.
+    This shows that $g_k \to f$ uniformly on $C$ as $k\to\infty$, and hence $f|_C$ is continuous as the uniform limit of continuous functions.
+    This completes the proof.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>Egorov's theorem is another important result about measurable functions.</p>
+<div class="theorem-box theorem-box" id="thm:egorovs_theorem">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Egorov's Theorem)</div>
+  <div class="theorem-content">Let $(X,\mu)$ be a measure space, and let $A\sub X$ be a measurable set with $\mu(A) < \infty$.
+    If $\{f_j\}_{j=1}^\infty$ is a sequence of $\mu$-measurable functions $A\to \R$ which converges pointwise to a function $f: A\to \R$, then for every $\varepsilon > 0$, there exists a measurable set $B_\varepsilon\sub A$ such that $\mu(A\setminus B_\varepsilon) < \varepsilon$ and $f_j \to f$ uniformly on $B_\varepsilon$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-11">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-11')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-11">
+    Let $\varepsilon > 0$.
+    For the moment, fix $n\in \Z^+$.
+    The definition of pointwise convergence implies that
+    \[ X = \bigcup_{m=1}^\infty \bigcap_{k=m}^\infty \left\{ x\in X : |f_k(x) - f(x)| < \frac{1}{n} \right\}. \]
+    For each $m\in \Z^+$, define
+    \[ A_{m,n} := \bigcap_{k=m}^\infty \left\{ x\in X : |f_k(x) - f(x)| < \frac{1}{n} \right\}. \]
+    Then $\{A_{m,n}\}_{m=1}^\infty$ is an increasing sequence of measurable sets whose union is $X$.
+    Since $\mu(A) < \infty$, we have $\mu(A) = \lim_{m\to\infty} \mu(A_{m,n})$ for each $n\in \Z^+$ by Proposition <span class="ref-unknown" title="Reference not found: prop:sequences_of_measurable_sets">[prop:sequences_of_measurable_sets?]</span>.
+<p>Thus there exists some $m_n\in \Z^+$ such that \[ \mu(A) - \mu(A_{m_n,n}) < \frac{\varepsilon}{2^n}. \]
+    We now take the union of these sets over all $n\in \Z^+$ and define 
+    \[ B_\varepsilon := \bigcap_{n=1}^\infty A_{m_n,n}. \]
+    Then $B_\varepsilon$ is a measurable set since it is a countable intersection of measurable sets, and
+    \begin{align*}
+        \mu(A\setminus B_\varepsilon) &= \mu\left( A \setminus \bigcap_{n=1}^\infty A_{m_n,n} \right) \\
+            &= \mu\left( \bigcup_{n=1}^\infty (A\setminus A_{m_n,n}) \right) \\
+            &\leq \sum_{n=1}^\infty \mu(A\setminus A_{m_n,n}) \\
+            < \sum_{n=1}^\infty \frac{\varepsilon}{2^n} = \varepsilon.
+    \end{align*}</p>
+<p>Finally, we show that $f_j \to f$ uniformly on $B_\varepsilon$.
+    Let $\delta > 0$ be arbitrary.
+    Let $N\in \Z^+$ be such that $1/N < \delta$.
+    Then $B_\varepsilon \sub A_{m_N,N}$ by construction, and hence for each $x\in B_\varepsilon$ and each $j\geq m_N$, we have
+    \[ |f_j(x) - f(x)| < \frac{1}{N} < \delta. \]
+    This shows that $f_j \to f$ uniformly on $B_\varepsilon$ as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+    </main>
+  </div>
+  
+  <script>
+    function toggleChapter(element) {
+      element.parentElement.classList.toggle('expanded');
+    }
+    
+    // Highlight current page in sidebar
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPath = window.location.pathname;
+      const links = document.querySelectorAll('.section-link');
+      links.forEach(link => {
+        if (currentPath.endsWith(link.getAttribute('href').split('/').pop())) {
+          link.classList.add('active');
+          // Expand parent chapter
+          const group = link.closest('.chapter-group');
+          if (group) group.classList.add('expanded');
+        }
+      });
+    });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('Restoring proof collapse states...');
+      try {
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        const currentPage = window.location.pathname;
+        const pageOpen = openProofs[currentPage] || [];
+        
+        console.log('Current page:', currentPage);
+        console.log('Open proof IDs stored:', pageOpen);
+        console.log('Found ' + pageOpen.length + ' open proofs for this page');
+        
+        document.querySelectorAll('.proof-box').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          console.log('Checking proof:', proofId, 'Should be open:', pageOpen.includes(proofId));
+          if (pageOpen.includes(proofId)) {
+            box.classList.remove('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'true');
+          } else {
+            box.classList.add('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        const pageBoxes = openBoxes[currentPage] || [];
+        
+        console.log('Open box IDs stored:', pageBoxes);
+        
+        document.querySelectorAll('.collapsible-box').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          console.log('Checking box:', boxId, 'Should be open:', pageBoxes.includes(boxId));
+          if (pageBoxes.includes(boxId)) {
+            box.classList.remove('collapsed');
+          } else {
+            box.classList.add('collapsed');
+          }
+        });
+        
+        console.log('Proof states restored');
+      } catch (e) {
+        console.error('Error restoring collapse state:', e);
+      }
+    });
+    
+    function toggleProof(proofId) {
+      const proofContent = document.getElementById(proofId);
+      const proofBox = proofContent.closest('.proof-box');
+      proofBox.classList.toggle('collapsed');
+      
+      const button = proofBox.querySelector('.proof-toggle');
+      button.setAttribute('aria-expanded', !proofBox.classList.contains('collapsed'));
+      
+      saveProofState();
+    }
+    
+    function toggleSubproof(subproofId) {
+      const subproofContent = document.getElementById(subproofId);
+      const subproof = subproofContent.closest('.subproof');
+      subproof.classList.toggle('collapsed');
+      
+      const button = subproof.querySelector('.subproof-toggle');
+      button.setAttribute('aria-expanded', !subproof.classList.contains('collapsed'));
+    }
+    
+    function saveProofState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        if (!openProofs[currentPage]) {
+          openProofs[currentPage] = [];
+        }
+        
+        openProofs[currentPage] = [];
+        document.querySelectorAll('.proof-box:not(.collapsed)').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          if (proofId) {
+            openProofs[currentPage].push(proofId);
+          }
+        });
+        
+        localStorage.setItem('openProofs', JSON.stringify(openProofs));
+        console.log('Saved proof state (open proofs):', openProofs[currentPage]);
+      } catch (e) {
+        console.error('Error saving collapse state:', e);
+      }
+    }
+    
+    function toggleCollapsible(collapsibleId) {
+      const content = document.getElementById(collapsibleId);
+      const box = content.closest('.collapsible-box');
+      box.classList.toggle('collapsed');
+      
+      saveCollapsibleState();
+    }
+    
+    function saveCollapsibleState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        if (!openBoxes[currentPage]) {
+          openBoxes[currentPage] = [];
+        }
+        
+        openBoxes[currentPage] = [];
+        document.querySelectorAll('.collapsible-box:not(.collapsed)').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          if (boxId) {
+            openBoxes[currentPage].push(boxId);
+          }
+        });
+        
+        localStorage.setItem('openBoxes', JSON.stringify(openBoxes));
+      } catch (e) {
+        console.error('Error saving box state:', e);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        const proofBoxes = document.querySelectorAll('.proof-box');
+        const anyExpanded = Array.from(proofBoxes).some(box => !box.classList.contains('collapsed'));
+        
+        proofBoxes.forEach(box => {
+          if (anyExpanded) {
+            box.classList.add('collapsed');
+          } else {
+            box.classList.remove('collapsed');
+          }
+        });
+        
+        saveProofState();
+      }
+    });
+    
+    document.querySelectorAll('a.ref-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.background = '#fef3c7';
+          target.style.transition = 'background 0.3s ease';
+          setTimeout(() => { target.style.background = ''; }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

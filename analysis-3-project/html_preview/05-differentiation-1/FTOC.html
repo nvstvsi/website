@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FTOC</title>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '0.8em',
+      packages: {'[+]': ['ams']},
+      macros: {
+        R: '\\mathbb{R}',
+        C: '\\mathbb{C}',
+        N: '\\mathbb{N}',
+        Z: '\\mathbb{Z}',
+        Q: '\\mathbb{Q}',
+        E: '\\mathbb{E}',
+        F: '\\mathbb{F}',
+        S: '\\mathbb{S}',
+        H: '\\mathcal{H}',
+        L: '\\mathcal{L}',
+        dif: '\\,\\mathrm{d}',
+        supp: '\\operatorname{supp}',
+        proj: '\\operatorname{proj}',
+        Id: '\\operatorname{Id}',
+        Span: '\\operatorname{span}',
+        graph: '\\operatorname{graph}',
+        dist: '\\operatorname{dist}',
+        diam: '\\operatorname{diam}',
+        avg: '\\operatorname{avg}',
+        div: '\\operatorname{div}',
+        vol: '\\operatorname{vol}',
+        ord: '\\operatorname{ord}',
+        Chi: '\\mathbf{1}',
+        sub: '\\subseteq',
+        mres: '\\downharpoonright',
+        ddag: '\\ddagger',
+        dag: '\\dagger',
+        norm: ['\\left\\| #1 \\right\\|', 1],
+        abs: ['\\left| #1 \\right|', 1],
+        set: ['\\left\\{ #1 \\right\\}', 1],
+        inner: ['\\langle #1, #2 \\rangle', 2],
+        floor: ['\\lfloor #1 \\rfloor', 1],
+        ceil: ['\\lceil #1 \\rceil', 1],
+        bigskull: '\\unicode{x1F480}',
+        skull: '\\unicode{x2620}',
+        mathwitch: '\\unicode{x1F9D9}',
+        pumpkin: '\\unicode{x1F383}',
+        mathpumpkin: '\\unicode{x1F383}',
+        bigpumpkin: '\\unicode{x1F383}',
+        mathghost: '\\unicode{x1F47B}',
+        mathcat: '\\unicode{x1F408}',
+        mathbat: '\\unicode{x1F987}',
+        esssup: '\\operatorname{ess\\,sup}',
+        essinf: '\\operatorname{ess\\,inf}',
+        Lip: '\\operatorname{Lip}',
+        pd: ['\\frac{\\partial#1}{\\partial#2}', 2],
+        od: ['\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}', 2],
+        dashint: '\\mathchoice{\\rlap{-}\\!\\int}{\\rlap{\\raise.15ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}'
+      }
+    },
+    startup: {
+      pageReady: () => {
+        return MathJax.startup.defaultPageReady().then(() => {
+          console.log('MathJax ready');
+        });
+      }
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+  <script>
+  // Auto-reload when watch.js signals a rebuild
+  (function() {
+    // Save state before unload
+    window.addEventListener('beforeunload', function() {
+      saveProofState();
+      saveCollapsibleState();
+    });
+    
+    const eventSource = new EventSource('http://localhost:35729/reload-stream');
+    
+    eventSource.onmessage = function(event) {
+      if (event.data === 'reload') {
+        console.log('📝 File updated, saving state and reloading...');
+        // Save state before reload
+        saveProofState();
+        saveCollapsibleState();
+        // Small delay to ensure localStorage flush
+        setTimeout(() => {
+          window.location.reload();
+        }, 50);
+      }
+    };
+    
+    eventSource.onerror = function() {
+      console.log('⚠️  Auto-reload server not available. Run node watch.js to enable auto-reload.');
+      eventSource.close();
+    };
+    
+    console.log('🔄 Auto-reload enabled');
+  })();
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+    h2, h3, h4 {
+      margin-top: 2em;
+      margin-bottom: 0.75em;
+      color: #000;
+      font-weight: 600;
+    }
+    h2 { font-size: 1.5em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.1em; }
+    p {
+      margin: 1em 0;
+      text-indent: 2em;
+    }
+    p:first-of-type,
+    h2 + p,
+    h3 + p,
+    h4 + p,
+    .theorem-box + p,
+    .proof-box + p {
+      text-indent: 0;
+    }
+    .noindent + p,
+    p:has(> .noindent:first-child) {
+      text-indent: 0 !important;
+    }
+    .noindent {
+      display: none;
+    }
+    .theorem-box {
+      margin: 1.75em 0;
+      padding: 1.25em;
+      border-left: 5px solid #16a34a;
+      background: linear-gradient(to top, #bbf7d0 0%, #d1fae5 100%);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .definition-box { border-left-color: #16a34a; background: linear-gradient(to top, #d1fae5 0%, #ecfdf5 100%); }
+    .lemma-box { border-left-color: #1e3a8a; background: linear-gradient(to top, #bfdbfe 0%, #dbeafe 100%); }
+    .corollary-box { border-left-color: #9333ea; background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%); }
+    .proposition-box { border-left-color: #dc2626; background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%); }
+    .remark-box { border-left-color: #64748b; background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%); }
+    .example-box { border-left-color: #0891b2; background: linear-gradient(to top, #a5f3fc 0%, #cffafe 100%); }
+    .construction-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .notation-box { border-left-color: #ca8a04; background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%); }
+    .exercise-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .problem-box { border-left-color: #ec4899; background: linear-gradient(to top, #fbcfe8 0%, #fce7f3 100%); }
+    .theorem-header {
+      margin-bottom: 0.75em;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+    .theorem-header.clickable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .theorem-header.clickable:hover {
+      background: rgba(0,0,0,0.03);
+      margin: -0.5em -0.75em 0.75em -0.75em;
+      padding: 0.5em 0.75em;
+      border-radius: 4px;
+    }
+    .collapsible-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      margin-right: 0.5em;
+      color: #6b7280;
+    }
+    .collapsible-box.collapsed .collapsible-icon {
+      transform: rotate(-90deg);
+    }
+    .collapsible-content {
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+    }
+    .collapsible-box.collapsed .collapsible-content {
+      display: none;
+    }
+    .theorem-content {
+      padding-left: 0.5em;
+      line-height: 1.8;
+    }
+    .proof-box {
+      margin: 1.5em 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .proof-header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      border-radius: 6px 6px 0 0;
+    }
+    .proof-toggle {
+      width: 100%;
+      padding: 0.85em 1.25em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      transition: background 0.15s;
+    }
+    .proof-toggle:hover { background: rgba(0,0,0,0.03); }
+    .proof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      color: #6b7280;
+    }
+    .proof-box.collapsed .proof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .proof-content {
+      padding: 1.25em;
+      line-height: 1.8;
+    }
+    .proof-box.collapsed .proof-content {
+      display: none;
+    }
+    .proof-end {
+      float: right;
+      font-size: 1.3em;
+      margin-left: 0.5em;
+      color: #374151;
+    }
+    .subproof {
+      margin: 1em 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #f9fafb;
+    }
+    .subproof-header {
+      background: linear-gradient(to bottom, #f9fafb 0%, #f3f4f6 100%);
+      border-bottom: 1px solid #d1d5db;
+      border-radius: 4px 4px 0 0;
+    }
+    .subproof-toggle {
+      width: 100%;
+      padding: 0.6em 1em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: background 0.15s;
+    }
+    .subproof-toggle:hover {
+      background: rgba(0,0,0,0.03);
+    }
+    .subproof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.7em;
+      color: #6b7280;
+    }
+    .subproof.collapsed .subproof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .subproof-content {
+      padding: 1em;
+      line-height: 1.7;
+    }
+    .subproof.collapsed .subproof-content {
+      display: none;
+    }
+    .ref-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 0.15em;
+      border-radius: 2px;
+    }
+    .ref-link:hover {
+      background: #dbeafe;
+      text-decoration: underline;
+    }
+    .ref-unknown {
+      color: #dc2626;
+      font-weight: bold;
+      background: #fee2e2;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+    ol, ul {
+      margin: 1em 0;
+      padding-left: 2.5em;
+      line-height: 1.8;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    .latex-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5em auto;
+    }
+    .latex-figure .latex-image {
+      display: inline-block;
+      margin: 0.5em;
+      vertical-align: middle;
+    }
+    .latex-figure {
+      margin: 2em 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .latex-figure .figure-content {
+      margin-bottom: 0.75em;
+      line-height: normal;
+    }
+    .latex-figure .figure-content > * {
+      vertical-align: middle;
+    }
+    .latex-figure figcaption {
+      font-size: 0.9em;
+      color: #4b5563;
+      font-style: italic;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <h2>Fundamental Theorem of Calculus on $\R$</h2>
+<p>In this section, we prove both versions of the Fundamental Theorem of Calculus for Lebesgue integrals on the real line.
+We are not striving for maximum generalizty here, because that will come later.</p>
+<p><span class="noindent"></span>In short section, we always let $[a,b]$ denoted a closed, bounded interval in $\R$ with $a < b$.</p>
+<h3>Absolute Continuity</h3>
+<div class="theorem-box definition-box" id="def:absolute_continuity">
+  <div class="theorem-header"><strong>Definition ?</strong> (Absolute Continuity)</div>
+  <div class="theorem-content">A function $f:[a,b]\to\R$ is said to be <em>absolutely continuous</em> on $[a,b]$ if for each $\epsilon > 0$, there exists a $\delta > 0$ such that for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+    we have
+    \[ \sum_{k=1}^N |f(b_k) - f(a_k)| < \epsilon. \]
+    We define the set of all absolutely continuous functions on $[a,b]$ to be $AC([a,b])$.</div>
+</div>
+<div class="theorem-box remark-box collapsible-box collapsed" id="rem:AC_implies_uniformly_continuous" data-collapsible-id="collapsible-rem:AC_implies_uniformly_continuous">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-rem:AC_implies_uniformly_continuous')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong> (Absolute Continuity Implies Uniform Continuity)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-rem:AC_implies_uniformly_continuous">If $f$ is absolutely continuous on $[a,b]$, then it is uniformly continuous on $[a,b]$.
+<p>Let $\epsilon > 0$, and let $\delta > 0$ be such that for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+\[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+we have
+\[ \sum_{k=1}^N |f(b_k) - f(a_k)| < \epsilon. \]
+Then by choosing $N=1$, we have that for any sub-interval $(a_1,b_1)$ of $[a,b]$ with
+\[ b_1 - a_1 < \delta, \]
+we have
+\[ |f(b_1) - f(a_1)| < \epsilon. \]
+This is precisely the definition of uniform continuity.</div>
+</div></p>
+<div class="theorem-box example-box collapsible-box collapsed" id="ex:lipschitz_functions_are_absolutely_continuous" data-collapsible-id="collapsible-ex:lipschitz_functions_are_absolutely_continuous">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-ex:lipschitz_functions_are_absolutely_continuous')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Example ?</strong> (Lipschitz Functions are Absolutely Continuous)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-ex:lipschitz_functions_are_absolutely_continuous">If $f:[a,b]\to\R$ is Lipschitz with Lipschitz constant $L>0$, then for each $\epsilon > 0$, if we let $\delta := \epsilon / L$, then for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+    we have
+    \[ \sum_{k=1}^N |f(b_k) - f(a_k)| \leq \sum_{k=1}^N L |b_k - a_k| = L \sum_{k=1}^N (b_k - a_k) < L \delta = \epsilon. \]
+    Thus $f$ is absolutely continuous on $[a,b]$.</div>
+</div>
+<div class="theorem-box example-box collapsible-box collapsed" id="ex:not_all_absolutely_continuous_functions_are_lipschitz" data-collapsible-id="collapsible-ex:not_all_absolutely_continuous_functions_are_lipschitz">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-ex:not_all_absolutely_continuous_functions_are_lipschitz')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Example ?</strong> (Not All Absolutely Continuous Functions are Lipschitz)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-ex:not_all_absolutely_continuous_functions_are_lipschitz">For example, the function $f:[0,1]\to\R$ defined by $f(x) = \sqrt{x}$ is absolutely continuous on $[0,1]$ but not Lipschitz.
+<p>....</div>
+</div></p>
+<div class="theorem-box example-box collapsible-box collapsed" id="ex:cantor_lebesgue_function_is_not_absolutely_continuous" data-collapsible-id="collapsible-ex:cantor_lebesgue_function_is_not_absolutely_continuous">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-ex:cantor_lebesgue_function_is_not_absolutely_continuous')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Example ?</strong> (The Cantor-Lebesgue Function is Not Absolutely Continuous)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-ex:cantor_lebesgue_function_is_not_absolutely_continuous">The Cantor-Lebesgue function $f:[0,1]\to[0,1]$ is continuous and increasing, but not absolutely continuous.
+<p>....</div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:AC_is_a_vector_space">
+  <div class="theorem-header"><strong>Exercise ?</strong> ($AC$ is a Vector Space)</div>
+  <div class="theorem-content">Show that $AC([a,b])$ is a vector space over $\R$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-0">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-0')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-0">
+    First see that $0$, the zero function, is in $AC([a,b])$.
+    Now let $f,g \in AC([a,b])$ and $\alpha\in \R\setminus\{0\}$.
+<p>Let $\epsilon > 0$.
+    Since $f$ and $g$ are absolutely continuous on $[a,b]$, there exist $\delta_1,\delta_2 > 0$ such that for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta_1 \quad \text{and} \quad \sum_{k=1}^N (b_k - a_k) < \delta_2, \]
+    we have
+    \[ \sum_{k=1}^N |f(b_k) - f(a_k)| < \frac{\epsilon}{2|\alpha|} \quad \text{and} \quad \sum_{k=1}^N |g(b_k) - g(a_k)| < \frac{\epsilon}{2}. \]
+    Then letting $\delta := \min\{\delta_1,\delta_2\}$, we have that for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+    we have
+    \begin{align*}
+        \sum_{k=1}^N |(\alpha f + g)(b_k) - (\alpha f + g)(a_k)| &\leq \sum_{k=1}^N |\alpha| |f(b_k) - f(a_k)| + \sum_{k=1}^N |g(b_k) - g(a_k)| \\
+            &< |\alpha| \frac{\epsilon}{2|\alpha|} + \frac{\epsilon}{2} = \epsilon.
+    \end{align*}
+    Thus $\alpha f + g \in AC([a,b])$.
+    Therefore $AC([a,b])$ is a vector space over $\R$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:product_of_AC_is_AC">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Product of $AC$ is $AC$)</div>
+  <div class="theorem-content">If $f,g \in AC([a,b])$, then $fg \in AC([a,b])$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-1">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-1')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-1">
+    Let $f,g \in AC([a,b])$.
+    Since $f$ and $g$ are continuous on the compact set $[a,b]$, they are bounded.
+    That is, there exist $M_1,M_2 > 0$ such that
+    \[ |f(x)| \leq M_1 \quad\text{and}\quad |g(x)| \leq M_2 \quad\forall x\in[a,b]. \]
+<p>Let $\epsilon > 0$.
+    Since $f$ and $g$ are absolutely continuous on $[a,b]$, there exist $\delta_1,\delta_2 > 0$ such that for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta_1 \quad \text{and} \quad \sum_{k=1}^N (b_k - a_k) < \delta_2, \]
+    we have
+    \[ \sum_{k=1}^N |f(b_k) - f(a_k)| < \frac{\epsilon}{2M_2} \quad \text{and} \quad \sum_{k=1}^N |g(b_k) - g(a_k)| < \frac{\epsilon}{2M_1}. \]
+    Then letting $\delta := \min\{\delta_1,\delta_2\}$, we have that for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+    we have
+    \begin{align*}
+        \sum_{k=1}^N |(fg)(b_k) - (fg)(a_k)| &= \sum_{k=1}^N |f(b_k)g(b_k) - f(a_k)g(a_k)| \\
+            &= \sum_{k=1}^N |f(b_k)g(b_k) - f(a_k)g(b_k) + f(a_k)g(b_k) - f(a_k)g(a_k)| \\
+            &\leq \sum_{k=1}^N |g(b_k)||f(b_k) - f(a_k)| + \sum_{k=1}^N |f(a_k)||g(b_k) - g(a_k)| \\
+            &\leq M_2 \sum_{k=1}^N |f(b_k) - f(a_k)| + M_1 \sum_{k=1}^N |g(b_k) - g(a_k)| \\
+            &< M_2 \frac{\epsilon}{2M_2} + M_1 \frac{\epsilon}{2M_1} = \epsilon.
+    \end{align*}
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:equivalent_definition_of_AC_functions">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Equivalent Definition of $AC$ Functions)</div>
+  <div class="theorem-content">Let $f:[a,b]\to\R$ be a function.
+    Then $f$ is absolutely continuous on $[a,b]$ if and only if for each $\epsilon > 0$, there exists a $\delta > 0$ such that for any countable collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^\infty$ of $[a,b]$ with
+    \[ \sum_{k=1}^\infty (b_k - a_k) < \delta, \]
+    we have
+    \[ \sum_{k=1}^\infty |f(b_k) - f(a_k)| < \epsilon. \]
+    Deduce that if $f$ is absolutely continuous on $[a,b]$, then $f$ maps sets of Lebesgue measure zero to sets of Lebesgue measure zero.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-2">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-2')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-2">
+    ($\Rightarrow$) Suppose that $f$ is absolutely continuous on $[a,b]$.
+    Let $\epsilon > 0$, and let $\delta > 0$ be such that for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+    we have
+    \[ \sum_{k=1}^N |f(b_k) - f(a_k)| < \frac{\epsilon}{2}. \]
+<p>Now let $\{(a_k,b_k)\}_{k=1}^\infty$ be any countable collection of pairwise disjoint sub-intervals of $[a,b]$ with
+    \[ \sum_{k=1}^\infty (b_k - a_k) < \delta. \]
+    Then for each $N\in\Z^+$, we have
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+    so
+    \[ \sum_{k=1}^N |f(b_k) - f(a_k)| < \frac{\epsilon}{2}. \]
+    By taking the limit as $N\to\infty$ we see that
+    \[ \sum_{k=1}^\infty |f(b_k) - f(a_k)| \leq \frac{\epsilon}{2} < \epsilon. \]</p>
+<p>Since the collection $\{(a_k,b_k)\}_{k=1}^\infty$ satisfying $\sum_{k=1}^\infty (b_k - a_k) < \delta$ was arbitrary, and $\epsilon > 0$ was arbitrary, we have shown that the function $f$ satisfies the condition in the statement of the exercise.
+    Thus the forward direction is proven.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>($\Leftarrow$) The reverse direction is trivial since any finite collection of pairwise disjoint sub-intervals is also a countable collection of pairwise disjoint sub-intervals.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>Suppose now that $f$ is increasing and absolutely continuous on $[a,b]$, and let $E\subseteq [a,b]$ be a set of Lebesgue measure zero.
+    Let $\epsilon > 0$, and let $\delta > 0$ be such that for any countable collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^\infty$ of $[a,b]$ with
+    \[ \sum_{k=1}^\infty (b_k - a_k) < \delta, \]
+    we have
+    \[ \sum_{k=1}^\infty |f(b_k) - f(a_k)| < \epsilon. \]
+    Since $E$ has Lebesgue measure zero, there exists a countable collection of pairwise disjoint open intervals $\{(a_k,b_k)\}_{k=1}^\infty$ of $[a,b]$ such that
+    \[ E \subseteq \bigcup_{k=1}^\infty (a_k,b_k) \quad\text{and}\quad \sum_{k=1}^\infty (b_k - a_k) < \delta. \]
+    Then
+    \[ f(E) \subseteq f\left( \bigcup_{k=1}^\infty (a_k,b_k) \right) \subseteq \bigcup_{k=1}^\infty [f(a_k),f(b_k)] \]
+    since $f$ is increasing, so
+    \[ m(f(E)) \leq m\left( \bigcup_{k=1}^\infty [f(a_k),f(b_k)] \right) \leq \sum_{k=1}^\infty |f(b_k) - f(a_k)| < \epsilon. \]
+    Since $\epsilon > 0$ was arbitrary, we have shown that $m(f(E)) = 0$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box lemma-box" id="lem:AC_implies_BV">
+  <div class="theorem-header"><strong>Lemma ?</strong> ($AC$ implies $BV$)</div>
+  <div class="theorem-content">If $f:[a,b]\to\R$ is absolutely continuous on $[a,b]$, then it is of bounded variation on $[a,b]$ and its total variation function is absolutely continuous.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-3">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-3')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-3">
+    Let $f:[a,b]\to\R$ be absolutely continuous on $[a,b]$.
+    Then there exists $\delta > 0$ such that for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+    we have
+    \[ \sum_{k=1}^N |f(b_k) - f(a_k)| < 1. \]
+<p>Then let $P$ be a partition \[a = x_0 < x_1 < \cdots < x_N = b \] 
+    of $[a,b]$ such that $x_k - x_{k-1} < \delta$ for each $k=1,\ldots,N$.
+    Then
+    \[ V_{x_{k-1}}^{x_k}(f) = \sup \left\{ \sum_{j=1}^M |f(y_j) - f(y_{j-1})| : P' = \{ y_0 < y_1 < \cdots < y_M \} \text{ is a partition of } [x_{k-1},x_k] \right\} \leq 1 \]
+    for each $k=1,\ldots,N$, so
+    \[ V_a^b(f) = \sum_{k=1}^N V_{x_{k-1}}^{x_k}(f) \leq N < \infty. \]
+    Thus $f$ is of bounded variation on $[a,b]$.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>Now we will show that the function $x\longmapsto V_a^x(f)$ is absolutely continuous on $[a,b]$.
+    Let $\epsilon > 0$. Since $f$ is absolutely continuous on $[a,b]$, there exists $\delta > 0$ such that for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+    we have
+    \[ \sum_{k=1}^N |f(b_k) - f(a_k)| < \frac{\epsilon}{2}. \]</p>
+<p>Fix a finite collection of pairwise disjoint sub-intervals $\{(c_k,d_k)\}_{k=1}^M$ of $[a,b]$ with
+    \[ \sum_{k=1}^M (d_k - c_k) < \delta, \]
+    and for each $k=1,\ldots,M$, let $P_k = \{ c_k = y_0 < y_1 < \cdots < y_{N_k} = d_k \}$ be a partition of $[c_k,d_k]$.
+    We have
+    \[ \sum_{k=1}^M V( f|_{[c_k,d_k]}, P_k ) < \frac{\epsilon}{2} \]
+    by choice of $\delta$.</p>
+<p>By taking the supremum over all partitions $P_k$ of $[c_k,d_k]$ for each $k=1,\ldots,M$, we have
+    \[ \sum_{k=1}^M V_{c_k}^{d_k}(f) \leq \frac{\epsilon}{2} < \epsilon. \]
+    It follows from additivity of the total variation function (see Proposition <span class="ref-unknown" title="Reference not found: prop:additivity_of_total_variation">[prop:additivity_of_total_variation?]</span>) that
+    \[ V_{c_k}^{d_k}(f) = V_a^{d_k}(f) - V_a^{c_k}(f) \quad \forall k = 1,\ldots,M. \]
+    Putting these two facts together, we have
+    \[ \sum_{k=1}^M |V_a^{d_k}(f) - V_a^{c_k}(f)| = \sum_{k=1}^M V_{c_k}^{d_k}(f) < \epsilon. \]
+    Since the collection $\{(c_k,d_k)\}_{k=1}^M$ satisfying $\sum_{k=1}^M (d_k - c_k) < \delta$ was arbitrary, and $\epsilon > 0$ was arbitrary, we have shown that the function $x\longmapsto V_a^x(f)$ is absolutely continuous on $[a,b]$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box corollary-box" id="cor:AC_is_difference_of_increasing_AC">
+  <div class="theorem-header"><strong>Corollary ?</strong> (Jordan Decomposition for $AC$ Functions)</div>
+  <div class="theorem-content">If $f:[a,b]\to\R$ is absolutely continuous on $[a,b]$, then there exist increasing, absolutely continuous functions $f_1,f_2:[a,b]\to\R$ such that
+    \[ f = f_1 - f_2. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-4">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-4')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-4">
+    From the previous lemma <span class="ref-unknown" title="Reference not found: lem:AC_implies_BV">[lem:AC_implies_BV?]</span> and the Jordan decomposition theorem (Theorem <span class="ref-unknown" title="Reference not found: thm:jordan_decomposition_theorem">[thm:jordan_decomposition_theorem?]</span>),
+    it follows that 
+    \[ f(x) = (f(x) + V_a^x(f)) - V_a^x(f) \qquad \forall x \in [a,b] \]
+    expresses $f$ as the difference of two increasing functions on $[a,b]$.
+    The previous lemma also shows that $x\mapsto V_a^x(f)$ is absolutely continuous on $[a,b]$, and in Exercise <span class="ref-unknown" title="Reference not found: ex:AC_is_a_vector_space">[ex:AC_is_a_vector_space?]</span> we showed that the difference of two absolutely continuous functions is absolutely continuous.
+    Thus $f$ can be expressed as the difference of two increasing, absolutely continuous functions on $[a,b]$.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<p>The following Corollary is frequently used.</p>
+<div class="theorem-box corollary-box" id="cor:AC_functions_are_differentiable_almost_everywhere">
+  <div class="theorem-header"><strong>Corollary ?</strong> ($AC$ Functions are Differentiable Almost Everywhere)</div>
+  <div class="theorem-content">If $f:[a,b]\to\R$ is absolutely continuous on $[a,b]$, then it is differentiable almost everywhere on $[a,b]$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-5">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-5')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-5">
+    Since $f$ is absolutely continuous on $[a,b]$, it is of bounded variation on $[a,b]$ by Lemma <span class="ref-unknown" title="Reference not found: lem:AC_implies_BV">[lem:AC_implies_BV?]</span>.
+    Thus by Corollary <span class="ref-unknown" title="Reference not found: cor:BV_functions_are_differentiable_a_e">[cor:BV_functions_are_differentiable_a_e?]</span>, $f$ is differentiable almost everywhere on $[a,b]$.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<h3>Fundamental Theorem of Calculus</h3>
+<div class="theorem-box lemma-box" id="lem:anti_derivative_is_AC">
+  <div class="theorem-header"><strong>Lemma ?</strong> ((Improved) Second Fundamental Theorem of Calculus)</div>
+  <div class="theorem-content">Let $f:[a,b]\to\R$ be an integrable function.
+    Then the indefinite integral
+    \[ F(x) = \int_a^x f(t)\,\dif t, \qquad x\in[a,b], \]
+    is absolutely continuous on $[a,b]$ and has derivative $F'(x) = f(x)$ for almost every $x\in[a,b]$.</div>
+</div>
+<p><span class="noindent"></span>We already know $F$ is continuous on $[a,b]$, and that $F'(x)$ exists and equals $f(x)$ for almost every $ x\in[a,b]$ by Theorem <span class="ref-unknown" title="Reference not found: thm:second_fundamental_theorem_of_calculus">[thm:second_fundamental_theorem_of_calculus?]</span>.
+The new conclusion here is that $F$ is absolutely continuous on $[a,b]$.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-6">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-6')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-6">
+    Let $\{ (a_k,b_k) \}_{k=1}^N$ be an arbitrary finite collection of pairwise disjoint sub-intervals of $[a,b]$.
+Then we have
+\begin{align*}
+    \sum_{k=1}^N |F(b_k) - F(a_k)| &= \sum_{k=1}^N \left| \int_a^{b_k} f(t)\,dt - \int_a^{a_k} f(t)\,dt \right| \\
+        &= \sum_{k=1}^N \left| \int_{a_k}^{b_k} f(t)\,dt \right| \\
+        &\leq \sum_{k=1}^N \int_{a_k}^{b_k} |f(t)|\,dt = \int_{\bigcup_{k=1}^N (a_k,b_k)} |f(t)|\,dt. \\
+\end{align*}
+<p>Let $\epsilon > 0$, and let $\delta > 0$ be such that if $E\subseteq [a,b]$ is a measurable set with $\mathcal{L}^1(E) < \delta$, then 
+\[ \int_E |f(t)|\,dt < \epsilon. \]
+(This is possible by <span class="ref-unknown" title="Reference not found: lem:integral_on_small_sets_is_small">[lem:integral_on_small_sets_is_small?]</span> since $f$ is integrable on $[a,b]$.)
+Then for each finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+\[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+we have
+\[ \sum_{k=1}^N |F(b_k) - F(a_k)| \leq \int_{\bigcup_{k=1}^N (a_k,b_k)} |f(t)|\,dt < \epsilon. \]
+Thus $F$ is absolutely continuous on $[a,b]$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box lemma-box" id="lem:zero_derivative_implies_constant">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Zero Derivative Implies Constant)</div>
+  <div class="theorem-content">Let $f:[a,b]\to\R$ be an increasing absolutely continuous function on $[a,b]$.
+    If $f'(x) = 0$ for almost every $x\in[a,b]$, then $f$ is constant on $[a,b]$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-7">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-7')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-7">
+    <em>Step 1:</em> We assume that $f$ is increasing on $[a,b]$ and that $f'(x) = 0$ for almost every $x\in[a,b]$.
+    <div style="margin: 1em 0;"></div>
+<p>Since $f$ is increasing and uniformly continuous on the compact set $[a,b]$, its range must be the closed interval $[f(a),f(b)]$.
+    We will show that the length of this interval is zero. Let 
+    \[ E := \{ x\in [a,b] : f'(x)  = 0 \} \]
+    so that $\mathcal{L}^1([a,b]\setminus E) = 0$ by assumption.
+    By <span class="ref-unknown" title="Reference not found: ex:equivalent_definition_of_AC_functions">[ex:equivalent_definition_of_AC_functions?]</span>, the absolute continuity of $f$ implies that the image of $[a,b]\setminus E$ under $f$ has Lebesgue measure zero.
+    That is, 
+    \[ \mathcal{L}^1(f([a,b]\setminus E)) = 0. \]</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 2:</em> We claim that $f(E)$ also has Lebesgue measure zero.
+    <div style="margin: 1em 0;"></div></p>
+<p>Let $\epsilon > 0$. If $x_0\in E$ then $f'(x_0) = 0$, so by definition of the derivative, there exists a $\delta > 0$ such that for each $x\in [x_0,x_0 + \delta)$ we have
+    \[  \frac{f(x) - f(x_0)}{x - x_0} < \epsilon \]
+    which is equivalent to
+    \[ f(x) - f(x_0) < \epsilon (x - x_0) \]
+    which rearranges to
+    \[ \epsilon x_0 - f(x_0) < \epsilon x - f(x). \]
+    Thus $x_0$ is invisible from the right with respect to the continuous function $x\mapsto \epsilon x - f(x)$.
+    Since $x_0\in E$ was arbitrary, we have shown that every point in $E$ is invisible from the right with respect to the continuous function $x\mapsto \epsilon x - f(x)$.</p>
+<p>By the Rising Sun Lemma (Lemma <span class="ref-unknown" title="Reference not found: lem:rising_sun_lemma">[lem:rising_sun_lemma?]</span>), there is a countable collection of pairwise disjoint open intervals $\{(a_k,b_k)\}_{k=1}^\infty$ such that
+    \[ E \subseteq \bigcup_{k=1}^\infty (a_k,b_k) \quad\text{and}\quad f(b_k) - \epsilon b_k \leq f(a_k) - \epsilon a_k \quad\forall k\in\Z^+. \]
+    That is, \[ f(b_k) - f(a_k) \leq \epsilon (b_k - a_k) \quad\forall k\in\Z^+. \]
+    But then we see that 
+    \[ \sum_{k=1}^\infty (f(b_k) - f(a_k)) \leq \epsilon \sum_{k=1}^\infty (b_k - a_k) \leq \epsilon (b-a). \]
+    Hence
+    \[ \mathcal{L}^1(f(E)) \leq \mathcal{L}^1\left(f\left(\bigcup_{k=1}^\infty (a_k,b_k)\right)\right) \leq \mathcal{L}^1\left(\bigcup_{k=1}^\infty f((a_k,b_k))\right) \leq \sum_{k=1}^\infty (f(b_k) - f(a_k)) \leq \epsilon (b-a). \]
+    Since $\epsilon > 0$ was arbitrary, we have shown that $\mathcal{L}^1(f(E)) = 0$.</p>
+<p>But now we see that 
+    \[ \mathcal{L}^1(f([a,b])) = \mathcal{L}^1(f(E) \cup f([a,b]\setminus E)) \leq \mathcal{L}^1(f(E)) + \mathcal{L}^1(f([a,b]\setminus E)) = 0 + 0 = 0. \]
+    Since $f([a,b]) = [f(a),f(b)]$ is a closed interval, it must be that $f(a) = f(b)$ and $f(x) = f(a)$ for all $x\in[a,b]$.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>[It is instructive to note where we have used the fact that $f$ is increasing in the above argument --- 
+    first of all, this allows us to remove the absolute value bars in the first inequality in step 2, and this is crucial for all the following computations.
+    It is also worth noting that we used the absolute continuity of $f$ in step 1 deduce that the image of $\{ x : f'(x) = 0 \} $ has Lebesgue measure zero, and also in step 2 to apply the Rising Sun Lemma (which requires continuity).]
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box theorem-box" id="thm:fundamental_theorem_of_calculus_for_AC_functions">
+  <div class="theorem-header"><strong>Theorem ?</strong> (First Fundamental Theorem of Calculus for $AC$ Functions)</div>
+  <div class="theorem-content">If $f:[a,b]\to\R$ is absolutely continuous on $[a,b]$, then
+    \[ \int_a^b f'(t)\,\dif t = f(b) - f(a). \]</div>
+</div>
+<p>Note that we already know that $f'$ exists almost everywhere on $[a,b]$ and is integrable, since $AC$ functions are $BV$ functions (Lemma <span class="ref-unknown" title="Reference not found: lem:AC_implies_BV">[lem:AC_implies_BV?]</span>) and $BV$ functions are differentiable almost everywhere (Corollary <span class="ref-unknown" title="Reference not found: cor:BV_functions_are_differentiable_a_e">[cor:BV_functions_are_differentiable_a_e?]</span>) and have integrable derivatives.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-8">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-8')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-8">
+    <em>Step 1:</em>
+    First we consider an increasing absolutely continuous function $f:[a,b]\to\R$.
+    Then as we remarked above, $f'$ exists almost everywhere on $[a,b]$ and is integrable.
+    We define a function $\Phi:[a,b]\to\R$ by
+    \[ \Phi(x) := f(x) - \int_a^x f'(t)\,\dif t, \qquad\forall x \in [a,b]. \]
+    Then becuase $f'$ is integrable on $[a,b]$, the function $x\mapsto \int_a^x f'(t)\,\dif t$ is absolutely continuous on $[a,b]$ by Lemma <span class="ref-unknown" title="Reference not found: lem:anti_derivative_is_AC">[lem:anti_derivative_is_AC?]</span>, and hence $\Phi$ is absolutely continuous on $[a,b]$ as well since it is the difference of two absolutely continuous functions.
+<p>See that $\Phi$ is increasing on $[a,b]$ since for all $x,y\in[a,b]$ with $x < y$, we have
+    \begin{align*}
+        \Phi(y) - \Phi(x) &= f(y) - f(x) - \int_a^y f'(t)\,\dif t + \int_a^x f'(t)\,\dif t \\
+            &= f(y) - f(x) - \int_x^y f'(t)\,\dif t \\
+            &\geq f(y) - f(x) - (f(y) - f(x)) = 0,
+    \end{align*}
+    where we have used Exercise <span class="ref-unknown" title="Reference not found: ex:fundamental_theorem_of_calculus_inequality">[ex:fundamental_theorem_of_calculus_inequality?]</span> in the last line. 
+    [This is where we use the fact that $f$ is increasing.]</p>
+<p>We also see that $\Phi$ is differentiable almost everywhere on $[a,b]$ and that
+    \[ \Phi'(x) = f'(x) - f'(x) = 0 \]
+    for almost every $x\in[a,b]$, where we have used the fact that $f'$ exists almost everywhere on $[a,b]$, and that the derivative of the indefinite integral is the integrand almost everywhere (the Second Fundamental Theorem of Calculus <span class="ref-unknown" title="Reference not found: thm:second_fundamental_theorem_of_calculus">[thm:second_fundamental_theorem_of_calculus?]</span>).</p>
+<p>Therefore by Lemma <span class="ref-unknown" title="Reference not found: lem:zero_derivative_implies_constant">[lem:zero_derivative_implies_constant?]</span>, $\Phi$ is constant on $[a,b]$, so
+    for each $x\in[a,b]$ we have $\Phi(x) = \Phi(a)$, which is equivalent to
+    \[ f(x) - \int_a^x f'(t)\,\dif t = f(a) - \int_a^a f'(t)\,\dif t = f(a). \]
+    Rearranging this gives
+    \[ f(x) = f(a) + \int_a^x f'(t)\,\dif t \qquad\forall x\in[a,b]. \]
+    In particular, letting $x = b$ gives
+    \[ f(b) - f(a) = \int_a^b f'(t)\,\dif t. \]</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p><em>Step 2:</em>
+    Now let $f:[a,b]\to\R$ be an arbitrary absolutely continuous function on $[a,b]$.
+    By Corollary <span class="ref-unknown" title="Reference not found: cor:AC_is_difference_of_increasing_AC">[cor:AC_is_difference_of_increasing_AC?]</span>, there exist increasing absolutely continuous functions $f_1,f_2:[a,b]\to\R$ such that
+    \[ f = f_1 - f_2. \]
+    Then by Step 1, we have
+    \[ f_1(x) - f_1(a) = \int_a^x f_1'(t)\,\dif t \quad\text{and}\quad f_2(x) - f_2(a) = \int_a^x f_2'(t)\,\dif t \qquad\forall x\in [a,b]. \]
+    Subtracting these two equations gives
+    \[ f(x) - f(a) = (f_1(x) - f_2(x)) - (f_1(a) - f_2(a)) = \int_a^x f_1'(t)\,\dif t - \int_a^x f_2'(t)\,\dif t = \int_a^x (f_1'(t) - f_2'(t))\,\dif t \qquad\forall x\in[a,b]. \]
+    But since $f = f_1 - f_2$, we have $f' = f_1' - f_2'$ almost everywhere on $[a,b]$, so
+    \[ f(x) - f(a) = \int_a^x f'(t)\,\dif t \qquad \forall x\in [a,b]. \] 
+    In particular, letting $x = b$ gives
+    \[ f(b) - f(a) = \int_a^b f'(t)\,\dif t. \]
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box corollary-box" id="cor:integration_by_parts_for_AC_functions">
+  <div class="theorem-header"><strong>Corollary ?</strong> (Integration by Parts for $AC$ Functions)</div>
+  <div class="theorem-content">If $f,g:[a,b]\to\R$ are absolutely continuous on $[a,b]$, then
+    \[ \int_a^b f(t)g'(t)\,\dif t = f(b)g(b) - f(a)g(a) - \int_a^b f'(t)g(t)\,\dif t. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-9">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-9')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-9">
+    Let $f,g:[a,b]\to\R$ be absolutely continuous on $[a,b]$.
+    By exercise <span class="ref-unknown" title="Reference not found: ex:product_of_AC_is_AC">[ex:product_of_AC_is_AC?]</span>, the product $fg$ is absolutely continuous on $[a,b]$.
+    Then by Theorem <span class="ref-unknown" title="Reference not found: thm:fundamental_theorem_of_calculus_for_AC_functions">[thm:fundamental_theorem_of_calculus_for_AC_functions?]</span>, we have
+    \[ (fg)(b) - (fg)(a) = \int_a^b (fg)'(t)\,\dif t. \]
+    But by the product rule for derivatives, we have
+    \[ (fg)'(t) = f'(t)g(t) + f(t)g'(t) \]
+    for almost every $t\in[a,b]$, so
+    \[ f(b)g(b) - f(a)g(a) = \int_a^b f'(t)g(t)\,\dif t + \int_a^b f(t)g'(t)\,\dif t. \]
+    Rearranging this gives the desired result.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<p>This finishes our generalization of one-variable calculus to the Lebesgue integral.</p>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('Restoring proof collapse states...');
+      try {
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        const currentPage = window.location.pathname;
+        const pageOpen = openProofs[currentPage] || [];
+        
+        console.log('Current page:', currentPage);
+        console.log('Open proof IDs stored:', pageOpen);
+        console.log('Found ' + pageOpen.length + ' open proofs for this page');
+        
+        document.querySelectorAll('.proof-box').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          console.log('Checking proof:', proofId, 'Should be open:', pageOpen.includes(proofId));
+          if (pageOpen.includes(proofId)) {
+            // This proof should be open
+            box.classList.remove('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'true');
+          } else {
+            // This proof should be collapsed (default)
+            box.classList.add('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        const pageBoxes = openBoxes[currentPage] || [];
+        
+        console.log('Open box IDs stored:', pageBoxes);
+        
+        document.querySelectorAll('.collapsible-box').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          console.log('Checking box:', boxId, 'Should be open:', pageBoxes.includes(boxId));
+          if (pageBoxes.includes(boxId)) {
+            box.classList.remove('collapsed');
+          } else {
+            box.classList.add('collapsed');
+          }
+        });
+        
+        console.log('Proof states restored');
+      } catch (e) {
+        console.error('Error restoring collapse state:', e);
+      }
+    });
+    
+    function toggleProof(proofId) {
+      const proofContent = document.getElementById(proofId);
+      const proofBox = proofContent.closest('.proof-box');
+      proofBox.classList.toggle('collapsed');
+      
+      const button = proofBox.querySelector('.proof-toggle');
+      button.setAttribute('aria-expanded', !proofBox.classList.contains('collapsed'));
+      
+      saveProofState();
+    }
+    
+    function toggleSubproof(subproofId) {
+      const subproofContent = document.getElementById(subproofId);
+      const subproof = subproofContent.closest('.subproof');
+      subproof.classList.toggle('collapsed');
+      
+      const button = subproof.querySelector('.subproof-toggle');
+      button.setAttribute('aria-expanded', !subproof.classList.contains('collapsed'));
+    }
+    
+    function saveProofState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        if (!openProofs[currentPage]) {
+          openProofs[currentPage] = [];
+        }
+        
+        // Get all OPEN (not collapsed) proofs
+        openProofs[currentPage] = [];
+        document.querySelectorAll('.proof-box:not(.collapsed)').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          if (proofId) {
+            openProofs[currentPage].push(proofId);
+          }
+        });
+        
+        localStorage.setItem('openProofs', JSON.stringify(openProofs));
+        console.log('Saved proof state (open proofs):', openProofs[currentPage]);
+      } catch (e) {
+        console.error('Error saving collapse state:', e);
+      }
+    }
+    
+    function toggleCollapsible(collapsibleId) {
+      const content = document.getElementById(collapsibleId);
+      const box = content.closest('.collapsible-box');
+      box.classList.toggle('collapsed');
+      
+      saveCollapsibleState();
+    }
+    
+    function saveCollapsibleState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        if (!openBoxes[currentPage]) {
+          openBoxes[currentPage] = [];
+        }
+        
+        // Get all OPEN (not collapsed) boxes
+        openBoxes[currentPage] = [];
+        document.querySelectorAll('.collapsible-box:not(.collapsed)').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          if (boxId) {
+            openBoxes[currentPage].push(boxId);
+          }
+        });
+        
+        localStorage.setItem('openBoxes', JSON.stringify(openBoxes));
+      } catch (e) {
+        console.error('Error saving box state:', e);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        const proofBoxes = document.querySelectorAll('.proof-box');
+        const anyExpanded = Array.from(proofBoxes).some(box => !box.classList.contains('collapsed'));
+        
+        proofBoxes.forEach(box => {
+          if (anyExpanded) {
+            box.classList.add('collapsed');
+          } else {
+            box.classList.remove('collapsed');
+          }
+        });
+        
+        saveProofState();
+      }
+    });
+    
+    document.querySelectorAll('a.ref-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.background = '#fef3c7';
+          target.style.transition = 'background 0.3s ease';
+          setTimeout(() => { target.style.background = ''; }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,2818 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  19 NOV 2025 16:44
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**/Users/calebnastasi/Desktop/website/analysis-3-project/main.tex
+(/Users/calebnastasi/Desktop/website/analysis-3-project/main.tex
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2024/06/29 v1.4n Standard LaTeX document class
+(/usr/local/texlive/2025/texmf-dist/tex/latex/base/bk12.clo
+File: bk12.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count196
+\c@chapter=\count197
+\c@section=\count198
+\c@subsection=\count199
+\c@subsubsection=\count266
+\c@paragraph=\count267
+\c@subparagraph=\count268
+\c@figure=\count269
+\c@table=\count270
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen141
+) (./preamble.tex (/usr/local/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+))
+\Gm@cnth=\count271
+\Gm@cntv=\count272
+\c@Gm@tempcnt=\count273
+\Gm@bindingoffset=\dimen142
+\Gm@wd@mp=\dimen143
+\Gm@odd@mp=\dimen144
+\Gm@even@mp=\dimen145
+\Gm@layoutwidth=\dimen146
+\Gm@layoutheight=\dimen147
+\Gm@layouthoffset=\dimen148
+\Gm@layoutvoffset=\dimen149
+\Gm@dimlist=\toks18
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2024/11/05 v2.17t AMS math features
+\@mathmargin=\skip51
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks19
+\ex@=\dimen150
+)) (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen151
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count274
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count275
+\leftroot@=\count276
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count277
+\DOTSCASE@=\count278
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box52
+\strutbox@=\box53
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen152
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count279
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count280
+\dotsspace@=\muskip17
+\c@parentequation=\count281
+\dspbrk@lvl=\count282
+\tag@help=\toks20
+\row@=\count283
+\column@=\count284
+\maxfields@=\count285
+\andhelp@=\toks21
+\eqnshift@=\dimen153
+\alignsep@=\dimen154
+\tagshift@=\dimen155
+\tagwidth@=\dimen156
+\totwidth@=\dimen157
+\lineht@=\dimen158
+\@envbody=\toks22
+\multlinegap=\skip52
+\multlinetaggap=\skip53
+\mathdisplay@stack=\toks23
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2020/05/29 v2.20.6
+\thm@style=\toks24
+\thm@bodyfont=\toks25
+\thm@headfont=\toks26
+\thm@notefont=\toks27
+\thm@headpunct=\toks28
+\thm@preskip=\skip54
+\thm@postskip=\skip55
+\thm@headsep=\skip56
+\dth@everypar=\toks29
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (/usr/local/texlive/2025/texmf-dist/tex/latex/mathtools/mathtools.sty
+Package: mathtools 2024/10/04 v1.31 mathematical typesetting tools
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count286
+\calc@Bcount=\count287
+\calc@Adimen=\dimen159
+\calc@Bdimen=\dimen160
+\calc@Askip=\skip57
+\calc@Bskip=\skip58
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count288
+\calc@Cskip=\skip59
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/mathtools/mhsetup.sty
+Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
+)
+\g_MT_multlinerow_int=\count289
+\l_MT_multwidth_dim=\dimen161
+\origjot=\skip60
+\l_MT_shortvdotswithinadjustabove_dim=\dimen162
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen163
+\l_MT_above_intertext_sep=\dimen164
+\l_MT_below_intertext_sep=\dimen165
+\l_MT_above_shortintertext_sep=\dimen166
+\l_MT_below_shortintertext_sep=\dimen167
+\xmathstrut@box=\box54
+\xmathstrut@dim=\dimen168
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/mathabx/mathabx.sty
+Package: mathabx 2003/07/29 v0.0 Non-standard LaTeX package mathabx
+\symmatha=\mathgroup6
+\symmathb=\mathgroup7
+\symmathx=\mathgroup8
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/mathabx/mathabx.dcl
+LaTeX Font Info:    Redeclaring math symbol \cdotp on input line 25.
+LaTeX Font Info:    Redeclaring math symbol \times on input line 33.
+LaTeX Font Info:    Redeclaring math symbol \div on input line 34.
+LaTeX Font Info:    Redeclaring math symbol \cdot on input line 35.
+LaTeX Font Info:    Redeclaring math symbol \circ on input line 36.
+LaTeX Font Info:    Redeclaring math symbol \ast on input line 38.
+LaTeX Font Info:    Redeclaring math symbol \pm on input line 41.
+LaTeX Font Info:    Redeclaring math symbol \mp on input line 42.
+LaTeX Font Info:    Redeclaring math symbol \ltimes on input line 43.
+LaTeX Font Info:    Redeclaring math symbol \rtimes on input line 44.
+LaTeX Font Info:    Redeclaring math symbol \diamond on input line 45.
+LaTeX Font Info:    Redeclaring math symbol \bullet on input line 46.
+LaTeX Font Info:    Redeclaring math symbol \star on input line 47.
+LaTeX Font Info:    Redeclaring math symbol \amalg on input line 51.
+LaTeX Font Info:    Redeclaring math symbol \dotplus on input line 58.
+LaTeX Font Info:    Redeclaring math symbol \square on input line 63.
+LaTeX Font Info:    Redeclaring math symbol \divideontimes on input line 71.
+LaTeX Font Info:    Redeclaring math symbol \bigstar on input line 75.
+LaTeX Font Info:    Redeclaring math symbol \equiv on input line 83.
+LaTeX Font Info:    Redeclaring math symbol \sim on input line 84.
+LaTeX Font Info:    Redeclaring math symbol \approx on input line 85.
+LaTeX Font Info:    Redeclaring math symbol \simeq on input line 86.
+LaTeX Font Info:    Redeclaring math symbol \asymp on input line 89.
+LaTeX Font Info:    Redeclaring math symbol \nsim on input line 97.
+LaTeX Font Info:    Redeclaring math symbol \ncong on input line 100.
+LaTeX Font Info:    Redeclaring math symbol \risingdotseq on input line 118.
+LaTeX Font Info:    Redeclaring math symbol \fallingdotseq on input line 119.
+LaTeX Font Info:    Redeclaring math symbol \circeq on input line 125.
+LaTeX Font Info:    Redeclaring math symbol \eqcirc on input line 126.
+LaTeX Font Info:    Redeclaring math symbol \triangleq on input line 127.
+LaTeX Font Info:    Redeclaring math symbol \neg on input line 134.
+LaTeX Font Info:    Redeclaring math symbol \ll on input line 136.
+LaTeX Font Info:    Redeclaring math symbol \gg on input line 137.
+LaTeX Font Info:    Redeclaring math symbol \vdash on input line 139.
+LaTeX Font Info:    Redeclaring math symbol \dashv on input line 140.
+LaTeX Font Info:    Redeclaring math symbol \nvdash on input line 141.
+LaTeX Font Info:    Redeclaring math symbol \vDash on input line 143.
+LaTeX Font Info:    Redeclaring math symbol \nvDash on input line 145.
+LaTeX Font Info:    Redeclaring math symbol \Vdash on input line 147.
+LaTeX Font Info:    Redeclaring math symbol \nVdash on input line 149.
+LaTeX Font Info:    Redeclaring math symbol \flat on input line 158.
+LaTeX Font Info:    Redeclaring math symbol \natural on input line 159.
+LaTeX Font Info:    Redeclaring math symbol \sharp on input line 160.
+LaTeX Font Info:    Redeclaring math symbol \infty on input line 161.
+LaTeX Font Info:    Redeclaring math symbol \propto on input line 162.
+LaTeX Font Info:    Redeclaring math symbol \dagger on input line 163.
+LaTeX Font Info:    Redeclaring math symbol \ddagger on input line 164.
+LaTeX Font Info:    Redeclaring math symbol \between on input line 170.
+LaTeX Font Info:    Redeclaring math symbol \smile on input line 171.
+LaTeX Font Info:    Redeclaring math symbol \frown on input line 172.
+LaTeX Font Info:    Redeclaring math symbol \leftthreetimes on input line 174.
+LaTeX Font Info:    Redeclaring math symbol \rightthreetimes on input line 175.
+LaTeX Font Info:    Redeclaring math symbol \pitchfork on input line 176.
+LaTeX Font Info:    Redeclaring math symbol \nVDash on input line 182.
+LaTeX Font Info:    Redeclaring math symbol \Vvdash on input line 184.
+LaTeX Font Info:    Redeclaring math symbol \therefore on input line 189.
+LaTeX Font Info:    Redeclaring math symbol \because on input line 190.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 193.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 195.
+LaTeX Font Info:    Redeclaring math symbol \measuredangle on input line 202.
+LaTeX Font Info:    Redeclaring math symbol \sphericalangle on input line 203.
+LaTeX Font Info:    Redeclaring math symbol \setminus on input line 218.
+LaTeX Font Info:    Redeclaring math symbol \mid on input line 222.
+LaTeX Font Info:    Redeclaring math symbol \forall on input line 279.
+LaTeX Font Info:    Redeclaring math symbol \complement on input line 280.
+LaTeX Font Info:    Redeclaring math symbol \partial on input line 281.
+LaTeX Font Info:    Redeclaring math symbol \exists on input line 284.
+LaTeX Font Info:    Redeclaring math symbol \nexists on input line 285.
+LaTeX Font Info:    Redeclaring math symbol \Finv on input line 286.
+LaTeX Font Info:    Redeclaring math symbol \Game on input line 287.
+LaTeX Font Info:    Redeclaring math symbol \emptyset on input line 288.
+LaTeX Font Info:    Redeclaring math symbol \top on input line 290.
+LaTeX Font Info:    Redeclaring math symbol \bot on input line 291.
+LaTeX Font Info:    Redeclaring math symbol \perp on input line 292.
+LaTeX Font Info:    Redeclaring math symbol \curlywedge on input line 296.
+LaTeX Font Info:    Redeclaring math symbol \curlyvee on input line 297.
+LaTeX Font Info:    Redeclaring math symbol \in on input line 299.
+LaTeX Font Info:    Redeclaring math symbol \owns on input line 300.
+LaTeX Font Info:    Redeclaring math symbol \cap on input line 312.
+LaTeX Font Info:    Redeclaring math symbol \cup on input line 313.
+LaTeX Font Info:    Redeclaring math symbol \uplus on input line 314.
+LaTeX Font Info:    Redeclaring math symbol \sqcap on input line 315.
+LaTeX Font Info:    Redeclaring math symbol \sqcup on input line 316.
+LaTeX Font Info:    Redeclaring math symbol \wedge on input line 318.
+LaTeX Font Info:    Redeclaring math symbol \vee on input line 320.
+LaTeX Font Info:    Redeclaring math symbol \barwedge on input line 327.
+LaTeX Font Info:    Redeclaring math symbol \veebar on input line 328.
+LaTeX Font Info:    Redeclaring math symbol \doublebarwedge on input line 329.
+LaTeX Font Info:    Redeclaring math symbol \doublecap on input line 331.
+LaTeX Font Info:    Redeclaring math symbol \doublecup on input line 333.
+LaTeX Font Info:    Redeclaring math symbol \subset on input line 344.
+LaTeX Font Info:    Redeclaring math symbol \supset on input line 345.
+LaTeX Font Info:    Redeclaring math symbol \subseteq on input line 348.
+LaTeX Font Info:    Redeclaring math symbol \supseteq on input line 349.
+LaTeX Font Info:    Redeclaring math symbol \nsubseteq on input line 350.
+LaTeX Font Info:    Redeclaring math symbol \nsupseteq on input line 351.
+LaTeX Font Info:    Redeclaring math symbol \subsetneq on input line 352.
+LaTeX Font Info:    Redeclaring math symbol \supsetneq on input line 353.
+LaTeX Font Info:    Redeclaring math symbol \varsubsetneq on input line 354.
+LaTeX Font Info:    Redeclaring math symbol \varsupsetneq on input line 355.
+LaTeX Font Info:    Redeclaring math symbol \subseteqq on input line 357.
+LaTeX Font Info:    Redeclaring math symbol \supseteqq on input line 358.
+LaTeX Font Info:    Redeclaring math symbol \nsubseteqq on input line 359.
+LaTeX Font Info:    Redeclaring math symbol \nsupseteqq on input line 360.
+LaTeX Font Info:    Redeclaring math symbol \subsetneqq on input line 361.
+LaTeX Font Info:    Redeclaring math symbol \supsetneqq on input line 362.
+LaTeX Font Info:    Redeclaring math symbol \varsubsetneqq on input line 363.
+LaTeX Font Info:    Redeclaring math symbol \varsupsetneqq on input line 364.
+LaTeX Font Info:    Redeclaring math symbol \Subset on input line 366.
+LaTeX Font Info:    Redeclaring math symbol \Supset on input line 367.
+LaTeX Font Info:    Redeclaring math symbol \sqsubseteq on input line 380.
+LaTeX Font Info:    Redeclaring math symbol \sqsupseteq on input line 381.
+LaTeX Font Info:    Redeclaring math symbol \triangleleft on input line 407.
+LaTeX Font Info:    Redeclaring math symbol \vartriangleleft on input line 408.
+LaTeX Font Info:    Redeclaring math symbol \triangleright on input line 409.
+LaTeX Font Info:    Redeclaring math symbol \vartriangleright on input line 410.
+LaTeX Font Info:    Redeclaring math symbol \ntriangleleft on input line 411.
+LaTeX Font Info:    Redeclaring math symbol \ntriangleright on input line 412.
+LaTeX Font Info:    Redeclaring math symbol \trianglelefteq on input line 413.
+LaTeX Font Info:    Redeclaring math symbol \trianglerighteq on input line 414.
+LaTeX Font Info:    Redeclaring math symbol \ntrianglelefteq on input line 415.
+LaTeX Font Info:    Redeclaring math symbol \ntrianglerighteq on input line 416.
+LaTeX Font Info:    Redeclaring math symbol \blacktriangledown on input line 427.
+LaTeX Font Info:    Redeclaring math symbol \blacktriangleleft on input line 428.
+LaTeX Font Info:    Redeclaring math symbol \blacktriangleright on input line 429.
+LaTeX Font Info:    Redeclaring math symbol \nless on input line 437.
+LaTeX Font Info:    Redeclaring math symbol \ngtr on input line 438.
+LaTeX Font Info:    Redeclaring math symbol \leq on input line 439.
+LaTeX Font Info:    Redeclaring math symbol \geq on input line 441.
+LaTeX Font Info:    Redeclaring math symbol \nleq on input line 443.
+LaTeX Font Info:    Redeclaring math symbol \ngeq on input line 445.
+LaTeX Font Info:    Redeclaring math symbol \lneq on input line 451.
+LaTeX Font Info:    Redeclaring math symbol \gneq on input line 452.
+LaTeX Font Info:    Redeclaring math symbol \leqq on input line 453.
+LaTeX Font Info:    Redeclaring math symbol \geqq on input line 454.
+LaTeX Font Info:    Redeclaring math symbol \nleqq on input line 455.
+LaTeX Font Info:    Redeclaring math symbol \ngeqq on input line 456.
+LaTeX Font Info:    Redeclaring math symbol \lneqq on input line 457.
+LaTeX Font Info:    Redeclaring math symbol \gneqq on input line 458.
+LaTeX Font Info:    Redeclaring math symbol \lvertneqq on input line 459.
+LaTeX Font Info:    Redeclaring math symbol \gvertneqq on input line 460.
+LaTeX Font Info:    Redeclaring math symbol \eqslantless on input line 461.
+LaTeX Font Info:    Redeclaring math symbol \eqslantgtr on input line 462.
+LaTeX Font Info:    Redeclaring math symbol \lessgtr on input line 465.
+LaTeX Font Info:    Redeclaring math symbol \gtrless on input line 466.
+LaTeX Font Info:    Redeclaring math symbol \lesseqgtr on input line 467.
+LaTeX Font Info:    Redeclaring math symbol \gtreqless on input line 468.
+LaTeX Font Info:    Redeclaring math symbol \lesseqqgtr on input line 469.
+LaTeX Font Info:    Redeclaring math symbol \gtreqqless on input line 470.
+LaTeX Font Info:    Redeclaring math symbol \lesssim on input line 472.
+LaTeX Font Info:    Redeclaring math symbol \gtrsim on input line 473.
+LaTeX Font Info:    Redeclaring math symbol \lnsim on input line 476.
+LaTeX Font Info:    Redeclaring math symbol \gnsim on input line 477.
+LaTeX Font Info:    Redeclaring math symbol \lessapprox on input line 478.
+LaTeX Font Info:    Redeclaring math symbol \gtrapprox on input line 479.
+LaTeX Font Info:    Redeclaring math symbol \lnapprox on input line 482.
+LaTeX Font Info:    Redeclaring math symbol \gnapprox on input line 483.
+LaTeX Font Info:    Redeclaring math symbol \lessdot on input line 485.
+LaTeX Font Info:    Redeclaring math symbol \gtrdot on input line 486.
+LaTeX Font Info:    Redeclaring math symbol \lll on input line 488.
+LaTeX Font Info:    Redeclaring math symbol \ggg on input line 489.
+LaTeX Font Info:    Redeclaring math symbol \prec on input line 498.
+LaTeX Font Info:    Redeclaring math symbol \succ on input line 499.
+LaTeX Font Info:    Redeclaring math symbol \nprec on input line 500.
+LaTeX Font Info:    Redeclaring math symbol \nsucc on input line 501.
+LaTeX Font Info:    Redeclaring math symbol \preccurlyeq on input line 502.
+LaTeX Font Info:    Redeclaring math symbol \succcurlyeq on input line 503.
+LaTeX Font Info:    Redeclaring math symbol \preceq on input line 506.
+LaTeX Font Info:    Redeclaring math symbol \succeq on input line 507.
+LaTeX Font Info:    Redeclaring math symbol \npreceq on input line 508.
+LaTeX Font Info:    Redeclaring math symbol \nsucceq on input line 509.
+LaTeX Font Info:    Redeclaring math symbol \curlyeqprec on input line 512.
+LaTeX Font Info:    Redeclaring math symbol \curlyeqsucc on input line 513.
+LaTeX Font Info:    Redeclaring math symbol \precsim on input line 517.
+LaTeX Font Info:    Redeclaring math symbol \succsim on input line 518.
+LaTeX Font Info:    Redeclaring math symbol \precnsim on input line 521.
+LaTeX Font Info:    Redeclaring math symbol \succnsim on input line 522.
+LaTeX Font Info:    Redeclaring math symbol \precapprox on input line 523.
+LaTeX Font Info:    Redeclaring math symbol \succapprox on input line 524.
+LaTeX Font Info:    Redeclaring math symbol \precnapprox on input line 527.
+LaTeX Font Info:    Redeclaring math symbol \succnapprox on input line 528.
+LaTeX Font Info:    Redeclaring math symbol \leftarrow on input line 540.
+LaTeX Font Info:    Redeclaring math symbol \rightarrow on input line 542.
+LaTeX Font Info:    Redeclaring math symbol \nwarrow on input line 546.
+LaTeX Font Info:    Redeclaring math symbol \nearrow on input line 547.
+LaTeX Font Info:    Redeclaring math symbol \swarrow on input line 548.
+LaTeX Font Info:    Redeclaring math symbol \searrow on input line 549.
+LaTeX Font Info:    Redeclaring math symbol \leftrightarrow on input line 550.
+LaTeX Font Info:    Redeclaring math symbol \nleftarrow on input line 552.
+LaTeX Font Info:    Redeclaring math symbol \nrightarrow on input line 553.
+LaTeX Font Info:    Redeclaring math symbol \nleftrightarrow on input line 554.
+LaTeX Font Info:    Redeclaring math symbol \mapstochar on input line 557.
+LaTeX Font Info:    Redeclaring math symbol \leftharpoonup on input line 560.
+LaTeX Font Info:    Redeclaring math symbol \rightharpoonup on input line 561.
+LaTeX Font Info:    Redeclaring math symbol \leftharpoondown on input line 562.
+LaTeX Font Info:    Redeclaring math symbol \rightharpoondown on input line 563.
+LaTeX Font Info:    Redeclaring math symbol \upharpoonleft on input line 564.
+LaTeX Font Info:    Redeclaring math symbol \downharpoonleft on input line 565.
+LaTeX Font Info:    Redeclaring math symbol \upharpoonright on input line 566.
+LaTeX Font Info:    Redeclaring math symbol \restriction on input line 567.
+LaTeX Font Info:    Redeclaring math symbol \downharpoonright on input line 568.
+LaTeX Font Info:    Redeclaring math symbol \leftrightharpoons on input line 569.
+LaTeX Font Info:    Redeclaring math symbol \Leftarrow on input line 575.
+LaTeX Font Info:    Redeclaring math symbol \Rightarrow on input line 576.
+LaTeX Font Info:    Redeclaring math symbol \Leftrightarrow on input line 579.
+LaTeX Font Info:    Redeclaring math symbol \nLeftarrow on input line 581.
+LaTeX Font Info:    Redeclaring math symbol \nRightarrow on input line 582.
+LaTeX Font Info:    Redeclaring math symbol \nLeftrightarrow on input line 583.
+LaTeX Font Info:    Redeclaring math symbol \leftleftarrows on input line 593.
+LaTeX Font Info:    Redeclaring math symbol \rightrightarrows on input line 594.
+LaTeX Font Info:    Redeclaring math symbol \upuparrows on input line 595.
+LaTeX Font Info:    Redeclaring math symbol \downdownarrows on input line 596.
+LaTeX Font Info:    Redeclaring math symbol \leftrightarrows on input line 597.
+LaTeX Font Info:    Redeclaring math symbol \rightleftarrows on input line 598.
+LaTeX Font Info:    Redeclaring math symbol \rhook on input line 612.
+LaTeX Font Info:    Redeclaring math symbol \lhook on input line 613.
+LaTeX Font Info:    Redeclaring math symbol \diagup on input line 614.
+LaTeX Font Info:    Redeclaring math symbol \diagdown on input line 615.
+LaTeX Font Info:    Redeclaring math symbol \Lsh on input line 617.
+LaTeX Font Info:    Redeclaring math symbol \Rsh on input line 619.
+LaTeX Font Info:    Redeclaring math symbol \looparrowleft on input line 624.
+LaTeX Font Info:    Redeclaring math symbol \looparrowright on input line 626.
+LaTeX Font Info:    Redeclaring math symbol \curvearrowleft on input line 631.
+LaTeX Font Info:    Redeclaring math symbol \curvearrowright on input line 633.
+LaTeX Font Info:    Redeclaring math symbol \circlearrowleft on input line 641.
+LaTeX Font Info:    Redeclaring math symbol \circlearrowright on input line 642.
+LaTeX Font Info:    Redeclaring math symbol \rightsquigarrow on input line 645.
+LaTeX Font Info:    Redeclaring math symbol \leftrightsquigarrow on input line 646.
+LaTeX Font Info:    Redeclaring math symbol \oplus on input line 658.
+LaTeX Font Info:    Redeclaring math symbol \ominus on input line 659.
+LaTeX Font Info:    Redeclaring math symbol \otimes on input line 661.
+LaTeX Font Info:    Redeclaring math symbol \odot on input line 663.
+LaTeX Font Info:    Redeclaring math symbol \oslash on input line 675.
+LaTeX Font Info:    Redeclaring math symbol \boxplus on input line 683.
+LaTeX Font Info:    Redeclaring math symbol \boxminus on input line 684.
+LaTeX Font Info:    Redeclaring math symbol \boxtimes on input line 686.
+LaTeX Font Info:    Redeclaring math symbol \boxdot on input line 688.
+\mayacnter=\count290
+\mayacnta=\count291
+\mayacntb=\count292
+\mayacntc=\count293
+\mayawidth=\dimen169
+LaTeX Font Info:    Redeclaring math symbol \intop on input line 753.
+LaTeX Font Info:    Redeclaring math symbol \ointop on input line 760.
+LaTeX Font Info:    Redeclaring math delimiter \lbrace on input line 842.
+LaTeX Info: Redefining \{ on input line 846.
+LaTeX Font Info:    Redeclaring math delimiter \rbrace on input line 848.
+LaTeX Info: Redefining \} on input line 852.
+LaTeX Font Info:    Redeclaring math delimiter \langle on input line 858.
+LaTeX Font Info:    Redeclaring math delimiter \rangle on input line 859.
+LaTeX Font Info:    Redeclaring math delimiter \vert on input line 863.
+LaTeX Font Info:    Redeclaring math delimiter \Vert on input line 865.
+LaTeX Font Info:    Redeclaring math delimiter \uparrow on input line 868.
+LaTeX Font Info:    Redeclaring math delimiter \downarrow on input line 869.
+LaTeX Font Info:    Redeclaring math delimiter \updownarrow on input line 870.
+LaTeX Font Info:    Redeclaring math delimiter \Uparrow on input line 871.
+LaTeX Font Info:    Redeclaring math delimiter \Downarrow on input line 872.
+LaTeX Font Info:    Redeclaring math delimiter \Updownarrow on input line 873.
+LaTeX Font Info:    Redeclaring math delimiter \lgroup on input line 880.
+LaTeX Font Info:    Redeclaring math delimiter \rgroup on input line 881.
+LaTeX Font Info:    Redeclaring math delimiter \lceil on input line 882.
+LaTeX Font Info:    Redeclaring math delimiter \rceil on input line 883.
+LaTeX Font Info:    Redeclaring math delimiter \lfloor on input line 884.
+LaTeX Font Info:    Redeclaring math delimiter \rfloor on input line 885.
+LaTeX Font Info:    Redeclaring math symbol \braceld on input line 903.
+LaTeX Font Info:    Redeclaring math symbol \bracerd on input line 905.
+LaTeX Font Info:    Redeclaring math symbol \bracelu on input line 907.
+LaTeX Font Info:    Redeclaring math symbol \braceru on input line 909.
+LaTeX Font Info:    Redeclaring math accent \widehat on input line 944.
+LaTeX Font Info:    Redeclaring math accent \widetilde on input line 946.
+)) (/usr/local/texlive/2025/texmf-dist/tex/latex/esint/esint.sty
+Package: esint 
+\symlargesymbolsA=\mathgroup9
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/commath/commath.sty (/usr/local/texlive/2025/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
+)) (/usr/local/texlive/2025/texmf-dist/tex/latex/halloweenmath/halloweenmath.sty
+Package: halloweenmath 2019/11/01 v0.11 (development)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/pict2e/pict2e.sty
+Package: pict2e 2020/09/30 v0.4b Improved picture commands (HjG,RN,JT)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/pict2e/pict2e.cfg
+File: pict2e.cfg 2016/02/05 v0.1u pict2e configuration for teTeX/TeXLive
+)
+Package pict2e Info: Driver file: pdftex.def on input line 112.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
+)
+Package pict2e Info: Driver file for pict2e: p2e-pdftex.def on input line 114.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/pict2e/p2e-pdftex.def
+File: p2e-pdftex.def 2016/02/05 v0.1u Driver-dependant file (RN,HjG,JT)
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+)
+\pIIe@GRAPH=\toks30
+\@arclen=\dimen170
+\@arcrad=\dimen171
+\pIIe@tempdima=\dimen172
+\pIIe@tempdimb=\dimen173
+\pIIe@tempdimc=\dimen174
+\pIIe@tempdimd=\dimen175
+\pIIe@tempdime=\dimen176
+\pIIe@tempdimf=\dimen177
+)
+\@HwM@arrowfill@skip=\skip61
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+)
+\Gin@req@height=\dimen178
+\Gin@req@width=\dimen179
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen180
+\WF@size=\dimen181
+\c@WF@wrappedlines=\count294
+\WF@box=\box55
+\WF@everypar=\toks31
+Package: wrapfig 2003/01/31  v 3.6
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks32
+\pgfutil@tempdima=\dimen182
+\pgfutil@tempdimb=\dimen183
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box56
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2023-01-15 v3.1.10 (3.1.10)
+))
+Package: pgf 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks33
+\pgfkeys@temptoks=\toks34
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/utilities/pgfkeyslibraryfiltered.code.tex
+\pgfkeys@tmptoks=\toks35
+))
+\pgf@x=\dimen184
+\pgf@y=\dimen185
+\pgf@xa=\dimen186
+\pgf@ya=\dimen187
+\pgf@xb=\dimen188
+\pgf@yb=\dimen189
+\pgf@xc=\dimen190
+\pgf@yc=\dimen191
+\pgf@xd=\dimen192
+\pgf@yd=\dimen193
+\w@pgf@writea=\write3
+\r@pgf@reada=\read2
+\c@pgf@counta=\count295
+\c@pgf@countb=\count296
+\c@pgf@countc=\count297
+\c@pgf@countd=\count298
+\t@pgf@toka=\toks36
+\t@pgf@tokb=\toks37
+\t@pgf@tokc=\toks38
+\pgf@sys@id@count=\count299
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2023-01-15 v3.1.10 (3.1.10)
+)
+Driver file for pgf: pgfsys-pdftex.def
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2023-01-15 v3.1.10 (3.1.10)
+))) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfsyssoftpath@smallbuffer@items=\count300
+\pgfsyssoftpath@bigbuffer@items=\count301
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)) (/usr/local/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen194
+\pgfmath@count=\count302
+\pgfmath@box=\box57
+\pgfmath@toks=\toks39
+\pgfmath@stack@operand=\toks40
+\pgfmath@stack@operation=\toks41
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count303
+)) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@picminx=\dimen195
+\pgf@picmaxx=\dimen196
+\pgf@picminy=\dimen197
+\pgf@picmaxy=\dimen198
+\pgf@pathminx=\dimen199
+\pgf@pathmaxx=\dimen256
+\pgf@pathminy=\dimen257
+\pgf@pathmaxy=\dimen258
+\pgf@xx=\dimen259
+\pgf@xy=\dimen260
+\pgf@yx=\dimen261
+\pgf@yy=\dimen262
+\pgf@zx=\dimen263
+\pgf@zy=\dimen264
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@path@lastx=\dimen265
+\pgf@path@lasty=\dimen266
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@shorten@end@additional=\dimen267
+\pgf@shorten@start@additional=\dimen268
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfpic=\box58
+\pgf@hbox=\box59
+\pgf@layerbox@main=\box60
+\pgf@picture@serial@count=\count304
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgflinewidth=\dimen269
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@pt@x=\dimen270
+\pgf@pt@y=\dimen271
+\pgf@pt@temp=\dimen272
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfarrowsep=\dimen273
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@max=\dimen274
+\pgf@sys@shading@range@num=\count305
+\pgf@shadingcount=\count306
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfexternal@startupbox=\box61
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfnodeparttextbox=\box62
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2023-01-15 v3.1.10 (3.1.10)
+\pgf@nodesepstart=\dimen275
+\pgf@nodesepend=\dimen276
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2023-01-15 v3.1.10 (3.1.10)
+)) (/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex)) (/usr/local/texlive/2025/texmf-dist/tex/latex/pgf/math/pgfmath.sty (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2023-01-15 v3.1.10 (3.1.10)
+\pgffor@iter=\dimen277
+\pgffor@skip=\dimen278
+\pgffor@stack=\toks42
+\pgffor@toks=\toks43
+)) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2023-01-15 v3.1.10 (3.1.10)
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@plot@mark@count=\count307
+\pgfplotmarksize=\dimen279
+)
+\tikz@lastx=\dimen280
+\tikz@lasty=\dimen281
+\tikz@lastxsaved=\dimen282
+\tikz@lastysaved=\dimen283
+\tikz@lastmovetox=\dimen284
+\tikz@lastmovetoy=\dimen285
+\tikzleveldistance=\dimen286
+\tikzsiblingdistance=\dimen287
+\tikz@figbox=\box63
+\tikz@figbox@bg=\box64
+\tikz@tempbox=\box65
+\tikz@tempbox@bg=\box66
+\tikztreelevel=\count308
+\tikznumberofchildren=\count309
+\tikznumberofcurrentchild=\count310
+\tikz@fig@count=\count311
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfmatrixcurrentrow=\count312
+\pgfmatrixcurrentcolumn=\count313
+\pgf@matrix@numberofcolumns=\count314
+)
+\tikz@expandcount=\count315
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
+File: pgflibraryarrows.meta.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfarrowinset=\dimen288
+\pgfarrowlength=\dimen289
+\pgfarrowwidth=\dimen290
+\pgfarrowlinewidth=\dimen291
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathmorphing.code.tex (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
+\pgfdecoratedcompleteddistance=\dimen292
+\pgfdecoratedremainingdistance=\dimen293
+\pgfdecoratedinputsegmentcompleteddistance=\dimen294
+\pgfdecoratedinputsegmentremainingdistance=\dimen295
+\pgf@decorate@distancetomove=\dimen296
+\pgf@decorate@repeatstate=\count316
+\pgfdecorationsegmentamplitude=\dimen297
+\pgfdecorationsegmentlength=\dimen298
+)
+\tikz@lib@dec@box=\box67
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathmorphing.code.tex)) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
+File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryintersections.code.tex (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/libraries/pgflibraryintersections.code.tex (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex)
+\pgf@intersect@solutions=\count317
+)) (/usr/local/texlive/2025/texmf-dist/tex/latex/tikz-cd/tikz-cd.sty
+Package: tikz-cd 2021/05/04 v1.0 Commutative diagrams with TikZ
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/tikz-cd/tikzlibrarycd.code.tex (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarymatrix.code.tex
+File: tikzlibrarymatrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryquotes.code.tex
+File: tikzlibraryquotes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (/usr/local/texlive/2025/texmf-dist/tex/latex/fourier/fourier-orns.sty
+Package: fourier-orns 2024/09/08 2.4 fourier-ornaments package
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/tools/enumerate.sty
+Package: enumerate 2023/07/04 v3.00 enumerate extensions (DPC)
+\@enLab=\toks44
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/changepage/changepage.sty
+Package: changepage 2009/10/20 v1.0c check page and change page layout
+\c@cp@cntr=\count318
+\cp@tempcnt=\count319
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/subfiles/subfiles.sty
+Package: subfiles 2020/11/14 v2.2 Multi-file projects (package)
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/import/import.sty
+Package: import 2020/04/01  v 6.2
+)) (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/pifont.sty
+Package: pifont 2020/03/25 PSNFSS-v9.3 Pi font support (SPQR) 
+LaTeX Font Info:    Trying to load font information for U+pzd on input line 63.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/upzd.fd
+File: upzd.fd 2001/06/04 font definitions for U/pzd.
+)
+LaTeX Font Info:    Trying to load font information for U+psy on input line 64.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/upsy.fd
+File: upsy.fd 2001/06/04 font definitions for U/psy.
+)) (/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2024-11-05 v7.01l Hypertext links for LaTeX
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)) (/usr/local/texlive/2025/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count320
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count321
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/stringenc/stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
+)
+\@linkdim=\dimen299
+\Hy@linkcounter=\count322
+\Hy@pagecounter=\count323
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2024-11-05 v7.01l Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+) (/usr/local/texlive/2025/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count324
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2024-11-05 v7.01l Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4157.
+Package hyperref Info: Link nesting OFF on input line 4162.
+Package hyperref Info: Hyper index ON on input line 4165.
+Package hyperref Info: Plain pages OFF on input line 4172.
+Package hyperref Info: Backreferencing OFF on input line 4177.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4424.
+\c@Hy@tempcnt=\count325
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4763.
+\XeTeXLinkMargin=\dimen300
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
+))
+\Fld@menulength=\count326
+\Field@Width=\dimen301
+\Fld@charsize=\dimen302
+Package hyperref Info: Hyper figures OFF on input line 6042.
+Package hyperref Info: Link nesting OFF on input line 6047.
+Package hyperref Info: Hyper index ON on input line 6050.
+Package hyperref Info: backreferencing OFF on input line 6057.
+Package hyperref Info: Link coloring OFF on input line 6062.
+Package hyperref Info: Link coloring with OCG OFF on input line 6067.
+Package hyperref Info: PDF/A mode OFF on input line 6072.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count327
+\c@Item=\count328
+\c@Hfootnote=\count329
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2024-11-05 v7.01l Hyperref driver for pdfTeX
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
+with kernel methods
+)
+\Fld@listcount=\count330
+\c@bookmark@seq@number=\count331
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+ (/usr/local/texlive/2025/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
+)
+\Hy@SectionHShift=\skip62
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/stmaryrd/stmaryrd.sty
+Package: stmaryrd 1994/03/03 St Mary's Road symbol package
+\symstmry=\mathgroup10
+LaTeX Font Info:    Overwriting symbol font `stmry' in version `bold'
+(Font)                  U/stmry/m/n --> U/stmry/b/n on input line 89.
+)
+\c@theorem=\count332
+\c@exercise=\count333
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count334
+\l__pdf_internal_box=\box68
+) (./main.aux (./src/01-measure-theory/measure-theory.aux) (./src/02-integration/integration.aux) (./src/03-fubini/fubini_ch.aux) (./src/04-differentiation-1/differentiation.aux) (./src/05-differentiation-2/diff-2.aux) (./src/06-riesz/riesz.aux) (./src/08-ext-res/ext-res.aux))
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for U/mathx/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 3.
+LaTeX Font Info:    ... okay on input line 3.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: twoside 
+* h-part:(L,W,R)=(72.26999pt, 469.75502pt, 72.26999pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43001pt, 72.26999pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=469.75502pt
+* \textheight=650.43001pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=-31.8738pt
+* \headheight=12.0pt
+* \headsep=19.8738pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=98.0pt
+* \marginparsep=7.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidetrue
+* \@mparswitchtrue
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+LaTeX Info: Command `\dddot' is already robust on input line 3.
+LaTeX Info: Command `\ddddot' is already robust on input line 3.
+(/usr/local/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count335
+\scratchdimen=\dimen303
+\scratchbox=\box69
+\nofMPsegments=\count336
+\nofMParguments=\count337
+\everyMPshowfont=\toks45
+\MPscratchCnt=\count338
+\MPscratchDim=\dimen304
+\MPnumerator=\count339
+\makeMPintoPDFobject=\count340
+\everyMPtoPDFconversion=\toks46
+) (/usr/local/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+))
+Package hyperref Info: Link coloring OFF on input line 3.
+ (./main.out) (./main.out)
+\@outlinefile=\write4
+\openout4 = `main.out'.
+
+ (./main.toc
+LaTeX Font Info:    Trying to load font information for U+msa on input line 2.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 2.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Trying to load font information for U+esint on input line 2.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/esint/uesint.fd
+File: uesint.fd 
+)
+LaTeX Font Info:    Trying to load font information for U+stmry on input line 2.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
+
+[1
+
+
+{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+[2]
+
+[3])
+\tf@toc=\write5
+\openout5 = `main.toc'.
+
+
+
+[4]
+\openout2 = `src/01-measure-theory/measure-theory.aux'.
+
+ (./src/01-measure-theory/measure-theory.tex
+Chapter 1.
+(./src/01-measure-theory/basics.tex
+Overfull \hbox (6.32683pt too wide) in paragraph at lines 2--2
+[]\OT1/cmr/bx/n/17.28 Outer Mea-sures and Carath^^Seodory Mea-sur-able Sets 
+ []
+
+
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.28 \end{definition}
+                      [1
+
+
+
+]
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.81 ...mu(B\setminus X) = \mu(B) + 0 = \mu(B). \]
+                                                   [2]
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.108 ... \right) = \lim_{j\to\infty} \mu(A_j). \]
+                                                   [3]
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.4}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.146 ...left( \bigcup_{j=1}^\infty A_j \right) \]
+                                                   [4]
+
+[5]
+Overfull \hbox (74.99223pt too wide) detected at line 190
+[]
+ []
+
+
+
+[6]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 199.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\sigma' on input line 199.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 199.
+
+
+
+[7]
+
+[8]
+
+[9]
+Overfull \hbox (38.66689pt too wide) detected at line 379
+[]
+ []
+
+
+
+[10]
+
+[11]
+
+[12]
+
+[13]
+Overfull \hbox (16.26031pt too wide) in paragraph at lines 500--504
+\OT1/cmr/m/n/12 Thus ei-ther $\OML/cmm/m/it/12 ^^V\U/matha/m/n/12 p\OML/cmm/m/it/12 A\U/matha/m/n/12 q ^^P 8$ \OT1/cmr/m/n/12 and $\OML/cmm/m/it/12 ^^V [] \U/matha/m/n/12 Ñ 8$ \OT1/cmr/m/n/12 as $\OML/cmm/m/it/12 N \U/matha/m/n/12 Ñ 8$ \OT1/cmr/m/n/12 or $\OML/cmm/m/it/12 ^^V\U/matha/m/n/12 p\OML/cmm/m/it/12 A\U/matha/m/n/12 q   8$ \OT1/cmr/m/n/12 and $\OML/cmm/m/it/12 ^^V [] \U/matha/m/n/12  
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 507.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\pi' on input line 507.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 507.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 507.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\lambda' on input line 507.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 507.
+
+
+
+[14]
+
+[15{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+
+[16]) (./src/01-measure-theory/lebesgue-meas.tex
+
+[17]
+
+[18]
+
+[19]
+
+[20]
+
+[21]
+Overfull \hbox (15.93933pt too wide) detected at line 183
+\OML/cmm/m/it/12 Q[] []\U/matha/m/n/12 ^^P [] \OML/cmm/m/it/12 ;  m \U/matha/m/n/12 P \U/msb/m/n/12 Z[]\OML/cmm/m/it/12 ; k \U/matha/m/n/12 P \U/msb/m/n/12 Z\OML/cmm/m/it/12 :
+ []
+
+
+
+[22]
+
+[23]
+
+[24]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 248.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 248.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 248.
+
+
+
+[25]
+
+[26]
+
+[27]
+
+[28]
+
+[29]
+
+[30]
+
+[31]
+
+[32]) (./src/01-measure-theory/cantor.tex
+
+[33]
+Overfull \hbox (2.32848pt too wide) in paragraph at lines 18--20
+[]\OT1/cmr/m/n/12 By def-i-ni-tion, the Can-tor set $\OML/cmm/m/it/12 C$ \OT1/cmr/m/n/12 is the in-ter-sec-tion of a de-creas-ing se-quence of nonempty
+ []
+
+
+
+[34]
+
+[35]
+
+LaTeX Warning: Command \textsection invalid in math mode on input line 120.
+
+
+LaTeX Warning: Command \textsection invalid in math mode on input line 120.
+
+Missing character: There is no § in font cmr12!
+
+
+[36]
+
+[37]
+
+[38]
+Overfull \hbox (21.04683pt too wide) detected at line 231
+\U/matha/m/n/12 |\OML/cmm/m/it/12 f[]\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q ^^A \OML/cmm/m/it/12 f[]\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q| ^^P [] ^^P [] [] ¤ [] ^^D \OT1/cmr/m/n/12 2[] \U/matha/m/n/12 ^^P \OT1/cmr/m/n/12 2[]\OML/cmm/m/it/12 :
+ []
+
+
+
+[39]
+<figures/devil-step.png, id=804, 577.15625pt x 568.1225pt>
+File: figures/devil-step.png Graphic file (type png)
+<use figures/devil-step.png>
+Package pdftex.def Info: figures/devil-step.png  used on input line 267.
+(pdftex.def)             Requested size: 234.8775pt x 231.20662pt.
+
+
+[40]
+
+[41 <./figures/devil-step.png>]
+
+[42]) (./src/01-measure-theory/measure-spaces.tex
+
+[43]
+
+[44]
+
+[45]
+
+[46]
+
+[47]
+
+[48]
+
+[49]
+
+[50]
+
+[51]
+
+[52]
+
+[53]
+
+[54]
+
+[55]
+
+[56]
+
+[57]
+
+[58]
+
+[59]
+
+[60]))
+
+[61]
+\openout2 = `src/02-integration/integration.aux'.
+
+ (./src/02-integration/integration.tex
+
+[62
+
+
+
+
+]
+Chapter 2.
+(./src/02-integration/integrals-1.tex
+
+[63]
+Overfull \hbox (3.99767pt too wide) in paragraph at lines 50--52
+[]\OT1/cmr/m/n/12 On the other hand, let $\OML/cmm/m/it/12 P$ \OT1/cmr/m/n/12 be a $\OML/cmm/m/it/12 ^^V$\OT1/cmr/m/n/12 -partition of $\U/matha/m/n/12 p\OML/cmm/m/it/12 X; ^^V\U/matha/m/n/12 q$ \OT1/cmr/m/n/12 into dis-joint mea-sur-able sets $\OML/cmm/m/it/12 A[]; [] ; A[]$\OT1/cmr/m/n/12 .
+ []
+
+
+
+[64]
+
+[65]
+
+[66]
+
+[67]
+Overfull \hbox (10.09123pt too wide) in paragraph at lines 196--197
+[]\OT1/cmr/m/n/12 In essence, this says that one can in-ter-change lim-its and in-te-grals $[][] [] \OML/cmm/m/it/12 f[] [] ^^V \U/matha/m/n/12 ^^P [] [][] \OML/cmm/m/it/12 f[] [] ^^V$
+ []
+
+
+
+[68]
+
+[69]
+
+[70]
+
+[71]
+
+[72]
+
+[73]
+
+[74]
+
+[75]
+
+[76]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 516.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 516.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 516.
+
+
+
+[77]
+Overfull \hbox (90.49379pt too wide) detected at line 548
+[]
+ []
+
+
+
+[78]) (./src/02-integration/integrals-2.tex
+
+[79]
+
+[80]
+
+[81]
+
+[82]
+
+[83]
+
+LaTeX Warning: Reference `rem:integral_of_function_equal_ae' on page 84 undefined on input line 203.
+
+
+
+[84]
+
+[85]
+
+[86]
+
+[87]
+
+[88]
+
+[89]
+
+[90]
+Overfull \hbox (14.01982pt too wide) detected at line 449
+[]
+ []
+
+
+
+[91]
+
+[92]
+
+[93]
+Overfull \hbox (10.81934pt too wide) detected at line 536
+[][] \OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q  [] \OML/cmm/m/it/12 x \U/matha/m/n/12 ^^@ [][] \OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q  [] \OML/cmm/m/it/12 x \U/matha/m/n/12 ^^P [][] \OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q  [] \OML/cmm/m/it/12 x \U/matha/m/n/12 ^^@ [][] \OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q  [] \OML/cmm/m/it/12 x \U/matha/m/n/12 ^^@ [][] \OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q  [] \OML/cmm/m/it/12 x \U/matha/m/n/12 ^^P [][] \OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q  [] \OML/cmm/m/it/12 x \U/matha/m/n/12 ^^@ [][] \OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q  [] \OML/cmm/m/it/12 x:
+ []
+
+
+
+[94]
+
+[95]
+
+[96]) (./src/02-integration/lp_spaces.tex
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 1.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 5.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 5.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 5.
+
+
+
+[97]
+
+[98]
+
+[99]
+
+[100]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 158.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 158.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\infty' on input line 158.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 158.
+
+
+
+[101]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 232.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 232.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 232.
+
+
+
+[102]
+Overfull \hbox (9.00636pt too wide) detected at line 272
+\U/matha/m/n/12 }\OML/cmm/m/it/12 f\U/matha/m/n/12 }[] ^^P [][] ^^P [][] ^^P |\OML/cmm/m/it/12 \U/matha/m/n/12 | [][] ^^P |\OML/cmm/m/it/12 \U/matha/m/n/12 |}\OML/cmm/m/it/12 f\U/matha/m/n/12 }[]\OML/cmm/m/it/12 :
+ []
+
+
+
+[103]) (./src/02-integration/inequality-party.tex
+
+[104]
+
+[105]
+Overfull \hbox (8.44058pt too wide) detected at line 69
+\U/matha/m/n/12 }\OML/cmm/m/it/12 g\U/matha/m/n/12 }[] []^^P [][] |\OML/cmm/m/it/12 g\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q| []^^P []t\OML/cmm/m/it/12 C [] \U/matha/m/n/12 |\OML/cmm/m/it/12 g\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q| ¤ \OML/cmm/m/it/12 C[]^^V[]x \U/matha/m/n/12 P \OML/cmm/m/it/12 X\U/matha/m/n/12 u @\OML/cmm/m/it/12 g \U/matha/m/n/12 P \OML/cmm/m/it/12 L[]\U/matha/m/n/12 p\OML/cmm/m/it/12 X; ^^V\U/matha/m/n/12 q\OML/cmm/m/it/12 :
+ []
+
+
+
+[106]
+
+LaTeX Warning: Reference `holders_inequality_1' on page 107 undefined on input line 109.
+
+
+
+[107]
+
+LaTeX Warning: Reference `holders_inequality_1' on page 108 undefined on input line 164.
+
+
+
+[108]
+
+[109]
+
+[110]
+
+[111]
+
+[112]
+
+[113]
+
+[114]
+
+[115]
+
+[116]
+Overfull \hbox (9.72707pt too wide) detected at line 511
+[]
+ []
+
+) (./src/02-integration/convergence.tex
+
+[117]
+
+[118]
+
+[119]
+
+[120]
+
+[121]
+
+LaTeX Warning: Reference `prop:properties_of_lebesgue_integral' on page 122 undefined on input line 169.
+
+
+Overfull \hbox (124.25626pt too wide) detected at line 176
+\OML/cmm/m/it/12 ^^V\U/matha/m/n/12 pt\OML/cmm/m/it/12 x \U/matha/m/n/12 P \OML/cmm/m/it/12 X [] \U/matha/m/n/12 |p\OML/cmm/m/it/12 f[]\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q ^^@ \OML/cmm/m/it/12 g[]\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 qq ^^A p\OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q ^^@ \OML/cmm/m/it/12 g\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 qq| ¥ \OML/cmm/m/it/12 ^^O\U/matha/m/n/12 uq ¤ \OML/cmm/m/it/12 ^^V\U/matha/m/n/12 pt\OML/cmm/m/it/12 x \U/matha/m/n/12 P \OML/cmm/m/it/12 X [] \U/matha/m/n/12 |\OML/cmm/m/it/12 f[]\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q ^^A \OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q| ¥ \OML/cmm/m/it/12 ^^O\U/matha/m/n/12 {\OT1/cmr/m/n/12 2\U/matha/m/n/12 uq ^^@ \OML/cmm/m/it/12 ^^V\U/matha/m/n/12 pt\OML/cmm/m/it/12 x \U/matha/m/n/12 P \OML/cmm/m/it/12 X [] \U/matha/m/n/12 |\OML/cmm/m/it/12 g[]\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q ^^A \OML/cmm/m/it/12 g\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q| ¥ \OML/cmm/m/it/12 ^^O\U/matha/m/n/12 {\OT1/cmr/m/n/12 2\U/matha/m/n/12 uq\OML/cmm/m/it/12 :
+ []
+
+
+
+[122]
+
+LaTeX Warning: Reference `prop:properties_of_lebesgue_integral' on page 123 undefined on input line 234.
+
+
+
+[123]
+<figures/modes_of_1.png, id=1377, 765.86125pt x 451.6875pt>
+File: figures/modes_of_1.png Graphic file (type png)
+<use figures/modes_of_1.png>
+Package pdftex.def Info: figures/modes_of_1.png  used on input line 266.
+(pdftex.def)             Requested size: 281.85587pt x 166.23265pt.
+
+
+[124 <./figures/modes_of_1.png>]
+<figures/modes_of_2.png, id=1391, 765.86125pt x 451.6875pt>
+File: figures/modes_of_2.png Graphic file (type png)
+<use figures/modes_of_2.png>
+Package pdftex.def Info: figures/modes_of_2.png  used on input line 328.
+(pdftex.def)             Requested size: 234.8775pt x 138.51917pt.
+
+
+[125 <./figures/modes_of_2.png>]
+
+[126]))
+
+[127]
+\openout2 = `src/03-fubini/fubini_ch.aux'.
+
+ (./src/03-fubini/fubini_ch.tex
+
+[128
+
+
+
+
+]
+Chapter 3.
+(./src/03-fubini/fubini.tex
+
+[129]
+
+[130]
+
+LaTeX Warning: Reference `lem:cross_section_of_measurable_set_is_measurable' on page 131 undefined on input line 79.
+
+
+
+[131]
+
+[132]
+
+[133]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 231.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\sigma' on input line 231.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 231.
+
+
+
+[134]
+
+[135]
+
+[136]
+
+[137]
+
+[138]
+
+[139]
+
+LaTeX Warning: Reference `thm:bounded_convergence_theorem' on page 140 undefined on input line 423.
+
+
+
+[140]
+
+[141]
+Overfull \hbox (80.74014pt too wide) detected at line 508
+[][] \U/matha/m/n/12 |\OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x; y\U/matha/m/n/12 q|  [] \OML/cmm/m/it/12 ^^W\U/matha/m/n/12 p\OML/cmm/m/it/12 y\U/matha/m/n/12 q   8[]\OML/cmm/m/it/12 ^^V[]x \U/matha/m/n/12 P \OML/cmm/m/it/12 X []  [][] \U/matha/m/n/12 |\OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x; y\U/matha/m/n/12 q|  [] \OML/cmm/m/it/12 ^^V\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q   8[]\OML/cmm/m/it/12 ^^W[]y \U/matha/m/n/12 P \OML/cmm/m/it/12 Y;
+ []
+
+
+
+[142]
+
+[143]
+
+[144]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 618.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 618.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 618.
+
+
+
+[145]
+Overfull \hbox (45.27696pt too wide) detected at line 640
+[]
+ []
+
+
+Overfull \hbox (24.94412pt too wide) detected at line 647
+[][] \OML/cmm/m/it/12 f  [] x \U/matha/m/n/12 ^^P [][] [][] \OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x[]; x[]\U/matha/m/n/12 q  [] \OMS/cmsy/m/n/12 L[]\U/matha/m/n/12 p\OML/cmm/m/it/12 x[]\U/matha/m/n/12 q  [] \OMS/cmsy/m/n/12 L[]\U/matha/m/n/12 p\OML/cmm/m/it/12 x[]\U/matha/m/n/12 q ^^P [][] [][] \OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x[]; x[]\U/matha/m/n/12 q  [] \OMS/cmsy/m/n/12 L[]\U/matha/m/n/12 p\OML/cmm/m/it/12 x[]\U/matha/m/n/12 q  [] \OMS/cmsy/m/n/12 L[]\U/matha/m/n/12 p\OML/cmm/m/it/12 x[]\U/matha/m/n/12 q\OML/cmm/m/it/12 :
+ []
+
+
+Overfull \hbox (145.7096pt too wide) detected at line 653
+[][] \OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q  [] \OML/cmm/m/it/12 x \U/matha/m/n/12 ^^P [][] [][] \OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x[]; x[]; [] ; x[]\U/matha/m/n/12 q  [] \OML/cmm/m/it/12 x[] [] [] x[]  [] x[] [] [] x[] \U/matha/m/n/12 ^^P [][] [][] \OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x[]; x[]; [] ; x[]\U/matha/m/n/12 q  [] \OML/cmm/m/it/12 x[] [] [] x[]  [] x[] [] [] x[]:
+ []
+
+) (./src/03-fubini/integrals-3.tex
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 1.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1.
+
+
+
+[146]
+
+
+Overfull \hbox (2.66342pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 3.2.  APPLICATIONS OF THE FUBINI-TONELLI THEOREM TO INTEGRALS IN $\U/msb/m/n/12 R[]$ \OT1/cmr/m/n/12 147
+ []
+
+[147]
+
+LaTeX Warning: Reference `prop:approximation_by_simple_functions' on page 148 undefined on input line 53.
+
+
+
+[148]
+
+
+Overfull \hbox (2.66342pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 3.2.  APPLICATIONS OF THE FUBINI-TONELLI THEOREM TO INTEGRALS IN $\U/msb/m/n/12 R[]$ \OT1/cmr/m/n/12 149
+ []
+
+[149]
+
+[150]
+
+
+Overfull \hbox (2.66342pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 3.2.  APPLICATIONS OF THE FUBINI-TONELLI THEOREM TO INTEGRALS IN $\U/msb/m/n/12 R[]$ \OT1/cmr/m/n/12 151
+ []
+
+[151]
+
+[152]
+
+LaTeX Warning: Reference `prop:approximation_by_simple_functions' on page 153 undefined on input line 265.
+
+
+
+
+Overfull \hbox (2.66342pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 3.2.  APPLICATIONS OF THE FUBINI-TONELLI THEOREM TO INTEGRALS IN $\U/msb/m/n/12 R[]$ \OT1/cmr/m/n/12 153
+ []
+
+[153]
+Overfull \hbox (12.7918pt too wide) in paragraph at lines 295--297
+\OT1/cmr/m/n/12 By the fun-da-men-tal the-o-rem of cal-cu-lus, for each fixed $\U/matha/m/n/12 p\OML/cmm/m/it/12 x[]; [] ; x[]; x[]; [] ; x[]\U/matha/m/n/12 q P r^^A\OML/cmm/m/it/12 R; R\U/matha/m/n/12 s[]$\OT1/cmr/m/n/12 ,
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 306.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 306.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 306.
+
+
+
+[154]
+
+
+Overfull \hbox (2.66342pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 3.2.  APPLICATIONS OF THE FUBINI-TONELLI THEOREM TO INTEGRALS IN $\U/msb/m/n/12 R[]$ \OT1/cmr/m/n/12 155
+ []
+
+[155]
+Overfull \hbox (6.65938pt too wide) in paragraph at lines 384--386
+[]\OT1/cmr/m/it/12 Step 0: \OT1/cmr/m/n/12 We com-pute the vol-ume of the $0$-dimensional, $1$-dimensional, and $2$-dimensional
+ []
+
+
+
+[156]
+Overfull \hbox (51.61949pt too wide) detected at line 418
+[]
+ []
+
+
+
+
+Overfull \hbox (2.66342pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 3.2.  APPLICATIONS OF THE FUBINI-TONELLI THEOREM TO INTEGRALS IN $\U/msb/m/n/12 R[]$ \OT1/cmr/m/n/12 157
+ []
+
+[157]
+Overfull \hbox (75.63844pt too wide) detected at line 453
+[]
+ []
+
+
+
+[158]
+
+
+Overfull \hbox (2.66342pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 3.2.  APPLICATIONS OF THE FUBINI-TONELLI THEOREM TO INTEGRALS IN $\U/msb/m/n/12 R[]$ \OT1/cmr/m/n/12 159
+ []
+
+[159]
+
+[160]
+
+
+Overfull \hbox (2.66342pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 3.2.  APPLICATIONS OF THE FUBINI-TONELLI THEOREM TO INTEGRALS IN $\U/msb/m/n/12 R[]$ \OT1/cmr/m/n/12 161
+ []
+
+[161]
+
+[162]))
+
+
+Overfull \hbox (2.66342pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 3.2.  APPLICATIONS OF THE FUBINI-TONELLI THEOREM TO INTEGRALS IN $\U/msb/m/n/12 R[]$ \OT1/cmr/m/n/12 163
+ []
+
+[163]
+\openout2 = `src/04-differentiation-1/differentiation.aux'.
+
+ (./src/04-differentiation-1/differentiation.tex
+
+[164
+
+
+
+
+]
+Chapter 4.
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 3.
+
+(./src/04-differentiation-1/covering.tex
+
+[165]
+
+[166]
+
+[167]
+
+[168]
+
+[169]
+
+[170]
+
+[171]
+Underfull \vbox (badness 1137) has occurred while \output is active []
+
+
+
+[172]) (./src/04-differentiation-1/HL.tex
+Overfull \hbox (1.0127pt too wide) in paragraph at lines 1--1
+[]\OT1/cmr/bx/n/17.28 Hardy-Littlewood Max-i-mal Func-tion and Lebesgue
+ []
+
+
+Underfull \vbox (badness 1881) has occurred while \output is active []
+
+
+
+[173]
+
+[174]
+
+
+Overfull \hbox (109.55038pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 4.2.  HARDY-LITTLEWOOD MAXIMAL FUNCTION AND LEBESGUE DIFFERENTIATION THEOREM \OT1/cmr/m/n/12 175
+ []
+
+[175]
+Overfull \hbox (5.02101pt too wide) in paragraph at lines 99--101
+[][]\OT1/cmr/bx/n/12 Exercise 4.2.3 \OT1/cmr/m/n/12 (Sub-lin-ear-ity of the Hardy-Lit-tle-wood Max-i-mal Func-tion)\OT1/cmr/bx/n/12 . []\OT1/cmr/m/n/12 Let $\OML/cmm/m/it/12 f; g \U/matha/m/n/12 P \OML/cmm/m/it/12 L[]\U/matha/m/n/12 p\U/msb/m/n/12 R[]\U/matha/m/n/12 q$
+ []
+
+
+Overfull \hbox (7.04239pt too wide) in paragraph at lines 123--125
+[][]\OT1/cmr/bx/n/12 Proposition 4.2.3 \OT1/cmr/m/n/12 (Prop-er-ties of the Hardy-Lit-tle-wood Max-i-mal Func-tion)\OT1/cmr/bx/n/12 . []\OT1/cmr/m/it/12 Let $\OML/cmm/m/it/12 f \U/matha/m/n/12 P \OML/cmm/m/it/12 L[]\U/matha/m/n/12 p\U/msb/m/n/12 R[]\U/matha/m/n/12 q$\OT1/cmr/m/it/12 .
+ []
+
+
+
+[176]
+
+
+Overfull \hbox (109.55038pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 4.2.  HARDY-LITTLEWOOD MAXIMAL FUNCTION AND LEBESGUE DIFFERENTIATION THEOREM \OT1/cmr/m/n/12 177
+ []
+
+[177]
+
+[178]
+
+
+Overfull \hbox (109.55038pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 4.2.  HARDY-LITTLEWOOD MAXIMAL FUNCTION AND LEBESGUE DIFFERENTIATION THEOREM \OT1/cmr/m/n/12 179
+ []
+
+[179]
+Overfull \hbox (4.92978pt too wide) in paragraph at lines 242--244
+[][]\OT1/cmr/bx/n/12 Corollary 4.2.5 \OT1/cmr/m/n/12 (Max-i-mal Func-tion Bounds Func-tion Al-most Ev-ery-where)\OT1/cmr/bx/n/12 . []\OT1/cmr/m/it/12 Let $\OML/cmm/m/it/12 f \U/matha/m/n/12 P \OML/cmm/m/it/12 L[]\U/matha/m/n/12 p\U/msb/m/n/12 R[]\U/matha/m/n/12 q$\OT1/cmr/m/it/12 .
+ []
+
+
+
+[180]
+
+
+Overfull \hbox (109.55038pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 4.2.  HARDY-LITTLEWOOD MAXIMAL FUNCTION AND LEBESGUE DIFFERENTIATION THEOREM \OT1/cmr/m/n/12 181
+ []
+
+[181]
+
+[182]) (./src/04-differentiation-1/monotone.tex
+
+[183]
+
+[184]
+
+[185]
+
+LaTeX Warning: Reference `thm:lebesgue_criterion_for_measurability' on page 186 undefined on input line 133.
+
+
+
+[186]
+
+LaTeX Warning: Reference `area_under_graph_formula' on page 187 undefined on input line 143.
+
+
+
+[187]
+
+[188]
+
+[189]
+
+[190]
+<figures/rising-sun.png, id=1834, 471.7625pt x 343.2825pt>
+File: figures/rising-sun.png Graphic file (type png)
+<use figures/rising-sun.png>
+Package pdftex.def Info: figures/rising-sun.png  used on input line 298.
+(pdftex.def)             Requested size: 328.82707pt x 239.27467pt.
+
+
+[191 <./figures/rising-sun.png>]
+
+[192]
+
+[193]
+
+[194]
+
+[195]
+Overfull \hbox (35.33664pt too wide) detected at line 485
+[] [] \U/matha/m/n/12   8 []  [] [] ¤ [] []
+ []
+
+
+
+[196]
+
+[197]
+
+[198]
+Overfull \hbox (194.76384pt too wide) detected at line 587
+[]
+ []
+
+
+Underfull \vbox (badness 2980) has occurred while \output is active []
+
+
+
+[199]
+
+[200]
+
+[201]
+Underfull \vbox (badness 4279) has occurred while \output is active []
+
+
+
+[202]
+
+[203]
+
+[204]
+
+[205]
+
+[206]) (./src/04-differentiation-1/BV_on_R.tex
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1.
+
+
+
+[207]
+
+[208]
+
+[209]
+Overfull \hbox (63.48535pt too wide) detected at line 138
+[]
+ []
+
+
+
+[210]
+Overfull \hbox (3.03677pt too wide) detected at line 163
+[]
+ []
+
+
+
+[211]
+
+[212]
+
+LaTeX Warning: Reference `thm:increasing_functions_are_differentiable_a_e' on page 213 undefined on input line 236.
+
+
+
+[213]) (./src/04-differentiation-1/FTOC.tex
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1.
+
+
+
+[214]
+Overfull \hbox (2.1355pt too wide) in paragraph at lines 52--53
+[][]\OT1/cmr/bx/n/12 Example 4.5.5 \OT1/cmr/m/n/12 (The Can-tor-Lebesgue Func-tion is Not Ab-so-lutely Con-tin-u-ous)\OT1/cmr/bx/n/12 . []\OT1/cmr/m/n/12 The Cantor-
+ []
+
+
+
+[215]
+
+[216]
+
+[217]
+
+[218]
+Overfull \hbox (33.55565pt too wide) detected at line 173
+\OML/cmm/m/it/12 V[]\U/matha/m/n/12 p\OML/cmm/m/it/12 f\U/matha/m/n/12 q ^^P [] [] ¤ \OT1/cmr/m/n/12 1
+ []
+
+
+
+[219]
+
+LaTeX Warning: Reference `thm:jordan_decomposition_theorem' on page 220 undefined on input line 208.
+
+
+
+[220]
+
+[221]
+
+[222]
+
+[223]
+
+[224]
+Overfull \hbox (82.88744pt too wide) detected at line 355
+\OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q ^^A \OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 a\U/matha/m/n/12 q ^^P p\OML/cmm/m/it/12 f[]\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q ^^A \OML/cmm/m/it/12 f[]\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 qq ^^A p\OML/cmm/m/it/12 f[]\U/matha/m/n/12 p\OML/cmm/m/it/12 a\U/matha/m/n/12 q ^^A \OML/cmm/m/it/12 f[]\U/matha/m/n/12 p\OML/cmm/m/it/12 a\U/matha/m/n/12 qq ^^P [][] \OML/cmm/m/it/12 f[]\U/matha/m/n/12 p\OML/cmm/m/it/12 t\U/matha/m/n/12 q  [] \OML/cmm/m/it/12 t \U/matha/m/n/12 ^^A [][] \OML/cmm/m/it/12 f[]\U/matha/m/n/12 p\OML/cmm/m/it/12 t\U/matha/m/n/12 q  [] \OML/cmm/m/it/12 t \U/matha/m/n/12 ^^P [][]p\OML/cmm/m/it/12 f[]\U/matha/m/n/12 p\OML/cmm/m/it/12 t\U/matha/m/n/12 q ^^A \OML/cmm/m/it/12 f[]\U/matha/m/n/12 p\OML/cmm/m/it/12 t\U/matha/m/n/12 qq  [] \OML/cmm/m/it/12 t \U/matha/m/n/12 @\OML/cmm/m/it/12 x \U/matha/m/n/12 P r\OML/cmm/m/it/12 a; b\U/matha/m/n/12 s\OML/cmm/m/it/12 :
+ []
+
+))
+
+[225]
+
+[226]
+\openout2 = `src/05-differentiation-2/diff-2.aux'.
+
+ (./src/05-differentiation-2/diff-2.tex
+Chapter 5.
+(./src/05-differentiation-2/vector-measures.tex
+
+[227
+
+
+
+
+]
+
+[228]
+
+
+Overfull \hbox (5.48595pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 5.1.  SIGNED AND VECTOR-VALUED MEASURES, DECOMPOSITION THEOREMS \OT1/cmr/m/n/12 229
+ []
+
+[229]
+
+[230]
+
+
+Overfull \hbox (5.48595pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 5.1.  SIGNED AND VECTOR-VALUED MEASURES, DECOMPOSITION THEOREMS \OT1/cmr/m/n/12 231
+ []
+
+[231]
+
+[232]
+
+
+Overfull \hbox (5.48595pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 5.1.  SIGNED AND VECTOR-VALUED MEASURES, DECOMPOSITION THEOREMS \OT1/cmr/m/n/12 233
+ []
+
+[233]
+
+[234]
+
+
+Overfull \hbox (5.48595pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 5.1.  SIGNED AND VECTOR-VALUED MEASURES, DECOMPOSITION THEOREMS \OT1/cmr/m/n/12 235
+ []
+
+[235]
+
+[236]
+
+
+Overfull \hbox (5.48595pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 5.1.  SIGNED AND VECTOR-VALUED MEASURES, DECOMPOSITION THEOREMS \OT1/cmr/m/n/12 237
+ []
+
+[237]
+Overfull \hbox (43.09676pt too wide) detected at line 416
+\U/matha/m/n/12 |\OML/cmm/m/it/12 ^^W [] \U/matha/m/n/12 | ^^@ |\OML/cmm/m/it/12 ^^W [] \U/matha/m/n/12 | ^^P [][] |\OML/cmm/m/it/12 f\U/matha/m/n/12 |  [] \OML/cmm/m/it/12 ^^V \U/matha/m/n/12 ^^@ [][] |\OML/cmm/m/it/12 f\U/matha/m/n/12 |  [] \OML/cmm/m/it/12 ^^V \U/matha/m/n/12 ^^P [][] |\OML/cmm/m/it/12 f\U/matha/m/n/12 |  [] \OML/cmm/m/it/12 ^^V:
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[238]
+
+
+Overfull \hbox (5.48595pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 5.1.  SIGNED AND VECTOR-VALUED MEASURES, DECOMPOSITION THEOREMS \OT1/cmr/m/n/12 239
+ []
+
+[239]
+
+[240]
+
+
+Overfull \hbox (5.48595pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 5.1.  SIGNED AND VECTOR-VALUED MEASURES, DECOMPOSITION THEOREMS \OT1/cmr/m/n/12 241
+ []
+
+[241]
+
+[242]
+
+
+Overfull \hbox (5.48595pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 5.1.  SIGNED AND VECTOR-VALUED MEASURES, DECOMPOSITION THEOREMS \OT1/cmr/m/n/12 243
+ []
+
+[243]
+
+[244]) (./src/05-differentiation-2/r-nik.tex
+
+
+Overfull \hbox (5.48595pt too wide) has occurred while \output is active
+\OT1/cmr/m/sl/12 5.1.  SIGNED AND VECTOR-VALUED MEASURES, DECOMPOSITION THEOREMS \OT1/cmr/m/n/12 245
+ []
+
+[245]
+
+LaTeX Warning: Reference `properties_of_signed_measures' on page 246 undefined on input line 28.
+
+
+
+[246]
+
+[247]
+
+LaTeX Warning: Reference `thm:bounded_convergence_theorem' on page 248 undefined on input line 85.
+
+
+
+[248]
+
+[249]
+
+LaTeX Warning: Reference `thm:lebesgue_decomposition_theorem' on page 250 undefined on input line 159.
+
+
+LaTeX Warning: Reference `thm:lebesgue_decomposition_theorem' on page 250 undefined on input line 174.
+
+
+
+[250]
+
+[251]
+
+[252]
+
+[253]
+
+LaTeX Warning: Reference `thm:dominated_convergence_theorem' on page 254 undefined on input line 311.
+
+
+
+[254]) (./src/05-differentiation-2/besi.tex
+
+[255]
+
+[256]
+
+[257]
+
+[258]
+Overfull \hbox (57.3266pt too wide) detected at line 178
+[]
+ []
+
+
+
+[259]
+
+[260]
+
+[261]
+
+[262]
+
+[263]
+Overfull \hbox (12.68689pt too wide) in paragraph at lines 313--316
+\OML/cmm/m/it/12 A\U/matha/m/n/12 z [][] \OML/cmm/m/it/12 B[]$ \OT1/cmr/m/n/12 and the col-lec-tion $\OMS/cmsy/m/n/12 B[]$\OT1/cmr/m/n/12 , we ob-tain finitely many dis-joint balls $\OML/cmm/m/it/12 B[]; B[]; [] ; B[] \U/matha/m/n/12 P
+ []
+
+
+Overfull \hbox (53.08904pt too wide) in paragraph at lines 316--318
+\OT1/cmr/m/n/12 which are dis-joint from $[][] \OML/cmm/m/it/12 B[]$\OT1/cmr/m/n/12 , and we ob-tain finitely many dis-joint balls $\OML/cmm/m/it/12 B[]; B[]; [] ; B[] \U/matha/m/n/12 P
+ []
+
+
+
+[264]
+
+[265]
+
+[266]
+
+[267]) (./src/05-differentiation-2/densities.tex
+
+[268]
+
+[269]
+
+[270]
+
+[271]
+
+[272]
+
+[273]
+
+[274]
+
+[275]
+
+LaTeX Warning: Reference `thm:besicovitch_covering_theorem' on page 276 undefined on input line 284.
+
+
+
+[276]
+
+[277]
+
+[278]
+
+[279]
+
+[280]
+
+[281]
+
+[282]
+
+[283]) (./src/05-differentiation-2/diff-measures.tex
+
+[284]
+Overfull \hbox (13.77487pt too wide) detected at line 42
+\OML/cmm/m/it/12 ^^W\U/matha/m/n/12 p\OML/cmm/m/it/12 S\U/matha/m/n/12 q ^^P \OML/cmm/m/it/12 ^^W\U/matha/m/n/12 p\OML/cmm/m/it/12 C\U/matha/m/n/12 q ^^P [][] \OML/cmm/m/it/12 f  [] ^^V \U/matha/m/n/12 ^^P [][] \OML/cmm/m/it/12 f  [] ^^V \U/matha/m/n/12 ^^@ [][] \OML/cmm/m/it/12 f  [] ^^V \U/matha/m/n/12 ^^P \OML/cmm/m/it/12 ^^W\U/matha/m/n/12 p\OML/cmm/m/it/12 C \U/matha/m/n/12 X \OML/cmm/m/it/12 A\U/matha/m/n/12 q ^^@ \OML/cmm/m/it/12 ^^W\U/matha/m/n/12 p\OML/cmm/m/it/12 C \U/matha/m/n/12 X \OML/cmm/m/it/12 A[]\U/matha/m/n/12 q ¥ \OML/cmm/m/it/12 ^^W\U/matha/m/n/12 p\OML/cmm/m/it/12 S \U/matha/m/n/12 X \OML/cmm/m/it/12 A\U/matha/m/n/12 q ^^@ \OML/cmm/m/it/12 ^^W\U/matha/m/n/12 p\OML/cmm/m/it/12 S \U/matha/m/n/12 X \OML/cmm/m/it/12 A[]\U/matha/m/n/12 q
+ []
+
+
+
+[285]
+
+[286]
+Overfull \hbox (70.64851pt too wide) detected at line 128
+[]
+ []
+
+
+
+[287]
+
+[288]
+
+[289]
+Overfull \hbox (64.67657pt too wide) detected at line 220
+\OML/cmm/m/it/12 U[] []\U/matha/m/n/12 ^^P t\OML/cmm/m/it/12 x \U/matha/m/n/12 P \OML/cmm/m/it/12 X [] ^^V[]\U/matha/m/n/12 p[]p\OML/cmm/m/it/12 x; r\U/matha/m/n/12 qq ^^P \OT1/cmr/m/n/12 0[]\OML/cmm/m/it/12 r \U/matha/m/n/12 ¡ \OT1/cmr/m/n/12 0\U/matha/m/n/12 u [] \OML/cmm/m/it/12 U[] []\U/matha/m/n/12 ^^P t\OML/cmm/m/it/12 x \U/matha/m/n/12 P \OML/cmm/m/it/12 X [] ^^V\U/matha/m/n/12 p[]p\OML/cmm/m/it/12 x; r\U/matha/m/n/12 qq ^^P \OT1/cmr/m/n/12 0[]\OML/cmm/m/it/12 r \U/matha/m/n/12 ¡ \OT1/cmr/m/n/12 0\U/matha/m/n/12 u\OML/cmm/m/it/12 :
+ []
+
+
+
+[290]
+Overfull \hbox (64.67657pt too wide) detected at line 241
+\OML/cmm/m/it/12 U[] []\U/matha/m/n/12 ^^P t\OML/cmm/m/it/12 x \U/matha/m/n/12 P \OML/cmm/m/it/12 X [] ^^V\U/matha/m/n/12 p[]p\OML/cmm/m/it/12 x; r\U/matha/m/n/12 qq ^^P \OT1/cmr/m/n/12 0[]\OML/cmm/m/it/12 r \U/matha/m/n/12 ¡ \OT1/cmr/m/n/12 0\U/matha/m/n/12 u [] \OML/cmm/m/it/12 U[] []\U/matha/m/n/12 ^^P t\OML/cmm/m/it/12 x \U/matha/m/n/12 P \OML/cmm/m/it/12 X [] ^^V[]\U/matha/m/n/12 p[]p\OML/cmm/m/it/12 x; r\U/matha/m/n/12 qq ^^P \OT1/cmr/m/n/12 0[]\OML/cmm/m/it/12 r \U/matha/m/n/12 ¡ \OT1/cmr/m/n/12 0\U/matha/m/n/12 u\OML/cmm/m/it/12 :
+ []
+
+
+
+[291]
+
+[292]
+
+[293]
+
+[294]
+
+[295]
+
+[296]
+
+[297]
+
+[298]
+Overfull \hbox (22.10603pt too wide) detected at line 512
+\OML/cmm/m/it/12 ^^V\U/matha/m/n/12 p\OML/cmm/m/it/12 A\U/matha/m/n/12 q ^^P \OML/cmm/m/it/12 ^^V\U/matha/m/n/12 p\OML/cmm/m/it/12 A\U/matha/m/n/12 z\OML/cmm/m/it/12 Z\U/matha/m/n/12 q ^^@ \OML/cmm/m/it/12 ^^V\U/matha/m/n/12 p\OML/cmm/m/it/12 A \U/matha/m/n/12 X \OML/cmm/m/it/12 Z\U/matha/m/n/12 q ^^P [][] \OT1/cmr/m/n/12 ^^B[]\U/matha/m/n/12 p[]\OML/cmm/m/it/12 ; x\U/matha/m/n/12 q  [] \OML/cmm/m/it/12 ^^V[]\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q ^^@ \OML/cmm/m/it/12 ^^V\U/matha/m/n/12 p\OML/cmm/m/it/12 A \U/matha/m/n/12 X \OML/cmm/m/it/12 Z\U/matha/m/n/12 q ^^P [][] \OT1/cmr/m/n/12 ^^B[]\U/matha/m/n/12 p[]\OML/cmm/m/it/12 ; x\U/matha/m/n/12 q  [] \OML/cmm/m/it/12 ^^V[]\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q ^^@ p\OML/cmm/m/it/12 ^^V \U/matha/m/n/12 ç \OML/cmm/m/it/12 Z\U/matha/m/n/12 qp\OML/cmm/m/it/12 A\U/matha/m/n/12 q
+ []
+
+
+
+[299]))
+
+[300]
+\openout2 = `src/06-riesz/riesz.aux'.
+
+ (./src/06-riesz/riesz.tex
+Chapter 6.
+(./src/06-riesz/LCH_spaces.tex
+
+[301
+
+
+
+
+]
+
+[302]
+
+[303]
+
+[304]
+
+[305]
+
+[306]
+Overfull \hbox (27.52306pt too wide) detected at line 257
+[]
+ []
+
+
+
+[307]
+
+[308]
+
+[309]
+
+[310]) (./src/06-riesz/riesz_functional.tex
+
+[311]
+Overfull \hbox (153.65323pt too wide) detected at line 34
+[][][][]\U/matha/m/n/12 t\OML/cmm/m/it/12 L\U/matha/m/n/12 p\OML/cmm/m/it/12 f\U/matha/m/n/12 q [] \OML/cmm/m/it/12 f \U/matha/m/n/12 P \OML/cmm/m/it/12 C[]\U/matha/m/n/12 p\OML/cmm/m/it/12 X\U/matha/m/n/12 q\OML/cmm/m/it/12 ; f \U/matha/m/n/12 ¤ \OT1/cmr/m/n/12 1\OML/cmm/m/it/12 ; [] f \U/matha/m/n/12 „ \OML/cmm/m/it/12 V\U/matha/m/n/12 u ¤ []t\OML/cmm/m/it/12 L\U/matha/m/n/12 p\OML/cmm/m/it/12 g\U/matha/m/n/12 q [] \OML/cmm/m/it/12 g \U/matha/m/n/12 P \OML/cmm/m/it/12 C[]\U/matha/m/n/12 p\OML/cmm/m/it/12 X\U/matha/m/n/12 q\OML/cmm/m/it/12 ; g \U/matha/m/n/12 ¤ \OT1/cmr/m/n/12 1\OML/cmm/m/it/12 ; g \U/matha/m/n/12 ^^Q \OT1/cmr/m/n/12 1[][]\OML/cmm/m/it/12 ; [] g \U/matha/m/n/12 „ \OML/cmm/m/it/12 U\U/matha/m/n/12 u
+ []
+
+
+
+[312]
+Overfull \hbox (67.55847pt too wide) detected at line 49
+\OML/cmm/m/it/12 ^^V\U/matha/m/n/12 p\OML/cmm/m/it/12 U\U/matha/m/n/12 q []^^P []t\OML/cmm/m/it/12 L\U/matha/m/n/12 p\OML/cmm/m/it/12 f\U/matha/m/n/12 q [] \OML/cmm/m/it/12 f \U/matha/m/n/12 P \OML/cmm/m/it/12 C[]\U/matha/m/n/12 p\OML/cmm/m/it/12 X\U/matha/m/n/12 q\OML/cmm/m/it/12 ; f \U/matha/m/n/12 ¤ \OT1/cmr/m/n/12 1\OML/cmm/m/it/12 ; [] f \U/matha/m/n/12 „ \OML/cmm/m/it/12 U\U/matha/m/n/12 u ¤ []t\OML/cmm/m/it/12 L\U/matha/m/n/12 p\OML/cmm/m/it/12 f\U/matha/m/n/12 q [] \OML/cmm/m/it/12 f \U/matha/m/n/12 P \OML/cmm/m/it/12 C[]\U/matha/m/n/12 p\OML/cmm/m/it/12 X\U/matha/m/n/12 q\OML/cmm/m/it/12 ; f \U/matha/m/n/12 ¤ \OT1/cmr/m/n/12 1\OML/cmm/m/it/12 ; [] f \U/matha/m/n/12 „ \OML/cmm/m/it/12 V\U/matha/m/n/12 u ^^P[] \OML/cmm/m/it/12 ^^V\U/matha/m/n/12 p\OML/cmm/m/it/12 V\U/matha/m/n/12 q
+ []
+
+
+Overfull \hbox (86.63821pt too wide) detected at line 59
+\OML/cmm/m/it/12 ^^V\U/matha/m/n/12 p\OML/cmm/m/it/12 K\U/matha/m/n/12 q []^^P []t\OML/cmm/m/it/12 ^^V\U/matha/m/n/12 p\OML/cmm/m/it/12 U\U/matha/m/n/12 q [] \OML/cmm/m/it/12 U \U/matha/m/n/12 … \OML/cmm/m/it/12 K; U[]\U/matha/m/n/12 u ^^P []t\OML/cmm/m/it/12 L\U/matha/m/n/12 p\OML/cmm/m/it/12 g\U/matha/m/n/12 q [] \OML/cmm/m/it/12 g \U/matha/m/n/12 P \OML/cmm/m/it/12 C[]\U/matha/m/n/12 p\OML/cmm/m/it/12 X\U/matha/m/n/12 q\OML/cmm/m/it/12 ; g \U/matha/m/n/12 ¤ \OT1/cmr/m/n/12 1\OML/cmm/m/it/12 ; g \U/matha/m/n/12 ^^Q \OT1/cmr/m/n/12 1[]\OML/cmm/m/it/12 K\U/matha/m/n/12 u   8
+ []
+
+
+
+[313]
+
+[314]
+
+[315]
+Underfull \vbox (badness 2326) has occurred while \output is active []
+
+
+
+[316]
+
+[317]
+Overfull \hbox (11.54018pt too wide) in paragraph at lines 199--200
+[][]\OT1/cmr/bx/n/12 Theorem 6.3.2 \OT1/cmr/m/n/12 (Riesz Rep-re-sen-ta-tion The-o-rem for Bounded Lin-ear Func-tion-als on $\OML/cmm/m/it/12 C[]\U/matha/m/n/12 p\OML/cmm/m/it/12 X; H\U/matha/m/n/12 q$\OT1/cmr/m/n/12 )\OT1/cmr/bx/n/12 .
+ []
+
+
+Overfull \hbox (7.17987pt too wide) detected at line 219
+\OML/cmm/m/it/12 ^^U\U/matha/m/n/12 p\OML/cmm/m/it/12 cf\U/matha/m/n/12 q ^^P []t\OML/cmm/m/it/12 L\U/matha/m/n/12 p\OML/cmm/m/it/12 !\U/matha/m/n/12 q [] \OML/cmm/m/it/12 ! \U/matha/m/n/12 P \OML/cmm/m/it/12 C[]\U/matha/m/n/12 p\OML/cmm/m/it/12 X; \U/msb/m/n/12 R[]\U/matha/m/n/12 q\OML/cmm/m/it/12 ; \U/matha/m/n/12 }\OML/cmm/m/it/12 !\U/matha/m/n/12 } ¤ \OML/cmm/m/it/12 cf\U/matha/m/n/12 u ^^P \OML/cmm/m/it/12 c []\U/matha/m/n/12 t\OML/cmm/m/it/12 L\U/matha/m/n/12 p\OML/cmm/m/it/12 !\U/matha/m/n/12 q [] \OML/cmm/m/it/12 ! \U/matha/m/n/12 P \OML/cmm/m/it/12 C[]\U/matha/m/n/12 p\OML/cmm/m/it/12 X; \U/msb/m/n/12 R[]\U/matha/m/n/12 q\OML/cmm/m/it/12 ; \U/matha/m/n/12 }\OML/cmm/m/it/12 !\U/matha/m/n/12 } ¤ \OML/cmm/m/it/12 f\U/matha/m/n/12 u ^^P \OML/cmm/m/it/12 c^^U\U/matha/m/n/12 p\OML/cmm/m/it/12 f\U/matha/m/n/12 q
+ []
+
+
+
+[318]
+
+[319]
+
+[320]
+
+[321]
+
+[322]
+
+[323]))
+
+[324]
+\openout2 = `src/08-ext-res/ext-res.aux'.
+
+ (./src/08-ext-res/ext-res.tex
+Chapter 7.
+(./src/08-ext-res/taylor_thm_integral_remainder.tex
+Overfull \hbox (85.42036pt too wide) detected at line 27
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[325
+
+
+
+
+]
+Overfull \hbox (9.19711pt too wide) detected at line 39
+\OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q ^^P [] []p\OML/cmm/m/it/12 x \U/matha/m/n/12 ^^A \OML/cmm/m/it/12 a\U/matha/m/n/12 q[] ^^@ \OML/cmm/m/it/12 m [] [] [][]\U/matha/m/n/12 p\OT1/cmr/m/n/12 1 \U/matha/m/n/12 ^^A \OML/cmm/m/it/12 t\U/matha/m/n/12 q[] []  [] \OML/cmm/m/it/12 t:
+ []
+
+
+
+[326]
+Overfull \hbox (131.48965pt too wide) detected at line 64
+[]
+ []
+
+
+Overfull \hbox (58.78041pt too wide) detected at line 78
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[327]
+Overfull \hbox (5.93326pt too wide) detected at line 93
+\OML/cmm/m/it/12 f\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q ^^P [] []p\OML/cmm/m/it/12 x \U/matha/m/n/12 ^^A \OML/cmm/m/it/12 a\U/matha/m/n/12 q[] ^^@ \OML/cmm/m/it/12 m [] [] [][]\U/matha/m/n/12 p\OT1/cmr/m/n/12 1 \U/matha/m/n/12 ^^A \OML/cmm/m/it/12 t\U/matha/m/n/12 q[] []  [] \OML/cmm/m/it/12 t
+ []
+
+
+Underfull \vbox (badness 3746) has occurred while \output is active []
+
+
+
+[328]
+
+[329]
+
+[330]
+Overfull \hbox (101.44914pt too wide) detected at line 193
+[]
+ []
+
+
+
+[331]) (./src/08-ext-res/whitney-decomposition.tex
+
+[332]
+
+[333]
+
+[334]
+
+[335]
+
+[336]
+
+[337]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[338]
+
+[339]) (./src/08-ext-res/whitney-partition-of-unity.tex
+
+[340]
+
+[341]
+
+[342]
+
+[343]
+
+[344]
+
+[345]
+Overfull \hbox (19.22357pt too wide) detected at line 252
+[] \U/matha/m/n/12 ¤ |B[]\OML/cmm/m/it/12 S\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q| ¤ \OT1/cmr/m/n/12 12[] [] \U/matha/m/n/12 |B[]\OML/cmm/m/it/12 '[]\U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q| ¤ \OT1/cmr/m/n/12 12[]\OML/cmm/m/it/12 C[]  [] `\U/matha/m/n/12 p\OML/cmm/m/it/12 Q[]\U/matha/m/n/12 q[] ¤ \OT1/cmr/m/n/12 12[]\OML/cmm/m/it/12 C[]\OT1/cmr/m/n/12 4\OML/cmm/m/it/12 `\U/matha/m/n/12 p\OML/cmm/m/it/12 Q[]\U/matha/m/n/12 q[]
+ []
+
+
+
+[346]
+
+[347]
+
+[348]
+
+[349]
+Overfull \hbox (30.13219pt too wide) detected at line 357
+[]
+ []
+
+
+LaTeX Warning: Reference `lem:integral_of_product_of_bump_functions' on page 350 undefined on input line 371.
+
+
+LaTeX Warning: Reference `lem:integral_of_product_of_bump_functions' on page 350 undefined on input line 371.
+
+
+
+[350]) (./src/08-ext-res/whitney-extension-theorem.tex
+
+[351]
+
+[352]
+Overfull \hbox (9.95792pt too wide) in paragraph at lines 74--80
+[]\OT1/cmr/m/n/12 Finally, we will show that $\OML/cmm/m/it/12 J[]\U/matha/m/n/12 p\OML/cmm/m/it/12 K\U/matha/m/n/12 q$ \OT1/cmr/m/n/12 is com-plete with re-spect to this norm. If $[][]$
+ []
+
+
+Overfull \hbox (3.8202pt too wide) in paragraph at lines 84--85
+[][]\OT1/cmr/bx/n/12 Definition 7.3.4 \OT1/cmr/m/n/12 (For-mal Tay-lor Poly-no-mial, For-mal Deriva-tive)\OT1/cmr/bx/n/12 . []\OT1/cmr/m/n/12 Let $\OML/cmm/m/it/12 A \U/matha/m/n/12 „ \U/msb/m/n/12 R[]$ \OT1/cmr/m/n/12 be a nonempty
+ []
+
+
+
+[353]
+
+[354]
+Overfull \hbox (2.75902pt too wide) in paragraph at lines 162--164
+[][]\OT1/cmr/bx/n/12 Exercise 7.3.3 \OT1/cmr/m/n/12 (For-mal Deriva-tive of For-mal Tay-lor Poly-no-mial)\OT1/cmr/bx/n/12 . []\OT1/cmr/m/n/12 Let $\OML/cmm/m/it/12 A \U/matha/m/n/12 „ \U/msb/m/n/12 R[]$ \OT1/cmr/m/n/12 be a nonempty
+ []
+
+
+
+[355]
+
+[356]
+
+[357]
+Overfull \hbox (69.70164pt too wide) detected at line 272
+\U/matha/m/n/12 } ^^D }[] [] \OMS/cmsy/m/n/12 W[]\U/matha/m/n/12 p\OML/cmm/m/it/12 K\U/matha/m/n/12 q Ñ r\OT1/cmr/m/n/12 0\OML/cmm/m/it/12 ; \U/matha/m/n/12 8q\OML/cmm/m/it/12 ;  [][] []\U/matha/m/n/12 ^^P }\OML/cmm/m/it/12 f[]\U/matha/m/n/12 }[] ^^@ [] [] \OML/cmm/m/it/12 :
+ []
+
+
+Overfull \hbox (37.8508pt too wide) detected at line 282
+[][] \U/matha/m/n/12 p\OML/cmm/m/it/12 x\U/matha/m/n/12 q ^^P p\OML/cmm/m/it/12 R[]f[]\U/matha/m/n/12 q[]p\OML/cmm/m/it/12 x\U/matha/m/n/12 q ^^@ p\OML/cmm/m/it/12 R[]g[]\U/matha/m/n/12 q[]p\OML/cmm/m/it/12 x\U/matha/m/n/12 q ^^P \OML/cmm/m/it/12 o\U/matha/m/n/12 p}\OML/cmm/m/it/12 x \U/matha/m/n/12 ^^A \OML/cmm/m/it/12 a\U/matha/m/n/12 }q [] \OML/cmm/m/it/12 x \U/matha/m/n/12 Ñ \OML/cmm/m/it/12 a;  []x; a \U/matha/m/n/12 P \OML/cmm/m/it/12 K:
+ []
+
+
+Overfull \hbox (62.07315pt too wide) detected at line 297
+[]
+ []
+
+
+
+[358]
+Overfull \hbox (89.8595pt too wide) detected at line 304
+[]
+ []
+
+
+LaTeX Warning: Reference `ex:jets_are_banach_spaces' on page 359 undefined on input line 316.
+
+
+
+[359]
+
+[360]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 393.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 393.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 393.
+
+
+
+[361]
+<figures/bierstone.png, id=3033, 355.3275pt x 231.86626pt>
+File: figures/bierstone.png Graphic file (type png)
+<use figures/bierstone.png>
+Package pdftex.def Info: figures/bierstone.png  used on input line 431.
+(pdftex.def)             Requested size: 355.32661pt x 231.86568pt.
+
+
+[362]) (./src/08-ext-res/whitney-extension-proof.tex
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 2.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 2.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 2.
+
+
+
+[363 <./figures/bierstone.png>]
+Overfull \hbox (7.24617pt too wide) in paragraph at lines 54--56
+[]\OT1/cmr/m/n/12 Suppose to-wards a con-tra-dic-tion that there ex-ists $\OML/cmm/m/it/12 t[] \U/matha/m/n/12 ¡ [] \OML/cmm/m/it/12 A$ \OT1/cmr/m/n/12 such that $\OML/cmm/m/it/12 !\U/matha/m/n/12 p\OML/cmm/m/it/12 t[]\U/matha/m/n/12 q ¡ \OML/cmm/m/it/12 ^^Z\U/matha/m/n/12 p[] \OML/cmm/m/it/12 A\U/matha/m/n/12 q$\OT1/cmr/m/n/12 .
+ []
+
+
+Overfull \hbox (14.48909pt too wide) in paragraph at lines 59--62
+\OT1/cmr/m/n/12 Note that $[]$ is a con-tin-u-ous func-tion since $[]\U/matha/m/n/12 |[] ^^P \OML/cmm/m/it/12 !\U/matha/m/n/12 |[]$ \OT1/cmr/m/n/12 is con-tin-u-ous and $[]\U/matha/m/n/12 p[] \OML/cmm/m/it/12 A\U/matha/m/n/12 q ^^P
+ []
+
+
+
+[364]
+
+LaTeX Warning: Reference `lem:whitney_decomposition' on page 365 undefined on input line 90.
+
+
+LaTeX Warning: Reference `lem:whitney_partition_of_unity' on page 365 undefined on input line 92.
+
+
+Overfull \hbox (8.8507pt too wide) in paragraph at lines 90--93
+[]\OT1/cmr/m/n/12 Assume that $\OML/cmm/m/it/12 A \U/matha/m/n/12 €
+ []
+
+
+
+[365]
+
+LaTeX Warning: Reference `lem:whitney_decomposition' on page 366 undefined on input line 108.
+
+
+LaTeX Warning: Reference `lem:whitney_decomposition' on page 366 undefined on input line 111.
+
+
+Overfull \hbox (20.21455pt too wide) in paragraph at lines 135--137
+[]\OT1/cmr/m/n/12 We claim that there ex-ists a con-stant $\OML/cmm/m/it/12 C \U/matha/m/n/12 ¡ \OT1/cmr/m/n/12 0$ which only de-pends on $\OML/cmm/m/it/12 m$\OT1/cmr/m/n/12 , $\OML/cmm/m/it/12 n$\OT1/cmr/m/n/12 , and $[][] []\U/matha/m/n/12 p\OML/cmm/m/it/12 y; A\U/matha/m/n/12 q$
+ []
+
+
+
+[366]
+Overfull \hbox (99.57999pt too wide) detected at line 158
+[]
+ []
+
+
+Overfull \hbox (53.91379pt too wide) detected at line 166
+[]
+ []
+
+
+
+[367]
+Overfull \hbox (141.66458pt too wide) detected at line 207
+[]
+ []
+
+
+
+[368]
+
+[369]
+Overfull \hbox (5.63875pt too wide) detected at line 237
+[] \U/matha/m/n/12 ¤ \OT1/cmr/m/n/12 4[]\OML/cmm/m/it/12 e[] \U/matha/m/n/12 ^^D \OML/cmm/m/it/12 !\U/matha/m/n/12 p}\OML/cmm/m/it/12 a \U/matha/m/n/12 ^^A \OML/cmm/m/it/12 b\U/matha/m/n/12 }q ^^D []  @ \OML/cmm/m/it/12 x \U/matha/m/n/12 P \U/msb/m/n/12 R[]\OML/cmm/m/it/12 :
+ []
+
+
+Overfull \hbox (169.97723pt too wide) detected at line 258
+[]
+ []
+
+
+
+[370]
+Overfull \hbox (6.84853pt too wide) detected at line 285
+[]
+ []
+
+
+
+[371]
+
+LaTeX Warning: Reference `lem:whitney_decomposition' on page 372 undefined on input line 345.
+
+
+LaTeX Warning: Reference `lem:whitney_decomposition' on page 372 undefined on input line 345.
+
+
+Overfull \hbox (14.0697pt too wide) detected at line 345
+[]
+ []
+
+
+
+[372]
+Overfull \hbox (72.79214pt too wide) detected at line 376
+[]
+ []
+
+
+
+[373]
+Overfull \hbox (153.22055pt too wide) detected at line 396
+[]
+ []
+
+
+
+[374]
+
+LaTeX Warning: Reference `lem:whitney_decomposition' on page 375 undefined on input line 407.
+
+
+Overfull \hbox (147.81567pt too wide) detected at line 428
+[]
+ []
+
+
+
+[375]) (./src/08-ext-res/whitney-extension-applications.tex
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 7.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 7.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\@@overline' on input line 7.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 7.
+
+
+Overfull \hbox (155.80495pt too wide) detected at line 19
+\OML/cmm/m/it/12 C[]\U/matha/m/n/12 p[]q []^^P []
+ []
+
+
+Overfull \hbox (132.98329pt too wide) detected at line 21
+\OML/cmm/m/it/12 C[]\U/matha/m/n/12 p[]q []^^P [] \OML/cmm/m/it/12 :
+ []
+
+
+
+[376]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 51.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 51.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\@@overline' on input line 51.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 51.
+
+
+
+[377]
+LaTeX Font Info:    Trying to load font information for U+futs on input line 85.
+ (/usr/local/texlive/2025/texmf-dist/tex/latex/fourier/ufuts.fd
+File: ufuts.fd 2024/07/22 Fontinst v1.933 font definitions for U/futs.
+)
+
+[378]
+
+[379]
+
+[380]
+
+[381]
+
+[382]
+
+[383]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `superscript' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\@@overline' on input line 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 357.
+
+
+LaTeX Warning: Reference `rem:natural_inclusion_of_Cm_spaces' on page 384 undefined on input line 361.
+
+
+
+[384]
+
+[385]
+
+[386])) (./main.aux (./src/01-measure-theory/measure-theory.aux) (./src/02-integration/integration.aux) (./src/03-fubini/fubini_ch.aux) (./src/04-differentiation-1/differentiation.aux) (./src/05-differentiation-2/diff-2.aux) (./src/06-riesz/riesz.aux) (./src/08-ext-res/ext-res.aux))
+ ***********
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+ ***********
+
+
+LaTeX Warning: There were undefined references.
+
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 27E6522C148E3DD173D7A7DD6892EE95;21675.
+ ) 
+Here is how much of TeX's memory you used:
+ 27362 strings out of 473190
+ 524122 string characters out of 5715801
+ 909909 words of memory out of 5000000
+ 48888 multiletter control sequences out of 15000+600000
+ 584456 words of font info for 132 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 89i,17n,94p,616b,707s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{theorem.2.4.15} has been referenced but does not exist, replaced by a fixed one
+
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/esint-type1/esint10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/mathabx-type1/matha10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/mathabx-type1/matha12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/mathabx-type1/matha6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/mathabx-type1/matha8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/mathabx-type1/mathb12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/mathabx-type1/mathx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/stmaryrd/stmary10.pfb>
+Output written on main.pdf (390 pages, 1729258 bytes).
+PDF statistics:
+ 3539 PDF objects out of 3580 (max. 8388607)
+ 3028 compressed objects within 31 object streams
+ 1089 named destinations out of 1200 (max. 500000)
+ 846 words of extra memory for PDF output out of 10000 (max. 10000000)
+

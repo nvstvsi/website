@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>area-prereq</title>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '0.8em',
+      packages: {'[+]': ['ams']},
+      macros: {
+        R: '\\mathbb{R}',
+        C: '\\mathbb{C}',
+        N: '\\mathbb{N}',
+        Z: '\\mathbb{Z}',
+        Q: '\\mathbb{Q}',
+        E: '\\mathbb{E}',
+        F: '\\mathbb{F}',
+        S: '\\mathbb{S}',
+        H: '\\mathcal{H}',
+        L: '\\mathcal{L}',
+        dif: '\\,\\mathrm{d}',
+        supp: '\\operatorname{supp}',
+        proj: '\\operatorname{proj}',
+        Id: '\\operatorname{Id}',
+        Span: '\\operatorname{span}',
+        graph: '\\operatorname{graph}',
+        dist: '\\operatorname{dist}',
+        diam: '\\operatorname{diam}',
+        avg: '\\operatorname{avg}',
+        div: '\\operatorname{div}',
+        vol: '\\operatorname{vol}',
+        ord: '\\operatorname{ord}',
+        Chi: '\\mathbf{1}',
+        sub: '\\subseteq',
+        mres: '\\downharpoonright',
+        ddag: '\\ddagger',
+        dag: '\\dagger',
+        norm: ['\\left\\| #1 \\right\\|', 1],
+        abs: ['\\left| #1 \\right|', 1],
+        set: ['\\left\\{ #1 \\right\\}', 1],
+        inner: ['\\langle #1, #2 \\rangle', 2],
+        floor: ['\\lfloor #1 \\rfloor', 1],
+        ceil: ['\\lceil #1 \\rceil', 1],
+        llbracket: '\\unicode{x27E6}',
+        rrbracket: '\\unicode{x27E7}',
+        bigskull: '\\unicode{x1F480}',
+        skull: '\\unicode{x2620}',
+        mathwitch: '\\unicode{x1F9D9}',
+        pumpkin: '\\unicode{x1F383}',
+        mathpumpkin: '\\unicode{x1F383}',
+        bigpumpkin: '\\unicode{x1F383}',
+        mathghost: '\\unicode{x1F47B}',
+        mathcat: '\\unicode{x1F408}',
+        mathbat: '\\unicode{x1F987}',
+        esssup: '\\operatorname{ess\\,sup}',
+        essinf: '\\operatorname{ess\\,inf}',
+        Lip: '\\operatorname{Lip}',
+        pd: ['\\frac{\\partial#1}{\\partial#2}', 2],
+        od: ['\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}', 2],
+        dashint: '\\mathchoice{\\rlap{-}\\!\\int}{\\rlap{\\raise.15ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}',
+        eurologo: '\\unicode{x20AC}',
+        starredbullet: '\\unicode{x2726}',
+        grimace: '\\unicode{x1F62C}',
+        textthing: '\\unicode{x2639}',
+        noway: '\\unicode{x26D4}',
+        warning: '\\unicode{x26A0}',
+        danger: '\\unicode{x26A0}',
+        textxswup: '\\unicode{x2195}',
+        textxswdown: '\\unicode{x2195}',
+        decoone: '\\unicode{x2756}',
+        decotwo: '\\unicode{x2767}',
+        decothreeleft: '\\unicode{x2619}',
+        decothreeright: '\\unicode{x2767}',
+        decofourleft: '\\unicode{x261A}',
+        decofourright: '\\unicode{x261B}',
+        floweroneleft: '\\unicode{x2740}',
+        floweroneright: '\\unicode{x2740}',
+        lefthand: '\\unicode{x261C}',
+        righthand: '\\unicode{x261E}',
+        decosix: '\\unicode{x2766}',
+        bomb: '\\unicode{x1F4A3}',
+        caution: '\\unicode{x2621}',
+        leftblackhand: '\\unicode{x261A}',
+        rightblackhand: '\\unicode{x261B}',
+        leafleft: '\\unicode{x2618}',
+        leafright: '\\unicode{x2618}',
+        leafNW: '\\unicode{x2618}',
+        leafNE: '\\unicode{x2618}',
+        leafSE: '\\unicode{x2618}',
+        leafSW: '\\unicode{x2618}',
+        aldineleft: '\\unicode{x2619}',
+        aldineright: '\\unicode{x2767}',
+        aldine: '\\unicode{x2766}',
+        aldinesmall: '\\unicode{x2767}',
+        aldinesmallrevert: '\\unicode{x2619}',
+        aldinesmallup: '\\unicode{x2766}',
+        grappe: '\\unicode{x2766}',
+        rightgrappe: '\\unicode{x2767}',
+        leftgrappe: '\\unicode{x2619}',
+        oldpilcrowone: '\\unicode{x00B6}',
+        oldpilcrowtwo: '\\unicode{x00B6}',
+        oldpilcrowthree: '\\unicode{x00B6}',
+        oldpilcrowfour: '\\unicode{x00B6}',
+        oldpilcrowfive: '\\unicode{x00B6}',
+        oldpilcrowsix: '\\unicode{x00B6}'
+      }
+    },
+    startup: {
+      pageReady: () => {
+        return MathJax.startup.defaultPageReady().then(() => {
+          console.log('MathJax ready');
+        });
+      }
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+  <script>
+  (function() {
+    window.addEventListener('beforeunload', function() {
+      saveProofState();
+      saveCollapsibleState();
+    });
+    
+    const eventSource = new EventSource('http://localhost:35729/reload-stream');
+    
+    eventSource.onmessage = function(event) {
+      if (event.data === 'reload') {
+        console.log('📝 File updated, saving state and reloading...');
+        saveProofState();
+        saveCollapsibleState();
+        setTimeout(() => {
+          window.location.reload();
+        }, 50);
+      }
+    };
+    
+    eventSource.onerror = function() {
+      console.log('⚠️  Auto-reload server not available. Run node watch.js to enable auto-reload.');
+      eventSource.close();
+    };
+    
+    console.log('🔄 Auto-reload enabled');
+  })();
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+    
+    /* Layout with sidebar */
+    .page-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      width: 280px;
+      background: #fff;
+      border-right: 1px solid #e0e0e0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px 0;
+      font-size: 14px;
+    }
+    
+    .sidebar-header {
+      padding: 15px 20px 25px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .sidebar-header h1 {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 5px 0;
+    }
+    
+    .sidebar-header .subtitle {
+      font-size: 0.85em;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .sidebar-header .back-link {
+      display: block;
+      font-size: 0.8em;
+      color: #666;
+      text-decoration: none;
+      margin-top: 12px;
+    }
+    
+    .sidebar-header .back-link:hover {
+      color: #1a1a1a;
+    }
+    
+    .sidebar-nav {
+      padding: 10px 0;
+    }
+    
+    .chapter-group {
+      margin-bottom: 2px;
+    }
+    
+    .chapter-title {
+      padding: 12px 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chapter-title:hover {
+      background: #f5f5f5;
+    }
+    
+    .chapter-title .toggle {
+      font-size: 0.65em;
+      color: #999;
+      transition: transform 0.2s;
+    }
+    
+    .chapter-group.expanded .chapter-title .toggle {
+      transform: rotate(90deg);
+    }
+    
+    .section-list {
+      display: none;
+      padding: 5px 0;
+      background: #f8f8f8;
+    }
+    
+    .chapter-group.expanded .section-list {
+      display: block;
+    }
+    
+    .section-link {
+      display: block;
+      padding: 8px 20px 8px 35px;
+      font-size: 0.85em;
+      color: #555;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+    }
+    
+    .section-link:hover {
+      background: #f0f0f0;
+      color: #1a1a1a;
+    }
+    
+    .section-link.active {
+      background: #e8e8e8;
+      border-left-color: #333;
+      color: #000;
+      font-weight: 500;
+    }
+    
+    /* Main content area */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      max-width: 900px;
+      padding: 40px 60px;
+    }
+    
+    @media (max-width: 1100px) {
+      .sidebar {
+        width: 240px;
+      }
+      .main-content {
+        margin-left: 240px;
+        padding: 30px 40px;
+      }
+    }
+    
+    @media (max-width: 800px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+      .page-layout {
+        flex-direction: column;
+      }
+    }
+    
+    h2, h3, h4 {
+      margin-top: 2em;
+      margin-bottom: 0.75em;
+      color: #000;
+      font-weight: 600;
+    }
+    h2 { font-size: 1.5em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.1em; }
+    p {
+      margin: 1em 0;
+      text-indent: 2em;
+    }
+    p:first-of-type,
+    h2 + p,
+    h3 + p,
+    h4 + p,
+    .theorem-box + p,
+    .proof-box + p {
+      text-indent: 0;
+    }
+    .noindent + p,
+    p:has(> .noindent:first-child) {
+      text-indent: 0 !important;
+    }
+    .noindent {
+      display: none;
+    }
+    .theorem-box {
+      margin: 1.75em 0;
+      padding: 1.25em;
+      border-left: 5px solid #16a34a;
+      background: linear-gradient(to top, #bbf7d0 0%, #d1fae5 100%);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .definition-box { border-left-color: #16a34a; background: linear-gradient(to top, #d1fae5 0%, #ecfdf5 100%); }
+    .lemma-box { border-left-color: #1e3a8a; background: linear-gradient(to top, #bfdbfe 0%, #dbeafe 100%); }
+    .corollary-box { border-left-color: #9333ea; background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%); }
+    .proposition-box { border-left-color: #dc2626; background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%); }
+    .remark-box { border-left-color: #64748b; background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%); }
+    .example-box { border-left-color: #0891b2; background: linear-gradient(to top, #a5f3fc 0%, #cffafe 100%); }
+    .construction-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .notation-box { border-left-color: #ca8a04; background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%); }
+    .exercise-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .problem-box { border-left-color: #ec4899; background: linear-gradient(to top, #fbcfe8 0%, #fce7f3 100%); }
+    .theorem-header {
+      margin-bottom: 0.75em;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+    .theorem-header.clickable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .theorem-header.clickable:hover {
+      background: rgba(0,0,0,0.03);
+      margin: -0.5em -0.75em 0.75em -0.75em;
+      padding: 0.5em 0.75em;
+      border-radius: 4px;
+    }
+    .collapsible-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      margin-right: 0.5em;
+      color: #6b7280;
+    }
+    .collapsible-box.collapsed .collapsible-icon {
+      transform: rotate(-90deg);
+    }
+    .collapsible-content {
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+    }
+    .collapsible-box.collapsed .collapsible-content {
+      display: none;
+    }
+    .theorem-content {
+      padding-left: 0.5em;
+      line-height: 1.8;
+    }
+    .proof-box {
+      margin: 1.5em 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .proof-header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      border-radius: 6px 6px 0 0;
+    }
+    .proof-toggle {
+      width: 100%;
+      padding: 0.85em 1.25em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      transition: background 0.15s;
+    }
+    .proof-toggle:hover { background: rgba(0,0,0,0.03); }
+    .proof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      color: #6b7280;
+    }
+    .proof-box.collapsed .proof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .proof-content {
+      padding: 1.25em;
+      line-height: 1.8;
+    }
+    .proof-box.collapsed .proof-content {
+      display: none;
+    }
+    .proof-end {
+      float: right;
+      font-size: 1.3em;
+      margin-left: 0.5em;
+      color: #374151;
+    }
+    .subproof {
+      margin: 1em 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #f9fafb;
+    }
+    .subproof-header {
+      background: linear-gradient(to bottom, #f9fafb 0%, #f3f4f6 100%);
+      border-bottom: 1px solid #d1d5db;
+      border-radius: 4px 4px 0 0;
+    }
+    .subproof-toggle {
+      width: 100%;
+      padding: 0.6em 1em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: background 0.15s;
+    }
+    .subproof-toggle:hover {
+      background: rgba(0,0,0,0.03);
+    }
+    .subproof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.7em;
+      color: #6b7280;
+    }
+    .subproof.collapsed .subproof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .subproof-content {
+      padding: 1em;
+      line-height: 1.7;
+    }
+    .subproof.collapsed .subproof-content {
+      display: none;
+    }
+    .ref-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 0.15em;
+      border-radius: 2px;
+    }
+    .ref-link:hover {
+      background: #dbeafe;
+      text-decoration: underline;
+    }
+    .ref-unknown {
+      color: #dc2626;
+      font-weight: bold;
+      background: #fee2e2;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+    ol, ul {
+      margin: 1em 0;
+      padding-left: 2.5em;
+      line-height: 1.8;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    .latex-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5em auto;
+    }
+    .latex-figure .latex-image {
+      display: inline-block;
+      margin: 0.5em;
+      vertical-align: middle;
+    }
+    .latex-figure {
+      margin: 2em 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .latex-figure .figure-content {
+      margin-bottom: 0.75em;
+      line-height: normal;
+    }
+    .latex-figure .figure-content > * {
+      vertical-align: middle;
+    }
+    .latex-figure figcaption {
+      font-size: 0.9em;
+      color: #4b5563;
+      font-style: italic;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1>Analysis III</h1>
+        <div class="subtitle">Measure Theory &amp; Integration</div>
+        <a href="../index.html" class="back-link">← Table of Contents</a>
+      </div>
+      <div class="sidebar-nav">
+        <div class="chapter-group expanded">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>1. Measure Theory</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../01-measure-theory/measure-theory.html" class="section-link">Overview</a>
+            <a href="../01-measure-theory/basics.html" class="section-link">Outer Measures</a>
+            <a href="../01-measure-theory/lebesgue-meas.html" class="section-link">Lebesgue Measure</a>
+            <a href="../01-measure-theory/cantor.html" class="section-link">The Cantor Set</a>
+            <a href="../01-measure-theory/measure-spaces.html" class="section-link">Measure Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>2. Integration</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../02-integration/integration.html" class="section-link">Overview</a>
+            <a href="../02-integration/integrals-1.html" class="section-link">Simple Functions</a>
+            <a href="../02-integration/integrals-2.html" class="section-link">General Functions</a>
+            <a href="../02-integration/convergence.html" class="section-link">Convergence Theorems</a>
+            <a href="../02-integration/inequality-party.html" class="section-link">Integral Inequalities</a>
+            <a href="../02-integration/lp_spaces.html" class="section-link">Lᵖ Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>3. Product Measures</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../03-fubini/fubini_ch.html" class="section-link">Overview</a>
+            <a href="../03-fubini/fubini.html" class="section-link">Fubini-Tonelli</a>
+            <a href="../03-fubini/integrals-3.html" class="section-link">Product Measures</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>4. Differentiation I</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../04-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../04-differentiation-1/covering.html" class="section-link">Vitali Covering</a>
+            <a href="../04-differentiation-1/monotone.html" class="section-link">Monotone Functions</a>
+            <a href="../04-differentiation-1/BV_on_R.html" class="section-link">Bounded Variation</a>
+            <a href="../04-differentiation-1/FTOC.html" class="section-link">FTC for Lebesgue</a>
+            <a href="../04-differentiation-1/HL.html" class="section-link">Hardy-Littlewood</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>5. Differentiation I (cont)</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../05-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../05-differentiation-1/r-nik.html" class="section-link">Radon-Nikodym</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>6. Differentiation II</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-differentiation-2/diff-2.html" class="section-link">Overview</a>
+            <a href="../06-differentiation-2/vector-measures.html" class="section-link">Vector Measures</a>
+            <a href="../06-differentiation-2/r-nik.html" class="section-link">Radon-Nikodym</a>
+            <a href="../06-differentiation-2/besi.html" class="section-link">Besicovitch</a>
+            <a href="../06-differentiation-2/densities.html" class="section-link">Densities</a>
+            <a href="../06-differentiation-2/diff-measures.html" class="section-link">Measure Derivatives</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>7. Riesz Representation</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-riesz/riesz.html" class="section-link">Overview</a>
+            <a href="../06-riesz/riesz_functional.html" class="section-link">Riesz Representation</a>
+            <a href="../06-riesz/LCH_spaces.html" class="section-link">LCH Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>8. Integral Formulas</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../07-formulas/formulas.html" class="section-link">Overview</a>
+            <a href="../07-formulas/hausdorff_meas.html" class="section-link">Hausdorff Measures</a>
+            <a href="../07-formulas/lippy.html" class="section-link">Lipschitz Maps</a>
+            <a href="../07-formulas/rademacher.html" class="section-link">Rademacher</a>
+            <a href="../07-formulas/coarea-prereq.html" class="section-link">Coarea Prerequisites</a>
+            <a href="../07-formulas/coarea.html" class="section-link">Coarea Formula</a>
+            <a href="../07-formulas/area-prereq.html" class="section-link">Area Prerequisites</a>
+            <a href="../07-formulas/area-formula.html" class="section-link">Area Formula</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>9. Extension Results</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../08-ext-res/ext-res.html" class="section-link">Overview</a>
+            <a href="../08-ext-res/taylor_thm_integral_remainder.html" class="section-link">Taylor's Theorem</a>
+            <a href="../08-ext-res/whitney-cover.html" class="section-link">Whitney Covering</a>
+            <a href="../08-ext-res/whitney-partition-of-unity.html" class="section-link">Partition of Unity</a>
+            <a href="../08-ext-res/whitney-decomposition.html" class="section-link">Decomposition</a>
+            <a href="../08-ext-res/whitney-extension-theorem.html" class="section-link">Extension Theorem</a>
+            <a href="../08-ext-res/whitney-extension-proof.html" class="section-link">Extension Proof</a>
+            <a href="../08-ext-res/whitney-extension-applications.html" class="section-link">Applications</a>
+            <a href="../08-ext-res/whitney-extension.html" class="section-link">Summary</a>
+            <a href="../08-ext-res/more-bump.html" class="section-link">More Bump Functions</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <main class="main-content">
+      <h2>Linear Algebra Prerequisites</h2>
+<p>Here we collect some results which will be used in our discussion and proof of the area formula.
+All of this could be done in a greater generality, but we will restrict ourselves to linear maps between Euclidean spaces for simplicity.</p>
+<h3>Review</h3>
+<div class="theorem-box definition-box" id="def:orthogonal_matrix">
+  <div class="theorem-header"><strong>Definition ?</strong> (Orthogonal Map, Symmetric Map, Adjoint Map)</div>
+  <div class="theorem-content">A linear map $R : \R^n \to \R^m$ is called <strong>orthogonal</strong> if it preserves the inner product, i.e.
+    \[ \langle R(x), R(y) \rangle = \langle x, y \rangle \quad \text{ for all } x, y \in \R^n. \]
+    The set of all orthogonal linear maps $\R^n \to \R^m$ is denoted $O(n,m)$.
+    We also set $O(n) := O(n,n)$.
+<p><div style="margin: 1em 0;"></div></p>
+<p><span class="noindent"></span>A linear map $S : \R^n \to \R^n$ is called <strong>symmetric</strong> if
+    \[ \langle S(x), y \rangle = \langle x, S(y) \rangle \quad \text{ for all } x, y \in \R^n. \]</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p><span class="noindent"></span>Given a linear map $T : \R^n \to \R^m$, the <strong>adjoint</strong> of $T$ is the unique linear map $T^* : \R^m \to \R^n$ such that
+    \[ \langle T(x), y \rangle = \langle x, T^*(y) \rangle \quad \text{ for all } x \in \R^n, y \in \R^m. \]</div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:orthogonal_properties">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Linear Algebra Review)</div>
+  <div class="theorem-content"><ol style="list-style-type: lower-roman;"><li>$A^{**} = A$ for each linear map $A : \R^n \to \R^m$.
+        </li><li>$(AB)^* = B^* A^*$ for each pair of linear maps $A : \R^n \to \R^m$ and $B : \R^m \to \R^k$.
+        </li><li>$R \in O(n,m)$ if and only if $R^* R = \operatorname{id}_{\R^n}$.
+        </li><li>If $R \in O(n,m)$ then $n \leq m$ and $R R^*(y) = y$ for all $y \in \operatorname{im}(R)$.
+        </li><li>$R \in O(n)$ if and only if $R^{-1} = R^*$.
+        </li><li>A linear map $S : \R^n \to \R^n$ is symmetric if and only if $S = S^*$.</li></ol></div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-0">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-0')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-0">
+    <ol style="list-style-type: lower-roman;"><li>Let $A: \R^n \to \R^m$ be a linear map. Then for each $x \in \R^n$ and $y \in \R^m$, we have
+            \begin{align*}
+                \langle A^{**}(x), y \rangle &= \langle x, A^*(y) \rangle \\
+                    &= \langle A(x), y \rangle.
+            \end{align*}
+            Since this holds for all $x$ and $y$, we have $A^{**} = A$.
+<p></li><li>Let $A : \R^n \to \R^m$ and $B : \R^m \to \R^k$ be linear maps. Then for each $x \in \R^n$ and $y \in \R^k$, we have
+            \begin{align*}
+                \langle (AB)^*(y), x \rangle &= \langle y, AB(x) \rangle \\
+                    &= \langle B^*(y), A(x) \rangle \\
+                    &= \langle A^* B^*(y), x \rangle.
+            \end{align*}
+            Since this holds for all $x$ and $y$, we have $(AB)^* = B^* A^*$.</p>
+<p></li><li>Suppose $R \in O(n,m)$. Then for each $x, y \in \R^n$, we have
+            \[ \langle R^* R(x), y \rangle = \langle R(x), R(y) \rangle = \langle x, y \rangle. \]
+            Since this holds for all $x$ and $y$, we have $R^* R = \operatorname{id}_{\R^n}$.</p>
+<p>Conversely, suppose $R^* R = \operatorname{id}_{\R^n}$. Then for each $x, y \in \R^n$, we have
+            \[ \langle R(x), R(y) \rangle = \langle R^* R(x), y \rangle = \langle x, y \rangle. \]
+            Since this holds for all $x$ and $y$, we see that $R$ is orthogonal.</p>
+<p></li><li>Suppose $R \in O(n,m)$. By exercise (iii), we have $R^* R = \operatorname{id}_{\R^n}$.
+            Then note that $R^* : \R^m \to \R^n$ is surjective (since $R^* R$ is the identity on $\R^n$, and hence surjective).
+            Thus, by the rank-nullity theorem, we have
+            \[ m = \dim(\ker(R^*)) + \dim(\operatorname{im}(R^*)) = \dim(\ker(R^*)) + n, \]
+            so $n \leq m$.</p>
+<p>Now let $y \in \operatorname{im}(R)$. Then there exists $x \in \R^n$ such that $y = R(x)$.
+            Thus,
+            \[ R R^*(y) = R R^* R(x) = R(x) = y \]
+            as desired.</p>
+<p></li><li>Suppose $R \in O(n)$. Then we have $R^* R = \operatorname{id}_{\R^n}$ by part (iii). Multiplying both sides on the left by $R^{-1}$, we have $R^{-1} = R^*$.</p>
+<p>Conversely, suppose $R^{-1} = R^*$. Then we have
+            \[ R^* R = R^{-1} R = \operatorname{id}_{\R^n}. \]
+            By part (iii), we see that $R$ is orthogonal.</p>
+<p></li><li>Suppose $S:\R^n \to \R^n$ is symmetric. Then for each $x, y \in \R^n$, we have
+            \[ \langle S(x), y \rangle = \langle x, S(y) \rangle = \langle x, S^*(y) \rangle. \]
+            Since this holds for all $x$ and $y$, we have $S = S^*$.</p>
+<p>Conversely, suppose $S = S^*$. Then for each $x, y \in \R^n$, we have
+            \[ \langle S(x), y \rangle = \langle x, S^*(y) \rangle = \langle x, S(y) \rangle. \]
+            Since this holds for all $x$ and $y$, we see that $S$ is symmetric.</li></ol>
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>We will also recall the Spectral Decomposition Theorem for symmetric matrices, without proof.</p>
+<div class="theorem-box theorem-box" id="thm:spectral_decomposition">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Spectral Decomposition Theorem)</div>
+  <div class="theorem-content">For each symmetric linear map $S : \R^n \to \R^n$, there exists an orthogonal map $R \in O(n)$ and diagonal map $D : \R^n \to \R^n$ such that
+    \[ S = R D R^{-1}. \]
+    The diagonal entries of $D$ are the eigenvalues of $S$, and the columns of $R$ are the corresponding orthonormal eigenvectors of $S$.</div>
+</div>
+<div class="theorem-box remark-box collapsible-box collapsed" id="rem:spectral_decomposition" data-collapsible-id="collapsible-rem:spectral_decomposition">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-rem:spectral_decomposition')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong> (Spectral Decomposition)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-rem:spectral_decomposition">In other words, the Spectral Decomposition Theorem states that every symmetric linear map $S : \R^n \to \R^n$ has an orthonormal basis of eigenvectors $\{ v_1, \ldots, v_n \}$ with corresponding real eigenvalues $\lambda_1, \ldots, \lambda_n$ such that
+    \[ S = \sum_{j=1}^n \lambda_j v_j\otimes v_j \]
+    where $v_j \otimes v_j$ is the linear map defined by
+    \[ (v_j \otimes v_j)(x) := \langle x, v_j \rangle v_j. \]</div>
+</div>
+<p>We will use the Spectral Decomposition Theorem to prove the Polar Decomposition Theorem.</p>
+<div class="theorem-box theorem-box" id="thm:polar_decomposition">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Polar Decomposition Theorem)</div>
+  <div class="theorem-content">Let $T : \R^n \to \R^m$ be a linear map.
+    <ol><li>If $n \leq m$, then there exists an orthogonal map $R \in O(n,m)$ and a symmetric map $S : \R^n \to \R^n$ such that
+            \[ T = R S. \]
+        </li><li>If $n \geq m$, then there exists an orthogonal map $R \in O(m,n)$ and a symmetric map $S : \R^m \to \R^m$ such that
+            \[ T = S R^*. \]</li></ol></div>
+</div>
+<p>You should think of this as being an abstraction of the polar form of complex numbers, where multiplication by a complex number is decomposed into a rotation (an orthogonal map) and a scaling (a symmetric map).</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-1">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-1')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-1">
+    Suppose $n \leq m$. Then note that $T^* T : \R^n \to \R^n$ is a symmetric linear map since 
+    \[ (T^* T)^* = T^* (T^*)^* = T^* T \]
+    by exercise <span class="ref-unknown" title="Reference not found: ex:orthogonal_properties">[ex:orthogonal_properties?]</span> (ii) and (i).
+    Also note that $T^* T$ is positive semi-definite, since for each $x \in \R^n$, we have
+    \[ \langle T^* T(x), x \rangle = \langle T(x), T(x) \rangle = \|T(x)\|^2 \geq 0. \]
+    Hence there are non-negative eigenvalues $\lambda_1, \ldots, \lambda_n \geq 0$ of $T^* T$ with corresponding orthonormal eigenvectors $v_1, \ldots, v_n$ which form an orthonormal basis of $\R^n$ by the Spectral Decomposition Theorem <span class="ref-unknown" title="Reference not found: thm:spectral_decomposition">[thm:spectral_decomposition?]</span>.
+    For each $j = 1, \ldots, n$, define
+    \[ \mu_j := \sqrt{\lambda_j} \geq 0. \]
+    If $\mu_j > 0$, define
+    \[ w_j := \frac{1}{\mu_j} T(v_j) \in \R^m. \]
+    If $\mu_j = 0$, then define $w_j \in \R^m$ to be any unit vector orthogonal to all of the previously defined $w_1, \ldots, w_{j-1}$.
+    Then the set $\{w_1, \ldots, w_n\}$ is an orthogonal set in $\R^m$ because for each $i \neq j$, if $\mu_i, \mu_j > 0$, then
+    \[ \langle w_i, w_j \rangle = \frac{1}{\mu_i \mu_j} \langle T(v_i), T(v_j) \rangle = \frac{1}{\mu_i \mu_j} \langle T^* T(v_i), v_j \rangle = \frac{\lambda_j}{\mu_i \mu_j} \langle v_i, v_j \rangle = 0, \]
+    and if one of $\mu_i$ or $\mu_j$ is zero, then the orthogonality follows from the definition of $w_j$.
+<p>Define the linear map $S : \R^n \to \R^n$ by
+    \[ S(v_j) := \mu_j v_j \]
+    and the linear map $R : \R^n \to \R^m$ by
+    \[ R(v_j) := w_j. \]
+    Then for each $j = 1, \ldots, n$, we have
+    \[ R S(v_j) = \mu_j R(v_j) = \mu_j w_j = T(v_j). \]
+    Thus, we have $T = R S$.
+    Also, note that $S$ is symmetric since for each $i, j = 1, \ldots, n$, we have
+    \[ \langle S(v_i), v_j \rangle = \mu_i \langle v_i, v_j \rangle = \mu_j \langle v_i, v_j \rangle = \langle v_i, S(v_j) \rangle. \]
+    Finally, note that $R$ is orthogonal since for each $i, j = 1, \ldots, n$, we have
+    \[ \langle R(v_i), R(v_j) \rangle = \langle w_i, w_j \rangle = \langle v_i, v_j \rangle. \]
+    This completes the proof of part (i).</p>
+<p><div style="margin: 1em 0;"></div>
+    (ii). Suppose $n \geq m$. Then $T^*: \R^m \to \R^n$ is a linear map with $m \leq n$, so by part (i), there exists an orthogonal map $R \in O(m,n)$ and a symmetric map $S : \R^m \to \R^m$ such that
+    \[ T^* = R S. \]
+    Taking adjoints of both sides, we have
+    \[ T = S R^*. \]
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box definition-box" id="def:jacobian">
+  <div class="theorem-header"><strong>Definition ?</strong> (Jacobian of a Linear Map)</div>
+  <div class="theorem-content">Let $T : \R^n \to \R^m$ be a linear map. 
+    <ul><li>If $n \leq m$, then the <em>Jacobian</em> of $T$ is
+            \[ JT := |\det S| \]
+            where $S : \R^n \to \R^n$ is the symmetric map from the polar decomposition $T = R S$ in theorem <span class="ref-unknown" title="Reference not found: thm:polar_decomposition">[thm:polar_decomposition?]</span> (i).
+        </li><li>If $n \geq m$, then the <em>Jacobian</em> of $T$ is
+            \[ JT := |\det S| \]
+            where $S : \R^m \to \R^m$ is the symmetric map from the polar decomposition $T = S R^*$ in theorem <span class="ref-unknown" title="Reference not found: thm:polar_decomposition">[thm:polar_decomposition?]</span> (ii).</li></ul></div>
+</div>
+<div class="theorem-box remark-box collapsible-box collapsed" id="rem:well_defined_jacobian" data-collapsible-id="collapsible-rem:well_defined_jacobian">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-rem:well_defined_jacobian')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong> (Well-Definedness of the Jacobian)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-rem:well_defined_jacobian">At first, it may seem that the definition of the Jacobian in definition <span class="ref-unknown" title="Reference not found: def:jacobian">[def:jacobian?]</span> depends on the choice of polar decomposition of $T$.
+    We show that this is not the case.
+<p>Suppose $n \leq m$, and let $T = R_1 S_1 = R_2 S_2$ be two polar decompositions of $T$ with $R_1, R_2 \in O(n,m)$ and symmetric maps $S_1, S_2 : \R^n \to \R^n$.
+    Then we have
+    \begin{align*}
+        &R_1 S_1 = R_2 S_2 \\
+        & \implies S_1 = R_1^{-1} R_2 S_2 \\
+    \end{align*}
+    so that
+    \begin{align*}
+        \det(S_1) &= \det(R_1^{-1} R_2 S_2) \\
+            &= \det(R_1^{-1}) \det(R_2) \det(S_2) \\
+            &= \pm1 \cdot \pm1 \cdot \det(S_2) \\
+            &= \pm \det(S_2).
+    \end{align*}
+    since all orthogonal maps have determinant $\pm 1$.
+    Thus, we have $|\det(S_1)| = |\det(S_2)|$ and as a result, the Jacobian $JT$ is well-defined.</p>
+<p>A similar argument holds in the case $n \geq m$.</div>
+</div></p>
+<div class="theorem-box proposition-box" id="prop:alt_definition_of_jacobian">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Alternative Definition of the Jacobian)</div>
+  <div class="theorem-content">Let $T : \R^n \to \R^m$ be a linear map. If $n \leq m$, then 
+    \[ JT = \sqrt{\det(T^* T)} \]
+    and if $n \geq m$, then
+    \[ JT = \sqrt{\det(T T^*)}. \]</div>
+</div>
+<p>This is the definition we will use most often.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-2">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-2')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-2">
+    Suppose $n \leq m$. Let $T = R S$ be the polar decomposition of $T$ from theorem <span class="ref-unknown" title="Reference not found: thm:polar_decomposition">[thm:polar_decomposition?]</span> (i) with $R \in O(n,m)$ and symmetric map $S : \R^n \to \R^n$.
+    Then we have $T^* = S^* R^* = S R^*$ by exercise <span class="ref-unknown" title="Reference not found: ex:orthogonal_properties">[ex:orthogonal_properties?]</span> (i) and (vi), so that
+    \[ T^* T = S R^* R S = S \circ \operatorname{id}_{\R^n} \circ S = S\circ S. \]
+    As a result, we have
+    \[ \det(T^* T) = \det(S\circ S) = \det(S)^2 \]
+    so that
+    \[ JT = |\det(S)| = \sqrt{\det(T^* T)}. \]
+<p><div style="margin: 1em 0;"></div></p>
+<p>Now suppose $n \geq m$. Let $T = S R^*$ be the polar decomposition of $T$ from theorem <span class="ref-unknown" title="Reference not found: thm:polar_decomposition">[thm:polar_decomposition?]</span> (ii) with $R \in O(m,n)$ and symmetric map $S : \R^m \to \R^m$.
+    Then we have $T^* = R S$ by exercise <span class="ref-unknown" title="Reference not found: ex:orthogonal_properties">[ex:orthogonal_properties?]</span> (i) and (vi), so that
+    \[ T T^* = S R^* R S = S \circ \operatorname{id}_{\R^m} \circ S = S\circ S. \]
+    Hence
+    \[ \det(T T^*) = \det(S\circ S) = \det(S)^2 \]
+    so that 
+    \[ JT = |\det(S)| = \sqrt{\det(T T^*)}. \]
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>We conclude this section with a nice identity from Linear Algebra, which is a higher dimensional generalization of the Pythagorean theorem.</p>
+<div class="theorem-box exercise-box" id="ex:sum_product_interchange">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Sum and Product Interchange)</div>
+  <div class="theorem-content">Assume $n \leq m$. Let $(a_{j,k})_{1 \leq j \leq n, 1 \leq k \leq m}$ be a matrix of real numbers.
+    Then
+    \[ \prod_{j=1}^n \sum_{k=1}^m a_{j,k} = \sum_{(k_1,\ldots,k_n) \in \{1,\ldots,m\}^n} \prod_{j=1}^n a_{j, k_j} \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-3">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-3')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-3">
+    We prove this statement by induction on $n$.
+<p><div style="margin: 1em 0;"></div>
+    <em>Base Case:</em> $n = 1$. Then on the left side of the desired equation, we have
+    \[ \prod_{j=1}^1 \sum_{k=1}^m a_{j,k} = \sum_{k=1}^m a_{1,k} \]
+    and on the right side of the desired equation, we have
+    \[ \sum_{k \in\{1,\ldots,m\}} \prod_{j=1}^1 a_{j, k} = \sum_{k=1}^m a_{1,k} \]
+    which is the same sum, so the base case holds.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Inductive Step:</em> Assume the statement holds for some $n \geq 1$.
+    Then for $n+1$, we have
+    \begin{align*}
+        \prod_{j=1}^{n+1} \sum_{k=1}^m a_{j,k} &= \left( \prod_{j=1}^n \sum_{k=1}^m a_{j,k} \right) \left( \sum_{k=1}^m a_{n+1, k} \right) \\
+            &= \left( \sum_{(k_1, \ldots, k_n) \in \{1, \ldots, m\}^n} \prod_{j=1}^n a_{j, k_j} \right) \left( \sum_{k=1}^m a_{n+1, k} \right) &&\text{by the inductive hypothesis} \\
+            &= \sum_{(k_1, \ldots, k_n) \in \{1, \ldots, m\}^n} \sum_{k_{n+1}=1}^m \left( \prod_{j=1}^n a_{j, k_j} \right) a_{n+1, k_{n+1}} &&\text{by distributivity} \\
+            &= \sum_{(k_1, \ldots, k_{n+1}) \in \{1, \ldots, m\}^{n+1}} \prod_{j=1}^{n+1} a_{j, k_j}.
+    \end{align*}
+    This completes the inductive step, and thus the proof.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box definition-box" id="def:binet_cauchy_stuff">
+  <div class="theorem-header"><strong>Definition ?</strong></div>
+  <div class="theorem-content">Assume $n \leq m$. Define 
+    \[ \Lambda(n,m) := \{ \lambda : \{1, \ldots, n\} \to \{1, \ldots, m\} \mid \lambda \text{ is strictly increasing} \}. \]
+    For each $\lambda \in \Lambda(n,m)$, define the linear map
+    \[ P_\lambda : \R^m \to \R^n , \quad P_\lambda(x) := (x_{\lambda(1)}, \ldots, x_{\lambda(n)}) \]
+    which is the projection onto the coordinates indexed by $\lambda$.</div>
+</div>
+<div class="theorem-box proposition-box" id="prop:binet_cauchy_identity">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Binet-Cauchy Identity)</div>
+  <div class="theorem-content">Assume $n \leq m$, and let $T : \R^n \to \R^m$ be a linear map.
+    Then 
+    \[ \det(T^* T) = \sum_{\sigma \in \Lambda(n,m)} \det(P_\sigma \circ T)^2. \]</div>
+</div>
+<p>In other words, when $n\leq m$ we can compute $\det(T^* T)$ by summing the squares of the determinants of all $n \times n$ minors of the standard matrix representation of $T$.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-4">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-4')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-4">
+    Let $(t_{i,j})_{1 \leq i,j \leq n}$ be the standard matrix representation of $T : \R^n \to \R^m$, and let $(a_{i,j})_{1 \leq i,j \leq n}$ be the standard matrix representation of $T^* T : \R^n \to \R^n$.
+    Then
+    \[ a_{k,l} = \sum_{j=1}^n t_{j,k} t_{j,l}  \qquad \forall \, 1\leq k,l \leq n. \]
+    By the alternative definition of the determinant from proposition <span class="ref-unknown" title="Reference not found: prop:determinant_alternative_definition">[prop:determinant_alternative_definition?]</span> and the definition of the determinant, we have
+    \[ \det(T^* T) = \sum_{\sigma \in \operatorname{Sym}_n} \operatorname{sgn}(\sigma) \prod_{j=1}^n a_{j, \sigma(j)} \]
+    where $\operatorname{Sym}_n$ is the group of bijections of $\{1, \ldots, n\}$, i.e. $\operatorname{Sym}_n$ is the symmetric group on $n$ elements.
+<p>Continuing the above computation, using the expression for the entries $(a_{i,j})_{1 \leq i,j \leq n}$, we have
+    \begin{align*}
+        \det(T^*T) &= \sum_{\sigma \in \operatorname{Sym}_n} \operatorname{sgn}(\sigma) \prod_{j=1}^n \left( \sum_{k=1}^m t_{k,j} t_{k, \sigma(j)} \right) \\
+            &= \sum_{\sigma \in \operatorname{Sym}_n} \operatorname{sgn}(\sigma) \sum_{(k_1, \ldots, k_n) \in\{1, \ldots, m\}^n} \prod_{j=1}^n t_{k_j, j} t_{k_j, \sigma(j)} \\
+            &= \sum_{(k_1, \ldots, k_n) \in\{1, \ldots, m\}^n} \sum_{\sigma \in \operatorname{Sym}_n} \operatorname{sgn}(\sigma) \prod_{j=1}^n t_{k_j, j} t_{k_j, \sigma(j)}
+    \end{align*}
+    by exercise <span class="ref-unknown" title="Reference not found: ex:sum_product_interchange">[ex:sum_product_interchange?]</span>. Define the bijection
+    \[ \{1, \ldots, m\}^{ \{1,\ldots, n\} } \longrightarrow \{1, \ldots, m\}^n, \qquad
+        \phi \longmapsto (\phi(1), \ldots, \phi(n)) \]
+    and see that if $\phi : \{1, \ldots, n\} \to \{1, \ldots, m\}$ is not injective, then there exist $i \neq j$ such that $\phi(i) = \phi(j)$ and thus the expression
+    \[ \sum_{\sigma\in\operatorname{Sym}_n} \operatorname{sgn}(\sigma) \prod_{j=1}^n t_{\phi(j), j} t_{\phi(j), \sigma(j)} \]
+    is the determinant of a matrix with two identical rows, and is thus zero.</p>
+<p>Therefore the expression for $\det(T^* T)$ above reduces to
+    \[ \det(T^* T) = \sum_{\phi \in \operatorname{inj}(n,m)} \sum_{\sigma \in \operatorname{Sym}_n} \operatorname{sgn}(\sigma) \prod_{j=1}^n t_{\phi(j), j} t_{\phi(j), \sigma(j)} \]
+    where $\operatorname{inj}(n,m)$ is the set of injective maps $\phi : \{1, \ldots, n\} \to \{1, \ldots, m\}$.</p>
+<p>Since each injection $\phi \in \operatorname{inj}(n,m)$ can be uniquely written as $\phi = \lambda \circ \vartheta$ for some $\lambda \in \Lambda(n,m)$ and $\vartheta \in \operatorname{Sym}_n$, we have
+    \begin{align*}
+        \det(T^*T) &= \sum_{\phi \in \operatorname{inj}(n,m)} \sum_{\sigma \in \operatorname{Sym}_n} \operatorname{sgn}(\sigma) \prod_{j=1}^n t_{\phi(j), j} t_{\phi(j), \sigma(j)} \\
+            &= \sum_{\lambda \in \Lambda(n,m)} \sum_{\vartheta \in \operatorname{Sym}_n} \sum_{\sigma \in \operatorname{Sym}_n} \operatorname{sgn}(\sigma) \prod_{j=1}^n t_{\lambda(\vartheta(j)), j} t_{\lambda(\vartheta(j)), \sigma(j)} \\
+            &= \sum_{\lambda \in \Lambda(n,m)} \sum_{\rho \in \operatorname{Sym}_n} \sum_{\vartheta \in \operatorname{Sym}_n} \operatorname{sgn}(\rho) \operatorname{sgn}(\vartheta) \prod_{j=1}^n t_{\lambda(\vartheta(j)), j} t_{\lambda(\vartheta(j)), \rho(\vartheta(j))} \\
+            &= \sum_{\lambda \in \Lambda(n,m)} \left( \sum_{\vartheta \in \operatorname{Sym}_n} \operatorname{sgn}(\vartheta) \prod_{j=1}^n t_{\lambda(\vartheta(j)), j} \right) \left( \sum_{\rho \in \operatorname{Sym}_n} \operatorname{sgn}(\rho) \prod_{j=1}^n t_{\lambda(j), \rho(j)} \right) \\
+            &= \sum_{\lambda \in \Lambda(n,m)} \left( \sum_{\vartheta \in \operatorname{Sym}_n} \operatorname{sgn}(\vartheta) \prod_{j=1}^n t_{\lambda(\vartheta(j)), j} \right)^2 \\
+            &= \sum_{\lambda \in \Lambda(n,m)} \det(P_\lambda \circ T)^2
+    \end{align*}
+    as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box theorem-box" id="thm:area_formula_linear_maps">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Area Formula for Linear Maps)</div>
+  <div class="theorem-content">Assume $n \leq m$, and let $T : \R^n \to \R^m$ be a linear map.
+    Then for each $A \subset \R^n$ we have
+    \[ \H^n(T(A)) = JT \cdot \L^n(A). \]</div>
+</div>
+<p>This gives another interpretation of the Jacobian $JT$ of a linear map $T : \R^n \to \R^m$ when $n \leq m$: it is the factor by which $T$ scales $n$-dimensional Lebesgue measure.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-5">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-5')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-5">
+    Use the Polar Decomposition Theorem <span class="ref-unknown" title="Reference not found: thm:polar_decomposition">[thm:polar_decomposition?]</span> to write $T = R S$ with $R \in O(n,m)$ and symmetric map $S : \R^n \to \R^n$.
+    Then be defintion $JT = |\det(S)|$.
+<p>If $JT = 0$, then $S$ is not invertible, so $\dim(\operatorname{im}(S)) < n$ and thus $\dim(\operatorname{im}(T)) < n$.
+    As a result $\H^n(T(A)) = 0$, so in this case both sides of the desired equation are zero.</p>
+<p>Thus we assume $JT > 0$, so that $S$ is invertible. Then for each $x\in \R^n$ and $r > 0$, we have
+    \begin{align*}
+        \frac{\H^n(T(B(x,r)))}{\L^n(B(x,r))} &= \frac{\H^n( R^* \circ T(B(x,r)))}{\L^n(B(x,r))} \\
+            &=\frac{\L^n(R^*\circ T(B(x,r)))}{\L^n(B(x,r))} \\
+            &= \frac{\L^n(R^* \circ R\circ S(B(x,r)))}{\L^n(B(x,r))} \\
+            &= \frac{\L^n(S(B(x,r)))}{\L^n(B(x,r))} \\
+            &= \frac{r^n \L^n(S(B(x,1)))}{r^n \omega_n} \\
+            &= \frac{\L^n(S(B(x,1)))}{\omega_n} \\
+            &= |\det(S)| = JT. 
+    \end{align*}
+    where we have used the fact that $R^*$ is an isometry $\operatorname{im}(T) \to \R^n$ in the first equality and that
+    \[ \L^n(S(B(x,1))) = |\det(S)| \L^n(B(x,1)) = |\det(S)| \omega_n \]
+    in the last equality.
+    Therefore \[ \H^n(T(B(x,r))) = JT \cdot \L^n(B(x,r)) \tag{$\star$}\]
+    for each $x \in \R^n$ and $r > 0$.</p>
+<p>Define 
+    \[ \nu(A) := \H^n(T(A)) \qquad\forall \,A\subseteq \R^n. \]
+    Then $\nu$ is a Borel regular outer measure on $\R^n$, and we claim that $\nu$ is absolutely continuous with respect to $\L^n$.</p>
+<p>If $A \subset \R^n$ is a set with $\L^n(A) = 0$, then for each $\epsilon > 0$, there exists a countable collection of open balls $\{ B(x_j, r_j) \}_{j=1}^\infty$ such that
+    \[ A \subset \bigcup_{j=1}^\infty B(x_j, r_j) \quad \text{ and } \quad \sum_{j=1}^\infty \L^n(B(x_j, r_j)) < \epsilon. \]
+    Thus, by countable subadditivity of $\nu$ and the calculation $(\star)$, we have
+    \begin{align*}
+        \nu(A) &\leq \sum_{j=1}^\infty \nu(B(x_j, r_j)) \\
+            &= \sum_{j=1}^\infty \H^n(T(B(x_j, r_j))) \\
+            &= \sum_{j=1}^\infty JT \cdot \L^n(B(x_j, r_j)) \\
+            &< JT \cdot \epsilon.
+    \end{align*}
+    Since $\epsilon > 0$ was arbitrary, we have $\nu(A) = 0$, so $\nu$ is absolutely continuous with respect to $\L^n$.</p>
+<p>The Radon-Nikodym derivative of $\nu$ with respect to $\L^n$ is given by
+    \[ D_{\L^n} \nu(x) = \lim_{r\to 0^+} \frac{\nu(B(x,r))}{\L^n(B(x,r))} = JT \]
+    where the first equality holds by the Lebesgue-Radon-Nikodym Theorem <span class="ref-unknown" title="Reference not found: thm:radon_nikodym_theorem_via_densities">[thm:radon_nikodym_theorem_via_densities?]</span>, and the second equality follows from the above calculation $(\star)$.
+    Thus for each Borel set $A \subset \R^n$, we have
+    \[ \nu(A) = \int_A D_{\L^n} \nu(x) \,d\L^n(x) = \int_A JT \,d\L^n(x) = JT \cdot \L^n(A) \]
+    by the Lebesgue-Radon-Nikodym Theorem <span class="ref-unknown" title="Reference not found: thm:radon_nikodym_theorem_via_densities">[thm:radon_nikodym_theorem_via_densities?]</span> again.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+    </main>
+  </div>
+  
+  <script>
+    function toggleChapter(element) {
+      element.parentElement.classList.toggle('expanded');
+    }
+    
+    // Highlight current page in sidebar
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPath = window.location.pathname;
+      const links = document.querySelectorAll('.section-link');
+      links.forEach(link => {
+        if (currentPath.endsWith(link.getAttribute('href').split('/').pop())) {
+          link.classList.add('active');
+          // Expand parent chapter
+          const group = link.closest('.chapter-group');
+          if (group) group.classList.add('expanded');
+        }
+      });
+    });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('Restoring proof collapse states...');
+      try {
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        const currentPage = window.location.pathname;
+        const pageOpen = openProofs[currentPage] || [];
+        
+        console.log('Current page:', currentPage);
+        console.log('Open proof IDs stored:', pageOpen);
+        console.log('Found ' + pageOpen.length + ' open proofs for this page');
+        
+        document.querySelectorAll('.proof-box').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          console.log('Checking proof:', proofId, 'Should be open:', pageOpen.includes(proofId));
+          if (pageOpen.includes(proofId)) {
+            box.classList.remove('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'true');
+          } else {
+            box.classList.add('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        const pageBoxes = openBoxes[currentPage] || [];
+        
+        console.log('Open box IDs stored:', pageBoxes);
+        
+        document.querySelectorAll('.collapsible-box').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          console.log('Checking box:', boxId, 'Should be open:', pageBoxes.includes(boxId));
+          if (pageBoxes.includes(boxId)) {
+            box.classList.remove('collapsed');
+          } else {
+            box.classList.add('collapsed');
+          }
+        });
+        
+        console.log('Proof states restored');
+      } catch (e) {
+        console.error('Error restoring collapse state:', e);
+      }
+    });
+    
+    function toggleProof(proofId) {
+      const proofContent = document.getElementById(proofId);
+      const proofBox = proofContent.closest('.proof-box');
+      proofBox.classList.toggle('collapsed');
+      
+      const button = proofBox.querySelector('.proof-toggle');
+      button.setAttribute('aria-expanded', !proofBox.classList.contains('collapsed'));
+      
+      saveProofState();
+    }
+    
+    function toggleSubproof(subproofId) {
+      const subproofContent = document.getElementById(subproofId);
+      const subproof = subproofContent.closest('.subproof');
+      subproof.classList.toggle('collapsed');
+      
+      const button = subproof.querySelector('.subproof-toggle');
+      button.setAttribute('aria-expanded', !subproof.classList.contains('collapsed'));
+    }
+    
+    function saveProofState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        if (!openProofs[currentPage]) {
+          openProofs[currentPage] = [];
+        }
+        
+        openProofs[currentPage] = [];
+        document.querySelectorAll('.proof-box:not(.collapsed)').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          if (proofId) {
+            openProofs[currentPage].push(proofId);
+          }
+        });
+        
+        localStorage.setItem('openProofs', JSON.stringify(openProofs));
+        console.log('Saved proof state (open proofs):', openProofs[currentPage]);
+      } catch (e) {
+        console.error('Error saving collapse state:', e);
+      }
+    }
+    
+    function toggleCollapsible(collapsibleId) {
+      const content = document.getElementById(collapsibleId);
+      const box = content.closest('.collapsible-box');
+      box.classList.toggle('collapsed');
+      
+      saveCollapsibleState();
+    }
+    
+    function saveCollapsibleState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        if (!openBoxes[currentPage]) {
+          openBoxes[currentPage] = [];
+        }
+        
+        openBoxes[currentPage] = [];
+        document.querySelectorAll('.collapsible-box:not(.collapsed)').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          if (boxId) {
+            openBoxes[currentPage].push(boxId);
+          }
+        });
+        
+        localStorage.setItem('openBoxes', JSON.stringify(openBoxes));
+      } catch (e) {
+        console.error('Error saving box state:', e);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        const proofBoxes = document.querySelectorAll('.proof-box');
+        const anyExpanded = Array.from(proofBoxes).some(box => !box.classList.contains('collapsed'));
+        
+        proofBoxes.forEach(box => {
+          if (anyExpanded) {
+            box.classList.add('collapsed');
+          } else {
+            box.classList.remove('collapsed');
+          }
+        });
+        
+        saveProofState();
+      }
+    });
+    
+    document.querySelectorAll('a.ref-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.background = '#fef3c7';
+          target.style.transition = 'background 0.3s ease';
+          setTimeout(() => { target.style.background = ''; }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

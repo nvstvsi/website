@@ -1,0 +1,462 @@
+\section{Whitney's Extension Theorem}
+
+In this section we present the full version of Whitney's Extension Theorem, which we state somewhat imprecisely as follows.
+
+Let $A \subset \R^n$ be a proper nonempty closed subset, and let $f : A \to \R$ 
+be a continuous function. 
+Then Whitney's Extension Theorem states that $f$ is the restriction of a $C^m$ function $F : \R^n \to \R$ if there is a collection of continuous functions 
+$\{f^{(\alpha)} : \alpha \in \N^n, |\alpha| \leq m\}$ defined on $A$ which satisfy certain compatibility conditions which arise naturally from Taylor's theorem.
+
+\subsection{The Language of Jets}
+
+We have to introduce some technical language in order to get some more properties out of the extension operator. 
+
+\begin{definition}[$m$-jets]
+    \label{def:jets}
+    Let $A \subseteq \R^n$ be a nonempty closed subset, and let $m \in \Z^+$. An \textit{$m$-jet} on $A$ is a collection of continuous functions 
+    $\{f^{(\alpha)} : \alpha\in \N^n \text{ and } |\alpha| \leq m\} \subset C^0(A)$
+    which are indexed by multi-indices of order at most $m$.
+
+    We will commonly denote an $m$-jet on $A$ by $f^\bullet = \left( f^{(\alpha)} \right)_{|\alpha| \leq m}$.
+\end{definition}
+
+The following is the key example of an $m$-jet.
+\begin{example}[Jets from $C^m$ functions]
+    \label{ex:jets_from_Cm_functions}
+    Let $U \subseteq \R^n$ be an open set.
+    Then for each $f\in C^m(U)$ and each compact subset $K \subseteq U$, the collection of functions $\left( D^\alpha f|_K \right)_{|\alpha| \leq m}$ is an $m$-jet on $K$.
+\end{example}
+
+\begin{remark}[How to think about $m$-jets in this context]
+    \label{rmk:how_to_think_about_jets}
+The previous example also shows us how to think about $m$-jets in this context.
+
+Let $A \subseteq \R^n$ be a nonempty closed subset, and let $\{ f^{(\alpha)} : |\alpha| \leq m\}$ be an $m$-jet on $A$.
+Following the example above, we can think of $f^{(0)}$ as the ``original'' function which we are tying to extend, and for each multi-index $\alpha$ with $1 \leq |\alpha| \leq m$, 
+we can think of $f^{(\alpha)}$ as the candidate for the $\alpha^{\text{th}}$ derivative of the extension $F$ on the set $A$.
+\end{remark}
+
+\begin{exercise}[Jets are Banach Spaces]
+    \label{ex:jets_are_normed_vector_spaces}
+    Let $A \subseteq \R^n$ be a nonempty closed subset, and let $m \in \Z^+$.
+    Let $J^m(A)$ be the set of all $m$-jets on $A$.
+    Show that $J^m(A)$ is a vector space with the obvious addition and scalar multiplication operations defined by
+    \[ \left(f^{(\alpha)} + g^{(\alpha)}\right)_{|\alpha| \leq m} := \left(f^{(\alpha)}\right)_{|\alpha| \leq m} + \left(g^{(\alpha)}\right)_{|\alpha| \leq m} \]
+    and
+    \[ \left(c f^{(\alpha)}\right)_{|\alpha| \leq m} := c \left(f^{(\alpha)}\right)_{|\alpha| \leq m} \]
+    for all $c \in \R$ and all $m$-jets $\left(f^{(\alpha)}\right)_{|\alpha| \leq m}$ and $\left(g^{(\alpha)}\right)_{|\alpha| \leq m}$ on $A$.
+    
+    Furthermore, for each compact set $K \subset \R^n$, the function
+    \[ \| \cdot \|_{J^m(K)} : J^m(K) \to [0,\infty), \quad \left\| \left(f^{(\alpha)}\right)_{|\alpha| \leq m} \right\|_{J^m(K)} := \max_{|\alpha| \leq m} \left\| f^{(\alpha)} \right\|_{C^0(K)} \]
+    is a norm on $J^m(K)$, and with this norm $J^m(K)$ is a Banach space.
+\end{exercise}
+
+\begin{proof}
+    The fact that $J^m(A)$ is a vector space with these operations follows immediately from the definition of $m$-jets and the fact that $C^0(A)$ is a vector space.
+
+    Now we will show that $\| \cdot \|_{J^m(K)}$ is a norm on $J^m(K)$.
+    See that if $\left\| \left(f^{(\alpha)}\right)_{|\alpha| \leq m} \right\|_{J^m(K)} = 0$, then $f^{(\alpha)} = 0$ for each $|\alpha| \leq m$, so $\left(f^{(\alpha)}\right)_{|\alpha| \leq m}$ is the zero jet; hence $\| \cdot \|_{J^m(K)}$ is positive definite.
+
+    Now if $\left(f^{(\alpha)}\right)_{|\alpha| \leq m}$ and $c \in \R$, then
+    \[ \left\| c \left(f^{(\alpha)}\right)_{|\alpha| \leq m} \right\|_{J^m(K)} = \max_{|\alpha| \leq m} \left\| c f^{(\alpha)} \right\|_{C^0(K)} = |c| \max_{|\alpha| \leq m} \left\| f^{(\alpha)} \right\|_{C^0(K)} = |c| \left\| \left(f^{(\alpha)}\right)_{|\alpha| \leq m} \right\|_{J^m(K)} \]
+    so $\| \cdot \|_{J^m(K)}$ is absolutely homogeneous.
+
+    Finally, if $\left(f^{(\alpha)}\right)_{|\alpha| \leq m}$ and $\left(g^{(\alpha)}\right)_{|\alpha| \leq m}$ are two $m$-jets on $K$, then
+    \begin{align*}
+        \left\| \left(f^{(\alpha)} + g^{(\alpha)}\right)_{|\alpha| \leq m} \right\|_{J^m(K)} &= \max_{|\alpha| \leq m} \left\| f^{(\alpha)} + g^{(\alpha)} \right\|_{C^0(K)} \\
+            &\leq \max_{|\alpha| \leq m} \left( \left\| f^{(\alpha)} \right\|_{C^0(K)} + \left\| g^{(\alpha)} \right\|_{C^0(K)} \right) \\
+            &\leq \max_{|\alpha| \leq m} \left\| f^{(\alpha)} \right\|_{C^0(K)} + \max_{|\alpha| \leq m} \left\| g^{(\alpha)} \right\|_{C^0(K)} \\
+            &=  \left\| \left(f^{(\alpha)}\right)_{|\alpha| \leq m} \right\|_{J^m(K)} +  \left\| \left(g^{(\alpha)}\right)_{|\alpha| \leq m} \right\|_{J^m(K)}
+    \end{align*}
+    where we have used the triangle inequality for the $C^0$ norm.
+    Therefore $\| \cdot \|_{J^m(K)}$ satisfies the triangle inequality, and hence is a norm on $J^m(K)$.
+
+    Finally, we will show that $J^m(K)$ is complete with respect to this norm.
+    If $\left\{ \left(f^{(\alpha)}_j\right)_{|\alpha| \leq m} \right\}_{j=1}^\infty$ is a Cauchy sequence in $J^m(K)$, then for each multi-index $\alpha$ with $|\alpha| \leq m$,
+    the sequence $\left\{f^{(\alpha)}_j\right\}_{j=1}^\infty$ is a Cauchy sequence in $C^0(K)$ and hence converges to some function $f^{(\alpha)} \in C^0(K)$.
+    The resulting collection of functions $\left(f^{(\alpha)}\right)_{|\alpha| \leq m}$ is an $m$-jet on $K$, 
+    and we see that $\left\{ \left(f^{(\alpha)}_j\right)_{|\alpha| \leq m} \right\}_{j=1}^\infty$ converges to $\left(f^{(\alpha)}\right)_{|\alpha| \leq m}$ in $J^m(K)$.
+    This shows that $J^m(K)$ is complete with respect to the norm $\| \cdot \|_{J^m(K)}$, and hence is a Banach space.
+\end{proof}
+
+\begin{definition}[Formal Taylor Polynomial, Formal Derivative]
+    \label{def:formal_taylor_polynomial}
+    Let $A \subseteq \R^n$ be a nonempty closed subset, and let $f^\bullet = \left( f^{(\alpha)} \right)_{|\alpha| \leq m}$ be an $m$-jet on $A$.
+
+    For each $a \in A$, we define the \textit{formal Taylor polynomial of} $f^\bullet$ \textit{at} $a$ to be the function $T^m_a f^\bullet : \R^n \to \R$ defined by
+    \[ T^m_a f^\bullet(x) := \sum_{|\alpha| \leq m} \frac{f^{(\alpha)}(a)}{\alpha!} (x - a)^\alpha \qquad \forall\, x\in\R^n. \]
+
+    \vspace{2mm}
+
+    \noindent For each multi-index $\beta$ with $|\beta| \leq m$, we define the \textit{formal} $\beta^{\text{th}}$ \textit{derivative of} $f^\bullet$ to be the $m-|\beta|$-jet on $A$ defined by
+    \[ D^\beta f^\bullet := \left( f^{(\alpha+\beta)} \right)_{|\alpha| \leq m - |\beta|}. \]
+\end{definition}
+
+\begin{remark}[Justification for the name ``formal Taylor polynomial'' and ``formal derivative'']
+    \label{rmk:formal_taylor_polynomial_justification}
+    Let $U \subseteq \R^n$ be an open set, and let $K \subset U$ be a compact set.
+    Let $f \in C^m(U)$, and let $f^\bullet = \left( D^\alpha f|_K \right)_{|\alpha| \leq m}$ be the $m$-jet on $K$ obtained from $f$ as in Example \ref{ex:jets_from_Cm_functions}.
+
+    Then for each $a \in K$, the formal Taylor polynomial of $f^\bullet$ at $a$ is exactly the $m^{\text{th}}$ order Taylor polynomial of $f$ at $a$, i.e.
+    \[ T^m_a f^\bullet = T^m_a f \]
+    because for each multi-index $\alpha$ with $|\alpha| \leq m$, we have $f^{(\alpha)}(a) = D^\alpha f(a)$.
+
+    Similarly, for each multi-index $\beta$ with $|\beta| \leq m$, the formal $\beta^{\text{th}}$ derivative of $f^\bullet$ is exactly the $m-|\beta|$-jet obtained from the $\beta^{\text{th}}$ derivative of $f$, i.e.
+    \[ D^\beta f^\bullet = \left( D^{\alpha+\beta} f|_K \right)_{|\alpha| \leq m - |\beta|} = \left( D^\alpha \left( D^\beta f \right) \right)_{|\alpha| \leq m - |\beta|} \]
+    by using the fact that partial derivatives commute since $f$ is $C^m$.
+\end{remark}
+
+\begin{definition}
+    \label{def:jet_map}
+    Let $U \subseteq \R^n$ be an open set, and let $A \subseteq U$ be a closed set.
+    We define the \textit{jet map} $J^m_A : C^m(U) \to J^m(A)$ by
+    \[ J^m_A(f) := \left( D^\alpha f|_A \right)_{|\alpha| \leq m} \qquad \forall\, f \in C^m(U). \]
+\end{definition}
+
+\begin{definition}
+    \label{def:jet_remainder}
+    Let $A \subseteq \R^n$ be a nonempty closed subset, and let $f^\bullet = \left( f^{(\alpha)} \right)_{|\alpha| \leq m}$ be an $m$-jet on $A$.
+    For each $a \in A$, we define the \textit{remainder of} $f^\bullet$ \textit{at} $a$ to be the jet defined by
+    \[ R^m_a f^\bullet = f^\bullet - J^m_A \left( T^m_a f^\bullet \right). \]
+\end{definition}
+
+Notice that while $f^\bullet$ is an $m$-jet on $A$, the Taylor polynomial $T^m_a f^\bullet$ is a polynomial function defined on $\R^n$, and so we must apply the jet map $J^m$ to $T^m_a f^\bullet$ in order to get an $m$-jet on $A$ which we can subtract from $f^\bullet$.
+This shows the remainder is well-defined as an $m$-jet on $A$.
+
+The next three exrecises may seem like you are just pushing symbolds around, but all of these properties will be used in the proof of the Whitney's Extension Theorem.
+
+\begin{exercise}[Remainder Properties]
+    \label{ex:remainder_jet_properties}
+    Let $A \subseteq \R^n$ be a nonempty closed subset, and let $f^\bullet = \left( f^{(\alpha)} \right)_{|\alpha| \leq m}$ be an $m$-jet on $A$.
+    Then for each $a \in A$ and for each each multi-index $\alpha$ with $|\alpha| \leq m$, we have
+        \[ (R^m_a f)^{(\alpha)}(x) = f^{(\alpha)}(x) - \sum_{|\beta|\leq m-|\alpha|} \frac{f^{(\alpha+\beta)}(a)}{\beta!} (x - a)^\beta \qquad\forall \, x\in \R^n. \]
+\end{exercise}
+
+\begin{proof}
+    Fix $a \in A$ and a multi-index $\alpha$ with $|\alpha| \leq m$.
+    Let $x\in \R^n$ be arbitrary.
+    By the definition of the remainder jet, we have
+    \[ (R^m_a f^\bullet)^{(\alpha)}(x) = f^{(\alpha)}(x) - (J^m_A(T^m_a f^\bullet))^{(\alpha)}(x). \]
+    Now by the definition of the jet map and the formal Taylor polynomial, we have
+    \begin{align*}
+        \left(J^m_A (T^m_a f^\bullet))\right)^{(\alpha)}(x) &= D^\alpha (T^m_a f^\bullet)(x) \\
+            &= D^\alpha \left( \sum_{|\beta| \leq m} \frac{f^{(\beta)}(a)}{\beta!} (\cdot - a)^\beta \right)(x) \\
+            &= \sum_{|\beta| \leq m} \frac{f^{(\beta)}(a)}{\beta!} D^\alpha \left( (\cdot - a)^\beta \right)(x) \\
+            &= \sum_{|\beta| \leq m} \frac{f^{(\beta)}(a)}{\beta!} \cdot \left(\begin{cases}
+                0 &\text{if } |\beta| < |\alpha|, \\
+                \frac{\beta!}{(\beta - \alpha)!} (x - a)^{\beta - \alpha} &\text{if } |\beta| \geq |\alpha|
+            \end{cases} \right) \\
+            &= \sum_{|\alpha|\leq |\beta| \leq m} \frac{f^{(\beta)}(a)}{\beta!} \cdot \frac{\beta!}{(\beta - \alpha)!} (x - a)^{\beta - \alpha} \\
+            &= \sum_{|\alpha|\leq |\beta| \leq m} \frac{f^{(\beta)}(a)}{(\beta - \alpha)!} (x - a)^{\beta - \alpha} \\
+            &= \sum_{|\gamma| \leq m - |\alpha|} \frac{f^{(\alpha + \gamma)}(a)}{\gamma!} (x - a)^{\gamma}
+    \end{align*}
+    which we summarize and re-index as
+    \[ (J^m_A (T^m_a f^\bullet))^{(\alpha)}(x) = \sum_{|\beta|\leq m-|\alpha|} \frac{f^{(\alpha+\beta)}(a)}{\beta!} (x - a)^\beta. \]
+
+    Putting these this last equation together with the first gives
+    \[ (R^m_a f^\bullet)^{(\alpha)}(x) = f^{(\alpha)}(x) - \sum_{|\beta|\leq m-|\alpha|} \frac{f^{(\alpha+\beta)}(a)}{\beta!} (x - a)^\beta. \]
+\end{proof}
+
+\begin{exercise}[Formal Derivative of Formal Taylor Polynomial]
+    \label{ex:formal_derivative_of_formal_taylor_polynomial}
+    Let $A \subseteq \R^n$ be a nonempty closed subset, and let $f^\bullet = \left( f^{(\alpha)} \right)_{|\alpha| \leq m}$ be an $m$-jet on $A$.
+    Then for each $a \in A$ and for each each multi-index $\alpha$ with $|\alpha| \leq m$, we have
+    \[ D^\beta T^m_a f^\bullet = T^{m-|\beta|}_a (D^\beta f^\bullet) \]
+\end{exercise}
+
+\begin{proof}
+    Let $\alpha$ be a multi-index with $|\alpha| \leq m$, and let $a \in A$ be arbitrary.
+    The second computation in the previous exercise shows 
+    \[ D^\alpha(T^m_a f^\bullet)(x) = \sum_{|\beta| \leq m - |\alpha|} \frac{f^{(\alpha+\beta)}}{\beta!}(x-a)^\beta \qquad \forall \, x\in \R^n \]
+    and the right hand side is by definition the formal $m-|\alpha|$ order Taylor polynomial at $a\in A$ of the formal derivative $D^\alpha f^\bullet$.
+\end{proof}
+
+\begin{exercise}[More Formal Properties]
+    \label{ex:more_formal_properties}
+    Let $A \subseteq \R^n$ be a nonempty closed subset, and let $f^\bullet = \left( f^{(\alpha)} \right)_{|\alpha| \leq m}$ be an $m$-jet on $A$. Then for each $a \in A$ and for each each multi-index $\alpha$ with $|\alpha| \leq m$, we have
+    \begin{enumerate}
+        \item $f^{(\alpha)}(a) = D^\alpha (T^m_a f^\bullet)(a)$, and
+        \item if $b\in A$, then 
+            \[ D^\alpha(T^m_a f^\bullet - T^m_b f^\bullet)(a) = (R^m_b f^\bullet)^{(\alpha)}(a) \]
+        \item and if $b\in A$, then 
+            \[ f^{(\alpha)}(b)(x-b)^{\alpha} = D^\alpha(T^m_b f^\bullet)(a)\cdot (x-a)^{\alpha} \qquad \forall \, x\in \R^n. \]
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    Fix $a \in A$ and a multi-index $\alpha$ with $|\alpha| \leq m$.
+    By definition of the formal Taylor polynomial, we have
+    \[ T^m_a f^\bullet (x) = \sum_{|\beta| \leq m} \frac{f^{(\beta)}(a)}{\beta!} (x - a)^\beta  \qquad \forall \, x\in \R^n \]
+    so taking derivatives gives
+    \begin{align*}
+        D^\alpha (T^m_a f^\bullet)(x) &= \sum_{|\beta| \leq m} \frac{f^{(\beta)}(a)}{\beta!} \cdot\left(\begin{cases}
+        0 &\text{if } |\beta| < |\alpha|, \\
+        \frac{\beta!}{(\beta - \alpha)!} (x - a)^{\beta - \alpha} &\text{if } |\beta| \geq |\alpha|
+    \end{cases} \right) \\
+        &= \sum_{|\alpha| \leq |\beta| \leq m} \frac{f^{(\beta)}(a)}{(\beta - \alpha)!} (x - a)^{\beta - \alpha}
+    \end{align*}
+    similarly to in the proof of \ref{ex:remainder_jet_properties}.
+
+    Evaluating this at $x=a$ gives
+    \[ D^\alpha (T^m_a f^\bullet)(a) = \frac{f^{(\alpha)}(a)}{0!} = f^{(\alpha)}(a), \]
+    because all other terms vanish; this proves the first assertion. 
+
+    \vspace{2mm}
+
+    Now let $b \in A$ be arbitrary.
+    By exercise \ref{ex:remainder_jet_properties} and \ref{ex:formal_derivative_of_formal_taylor_polynomial}, we have
+    \begin{align*}
+        (R^m_b f^\bullet)^{(\alpha)}(a) &= f^{(\alpha)}(a) - \sum_{|\beta|\leq m-|\alpha|} \frac{f^{(\alpha+\beta)}(b)}{\beta!} (a - b)^\beta \\
+            &= f^{(\alpha)}(a) - T^{m-|\alpha|}_b (D^\alpha f^\bullet)(a) \\
+            &= f^{(\alpha)}(a) - D^\alpha (T^m_b f^\bullet)(a). 
+    \end{align*}
+    From the first assertion, we have $f^{(\alpha)}(a) = D^\alpha (T^m_a f^\bullet)(a)$, so we have
+    \[ (R^m_b f^\bullet)^{(\alpha)}(a) = D^\alpha (T^m_a f^\bullet)(a) - D^\alpha (T^m_b f^\bullet)(a) = D^\alpha(T^m_a f^\bullet - T^m_b f^\bullet)(a) \]
+    and the second assertion is proved.
+
+    To prove the third assertion, notice that both
+    \[ f^{(\alpha)}(b) (x-b)^{\alpha} \quad \text{and} \quad D^\alpha(T^m_b f^\bullet)(a) (x-a)^{\alpha} \]
+    are homogeneous polynomials of degree $|\alpha|$ in the variable $x$, so it suffices to check that the coefficients of these polynomials are equal.
+    The Taylor polynomial at $b$ is 
+    \[ T^m_b f^\bullet(x) = \sum_{|\beta| \leq m} \frac{f^{(\beta)}(b)}{\beta!} (x - b)^\beta \qquad \forall \,x\in\R^n \]
+    and the degree-$|\alpha|$ homogeneous part of this polynomial is precisely $\frac{f^{(\alpha)}(b)}{\alpha!} (x - b)^\alpha$.
+
+    But now expanding the same polynomial around $a$ gives
+    \[ T^m_b f^\bullet(x) = \sum_{|\beta| \leq m} \frac{ D^\beta(T^m_b f^\bullet)(a)}{\beta!} (x - a)^\beta \qquad \forall \,x\in\R^n \]
+    and the degree-$|\alpha|$ homogeneous part of this polynomial is precisely $\frac{D^\alpha(T^m_b f^\bullet)(a)}{\alpha!} (x - a)^\alpha$.
+    Equating the homogeneous parts (which is valid since the degree-$|\alpha|$ homogeneous part of a polynomial is unique) gives
+    \[ \frac{f^{(\alpha)}(b)}{\alpha!} (x - b)^\alpha = \frac{D^\alpha(T^m_b f^\bullet)(a)}{\alpha!} (x - a)^\alpha \qquad \forall \, x\in\R^n \]
+    and the third assertion is proved.
+\end{proof}
+
+\begin{proposition}[Remainder jet of a $C^m$ function]
+    \label{prop:remainder_jet_of_Cm_function}
+    Let $U \subseteq \R^n$ be an open set, and let $K \subseteq U$ be a compact set.
+    We consider $f \in C^m(U)$, and let $f^\bullet = J^m_K(f) = \left( D^\alpha f|_K \right)_{|\alpha| \leq m}$ be the $m$-jet on $K$ obtained from $f$ as in Example \ref{ex:jets_from_Cm_functions}.
+    
+    Then for each multi-index $\alpha$ with $|\alpha| \leq m$, we have 
+    \[ (R^m_a f^\bullet)^\alpha (x) = o(\| x - a \|^{m - |\alpha|}) \quad \text{as } \ x \to a, \ \text{ uniformly for }\  x,a\in K. \]
+\end{proposition}
+
+\begin{proof}
+    Because of exercise \ref{ex:remainder_jet_properties}, we have
+    \[ (R^m_a f^\bullet)^{(\alpha)}(x) = D^\alpha f(x) - \sum_{|\beta|\leq m-|\alpha|} \frac{D^{\alpha+\beta} f(a)}{\beta!} (x - a)^\beta \]
+    for each multi-index $\alpha$ with $|\alpha| \leq m$ and all $x,a \in K$.
+    
+    Thus the conclusion is precisely the content of Lemma \ref{lem:taylor_polynomial_uniform_remainder}, just restated in the language of jets.
+\end{proof}
+
+\begin{definition}[Whitney Jets]
+    \label{def:whitney_jet}
+    Let $A \subseteq \R^n$ be a nonempty closed subset, and let $m \in \Z^+$.
+    An $m$-jet $f^\bullet = \left( f^{(\alpha)} \right)_{|\alpha| \leq m}$ on $A$ is called a \textit{Whitney $m$-jet} if for each compact set $K \subseteq A$ and each multi-index $\alpha$ with $|\alpha| \leq m$, we have
+    \[ (R^m_a f^\bullet)^{(\alpha)}(x) = o(\| x - a \|^{m - |\alpha|}) \quad \text{as } \ x \to a, \ \text{ uniformly for }\  x,a\in K. \tag{W}\]
+
+    We denote the set of all Whitney $m$-jets on $A$ by $\mathcal{W}^m(A)$.
+\end{definition}
+
+While the notation $J^m(A)$ is standard, there is no standard notation for the set of Whitney $m$-jets on $A$, so we have chosen to denote it by $\mathcal{W}^m(A)$.
+
+\begin{example}[Every $m$-jet on a finite set is a Whitney $m$-jet]
+    \label{ex:whitney_extension_finite_set}
+    Let $A = \{ a_1, a_2, \ldots, a_k \} \subseteq \R^n$ be a finite set, and let $m \in \Z^+$.
+    Then every $m$-jet on $A$ is a Whitney $m$-jet on $A$, because each point in $A$ is isolated and hence the remainder condition is trivially satisfied.
+\end{example}
+
+\begin{exercise}[Whitney Jets on a compact set are a Banach Space]
+    \label{ex:whitney_jets_are_banach_spaces}
+    Let $K \subseteq \R^n$ be a compact set, and let $m \in \Z^+$.
+    Show that $\mathcal{W}^m(K)$ is a vector subspace of $J^m(K)$.
+
+    Also we define 
+    \[ \| \cdot \|_{\mathcal{W}^m(K)} : \mathcal{W}^m(K) \to [0,\infty), \quad \left\| f^\bullet \right\|_{\mathcal{W}^m(K)} := \| f^\bullet \|_{J^m(K)} + \sup\left\{ \frac{|(R^m_a f^\bullet)^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\}. \]
+    Show that $\| \cdot \|_{\mathcal{W}^m(K)}$ is a norm on $\mathcal{W}^m(K)$, and with this norm $\mathcal{W}^m(K)$ is a Banach space.
+\end{exercise}
+
+\begin{proof}[Proof that $\| \cdot \|_{\mathcal{W}^m(K)}$ is a norm on $\mathcal{W}^m(K)$]
+    See that by exercise \ref{ex:remainder_jet_properties}, we have
+    \[ R^m_a (f^\bullet + g^\bullet) = R^m_a f^\bullet + R^m_a g^\bullet \]
+    for each $a \in K$ and each $f^\bullet, g^\bullet \in \mathcal{W}^m(K)$.
+
+    Thus if $f^\bullet, g^\bullet \in \mathcal{W}^m(K)$, then for each multi-index $\alpha$ with $|\alpha| \leq m$ we have 
+    \[ \left(R^m_a (f^\bullet + g^\bullet)\right)^{(\alpha)}(x) = (R^m_a f^\bullet)^{(\alpha)}(x) + (R^m_a g^\bullet)^{(\alpha)}(x) = o(\|x-a\|) \quad \text{as} \ x\to a, \ \text{ uniformly for } x,a \in K. \]
+    This shows that $f^\bullet + g^\bullet$ is a Whitney $m$-jet on $K$, and hence $\mathcal{W}^m(K)$ is closed under addition.
+
+    Similarly $\mathcal{W}^m(K)$ is closed under scalar multiplication, and hence is a vector subspace of $J^m(K)$.
+
+    To show that $\| \cdot \|_{\mathcal{W}^m(K)}$ is a norm on $\mathcal{W}^m(K)$, it suffices to show that the quantity on the right-hand side is a semi-norm on $\mathcal{W}^m(K)$, since we already know that $\| \cdot \|_{J^m(K)}$ is a norm on $J^m(K)$ and hence is a norm on $\mathcal{W}^m(K)$.
+
+    Clearly
+    \[ \sup\left\{ \frac{|(R^m_a f^\bullet)^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\} \geq 0 \]
+    for all $f^\bullet \in \mathcal{W}^m(K)$, and if $f^\bullet = 0 \in \mathcal{W}^m(K)$, then this quantity is zero; hence it is positive semi-definite.
+
+    Now if $f^\bullet \in \mathcal{W}^m(K)$ and $c \in \R$, then
+    \begin{align*}
+        \sup\left\{ \frac{|(R^m_a (c f^\bullet))^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\} &= \sup\left\{ \frac{|c| |(R^m_a f^\bullet)^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\} \\
+            &= |c| \sup\left\{ \frac{|(R^m_a f^\bullet)^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\}
+    \end{align*}
+    which shows that this quantity is absolutely homogeneous.
+
+    Finally, if $f^\bullet, g^\bullet \in \mathcal{W}^m(K)$, then
+    \begin{align*}
+        \sup\left\{ \frac{|(R^m_a (f^\bullet + g^\bullet))^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\} &\leq \sup\left\{ \frac{|(R^m_a f^\bullet)^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\} \\
+            &\qquad + \sup\left\{ \frac{|(R^m_a g^\bullet)^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\}
+    \end{align*}
+    which shows that this quantity satisfies the triangle inequality, and hence is a semi-norm on $\mathcal{W}^m(K)$.
+\end{proof}
+
+\begin{proof}[Proof that $\mathcal{W}^m(K)$ is a Banach space]
+    Now we will show that $\mathcal{W}^m(K)$ is complete with respect to the norm $\| \cdot \|_{\mathcal{W}^m(K)}$.
+    For brevity, we let 
+    \[ S(g^\bullet) := \sup\left\{ \frac{|(R^m_a g^\bullet)^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\} \]
+    for each $g^\bullet \in \mathcal{W}^m(K)$.
+
+    Let $\{ f^\bullet_j \}_{j=1}^\infty \subset \mathcal{W}^m(K)$ be a Cauchy sequence with respect to the norm $\| \cdot \|_{\mathcal{W}^m(K)}$.
+    Then $\{ f^\bullet_j \}_{j=1}^\infty$ is also a Cauchy sequence with respect to the norm $\| \cdot \|_{J^m(K)}$, 
+    and hence converges to some $f^\bullet \in J^m(K)$ since $J^m(K)$ is a Banach space by Exercise \ref{ex:jets_are_banach_spaces}.
+    We claim that 
+    \[ \lim_{j\to \infty} \| f^\bullet_j - f^\bullet \|_{\mathcal{W}^m(K)} = 0 \]
+    and that $f^\bullet \in \mathcal{W}^m(K)$.
+
+    Since $\{ f^\bullet_j \}_{j=1}^\infty$ converges to $f^\bullet$ with respect to the norm $\| \cdot \|_{J^m(K)}$ and $\| \cdot \|_{\mathcal{W}^m(K)} = \| \cdot \|_{J^m(K)} + S(\cdot)$, it suffices to show that 
+    \[ \lim_{j\to \infty} S(f^\bullet_j - f^\bullet) = 0. \tag{$\star$}\]
+
+    Let $\epsilon > 0$ be arbitrary.
+    Since $\{ f^\bullet_j \}_{j=1}^\infty$ is a Cauchy sequence with respect to the norm $\| \cdot \|_{\mathcal{W}^m(K)}$, there exists $N \in \Z^+$ such that for all $j,k \geq N$ we have
+    \[ \| f^\bullet_j - f^\bullet_k \|_{\mathcal{W}^m(K)} < \epsilon. \]
+    Expending this gives
+    \[ \| f^\bullet_j - f^\bullet_k \|_{J^m(K)} + S(f^\bullet_j - f^\bullet_k) < \epsilon \qquad \forall\, j,k \geq N. \]
+    Since both quantities on the left-hand side are non-negative, we have
+    \[ S(f^\bullet_j - f^\bullet_k) < \epsilon \qquad \forall\, j,k \geq N. \]
+    By using the definition of $S(\cdot)$ we see that
+    \[ S(f^\bullet_j - f^\bullet_k) = \sup\left\{ \frac{|(R^m_a (f^\bullet_j - f^\bullet_k))^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\} \]
+    for all $j \in \Z^+$.
+    Thus for all $j,k \geq N$, and for all $x,a \in K$ with $x \neq a$, and each multi-index $\alpha$ with $|\alpha| \leq m$, we have
+    \[ \frac{|(R^m_a (f^\bullet_j - f^\bullet_k))^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} < \epsilon \]
+    or equivalently
+    \[ \left|(R^m_a (f^\bullet_j - f^\bullet_k))^{(\alpha)}(x)\right| < \epsilon \|x - a\|^{m - |\alpha|}. \tag{$\dagger$}\]
+
+    
+    Now let $x,a \in K$ be such that $x \neq a$, and let $\alpha$ be a multi-index with $|\alpha| \leq m$.
+    Then for all $j,k \geq N$ we have
+    \begin{align*}
+        \left|(R^m_a (f^\bullet_j - f^\bullet_k))^{(\alpha)}(x)\right| &= 
+                \left|(R^m_a f^\bullet_j)^{(\alpha)}(x) - (R^m_a f^\bullet_k)^{(\alpha)}(x)\right| \\
+            &= \left| f_j^{(\alpha)}(x) - f_k^{(\alpha)}(x) + \sum_{|\beta|\leq m-|\alpha|} \frac{f_j^{(\alpha+\beta)}(a) - f_k^{(\alpha+\beta)}(a)}{\beta!} (x - a)^\beta \right|
+    \end{align*}
+    by exercise \ref{ex:remainder_jet_properties} applied to the jet $f^\bullet_j - f^\bullet_k$;
+    for each $j \geq N$ we take the limit of the above as $k \to \infty$ to get
+    \begin{align*}
+        \lim_{k\to \infty}\left|(R^m_a (f^\bullet_j - f^\bullet_k))^{(\alpha)}(x)\right| &= 
+                \left| f_j^{(\alpha)}(x) - f^{(\alpha)}(x) + \sum_{|\beta|\leq m-|\alpha|} \frac{f_j^{(\alpha+\beta)}(a) - f^{(\alpha+\beta)}(a)}{\beta!} (x - a)^\beta \right| \\
+            &= \left| (R^m_a (f^\bullet_j - f^\bullet))^{(\alpha)}(x) \right|    
+    \end{align*}
+    by using exercise \ref{ex:remainder_jet_properties} applied to the jet $f^\bullet_j - f^\bullet$.
+    Thus for each $j \geq N$ we have
+    \[ \left| (R^m_a (f^\bullet_j - f^\bullet))^{(\alpha)}(x) \right| = \lim_{k\to \infty}\left|(R^m_a (f^\bullet_j - f^\bullet_k))^{(\alpha)}(x)\right| \leq \epsilon \|x - a\|^{m - |\alpha|} \]
+    by using the inequality $(\dagger)$.
+    Rearranging this gives
+    \[ \frac{\left| (R^m_a (f^\bullet_j - f^\bullet))^{(\alpha)}(x) \right|}{\|x - a\|^{m - |\alpha|}} \leq \epsilon \qquad \forall\, j \geq N \]
+    Since $x,a \in K$ such that $x \neq a$ and $\alpha$ with $|\alpha| \leq m$ were arbitrary, we have
+    \[ \sup\left\{ \frac{\left| (R^m_a (f^\bullet_j - f^\bullet))^{(\alpha)}(x) \right|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\} \leq \epsilon \qquad \forall \, j\geq N. \]
+    That is, for all $j \geq N$ we have
+    \[ S(f^\bullet_j - f^\bullet) \leq \epsilon. \]
+    Since $\epsilon > 0$ was arbitrary, we have shown that $\lim_{j\to \infty} S(f^\bullet_j - f^\bullet) = 0$, which proves the claim $(\star)$.
+
+    As a result, we have shown that $\{ f^\bullet_j \}_{j=1}^\infty$ converges to $f^\bullet$ with respect to the norm $\| \cdot \|_{\mathcal{W}^m(K)}$.
+    The reverse triangle inequality gives
+    \[ S(f^\bullet) \leq S(f^\bullet - f^\bullet_j) + S(f^\bullet_j) \qquad \forall\, j \in \Z^+ \]
+    and hence $S(f^\bullet) < \infty$, since both terms on the right are uniformly bounded for all $j \geq N$.
+    Thus $f^\bullet \in \mathcal{W}^m(K)$, and we have shown that $\{ f^\bullet_j \}_{j=1}^\infty$ converges to $f^\bullet$ in $\mathcal{W}^m(K)$.
+
+    Since $\{ f^\bullet_j \}_{j=1}^\infty$ was an arbitrary Cauchy sequence in $\mathcal{W}^m(K)$, we have shown that $\mathcal{W}^m(K)$ is complete with respect to the norm $\| \cdot \|_{\mathcal{W}^m(K)}$, and hence is a Banach space.
+\end{proof}
+
+\begin{exercise}[Whitney Jets on a non-compact set are a Fréchet Space]
+    \label{ex:whitney_jet_frechet_space}
+    Let $A \subseteq \R^n$ be a nonempty closed subset, and let $m \in \Z^+$.
+    Then for each compact set $K \subseteq A$, we consider the semi-norm $\| \cdot \|_{\mathcal{W}^m(K)}$ on $\mathcal{W}^m(A)$.
+
+    Let $\{ K_j \}_{j=1}^\infty$ be an increasing sequence of compact sets such that $\bigcup_{j=1}^\infty K_j = A$.
+    Show that the family of semi-norms $\{ \| \cdot \|_{\mathcal{W}^m(K_j)} \}_{j=1}^\infty$ defines a Fréchet space structure on $\mathcal{W}^m(A)$, and that this structure does not depend on the choice of the sequence $\{ K_j \}_{j=1}^\infty$.
+\end{exercise}
+
+\begin{proof}
+    See that for each compact set $K \subseteq A$, the function $\| \cdot \|_{\mathcal{W}^m(K)}$ is a semi-norm on $\mathcal{W}^m(A)$ because it is a norm on $\mathcal{W}^m(K)$.
+    
+    The fact that $\{ \| \cdot \|_{\mathcal{W}^m(K_j)} \}_{j=1}^\infty$ defines a Fréchet space structure on $\mathcal{W}^m(A)$ is shown in exactly the same way 
+    that we proved $C^0(A)$ is a Fréchet space with respect to the family of semi-norms $\{ \| \cdot \|_{C^0(K_j)} \}_{j=1}^\infty$.
+
+    The fact that this structure does not depend on the choice of the sequence $\{ K_j \}_{j=1}^\infty$ is shown in exactly the same way that we showed that the Fréchet space structure on $C^0(A)$ does not depend on the choice of the sequence $\{ K_j \}_{j=1}^\infty$.
+\end{proof}
+
+\subsection{Whitney's $C^m$ Extension Theorem}
+
+\begin{theorem}[Whitney's $C^m$ Extension Theorem, 1934]
+    \label{thm:whitney_extension_theorem}
+    Let $A \subseteq \R^n$ be a nonempty closed subset, and let $m \in \Z^+$.
+    Then there exists a continuous linear map
+    \[ W : \mathcal{W}^m(A) \to C^m(\R^n) \]
+    such that for each $f^\bullet \in \mathcal{W}^m(A)$, and each multi-index $\alpha$ with $|\alpha| \leq m$, we have
+    \[ D^\alpha (W(f^\bullet))(x) = f^{(\alpha)}(x) \qquad \forall\, x \in A. \]
+    Moreover, for each $f^\bullet \in \mathcal{W}^m(A)$, the function $W(f^\bullet)$ is $C^\infty$ on $\R^n \setminus A$.
+\end{theorem}
+
+\begin{remark}[Continuity of the Extension Operator]
+    \label{rmk:continuity_of_extension_operator}
+    The continuity of the extension operator $W$ means that if $K \subseteq A$ is a compact set, and $Q \subset \R^n$ is an open cube containing $K$ and we set 
+    \[ \lambda := \sup_{x\in Q} \dist(x,K) \]
+    then there is a constant $C_{m,n,\lambda} > 0$ such that for each $f^\bullet \in \mathcal{W}^m(A)$, we have
+    \[ \| W(f^\bullet) \|_{C^m(Q)} \leq C_{m,n,\lambda} \| f^\bullet \|_{\mathcal{W}^m(K)}. \]
+\end{remark}
+
+\begin{example}[The Condition (W) cannot be weakened]
+    \label{ex:whitney_extension_condition_cannot_be_weakened}
+    The property (W) in the definition of Whitney $m$-jets cannot be weakened to the condition 
+    \[ \lim_{x\to a} \frac{(R^m_a f^\bullet)^{(\alpha)}(x)}{\|x-a\|^{m - |\alpha|}} = 0 \tag{$*$}\]
+    for each $a \in A$ and each multi-index $\alpha$ with $|\alpha| \leq m$.
+    (This is condition (W) without the requirement that this limit must be uniform on compact subsets of $A$.)
+
+    We will show that there exist a $m$-jet satisfying this weaker condition but which do not admit a $C^m$ extension to $\R^n$.
+
+    \vspace{2mm}
+
+    In this example, we take $n = m = 1$. 
+    Choose sequences of positive real numbers $\{ x_j \}_{j=1}^\infty$ and $\{ y_j \}_{j=1}^\infty$ such that $x_j \to 0$ and $y_j \to 0$ as $j \to \infty$, and such that the line segment joining 
+    $(x_j, y_j)$ and $(x_{j+1}, y_{j+1})$ has slope $(-1)^j$ for each $j \in \Z^+$.
+
+    \begin{figure}
+    \centering
+    \label{fig:whitney_extension_counterexample}
+    \includegraphics{figures/bierstone.png}
+    \end{figure}
+
+    Let $A := \{ 0 \} \cup \{ x_j : j \in \Z^+ \}$.
+    Define a jet $f^\bullet \in J^1(A)$ by defining $f^{(0)}(0) := 0$ and $f^{(0)}(x_j) = y_j$ for each $j \in \Z^+$, and also $f^{(1)}\equiv 0$. 
+    Since each point in $A$ is isolated, the limit condition $(*)$ is trivially satisfied if $x = x_k$ for some $k \in \Z^+$.
+    Also see that
+    \[ (R^1_0f^\bullet)^0(x_j) = y_j \quad \text{ and }\quad (R^1_0f^\bullet)^1(x_j) = 0 \qquad \forall\, j\in \Z^+, \]
+    so the limit condition $(*)$ is satisfied at $0$ as well, since $y_j \to 0$ as $j \to \infty$.
+
+    However, we claim there is no $C^1$ extension of $f^{(0)}$ to $\R$. 
+    See that
+    \[ \frac{y_{k+1} - y_k}{x_{k+1} - x_k} = (-1)^k \qquad \forall\, k \in \Z^+ \]
+    and this does not approach a limit as $k \to \infty$.
+    Thus there can be no extension $f$ with $f'$ continuous at $0$, and hence there cannot be a $C^1$ extension of $f^{(0)}$ to $\R$.
+\end{example}
+
+
+
+\begin{theorem}[Simplified Version of Whitney's $C^m$ Extension Theorem]
+    \label{thm:whitney_simplified}
+    Let $A \subseteq \R^n$ be a nonempty proper closed subset, and let $m \in \Z^+$.
+    Let $f^{(0)} : A \to \R$ be a continuous function, and assume that there exist continuous functions $( f^{(\alpha)} )_{1\leq|\alpha| \leq m}$ defined on $A$ such that the collection $( f^{(\alpha)} )_{|\alpha| \leq m}$ is a Whitney $m$-jet on $A$.
+
+    Then there exists a function $f \in C^m(\R^n)$ such that for each multi-index $\alpha$ with $|\alpha| \leq m$, we have
+    \[ D^\alpha f(x) = f^{(\alpha)}(x) \qquad \forall\, x \in A. \]
+    Moreover, the function $f$ can be chosen so that it is $C^\infty$ on $\R^n \setminus A$.
+    We say that $f$ is a $C^m$ \textit{extension} of $f^{(0)}$ to $\R^n$.
+\end{theorem}
+
+Of course, the converse of this theorem is also true --- see that if $f \in C^m(\R^n)$ is an extension of $f^{(0)}$ to $\R^n$, i.e. $f|_A = f^{(0)}$, 
+then the collection $\{ D^\alpha f|_A : |\alpha| \leq m\}$ is a Whitney $m$-jet on $A$ by Proposition \ref{prop:remainder_jet_of_Cm_function}.

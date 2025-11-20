@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>whitney-extension-proof</title>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '0.8em',
+      packages: {'[+]': ['ams']},
+      macros: {
+        R: '\\mathbb{R}',
+        C: '\\mathbb{C}',
+        N: '\\mathbb{N}',
+        Z: '\\mathbb{Z}',
+        Q: '\\mathbb{Q}',
+        E: '\\mathbb{E}',
+        F: '\\mathbb{F}',
+        S: '\\mathbb{S}',
+        H: '\\mathcal{H}',
+        L: '\\mathcal{L}',
+        dif: '\\,\\mathrm{d}',
+        supp: '\\operatorname{supp}',
+        proj: '\\operatorname{proj}',
+        Id: '\\operatorname{Id}',
+        Span: '\\operatorname{span}',
+        graph: '\\operatorname{graph}',
+        dist: '\\operatorname{dist}',
+        diam: '\\operatorname{diam}',
+        avg: '\\operatorname{avg}',
+        div: '\\operatorname{div}',
+        vol: '\\operatorname{vol}',
+        ord: '\\operatorname{ord}',
+        Chi: '\\mathbf{1}',
+        sub: '\\subseteq',
+        mres: '\\downharpoonright',
+        ddag: '\\ddagger',
+        dag: '\\dagger',
+        norm: ['\\left\\| #1 \\right\\|', 1],
+        abs: ['\\left| #1 \\right|', 1],
+        set: ['\\left\\{ #1 \\right\\}', 1],
+        inner: ['\\langle #1, #2 \\rangle', 2],
+        floor: ['\\lfloor #1 \\rfloor', 1],
+        ceil: ['\\lceil #1 \\rceil', 1],
+        llbracket: '\\unicode{x27E6}',
+        rrbracket: '\\unicode{x27E7}',
+        bigskull: '\\unicode{x1F480}',
+        skull: '\\unicode{x2620}',
+        mathwitch: '\\unicode{x1F9D9}',
+        pumpkin: '\\unicode{x1F383}',
+        mathpumpkin: '\\unicode{x1F383}',
+        bigpumpkin: '\\unicode{x1F383}',
+        mathghost: '\\unicode{x1F47B}',
+        mathcat: '\\unicode{x1F408}',
+        mathbat: '\\unicode{x1F987}',
+        esssup: '\\operatorname{ess\\,sup}',
+        essinf: '\\operatorname{ess\\,inf}',
+        Lip: '\\operatorname{Lip}',
+        pd: ['\\frac{\\partial#1}{\\partial#2}', 2],
+        od: ['\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}', 2],
+        dashint: '\\mathchoice{\\rlap{-}\\!\\int}{\\rlap{\\raise.15ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}',
+        eurologo: '\\unicode{x20AC}',
+        starredbullet: '\\unicode{x2726}',
+        grimace: '\\unicode{x1F62C}',
+        textthing: '\\unicode{x2639}',
+        noway: '\\unicode{x26D4}',
+        warning: '\\unicode{x26A0}',
+        danger: '\\unicode{x26A0}',
+        textxswup: '\\unicode{x2195}',
+        textxswdown: '\\unicode{x2195}',
+        decoone: '\\unicode{x2756}',
+        decotwo: '\\unicode{x2767}',
+        decothreeleft: '\\unicode{x2619}',
+        decothreeright: '\\unicode{x2767}',
+        decofourleft: '\\unicode{x261A}',
+        decofourright: '\\unicode{x261B}',
+        floweroneleft: '\\unicode{x2740}',
+        floweroneright: '\\unicode{x2740}',
+        lefthand: '\\unicode{x261C}',
+        righthand: '\\unicode{x261E}',
+        decosix: '\\unicode{x2766}',
+        bomb: '\\unicode{x1F4A3}',
+        caution: '\\unicode{x2621}',
+        leftblackhand: '\\unicode{x261A}',
+        rightblackhand: '\\unicode{x261B}',
+        leafleft: '\\unicode{x2618}',
+        leafright: '\\unicode{x2618}',
+        leafNW: '\\unicode{x2618}',
+        leafNE: '\\unicode{x2618}',
+        leafSE: '\\unicode{x2618}',
+        leafSW: '\\unicode{x2618}',
+        aldineleft: '\\unicode{x2619}',
+        aldineright: '\\unicode{x2767}',
+        aldine: '\\unicode{x2766}',
+        aldinesmall: '\\unicode{x2767}',
+        aldinesmallrevert: '\\unicode{x2619}',
+        aldinesmallup: '\\unicode{x2766}',
+        grappe: '\\unicode{x2766}',
+        rightgrappe: '\\unicode{x2767}',
+        leftgrappe: '\\unicode{x2619}',
+        oldpilcrowone: '\\unicode{x00B6}',
+        oldpilcrowtwo: '\\unicode{x00B6}',
+        oldpilcrowthree: '\\unicode{x00B6}',
+        oldpilcrowfour: '\\unicode{x00B6}',
+        oldpilcrowfive: '\\unicode{x00B6}',
+        oldpilcrowsix: '\\unicode{x00B6}'
+      }
+    },
+    startup: {
+      pageReady: () => {
+        return MathJax.startup.defaultPageReady().then(() => {
+          console.log('MathJax ready');
+        });
+      }
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+  <script>
+  (function() {
+    window.addEventListener('beforeunload', function() {
+      saveProofState();
+      saveCollapsibleState();
+    });
+    
+    const eventSource = new EventSource('http://localhost:35729/reload-stream');
+    
+    eventSource.onmessage = function(event) {
+      if (event.data === 'reload') {
+        console.log('📝 File updated, saving state and reloading...');
+        saveProofState();
+        saveCollapsibleState();
+        setTimeout(() => {
+          window.location.reload();
+        }, 50);
+      }
+    };
+    
+    eventSource.onerror = function() {
+      console.log('⚠️  Auto-reload server not available. Run node watch.js to enable auto-reload.');
+      eventSource.close();
+    };
+    
+    console.log('🔄 Auto-reload enabled');
+  })();
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+    
+    /* Layout with sidebar */
+    .page-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      width: 280px;
+      background: #fff;
+      border-right: 1px solid #e0e0e0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px 0;
+      font-size: 14px;
+    }
+    
+    .sidebar-header {
+      padding: 15px 20px 25px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .sidebar-header h1 {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 5px 0;
+    }
+    
+    .sidebar-header .subtitle {
+      font-size: 0.85em;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .sidebar-header .back-link {
+      display: block;
+      font-size: 0.8em;
+      color: #666;
+      text-decoration: none;
+      margin-top: 12px;
+    }
+    
+    .sidebar-header .back-link:hover {
+      color: #1a1a1a;
+    }
+    
+    .sidebar-nav {
+      padding: 10px 0;
+    }
+    
+    .chapter-group {
+      margin-bottom: 2px;
+    }
+    
+    .chapter-title {
+      padding: 12px 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chapter-title:hover {
+      background: #f5f5f5;
+    }
+    
+    .chapter-title .toggle {
+      font-size: 0.65em;
+      color: #999;
+      transition: transform 0.2s;
+    }
+    
+    .chapter-group.expanded .chapter-title .toggle {
+      transform: rotate(90deg);
+    }
+    
+    .section-list {
+      display: none;
+      padding: 5px 0;
+      background: #f8f8f8;
+    }
+    
+    .chapter-group.expanded .section-list {
+      display: block;
+    }
+    
+    .section-link {
+      display: block;
+      padding: 8px 20px 8px 35px;
+      font-size: 0.85em;
+      color: #555;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+    }
+    
+    .section-link:hover {
+      background: #f0f0f0;
+      color: #1a1a1a;
+    }
+    
+    .section-link.active {
+      background: #e8e8e8;
+      border-left-color: #333;
+      color: #000;
+      font-weight: 500;
+    }
+    
+    /* Main content area */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      max-width: 900px;
+      padding: 40px 60px;
+    }
+    
+    @media (max-width: 1100px) {
+      .sidebar {
+        width: 240px;
+      }
+      .main-content {
+        margin-left: 240px;
+        padding: 30px 40px;
+      }
+    }
+    
+    @media (max-width: 800px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+      .page-layout {
+        flex-direction: column;
+      }
+    }
+    
+    h2, h3, h4 {
+      margin-top: 2em;
+      margin-bottom: 0.75em;
+      color: #000;
+      font-weight: 600;
+    }
+    h2 { font-size: 1.5em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.1em; }
+    p {
+      margin: 1em 0;
+      text-indent: 2em;
+    }
+    p:first-of-type,
+    h2 + p,
+    h3 + p,
+    h4 + p,
+    .theorem-box + p,
+    .proof-box + p {
+      text-indent: 0;
+    }
+    .noindent + p,
+    p:has(> .noindent:first-child) {
+      text-indent: 0 !important;
+    }
+    .noindent {
+      display: none;
+    }
+    .theorem-box {
+      margin: 1.75em 0;
+      padding: 1.25em;
+      border-left: 5px solid #16a34a;
+      background: linear-gradient(to top, #bbf7d0 0%, #d1fae5 100%);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .definition-box { border-left-color: #16a34a; background: linear-gradient(to top, #d1fae5 0%, #ecfdf5 100%); }
+    .lemma-box { border-left-color: #1e3a8a; background: linear-gradient(to top, #bfdbfe 0%, #dbeafe 100%); }
+    .corollary-box { border-left-color: #9333ea; background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%); }
+    .proposition-box { border-left-color: #dc2626; background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%); }
+    .remark-box { border-left-color: #64748b; background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%); }
+    .example-box { border-left-color: #0891b2; background: linear-gradient(to top, #a5f3fc 0%, #cffafe 100%); }
+    .construction-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .notation-box { border-left-color: #ca8a04; background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%); }
+    .exercise-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .problem-box { border-left-color: #ec4899; background: linear-gradient(to top, #fbcfe8 0%, #fce7f3 100%); }
+    .theorem-header {
+      margin-bottom: 0.75em;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+    .theorem-header.clickable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .theorem-header.clickable:hover {
+      background: rgba(0,0,0,0.03);
+      margin: -0.5em -0.75em 0.75em -0.75em;
+      padding: 0.5em 0.75em;
+      border-radius: 4px;
+    }
+    .collapsible-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      margin-right: 0.5em;
+      color: #6b7280;
+    }
+    .collapsible-box.collapsed .collapsible-icon {
+      transform: rotate(-90deg);
+    }
+    .collapsible-content {
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+    }
+    .collapsible-box.collapsed .collapsible-content {
+      display: none;
+    }
+    .theorem-content {
+      padding-left: 0.5em;
+      line-height: 1.8;
+    }
+    .proof-box {
+      margin: 1.5em 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .proof-header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      border-radius: 6px 6px 0 0;
+    }
+    .proof-toggle {
+      width: 100%;
+      padding: 0.85em 1.25em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      transition: background 0.15s;
+    }
+    .proof-toggle:hover { background: rgba(0,0,0,0.03); }
+    .proof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      color: #6b7280;
+    }
+    .proof-box.collapsed .proof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .proof-content {
+      padding: 1.25em;
+      line-height: 1.8;
+    }
+    .proof-box.collapsed .proof-content {
+      display: none;
+    }
+    .proof-end {
+      float: right;
+      font-size: 1.3em;
+      margin-left: 0.5em;
+      color: #374151;
+    }
+    .subproof {
+      margin: 1em 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #f9fafb;
+    }
+    .subproof-header {
+      background: linear-gradient(to bottom, #f9fafb 0%, #f3f4f6 100%);
+      border-bottom: 1px solid #d1d5db;
+      border-radius: 4px 4px 0 0;
+    }
+    .subproof-toggle {
+      width: 100%;
+      padding: 0.6em 1em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: background 0.15s;
+    }
+    .subproof-toggle:hover {
+      background: rgba(0,0,0,0.03);
+    }
+    .subproof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.7em;
+      color: #6b7280;
+    }
+    .subproof.collapsed .subproof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .subproof-content {
+      padding: 1em;
+      line-height: 1.7;
+    }
+    .subproof.collapsed .subproof-content {
+      display: none;
+    }
+    .ref-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 0.15em;
+      border-radius: 2px;
+    }
+    .ref-link:hover {
+      background: #dbeafe;
+      text-decoration: underline;
+    }
+    .ref-unknown {
+      color: #dc2626;
+      font-weight: bold;
+      background: #fee2e2;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+    ol, ul {
+      margin: 1em 0;
+      padding-left: 2.5em;
+      line-height: 1.8;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    .latex-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5em auto;
+    }
+    .latex-figure .latex-image {
+      display: inline-block;
+      margin: 0.5em;
+      vertical-align: middle;
+    }
+    .latex-figure {
+      margin: 2em 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .latex-figure .figure-content {
+      margin-bottom: 0.75em;
+      line-height: normal;
+    }
+    .latex-figure .figure-content > * {
+      vertical-align: middle;
+    }
+    .latex-figure figcaption {
+      font-size: 0.9em;
+      color: #4b5563;
+      font-style: italic;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1>Analysis III</h1>
+        <div class="subtitle">Measure Theory &amp; Integration</div>
+        <a href="../index.html" class="back-link">← Table of Contents</a>
+      </div>
+      <div class="sidebar-nav">
+        <div class="chapter-group expanded">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>1. Measure Theory</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../01-measure-theory/measure-theory.html" class="section-link">Overview</a>
+            <a href="../01-measure-theory/basics.html" class="section-link">Outer Measures</a>
+            <a href="../01-measure-theory/lebesgue-meas.html" class="section-link">Lebesgue Measure</a>
+            <a href="../01-measure-theory/cantor.html" class="section-link">The Cantor Set</a>
+            <a href="../01-measure-theory/measure-spaces.html" class="section-link">Measure Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>2. Integration</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../02-integration/integration.html" class="section-link">Overview</a>
+            <a href="../02-integration/integrals-1.html" class="section-link">Simple Functions</a>
+            <a href="../02-integration/integrals-2.html" class="section-link">General Functions</a>
+            <a href="../02-integration/convergence.html" class="section-link">Convergence Theorems</a>
+            <a href="../02-integration/inequality-party.html" class="section-link">Integral Inequalities</a>
+            <a href="../02-integration/lp_spaces.html" class="section-link">Lᵖ Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>3. Product Measures</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../03-fubini/fubini_ch.html" class="section-link">Overview</a>
+            <a href="../03-fubini/fubini.html" class="section-link">Fubini-Tonelli</a>
+            <a href="../03-fubini/integrals-3.html" class="section-link">Product Measures</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>4. Differentiation I</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../04-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../04-differentiation-1/covering.html" class="section-link">Vitali Covering</a>
+            <a href="../04-differentiation-1/monotone.html" class="section-link">Monotone Functions</a>
+            <a href="../04-differentiation-1/BV_on_R.html" class="section-link">Bounded Variation</a>
+            <a href="../04-differentiation-1/FTOC.html" class="section-link">FTC for Lebesgue</a>
+            <a href="../04-differentiation-1/HL.html" class="section-link">Hardy-Littlewood</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>5. Differentiation I (cont)</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../05-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../05-differentiation-1/r-nik.html" class="section-link">Radon-Nikodym</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>6. Differentiation II</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-differentiation-2/diff-2.html" class="section-link">Overview</a>
+            <a href="../06-differentiation-2/vector-measures.html" class="section-link">Vector Measures</a>
+            <a href="../06-differentiation-2/r-nik.html" class="section-link">Radon-Nikodym</a>
+            <a href="../06-differentiation-2/besi.html" class="section-link">Besicovitch</a>
+            <a href="../06-differentiation-2/densities.html" class="section-link">Densities</a>
+            <a href="../06-differentiation-2/diff-measures.html" class="section-link">Measure Derivatives</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>7. Riesz Representation</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-riesz/riesz.html" class="section-link">Overview</a>
+            <a href="../06-riesz/riesz_functional.html" class="section-link">Riesz Representation</a>
+            <a href="../06-riesz/LCH_spaces.html" class="section-link">LCH Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>8. Integral Formulas</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../07-formulas/formulas.html" class="section-link">Overview</a>
+            <a href="../07-formulas/hausdorff_meas.html" class="section-link">Hausdorff Measures</a>
+            <a href="../07-formulas/lippy.html" class="section-link">Lipschitz Maps</a>
+            <a href="../07-formulas/rademacher.html" class="section-link">Rademacher</a>
+            <a href="../07-formulas/coarea-prereq.html" class="section-link">Coarea Prerequisites</a>
+            <a href="../07-formulas/coarea.html" class="section-link">Coarea Formula</a>
+            <a href="../07-formulas/area-prereq.html" class="section-link">Area Prerequisites</a>
+            <a href="../07-formulas/area-formula.html" class="section-link">Area Formula</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>9. Extension Results</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../08-ext-res/ext-res.html" class="section-link">Overview</a>
+            <a href="../08-ext-res/taylor_thm_integral_remainder.html" class="section-link">Taylor's Theorem</a>
+            <a href="../08-ext-res/whitney-cover.html" class="section-link">Whitney Covering</a>
+            <a href="../08-ext-res/whitney-partition-of-unity.html" class="section-link">Partition of Unity</a>
+            <a href="../08-ext-res/whitney-decomposition.html" class="section-link">Decomposition</a>
+            <a href="../08-ext-res/whitney-extension-theorem.html" class="section-link">Extension Theorem</a>
+            <a href="../08-ext-res/whitney-extension-proof.html" class="section-link">Extension Proof</a>
+            <a href="../08-ext-res/whitney-extension-applications.html" class="section-link">Applications</a>
+            <a href="../08-ext-res/whitney-extension.html" class="section-link">Summary</a>
+            <a href="../08-ext-res/more-bump.html" class="section-link">More Bump Functions</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <main class="main-content">
+      <h2>Proof of Whitney's $C^m$ Extension Theorem</h2>
+<p>In this section we present the proof of Whitney's $C^m$ Extension Theorem.</p>
+<div class="theorem-box lemma-box" id="lem:modulus_of_continuity_for_whitney_jet">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Modulus of Continuity for Whitney Jets)</div>
+  <div class="theorem-content">A <em>modulus of continuity</em> is a function $\omega: [0,\infty) \to [0,\infty)$ which is increasing, concave, and satisfies $\omega(0) = 0$.
+<p>Let $A \subseteq \R^n$ be a nonempty compact set, and let $f^\bullet \in \mathcal{W}^m(A)$ be a Whitney $m$-jet on $A$.
+    Then there exists a modulus of continuity $\omega$ such that for each multi-index $\alpha$ with $|\alpha| \leq m$, we have
+    \[ \left\| (R^m_a f^\bullet)^{(\alpha)} (x) \right\| \leq \omega\left( \|x-a\|\right) \cdot \|x-a\|^{m-|\alpha|} \quad \forall\, x,a\in A \]
+    and also satisfying 
+    \[ \omega(t) = \omega(\diam A) \qquad \forall \, t\geq \diam A, \]
+    and \[ \|f^\bullet\|_{\mathcal{W}^m(A)} = \| f^\bullet \|_{J^m(A)} + \omega(\diam A). \]</div>
+</div></p>
+<div class="proof-box collapsed" data-proof-id="proof-num-0">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-0')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-0">
+    Define $\rho: [0,\infty) \to [0,\infty)$ by
+        \[ \rho(t) := \sup \left\{ \frac{\| (R^m_a f^\bullet)^{(\alpha)} (x) \|}{\|x-a\|^{m-|\alpha|}} : a,x \in A, 0 < \|x-a\| \leq t, |\alpha| \leq m \right\} \]
+        if $t > 0$, and $\rho(0) := 0$.
+        Note that $\rho$ is finite-valued since $f^\bullet \in \mathcal{W}^m(A)$.
+        Then $\rho$ is clearly increasing and 
+        \[ \lim_{t\to 0^+} \rho(t) = 0 = \rho(0) \]
+        so $\rho$ is continuous at $0$.
+        Also if $t \geq \diam A$, then $\rho(t) = \rho(\diam A)$, so $\rho$ is constant on $[\diam A,\infty)$.
+        (We note that $\rho$ is not necessarily concave or continuous on $(0,\infty)$.)
+<p>Now define 
+        \[ \operatorname{conv}(\rho) := \operatorname{conv}\left( [0,\infty) \cup \graph (\rho) \right) \]
+        to be the closed convex hull of the graph of $\rho$ together with the nonnegative $t$-axis.
+        Since $\operatorname{conv}(\rho)$ is convex and $\rho$ is non-negative, 
+        see that for each $t \geq 0$, the set $\{ s : (t,s) \in \operatorname{conv}(\rho) \}$ is a closed (possiby degenerate) interval of the form $[0,\omega(t)]$ for some $\omega(t) \geq \rho(t) \geq 0$.</p>
+<p>This defines a function $\omega$ on $[0,\infty)$ by $\omega(t) := \sup \{ s : (t,s) \in \operatorname{conv}(\rho) \}$.</p>
+<p>Let us check the required properties of $\omega$.
+        By construction, $\operatorname{conv}(\rho)$ is a closed subset of the upper half-plane, so $\omega(t) \geq 0$ for each $t \geq 0$.
+        Thus $\omega: [0,\infty) \to [0,\infty)$ is well-defined.</p>
+<p>Now the only point in $[0,\infty) \cup \graph(\rho)$ with $t=0$ is $(0,0)$, so 
+        the only point in $\operatorname{conv}(\rho)$ with $t=0$ is $(0,0)$, which implies $\omega(0) = 0$.</p>
+<p>We also see that $\omega$ is concave.
+        Let $t_1,t_2 \geq 0$ and $\lambda \in [0,1]$ be arbitrary.
+        Then the points $(t_1,\omega(t_1))$ and $(t_2,\omega(t_2))$ are in the convex set $\operatorname{conv}(\rho)$, so we have
+        \[ (\lambda t_1 + (1-\lambda) t_2, \lambda \omega(t_1) + (1-\lambda) \omega(t_2)) \in \operatorname{conv}(\rho). \]
+        But then the definition of $\omega(\lambda t_1 + (1-\lambda)t_2)$ implies that
+        \[ \lambda \omega(t_1) + (1-\lambda) \omega(t_2) \leq \omega(\lambda t_1 + (1-\lambda) t_2). \]
+        Since $t_1,t_2 \in [0,\infty)$ and $\lambda \in [0,1]$ were arbitrary, we conclude that $\omega$ is concave.</p>
+<p>Now $\omega: [0,\infty) \to [0,\infty)$ is a concave function with $\omega(0) = 0$, so we know from Analysis 1 that $\omega$ is increasing and continuous on $[0,\infty)$.</p>
+<p>Suppose towards a contradiction that there exists $t_0 > \diam A$ such that $\omega(t_0) > \rho(\diam A)$.
+        Then we define the function 
+        \[ \hat{\omega}: [0,\infty)\to [0,\infty), \quad \hat{\omega} := \begin{cases}
+            \omega(t) &\text{if } 0 \leq t \leq \diam A, \\
+            \omega(\diam A) &\text{if } t \geq \diam A.
+        \end{cases} \]
+        Note that $\hat{\omega}$ is a continuous function since $\hat{\omega}|_{[0,\diam A]} = \omega|_{[0,\diam A]}$ is continuous and $\hat{\omega}(\diam A) = \omega(\diam A)$.
+        Also note that $\hat{\omega}$ is concave because it is the pointwise minimum of the concave function $\omega$ and the constant (concave) function $\omega(\diam A)$.</p>
+<p>That is, $\hat{\omega}$ is a continuous increasing concave function with $\hat{\omega}(0) = 0$ and $\hat{\omega}(t) = \rho(\diam A)$ for each $t \geq \diam A$.
+        (In reality, $\hat{\omega}$ is literally equal to $\omega$, but it is easier to define a new function $\hat{\omega}$ than to prove directly that $\omega$ has this last property.)</p>
+<p><div style="margin: 1em 0;"></div>
+        The final thing to prove is the remainder estimate and the norm identity.
+        <div style="margin: 1em 0;"></div></p>
+<p>Let $\alpha$ be a multi-index with $|\alpha| \leq m$.
+        Then by definition of $\rho$ we see that
+        \[ \| (R^m_a f^\bullet)^{(\alpha)}(x) \| \leq \rho(\|x-a\|) \cdot \|x-a\|^{m-|\alpha|} \leq \hat{\omega}(\|x-a\|) \cdot \|x-a\|^{m-|\alpha|} \qquad\forall\, x,a\in A \]
+        as desired.
+        Also 
+        \begin{align*}
+            \| f^\bullet \|_{\mathcal{W}^m(A)} &= \| f^\bullet \|_{J^m(A)} + \sup\left\{ \frac{\| (R^m_a f^\bullet)^{(\alpha)}(x) \|}{\|x-a\|^{m-|\alpha|}} : x,a \in A, x\neq a, |\alpha| \leq m \right\} \\
+                &= \| f^\bullet \|_{J^m(A)} + \sup \left\{ \frac{\| (R^m_a f^\bullet)^{(\alpha)}(x) \|}{\|x-a\|^{m-|\alpha|}} : x,a \in A, 0 < \|x-a\| \leq \diam A, |\alpha| \leq m \right\} \\
+                &= \| f^\bullet \|_{J^m(A)} + \sup_{t \in (0,\diam A]} \rho(t) \\
+                &= \| f^\bullet \|_{J^m(A)} + \rho(\diam A) \\
+                &= \| f^\bullet \|_{J^m(A)} + \hat{\omega}(\diam A)
+        \end{align*}
+        where we have used that $A$ is compact in the second equality, and that $\rho$ is increasing in the third equality, and that $\hat{\omega}(\diam A) = \rho(\diam A)$ in the last equality.
+        This finishes the proof of the claim.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>We are now ready to prove Whitney's $C^m$ Extension Theorem.
+We warn you that this is one of the <em>longest</em> proofs in the book, and it is quite technical.</p>
+<div class="proof-box collapsed" data-proof-id="proof-proof-of-whitney-s-c-m-extension-theorem-in-the-case-a-subset-r-n-is-compact">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-proof-of-whitney-s-c-m-extension-theorem-in-the-case-a-subset-r-n-is-compact')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof of Whitney's $C^m$ Extension Theorem in the case $A \subset \R^n$ is compact</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-proof-of-whitney-s-c-m-extension-theorem-in-the-case-a-subset-r-n-is-compact">
+    Assume that $A \subset \R^n$ is a nonempty compact set, and let $\{Q_j\}_{j=1}^\infty$ be the Whitney decomposition of $A^c$ given by Lemma <span class="ref-unknown" title="Reference not found: lem:whitney_decomposition">[lem:whitney_decomposition?]</span>. 
+    Fix $0 < \varepsilon < \frac{1}{4}$ and for each $j \in \Z^+$, let $Q_j^* := (1+\varepsilon) Q_j$ be the cube with the same center as $Q_j$ but with side length $(1+\varepsilon)$ times that of $Q_j$. 
+    Let $\{ \psi_j \}_{j=1}^\infty$ be the Whitney partition of unity subordinate to the open cover $\{Q_j^*\}_{j=1}^\infty$ of $A^c$ given by Lemma <span class="ref-unknown" title="Reference not found: lem:whitney_partition_of_unity">[lem:whitney_partition_of_unity?]</span>.
+<p>For each $j \in \Z^+$, choose a point $a_j \in A$ such that 
+    \[ \dist(Q_j,A) = \dist(Q_j,a_j). \]
+    For each jet $f^\bullet \in \mathcal{J}^m(A)$, we define the function $\mathcal{E}_m(f^\bullet) : \R^n \to \R$ by
+    \[ \mathcal{E}_m(f^\bullet)(x) = \begin{cases}
+    f^{(0)}(x) &\text{if } x \in A, \\
+    \displaystyle \sum_{j=1}^\infty \psi_j(x) \cdot T^m_{a_j} f^\bullet (x) &\text{if } x \in A^c.
+    \end{cases} \]
+    This defines a linear map $\mathcal{E}_m$ from $\mathcal{J}^m(A)$ to functions on $\R^n$.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Claim 1:</em>
+    We claim that if $f^\bullet \in J^m(A)$, then $\mathcal{E}_m(f^\bullet)$ is $C^\infty$ on $A^c$.</p>
+<div class="subproof collapsed" data-subproof-id="subproof-1763576799694-0">
+      <div class="subproof-header">
+        <button class="subproof-toggle" onclick="toggleSubproof('subproof-1763576799694-0')" aria-expanded="false">
+          <span class="subproof-toggle-icon">▼</span>
+          <strong>Proof of Claim 1</strong>
+        </button>
+      </div>
+      <div class="subproof-content" id="subproof-1763576799694-0">
+        See that for each $j \in \Z^+$, at most $12^n$ other cubes from the Whitney decomposition can intersect $Q_j^*$ by Lemma <span class="ref-unknown" title="Reference not found: lem:whitney_decomposition">[lem:whitney_decomposition?]</span> and <span class="ref-unknown" title="Reference not found: cor:whitney_cover_dilation">[cor:whitney_cover_dilation?]</span>.
+        Hence there are only finitely many terms in the sum defining $\mathcal{E}_m(f^\bullet)$ on $Q^*_j$ which are nonzero, and each of these terms is a smooth function on $Q_j^*$, so $\mathcal{E}_m(f^\bullet)$ is smooth on $Q_j^*$.
+<p>Since $A^c = \bigcup_{j=1}^\infty Q_j^*$ by Lemma <span class="ref-unknown" title="Reference not found: lem:whitney_decomposition">[lem:whitney_decomposition?]</span>, we conclude that $\mathcal{E}_m(f^\bullet)$ is smooth on $A^c$.
+        <span class="proof-end">□</span>
+      </div>
+    </div></p>
+<p>Now we assume that $f^\bullet \in \mathcal{W}^m(A)$, and let $f := \mathcal{E}_m(f^\bullet)$.
+    We want to show that $f \in C^m(\R^n)$.</p>
+<p><div style="margin: 1em 0;"></div>
+    By Lemma <span class="ref-unknown" title="Reference not found: lem:modulus_of_continuity_for_whitney_jet">[lem:modulus_of_continuity_for_whitney_jet?]</span>, there exists a modulus of continuity $\omega$ such that for each multi-index $\alpha$ with $|\alpha| \leq m$, we have
+    \[ \left\| (R^m_a f^\bullet)^{(\alpha)} (x) \right\| \leq \omega\left( \|x-a\|\right) \cdot \|x-a\|^{m-|\alpha|} \quad \forall\, x,a\in A \]
+    and also satisfying 
+    \[ \omega(t) = \omega(\diam A) \qquad \forall \, t\geq \diam A, \]
+    and \[ \|f^\bullet\|_{\mathcal{W}^m(A)} = \| f^\bullet \|_{J^m(A)} + \omega(\diam A). \]</p>
+<p>Now we fix an cube $Q\subset \R^n$ such that $A \subset Q$ for the rest of the proof.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Claim 2:</em>
+    For each multi-index $\alpha$ with $|\alpha| \leq m$, we define
+        \[ \underline{\partial^{\alpha}} f(x) := \begin{cases}
+            D^\alpha f(x) &\text{if } x \in A^c, \\
+            f^{(\alpha)}(x) &\text{if } x \in A
+        \end{cases} \]
+    which is the candidate for the $\alpha$ partial derivative of $f$ on $\R^n$.</p>
+<p>We claim that there exists a constant $C > 0$ which only depends on $m$, $n$, and $\sup_{y\in Q} \dist(y,A)$ such that if $\alpha$ is a multi-index with $|\alpha| \leq m$, 
+    and if $x \in Q$ and $a \in A$, then we have
+    \[ \left| {\underline{\partial^{\alpha}}} f(x) - D^\alpha T^m_a f^\bullet(x) \right| \leq C \cdot \omega\left( \|x-a\|\right) \cdot \|x-a\|^{m-|\alpha|}. \tag{$\mathwitch$}\]</p>
+<p>For the moment, we will assume Claim 2 and use it to finish the proof of the theorem. 
+    We claim that $(\mathwitch)$ implies that $f \in C^m(\R^n)$ and that there is a constant $c > 0$ depending only on $m$, $n$, and $\sup_{y\in Q} \dist(y,A)$ such that 
+    \[ \| f \|_{C^m(Q)} \leq c \,\| f^\bullet \|_{\mathcal{W}^m(A)}. \tag{$\bigpumpkin$}\]
+    Recall that the estimate $(\bigpumpkin)$ is the required continuity estimate for the extension operator $\mathcal{E}_m$.</p>
+<div class="subproof collapsed" data-subproof-id="subproof-1763576799694-1">
+      <div class="subproof-header">
+        <button class="subproof-toggle" onclick="toggleSubproof('subproof-1763576799694-1')" aria-expanded="false">
+          <span class="subproof-toggle-icon">▼</span>
+          <strong>Proof that $(\mathwitch)$ implies $f \in C^m(\R^n)$</strong>
+        </button>
+      </div>
+      <div class="subproof-content" id="subproof-1763576799694-1">
+        Fix a multi-index $\alpha$ with $|\alpha| < m$. 
+        For each $j \in \{ 1,2 ,\ldots,n\}$, we let $e_j$ be the $j$-th standard basis vector in $\R^n$.
+        If $a \in A$ and $x \in Q \setminus A$, then
+        \[ \underline{\partial^{\alpha}} f(a) = f^{(\alpha)}(a) = D^\alpha T^m_a f^\bullet(a) \]
+        so that 
+        \begin{align*}
+            \left| \underline{\partial^{\alpha}} f(x) - \underline{\partial^{\alpha}} f(a) - \sum_{j=1}^n \underline{\partial^{\alpha + e_j}} f(a) (x_j - a_j) \right| &= \left| \underline{\partial^{\alpha}} f(x) - D^\alpha T^m_a f^\bullet(a) - \sum_{j=1}^n \underline{\partial^{\alpha + e_j}} f(a) (x_j - a_j) \right| \\
+                &\leq \left| \underline{\partial^{\alpha}} f(x) -  D^\alpha T^m_a f^\bullet(x) \right| \ + \\
+                &\qquad\qquad + \left|  D^\alpha T^m_a f^\bullet(x) -  D^\alpha T^m_a f^\bullet(a) - \sum_{j=1}^n \underline{\partial^{\alpha + e_j}} f(a) (x_j - a_j) \right| \\
+                &\leq C\cdot \omega\left( \|x-a\|\right) \cdot \|x-a\|^{m-|\alpha|} \ +\\
+                &\qquad\qquad + \left|  D^\alpha T^m_a f^\bullet(x) -  D^\alpha T^m_a f^\bullet(a) - \sum_{j=1}^n D^{\alpha + e_j} T^m_a f^\bullet(a) (x_j - a_j) \right| \\ 
+                &= o(\|x-a\|^{m-|\alpha|}) + o(\|x-a\|) \\
+                &= o(\|x-a\|)
+        \end{align*}
+        where we have used the estimate $(\mathwitch)$ in the second inequality, and the fact that $T^m_a f^\bullet$ is a polynomial of degree at most $m$ in the second to last equality, and finally the fact that $|\alpha| < m$ in the last equality.
+<p>If $a\in A$ and $x\in A$, then we have
+        \begin{align*}
+            \left| \underline{\partial^{\alpha}} f(x) - \underline{\partial^{\alpha}} f(a) - \sum_{j=1}^n \underline{\partial^{\alpha + e_j}} f(a) (x_j - a_j) \right| &= \left| D^{\alpha}T^m_a f^\bullet (x) - D^\alpha T^m_a f^\bullet(a) - \sum_{j=1}^n \underline{\partial^{\alpha + e_j}} f(a) (x_j - a_j) \right| \\
+                &= \left| D^{\alpha}T^m_a f^\bullet (x) - D^\alpha T^m_a f^\bullet(a) - \sum_{j=1}^n D^{\alpha + e_j} T^m_a f^\bullet(a) (x_j - a_j) \right| \\
+                &= o(\|x-a\|).
+        \end{align*}
+        where we have used the fact that $T^m_a f^\bullet$ is a polynomial of degree at most $m$.</p>
+<p>In either case, we have shown that for each multi-index $\alpha$ with $|\alpha| < m$ and each $a\in A$ we have
+        \[ \left| \underline{\partial^{\alpha}} f(x) - \underline{\partial^{\alpha}} f(a) - \sum_{j=1}^n \underline{\partial^{\alpha + e_j}} f(a) (x_j - a_j) \right| = o(\|x-a\|) \quad \text{as } x \to a, \]
+        and as a result, we conclude that $\underline{\partial^{\alpha}} f$ is differentiable at $a$ with derivative $\underline{\partial^{\alpha + e_j}} f(a) = f^{(\alpha + e_j)}(a)$ for each $j \in \{1,2,\ldots,n\}$.
+        Since $a \in A$ was arbitrary, we conclude that $\underline{\partial^{\alpha}} f$ is differentiable at each point of $A$ with derivative $\underline{\partial^{\alpha + e_j}} f(a) = f^{(\alpha + e_j)}(a)$ for each $j \in \{1,2,\ldots,n\}$; hence $\underline{\partial^{\alpha}} f$ is $C^1$ on $\R^n$.</p>
+<p>Now taking $\alpha = 0$ shows that for each $j\in \{1,2,\ldots,n\}$ the function $\underline{\partial_j} f$ is continuous , and the above argument combined with Claim 1 shows that $\underline{\partial_j} f$ is the $j^{\text{th}}$ partial derivative of $f$ on $\R^n$. 
+        Therefore $f \in C^1(\R^n)$ and $\underline{\partial_j} f = D_j f$ for each $j \in \{1,2,\ldots,n\}$.</p>
+<p>In a similar way, we then see that for each multi-index $\alpha$ with $|\alpha| = 2$, the function $\underline{\partial^{\alpha}} f$ is continuous; writing
+        $\alpha = e_i + e_j$ for some $i,j \in \{1,2,\ldots,n\}$, we see that $\underline{\partial^{\alpha}} f$ is the $i^\text{th}$ partial derivative of $\underline{\partial_j} f$, 
+        and hence $\underline{\partial^{\alpha}} f$ is the $\alpha = e_i + e_j$ partial derivative of $f$ on $\R^n$.
+        Since $\alpha$ was an arbitrary multi-index with $|\alpha| = 2$, we conclude that $f \in C^2(\R^n)$ and $\underline{\partial^{\alpha}} f = D^\alpha f$ for each multi-index $\alpha$ with $|\alpha| = 2$.</p>
+<p>Bootstrapping this argument, we conclude that for each multi-index $\alpha$ with $|\alpha| \leq m$ 
+        the function $\underline{\partial^{\alpha}} f$ is continuous and is the $\alpha$ partial derivative of $f$ on $\R^n$; because this is true for each multi-index $\alpha$ with $|\alpha| < m$, we conclude that $f \in C^m(\R^n)$.
+        <span class="proof-end">□</span>
+      </div>
+    </div></p>
+<div class="subproof collapsed" data-subproof-id="subproof-1763576799694-2">
+      <div class="subproof-header">
+        <button class="subproof-toggle" onclick="toggleSubproof('subproof-1763576799694-2')" aria-expanded="false">
+          <span class="subproof-toggle-icon">▼</span>
+          <strong>Proof that $(\mathwitch)$ and $f \in C^m(\R^n)$ implies $(\bigpumpkin)$</strong>
+        </button>
+      </div>
+      <div class="subproof-content" id="subproof-1763576799694-2">
+        Let $\alpha$ be a multi-index with $|\alpha| \leq m$, and let $x \in Q$ be arbitrary.
+        Since $A$ is compact there is a point $a \in A$ such that $\dist(x,A) = \|x-a\|$.
+        Set 
+        \[ \lambda := \sup_{y \in Q} \dist(y,A). \]
+<p>Then, as shown above we have $D^\alpha f(x) = \underline{\partial^{\alpha}} f(x)$, and for each $a \in A$ we have
+        \[ D^\alpha (T^m_a f^\bullet)(x) = \sum_{|\beta|\leq m - |\alpha|} \frac{f^{(\alpha+\beta)}(a)}{\beta!}(x-a)^\beta = \sum_{|\beta| \leq m - |\alpha|} \frac{D^{\alpha+\beta} f(a)}{\beta!}(x-a)^\beta \tag{$\dagger$}\]
+        where the first equality follows from the second computation in the proof of <span class="ref-unknown" title="Reference not found: ex:remainder_jet_properties">[ex:remainder_jet_properties?]</span>, 
+        and the second equality follows from the fact that $f^{(\alpha+\beta)}(a) = D^{\alpha+\beta} f(a)$ for all multi-indices $\beta$ with $|\beta| \leq m - |\alpha|$, which was shown in the previous step.</p>
+<p>Then we estimate
+        \begin{align*}
+            | D^\alpha f(x) | &\leq \left| D^\alpha f(x) - D^\alpha T^m_a f^\bullet(x) \right| + \left| D^\alpha T^m_a f^\bullet(x) \right| && \text{by triangle inequality}\\
+                &= \left| \underline{\partial^{\alpha}} f(x) - D^\alpha T^m_a f^\bullet(x) \right| + \left| \sum_{|\beta| \leq m - |\alpha|} \frac{D^{\alpha+\beta} f(a)}{\beta!}(x-a)^\beta \right| && \text{ by } (\dagger)\\
+                &\leq C \cdot \omega\left( \|x-a\| \right) \cdot \|x-a\|^{m-|\alpha|} + \sum_{|\beta| \leq m - |\alpha|}  \frac{\left|D^{\alpha+\beta} f(a)\right|}{\beta!}\left|(x-a)^\beta\right| &&\text{by }(\mathwitch) \text{ and the triangle inequality}\\
+                &\leq C \cdot \omega\left( \lambda \right) \cdot \lambda^{m-|\alpha|} + \sum_{|\beta| \leq m - |\alpha|}  \frac{\left|D^{\alpha+\beta} f(a)\right|}{\beta!} \|x-a\|^{|\beta|} &&\text{since } \omega \text{ is increasing and } \|x-a\| \leq \lambda\\
+                &\leq C \cdot \omega\left( \diam A \right) \cdot \lambda^{m-|\alpha|} + \sum_{|\beta| \leq m - |\alpha|}  \frac{\|f^\bullet\|_{J^m(A)}}{\beta!} \lambda^{|\beta|} \\
+                &= C \left( \| f^\bullet \|_{\mathcal{W}^m(A)} - \| f^\bullet \|_{J^m(A)} \right) \cdot \lambda^{m-|\alpha|}  + \left( \sum_{|\beta| \leq m - |\alpha|}  \frac{1}{\beta!} \lambda^{|\beta|} \right) \cdot \|f^\bullet\|_{J^m(A)} \\
+                &=: C \left( \| f^\bullet \|_{\mathcal{W}^m(A)} - \| f^\bullet \|_{J^m(A)} \right) \cdot \lambda^{m-|\alpha|}  + c_{m,\lambda} \cdot \|f^\bullet\|_{J^m(A)} \\
+                &= C \lambda^{m-|\alpha|} \cdot \| f^\bullet \|_{\mathcal{W}^m(A)} + (c_{m,\lambda} - C \lambda^{m-|\alpha|}) \cdot \|f^\bullet\|_{J^m(A)} \\
+        \end{align*}
+        where $C$ is the constant from $(\mathwitch)$ and $c_{m,\lambda} := \sum_{|\beta| \leq m - |\alpha|}  \frac{1}{\beta!} \lambda^{|\beta|}$.
+        Now let 
+        \[ C' := \max \left\{ C, \frac{c_{m,\lambda}}{\lambda^{m-|\alpha|}} \right \} \]
+        so that 
+        \[ C \leq C' \quad\text{and}\quad \frac{c_{m,\lambda}}{\lambda^{m-|\alpha|}} \leq C' \]
+        which implies
+        \[ c_{m,\lambda} - C' \lambda^{m-|\alpha|} \leq 0. \]
+        Then using the exact same argument as before but with $C'$ in place of $C$, we see that
+        \begin{align*}
+            |D^\alpha f(x)| &\leq C' \lambda^{m-|\alpha|} \cdot \| f^\bullet \|_{\mathcal{W}^m(A)} + (c_{m,\lambda} - C' \lambda^{m-|\alpha|}) \cdot \|f^\bullet\|_{J^m(A)} \\
+                &\leq C' \lambda^{m-|\alpha|} \cdot \| f^\bullet \|_{\mathcal{W}^m(A)}.
+        \end{align*}
+        Setting 
+        \[ c := C' \lambda^{m-|\alpha|} = \max \left\{ C \lambda^{m-|\alpha|}, c_{m,\lambda} \right\} \]
+        we conclude that
+        \[ |D^\alpha f(x)| \leq c \| f^\bullet \|_{\mathcal{W}^m(A)}. \]
+        Since $\alpha$ was an arbitrary multi-index with $|\alpha| \leq m$ and $x\in Q$ was arbitrary, we conclude that
+        \[ \max_{|\alpha| \leq m} \sup_{x \in Q} |D^\alpha f(x)| \leq c \| f^\bullet \|_{\mathcal{W}^m(A)} \]
+        which says that 
+        \[ \| f \|_{C^m(Q)} \leq c \,\| f^\bullet \|_{\mathcal{W}^m(A)} \]
+        as desired in $(\bigpumpkin)$.
+        <span class="proof-end">□</span>
+      </div>
+    </div></p>
+<p>It remains to prove Claim 2.
+    For this, we make a subclaim which will be used in the proof of Claim 2.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Subclaim 2a.</em>
+    We claim that if $a,b \in A$ and $\alpha$ is a multi-index with $|\alpha| \leq m$, then
+    \[ \left| D^\alpha T^m_a f^\bullet(x) - D^\alpha T^m_b f^\bullet (x) \right| \leq 4^{m-|\alpha|} e^n \cdot \alpha(\|a-b\|) \cdot\left( \|x-a\|^{m-|\alpha|} + \|x-b\|^{m-|\alpha|} \right) \qquad \forall\, x\in \R^n. \]</p>
+<div class="subproof collapsed" data-subproof-id="subproof-1763576799694-3">
+      <div class="subproof-header">
+        <button class="subproof-toggle" onclick="toggleSubproof('subproof-1763576799694-3')" aria-expanded="false">
+          <span class="subproof-toggle-icon">▼</span>
+          <strong>Proof of Subclaim 2a.</strong>
+        </button>
+      </div>
+      <div class="subproof-content" id="subproof-1763576799694-3">
+        Let $a,b \in A$ and $\alpha$ be a multi-index with $|\alpha| \leq m$.
+<p>We will use three properties about jets and their formal derivatives and Taylor polynomials.
+        Namely, for each multi-index $\beta$ with $|\beta| \leq m$, we have
+        \[ f^{(\beta)}(a) = D^\beta(T^m_a f^\bullet)(a) \tag{i}\]  
+        and
+        \[ D^\beta(T^m_a f^\bullet - T^m_b f^\bullet)(a) = (R^m_b f^\bullet)^{(\beta)}(a) \tag{ii} \]
+        and
+        \[ f^{(\beta)}(b)(x-b)^\beta = D^\beta(T^m_b f^\bullet)(a)\cdot (x-a)^\beta, \tag{iii}\]
+        which were proven in Exercise <span class="ref-unknown" title="Reference not found: ex:more_formal_properties">[ex:more_formal_properties?]</span>.</p>
+<p>Then as a result of these properties, for each $x\in \R^n$ we have 
+        \begin{align*}
+            T^m_a f^\bullet(x) - T^m_b f^\bullet(x) &= \sum_{|\beta| \leq m} \frac{f^{(\beta)}(a)}{\beta!}(x-a)^\beta - \sum_{|\beta| \leq m} \frac{f^{(\beta)}(b)}{\beta!}(x-b)^\beta &&\text{ by definition of formal Taylor polynomial}\\
+                &= \sum_{|\beta| \leq m} \frac{(x-a)^\beta}{\beta!} D^\beta(T^m_a f^\bullet)(a) \, - \sum_{|\beta| \leq m} \frac{(x-a)^\beta}{\beta!} D^\beta(T^m_b f^\bullet)(a) &&\text{ by properties (i) and (iii)}\\
+                &= \sum_{|\beta| \leq m} \frac{(x-a)^\beta}{\beta!} \left( D^\beta(T^m_a f^\bullet)(a) - D^\beta(T^m_b f^\bullet)(a) \right) \\
+                &= \sum_{|\beta| \leq m} \frac{(x-a)^\beta}{\beta!} D^\beta(T^m_a f^\bullet - T^m_b f^\bullet)(a) \\
+                &= \sum_{|\beta| \leq m} \frac{(x-a)^\beta}{\beta!} (R^m_a f^\bullet)^{(\beta)}(a) &&\text{ by property (ii)}.
+        \end{align*}</p>
+<p>As a result, we see that 
+        \[ D^\alpha(T^m_a f^\bullet)(x) - D^\alpha(T^m_b f^\bullet)(x) = \sum_{|\beta| \leq m-|\alpha|} \frac{(x-a)^\beta}{\beta!} (R^m_a f^\bullet)^{(\beta+\alpha)}(a) \qquad \forall \, x\in \R^n. \]
+        Hence if $x\in \R^n$ is such that $\|x-a\| \leq \|x-b\|$, then we can estimate
+        \begin{align*}
+            \left| D^\alpha T^m_a f^\bullet(x) - D^\alpha T^m_b f^\bullet (x) \right| &\leq
+                \sum_{|\beta| \leq m-|\alpha|} \frac{\|x-a\|^{|\beta|}}{\beta!} \cdot \left\| (R^m_a f^\bullet)^{(\beta+\alpha)}(a) \right\| \\
+                &\leq \sum_{|\beta| \leq m-|\alpha|} \frac{\|x-a\|^{|\beta|}}{\beta!} \cdot \|a-b\|^{m-|\alpha|-|\beta|} \cdot \omega(\|a-b\|) \\
+                &= \sum_{|\beta|\leq m - |\alpha|} \frac{1}{\beta!} \cdot \|x-a\|^{|\beta|} \cdot \|a-b\|^{m-|\alpha|-|\beta|} \cdot \omega(\|a-b\|). &&(\star)
+        \end{align*}
+        Then for each $x\in \R^n$ such that $\|x-a\| \leq \|x-b\|$, and each multi-index $\beta$ with $|\beta| \leq m-|\alpha|$, we have
+        \begin{align*}
+            \|x-a\|^{|\beta|} \|a-b\|^{m-|\alpha|-|\beta|} &\leq \|x-a\|^{|\beta|}\left( \|x-a\| + \|a-b\| \right)^{m-|\alpha|-|\beta|} \\
+                &\leq (\|x-a\|+\|a-b\|)^{m-|\alpha|} \\
+                &\leq 2^{m-|\alpha|} \cdot \left( \|x-a\|^{m-|\alpha|} + \|a-b\|^{m-|\alpha|} \right) \\
+                &\leq 2^{m-|\alpha|} \cdot \left( \|x-a\|^{m-|\alpha|} + \left( \|a-x\|+ \|x-b\| \right)^{m-|\alpha|}\right) \\
+                &\leq 2^{m-|\alpha|} \cdot \left( \|x-a\|^{m-|\alpha|} + (2\|x-b\|)^{m-|\alpha|} \right) \\
+                &\leq 4^{m-|\alpha|} \cdot \left( \|x-a\|^{m-|\alpha|} + \|x-b\|^{m-|\alpha|} \right) \\
+        \end{align*}
+        Returning to the estimate $(\star)$, we conclude that
+        \begin{align*}
+            \left| D^\alpha T^m_a f^\bullet(x) - D^\alpha T^m_b f^\bullet (x) \right| &\leq 
+                4^{m-|\alpha|} \cdot \sum_{|\beta| \leq m-|\alpha|} \frac{1}{\beta!} \cdot \omega(\|a-b\|) \cdot \left( \|x-a\|^{m-|\alpha|} + \|x-b\|^{m-|\alpha|} \right) \\
+                &\leq 4^{m-|\alpha|} \left( \sum_{\beta\in \N^n} \frac{1}{\beta!} \right) \cdot \omega(\|a-b\|) \cdot \left( \|x-a\|^{m-|\alpha|} + \|x-b\|^{m-|\alpha|} \right) \\
+                &\leq 4^{m-|\alpha|} \left( \prod_{j=1}^n \sum_{k=0}^\infty \frac{1}{k!} \right) \cdot \omega(\|a-b\|) \cdot \left( \|x-a\|^{m-|\alpha|} + \|x-b\|^{m-|\alpha|} \right) \\
+                &\leq 4^{m-|\alpha|} e^n \cdot \omega(\|a-b\|) \cdot \left( \|x-a\|^{m-|\alpha|} + \|x-b\|^{m-|\alpha|} \right).
+        \end{align*}</p>
+<p>Similarly, if $x\in \R^n$ is such that $\|x-b\| \leq \|x-a\|$, then we can estimate
+        \[ \left| D^\alpha T^m_a f^\bullet(x) - D^\alpha T^m_b f^\bullet (x) \right| \leq 4^{m-|\alpha|} e^n \cdot \omega(\|a-b\|) \cdot \|x-b\|^{m-|\alpha|}. \]
+        Putting these two estimates together, we conclude that for each $x\in \R^n$ we have
+        \[ \left| D^\alpha T^m_a f^\bullet(x) - D^\alpha T^m_b f^\bullet (x) \right| \leq 4^{m-|\alpha|} e^n \cdot \omega(\|a-b\|) \cdot\left( \|x-a\|^{m-|\alpha|} + \|x-b\|^{m-|\alpha|} \right) \]
+        as stated in the subclaim.
+        <span class="proof-end">□</span>
+      </div>
+    </div></p>
+<p>Now we prove $(\mathwitch)$ in Claim 2 using two cases.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p><span class="noindent"></span>Let $\alpha$ be a multi-index with $|\alpha| \leq m$, and let $x \in Q$ and $a \in A$ be arbitrary.
+    First consider the case where $x \in A$.</p>
+<div class="subproof collapsed" data-subproof-id="subproof-1763576799694-4">
+      <div class="subproof-header">
+        <button class="subproof-toggle" onclick="toggleSubproof('subproof-1763576799694-4')" aria-expanded="false">
+          <span class="subproof-toggle-icon">▼</span>
+          <strong>Proof of $(\mathwitch)$ when $x \in A$.</strong>
+        </button>
+      </div>
+      <div class="subproof-content" id="subproof-1763576799694-4">
+        If $x \in A$, then $\underline{\partial^{\alpha}} f(x) = f^{(\alpha)}(x)$ and we can estimate
+        \begin{align*}
+            \left| {\underline{\partial^{\alpha}}} f(x) - D^\alpha T^m_a f^\bullet(x) \right|
+                &= \left| f^{(\alpha)}(x) - T^{m-|\alpha|}_a D^\alpha f^{\bullet}(x) \right| \\
+                &= \left| (R^{m-|\alpha|}_a f^{\bullet + (\alpha)}) (x) \right| \\
+                &\leq \omega\left( \|x-a\|\right) \cdot \|x-a\|^{m-|\alpha|} 
+        \end{align*}
+        where the first equality follows from Exercise <span class="ref-unknown" title="Reference not found: ex:formal_derivative_of_formal_taylor_polynomial">[ex:formal_derivative_of_formal_taylor_polynomial?]</span>, 
+        and the final inequality follows from Lemma <span class="ref-unknown" title="Reference not found: lem:modulus_of_continuity_for_whitney_jet">[lem:modulus_of_continuity_for_whitney_jet?]</span> applied to the $m-|\alpha|$-jet $D^\alpha f^\bullet$.
+        This shows that $(\mathwitch)$ holds for each $x \in A$.
+        <span class="proof-end">□</span>
+      </div>
+    </div>
+<div class="subproof collapsed" data-subproof-id="subproof-1763576799694-5">
+      <div class="subproof-header">
+        <button class="subproof-toggle" onclick="toggleSubproof('subproof-1763576799694-5')" aria-expanded="false">
+          <span class="subproof-toggle-icon">▼</span>
+          <strong>Proof of $(\mathwitch)$ when $x \in A^c$.</strong>
+        </button>
+      </div>
+      <div class="subproof-content" id="subproof-1763576799694-5">
+        (NOTE: We have <em>not</em> yet used the definition of the extension operator $\mathcal{E}_m$ in this proof, and the 
+        consequences of the Whitney partition of unity and the Whitney decomposition, so this is where we will use these tools.)
+<p>Assume that $x\in Q\setminus A$. Then by definition of $f = \mathcal{E}_m(f^\bullet)$ and the fact that $\{\psi_j\}_{j=1}^\infty$ is a partition of unity on $A^c$,
+    we have
+    \[ f(x) - T^m_a f^\bullet(x) = \sum_{j=1}^\infty \psi_j(x) T^m_{a_j} f^\bullet(x) - \sum_{j=1}^\infty \psi_j(x) T^m_a f^\bullet(x) = \sum_{j=1}^\infty \psi_j(x) \left( T^m_{a_j} f^\bullet(x) - T^m_a f^\bullet(x) \right). \]
+    Hence we have
+    \begin{align*}
+        D^\alpha f(x) - D^\alpha T^m_a f^\bullet(x) &= \sum_{\beta \leq \alpha} \binom{\alpha}{\beta} \sum_{j=1}^\infty D^{\beta} \psi_j(x) \cdot D^{\alpha - \beta} \left( T^m_{a_j} f^\bullet(x) - T^m_a f^\bullet(x) \right) 
+    \end{align*}
+    by the Leibniz rule, which implies that
+    \begin{align*}
+        \left| D^\alpha f(x) - D^\alpha T^m_a f^\bullet(x) \right| &\leq
+            \sum_{\beta \leq \alpha} \binom{\alpha}{\beta} \left| \sum_{j=1}^\infty D^{\beta} \psi_j(x) \cdot D^{\alpha - \beta} \left( T^m_{a_j} f^\bullet(x) - T^m_a f^\bullet(x) \right) \right|.
+    \end{align*}
+    For each multi-index $\beta$ with $\beta \leq \alpha$, we let 
+    \[ S_\beta(x) := \sum_{j=1}^\infty D^\beta \psi_j(x) \cdot D^{\alpha - \beta} \left( T^m_{a_j} f^\bullet(x) - T^m_a f^\bullet(x) \right) \]
+    so that the previous equation reads
+    \[ \left| D^\alpha f(x) - D^\alpha T^m_a f^\bullet(x) \right| \leq \sum_{\beta \leq \alpha} \binom{\alpha}{\beta} |S_\beta(x)|. \tag{$\heartsuit$}\]</p>
+<p>First we estimate $|S_0(x)|$.
+    If $j \geq 1$ is such that $x \in Q^*_j$, then we have
+    \begin{align*}
+        \| x-a_j \| &\leq \diam Q^*_j + \dist(Q_j^*, A) \\
+            &\leq \frac{5}{4} \,\diam Q_j + \frac{3}{4} \,\dist(Q_j, A) &&\text{ since $Q_j^*$ is the dilation of $Q_j$ by a factor of } 1+\varepsilon < \frac{5}{4} \\
+            &\leq 2 \diam Q_j + \dist(Q_j, A) \\
+            &\leq 8 \dist(Q_j, A) + \dist(Q_j, A) &&\text{by Lemma [lem:whitney_decomposition?]} \\
+            &\leq 9 \|x-a\|
+    \end{align*}
+    where the first inequality follows from the triangle inequality,
+    and the final inequality follows from the fact that $x \in Q_j$ and $a \in A$.</p>
+<p>Hence if $j \geq 1$ is such that $x \in Q_j^*$, then we have
+    \[ \|a-a_{j}\| \leq \|a-x\| + \|x-a_{j}\| \leq \|a-x\| + 9 \|x-a\| = 10 \|x-a\| \]
+    which implies 
+    \[ \omega(\|a-a_{j}\|) \leq 10 \omega(\|x-a\|) \]
+    since $\omega$ is concave and increasing.</p>
+<p>If $j \geq 1$ is such that $x \notin Q_j^*$, then $\psi_j(x) = 0$ and so this term does not contribute to the sum defining $S_0(x)$.</p>
+<p>Therefore we have 
+    \begin{align*}
+    |S_0(x)| &\leq \sum_{ \{ j\, : \,x \in Q_j^* \} } 1 \cdot \left| D^\alpha(T^m_{a_j} f^\bullet - T^m_a f^\bullet)(x) \right| \\
+        &\leq C_{m,n} \cdot \sum_{\{ j\, : \,x \in Q_j^* \}} \omega(\|a-a_j\|) \left( \|x-a\|^{m-|\alpha|} + \|x-a_j\|^{m-|\alpha|} \right) && \text{by Subclaim 2a} \\
+        &\leq C_{m,n} \cdot \sum_{\{ j\, : \,x \in Q_j^* \}} 10 \omega(\|x-a\|) \left( \|x-a\|^{m-|\alpha|} + (9 \|x-a\|)^{m-|\alpha|} \right) \\
+        &\leq C_{m,n} \cdot 2^n \cdot 10(9^{m-|\alpha|} + 1) \cdot \omega(\|x-a\|) \cdot \|x-a\|^{m-|\alpha|} &&\text{by Corollary [cor:whitney_cover_dilation?]}
+    \end{align*}
+    where $C_{m,n} = 4^m e^n$ is the constant from Subclaim 2a for the case of the zero multi-index.
+    Thus there is a constant $C_0$ which only depends on $m$ and $n$ such that
+    \[ |S_0(x)| \leq C_0 \cdot \omega(\|x-a\|) \cdot \|x-a\|^{m-\alpha}. \tag{$\clubsuit$}\]</p>
+<p>Next let $\beta$ be a multi-index with $\beta \leq \alpha$ and $|\beta| \geq 1$, and consider $|S_\beta(x)|$.
+    Then see that for each $b \in A$ we have
+    \begin{align*}
+        S_\beta (x) &= \sum_{j=1}^\infty D^\beta \psi_j(x) \cdot D^{\alpha - \beta} \left( T^m_{a_j} f^\bullet(x) - T^m_a f^\bullet(x) \right) \\
+            &= \sum_{j=1}^\infty D^\beta \psi_j(x) \cdot \left( D^{\alpha - \beta} T^m_{a_j} f^\bullet(x) - D^{\alpha - \beta} T^m_b f^\bullet(x) + D^{\alpha - \beta} T^m_b f^\bullet(x) - D^{\alpha - \beta} T^m_a f^\bullet(x) \right) \\
+            &= \sum_{j=1}^\infty D^\beta \psi_j(x) \cdot \left( D^{\alpha - \beta} T^m_{a_j} f^\bullet(x) - D^{\alpha - \beta} T^m_b f^\bullet(x) \right) + \sum_{j=1}^\infty D^\beta \psi_j(x) \cdot \left( D^{\alpha - \beta} T^m_b f^\bullet(x) - D^{\alpha - \beta} T^m_a f^\bullet(x) \right) \\
+            &= \sum_{j=1}^\infty D^\beta \psi_j(x) \cdot \left( D^{\alpha - \beta} T^m_{a_j} f^\bullet(x) - D^{\alpha - \beta} T^m_b f^\bullet(x) \right) + 0 \\
+            &= \sum_{j=1}^\infty D^\beta \psi_j(x) \cdot \left( D^{\alpha - \beta} T^m_{a_j} f^\bullet(x) - D^{\alpha - \beta} T^m_b f^\bullet(x) \right)
+    \end{align*}
+    since $\sum_j \psi_j \equiv 1$ on $A^c$ and hence $\sum_j D^\beta \psi_j \equiv 0$ on $A^c$ for each multi-index $\beta$ with $|\beta| \geq 1$.</p>
+<p>Now choose a point $b\in A$ such that $\dist(x,A) = \|x-b\|$.
+    Then if $j \geq 1$ is such that $x \in Q_j^*$, then as before we have $\|x-a_j\| \leq 9 \|x-b\|$ so that 
+    \[ \|a_j - b\| \leq \|a_j - x\| + \|x-b\| \leq 10 \|x-b\| \]
+    and 
+    \[ \omega(\|a_j - b\|) \leq 10 \omega(\|x-b\|). \]
+    Hence we can estimate
+    \begin{align*}
+        |S_\beta(x)| &\leq \sum_{ \{j\,:\, x \in Q_j^* \} }
+            \left| D^\beta \psi_j(x) \cdot D^{\alpha - \beta} \left( T^m_{a_j} f^\bullet - T^m_b f^\bullet \right)(x) \right| \\
+            &\leq \sum_{ \{j\,:\, x \in Q_j^* \} } \left| D^\beta \psi_j(x) \right| \cdot
+                \left( 4^{m-|\alpha-\beta|}e^n \omega(\|a_j - b\|) \left( \|x-a_j\|^{m-|\alpha - \beta|} + \|x-b\|^{m-|\alpha - \beta|} \right) \right)
+                && \quad \text{ by Subclaim 2a} \\
+            &\leq C_{m,n,\beta} \cdot \sum_{ \{j\,:\, x \in Q_j^* \} } \left| D^\beta \psi_j(x) \right| \cdot 10 \omega(\|x-b\|) \left( (9\|x-b\|)^{m-|\alpha - \beta|} + \|x-b\|^{m-|\alpha -\beta|} \right) 
+                && \quad\text{ where } C_{m,n,\beta} := 4^{m-|\alpha-\beta|} e^n \\
+            &\leq C_{m,n,\beta} \cdot 10(9^{m-|\alpha - \beta|} + 1) 
+                \cdot \omega(\|x-b\|)\|x-b\|^{m-|\alpha -\beta|} \sum_{ \{j\,:\, x \in Q_j^* \} } \left| D^\beta \psi_j(x) \right| \\
+            &\leq C_{m,n,\beta} \cdot 10(9^{m-|\alpha - \beta|} + 1) \cdot \omega(\|x-b\|)\|x-b\|^{m-|\alpha - \beta|} \cdot C_\beta \sum_{ \{ j\,:\, x\in Q^*_j \} } (\diam Q_j)^{-|\beta|}
+    \end{align*}
+    where the last inequality holds by the property (iv) of the Whitney partition of unity <span class="ref-unknown" title="Reference not found: prop:whitney_partition_of_unity">[prop:whitney_partition_of_unity?]</span>, and the constant $C_\beta$ only depends only on $\beta$ and $n$.</p>
+<p>Letting
+    \[ \hat{C}_{\beta} := C_{m,n,\beta} \cdot 10(9^{m-|\alpha - \beta|} + 1) \cdot C_\beta \]
+    to make things more managable, we have shown that 
+    \[ |S_\beta(x)| \leq \hat{C}_{\beta} \cdot \omega(\|x-b\|)\|x-b\|^{m-|\alpha-\beta|} \sum_{ \{ j\,:\, x\in Q^*_j \} } (\diam Q_j)^{-|\beta|}. \]
+    Now fix some $l \in Z^+$ such that $x \in Q_l$. 
+    Then for each $j\geq 1$ such that $x\in Q_j^*$, the cubes $Q_j$ and $Q_l$ must be adjacent, as shown in the proof of Corollary <span class="ref-unknown" title="Reference not found: cor:whitney_cover_dilation">[cor:whitney_cover_dilation?]</span>.
+    Hence there are at most $2^n$ terms in the sum $\sum_{ \{ j\,:\, x\in Q^*_j \} } (\diam Q_j)^{-|\beta|}$, 
+    as shown in <span class="ref-unknown" title="Reference not found: cor:whitney_cover_dilation">[cor:whitney_cover_dilation?]</span>,
+    and each term is at most $4^{|\beta|}(\dist(Q_l, A))^{-|\beta|}$ by Lemma <span class="ref-unknown" title="Reference not found: lem:whitney_decomposition">[lem:whitney_decomposition?]</span> (b) and (c).</p>
+<p>Hence we have 
+    \begin{align*}
+        |S_\beta(x)| &\leq 2^n \cdot 4^{|\beta|} \cdot \hat{C}_{\beta} \cdot \omega(\|x-b\|)\|x-b\|^{m-|\alpha-\beta|} \cdot (\dist(Q_l, A))^{-|\beta|} \\
+            &= 2^n \cdot 4^{|\beta|} \cdot \hat{C}_{\beta} \cdot \omega\left( \dist(x,A)\right) \left(\dist(x,A)\right)^{m-|\alpha-\beta|} 
+                \cdot \left( \dist(x,A) \right)^{-|\beta|} \\
+    \end{align*} 
+    because $\|x-b\| = \dist(x,A)$ and $\dist(Q_l, A) \geq \dist(x,A)$ by virtue of $x \in Q_l$.
+    Since $\beta \leq \alpha$, we see that $m-|\alpha-\beta| = m-|\alpha| + |\beta|$ and thus we have
+    \[ |S_\beta(x)| \leq 2^n \cdot 4^{|\beta|} \cdot \hat{C}_{\beta} \cdot \omega\left( \dist(x,A)\right) \left(\dist(x,A)\right)^{m-|\alpha|}. \]
+    Letting $C'_\beta := 2^n \cdot 4^{|\beta|} \cdot \hat{C}_{\beta}$, we have shown that
+    \[ |S_\beta(x)| \leq C'_\beta \cdot \omega\left( \dist(x,A)\right) \left(\dist(x,A)\right)^{m-|\alpha|}. \tag{$\spadesuit$}\]</p>
+<p>Putting this all together, we have 
+    \begin{align*}
+        | D^\alpha f(x) - D^\alpha T^m_a f^\bullet(x) | &\leq
+            \sum_{\beta \leq \alpha} \binom{\alpha}{\beta} |S_\beta(x)| && \text{ by }(\heartsuit) \\
+            &= |S_0(x)| + \sum_{\substack{\beta \leq \alpha, \\ |\beta| \geq 1}} \binom{\alpha}{\beta} |S_\beta(x)| \\
+            &\leq C_0 \cdot \omega(\|x-a\|) \cdot \|x-a\|^{m-|\alpha|} + \sum_{\substack{\beta \leq \alpha, \\ |\beta| \geq 1}} \binom{\alpha}{\beta} C'_\beta \cdot\omega\left( \dist(x,A)\right) \left(\dist(x,A)\right)^{m-|\alpha|} &&\text{ by }(\clubsuit) \text{ and }(\spadesuit) \\
+            &= C \cdot \omega\left( \dist(x,A)\right) \left(\dist(x,A)\right)^{m-|\alpha|} 
+    \end{align*}
+    where we have set
+    \[ C := C_0 + \sum_{\substack{\beta \leq \alpha, \\ |\beta| \geq 1}} \binom{\alpha}{\beta} C'_\beta. \]
+    Because $x\in A^c$, we have $\underline{\partial^\alpha} f(x) = D^\alpha f(x)$, and thus we have shown $(\mathwitch)$ in the case where $x \in A^c$.
+        <span class="proof-end">□</span>
+      </div>
+    </div>
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="proof-box collapsed" data-proof-id="proof-proof-of-whitney-s-extension-theorem-in-the-general-case">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-proof-of-whitney-s-extension-theorem-in-the-general-case')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof of Whitney's Extension Theorem in the general case</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-proof-of-whitney-s-extension-theorem-in-the-general-case">
+    Let $A \subseteq \R^n$ be a closed set, and let $f^\bullet\in \mathcal{W}^m(A)$ be a Whitney $m$-jet on $A$.
+<p>partition of unity argument
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>Holy shit, we did it.
+    That is like, <em>the</em>, coolest theorem.
+    I have been wanting to go through that full proof since I learned about the result as an undergrad.</p>
+<p>It turns out that even more can be said about the extension operator in terms of continuity.
+If things are property defined, 
+it can be shown that a small modification of the operator $\mathcal{E}_m$ we constructed is a continuous map
+from the Banach space of $s$-Hölder continuous Whitney jets on a compact subset to the Banach space $C^{m,s}(\R^n)$
+of $C^m$ functions on $\R^n$ with $s$-Hölder continuous $m^{\text{th}}$ derivatives.
+The details are in Stein's book <em>Singular Integrals and Differentiability Properties of Functions</em>.</p>
+<p>The natural follow up question is the following: Is there a continuous extension operator for jets of infinite order, satisfying a 
+Whitney condition?</p>
+<p>Grothendieck showed that such an extension operator, with the natural definitions in place, cannot exist on a general closed set --- his example shows that
+the singleton $\{0\}$ is a closed set for which no such extension operator can exist.
+See Bierstone's paper <em>Differentiable Functions</em> in the Bulliten of the Brazilian Mathematical Society for details.</p>
+    </main>
+  </div>
+  
+  <script>
+    function toggleChapter(element) {
+      element.parentElement.classList.toggle('expanded');
+    }
+    
+    // Highlight current page in sidebar
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPath = window.location.pathname;
+      const links = document.querySelectorAll('.section-link');
+      links.forEach(link => {
+        if (currentPath.endsWith(link.getAttribute('href').split('/').pop())) {
+          link.classList.add('active');
+          // Expand parent chapter
+          const group = link.closest('.chapter-group');
+          if (group) group.classList.add('expanded');
+        }
+      });
+    });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('Restoring proof collapse states...');
+      try {
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        const currentPage = window.location.pathname;
+        const pageOpen = openProofs[currentPage] || [];
+        
+        console.log('Current page:', currentPage);
+        console.log('Open proof IDs stored:', pageOpen);
+        console.log('Found ' + pageOpen.length + ' open proofs for this page');
+        
+        document.querySelectorAll('.proof-box').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          console.log('Checking proof:', proofId, 'Should be open:', pageOpen.includes(proofId));
+          if (pageOpen.includes(proofId)) {
+            box.classList.remove('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'true');
+          } else {
+            box.classList.add('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        const pageBoxes = openBoxes[currentPage] || [];
+        
+        console.log('Open box IDs stored:', pageBoxes);
+        
+        document.querySelectorAll('.collapsible-box').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          console.log('Checking box:', boxId, 'Should be open:', pageBoxes.includes(boxId));
+          if (pageBoxes.includes(boxId)) {
+            box.classList.remove('collapsed');
+          } else {
+            box.classList.add('collapsed');
+          }
+        });
+        
+        console.log('Proof states restored');
+      } catch (e) {
+        console.error('Error restoring collapse state:', e);
+      }
+    });
+    
+    function toggleProof(proofId) {
+      const proofContent = document.getElementById(proofId);
+      const proofBox = proofContent.closest('.proof-box');
+      proofBox.classList.toggle('collapsed');
+      
+      const button = proofBox.querySelector('.proof-toggle');
+      button.setAttribute('aria-expanded', !proofBox.classList.contains('collapsed'));
+      
+      saveProofState();
+    }
+    
+    function toggleSubproof(subproofId) {
+      const subproofContent = document.getElementById(subproofId);
+      const subproof = subproofContent.closest('.subproof');
+      subproof.classList.toggle('collapsed');
+      
+      const button = subproof.querySelector('.subproof-toggle');
+      button.setAttribute('aria-expanded', !subproof.classList.contains('collapsed'));
+    }
+    
+    function saveProofState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        if (!openProofs[currentPage]) {
+          openProofs[currentPage] = [];
+        }
+        
+        openProofs[currentPage] = [];
+        document.querySelectorAll('.proof-box:not(.collapsed)').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          if (proofId) {
+            openProofs[currentPage].push(proofId);
+          }
+        });
+        
+        localStorage.setItem('openProofs', JSON.stringify(openProofs));
+        console.log('Saved proof state (open proofs):', openProofs[currentPage]);
+      } catch (e) {
+        console.error('Error saving collapse state:', e);
+      }
+    }
+    
+    function toggleCollapsible(collapsibleId) {
+      const content = document.getElementById(collapsibleId);
+      const box = content.closest('.collapsible-box');
+      box.classList.toggle('collapsed');
+      
+      saveCollapsibleState();
+    }
+    
+    function saveCollapsibleState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        if (!openBoxes[currentPage]) {
+          openBoxes[currentPage] = [];
+        }
+        
+        openBoxes[currentPage] = [];
+        document.querySelectorAll('.collapsible-box:not(.collapsed)').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          if (boxId) {
+            openBoxes[currentPage].push(boxId);
+          }
+        });
+        
+        localStorage.setItem('openBoxes', JSON.stringify(openBoxes));
+      } catch (e) {
+        console.error('Error saving box state:', e);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        const proofBoxes = document.querySelectorAll('.proof-box');
+        const anyExpanded = Array.from(proofBoxes).some(box => !box.classList.contains('collapsed'));
+        
+        proofBoxes.forEach(box => {
+          if (anyExpanded) {
+            box.classList.add('collapsed');
+          } else {
+            box.classList.remove('collapsed');
+          }
+        });
+        
+        saveProofState();
+      }
+    });
+    
+    document.querySelectorAll('a.ref-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.background = '#fef3c7';
+          target.style.transition = 'background 0.3s ease';
+          setTimeout(() => { target.style.background = ''; }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

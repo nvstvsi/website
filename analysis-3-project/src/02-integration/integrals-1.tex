@@ -1,0 +1,567 @@
+\section{The Lebesgue Integral}
+
+Now that we have defined measure spaces and measurable functions, we would like to define the Lebesgue integral.
+The Lebesgue integral is a generalization of the Riemann integral, and it fixes many of the deficiencies of the Riemann integral.
+
+\noindent There are many different approaches to defining the Lebesgue integral, and they can all be shown to be equivalent.
+
+\subsection{Integration of Nonnegative Functions with respect to a Measure}
+
+Some people take an approach of defining the Lebesgue integral with a series of steps, but we will do it all at once.
+
+\begin{definition}[Lower Lebesgue Sum, Lebesgue Integral of Nonnegative Function]
+    \label{def:lebesgue_integral}
+    Let $(X,\mu)$ be a measure space, and let $P$ be a finite collection of disjoint measurable sets such that $\bigcup_{A \in P} A = X$.
+    We call such a collection a \textit{$\mu$-partition} of $(X,\mu)$.
+
+    \vspace{2mm}
+
+    \noindent If $f : X \to [0,\infty]$ is a nonnegative measurable function, then we define the \textit{lower Lebesgue sum} of $f$ with respect to the $\mu$-partition $P$ to be
+    \[ L(f,P) = \sum_{A \in P} \inf_{x \in A} f(x) \mu(A). \]
+    We then define the \textit{Lebesgue integral} of $f$ with respect to $\mu$ to be
+    \[ \int_X f \, \dif \mu := \sup_{P} L(f,P), \]
+    where the supremum is taken over all $\mu$-partitions $P$ of $(X,\mu)$.
+\end{definition}
+
+\begin{remark}[Notation for Lebesgue Integral]
+    \label{rem:notation_for_lebesgue_integral}
+We note that the symbol $\dif \mu$ is used to denote integration with respect to the measure $\mu$, and the symbol $\dif$ has no independent meaning here.
+Sometimes people drop the $X$ in the integral sign and just write $\int f \, \dif \mu$ --- this is fine because the domain of integration is always the largest set in the $\sigma$-algebra on which $\mu$ is defined.
+Sometimes people write the Lebesgue integral as $\int_X f(x) \, \dif \mu(x)$, and we will occasionally do this as well.
+
+We also remark that when we are integrating with respect to the Lebesgue measure on $\R^n$, we will usually write $\dif x$ instead of $\dif \mu$;
+this is by tradition and conveience. (There is a connection to differential forms, but we will not discuss that here.)
+In this case, we will usually write $\int_{\R^n} f(x) \, \dif x$.
+\end{remark}
+
+
+\begin{lemma}[Integral of Characteristic Function]
+    \label{lem:integral_of_characteristic_function}
+    Let $(X,\mu)$ be a measure space, and let $A \subset X$ be a measurable set.
+    Then
+    \[ \int_X \Chi_A \, \dif \mu = \mu(A). \]
+\end{lemma}
+
+\begin{proof}
+    Since $A$, $X \setminus A$ is a $\mu$-partition of $(X,\mu)$, we clearly have
+    $L(\Chi_A, \{A, X \setminus A\}) = \mu(A) $.
+    Thus \[ \int_X \Chi_A \, \dif \mu \geq \mu(A). \]
+
+    On the other hand, let $P$ be a $\mu$-partition of $(X,\mu)$ into disjoint measurable sets $A_1, \ldots, A_n$.
+    Then for each $j=1,2,\ldots,n$ we see that
+    \[ \inf_{x \in A_j} \Chi_A(x) = \begin{cases}
+        1 & A_j \subset A, \\
+        0 & A_j \not\subset A
+    \end{cases} \]
+    which implies
+    \[ \mu(A_j)\inf_{A_j} \Chi_A = \begin{cases}
+        \mu(A_j) & A_j \subset A, \\
+        0 & A_j \not\subset A.
+    \end{cases} \]
+    Then we have
+    \[ L(\Chi_A, P) = \sum_{j:A_j \subset A} \mu(A_j) = \mu\left( \bigcup_{j:A_j \subset A} A_j \right) \leq \mu(A). \]
+    This holds for any $\mu$-partition $P$, so we have
+    \[ \int_X \Chi_A \, \dif \mu = \sup_P L(\Chi_A, P) \leq \mu(A). \]
+    Combining the two inequalities gives the result.
+\end{proof}
+
+Now that we know the integral of characteristic functions, we can upgrade this to simple functions.
+
+\begin{lemma}[Integral of Simple Function]
+    \label{lem:integral_of_simple_function}
+    Let $(X,\mu)$ be a measure space, and let $s : X \to [0,\infty)$ be a nonnegative simple function,
+    \[ s = \sum_{j=1}^n c_j \Chi_{A_j}, \]
+    where $c_1, \ldots, c_n \geq 0$ and $A_1, \ldots, A_n$ are disjoint measurable sets.
+    Then we have
+    \[ \int_X s \, \dif \mu = \sum_{j=1}^n c_j \mu(A_j). \]
+\end{lemma}
+
+Some authors take this as the definition of the Lebesgue integral for simple functions, and then use this to define the Lebesgue integral for nonnegative measurable functions.
+We do not take this approach, because it is not clear that the right-hand side is well-defined (i.e. independent of the representation of $s$ as a sum of characteristic functions).
+
+\begin{proof}
+    Set $A_0 = X \setminus \bigcup_{i=1}^n A_i$.
+    Then $A_0, A_1, \ldots, A_n$ is a $\mu$-partition of $(X,\mu)$, and we have
+    \[ L(s, \{A_0, A_1, \ldots, A_n\}) = \sum_{j=1}^n c_j \mu(A_j). \]
+    Thus
+    \[ \int_X s \, \dif \mu \geq \sum_{j=1}^n c_j \mu(A_j). \]
+
+    Now let $P$ be any $\mu$-partition of $(X,\mu)$ into disjoint measurable sets $B_1, \ldots, B_m$.
+    Then we have
+    \begin{align*}
+        L(s,P) &= \sum_{j=1}^m \inf_{x \in B_j} s(x) \mu(B_j) \\
+            &= \sum_{j=1}^m \min_{\{ i : B_j\cap A_i \neq \varnothing \}} c_i \,\mu(B_j) \\
+            &\leq \sum_{j=1}^m \sum_{i=1}^n \mu(B_j\cap A_k) c_k \\
+            &= \sum_{k=1}^n c_k \sum_{j=1}^m \mu(B_j \cap A_k) \\
+            &= \sum_{k=1}^n c_k \mu(A_k).
+    \end{align*}
+    This holds for any $\mu$-partition $P$, so we have
+    \[ \int_X s \, \dif \mu \leq \sum_{j=1}^n c_j \mu(A_j). \]
+    Combining the two inequalities gives the result.
+\end{proof}
+
+\begin{lemma}[Lebesgue Integral is Order-Preserving]
+    \label{lem:lebesgue_integral_is_order_preserving}
+    Let $(X,\mu)$ be a measure space, and let $f,g : X \to [0,\infty]$ be nonnegative measurable functions such that $f(x) \leq g(x)$ for all $x \in X$.
+    Then
+    \[ \int_X f \, \dif \mu \leq \int_X g \, \dif \mu. \]
+\end{lemma}
+
+\begin{proof}
+    Let $P$ be any $\mu$-partition of $(X,\mu)$.
+    Then for each set $A \in P$ we have
+    \[ \inf_{x \in A} f(x) \leq \inf_{x \in A} g(x), \]
+    which implies
+    \[ L(f,P) = \sum_{A \in P} \inf_{x \in A} f(x) \mu(A) \leq \sum_{A \in P} \inf_{x \in A} g(x) \mu(A) = L(g,P). \]
+    This holds for any $\mu$-partition $P$, so we have
+    \[ \int_X f \, \dif \mu \leq \int_X g \, \dif \mu. \]
+\end{proof}
+
+We finish this subsection by showing that that the integral of a general nonnegative measurable function can be approximated by integrals of simple functions.
+
+\begin{lemma}[Integrals via Simple Functions]
+    \label{lem:integrals_via_simple_functions}
+    Let $(X,\mu)$ be a measure space, and let $f : X \to [0,\infty]$ be a nonnegative measurable function.
+    Then \[ \int_X f \,\dif \mu = \sup\left\{ \int_X s \dif \mu : s \text{ is a simple function with } 0 \leq s \leq f \right\} \]
+\end{lemma}
+
+\begin{proof}
+    First note that the inequality $\geq$ is immediate from Lemma \ref{lem:lebesgue_integral_is_order_preserving}.
+
+    For the reverse inequality, we assume first that we are in the special case where $\inf_{A} f > 0$ for each measurable set $A \subseteq X$ with $\mu(A) > 0$.
+    (This is a technical assumption that we will remove later.)
+    
+    Let $P$ be a $\mu$-partition of $(X,\mu)$ into disjoint nonempty measurable sets $A_1, \ldots, A_n$.
+    For each $j=1,2,\ldots,n$, set $m_j = \inf_{x \in A_j} f(x)$. Then the function 
+    \[ s = \sum_{j=1}^n m_j \Chi_{A_j} \]
+    is a simple function with $0 \leq s \leq f$, and 
+    \[ \int_X s \, \dif \mu = \sum_{j=1}^n m_j \,\mu(A_j) = \sum_{j=1}^\infty \,\inf_{x \in A_j} f(x) \,\mu(A_j) = L(f,P) \]
+    where the first equality holds by Lemma \ref{lem:integral_of_simple_function}.
+    Therefore taking the supremum over all $\mu$-partitions $P$ gives
+    \[ \int_X f \, \dif \mu = \sup_P L(f,P) \leq \sup\left\{ \int_X s \dif \mu : s \text{ is a simple function with } 0 \leq s \leq f \right\}. \]
+
+    Now we remove the technical assumption.
+    Assume that there is a measurable set $A \subseteq X$ with $\mu(A) > 0$ and $\inf_A f = \infty$.
+    Then we must have $f(x) = \infty$ for each $x \in A$.
+
+    In this case, for arbitrary $t>0$ the function $t\Chi_A$ is a simple function with $0 \leq t\Chi_A \leq f$, and
+    \[ \int_X t\Chi_A \, \dif \mu = t \mu(A) \]
+    by Lemma \ref{lem:integral_of_characteristic_function}.
+    Thus the supremum on the right-hand side is greater than $t\mu(A)$ for each $t>0$, and hence is infinite.
+    Thus the inequality $\leq$ holds in this case as well, completeing the proof.
+\end{proof}
+
+\begin{example}[Sums are Integrals]
+    \label{ex:sums_are_integrals}
+    Consider the counting measure $\mu$ on $\N$, and let $\{a_k\}_{k=0}^\infty$ be a sequence of nonnegative real numbers.
+    Define $a : \N \to [0,\infty)$ by $a(n) = a_n$.
+    Then we have
+    \[ \int a \,\dif \mu = \sum_{k=0}^\infty a_k. \]
+\end{example}
+\begin{proof}
+    for each $n \in \N$, the set $\{n\}$ is measurable and has measure $\mu(\{n\}) = 1$.
+    Thus for each $n \in \N$ the sum 
+    \[ s_n := \sum_{j=0}^N a_j \Chi_{\{j\}} = \sum_{j=0}^N a_j \]
+    is a simple function; the fact that the sequence $\{a_k\}_{k=0}^\infty$ is nonnegative implies that $0 \leq s_n \leq a$.
+    By the previous lemma, we have
+    \[ \int a \,\dif \mu \geq \int s_n \,\dif \mu = \sum_{j=0}^N a_j \]
+    for each $N \in \N$; taking limits gives
+    \[ \int a \,\dif \mu \geq \sum_{j=0}^\infty a_j. \]
+
+    On the other hand, let $P$ be any $\mu$-partition of $(\N,\mu)$ into disjoint nonempty measurable sets $A_1, A_2, \ldots, A_m$.
+    Then for each $j=1,2,\ldots,m$ we have
+    \[ \inf_{n \in A_j} a(n) = \inf_{n \in A_j} a_n = \min_{n \in A_j} a_n \]
+    since $A_j$ is a nonempty finite set.
+    Thus we have
+    \[ L(a,P) = \sum_{j=1}^m \inf_{n \in A_j} a(n) \mu(A_j) = \sum_{j=1}^m \min_{n \in A_j} a_n \cdot 1 \leq \sum_{j=1}^m \sum_{n \in A_j} a_n = \sum_{n=0}^\infty a_n. \]
+    Taking the supremum over all $\mu$-partitions $P$ gives
+    \[ \int a \,\dif \mu \leq \sum_{n=0}^\infty a_n. \]
+    Combining the two inequalities gives the result.
+\end{proof}
+
+\subsection{Properties of the Lebesgue Integral}
+
+Still only working with nonnegative measurable functions, we now prove some important properties of the Lebesgue integral.
+One of the most important properties is the Monotone Convergence Theorem.
+
+\begin{theorem}[Monotone Convergence Theorem]
+    \label{thm:monotone_convergence_theorem}
+    Let $(X,\mu)$ be a measure space, and let $\{f_k\}_{k=1}^\infty$ be a sequence of nonnegative measurable functions such that $f_k(x) \leq f_{k+1}(x)$ for all $x \in X$ and $k \in \N$.
+    Define the function $f:X\to[0,\infty]$ by
+    \[ f(x) = \lim_{k \to \infty} f_k(x) , \qquad \forall x\in X. \]
+    Then 
+    \[ \lim_{k \to \infty} \int_X f_k \, \dif \mu = \int_X f \, \dif \mu. \]    
+\end{theorem}
+
+In essence, this says that one can interchange limits and integrals $\lim_k \int f_k \dif\mu = \int \lim_k f_k \dif\mu$ for monotone sequences of nonnegative measurable functions.
+
+\begin{proof}
+    Note that the function $f$ is well-defined at each $x \in X$ because the sequence $\{f_k(x)\}_{k=1}^\infty$ is nondecreasing and bounded below by $0$;
+    hence \[ f_k(x) \leq f(x) \qquad\forall x\in X,\forall k\geq 1.  \]
+    Also note that $f$ is measurable because it is the pointwise limit of measurable functions.
+
+    We remark that the limit $\lim_{k \to \infty} \int_X f_k \, \dif \mu$ exists because the sequence of integrals is nondecreasing (since $\{f_k\}_{k=1}^\infty$ is nondecreasing) and bounded below by $0$.
+    Thus everything in the statement of the theorem is well-defined.
+
+    By Lemma \ref{lem:lebesgue_integral_is_order_preserving}, we have
+    \[ \int_X f_k \, \dif \mu \leq \int_X f \, \dif \mu \qquad\forall k\geq 1, \]
+    and thus
+    \[ \lim_{k \to \infty} \int_X f_k \, \dif \mu \leq \int_X f \, \dif \mu. \]
+
+    To prove the reverse inequality, let $A_1, A_2, \ldots, A_n$ be disjoint measurable subsets of $X$, and let $c_1, c_2, \ldots, c_n \geq 0$ be such that
+    \[ f(x) \geq \sum_{j=1}^m c_j \Chi_{A_j}(x) \qquad\forall x\in X. \]
+    Let $t\in(0,1)$ be arbitrary.
+    Then for each $k\in\Z^+$ we let
+    \[ E^t_k := \left\{ x\in X : f_k(x) \geq t \sum_{j=1}^m c_j \Chi_{A_j}(x) \right\}. \]
+    Then $\{E^t_k\}_{k=1}^\infty$ is an increasing sequence of measurable sets such that $\bigcup_{k=1}^\infty E^t_k = X$.
+    By Proposition \ref{prop:sequences_of_measurable_sets}, we have
+    \[ \lim_{k\to\infty} \mu(A_j\cap E^t_k) = \mu(A_j) \]
+    for each $j=1,2,\ldots,m$.
+
+    If $k\in \Z^+$, then 
+    \[ f_k(x) \geq \sum_{j=1}^m tc_j \Chi_{A_j\cap E^t_k} (x) \]
+    for each $x\in X$, and thus by Lemma \ref{lem:integral_of_simple_function} we have
+    \[ \int_X f_k \, \dif \mu \geq t \sum_{j=1}^m c_j \mu(A_j\cap E^t_k). \]
+    Taking limits as $k\to\infty$ gives
+    \[ \lim_{k\to\infty} \int_X f_k \, \dif \mu \geq t \sum_{j=1}^m c_j \mu(A_j). \]
+    Taking limits as $t\to 1^-$ gives
+    \[ \lim_{k\to\infty} \int_X f_k \, \dif \mu \geq \sum_{j=1}^m c_j \mu(A_j). \]
+    Taking the supremum over all choices of $m$, $c_1, \ldots, c_m$, and $A_1, \ldots, A_m$ gives
+    \[ \lim_{k\to\infty} \int_X f_k \, \dif \mu \geq \int_X f \, \dif \mu. \]
+    This completes the proof.
+\end{proof}
+
+In the Lemma \ref{lem:integral_of_simple_function}, we computed the integral of a simple function once it had been expressed as a sum of characteristic functions of disjoint measurable sets.
+This expression is not unique, and the assumption that the sets are disjoint is inconvenient.
+It turns out that the integral of a simple function can be computed from any of its expressions and they all give the same answer.
+
+\begin{lemma}[Integral of Simple Functions, II.]
+    \label{lem:integral_of_simple_function_2}
+    Let $(X,\mu)$ be a measure space, and let $s : X \to [0,\infty)$ be a nonnegative simple function.
+    If
+    \[ s = \sum_{j=1}^m a_j \Chi_{A_j} = \sum_{k=1}^n b_k \Chi_{B_k} \]
+    are two representations of $s$ as nonnegative linear combinations of characteristic functions, then
+    \[ \sum_{j=1}^m a_j \mu(A_j) = \sum_{k=1}^n b_k \mu(B_k). \]
+    In particular, \[ \int_X s\,\dif\mu = \sum_{j=1}^m a_j \mu(A_j) \] 
+\end{lemma}
+
+\begin{proof}
+    Let $A_0 = X \setminus \bigcup_{j=1}^m A_j$ so that $A_0, A_1, \ldots, A_m$ is a $\mu$-partition of $(X,\mu)$.
+    If $A_i \cap A_j \neq \varnothing$ for some $i \neq j$, then we can write
+    \[ a_i\Chi_{A_i} + a_j\Chi_{A_j} = a_i\Chi_{A_i \setminus A_j} + a_j\Chi_{A_j \setminus A_i} + (a_i + a_j)\Chi_{A_i \cap A_j} \]
+    and the sets $A_i \setminus A_j$, $A_j \setminus A_i$, and $A_i \cap A_j$ are disjoint measurable sets.
+
+    Thus for $0\leq i < j \leq m$ such that $A_i \cap A_j \neq \varnothing$, we have
+    \[ A_i = (A_i \setminus A_j) \cup (A_i \cap A_j) \quad\text{ and }\quad A_j = (A_j \setminus A_i) \cup (A_i \cap A_j) \]
+    and each of these unions is disjoint; hence
+    \[ \mu(A_i) = \mu(A_i \setminus A_j) + \mu(A_i \cap A_j) \quad\text{ and }\quad \mu(A_j) = \mu(A_j \setminus A_i) + \mu(A_i \cap A_j) \]
+    by disjoint additivity of $\mu$, and it follows that
+    \[ a_i \mu(A_i) + a_j \mu(A_j) = a_i \mu(A_i \setminus A_j) + a_j \mu(A_j \setminus A_i) + (a_i + a_j) \mu(A_i \cap A_j). \]
+    Thus for each $0\leq i < j \leq m$ such that $A_i \cap A_j \neq \varnothing$, we can replace the sets $A_i, A_j$ by the disjoint sets $A_i \setminus A_j$, $A_j \setminus A_i$, and $A_i \cap A_j$, and replace the coefficients $a_i, a_j$ by $a_i, a_j, a_i + a_j$ respectively; 
+    the linear combinations of the characteristic functions and the sums of the measures weighted by the coefficients remain unchanged.
+    
+    Repeating this process a finite number of times gives a representation of $s$ as a sum of characteristic functions of disjoint measurable sets.
+    By relabeling, we have finitely many disjoint measurable sets $\tilde{A}_1, \ldots, \tilde{A}_N$, with nonnegative coefficients $\tilde{a}_1, \ldots, \tilde{a}_N \geq 0$, such that
+    $s = \sum_{j=1}^N \tilde{a}_j \Chi_{\tilde{A}_j}.$
+
+    The next step is to make the numbers $\tilde{a}_1, \ldots, \tilde{a}_N$ distinct.
+    If $\tilde{a}_i = \tilde{a}_j$ for some $i \neq j$, then $\tilde{A}_i \cup \tilde{A}_j$ is a measurable set, and disjoint additivity of $\mu$ gives
+    \[ \tilde{a}_i \mu(\tilde{A}_i) + \tilde{a}_j \mu(\tilde{A}_j) = \tilde{a}_i \mu(\tilde{A}_i \cup \tilde{A}_j). \]
+    Thus for each $i \neq j$ such that $\tilde{a}_i = \tilde{a}_j$, we can replace the sets $\tilde{A}_i, \tilde{A}_j$ by the single set $\tilde{A}_i \cup \tilde{A}_j$, and replace the coefficients $\tilde{a}_i, \tilde{a}_j$ by the single coefficient $\tilde{a}_i$.
+
+    Repeating this process a finite number of times gives a representation of $s$ as a sum of characteristic functions of disjoint measurable sets with distinct coefficients.
+    By relabeling, we have finitely many disjoint measurable sets $\hat{A}_1, \ldots, \hat{A}_M$, with distinct nonnegative coefficients $\hat{a}_1, \ldots, \hat{a}_M \geq 0$, such that
+    $s = \sum_{j=1}^M \hat{a}_j \Chi_{\hat{A}_j}.$
+
+    Finally if $1\leq j\leq M$ is such that $\hat{A}_j = \varnothing$, then we can simply remove this term from the sum without changing anything.
+    Thus we may assume that $\hat{A}_1, \ldots, \hat{A}_M$ are nonempty disjoint measurable sets, and $\hat{a}_1, \ldots, \hat{a}_M$ are distinct nonnegative numbers.
+    The expression $s = \sum_{j=1}^M \hat{a}_j \Chi_{\hat{A}_j}$ is the \textit{standard form} of the simple function $s$.
+
+    We can now do the same process to the other representation $s = \sum_{k=1}^n b_k \Chi_{B_k}$ to obtain a standard form $s = \sum_{k=1}^M \hat{b}_k \Chi_{\hat{B}_k}$.
+    By construction these standard forms must have the same number of terms (the number of distinct values that $s$ takes), and for each $j=1,2,\ldots,M$ there exists $k_j \in \{1,2,\ldots,M\}$ such that $\hat{A}_j = \hat{B}_{k_j}$ and $\hat{a}_j = \hat{b}_{k_j}$.
+    Thus we have 
+    \[ \sum_{j=1}^m a_j \mu(A_j) = \sum_{j=1}^M \hat{a}_j \mu(\hat{A}_j) = \sum_{k=1}^M \hat{b}_k \mu(\hat{B}_k) = \sum_{k=1}^n b_k \mu(B_k) \]
+    as desired.
+
+    The fact that $\int_X s\,\dif\mu = \sum_{j=1}^m a_j \mu(A_j)$ follows from Lemma \ref{lem:integral_of_simple_function}.
+\end{proof}
+
+We can now use the Monotone Convergence Theorem to prove additivity of the Lebesgue integral.
+
+\begin{proposition}[Additivity for Nonnegative Functions]
+    \label{prop:additivity_for_nonnegative_functions}
+    Let $(X,\mu)$ be a measure space, and let $f,g : X \to [0,\infty]$ be nonnegative measurable functions.
+    Then
+    \[ \int_X (f+g)\,\dif\mu = \int_X f\,\dif\mu + \int_X g\,\dif\mu. \]
+\end{proposition}
+
+\begin{proof}
+    Note that for simple functions the result follows from Lemma \ref{lem:integral_of_simple_function_2}.
+    Thus we approximate by such functions and use the Monotone Convergence Theorem.
+
+    Let $\{f_k\}_{k=1}^\infty$ and $\{g_k\}_{k=1}^\infty$ be increasing sequences of nonnegative simple functions such that 
+    \[ \lim_{k \to \infty} f_k = f \quad \text{and} \quad \lim_{k \to \infty} g_k = g \]
+    pointwise on $X$; such sequences exist by Proposition \ref{prop:measurable_approx_by_simple_functions}.
+    Then the monotone convergence theorem gives
+    \begin{align*}
+        \int_X (f+g) \,\dif \mu &= \lim_{k \to \infty} \int_X (f_k + g_k) \,\dif \mu \\
+            &= \lim_{k \to \infty} \int_X f_k \,\dif \mu + \lim_{k \to \infty} \int_X g_k \,\dif \mu \\
+            &= \int_X f\,\dif\mu + \int_X g\,\dif\mu.
+    \end{align*}
+    Here we have used the Monotone Convergence Theorem in the first and last equalities, and the additivity of the integral for simple functions in the second equality.
+\end{proof}
+
+\subsection{Integration of Real and Complex Valued Functions}
+
+\begin{definition}[$f^+$, $f^-$]
+    \label{def:f_plus_minus}
+    Let $f : X \to [-\infty,\infty]$ be a function defined on a set $X$.
+    We define the functions $f^+, f^- : X \to [0,\infty]$ by
+    \[ f^+(x) := \max\{f(x),0\} \quad \text{ and } \quad f^-(x) := \max\{-f(x),0\} \qquad\forall x\in X. \]
+\end{definition}
+
+\begin{remark}
+    \label{rem:f_plus_minus}
+    Note that if $f$ is measurable, then $f^+$ and $f^-$ are nonnegative measurable functions, and that
+    \[ f = f^+ - f^- \quad\text{and}\quad |f| = f^+ + f^-. \]
+\end{remark}
+
+\begin{definition}[Lebesgue Integral, Real-Valued Case]
+    \label{def:lebesgue_integral_real_valued_case}
+    Let $(X,\mu)$ be a measure space, and let $f : X \to [-\infty,\infty]$ be a measurable function 
+    such that at least one of the integrals $\int_X f^+ \,\dif\mu$ or $\int_X f^- \,\dif\mu$ is finite.
+    Then we define the \textit{Lebesgue integral} of $f$ with respect to $\mu$ to be
+    \[ \int_X f \,\dif\mu := \int_X f^+ \,\dif\mu - \int_X f^- \,\dif\mu. \]
+    We say that $f$ is \textit{integrable} if $\int_X f \,\dif\mu$ exists and is finite.
+\end{definition}
+
+See that if $f\geq 0$, then $f^- = 0$ and $f^+ = f$, so this definition agrees with the previous definition for nonnegative measurable functions.
+Also notice that we allow $f$ to take the values $\pm\infty$, but if $f$ takes either value on a set of positive measure, then the integral will be infinite.
+Also notice that 
+\begin{align*}
+    f \text{ is integrable } &\iff \int_X f \,\dif \mu = \int_X f^+ \,\dif\mu - \int_X f^- \,\dif\mu \in \R \\
+        &\iff \int_X f^+ \,\dif\mu < \infty \text{ and } \int_X f^- \,\dif\mu < \infty \\
+        &\iff \int_X (f^+ + f^-) \,\dif\mu = \int_X |f| \,\dif\mu < \infty.
+\end{align*}
+where in the second line we have used that at most one of $\int_X f^+ \,\dif\mu$ or $\int_X f^- \,\dif\mu$ is infinite, since otherwise the integral of $f$ would not be defined.
+Thus a real-valued measurable function is integrable if $\int_X |f| \,\dif\mu$ is finite.
+
+\begin{definition}[Lebesgue Integral, Complex-Valued Case]
+    \label{def:lebesgue_integral_complex_valued_case}
+    Let $(X,\mu)$ be a measure space, and let $f : X \to \C \cup \{ \infty \}$ be a measurable function such that $\int_X |f| \,\dif\mu$ is finite.
+    Then we define the \textit{Lebesgue integral} of $f$ with respect to $\mu$ to be
+    \[ \int_X f \,\dif\mu := \int_X \Re(f) \,\dif\mu + i \int_X \Im(f) \,\dif\mu. \]
+    If the integral $\int_X f \,\dif\mu$ is defined, then we say that $f$ is \textit{integrable}.
+\end{definition}
+
+Similarly here we allow $f$ to take the value $\infty$, but if it does so on a set of positive measure, then the integral will not be defined (since $\int_X |f| \,\dif\mu$ will be infinite).
+We should take note here that for complex-valued functions, we require absolute integrability in order for the integral to be defined.
+Also if $f$ is real-valued, then this definition agrees with the previous definition for real-valued functions.
+
+We would like to state and prove properties of the Lebesgue integral in the real-valued and complex-valued cases we have just defined. 
+For efficiency, we let $\F$ denote either $\R$ or $\C$, and we let $\F_\infty$ denote either $[-\infty,\infty]$ or $\C \cup \{\infty\}$ respectively.
+
+\begin{proposition}[Properties of the Lebesgue Integral]
+    \label{prop:properties_of_the_lebesgue_integral}
+    Let $(X,\mu)$ be a measure space. 
+    \begin{enumerate}[(i)]
+        \item (Homogeneity) If $f : X \to \F_\infty$ is a measurable function such that the integral $\int_X f \,\dif\mu$ is defined, and if $c \in \F$, then
+            \[ \int_X cf \,\dif\mu = c \int_X f \,\dif\mu. \]
+        \item (Additivity) If $f,g : X \to \F_\infty$ are measurable functions such that $\int_X |f| \,\dif\mu$ and $\int_X |g| \,\dif\mu$ are both finite, then
+            \[ \int_X (f+g) \,\dif\mu = \int_X f \,\dif\mu + \int_X g \,\dif\mu. \]
+        \item (Monotonicity) If $f,g : X \to [-\infty,\infty]$ are measurable functions such that $f \leq g$ and the integrals $\int_X f \dif\mu$ and $\int_X g \dif\mu$ are both defined, then
+            \[ \int_X f \,\dif\mu \leq \int_X g \,\dif\mu. \]
+        \item (Triangle Inequality) If $f : X \to \F_\infty$ is a measurable function such that $\int_X f\,\dif\mu$ is defined, then
+            \[ \left| \int_X f \,\dif\mu \right| \leq \int_X |f| \,\dif\mu. \]
+    \end{enumerate}
+\end{proposition}
+
+Notice the third property only applies to real-valued functions, since the complex numbers are not an ordered field.
+
+\begin{proof}
+    \textit{(i) Homogeneity.}
+    \vspace{2mm}
+
+    \textit{Case $\F = \R$.}
+    First we consider the special case of nonnegative measurable functions and constants.
+    Let $f : X \to [0,\infty]$ be a nonnegative measurable function, and let $c \geq 0$.
+    Then for each $\mu$-partition $P$ of $(X,\mu)$ we have
+    \[ L(cf,P) = \sum_{A \in P} \inf_{x \in A} cf(x) \mu(A) = c \sum_{A \in P} \inf_{x \in A} f(x) \mu(A) = c L(f,P). \]
+    Taking the supremum over all $\mu$-partitions $P$ gives
+    \[ \int_X cf \,\dif\mu = c \int_X f \,\dif\mu. \]
+
+    Now we consider the general case. 
+    Let $f : X \to [-\infty,\infty]$ be a measurable function such that the integral $\int_X f \,\dif\mu$ is defined.
+    If $c \geq 0$ , then we have
+    \begin{align*}
+        \int_X cf \,\dif\mu &= \int_X (cf)^+ \,\dif\mu - \int_X (cf)^- \,\dif\mu \\
+            &= \int_X c f^+ \,\dif\mu - \int_X c f^- \,\dif\mu \\
+            &= c \left( \int_X f^+ \,\dif\mu - \int_X f^- \,\dif\mu \right) \\
+            &= c \int_X f \,\dif\mu
+    \end{align*}
+    where we have used the result for nonnegative measurable functions in the third equality.
+
+    If $c < 0$ then $-c>0$, and we have
+    \begin{align*}
+        \int_X cf \,\dif\mu &= \int_X (cf)^+ \,\dif\mu - \int_X (cf)^- \,\dif\mu \\
+            &= \int_X (-c)f^- \,\dif\mu - \int_X (-c)f^+ \,\dif\mu \\
+            &= -c \left( \int_X f^- \,\dif\mu - \int_X f^+ \,\dif\mu \right) \\
+            &= (-c) \cdot \left( -\int_X f \,\dif\mu \right) \\
+    \end{align*}
+    which completes the proof of homogeneity.
+
+    \vspace{2mm}
+    \textit{Case $\F = \C$.}
+    Let $f : X \to \C \cup \{\infty\}$ be a measurable function such that $\int_X |f| \,\dif\mu$ is finite, and let $c \in \C$.
+    Then
+    \begin{align*}
+        \int_X cf \,\dif\mu &= \int_X \Re(cf) \,\dif\mu + i \int_X \Im(cf) \,\dif\mu \\
+            &= \Re(c) \int_X \Re(f) \,\dif\mu - \Im(c) \int_X \Im(f) \,\dif\mu + i\left( \Re(c) \int_X \Im(f) \,\dif\mu + \Im(c) \int_X \Re(f) \,\dif\mu \right) \\
+            &= c\left( \int_X \Re(f) \,\dif\mu + i\int_X \Im(f) \,\dif\mu \right) \\
+            &= c \int_X f \,\dif\mu
+    \end{align*}
+    where we have used homogeneity for real-valued functions in the second equality.
+    This completes the proof of homogeneity.
+
+    \vspace{2mm}
+    \textit{(ii) Additivity.}
+    \vspace{2mm}
+
+    \textit{Case $\F = \R$.}
+    Let $f,g : X \to [-\infty,\infty]$ be measurable functions such that $\int_X |f| \,\dif\mu$ and $\int_X |g| \,\dif\mu$ are both finite.
+    Then
+    \[ (f+g)^+ - (f+g)^- = f + g = f^+ - f^- + g^+ - g^- \]
+    which implies
+    \[ (f+g)^+ + f^- + g^- = (f+g)^- + f^+ + g^+. \]
+    Both sides of this equation are nonnegative measurable functions, so we can integrate both sides to obtain
+    \[ \int_X (f+g)^+ \,\dif\mu + \int_X f^- \,\dif\mu + \int_X g^- \,\dif\mu = \int_X (f+g)^- \,\dif\mu + \int_X f^+ \,\dif\mu + \int_X g^+ \,\dif\mu \]
+    by additivity of the Lebesgue integral for nonnegative measurable functions.
+
+    Rearranging gives
+    \[ \int_X (f+g)^+ \,\dif\mu - \int_X (f+g)^- \,\dif\mu = \int_X f^+ \,\dif\mu - \int_X f^- \,\dif\mu + \int_X g^+ \,\dif\mu - \int_X g^- \,\dif\mu \]
+    The left side is not of the form $\infty-\infty$ since $(f+g)^+ \leq f^+ + g^+$ and $(f+g)^- \leq f^- + g^-$, and the
+    assumption that $\int_X |f| \,\dif\mu$ and $\int_X |g| \,\dif\mu$ are both finite to ensure that the integrals $\int_X f^\pm \dif \mu$ and $\int_X g^\pm \dif \mu$ are all finite, 
+    and thus both of the integrals on the left side are also finite.    
+    
+    This last equation is exactly the desired result, by definition of the Lebesgue integral for general measurable functions.
+
+    \textit{Case $\F = \C$.} Let $f,g : X \to \C \cup \{\infty\}$ be measurable functions such that $\int_X |f| \,\dif\mu$ and $\int_X |g| \,\dif\mu$ are both finite.
+    Then
+    \begin{align*}
+        \int_X (f+g) \,\dif\mu &= \int_X \Re(f+g) \,\dif\mu + i \int_X \Im(f+g) \,\dif\mu \\
+            &= \int_X \Re(f) \,\dif\mu + \int_X \Re(g) \,\dif\mu + i \left( \int_X \Im(f) \,\dif\mu + \int_X \Im(g) \,\dif\mu \right) \\
+            &= \left( \int_X \Re(f) \,\dif\mu + i \int_X \Im(f) \,\dif\mu \right) + \left( \int_X \Re(g) \,\dif\mu + i \int_X \Im(g) \,\dif\mu \right) \\
+            &= \int_X f \,\dif\mu + \int_X g \,\dif\mu
+    \end{align*}
+    where we have used additivity for real-valued functions in the second equality.
+    This completes the proof of additivity.
+
+    \vspace{2mm}
+    \textit{(iii) Monotonicity.}
+    \vspace{2mm}
+
+    Let $f,g : X \to [-\infty,\infty]$ be measurable functions such that $f \leq g$ almost everywhere with respect to $\mu$ and the integrals $\int_X f \dif\mu$ and $\int_X g \dif\mu$ are both defined.
+    If $\int_X f \dif\mu = \pm\infty$ or $\int_X g \dif\mu = \pm\infty$, then we check this case by case:
+    \begin{itemize}
+        \item If $\int_X f \dif\mu = -\infty$ or $\int_X g \dif\mu = \infty$, then trivially $\int_X f \dif\mu \leq \int_X g \dif\mu$.
+        \item If $\int_X f \dif\mu = \infty$, then we must have either $\int_X f^+ \dif\mu = \infty$ and $\int_X f^- \dif\mu < \infty$, or $\int_X f^+ \dif\mu < \infty$ and $\int_X f^- \dif\mu = \infty$.
+            In the first subcase, we have $\int_X g^+ \dif\mu \geq \int_X f^+ \dif\mu = \infty$ and thus $\int_X g \dif\mu = \infty$; hence $\int_X f \dif\mu \leq \int_X g \dif\mu$.
+            In the second subcase, we have $\int_X g^- \dif\mu \leq \int_X f^- \dif\mu = \infty$ and thus $\int_X g \dif\mu = -\infty$; hence $\int_X f \dif\mu \leq \int_X g \dif\mu$.
+        \item If $\int_X g \dif\mu = -\infty$, then this is similar to the previous case.
+    \end{itemize}
+
+    Now assume that both $\int_X f \dif\mu$ and $\int_X g \dif\mu$ are finite.
+    Then additivity and homogeneity with $c=-1$ give
+    \[ \int_X (g-f) \dif\mu = \int_X g \dif\mu - \int_X f \dif\mu. \]
+    Since $g-f \geq 0$, we have $\int_X (g-f) \dif\mu \geq 0$.
+    Rearranging gives
+    \[ \int_X g \dif\mu \geq \int_X f \dif\mu \]
+    as desired. 
+
+    \vspace{2mm}
+    \textit{(iv) Triangle Inequality.}
+    \vspace{2mm}
+    
+    \textit{Case $\F = \R$.}
+    Let $f : X \to [-\infty,\infty]$ be a measurable function such that $\int_X f \dif\mu$ is defined.
+    Then one of $\int_X f^+ \dif\mu$ or $\int_X f^- \dif\mu$ is finite.
+    Thus 
+    \begin{align*}
+        \abs{ \int_X f \,\dif \mu } &= \abs{ \int_X f^+ \,\dif\mu - \int_X f^- \,\dif\mu } \\
+            &\leq \int_X f^+ \,\dif\mu + \int_X f^- \,\dif\mu \\
+            &= \int_X (f^+ + f^-) \,\dif\mu \\
+            &= \int_X |f| \,\dif\mu
+    \end{align*}
+    where we have used the triangle inequality for real numbers in the second line, and additivity of the Lebesgue integral for nonnegative measurable functions in the third line.
+
+    \vspace{2mm}
+    \textit{Case $\F = \C$.}
+    Let $f : X \to \C \cup \{\infty\}$ be a measurable function such that $\int_X |f| \dif\mu$ is finite.
+    If $\int_X f \dif\mu = 0$ then the inequality is trivial, so assume that $\int_X f \dif\mu \neq 0$.
+    Then let 
+    \[ \alpha := \frac{\left|\int_X f \dif\mu\right|}{\int_X f \dif\mu}. \]
+    We compute that
+    \begin{align*}
+        \left| \int_X f \dif\mu \right| = \alpha \int_X f \dif\mu &= \int_X \alpha f \dif\mu \\
+            &= \int_X \Re(\alpha f) \dif\mu + i \int_X \Im(\alpha f) \dif\mu \\
+            &= \int_X \Re(\alpha f) \dif\mu \\
+            &\leq \int_X |\alpha f| \dif\mu \\
+            &= \int_X |f| \dif\mu
+    \end{align*}
+    where we have use homogeneity for complex-valued functions in the second equality, and the fact that $ \alpha \int_X f \dif\mu$ is a nonnegative real number in the fourth equality, 
+    and the triangle inequality for real-valued functions in the inequality.
+    This completes the proof of the triangle inequality.
+\end{proof}
+
+\subsection{Integration of $\R^m$-Valued Functions}
+
+Sometimes we wish to integrate functions that take values in $\R^m$ or some vector space other than $\R$ or $\C$.
+This can be done component-wise using the Lebesgue integral we have already defined.
+
+\begin{definition}[Lebesgue Integral, Vector-Valued Case]
+    \label{def:lebesgue_integral_vector_valued_case}
+    Let $(X,\mu)$ be a measure space, and let $f: X \to \R^m$ be a measurable function.
+    We define the \textit{Lebesgue integral} of $f$ with respect to $\mu$ as the vector
+    \[ \int_X f \,\dif \mu := \left( \int_X f_1 \,\dif \mu, \int_X f_2 \,\dif \mu, \ldots, \int_X f_m \,\dif \mu \right) \in \R^m \]
+    where $f_j: X \to \R$ is the $j$-th component function of $f$ for each $1 \leq j \leq m$.
+\end{definition}
+
+\begin{proposition}[Properties of the Lebesgue Integral, Vector-Valued Case]
+    \label{prop:properties_of_the_lebesgue_integral_vector_valued_case}
+    Let $(X,\mu)$ be a measure space, and let $f,g: X \to \R^m$ be measurable functions.
+    Then the following properties hold:
+    \begin{enumerate}[(i)]
+        \item (Linearity) For each $\lambda\in \R$ we have
+            \[ \int_X (f + \lambda g) \,\dif \mu = \int_X f \,\dif \mu + \lambda \int_X g \,\dif \mu. \]
+        \item (Triangle Inequality) We have
+            \[ \left\| \int_X f \,\dif \mu \right\| \leq \int_X \| f \| \,\dif \mu. \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    Letting $f_1,f_2,\ldots,f_m: X \to \R$ and $g_1,g_2,\ldots,g_m: X \to \R$ be the component functions of $f$ and $g$ respectively, we have
+    \begin{align*}
+        \int_X (f + \lambda g) \,\dif \mu &= \left( \int_X (f_1 + \lambda g_1) \,\dif \mu, \ldots, \int_X (f_m + \lambda g_m) \,\dif \mu \right) \\
+            &= \left( \int_X f_1 \,\dif \mu + \lambda \int_X g_1 \,\dif \mu, \ldots, \int_X f_m \,\dif \mu + \lambda \int_X g_m \,\dif \mu \right) &&\text{by linearity for real-valued case} \\
+            &= \left( \int_X f_1 \,\dif \mu, \ldots, \int_X f_m \,\dif \mu \right) + \lambda \left( \int_X g_1 \,\dif \mu, \ldots, \int_X g_m \,\dif \mu \right) \\
+            &= \int_X f \,\dif \mu + \lambda \int_X g \,\dif \mu.
+    \end{align*}
+
+\vspace{2mm}
+
+If $\int_X f \,\dif \mu = 0 \in \R^m$, the inequality is trivial, so we may assume that $\int_X f \,\dif \mu \neq 0$.
+
+Let $v \in \R^m \setminus \{ 0 \}$ be arbitrary.
+Then
+\begin{align*}
+    \left\langle v, \int_X f \,\dif \mu \right\rangle &= \sum_j v_j \int_X f_j \,\dif \mu \\
+        &= \int_X \sum_j v_j f_j(x) \,\dif \mu(x) \\
+        &=\int_X \langle v, f(x) \rangle \,\dif \mu(x) \\
+        &\leq \int_X \| v \| \| f(x) \| \,\dif \mu(x) && \text{by Cauchy-Schwarz Inequality} \\
+        &= \| v \| \int_X \| f(x) \| \,\dif \mu(x).
+\end{align*}
+By taking \[ v := \frac{ \int_X f \,\dif \mu }{\| \int_X f \,\dif \mu \|} \in \R^m \setminus \{0\} \]
+which has norm $1$, we get
+\[ \left\langle \frac{ \int_X f \,\dif \mu }{\| \int_X f \,\dif \mu \|}, \int_X f \,\dif \mu \right\rangle = \left\| \int_X f \,\dif \mu \right\| \]
+and thus \[ \left\| \int_X f \,\dif \mu \right\| \leq \int_X \| f(x) \| \,\dif \mu(x). \]
+\end{proof}

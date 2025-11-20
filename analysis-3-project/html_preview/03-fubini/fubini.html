@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>fubini</title>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '0.8em',
+      packages: {'[+]': ['ams']},
+      macros: {
+        R: '\\mathbb{R}',
+        C: '\\mathbb{C}',
+        N: '\\mathbb{N}',
+        Z: '\\mathbb{Z}',
+        Q: '\\mathbb{Q}',
+        E: '\\mathbb{E}',
+        F: '\\mathbb{F}',
+        S: '\\mathbb{S}',
+        H: '\\mathcal{H}',
+        L: '\\mathcal{L}',
+        dif: '\\,\\mathrm{d}',
+        supp: '\\operatorname{supp}',
+        proj: '\\operatorname{proj}',
+        Id: '\\operatorname{Id}',
+        Span: '\\operatorname{span}',
+        graph: '\\operatorname{graph}',
+        dist: '\\operatorname{dist}',
+        diam: '\\operatorname{diam}',
+        avg: '\\operatorname{avg}',
+        div: '\\operatorname{div}',
+        vol: '\\operatorname{vol}',
+        ord: '\\operatorname{ord}',
+        Chi: '\\mathbf{1}',
+        sub: '\\subseteq',
+        mres: '\\downharpoonright',
+        ddag: '\\ddagger',
+        dag: '\\dagger',
+        norm: ['\\left\\| #1 \\right\\|', 1],
+        abs: ['\\left| #1 \\right|', 1],
+        set: ['\\left\\{ #1 \\right\\}', 1],
+        inner: ['\\langle #1, #2 \\rangle', 2],
+        floor: ['\\lfloor #1 \\rfloor', 1],
+        ceil: ['\\lceil #1 \\rceil', 1],
+        llbracket: '\\unicode{x27E6}',
+        rrbracket: '\\unicode{x27E7}',
+        bigskull: '\\unicode{x1F480}',
+        skull: '\\unicode{x2620}',
+        mathwitch: '\\unicode{x1F9D9}',
+        pumpkin: '\\unicode{x1F383}',
+        mathpumpkin: '\\unicode{x1F383}',
+        bigpumpkin: '\\unicode{x1F383}',
+        mathghost: '\\unicode{x1F47B}',
+        mathcat: '\\unicode{x1F408}',
+        mathbat: '\\unicode{x1F987}',
+        esssup: '\\operatorname{ess\\,sup}',
+        essinf: '\\operatorname{ess\\,inf}',
+        Lip: '\\operatorname{Lip}',
+        pd: ['\\frac{\\partial#1}{\\partial#2}', 2],
+        od: ['\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}', 2],
+        dashint: '\\mathchoice{\\rlap{-}\\!\\int}{\\rlap{\\raise.15ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}',
+        eurologo: '\\unicode{x20AC}',
+        starredbullet: '\\unicode{x2726}',
+        grimace: '\\unicode{x1F62C}',
+        textthing: '\\unicode{x2639}',
+        noway: '\\unicode{x26D4}',
+        warning: '\\unicode{x26A0}',
+        danger: '\\unicode{x26A0}',
+        textxswup: '\\unicode{x2195}',
+        textxswdown: '\\unicode{x2195}',
+        decoone: '\\unicode{x2756}',
+        decotwo: '\\unicode{x2767}',
+        decothreeleft: '\\unicode{x2619}',
+        decothreeright: '\\unicode{x2767}',
+        decofourleft: '\\unicode{x261A}',
+        decofourright: '\\unicode{x261B}',
+        floweroneleft: '\\unicode{x2740}',
+        floweroneright: '\\unicode{x2740}',
+        lefthand: '\\unicode{x261C}',
+        righthand: '\\unicode{x261E}',
+        decosix: '\\unicode{x2766}',
+        bomb: '\\unicode{x1F4A3}',
+        caution: '\\unicode{x2621}',
+        leftblackhand: '\\unicode{x261A}',
+        rightblackhand: '\\unicode{x261B}',
+        leafleft: '\\unicode{x2618}',
+        leafright: '\\unicode{x2618}',
+        leafNW: '\\unicode{x2618}',
+        leafNE: '\\unicode{x2618}',
+        leafSE: '\\unicode{x2618}',
+        leafSW: '\\unicode{x2618}',
+        aldineleft: '\\unicode{x2619}',
+        aldineright: '\\unicode{x2767}',
+        aldine: '\\unicode{x2766}',
+        aldinesmall: '\\unicode{x2767}',
+        aldinesmallrevert: '\\unicode{x2619}',
+        aldinesmallup: '\\unicode{x2766}',
+        grappe: '\\unicode{x2766}',
+        rightgrappe: '\\unicode{x2767}',
+        leftgrappe: '\\unicode{x2619}',
+        oldpilcrowone: '\\unicode{x00B6}',
+        oldpilcrowtwo: '\\unicode{x00B6}',
+        oldpilcrowthree: '\\unicode{x00B6}',
+        oldpilcrowfour: '\\unicode{x00B6}',
+        oldpilcrowfive: '\\unicode{x00B6}',
+        oldpilcrowsix: '\\unicode{x00B6}'
+      }
+    },
+    startup: {
+      pageReady: () => {
+        return MathJax.startup.defaultPageReady().then(() => {
+          console.log('MathJax ready');
+        });
+      }
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+  <script>
+  (function() {
+    window.addEventListener('beforeunload', function() {
+      saveProofState();
+      saveCollapsibleState();
+    });
+    
+    const eventSource = new EventSource('http://localhost:35729/reload-stream');
+    
+    eventSource.onmessage = function(event) {
+      if (event.data === 'reload') {
+        console.log('📝 File updated, saving state and reloading...');
+        saveProofState();
+        saveCollapsibleState();
+        setTimeout(() => {
+          window.location.reload();
+        }, 50);
+      }
+    };
+    
+    eventSource.onerror = function() {
+      console.log('⚠️  Auto-reload server not available. Run node watch.js to enable auto-reload.');
+      eventSource.close();
+    };
+    
+    console.log('🔄 Auto-reload enabled');
+  })();
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+    
+    /* Layout with sidebar */
+    .page-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      width: 280px;
+      background: #fff;
+      border-right: 1px solid #e0e0e0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px 0;
+      font-size: 14px;
+    }
+    
+    .sidebar-header {
+      padding: 15px 20px 25px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .sidebar-header h1 {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 5px 0;
+    }
+    
+    .sidebar-header .subtitle {
+      font-size: 0.85em;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .sidebar-header .back-link {
+      display: block;
+      font-size: 0.8em;
+      color: #666;
+      text-decoration: none;
+      margin-top: 12px;
+    }
+    
+    .sidebar-header .back-link:hover {
+      color: #1a1a1a;
+    }
+    
+    .sidebar-nav {
+      padding: 10px 0;
+    }
+    
+    .chapter-group {
+      margin-bottom: 2px;
+    }
+    
+    .chapter-title {
+      padding: 12px 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chapter-title:hover {
+      background: #f5f5f5;
+    }
+    
+    .chapter-title .toggle {
+      font-size: 0.65em;
+      color: #999;
+      transition: transform 0.2s;
+    }
+    
+    .chapter-group.expanded .chapter-title .toggle {
+      transform: rotate(90deg);
+    }
+    
+    .section-list {
+      display: none;
+      padding: 5px 0;
+      background: #f8f8f8;
+    }
+    
+    .chapter-group.expanded .section-list {
+      display: block;
+    }
+    
+    .section-link {
+      display: block;
+      padding: 8px 20px 8px 35px;
+      font-size: 0.85em;
+      color: #555;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+    }
+    
+    .section-link:hover {
+      background: #f0f0f0;
+      color: #1a1a1a;
+    }
+    
+    .section-link.active {
+      background: #e8e8e8;
+      border-left-color: #333;
+      color: #000;
+      font-weight: 500;
+    }
+    
+    /* Main content area */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      max-width: 900px;
+      padding: 40px 60px;
+    }
+    
+    @media (max-width: 1100px) {
+      .sidebar {
+        width: 240px;
+      }
+      .main-content {
+        margin-left: 240px;
+        padding: 30px 40px;
+      }
+    }
+    
+    @media (max-width: 800px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+      .page-layout {
+        flex-direction: column;
+      }
+    }
+    
+    h2, h3, h4 {
+      margin-top: 2em;
+      margin-bottom: 0.75em;
+      color: #000;
+      font-weight: 600;
+    }
+    h2 { font-size: 1.5em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.1em; }
+    p {
+      margin: 1em 0;
+      text-indent: 2em;
+    }
+    p:first-of-type,
+    h2 + p,
+    h3 + p,
+    h4 + p,
+    .theorem-box + p,
+    .proof-box + p {
+      text-indent: 0;
+    }
+    .noindent + p,
+    p:has(> .noindent:first-child) {
+      text-indent: 0 !important;
+    }
+    .noindent {
+      display: none;
+    }
+    .theorem-box {
+      margin: 1.75em 0;
+      padding: 1.25em;
+      border-left: 5px solid #16a34a;
+      background: linear-gradient(to top, #bbf7d0 0%, #d1fae5 100%);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .definition-box { border-left-color: #16a34a; background: linear-gradient(to top, #d1fae5 0%, #ecfdf5 100%); }
+    .lemma-box { border-left-color: #1e3a8a; background: linear-gradient(to top, #bfdbfe 0%, #dbeafe 100%); }
+    .corollary-box { border-left-color: #9333ea; background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%); }
+    .proposition-box { border-left-color: #dc2626; background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%); }
+    .remark-box { border-left-color: #64748b; background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%); }
+    .example-box { border-left-color: #0891b2; background: linear-gradient(to top, #a5f3fc 0%, #cffafe 100%); }
+    .construction-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .notation-box { border-left-color: #ca8a04; background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%); }
+    .exercise-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .problem-box { border-left-color: #ec4899; background: linear-gradient(to top, #fbcfe8 0%, #fce7f3 100%); }
+    .theorem-header {
+      margin-bottom: 0.75em;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+    .theorem-header.clickable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .theorem-header.clickable:hover {
+      background: rgba(0,0,0,0.03);
+      margin: -0.5em -0.75em 0.75em -0.75em;
+      padding: 0.5em 0.75em;
+      border-radius: 4px;
+    }
+    .collapsible-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      margin-right: 0.5em;
+      color: #6b7280;
+    }
+    .collapsible-box.collapsed .collapsible-icon {
+      transform: rotate(-90deg);
+    }
+    .collapsible-content {
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+    }
+    .collapsible-box.collapsed .collapsible-content {
+      display: none;
+    }
+    .theorem-content {
+      padding-left: 0.5em;
+      line-height: 1.8;
+    }
+    .proof-box {
+      margin: 1.5em 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .proof-header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      border-radius: 6px 6px 0 0;
+    }
+    .proof-toggle {
+      width: 100%;
+      padding: 0.85em 1.25em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      transition: background 0.15s;
+    }
+    .proof-toggle:hover { background: rgba(0,0,0,0.03); }
+    .proof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      color: #6b7280;
+    }
+    .proof-box.collapsed .proof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .proof-content {
+      padding: 1.25em;
+      line-height: 1.8;
+    }
+    .proof-box.collapsed .proof-content {
+      display: none;
+    }
+    .proof-end {
+      float: right;
+      font-size: 1.3em;
+      margin-left: 0.5em;
+      color: #374151;
+    }
+    .subproof {
+      margin: 1em 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #f9fafb;
+    }
+    .subproof-header {
+      background: linear-gradient(to bottom, #f9fafb 0%, #f3f4f6 100%);
+      border-bottom: 1px solid #d1d5db;
+      border-radius: 4px 4px 0 0;
+    }
+    .subproof-toggle {
+      width: 100%;
+      padding: 0.6em 1em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: background 0.15s;
+    }
+    .subproof-toggle:hover {
+      background: rgba(0,0,0,0.03);
+    }
+    .subproof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.7em;
+      color: #6b7280;
+    }
+    .subproof.collapsed .subproof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .subproof-content {
+      padding: 1em;
+      line-height: 1.7;
+    }
+    .subproof.collapsed .subproof-content {
+      display: none;
+    }
+    .ref-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 0.15em;
+      border-radius: 2px;
+    }
+    .ref-link:hover {
+      background: #dbeafe;
+      text-decoration: underline;
+    }
+    .ref-unknown {
+      color: #dc2626;
+      font-weight: bold;
+      background: #fee2e2;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+    ol, ul {
+      margin: 1em 0;
+      padding-left: 2.5em;
+      line-height: 1.8;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    .latex-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5em auto;
+    }
+    .latex-figure .latex-image {
+      display: inline-block;
+      margin: 0.5em;
+      vertical-align: middle;
+    }
+    .latex-figure {
+      margin: 2em 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .latex-figure .figure-content {
+      margin-bottom: 0.75em;
+      line-height: normal;
+    }
+    .latex-figure .figure-content > * {
+      vertical-align: middle;
+    }
+    .latex-figure figcaption {
+      font-size: 0.9em;
+      color: #4b5563;
+      font-style: italic;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1>Analysis III</h1>
+        <div class="subtitle">Measure Theory &amp; Integration</div>
+        <a href="../index.html" class="back-link">← Table of Contents</a>
+      </div>
+      <div class="sidebar-nav">
+        <div class="chapter-group expanded">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>1. Measure Theory</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../01-measure-theory/measure-theory.html" class="section-link">Overview</a>
+            <a href="../01-measure-theory/basics.html" class="section-link">Outer Measures</a>
+            <a href="../01-measure-theory/lebesgue-meas.html" class="section-link">Lebesgue Measure</a>
+            <a href="../01-measure-theory/cantor.html" class="section-link">The Cantor Set</a>
+            <a href="../01-measure-theory/measure-spaces.html" class="section-link">Measure Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>2. Integration</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../02-integration/integration.html" class="section-link">Overview</a>
+            <a href="../02-integration/integrals-1.html" class="section-link">Simple Functions</a>
+            <a href="../02-integration/integrals-2.html" class="section-link">General Functions</a>
+            <a href="../02-integration/convergence.html" class="section-link">Convergence Theorems</a>
+            <a href="../02-integration/inequality-party.html" class="section-link">Integral Inequalities</a>
+            <a href="../02-integration/lp_spaces.html" class="section-link">Lᵖ Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>3. Product Measures</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../03-fubini/fubini_ch.html" class="section-link">Overview</a>
+            <a href="../03-fubini/fubini.html" class="section-link">Fubini-Tonelli</a>
+            <a href="../03-fubini/integrals-3.html" class="section-link">Product Measures</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>4. Differentiation I</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../04-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../04-differentiation-1/covering.html" class="section-link">Vitali Covering</a>
+            <a href="../04-differentiation-1/monotone.html" class="section-link">Monotone Functions</a>
+            <a href="../04-differentiation-1/BV_on_R.html" class="section-link">Bounded Variation</a>
+            <a href="../04-differentiation-1/FTOC.html" class="section-link">FTC for Lebesgue</a>
+            <a href="../04-differentiation-1/HL.html" class="section-link">Hardy-Littlewood</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>5. Differentiation I (cont)</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../05-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../05-differentiation-1/r-nik.html" class="section-link">Radon-Nikodym</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>6. Differentiation II</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-differentiation-2/diff-2.html" class="section-link">Overview</a>
+            <a href="../06-differentiation-2/vector-measures.html" class="section-link">Vector Measures</a>
+            <a href="../06-differentiation-2/r-nik.html" class="section-link">Radon-Nikodym</a>
+            <a href="../06-differentiation-2/besi.html" class="section-link">Besicovitch</a>
+            <a href="../06-differentiation-2/densities.html" class="section-link">Densities</a>
+            <a href="../06-differentiation-2/diff-measures.html" class="section-link">Measure Derivatives</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>7. Riesz Representation</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-riesz/riesz.html" class="section-link">Overview</a>
+            <a href="../06-riesz/riesz_functional.html" class="section-link">Riesz Representation</a>
+            <a href="../06-riesz/LCH_spaces.html" class="section-link">LCH Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>8. Integral Formulas</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../07-formulas/formulas.html" class="section-link">Overview</a>
+            <a href="../07-formulas/hausdorff_meas.html" class="section-link">Hausdorff Measures</a>
+            <a href="../07-formulas/lippy.html" class="section-link">Lipschitz Maps</a>
+            <a href="../07-formulas/rademacher.html" class="section-link">Rademacher</a>
+            <a href="../07-formulas/coarea-prereq.html" class="section-link">Coarea Prerequisites</a>
+            <a href="../07-formulas/coarea.html" class="section-link">Coarea Formula</a>
+            <a href="../07-formulas/area-prereq.html" class="section-link">Area Prerequisites</a>
+            <a href="../07-formulas/area-formula.html" class="section-link">Area Formula</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>9. Extension Results</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../08-ext-res/ext-res.html" class="section-link">Overview</a>
+            <a href="../08-ext-res/taylor_thm_integral_remainder.html" class="section-link">Taylor's Theorem</a>
+            <a href="../08-ext-res/whitney-cover.html" class="section-link">Whitney Covering</a>
+            <a href="../08-ext-res/whitney-partition-of-unity.html" class="section-link">Partition of Unity</a>
+            <a href="../08-ext-res/whitney-decomposition.html" class="section-link">Decomposition</a>
+            <a href="../08-ext-res/whitney-extension-theorem.html" class="section-link">Extension Theorem</a>
+            <a href="../08-ext-res/whitney-extension-proof.html" class="section-link">Extension Proof</a>
+            <a href="../08-ext-res/whitney-extension-applications.html" class="section-link">Applications</a>
+            <a href="../08-ext-res/whitney-extension.html" class="section-link">Summary</a>
+            <a href="../08-ext-res/more-bump.html" class="section-link">More Bump Functions</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <main class="main-content">
+      <h2>Fubini and Tonelli Theorems</h2>
+<p>In this section, we prove the Fubini and Tonelli theorems, which allow us to compute integrals on product spaces as iterated integrals.
+In a later section, we will prove a curvilinear version of this theorem for computing integrals called the <em>Area Formula</em> and the <em>Coarea Formula</em>.</p>
+<p>We follow the treatment given by Axler.
+<h3>Products of Measures</h3></p>
+<div class="theorem-box definition-box" id="def:product_sigma_algebra">
+  <div class="theorem-header"><strong>Definition ?</strong> (Product of $\sigma$-algebras)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ and $(Y,\mathcal{B})$ be measurable spaces.
+    We define the <em>product</em> of the $\sigma$-algebras $\mathcal{A}$ and $\mathcal{B}$ as the smallest $\sigma$-algebra on $X \times Y$ containing all products $A \times B$ with $A \in \mathcal{A}$ and $B \in \mathcal{B}$, 
+    and we denote this $\sigma$-algebra by $\mathcal{A} \otimes \mathcal{B}$.
+    A <em>measurable product</em> is a set of the form $A\times B$ with $A \in \mathcal{A}$ and $B \in \mathcal{B}$.</div>
+</div>
+<div class="theorem-box definition-box" id="def:cross_sections">
+  <div class="theorem-header"><strong>Definition ?</strong> (Cross Sections of a Set)</div>
+  <div class="theorem-content">Let $X$ and $Y$ be sets, and let $E \subseteq X \times Y$.
+    For each $x \in X$, we define the <em>cross section</em> of $E$ at $x$ as
+    \[ E_x := \{ y \in Y : (x,y) \in E \} \subseteq Y. \]
+    For each $y \in Y$, we define the <em>cross section</em> of $E$ at $y$ as
+    \[ E^y := \{ x \in X : (x,y) \in E \} \subseteq X. \]</div>
+</div>
+<div class="theorem-box lemma-box" id="lem:cross_section_of_measurable_product_is_measurable">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Cross Sections of Measurable Products are Measurable)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ and $(Y,\mathcal{B})$ be measurable spaces, and let $E = A \times B$ be a measurable product with $A \in \mathcal{A}$ and $B \in \mathcal{B}$.
+    Then for each $x \in X$ we have $E_x \in \mathcal{B}$, and for each $y \in Y$ we have $E^y \in \mathcal{A}$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-0">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-0')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-0">
+    Let $\mathcal{E}$ be the collection of all subsets $E \subseteq X \times Y$ such that $E_x \in \mathcal{B}$ for each $x \in X$ and $E^y \in \mathcal{A}$ for each $y \in Y$.
+    Then for all $A\in \mathcal{A}$ and all $B \in \mathcal{B}$, we have $(A \times B)_x = B$ if $x \in A$ and $(A \times B)_x = \emptyset$ otherwise, so $(A \times B)_x \in \mathcal{B}$ for each $x \in X$.
+    Similarly, we have $(A \times B)^y = A$ if $y \in B$ and $(A \times B)^y = \emptyset$ otherwise, so $(A \times B)^y \in \mathcal{A}$ for each $y \in Y$.
+    Thus $A \times B \in \mathcal{E}$ for all $A \in \mathcal{A}$ and $B \in \mathcal{B}$.
+<p>See that $\mathcal{E}$ is closed under complements because for each $E\in \mathcal{E}$ we have
+    \[ ((X\times Y)\setminus E)_x = Y \setminus E_x \in \mathcal{B} \]
+    for all $x \in X$ and similarly
+    \[ ((X\times Y)\setminus E)^y = X \setminus E^y \in \mathcal{A} \]
+    for all $y \in Y$.</p>
+<p>Also see that $\mathcal{E}$ is closed under countable unions because for each sequence $\{E_j\}_{j=1}^\infty$ in $\mathcal{E}$ we have
+    \[ \left( \bigcup_{j=1}^\infty E_j \right)_x = \bigcup_{j=1}^\infty (E_j)_x \in \mathcal{B} \]
+    for all $x \in X$ and similarly
+    \[ \left( \bigcup_{j=1}^\infty E_j \right)^y = \bigcup_{j=1}^\infty (E_j)^y \in \mathcal{A} \]
+    for all $y \in Y$.</p>
+<p>Since $\mathcal{E}$ contains all measurable products and is a $\sigma$-algebra, we have $\mathcal{A} \otimes \mathcal{B} \subseteq \mathcal{E}$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box definition-box" id="def:cross_section_of_function">
+  <div class="theorem-header"><strong>Definition ?</strong> (Cross Section of a Function)</div>
+  <div class="theorem-content">Let $X$ and $Y$ be sets, and let $f : X \times Y \to [-\infty,\infty]$ be a function.
+    For each $x \in X$, we define the <em>cross section</em> of $f$ at $x$ as the function $f_x : Y \to [-\infty,\infty]$ given by
+    \[ f_x(y) := f(x,y) \quad \text{for all } y \in Y. \]
+    For each $y \in Y$, we define the <em>cross section</em> of $f$ at $y$ as the function $f^y : X \to [-\infty,\infty]$ given by
+    \[ f^y(x) := f(x,y) \quad \text{for all } x \in X. \]</div>
+</div>
+<p>Basically if $f$ is a function defined on a product $X\times Y$, then fixing $x\in X$ gives a function $f_x$ defined on $Y$, and fixing $y \in Y$ gives a function $f^y$ defined on $X$.</p>
+<div class="theorem-box lemma-box" id="lem:cross_section_of_measurable_function_is_measurable">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Cross Sections of Measurable Functions are Measurable)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ and $(Y,\mathcal{B})$ be measurable spaces, and let $f : X \times Y \to [-\infty,\infty]$ be an $(\mathcal{A} \otimes \mathcal{B})$-measurable function.
+    Then for each $x \in X$, the cross section $f_x : Y \to [-\infty,\infty]$ is a $\mathcal{B}$-measurable function, and for each $y \in Y$, the cross section $f^y : X \to [-\infty,\infty]$ is an $\mathcal{A}$-measurable function.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-1">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-1')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-1">
+    Let $D$ be a Borel subset of $[-\infty,\infty]$ and let $x\in X$.
+    Then we have
+    \begin{align*}
+        y = (f_x)^{-1}(D) &\iff f_x(y) \in D \\
+        &\iff f(x,y) \in D \\
+        &\iff (x,y) \in f^{-1}(D).
+        &\iff y \in (f^{-1}(D))_x
+    \end{align*}
+    which shows that \[ (f_x)^{-1}(D) = (f^{-1}(D))_x \in \mathcal{B}. \]
+    Since $f$ is $(\mathcal{A} \otimes \mathcal{B})$-measurable, we have $f^{-1}(D) \in \mathcal{A} \otimes \mathcal{B}$, so by Lemma <span class="ref-unknown" title="Reference not found: lem:cross_section_of_measurable_set_is_measurable">[lem:cross_section_of_measurable_set_is_measurable?]</span> we have $(f^{-1}(D))_x \in \mathcal{B}$.
+    Thus $f_x$ is $\mathcal{B}$-measurable.
+    Since $x\in X$ was arbitrary, we have that $f_x$ is $\mathcal{B}$-measurable for each $x \in X$.
+<p>The same idea shows that for each $y \in Y$, the cross section $f^y : X \to [-\infty,\infty]$ is an $\mathcal{A}$-measurable function.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<h3>Monotone Class Lemma</h3>
+<div class="theorem-box definition-box" id="def:algebra_of_sets">
+  <div class="theorem-header"><strong>Definition ?</strong> (Algebra (of Sets))</div>
+  <div class="theorem-content">Let $X$ be a set.
+    A collection $\mathcal{A}$ of subsets of $X$ is an <em>algebra</em> if
+    <ul><li>$\emptyset \in \mathcal{A}$,
+        </li><li>if $A \in \mathcal{A}$, then $X \setminus A \in \mathcal{A}$, and
+        </li><li>if $A,B \in \mathcal{A}$, then $A \cup B \in \mathcal{A}$.</li></ul></div>
+</div>
+<p>Notice that an algebra is also closed under finite intersections, by DeMorgan's laws.</p>
+<p>An algebra is like a $\sigma$-algebra, except that it is only closed under finite unions instead of countable unions.</p>
+<div class="theorem-box lemma-box" id="lem:finite_union_of_measurable_products_is_algebra">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Finite Unions of Measurable Products Form an Algebra)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A})$ and $(Y,\mathcal{B})$ be measurable spaces, and let $\mathcal{E}$ be the collection of all finite unions of measurable products $A \times B$ with $A \in \mathcal{A}$ and $B \in \mathcal{B}$.
+    Then $\mathcal{E}$ is an algebra on $X \times Y$.
+<p>Moreover, every finite union of measurable products in $\mathcal{A}\otimes\mathcal{B}$ can be written as a countable union of disjoint measurable products in $\mathcal{A}\otimes\mathcal{B}$.</div>
+</div></p>
+<div class="proof-box collapsed" data-proof-id="proof-num-2">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-2')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-2">
+    It is clear that $\emptyset \in \mathcal{E}$ since $\emptyset = \emptyset \times \emptyset$.
+    Furthermore it is clear that $\mathcal{E}$ is closed under finite unions by definition.
+    The set $\mathcal{E}$ is also closed under finite intersections because if $(A_1 \times B_1) \cup (A_2 \times B_2) \cup \cdots \cup (A_m \times B_m)$ and $(C_1 \times D_1) \cup (C_2 \times D_2) \cup \cdots \cup (C_n \times D_n)$ are in $\mathcal{E}$, then
+    \begin{align*}
+        \bigcup_{j=1}^m (A_j \times B_j) \,\cap\, \bigcup_{k=1}^n (C_k \times D_k) &= \bigcup_{j=1}^m \bigcup_{k=1}^n \left( (A_j \times B_j) \cap (C_k \times D_k) \right) \\
+            &= \bigcup_{j=1}^m \bigcup_{k=1}^n \left( (A_j \cap C_k) \times (B_j \cap D_k) \right) \in \mathcal{E}.
+    \end{align*}
+<p>To see that the set $\mathcal{E}$ is closed under compliments, let $A \in \mathcal{A}$ and $B \in \mathcal{B}$.
+    Then \[ (X\times Y)\setminus (A\times B) = \left( (X \setminus A) \times Y \right) \cup \left( A \times (Y \setminus B) \right). \]
+    Hence the compliment of $A\times B$ is in $\mathcal{E}$. 
+    That is, the compliemnt of each measurable product is in $\mathcal{E}$.
+    Since $\mathcal{E}$ is closed under finite unions, we see that the compliment of any finite union of measurable products is in $\mathcal{E}$ by DeMorgan's laws and the fact that $\mathcal{E}$ is closed under finite intersections.</p>
+<p>Therefore $\mathcal{E}$ is an algebra on $X \times Y$.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>For the second part, note that if $A\times B$ and $C \times D$ are measurable products, then
+    \[ (A\times B)\cup (C\times D) = (A\times B)\cup(C\times (D\setminus B)) \cup (C\setminus A)\times(B\cap D) \]
+    is a union of three disjoint measurable products.</p>
+<p>Now consider a finite union of measurable products
+    \[ E = \bigcup_{j=1}^m (A_j \times B_j) \]
+    with $A_j \in \mathcal{A}$ and $B_j \in \mathcal{B}$ for each $j=1,2,\ldots,m$.
+    If there is some $j\in \{1,2,\ldots,m\}$ such that $A_j \times B_j$ is not disjoint from $\bigcup_{k \neq j} (A_k \times B_k)$, then we can replace $A_j \times B_j$ in the union with a union of three disjoint measurable products as above.
+    Doing this for all such $j$ gives $E$ as a finite union of disjoint measurable products.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box definition-box" id="def:monotone_class">
+  <div class="theorem-header"><strong>Definition ?</strong> (Monotone Class)</div>
+  <div class="theorem-content">Let $X$ be a set and let $\mathcal{M}$ be a collection of subsets of $X$.
+    We say that $\mathcal{M}$ is a <em>monotone class</em> if
+    <ul><li>if $\{A_j\}_{j=1}^\infty$ is an increasing sequence of sets in $\mathcal{M}$, then $\bigcup_{j=1}^\infty A_j \in \mathcal{M}$, and
+        </li><li>if $\{A_j\}_{j=1}^\infty$ is a decreasing sequence of sets in $\mathcal{M}$, then $\bigcap_{j=1}^\infty A_j \in \mathcal{M}$.</li></ul></div>
+</div>
+<p>Clearly every $\sigma$-algebra is a monotone class, since $\sigma$-algebras are closed under countable unions and countable intersections.
+Monotone classes don't have to be algebras or $\sigma$-algebras, as the following example shows.</p>
+<div class="theorem-box example-box collapsible-box collapsed" id="ex:monotone_class_of_intervals" data-collapsible-id="collapsible-ex:monotone_class_of_intervals">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-ex:monotone_class_of_intervals')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Example ?</strong> (Monotone Class of Intervals)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-ex:monotone_class_of_intervals">Let $\mathcal{M}$ be the collection of all intervals (closed, open, half-open, degenerate) in $\R$.
+    Then $\mathcal{M}$ is a monotone class since increasing unions and decreasing intersections of intervals are intervals.
+<p>However, $\mathcal{M}$ is not an algebra since it is not closed under finite unions.</div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:smallest_monotone_class">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Smallest Monotone Class)</div>
+  <div class="theorem-content">Let $X$ be a set, and let $\mathcal{E}$ be a collection of subsets of $X$.
+    Show that 
+    \[ \mathcal{M}_\mathcal{E} := \bigcap \{ \mathcal{M} : \mathcal{M} \text{ is a monotone class containing } \mathcal{E} \} \]
+    is the smallest monotone class containing $\mathcal{E}$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-3">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-3')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-3">
+    There are two things to show here --- first that $\mathcal{M}_\mathcal{E}$ is a monotone class, and second that for each monotone class $\mathcal{M}$ containing $\mathcal{E}$, we have $\mathcal{M}_\mathcal{E} \subseteq \mathcal{M}$.
+<p>To see that $\mathcal{M}_\mathcal{E}$ is a monotone class, let $\{A_j\}_{j=1}^\infty$ be an increasing sequence of sets in $\mathcal{M}_\mathcal{E}$.
+    Then for each monotone class $\mathcal{M}$ containing $\mathcal{E}$, we have $A_j \in \mathcal{M}$ for each $j\in\Z^+$, so $\bigcup_{j=1}^\infty A_j \in \mathcal{M}$ since $\mathcal{M}$ is a monotone class.
+    Since this is true for each monotone class $\mathcal{M}$ containing $\mathcal{E}$, we have $\bigcup_{j=1}^\infty A_j \in \mathcal{M}_\mathcal{E}$.
+    A similar argument shows that if $\{A_j\}_{j=1}^\infty$ is a decreasing sequence of sets in $\mathcal{M}_\mathcal{E}$, then $\bigcap_{j=1}^\infty A_j \in \mathcal{M}_\mathcal{E}$.
+    Thus $\mathcal{M}_\mathcal{E}$ is a monotone class.</p>
+<p>Now let $\mathcal{M}$ be a monotone class containing $\mathcal{E}$.
+    Then by definition of $\mathcal{M}_\mathcal{E}$, we have $\mathcal{M}_\mathcal{E} \subseteq \mathcal{M}$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box theorem-box" id="thm:monotone_class_lemma">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Monotone Class Lemma)</div>
+  <div class="theorem-content">Let $X$ be a set, and let $\mathcal{A}$ be an algebra of subsets of $X$.
+    Then the smallest monotone class containing $\mathcal{A}$ is the smallest $\sigma$-algebra containing $\mathcal{A}$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-4">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-4')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-4">
+    Let $\mathcal{M}_\mathcal{A}$ be the smallest monotone class containing $\mathcal{A}$.
+    Since every $\sigma$-algebra is a monotone class, we have $\mathcal{M}_\mathcal{A} \subseteq \sigma(\mathcal{A})$, where $\sigma(\mathcal{A})$ is the smallest $\sigma$-algebra containing $\mathcal{A}$.
+    To show the reverse inclusion, fix a set $A \in \mathcal{A}$ and let 
+    \[ \mathcal{E}_A := \{ E \in \mathcal{M}_\mathcal{A} : A \cup E \in \mathcal{M}_\mathcal{A} \}. \]
+    Then $\mathcal{A}\subseteq \mathcal{E}_A$ because $\mathcal{A}$ is closed under finite unions.
+<p>We want to show that $\mathcal{E}_A$ is a monotone class.
+    Let $\{E_j\}_{j=1}^\infty$ be an increasing sequence of sets in $\mathcal{E}_A$.
+    Then for each $j\in\Z^+$ we have $A \cup E_j \in \mathcal{M}_\mathcal{A}$, so
+    \[ A \cup \left( \bigcup_{j=1}^\infty E_j \right) = \bigcup_{j=1}^\infty (A \cup E_j) \in \mathcal{M}_\mathcal{A}. \]
+    Thus $\bigcup_{j=1}^\infty E_j \in \mathcal{E}_A$.
+    Since $\{E_j\}_{j=1}^\infty$ was arbitrary, we have shown that $\mathcal{E}_A$ is closed under countable increasing unions.
+    Now let $\{E_j\}_{j=1}^\infty$ be a decreasing sequence of sets in $\mathcal{E}_A$.
+    Then for each $j\in\Z^+$ we have $A \cup E_j \in \mathcal{M}_\mathcal{A}$, so
+    \[ A \cup \left( \bigcap_{j=1}^\infty E_j \right) = \bigcap_{j=1}^\infty (A \cup E_j) \in \mathcal{M}_\mathcal{A}. \]
+    Thus $\bigcap_{j=1}^\infty E_j \in \mathcal{E}_A$.
+    Since $\{E_j\}_{j=1}^\infty$ was arbitrary, we have shown that $\mathcal{E}_A$ is closed under countable decreasing intersections.
+    Therefore $\mathcal{E}_A$ is a monotone class containing $\mathcal{A}$, so $\mathcal{M}_\mathcal{A} \subseteq \mathcal{E}_A$ by Exercise <span class="ref-unknown" title="Reference not found: ex:smallest_monotone_class">[ex:smallest_monotone_class?]</span>.
+    Hence we have shown that $A \cup E \in \mathcal{M}_\mathcal{A}$ for each $E \in \mathcal{M}_\mathcal{A}$.</p>
+<p>Now define
+    \[ \mathcal{F} := \{ F \in \mathcal{M}_\mathcal{A} : F\cup E \text{ for each } E \in \mathcal{M}_\mathcal{A} \}. \]
+    Then $\mathcal{A} \subseteq \mathcal{F}$ since we have just shown that $A \cup E \in \mathcal{M}_\mathcal{A}$ for each $A \in \mathcal{A}$ and each $E \in \mathcal{M}_\mathcal{A}$.
+    Again, one shows that $\mathcal{F}$ is a monotone class by a similar argument as above.
+    As before, we have $\mathcal{M}_\mathcal{A} \subseteq \mathcal{F}$, so we have shown that $F \cup E \in \mathcal{M}_\mathcal{A}$ for each $E,F \in \mathcal{M}_\mathcal{A}$.</p>
+<p>We claim that $\mathcal{M}_\mathcal{A}$ is a $\sigma$-algebra.
+    The previous paragraph shows that $\mathcal{M}_\mathcal{A}$ is closed under finite unions.
+    If $\{E_j\}_{j=1}^\infty$ is a sequence of sets in $\mathcal{M}_\mathcal{A}$, then we can define a new sequence $\{F_j\}_{j=1}^\infty$ by
+    \[ F_j := \bigcup_{k=1}^j E_k. \]
+    Then $\{F_j\}_{j=1}^\infty$ is an increasing sequence of sets in $\mathcal{M}_\mathcal{A}$, so
+    \[ \bigcup_{j=1}^\infty E_j = \bigcup_{j=1}^\infty F_j \in \mathcal{M}_\mathcal{A}. \]
+    Thus $\mathcal{M}_\mathcal{A}$ is closed under countable unions.</p>
+<p>To see that $\mathcal{M}_\mathcal{A}$ is closed under complements, let
+    \[ \mathcal{D} := \{ D \in \mathcal{M}_\mathcal{A} : D^c \in \mathcal{M}_\mathcal{A} \}. \]
+    Then $\mathcal{A} \subseteq \mathcal{D}$ since $\mathcal{A}$ is closed under compliments.
+    Once again, one shows that $\mathcal{D}$ is a monotone class by a similar argument as above.
+    As before, we have $\mathcal{M}_\mathcal{A} \subseteq \mathcal{D}$, so we have shown that $D^c \in \mathcal{M}_\mathcal{A}$ for each $D \in \mathcal{M}_\mathcal{A}$.
+    Therefore $\mathcal{M}_\mathcal{A}$ is closed under complements.
+    This shows that $\mathcal{M}_\mathcal{A}$ is a $\sigma$-algebra containing $\mathcal{A}$, so $\sigma(\mathcal{A}) \subseteq \mathcal{M}_\mathcal{A}$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<h3>Products of $\sigma$-finite Measures</h3>
+<div class="theorem-box definition-box" id="def:sigma_finite">
+  <div class="theorem-header"><strong>Definition ?</strong> ($\sigma$-finite)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A},\mu)$ be a measure space.
+    We say that $(X,\mathcal{A},\mu)$ is <em>$\sigma$-finite</em> if there exists a countable collection of $\mu$-measurable sets $\{E_j\}_{j=1}^\infty$ such that $X = \bigcup_{j=1}^\infty E_j$ and $\mu(E_j) < \infty$ for each $j\in\Z^+$.
+<p><div style="margin: 1em 0;"></div></p>
+<p><span class="noindent"></span>A subset $A\subseteq X$ is <em>$\sigma$-finite</em> if there exists a countable collection of $\mu$-measurable sets $\{A_j\}_{j=1}^\infty$ such that $A = \bigcup_{j=1}^\infty A_j$ and $\mu(A_j) < \infty$ for each $j\in\Z^+$.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p><span class="noindent"></span>A function $f: X \to [-\infty,\infty]$ is <em>$\sigma$-finite</em> if $f$ is $\mu$-measurable and the set $\{x \in X : f(x) \neq 0\}$ is $\sigma$-finite.</div>
+</div></p>
+<div class="theorem-box lemma-box" id="lem:measure_of_cross_section_is_measurable">
+  <div class="theorem-header"><strong>Lemma ?</strong> (The Measure of Cross Sections is a Measurable Function)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A},\mu)$ and $(Y,\mathcal{B},\nu)$ be $\sigma$-finite measure spaces. If $E \in \mathcal{A} \otimes \mathcal{B}$, then the function
+    \[ x\longmapsto \nu(E_x) \]
+    is $\mathcal{A}$-measurable, and the function
+    \[ y\longmapsto \mu(E^y) \]
+    is $\mathcal{B}$-measurable.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-5">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-5')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-5">
+    If $E\in \mathcal{A} \otimes \mathcal{B}$, we know that $E_x\in \mathcal{B}$ for each $x\in X$.
+    Thus the function $x \mapsto \nu(E_x)$ is well-defined on $X$.
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 1:</em> Assume first that $\nu(Y) < \infty$.
+    <div style="margin: 1em 0;"></div></p>
+<p>Let 
+    \[ \mathcal{M} := \{ E \in \mathcal{A}\otimes\mathcal{B} : x \mapsto \nu(E_x) \text{ is } \mathcal{A}\text{-measurable on } X \}. \]
+    We want to show that $\mathcal{M} = \mathcal{A} \otimes \mathcal{B}$.</p>
+<p>If $A\in \mathcal{A}$ and $B \in \mathcal{B}$, then for each $x \in X$ we have
+    \[ (A \times B)_x = \begin{cases} B & \text{if } x \in A \\ \emptyset & \text{if } x \notin A \end{cases} \]
+    so that
+    \[ \nu((A \times B)_x) = \begin{cases} \nu(B) & \text{if } x \in A \\ 0 & \text{if } x \notin A \end{cases} = \nu(B) \chi_A(x). \]
+    In particular, the function $x\longmapsto \nu((A \times B)_x)$ is $\mathcal{A}$-measurable on $X$ since $\chi_A$ is $\mathcal{A}$-measurable.
+    Therefore $A \times B \in \mathcal{M}$ for all $A \in \mathcal{A}$ and $B \in \mathcal{B}$.</p>
+<p>Let $\mathcal{E}$ be the collection of all finite unions of measurable products $A \times B$ with $A \in \mathcal{A}$ and $B \in \mathcal{B}$, 
+    and let $E \in \mathcal{E}$.
+    Then by Lemma <span class="ref-unknown" title="Reference not found: lem:finite_union_of_measurable_products_is_algebra">[lem:finite_union_of_measurable_products_is_algebra?]</span>, we can write $E$ as a finite union of disjoint measurable products $E = \bigcup_{j=1}^m E_j$.
+    Then 
+    \begin{align*}
+        \nu(E_x) &= \nu\left( \left( \bigcup_{j=1}^m E_j \right)_x \right) \\
+            &= \nu\left( \bigcup_{j=1}^m (E_j)_x \right) \\
+            &= \sum_{j=1}^m \nu((E_j)_x)
+    \end{align*}
+    by disjoint additivity of $\nu$.
+    Since each $E_j$ is a measurable product, we have $E_j \in \mathcal{M}$, so the function $x \mapsto \nu((E_j)_x)$ is $\mathcal{A}$-measurable on $X$ for each $j=1,2,\ldots,m$.
+    Thus the function $x \mapsto \nu(E_x)$ is a finite sum of $\mathcal{A}$-measurable functions, so $x \mapsto \nu(E_x)$ is $\mathcal{A}$-measurable on $X$.
+    Therefore $E \in \mathcal{M}$ for all $E \in \mathcal{E}$.
+    Since $E\in \mathcal{E}$ was arbitrary, we have shown that $\mathcal{E} \subseteq \mathcal{M}$.</p>
+<p>Our next goal is to show that $\mathcal{M}$ is a monotone class on $X\times Y$.
+    Let $\{E_j\}_{j=1}^\infty$ be an increasing sequence of sets in $\mathcal{M}$, i.e.
+    \[ E_1 \subseteq E_2 \subseteq E_3 \subseteq \cdots. \]
+    Then for each $x \in X$, we have
+    \[ \left(\bigcup_{j=1}^\infty E_j\right)_x = \bigcup_{j=1}^\infty (E_j)_x \]
+    which implies that
+    \[ \nu\left( \left( \bigcup_{j=1}^\infty E_j \right)_x \right) = \nu\left( \bigcup_{j=1}^\infty (E_j)_x \right) = \lim_{j \to \infty} \nu((E_j)_x) \]
+    since the sequence of sets $\{(E_j)_x\}_{j=1}^\infty$ is increasing.
+    Since the pointwise limit of measurable functions is measurable, we have that the function $x \mapsto \nu\left( \left( \bigcup_{j=1}^\infty E_j \right)_x \right)$ is $\mathcal{A}$-measurable on $X$.
+    Thus $\bigcup_{j=1}^\infty E_j \in \mathcal{M}$.
+    This shows that $\mathcal{M}$ is closed under countable increasing unions.</p>
+<p>Now let $\{E_j\}_{j=1}^\infty$ be a decreasing sequence of sets in $\mathcal{M}$, i.e.
+    \[ E_1 \supseteq E_2 \supseteq E_3 \supseteq \cdots. \]
+    Then for each $x \in X$, we have
+    \[ \left(\bigcap_{j=1}^\infty E_j\right)_x = \bigcap_{j=1}^\infty (E_j)_x \]
+    which implies that
+    \[ \nu\left( \left( \bigcap_{j=1}^\infty E_j \right)_x \right) = \nu\left( \bigcap_{j=1}^\infty (E_j)_x \right) = \lim_{j \to \infty} \nu((E_j)_x) \]
+    since the sequence of sets $\{(E_j)_x\}_{j=1}^\infty$ is decreasing and $\nu(Y) < \infty$.
+    Since the pointwise limit of measurable functions is measurable, we have that the function $x \mapsto \nu\left( \left( \bigcap_{j=1}^\infty E_j \right)_x \right)$ is $\mathcal{A}$-measurable on $X$.
+    Thus $\bigcap_{j=1}^\infty E_j \in \mathcal{M}$.
+    This shows that $\mathcal{M}$ is closed under countable decreasing intersections; hence $\mathcal{M}$ is a monotone class.</p>
+<p>We have shown that $\mathcal{M}$ is a monotone class that contains the algebra $\mathcal{E}$ of all finite unions of measurable products in $\mathcal{A}\times \mathcal[B]$.
+    By the Monotone Class Lemma (Theorem <span class="ref-unknown" title="Reference not found: thm:monotone_class_lemma">[thm:monotone_class_lemma?]</span>), the smallest $\sigma$-algebra containing $\mathcal{E}$ is the smallest monotone class containing $\mathcal{E}$, so we have
+    $\mathcal{A}\otimes \mathcal{B} \subset \mathcal{M}$. 
+    This completes the proof of the fact that $x \mapsto \nu(E_x)$ is $\mathcal{A}$-measurable on $X$ for each $E \in \mathcal{A} \otimes \mathcal{B}$ in the case that $\nu(Y) < \infty$.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 2:</em> Now we prove the general case.
+    <div style="margin: 1em 0;"></div></p>
+<p>Since $(Y,\mathcal{B},\nu)$ is $\sigma$-finite, there exists an increasing sequence $\{Y_j\}_{j=1}^\infty$ of $\nu$-measurable subsets of $Y$ such that $Y = \bigcup_{j=1}^\infty Y_j$ and $\nu(Y_j) < \infty$ for each $j\in\Z^+$.
+    If $E \in \mathcal{A}\otimes \mathcal{B}$, then
+    \[ \nu( E_x ) = \lim_{j \to \infty} \nu( (E \cap (X \times Y_j))_x ) \]
+    for each $x \in X$ since $\{(E \cap (X \times Y_j))_x\}_{j=1}^\infty$ is an increasing sequence of sets whose union is $E_x$.
+    By Step 1, for each $j\in\Z^+$ the function $x \mapsto \nu( (E \cap (X \times Y_j))_x )$ is $\mathcal{A}$-measurable on $X$ since $E \cap (X \times Y_j) \in \mathcal{A} \otimes \mathcal{B}$ and $\nu(Y_j) < \infty$.
+    Since the pointwise limit of measurable functions is measurable, we have that the function $x \mapsto \nu(E_x)$ is $\mathcal{A}$-measurable on $X$.
+    This completes the proof of the first part of the lemma.</p>
+<p>The proof of the second part is similar.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>At last, we are ready to define the product of two measures.</p>
+<div class="theorem-box definition-box" id="def:product_measure">
+  <div class="theorem-header"><strong>Definition ?</strong> (Product of Measures)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A},\mu)$ and $(Y,\mathcal{B},\nu)$ be $\sigma$-finite measure spaces.
+    We define their <em>product</em> $\mu \otimes \nu : \mathcal{A} \otimes \mathcal{B} \to [0,\infty]$ by
+    \[ (\mu \otimes \nu)(E) = \int_X \int_Y \Chi_E(x,y) \, \dif \nu(y) \, \dif \mu(x). \]</div>
+</div>
+<p>Notice that we need the $\sigma$-finiteness assumption to ensure that the function $x \mapsto \nu(E_x)$ is $\mathcal{A}$-measurable, so that the outer integral is well-defined.</p>
+<div class="theorem-box lemma-box" id="lem:product_of_measures_is_measure">
+  <div class="theorem-header"><strong>Lemma ?</strong></div>
+  <div class="theorem-content">Let $(X,\mathcal{A},\mu)$ and $(Y,\mathcal{B},\nu)$ be $\sigma$-finite measure spaces.
+    Then the product $\mu \otimes \nu : \mathcal{A} \otimes \mathcal{B} \to [0,\infty]$ is a measure on $X \times Y$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-6">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-6')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-6">
+    Clearly we have $(\mu \otimes \nu)(\emptyset) = 0$ since $\chi_\emptyset(x,y) = 0$ for all $(x,y) \in X \times Y$.
+    Now let $\{E_j\}_{j=1}^\infty$ be a sequence of disjoint sets in $\mathcal{A} \otimes \mathcal{B}$.
+    Then we have
+    \begin{align*}
+        (\mu\otimes \nu)\left( \bigcup_{j=1}^\infty E_j \right) &= \int_X \int_Y \Chi_{\bigcup_{j=1}^\infty E_j}(x,y) \, \dif \nu(y) \, \dif \mu(x) \\
+            &= \int_X \nu\left( \bigcup_{j=1}^\infty (E_j)_x \right) \, \dif \mu(x) \\
+            &= \int_X \sum_{j=1}^\infty \nu((E_j)_x) \, \dif \mu(x) \\
+            &= \sum_{j=1}^\infty \int_X \nu((E_j)_x) \, \dif \mu(x) \\
+            &= \sum_{j=1}^\infty \int_X \int_Y \Chi_{E_j}(x,y) \, \dif \nu(y) \, \dif \mu(x) \\
+            &= \sum_{j=1}^\infty (\mu \otimes \nu)(E_j)
+    \end{align*}
+    where the interchange of the sum and integral is justified by the Monotone Convergence Theorem (<span class="ref-unknown" title="Reference not found: thm:monotone_convergence_theorem">[thm:monotone_convergence_theorem?]</span>).
+    Thus $\mu \otimes \nu$ is countably additive, so $\mu \otimes \nu$ is a measure on $X \times Y$.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<h3>Tonelli's Theorem and Fubini's Theorem</h3>
+<p>We have built up all the machinery we need to state and prove Tonelli's theorem and Fubini's theorem.</p>
+<div class="theorem-box theorem-box" id="thm:tonelli_theorem">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Tonelli's Theorem)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A},\mu)$ and $(Y,\mathcal{B},\nu)$ be $\sigma$-finite measure spaces, and let $f: X \times Y \to [0,\infty]$ be a nonnegative $\mathcal{A} \otimes \mathcal{B}$-measurable function.
+    Then
+    \[ x \longmapsto \int_Y f(x,y) \, \dif\nu(y) \qquad\text{is a }\mu\text{-measurable function on }X, \]
+    \[ y \longmapsto \int_X f(x,y) \, \dif\mu(x) \qquad\text{is a }\nu\text{-measurable function on }Y, \]
+    and
+    \[ \int_{X \times Y} f \, \dif(\mu \otimes \nu) = \int_X \int_Y f(x,y) \, \dif\nu(y) \, \dif\mu(x) = \int_Y \int_X f(x,y) \, \dif\mu(x) \, \dif\nu(y). \]</div>
+</div>
+<p>We want to notice a few things --- first, the spaces we integrate over must be $\sigma$-finite.
+Second, the function $f$ must be nonnegative. Third is that we make <em>no</em> integrability assumptions on $f$.
+This is a very powerful theorem.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-7">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-7')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-7">
+    <em>Step 0:</em> First consider the special case where $f = \Chi_E$ for some $E \in \mathcal{A} \otimes \mathcal{B}$, and assume that $\mu(X) < \infty$ and $\nu(Y) < \infty$.
+    <div style="margin: 1em 0;"></div>
+<p>Let $E \in \mathcal{A} \otimes \mathcal{B}$ be arbitrary. 
+    Then we have
+    \[ \int_Y \Chi_E(x,y) \, \dif\nu(y) = \nu(E_x) \]
+    for each $x \in X$, and similarly
+    \[ \int_X \Chi_E(x,y) \, \dif\mu(x) = \mu(E^y) \]
+    for each $y \in Y$.
+    By Lemma <span class="ref-unknown" title="Reference not found: lem:measure_of_cross_section_is_measurable">[lem:measure_of_cross_section_is_measurable?]</span>, the functions $x \mapsto \nu(E_x)$ and $y \mapsto \mu(E^y)$ are measurable.
+    Thus, in this case, the first two conclusions of Tonelli's theorem hold.</p>
+<p>Now let
+    \[ \mathcal{M} := \left\{ E \in \mathcal{A} \otimes \mathcal{B} : \int_X \int_Y \Chi_E(x,y) \, \dif\nu(y) \, \dif\mu(x) = \int_Y \int_X \Chi_E(x,y) \, \dif\mu(x) \, \dif\nu(y) \right\}. \]
+    If $A \in \mathcal{A}$ and $B \in \mathcal{B}$, then we have $A \times B \in \mathcal{M}$ since
+    \begin{align*}
+        \int_X \int_Y \Chi_{A \times B}(x,y) \, \dif\nu(y) \, \dif\mu(x) &= \int_X \int_Y \Chi_A(x) \Chi_B(y) \, \dif\nu(y) \, \dif\mu(x) \\
+            &= \int_X \Chi_A(x) \left( \int_Y \Chi_B(y) \, \dif\nu(y) \right) \, \dif\mu(x) \\
+            &= \nu(B) \int_X \Chi_A(x) \, \dif\mu(x) \\
+            &= \nu(B) \mu(A)
+    \end{align*}
+    and similarly the other integral equals $\mu(A) \nu(B)$.
+    Thus $A \times B \in \mathcal{M}$ for all $A \in \mathcal{A}$ and $B \in \mathcal{B}$.</p>
+<p>Let $\mathcal{E}$ be the collection of all finite unions of measurable products $A \times B$ with $A \in \mathcal{A}$ and $B \in \mathcal{B}$.
+    Then by Lemma <span class="ref-unknown" title="Reference not found: lem:finite_union_of_measurable_products_is_algebra">[lem:finite_union_of_measurable_products_is_algebra?]</span>, we can write an arbitrary $E \in \mathcal{E}$ as a finite union of disjoint measurable products $E = \bigcup_{j=1}^m E_j$.
+    Then by disjoint additivity of the integral, we have
+    \begin{align*}
+        \int_X \int_Y \Chi_E(x,y) \, \dif\nu(y) \, \dif\mu(x) &= \int_X \int_Y \Chi_{\bigcup_{j=1}^m E_j}(x,y) \, \dif\nu(y) \, \dif\mu(x) \\
+            &= \int_X \int_Y \sum_{j=1}^m \Chi_{E_j}(x,y) \, \dif\nu(y) \, \dif\mu(x) \\
+            &= \sum_{j=1}^m \int_X \int_Y \Chi_{E_j}(x,y) \, \dif\nu(y) \, \dif\mu(x) \\
+            &= \sum_{j=1}^m \int_Y \int_X \Chi_{E_j}(x,y) \, \dif\mu(x) \, \dif\nu(y) \\
+            &= \int_Y \int_X \Chi_{\bigcup_{j=1}^m E_j}(x,y) \, \dif\mu(x) \, \dif\nu(y) \\
+            &= \int_Y \int_X \Chi_E(x,y) \, \dif\mu(x) \, \dif\nu(y).
+    \end{align*}
+    Thus $E \in \mathcal{M}$.
+    Since $E\in \mathcal{E}$ was arbitrary, we have shown that $\mathcal{E} \subseteq \mathcal{M}$.</p>
+<p>Now the Monotone Convergence Theorem (<span class="ref-unknown" title="Reference not found: thm:monotone_convergence_theorem">[thm:monotone_convergence_theorem?]</span>) shows that $\mathcal{M}$ is closed under countable increasing unions.
+    The Bounded Convergence Theorem (<span class="ref-unknown" title="Reference not found: thm:bounded_convergence_theorem">[thm:bounded_convergence_theorem?]</span>) shows that $\mathcal{M}$ is closed under countable decreasing intersections --- note that <em>this</em> is where we need the finiteness assumptions on $\mu(X)$ and $\nu(Y)$.
+    Thus $\mathcal{M}$ is a monotone class containing the algebra $\mathcal{E}$ of all finite unions of measurable products in $\mathcal{A}\times \mathcal{B}$.
+    By the Monotone Class Lemma (Theorem <span class="ref-unknown" title="Reference not found: thm:monotone_class_lemma">[thm:monotone_class_lemma?]</span>), the smallest $\sigma$-algebra containing $\mathcal{E}$ is the smallest monotone class containing $\mathcal{E}$, so we have
+    $\mathcal{A}\otimes \mathcal{B} \subset \mathcal{M}$. 
+    That is, for each $E \in \mathcal{A} \otimes \mathcal{B}$ we have
+    \[ \int_X \int_Y \Chi_E(x,y) \, \dif\nu(y) \, \dif\mu(x) = \int_Y \int_X \Chi_E(x,y) \, \dif\mu(x) \, \dif\nu(y). \]
+    Since the integral on the left-hand side is precisely $(\mu \otimes \nu)(E)$ by Definition <span class="ref-unknown" title="Reference not found: def:product_measure">[def:product_measure?]</span>, we have
+    \[ (\mu \otimes \nu)(E) = \int_{X\times Y} \Chi_E \, \dif(\mu \otimes \nu) = \int_X \int_Y \Chi_E(x,y) \, \dif\nu(y) \, \dif\mu(x) = \int_Y \int_X \Chi_E(x,y) \, \dif\mu(x) \, \dif\nu(y). \]
+    This completes the proof of Tonelli's theorem in the special case where $f = \Chi_E$ for some $E \in \mathcal{A} \otimes \mathcal{B}$ and $\mu(X) < \infty$ and $\nu(Y) < \infty$.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 1:</em> Now consider the case where $f = \Chi_E$ for some $E \in \mathcal{A} \otimes \mathcal{B}$, but we do not assume that $\mu(X) < \infty$ or $\nu(Y) < \infty$.
+    <div style="margin: 1em 0;"></div></p>
+<p>Since $(X,\mathcal{A},\mu)$ and $(Y,\mathcal{B},\nu)$ are $\sigma$-finite, there exist increasing sequences $\{X_j\}_{j=1}^\infty$ and $\{Y_k\}_{k=1}^\infty$ of measurable subsets of $X$ and $Y$, respectively, such that $X = \bigcup_{j=1}^\infty X_j$ and $Y = \bigcup_{k=1}^\infty Y_k$ and $\mu(X_j) < \infty$ and $\nu(Y_k) < \infty$ for each $j,k\in\Z^+$.</p>
+<p>Let $E \in \mathcal{A} \otimes \mathcal{B}$.
+    For each $j,k \in \Z^+$, we apply the previous case to the finite measures $\mu\mres_{X_j}$ and $\nu\mres_{Y_k}$ to conclude that
+    \[  \int_{X_j} \int_{Y_k} \Chi_E(x,y) \, \dif\nu(y) \, \dif\mu(x) = \int_{Y_k} \int_{X_j} \Chi_E(x,y) \, \dif\mu(x) \, \dif\nu(y). \]
+    Now by the Monotone Convergence Theorem (<span class="ref-unknown" title="Reference not found: thm:monotone_convergence_theorem">[thm:monotone_convergence_theorem?]</span>), we have
+    \begin{align*}
+        \int_X \int_Y \Chi_E(x,y) \, \dif\nu(y) \, \dif\mu(x) &= \lim_{j \to \infty} \lim_{k \to \infty} \int_{X_j} \int_{Y_k} \Chi_E(x,y) \, \dif\nu(y) \, \dif\mu(x) \\
+            &= \lim_{j \to \infty} \lim_{k \to \infty} \int_{Y_k} \int_{X_j} \Chi_E(x,y) \, \dif\mu(x) \, \dif\nu(y) \\
+            &= \int_Y \int_X \Chi_E(x,y) \, \dif\mu(x) \, \dif\nu(y).
+    \end{align*}
+    Now the definition of the product measure (Definition <span class="ref-unknown" title="Reference not found: def:product_measure">[def:product_measure?]</span>) shows that
+    \[ (\mu \otimes \nu)(E) = \int_X \int_Y \Chi_E(x,y) \, \dif\nu(y) \, \dif\mu(x). \]
+    Putting this together, we have
+    \[ \int_{X \times Y} \Chi_E \, \dif(\mu \otimes \nu) = \int_X \int_Y \Chi_E(x,y) \, \dif\nu(y) \, \dif\mu(x) = \int_Y \int_X \Chi_E(x,y) \, \dif\mu(x) \, \dif\nu(y). \]
+    Since $E \in \mathcal{A} \otimes \mathcal{B}$ was arbitrary, this completes the proof of Tonelli's theorem in the case where $f = \Chi_E$ for some $E \in \mathcal{A} \otimes \mathcal{B}$.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 2:</em> Now consider the general case.
+    <div style="margin: 1em 0;"></div></p>
+<p>Let $f: X \times Y \to [0,\infty]$ be a nonnegative $\mathcal{A} \otimes \mathcal{B}$-measurable function.
+    Then we define a sequence of nonnegative simple functions $\{s_k\}_{k=1}^\infty$ on $X \times Y$ by
+    \[ s_k(x,y) := \begin{cases}
+        \frac{m}{2^k}, & \text{if } f(x,y) < k \text{ and } \frac{m}{2^k} \leq f(x,y) < \frac{m+1}{2^k} \text{ for some } m = 0,1,2,\ldots,2^{2k}k - 1 \\
+        k, & \text{if } f(x,y) \geq k \\
+    \end{cases} \]
+    for each $k\in\Z^+$.</p>
+<p>Note that by construction, we have 
+    \[ 0 \leq s_k(x,y) \leq s_{k+1}(x,y) \leq f(x,y) \]
+    for all $(x,y) \in X \times Y$ and $k\in\Z^+$, and
+    \[ \lim_{k \to \infty} s_k(x,y) = f(x,y) \]
+    for all $(x,y) \in X \times Y$.
+    Notice that each $s_k$ is a finite linear combination of characteristic functions of measurable sets, so by the previous step we know Tonelli's theorem holds for each $s_k$.
+    Now the Monotone Convergence Theorem (<span class="ref-unknown" title="Reference not found: thm:monotone_convergence_theorem">[thm:monotone_convergence_theorem?]</span>) shows that
+    \[ \int_Y f(x,y) \, \dif\nu(y) = \lim_{k \to \infty} \int_Y s_k(x,y) \, \dif\nu(y) \]
+    for each $x \in X$. Thus the function 
+    \[ x \longmapsto \int_Y f(x,y) \, \dif\nu(y) \]
+    is the pointwise limit of a sequence of $\mathcal{A}$-measurable functions, so it is $\mathcal{A}$-measurable on $X$.
+    Similarly the map
+    \[ y \longmapsto \int_X f(x,y) \, \dif\mu(x) \]
+    is $\mathcal{B}$-measurable on $Y$.</p>
+<p>Finally, another application of the Monotone Convergence Theorem (<span class="ref-unknown" title="Reference not found: thm:monotone_convergence_theorem">[thm:monotone_convergence_theorem?]</span>) shows that
+    \begin{align*}
+        \int_{X \times Y} f \, \dif(\mu \otimes \nu) &= \lim_{k \to \infty} \int_{X \times Y} s_k \, \dif(\mu \otimes \nu) \\
+            &= \lim_{k \to \infty} \int_X \int_Y s_k(x,y) \, \dif\nu(y) \, \dif\mu(x) \\
+            &= \int_X \int_Y f(x,y) \, \dif\nu(y) \, \dif\mu(x)
+    \end{align*}
+    and similarly
+    \[ \int_{X \times Y} f \, \dif(\mu \otimes \nu) = \int_Y \int_X f(x,y) \, \dif\mu(x) \, \dif\nu(y). \]
+    This completes the proof of Tonelli's theorem.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box corollary-box" id="cor:double_indexed_sum">
+  <div class="theorem-header"><strong>Corollary ?</strong></div>
+  <div class="theorem-content">Let $\{a_{i,j}\}_{i,j=1}^\infty$ be a doubly-indexed collection of nonnegative numbers.
+    Then
+    \[ \sum_{i,j=1}^\infty a_{i,j} = \sum_{i=1}^\infty \sum_{j=1}^\infty a_{i,j} = \sum_{j=1}^\infty \sum_{i=1}^\infty a_{i,j}. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-8">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-8')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-8">
+    Apply Tonelli's theorem with $X = Y = \Z^+$, $\mu = \nu$ the counting measure, and $f(i,j) = a_{ij}$.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<div class="theorem-box theorem-box" id="thm:fubini_theorem">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Fubini's Theorem)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A},\mu)$ and $(Y,\mathcal{B},\nu)$ be $\sigma$-finite measure spaces, and let $f: X \times Y \to [-\infty,\infty]$ be an $\mathcal{A} \otimes \mathcal{B}$-integrable function.
+    Then
+    \[ x \longmapsto \int_Y f(x,y) \, \dif\nu(y) \qquad\text{is a }\mu\text{-measurable function on }X, \]
+    \[ y \longmapsto \int_X f(x,y) \, \dif\mu(x) \qquad\text{is a }\nu\text{-measurable function on }Y, \]
+    and \[ \int_Y |f(x,y)| \, \dif\nu(y) < \infty \text{ for } \mu\text{-almost every } x \in X \quad\text{ and }\quad \int_X |f(x,y)| \, \dif\mu(x) < \infty \text{ for }\nu\text{-almost every } y \in Y, \]
+    and
+    \[ \int_{X \times Y} f \, \dif(\mu \otimes \nu) = \int_X \int_Y f(x,y) \, \dif\nu(y) \, \dif\mu(x) = \int_Y \int_X f(x,y) \, \dif\mu(x) \, \dif\nu(y). \]</div>
+</div>
+<p>We remark a few things --- first, the spaces we integrate over must be $\sigma$-finite.
+Second, the function $f$ can take on negative values, but we must assume that $f$ is integrable, i.e. that $\int_{X \times Y} |f| \, \dif(\mu \otimes \nu) < \infty$.
+Third is that we have the same conclusion as Tonelli's theorem, but we also have that the iterated integrals of $|f|$ are finite almost everywhere.</p>
+<div class="theorem-box remark-box collapsible-box collapsed" id="rmk:using_tonelli_and_fubini_in_practice" data-collapsible-id="collapsible-rmk:using_tonelli_and_fubini_in_practice">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-rmk:using_tonelli_and_fubini_in_practice')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong> (Using Tonelli and Fubini in Practice)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-rmk:using_tonelli_and_fubini_in_practice">Here's the trick. Assume that you have a function $f$ defined on a product space $X\times Y$ and you want to compute its integral.
+    What you should do is apply Tonelli's theorem to $|f|$ and show that the integral $\int_{X \times Y} |f| \, \dif(\mu \otimes \nu)$ is finite by evaluating one of the iterated integrals
+    given in Tonelli's theorem.
+    This shows that $f$ is integrable on $X \times Y$.
+    Then you can apply Fubini's theorem to $f$ to compute the integral $\int_{X \times Y} f \, \dif(\mu \otimes \nu)$ by evaluating either of the iterated integrals given in Fubini's theorem.
+<p>In practice, this combo is referred to as the Fubini-Tonelli theorem or just Fubini's theorem.</div>
+</div></p>
+<div class="proof-box collapsed" data-proof-id="proof-num-9">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-9')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-9">
+    Applying Tonelli's theorem (Theorem <span class="ref-unknown" title="Reference not found: thm:tonelli_theorem">[thm:tonelli_theorem?]</span>) to the nonnegative $\mathcal{A} \otimes \mathcal{B}$-measurable function $|f|$, we have
+    \[ x \longmapsto \int_Y |f(x,y)| \, \dif\nu(y) \qquad\text{is a }\mu\text{-measurable function on }X, \]
+    so the set \[ \left\{ x\in X : \int_Y |f(x,y)| \, \dif\nu(y) = \infty \right\} \]
+    is in $\mathcal{A}$.
+    Since $f$ is integrable on $X \times Y$, Tonelli's theorem and the assumption $f$ is integrable shows that
+    \[ \int_{X \times Y} |f| \, \dif(\mu \otimes \nu) = \int_X \int_Y |f(x,y)| \, \dif\nu(y) \, \dif\mu(x) < \infty. \]
+    Thus we must have
+    \[ \mu\left( \left\{ x\in X : \int_Y |f(x,y)| \, \dif\nu(y) = \infty \right\} \right) = 0. \]
+<p>Recall the definitions 
+    \[ f^+ = \max(f,0) \quad\text{and}\quad f^- = \max(-f,0) \]
+    which satisfy $f = f^+ - f^-$ and $|f| = f^+ + f^-$.
+    Applying Tonelli's theorem to the nonnegative $\mathcal{A} \otimes \mathcal{B}$-measurable functions $f^+$ and $f^-$ shows that
+    \[ x \longmapsto \int_Y f^+(x,y) \, \dif\nu(y) \qquad\text{and}\qquad x \longmapsto \int_Y f^-(x,y) \, \dif\nu(y) \]
+    are $\mu$-measurable functions on $X$. 
+    Since $f^+ \leq |f|$ and $f^- \leq |f|$, the sets \[ \left\{ x\in X : \int_Y f^+(x,y) \, \dif\nu(y) = \infty \right\} \quad\text{and}\quad \left\{ x\in X : \int_Y f^-(x,y) \, \dif\nu(y) = \infty \right\} \]
+    must also have $\mu$-measure zero.
+    The intersection of these two sets is \[ \left\{ x\in X : \int_Y |f(x,y)| \, \dif\nu(y) = \infty \right\}, \]
+    which is exacly the set on which the integral $\int_Y f(x,y) \, \dif\nu(y)$ fails to be defined.
+    Thus we have shown that
+    \[ \int_Y |f(x,y)| \, \dif\nu(y) < \infty \text{ for } \mu\text{-almost every } x \in X. \]</p>
+<p>Now the function 
+    \[ x \longmapsto \int_Y f(x,y) \, \dif\nu(y) = \int_Y f^+(x,y) \, \dif\nu(y) - \int_Y f^-(x,y) \, \dif\nu(y) \]
+    which must be modified to take the valued $0$ on if the right side is of the form $\infty - \infty$ (but this happens on a set of $\mu$-measure zero, as we just showed), is the difference of two $\mu$-measurable functions, so it is $\mu$-measurable on $X$.
+    We compute that
+    \begin{align*}
+        \int_{X\times Y} f \dif (\mu\otimes \nu) &= \int_{X \times Y} f^+ \, \dif(\mu \otimes \nu) - \int_{X \times Y} f^- \, \dif(\mu \otimes \nu) \\
+            &= \int_X \int_Y f^+(x,y) \, \dif\nu(y) \, \dif\mu(x) - \int_X \int_Y f^-(x,y) \, \dif\nu(y) \, \dif\mu(x) \\
+            &= \int_X \int_Y (f^+(x,y) - f^-(x,y)) \, \dif\nu(y) \, \dif\mu(x) \\
+            &= \int_X \int_Y f(x,y) \, \dif\nu(y) \, \dif\mu(x)
+    \end{align*}
+    where we have used the definition of the integral of a real-valued function and Tonelli's theorem on $f^+$ and $f^-$.</p>
+<p>This proves the first iterated integral formula in Fubini's theorem.</p>
+<p>The assertions about the $\nu$-measurability of the function $y \mapsto \int_X f(x,y) \, \dif\mu(x)$ and the second iterated integral formula in Fubini's theorem follow by a symmetric argument.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>We summarize the technique described in Remark <span class="ref-unknown" title="Reference not found: rmk:using_tonelli_and_fubini_in_practice">[rmk:using_tonelli_and_fubini_in_practice?]</span> in the following result.</p>
+<div class="theorem-box corollary-box" id="cor:fubini_tonelli_theorem">
+  <div class="theorem-header"><strong>Corollary ?</strong> (The Fubini-Tonelli Theorem)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A},\mu)$ and $(Y,\mathcal{B},\nu)$ be $\sigma$-finite measure spaces, and let $f: X \times Y \to [-\infty,\infty]$ be an $\mathcal{A} \otimes \mathcal{B}$-measurable function.
+    If either
+    \[ \int_X \int_Y |f(x,y)| \, \dif\nu(y) \, \dif\mu(x) < \infty \quad\text{ or }\quad \int_Y \int_X |f(x,y)| \, \dif\mu(x) \, \dif\nu(y) < \infty , \]
+    then $f$ is integrable on $X \times Y$, and
+    \[ \int_{X \times Y} f \, \dif(\mu \otimes \nu) = \int_X \int_Y f(x,y) \, \dif\nu(y) \, \dif\mu(x) = \int_Y \int_X f(x,y) \, \dif\mu(x) \, \dif\nu(y). \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-10">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-10')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-10">
+    The function $|f|$ is nonnegative and $\mathcal{A} \otimes \mathcal{B}$-measurable, so we can apply Tonelli's theorem to $|f|$ to conclude that
+    \[ \int_{X \times Y} |f| \, \dif(\mu \otimes \nu) = \int_X \int_Y |f(x,y)| \, \dif\nu(y) \, \dif\mu(x) = \int_Y \int_X |f(x,y)| \, \dif\mu(x) \, \dif\nu(y). \]
+    If either of the iterated integrals on the right-hand side is finite, then $\int_{X \times Y} |f| \, \dif(\mu \otimes \nu) < \infty$, so $f$ is integrable on $X \times Y$.
+    We can then apply Fubini's theorem to $f$ to conclude the desired result.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<div class="theorem-box exercise-box" id="ex:area_under_graph_formula">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Area Under Graph Formula)</div>
+  <div class="theorem-content">Let $(X,\mathcal{A},\mu)$ be a $\sigma$-finite measure space and let $f: X \to [0,\infty]$ be a $\mu$-measurable function.
+    Then \[ \int_X f \, d\mu = \int_0^\infty \mu(\{x \in X : t < f(x) \}) \, \dif t. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-11">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-11')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-11">
+    Let $\mathcal{B}_\R$ be the Borel $\sigma$-algebra on $\R$.
+<p>For each $k\in \Z^+$ let
+    \[ E_k := \bigcup_{m=0}^{k^2-1} \left( f^{-1}\left( \left[ \frac{m}{k}, \frac{m+1}{k} \right) \right) \right) \quad\text{ and }\quad F_k := f^{-1}\left( [k, \infty) \right) \times(0,k). \]
+    The for each $k\in\Z^+$ the set $E_k$ is a finite union of measurable products in $\mathcal{A} \times \mathcal{B}_\R$, and $F_k$ is a measurable product in $\mathcal{A} \times \mathcal{B}_\R$, so both $E_k$ and $F_k$ are in $\mathcal{A} \otimes \mathcal{B}_\R$.
+    Since \[ \{ (x,t) \in X \times \R : 0 < t < f(x) \} = \bigcup_{k=1}^\infty (E_k \cup F_k), \]
+    the set \(\{ (x,t) \in X \times \R : 0 < t < f(x) \}\) is in \(\mathcal{A} \otimes \mathcal{B}_\R\).</p>
+<p>The definition of the product measure $\mu \otimes \mathcal{L}^1$ then gives
+    \begin{align*}
+        (\mu \otimes \mathcal{L}^1) \left( \{ (x,t) \in X \times \R : 0 < t < f(x) \} \right) &= \int_X \int_\R \Chi_{\{ (x,t) : 0 < t < f(x) \}}(x,t) \, \dif \mathcal{L}^1(t) \, \dif \mu(x) \\
+            &= \int_X \int_0^{f(x)} 1 \, \dif t \, \dif \mu(x) \\
+            &= \int_X f(x) \, \dif \mu(x).
+    \end{align*}
+    This formula shows that the measure of the set $\{ (x,t) \in X \times \R : 0 < t < f(x) \}$ with respect to the product measure \(\mu \otimes \mathcal{L}^1 \) is equal to the integral of $f$ over $X$.
+    That is, the ``area under the graph'' of $f$ is equal to the integral of $f$.</p>
+<p>On the other hand, Tonelli's theorem (Theorem <span class="ref-unknown" title="Reference not found: thm:tonelli_theorem">[thm:tonelli_theorem?]</span>) says that we chan interchange the order of integration to get
+    \begin{align*}
+        (\mu \otimes \mathcal{L}^1) \left( \{ (x,t) \in X \times \R : 0 < t < f(x) \} \right) &= \int_0^\infty \int_X \Chi_{\{ (x,t) : 0 < t < f(x) \}}(x,t) \, \dif \mu(x) \, \dif \mathcal{L}^1(t) \\
+            &= \int_0^\infty \mu(\{ x \in X : t < f(x) \}) \, \dif t.
+    \end{align*}
+    Combinging the two formulas gives
+    \[ \int_X f(x) \, \dif \mu(x) = \int_0^\infty \mu(\{ x \in X : t < f(x) \}) \, \dif t, \]
+    which is the desired result.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<h3>Notation for Multiple Integrals in $\R^n$</h3>
+<div class="theorem-box lemma-box" id="lem:another_definition_of_lebesgue_measure">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Another Definition of Lebesgue Measure)</div>
+  <div class="theorem-content">For each $n>1$, the Lebesgue measure $\mathcal{L}^n$ on $\R^n$ is the product measure of $(\R^{n-1},\mathcal{L}^{n-1})$ and $(\R,\mathcal{L}^1)$, i.e.
+    \[ \mathcal{L}^n = \mathcal{L}^{n-1} \otimes \mathcal{L}^1. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-12">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-12')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-12">
+    Fix $n>1$. Then the measure spaces $(\R^{n-1},\mathcal{L}^{n-1})$ and $(\R,\mathcal{L}^1)$ are $\sigma$-finite since $\R^{n-1}$ and $\R$ can both be written as a countable union of finite measure sets.
+    Thus the product measure $\mathcal{L}^{n-1} \otimes \mathcal{L}^1$ is well-defined on $\R^{n-1} \times \R = \R^n$.
+<p>By Cor <span class="ref-unknown" title="Reference not found: cor:borel_reg_outer_measures_in_rn">[cor:borel_reg_outer_measures_in_rn?]</span>, we only need to show that $\mathcal{L}^n$ and $\mathcal{L}^{n-1} \otimes \mathcal{L}^1$ agree on all boxes in $\R^n$.
+    Let $R = [a_1,b_1] \times [a_2,b_2] \times \cdots \times [a_n,b_n]$ be a box in $\R^n$.
+    Then
+    \begin{align*}
+        (\mathcal{L}^{n-1} \otimes \mathcal{L}^1)(R) &= \int_{\R^{n-1}} \int_\R \Chi_R(x_1,x_2,\ldots,x_n) \, \dif \mathcal{L}^1(x_n) \, \dif \mathcal{L}^{n-1}(x_1,x_2,\ldots,x_{n-1}) \\
+            &= \int_{\R^{n-1}} \int_{a_n}^{b_n} \Chi_{[a_1,b_1] \times [a_2,b_2] \times \cdots \times [a_{n-1},b_{n-1}]}(x_1,x_2,\ldots,x_{n-1}) \, \dif x_n \, \dif \mathcal{L}^{n-1}(x_1,x_2,\ldots,x_{n-1}) \\
+            &= \int_{a_n}^{b_n} \dif x_n\,\cdot \int_{\R^{n-1}} \Chi_{[a_1,b_1] \times [a_2,b_2] \times \cdots \times [a_{n-1},b_{n-1}]}(x_1,x_2,\ldots,x_{n-1}) \, \dif \mathcal{L}^{n-1}(x_1,x_2,\ldots,x_{n-1}) \\
+            &= (b_n - a_n) \int_{\R^{n-1}} \Chi_{[a_1,b_1] \times [a_2,b_2] \times \cdots \times [a_{n-1},b_{n-1}]}(x_1,x_2,\ldots,x_{n-1}) \, \dif \mathcal{L}^{n-1}(x_1,x_2,\ldots,x_{n-1}) \\
+            &= (b_n - a_n) \mathcal{L}^{n-1}([a_1,b_1] \times [a_2,b_2] \times \cdots \times [a_{n-1},b_{n-1}]) \\
+            &= (b_n - a_n) (b_1 - a_1)(b_2 - a_2) \cdots (b_{n-1} - a_{n-1}) \\
+            &= (b_1 - a_1)(b_2 - a_2) \cdots (b_n - a_n) = \mathcal{L}^n(R)
+    \end{align*}
+    so we are done.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>By this result and induction, if $n>1$ and we have an integer $1 \leq k < n$, then
+\[ \mathcal{L}^n = \mathcal{L}^{n-k} \otimes \mathcal{L}^{k}. \]
+Then we can apply Tonelli's theorem and Fubini's theorem to functions defined on $\R^n$ to get formulas such as
+\[ \int_{\R^k \times \R^{n-k}} f \, \dif x = \int_{\R^k} \int_{\R^{n-k}} f(x_1,x_2) \, \dif \mathcal{L}^{n-k}(x_2) \, \dif \mathcal{L}^k(x_1) = \int_{\R^{n-k}} \int_{\R^k} f(x_1,x_2) \, \dif \mathcal{L}^k(x_1) \, \dif \mathcal{L}^{n-k}(x_2). \]
+for integrable $f: \R^n\to [-\infty,\infty]$.
+We remark that you should be careful in using the above formula, since we have $x_1 \in \R^k$ and $x_2 \in \R^{n-k}$ which is at odds with the usual notation.</p>
+<p>To avoid confusion, we usually write $x \in \R^n$ as $x = (x_1,x_2,\ldots,x_n)$ where each $x_j \in \R$.
+Then Fubini-Tonelli takes the form
+\[ \int_{\R^n} f(x) \, \dif x = \int_{\R^k} \int_{\R^{n-k}} f(x_1,x_2,\ldots,x_n) \, \dif x_{k+1} \cdots \dif x_n \, \dif x_1 \cdots \dif x_k = \int_{\R^{n-k}} \int_{\R^k} f(x_1,x_2,\ldots,x_n) \, \dif x_1 \cdots \dif x_k \, \dif x_{k+1} \cdots \dif x_n. \]
+for integrable $f: \R^n \to [-\infty,\infty]$, which we think is better (because it is more explicit and conforms to the usual notation), even if it is longer to write.</p>
+<p>The next section will be devoted to examples and applications of Fubini-Tonelli theorems in $\R^n$.</p>
+    </main>
+  </div>
+  
+  <script>
+    function toggleChapter(element) {
+      element.parentElement.classList.toggle('expanded');
+    }
+    
+    // Highlight current page in sidebar
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPath = window.location.pathname;
+      const links = document.querySelectorAll('.section-link');
+      links.forEach(link => {
+        if (currentPath.endsWith(link.getAttribute('href').split('/').pop())) {
+          link.classList.add('active');
+          // Expand parent chapter
+          const group = link.closest('.chapter-group');
+          if (group) group.classList.add('expanded');
+        }
+      });
+    });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('Restoring proof collapse states...');
+      try {
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        const currentPage = window.location.pathname;
+        const pageOpen = openProofs[currentPage] || [];
+        
+        console.log('Current page:', currentPage);
+        console.log('Open proof IDs stored:', pageOpen);
+        console.log('Found ' + pageOpen.length + ' open proofs for this page');
+        
+        document.querySelectorAll('.proof-box').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          console.log('Checking proof:', proofId, 'Should be open:', pageOpen.includes(proofId));
+          if (pageOpen.includes(proofId)) {
+            box.classList.remove('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'true');
+          } else {
+            box.classList.add('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        const pageBoxes = openBoxes[currentPage] || [];
+        
+        console.log('Open box IDs stored:', pageBoxes);
+        
+        document.querySelectorAll('.collapsible-box').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          console.log('Checking box:', boxId, 'Should be open:', pageBoxes.includes(boxId));
+          if (pageBoxes.includes(boxId)) {
+            box.classList.remove('collapsed');
+          } else {
+            box.classList.add('collapsed');
+          }
+        });
+        
+        console.log('Proof states restored');
+      } catch (e) {
+        console.error('Error restoring collapse state:', e);
+      }
+    });
+    
+    function toggleProof(proofId) {
+      const proofContent = document.getElementById(proofId);
+      const proofBox = proofContent.closest('.proof-box');
+      proofBox.classList.toggle('collapsed');
+      
+      const button = proofBox.querySelector('.proof-toggle');
+      button.setAttribute('aria-expanded', !proofBox.classList.contains('collapsed'));
+      
+      saveProofState();
+    }
+    
+    function toggleSubproof(subproofId) {
+      const subproofContent = document.getElementById(subproofId);
+      const subproof = subproofContent.closest('.subproof');
+      subproof.classList.toggle('collapsed');
+      
+      const button = subproof.querySelector('.subproof-toggle');
+      button.setAttribute('aria-expanded', !subproof.classList.contains('collapsed'));
+    }
+    
+    function saveProofState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        if (!openProofs[currentPage]) {
+          openProofs[currentPage] = [];
+        }
+        
+        openProofs[currentPage] = [];
+        document.querySelectorAll('.proof-box:not(.collapsed)').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          if (proofId) {
+            openProofs[currentPage].push(proofId);
+          }
+        });
+        
+        localStorage.setItem('openProofs', JSON.stringify(openProofs));
+        console.log('Saved proof state (open proofs):', openProofs[currentPage]);
+      } catch (e) {
+        console.error('Error saving collapse state:', e);
+      }
+    }
+    
+    function toggleCollapsible(collapsibleId) {
+      const content = document.getElementById(collapsibleId);
+      const box = content.closest('.collapsible-box');
+      box.classList.toggle('collapsed');
+      
+      saveCollapsibleState();
+    }
+    
+    function saveCollapsibleState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        if (!openBoxes[currentPage]) {
+          openBoxes[currentPage] = [];
+        }
+        
+        openBoxes[currentPage] = [];
+        document.querySelectorAll('.collapsible-box:not(.collapsed)').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          if (boxId) {
+            openBoxes[currentPage].push(boxId);
+          }
+        });
+        
+        localStorage.setItem('openBoxes', JSON.stringify(openBoxes));
+      } catch (e) {
+        console.error('Error saving box state:', e);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        const proofBoxes = document.querySelectorAll('.proof-box');
+        const anyExpanded = Array.from(proofBoxes).some(box => !box.classList.contains('collapsed'));
+        
+        proofBoxes.forEach(box => {
+          if (anyExpanded) {
+            box.classList.add('collapsed');
+          } else {
+            box.classList.remove('collapsed');
+          }
+        });
+        
+        saveProofState();
+      }
+    });
+    
+    document.querySelectorAll('a.ref-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.background = '#fef3c7';
+          target.style.transition = 'background 0.3s ease';
+          setTimeout(() => { target.style.background = ''; }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

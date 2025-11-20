@@ -1,0 +1,260 @@
+\section{Lipschitz Functions}
+\subsection{Definitions and Extension of Lipschitz Functions}
+
+\begin{definition}[Lipschitz Map]
+    \label{def:lipschitz_map}
+    Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces.
+    A map $f : X \to Y$ is said to be \textit{Lipschitz} if there exists a constant $C > 0$ such that for all $x_1,x_2 \in X$,
+    \[ d_Y(f(x_1),f(x_2)) \leq C d_X(x_1,x_2). \]
+    The infimum of all such constants $C$ is called the \textit{Lipschitz constant} of $f$, and is denoted by $\Lip(f)$.
+\end{definition}
+
+Basically a Lipschitz function is one that does not distort distances too much.
+
+\begin{exercise}[Lipschitz Implies Uniformly Continuous]
+    \label{ex:lip_implies_uniformly_continuous}
+    Every Lipschitz map is uniformly continuous.
+\end{exercise}
+\begin{proof}
+    Let $f : X \to Y$ be a Lipschitz map between metric spaces $(X,d_X)$ and $(Y,d_Y)$, with Lipschitz constant $C > 0$.
+    Let $\epsilon > 0$ be given.
+    Choose $\delta := \epsilon / C > 0$.
+    Then for each $x_1,x_2 \in X$ such that $d_X(x_1,x_2) < \delta$, we have
+    \[ d_Y(f(x_1),f(x_2)) \leq C d_X(x_1,x_2) < C \delta = \epsilon. \]
+    This shows that $f$ is uniformly continuous.
+\end{proof}
+
+We are mostly interested in the case where $X$ is a subset of $\R^n$ with the Euclidean metric, and $Y = \R^m$ with the Euclidean metric.
+
+This next result says that any Lipschitz function defined on a subset of a metric space can be extended to a Lipschitz function on the whole space, with the same Lipschitz constant.
+This is known as \textit{McShane's Extension Lemma}, and is a very useful result.
+Basically, if it is ever convenient, we can assume without loss of generality that a Lipschitz function is defined on the whole space, rather than just a subset.
+
+\begin{lemma}[McShane's Extension Lemma]
+    \label{lem:mcshane_lemma}
+    Let $(X,d)$ be a metric space, and let $A \subseteq X$ be a nonempty subset.
+    Let $f : A \to \R$ be a Lipschitz function.
+    Then there exists a Lipschitz function $\overline{f} : X \to \R$ such that $\overline{f}|_A = f$ and $\Lip(\overline{f}) = \Lip(f)$.
+    This extension is given by
+    \[ \overline{f}(x) := \inf_{a \in A} \left\{ f(a) + \Lip(f) d(x,a) \right\} \]
+    for each $x \in X$.
+\end{lemma}
+
+Of course, such an extension is not unique, but that doesn't really matter.
+
+\begin{proof}
+    \textit{Step 1:} We first show that the function $\overline{f}$ is well-defined and extends $f$.
+    \vspace{2mm}
+
+    First note that for each $x \in X$, the set $\{ f(a) + \Lip(f) d(x,a) : a \in A \}$ is nonempty since $A$ is nonempty; also this set is bounded below
+    --- choose a point $a_0 \in A$, then for each $a \in A$, we have
+    \[ f(a) \geq f(a_0) - |f(a) - f(a_0)| \geq f(a_0) - \Lip(f) d(a,a_0) \] 
+    which implies that
+    \[ f(a) + \Lip(f) d(x,a) \geq f(a_0) - \Lip(f) d(a,a_0) + \Lip(f) d(x,a) \geq f(a_0) - \Lip(f) d(a_0,x) \]
+    by the triangle inequality; thus the set $\{ f(a) + \Lip(f) d(x,a) : a \in A \}$ is bounded below by $f(a_0) - \Lip(f) d(a_0,x)$.
+    Therefore the infimum in the definition of $\overline{f}(x)$ is well-defined and finite for each point $x \in X$.
+
+    Next, for each $a \in A$, we have $\overline{f}(a) \leq f(a)$ by the fact that $d(a,a) = 0$ and using the definition of $\overline{f}$.
+    On the other hand, for all $a,a' \in A$, we have
+    \[ f(a') + \Lip(f) d(a,a') \geq f(a') \geq f(a) - |f(a') - f(a)| \geq f(a) - \Lip(f) d(a,a') \]
+    which implies that
+    \[ f(a') + \Lip(f) d(a,a') \geq f(a). \]
+    Taking the infimum over all $a' \in A$ gives $\overline{f}(a) \geq f(a)$.
+    Therefore we have shown that $\overline{f}(a) = f(a)$ for each $a \in A$, so $\overline{f}|_A = f$.
+
+    \vspace{2mm}
+    \textit{Step 2:} We now show that $\overline{f}$ is Lipschitz with Lipschitz constant $\Lip(f)$.
+    \vspace{2mm}
+
+    Let $x_1,x_2 \in X$ be arbitrary.
+    Then for each $a \in A$, we have
+    \begin{align*}
+        \overline{f}(x_1) - \overline{f}(x_2) &= \inf_{a_1 \in A} \left( f(a_1) + \Lip(f) d(x_1,a_1) \right) - \inf_{a_2 \in A} \left( f(a_2) + \Lip(f) d(x_2,a_2) \right) \\
+            &= \sup_{a_2 \in A} \inf_{a_1 \in A} \left( f(a_1) + \Lip(f) d(x_1,a_1) - f(a_2) - \Lip(f) d(x_2,a_2) \right) \\
+            &= \sup_{a_2 \in A} \inf_{a_1 \in A} \left( f(a_1) - f(a_2) + \Lip(f) (d(x_1,a_1) - d(x_2,a_2)) \right) \\
+            &\leq \sup_{a_2 \in A} \,\left( \Lip(f) (d(x_1,a_2) - d(x_2,a_2)) \right) \\
+            &\leq \Lip(f) d(x_1,x_2)
+    \end{align*}
+    and similarly
+    \[ \overline{f}(x_2) - \overline{f}(x_1) \leq \Lip(f) d(x_1,x_2). \]
+    This shows that
+    \[ |\overline{f}(x_1) - \overline{f}(x_2)| \leq \Lip(f) d(x_1,x_2) \]
+    for all $x_1,x_2 \in X$, so $\overline{f}$ is Lipschitz with Lipschitz constant at most $\Lip(f)$.
+    Since $\overline{f}$ extends $f$, we must have $\Lip(\overline{f}) \geq \Lip(f)$, so $\Lip(\overline{f}) = \Lip(f)$.
+    This completes the proof.
+\end{proof}
+
+
+\begin{exercise}[McShane's Extension Lemma to $\R^m$]
+    \label{ex:extension_to_R_m}
+    Let $(X,d)$ be a metric space, and let $A \subset X$ be a nonempty subset.
+    Let $f : A \to \R^m$ be a Lipschitz map.
+    Then there exists a Lipschitz function $\overline{f} : X \to \R^m$ such that $\overline{f}|_A = f$ and $\Lip(\overline{f}) \leq \sqrt{m} \Lip(f)$.
+\end{exercise}
+
+It turns out that we can actually get an extension with the same Lipschitz constant --- a result known as \textit{Kirszbraun's Extension Theorem}, which we will prove later.
+\begin{proof}
+    For each $j = 1,2,\ldots,m$, let $\pi_j : \R^m \to \R$ be the projection onto the $j$-th coordinate, i.e. \[ \pi_j(y) := y_j, \qquad \forall y = (y_1,\ldots,y_m) \in \R^m. \]
+    Write $f = (f_1,\ldots,f_m)$, where for each $j = 1,\ldots,m$, the function $f_j : A \to \R$ is given by $f_j = \pi_j \circ f$.
+    Then for each $j = 1,\ldots,m$, the function $f_j$ is Lipschitz with Lipschitz constant at most $\Lip(f)$ because
+    \[ |f_j(x_1) - f_j(x_2)| = |\pi_j(f(x_1)) - \pi_j(f(x_2))| \leq |f(x_1) - f(x_2)| \leq \Lip(f) d(x_1,x_2) \]
+    for all $x_1,x_2 \in A$.
+
+    By McShane's extension lemma \ref{lem:mcshane_lemma}, for each $j = 1,\ldots,m$, there exists a Lipschitz function $\overline{f_j} : X \to \R$ such that $\overline{f_j}|_A = f_j$ and $\Lip(\overline{f_j}) = \Lip(f_j) \leq \Lip(f)$.
+    Now define the function $\overline{f} : X \to \R^m$ by
+    \[ \overline{f}(x) := (\overline{f_1}(x),\ldots,\overline{f_m}(x)) \in \R^m \qquad \forall x \in X. \]
+    Then for each $x \in A$, we have
+    \[ \overline{f}(x) = (\overline{f_1}(x),\ldots,\overline{f_m}(x)) = (f_1(x),\ldots,f_m(x)) = f(x), \]
+    so $\overline{f}|_A = f$.
+    Moreover, for each $x_1,x_2 \in X$, we have
+    \begin{align*}
+        \|\overline{f}(x_1) - \overline{f}(x_2)\|^2 &= \sum_{j=1}^m |\overline{f_j}(x_1) - \overline{f_j}(x_2)|^2   \\
+            &\leq \sum_{j=1}^m (\Lip(\overline{f_j}) d(x_1,x_2))^2 \\
+            &\leq m \left(\Lip(f) d(x_1,x_2)\right)^2
+    \end{align*}
+    which implies that
+    \[ \| \overline{f}(x_1) - \overline{f}(x_2) \| \leq \sqrt{m} \Lip(f) d(x_1,x_2). \]
+    This shows that $\overline{f}$ is Lipschitz with Lipschitz constant $\leq \sqrt{m} \Lip(f)$.
+    Therefore we have constructed the desired extension $\overline{f} : X \to \R^m$ of $f$.
+\end{proof}
+
+\subsection{Locally Lipschitz Functions}
+
+\begin{definition}[Locally Lipschitz Map]
+    \label{def:locally_lipschitz_map}
+    Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces.
+    A map $f : X \to Y$ is said to be \textit{locally Lipschitz} if for every point $x \in X$, there exists an open set $U_x$ containing $x$ such that the restriction $f|_{U_x} : U_x \to Y$ is Lipschitz.
+\end{definition}
+
+\begin{exercise}[Equivalent Definition of Locally Lipschitz Map]
+    \label{ex:equivalent_definition_of_locally_lipschitz}
+    Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, and assume that $X$ is locally compact.
+    A map $f : X \to Y$ is locally Lipschitz if and only if for every compact set $K \subseteq X$, the restriction $f|_K : K \to Y$ is Lipschitz.
+\end{exercise}
+
+Note that only the reverse direction requires that $X$ be locally compact.
+\begin{proof}
+    ($\implies$) Suppose that $f : X \to Y$ is locally Lipschitz.
+    Let $K \subseteq X$ be a compact set.
+    For each $x \in K$, there exists an open set $U_x$ containing $x$ such that $f|_{U_x} : U_x \to Y$ is Lipschitz.
+    The collection $\{ U_x : x \in K \}$ is an open cover of the compact set $K$, so there exists a finite subcover $\{ U_{x_1},\ldots,U_{x_N} \}$ that also covers $K$.
+    For each $j = 1,\ldots,N$, let $L_j$ be the Lipschitz constant of $f|_{U_{x_j}}$.
+    Let $L := \max\{ L_1,\ldots,L_N \}$.
+    By the Lebesgue Number Lemma, there exists $\delta > 0$ such that for each $x \in K$, there exists $j \in \{ 1,\ldots,N \}$ such that $B(x,\delta) \subseteq U_{x_j}$.
+
+    Now let $z_1,z_2 \in K$ be arbitrary.
+    If $d_X(z_1,z_2) < \delta$, then there exists $j \in \{ 1,\ldots,N \}$ such that $B(z_1,\delta) \subseteq U_{x_j}$, so both $z_1$ and $z_2$ are in $U_{x_j}$.
+    Thus we have
+    \[ d_Y(f(z_1),f(z_2)) \leq L_j d_X(z_1,z_2) \leq L d_X(z_1,z_2). \]
+    On the other hand, if $d_X(z_1,z_2) \geq \delta$, then we have
+    \[ d_Y(f(z_1),f(z_2)) \leq \diam_Y(f(K)) \leq \frac{\diam_Y(f(K))}{\delta} d_X(z_1,z_2). \]
+    Note that $\diam_Y(f(K)) < \infty$ since $f(K)$ is compact in $Y$.
+    Thus in either case, we have
+    \[ d_Y(f(z_1),f(z_2)) \leq \max\left\{ L, \frac{\diam_Y(f(K))}{\delta} \right\} d_X(z_1,z_2). \]
+    Since $z_1,z_2 \in K$ were arbitrary, this shows that the restriction $f|_K : K \to Y$ is Lipschitz.
+
+    \vspace{2mm}
+
+    ($\impliedby$)
+    Now suppose that for every compact set $K \subseteq X$, the restriction $f|_K : K \to Y$ is Lipschitz.
+    Let $x \in X$ be arbitrary.
+    Since $X$ is locally compact, there exists an open set $U_x$ containing $x$ such that the closure $\overline{U_x}$ is compact; 
+    hence there exists $r > 0$ such that $B(x,r) \subseteq U_x$ and $\overline{B(x,r)}$ is compact (since it is a closed subset of the compact set $\overline{U_x}$).
+    By assumption, the restriction $f|_{\overline{B(x,r)}} : \overline{B(x,r)} \to Y$ is Lipschitz with some Lipschitz constant $L > 0$.
+    Thus the restriction $f|_{B(x,r)} : B(x,r) \to Y$ is also Lipschitz with Lipschitz constant $L$.
+    Since $x \in X$ was arbitrary, this shows that $f$ is locally Lipschitz.
+\end{proof}
+
+\begin{exercise}[$C^1$ Functions are Locally Lipschitz]
+    \label{ex:c1_functions_are_locally_lipschitz}
+    Let $U\subseteq \R^n$ be open and let $f:U\to \R$ be a $C^1$ function.
+    Then $f$ is locally Lipschitz on $U$.
+
+    \vspace{2mm}
+
+    \noindent If the derivative $Df:U\to \R^{n}$ is bounded and $U$ is convex, then $f$ is Lipschitz on $U$.
+\end{exercise}
+
+\begin{proof}
+    Let $x\in U$.
+    Since $U$ is open, there exists $r>0$ such that $B(x,r)\subseteq U$.
+    Since $f$ is $C^1$, the derivative $Df:U\to \R^n$ is continuous, so $Df$ is bounded on the compact set $\overline{B(x,r/2)}$.
+    Thus the $L^\infty$-norm
+    \[ \|Df\|_{L^\infty(\overline{B(x,r/2)})} = \sup_{y\in \overline{B(x,r/2)}}\|Df(y)\| < \infty \]
+    of $Df$ on $\overline{B(x,r/2)}$ is finite.
+    Now, if $y,z\in B(x,r/2)$, then the line segment from $y$ to $z$ is contained in $B(x,r)$, so by the Mean Value Inequality we know that
+    \[ |f(y) - f(z)| \leq \sup_{\lambda\in[0,1]}\|Df(\lambda y + (1-\lambda)z)\|\|y - z\| \]
+    which implies
+    \[ |f(y) - f(z)| \leq \|Df\|_{L^\infty(\overline{B(x,r/2)})}\|y - z\|. \]
+    Since $y,z\in B(x,r/2)$ were arbitrary, this shows that $f$ is Lipschitz on $B(x,r/2)$.
+    Since $x\in U$ was arbitrary, this shows that $f$ is locally Lipschitz on $U$.
+
+    \vspace{2mm}
+
+    Now suppose that $Df:U\to \R^n$ is bounded, i.e. $\|Df\|_{L^\infty(U)} < \infty$, and that $U$ is convex.
+    Then for each $y,z\in U$, the line segment from $y$ to $z$ is contained in $U$, so by the Mean Value Inequality we have
+    \[ |f(y) - f(z)| \leq \sup_{\lambda\in[0,1]}\|Df(\lambda y + (1-\lambda)z)\|\|y - z\| \leq \|Df\|_{L^\infty(U)} \|y - z\|. \]
+    This shows that $f$ is Lipschitz on $U$ with Lipschitz constant at most $\|Df\|_{L^\infty(U)}$.
+\end{proof}
+
+\subsection{Lipschitz Maps and Hausdorff Measure}
+
+\begin{proposition}[Hausdorff Measure under Lipschitz Maps]
+    \label{prop:hausdorff_measure_under_lipschitz_maps}
+    Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, and let $f : X \to Y$ be a Lipschitz map.
+    Then for each $\alpha \geq 0$ and each set $A \subseteq X$, we have
+    \[ \mathcal{H}_Y^\alpha(f(A)) \leq (\Lip(f))^\alpha \cdot \mathcal{H}_X^\alpha(A). \]
+\end{proposition}
+Thus, in addition to not distorting distances too much, Lipschitz maps also do not distort Hausdorff measure too much.
+
+\begin{proof}
+    
+
+\end{proof}
+
+We record a few corollaries of this result.
+
+\begin{corollary}[Hausdorff Measure under Retraction]
+    \label{cor:hausdorff_measure_under_retraction}
+    If $R: X \to X$ is a retraction map (i.e. $R \circ R = R$), then $\mathcal{H}^\alpha(R(A)) \leq \mathcal{H}^\alpha(A)$ for each $A \subseteq X$ and each $\alpha \geq 0$.
+\end{corollary}
+\begin{proof}
+    Let $R : X \to X$ be a retraction map.
+    Then for each $x_1,x_2 \in X$, we have
+    \[ d_X(R(x_1),R(x_2)) = d_X(R(R(x_1)),R(R(x_2))) \leq d_X(x_1,x_2) \]
+    which shows that $R$ is Lipschitz with $\Lip(R) \leq 1$.
+    Therefore by proposition \ref{prop:hausdorff_measure_under_lipschitz_maps}, we have
+    \[ \mathcal{H}^\alpha(R(A)) \leq (\Lip(R))^\alpha \cdot \mathcal{H}^\alpha(A) \leq \mathcal{H}^\alpha(A) \]
+    for each $A \subseteq X$ and each $\alpha \geq 0$.
+\end{proof}
+
+\begin{corollary}[Hausdorff Measure under Projection]
+    \label{cor:hausdorff_measure_under_projection}
+    Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, and let $P : X \times Y \to X$ be the projection onto the first factor. 
+    Then for each $\alpha \geq 0$ and each set $A \subseteq X \times Y$, we have
+    \[ \mathcal{H}_X^\alpha(P(A)) \leq \mathcal{H}_{X \times Y}^\alpha(A). \]
+\end{corollary}
+Note that we do not specify which of the product metrics we put on $X \times Y$ here, as the Hausdorff measure on the right will depend on the choice of metric, but the inequality will still hold.
+
+\begin{proof}
+    We see that the map $P$ is Lipschitz with Lipschitz constant $\Lip(P) = 1$, so this is immediate from proposition \ref{prop:hausdorff_measure_under_lipschitz_maps}.
+\end{proof}
+
+\begin{corollary}[Lipschitz Image of Hausdorff Measure Zero Set has Hausdorff Measure Zero]
+    \label{cor:lipschitz_image_of_hausdorff_measure_zero_set}
+    Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, and let $f : X \to Y$ be a Lipschitz map.
+    If $A \subseteq X$ is such that $\mathcal{H}_X^\alpha(A) = 0$ for some $\alpha \geq 0$, then $\mathcal{H}_Y^\alpha(f(A)) = 0$.
+\end{corollary}
+\begin{proof}
+    This is immediate from the inequality in proposition \ref{prop:hausdorff_measure_under_lipschitz_maps}.
+\end{proof}
+
+\begin{proposition}[Hausdorff Dimension of Lipschitz Graph in $\R^n$]
+    \label{prop:hausdorff_dim_of_lipschitz_graph}
+    Let $f: \R^n \to \R^m$ be a Lipschitz function, and let $A\subset \R^n$ be a Lebeasgue measurable set with $\L^n(A) > 0$. 
+    Then the graph of $f$ over $A$ has Hausdorff dimension $n$, i.e.
+    \[ \H_{\dim}(\graph (f|_A)) = n. \]
+\end{proposition}
+\begin{proof}
+    
+\end{proof}

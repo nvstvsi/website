@@ -1,0 +1,379 @@
+\section{Fundamental Theorem of Calculus on $\R$}
+
+In this section, we prove both versions of the Fundamental Theorem of Calculus for Lebesgue integrals on the real line.
+We are not striving for maximum generalizty here, because that will come later.
+
+\noindent In short section, we always let $[a,b]$ denoted a closed, bounded interval in $\R$ with $a < b$.
+
+\subsection{Absolute Continuity}
+
+\begin{definition}[Absolute Continuity]
+    \label{def:absolute_continuity}
+    A function $f:[a,b]\to\R$ is said to be \textit{absolutely continuous} on $[a,b]$ if for each $\epsilon > 0$, there exists a $\delta > 0$ such that for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+    we have
+    \[ \sum_{k=1}^N |f(b_k) - f(a_k)| < \epsilon. \]
+    We define the set of all absolutely continuous functions on $[a,b]$ to be $AC([a,b])$.
+\end{definition}
+
+\begin{remark}[Absolute Continuity Implies Uniform Continuity]
+    \label{rem:AC_implies_uniformly_continuous}
+If $f$ is absolutely continuous on $[a,b]$, then it is uniformly continuous on $[a,b]$.
+
+Let $\epsilon > 0$, and let $\delta > 0$ be such that for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+\[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+we have
+\[ \sum_{k=1}^N |f(b_k) - f(a_k)| < \epsilon. \]
+Then by choosing $N=1$, we have that for any sub-interval $(a_1,b_1)$ of $[a,b]$ with
+\[ b_1 - a_1 < \delta, \]
+we have
+\[ |f(b_1) - f(a_1)| < \epsilon. \]
+This is precisely the definition of uniform continuity.
+\end{remark}
+
+\begin{example}[Lipschitz Functions are Absolutely Continuous]
+    \label{ex:lipschitz_functions_are_absolutely_continuous}
+    If $f:[a,b]\to\R$ is Lipschitz with Lipschitz constant $L>0$, then for each $\epsilon > 0$, if we let $\delta := \epsilon / L$, then for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+    we have
+    \[ \sum_{k=1}^N |f(b_k) - f(a_k)| \leq \sum_{k=1}^N L |b_k - a_k| = L \sum_{k=1}^N (b_k - a_k) < L \delta = \epsilon. \]
+    Thus $f$ is absolutely continuous on $[a,b]$.
+\end{example}
+
+\begin{example}[Not All Absolutely Continuous Functions are Lipschitz]
+    \label{ex:not_all_absolutely_continuous_functions_are_lipschitz}
+    For example, the function $f:[0,1]\to\R$ defined by $f(x) = \sqrt{x}$ is absolutely continuous on $[0,1]$ but not Lipschitz.
+
+    ....
+\end{example}
+
+\begin{example}[The Cantor-Lebesgue Function is Not Absolutely Continuous]
+    \label{ex:cantor_lebesgue_function_is_not_absolutely_continuous}
+    The Cantor-Lebesgue function $f:[0,1]\to[0,1]$ is continuous and increasing, but not absolutely continuous.
+
+    ....
+\end{example}
+
+\begin{exercise}[$AC$ is a Vector Space]
+    \label{ex:AC_is_a_vector_space}
+    Show that $AC([a,b])$ is a vector space over $\R$.
+\end{exercise}
+\begin{proof}
+    First see that $0$, the zero function, is in $AC([a,b])$.
+    Now let $f,g \in AC([a,b])$ and $\alpha\in \R\setminus\{0\}$.
+
+    Let $\epsilon > 0$.
+    Since $f$ and $g$ are absolutely continuous on $[a,b]$, there exist $\delta_1,\delta_2 > 0$ such that for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta_1 \quad \text{and} \quad \sum_{k=1}^N (b_k - a_k) < \delta_2, \]
+    we have
+    \[ \sum_{k=1}^N |f(b_k) - f(a_k)| < \frac{\epsilon}{2|\alpha|} \quad \text{and} \quad \sum_{k=1}^N |g(b_k) - g(a_k)| < \frac{\epsilon}{2}. \]
+    Then letting $\delta := \min\{\delta_1,\delta_2\}$, we have that for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+    we have
+    \begin{align*}
+        \sum_{k=1}^N |(\alpha f + g)(b_k) - (\alpha f + g)(a_k)| &\leq \sum_{k=1}^N |\alpha| |f(b_k) - f(a_k)| + \sum_{k=1}^N |g(b_k) - g(a_k)| \\
+            &< |\alpha| \frac{\epsilon}{2|\alpha|} + \frac{\epsilon}{2} = \epsilon.
+    \end{align*}
+    Thus $\alpha f + g \in AC([a,b])$.
+    Therefore $AC([a,b])$ is a vector space over $\R$.
+\end{proof}
+
+\begin{exercise}[Product of $AC$ is $AC$]
+    \label{ex:product_of_AC_is_AC}
+    If $f,g \in AC([a,b])$, then $fg \in AC([a,b])$.
+\end{exercise}
+\begin{proof}
+    Let $f,g \in AC([a,b])$.
+    Since $f$ and $g$ are continuous on the compact set $[a,b]$, they are bounded.
+    That is, there exist $M_1,M_2 > 0$ such that
+    \[ |f(x)| \leq M_1 \quad\text{and}\quad |g(x)| \leq M_2 \quad\forall x\in[a,b]. \]
+
+    Let $\epsilon > 0$.
+    Since $f$ and $g$ are absolutely continuous on $[a,b]$, there exist $\delta_1,\delta_2 > 0$ such that for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta_1 \quad \text{and} \quad \sum_{k=1}^N (b_k - a_k) < \delta_2, \]
+    we have
+    \[ \sum_{k=1}^N |f(b_k) - f(a_k)| < \frac{\epsilon}{2M_2} \quad \text{and} \quad \sum_{k=1}^N |g(b_k) - g(a_k)| < \frac{\epsilon}{2M_1}. \]
+    Then letting $\delta := \min\{\delta_1,\delta_2\}$, we have that for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+    we have
+    \begin{align*}
+        \sum_{k=1}^N |(fg)(b_k) - (fg)(a_k)| &= \sum_{k=1}^N |f(b_k)g(b_k) - f(a_k)g(a_k)| \\
+            &= \sum_{k=1}^N |f(b_k)g(b_k) - f(a_k)g(b_k) + f(a_k)g(b_k) - f(a_k)g(a_k)| \\
+            &\leq \sum_{k=1}^N |g(b_k)||f(b_k) - f(a_k)| + \sum_{k=1}^N |f(a_k)||g(b_k) - g(a_k)| \\
+            &\leq M_2 \sum_{k=1}^N |f(b_k) - f(a_k)| + M_1 \sum_{k=1}^N |g(b_k) - g(a_k)| \\
+            &< M_2 \frac{\epsilon}{2M_2} + M_1 \frac{\epsilon}{2M_1} = \epsilon.
+    \end{align*}
+
+
+\end{proof}
+
+\begin{exercise}[Equivalent Definition of $AC$ Functions]
+    \label{ex:equivalent_definition_of_AC_functions}
+    Let $f:[a,b]\to\R$ be a function.
+    Then $f$ is absolutely continuous on $[a,b]$ if and only if for each $\epsilon > 0$, there exists a $\delta > 0$ such that for any countable collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^\infty$ of $[a,b]$ with
+    \[ \sum_{k=1}^\infty (b_k - a_k) < \delta, \]
+    we have
+    \[ \sum_{k=1}^\infty |f(b_k) - f(a_k)| < \epsilon. \]
+    Deduce that if $f$ is absolutely continuous on $[a,b]$, then $f$ maps sets of Lebesgue measure zero to sets of Lebesgue measure zero.
+\end{exercise}
+
+\begin{proof}
+    ($\Rightarrow$) Suppose that $f$ is absolutely continuous on $[a,b]$.
+    Let $\epsilon > 0$, and let $\delta > 0$ be such that for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+    we have
+    \[ \sum_{k=1}^N |f(b_k) - f(a_k)| < \frac{\epsilon}{2}. \]
+
+    Now let $\{(a_k,b_k)\}_{k=1}^\infty$ be any countable collection of pairwise disjoint sub-intervals of $[a,b]$ with
+    \[ \sum_{k=1}^\infty (b_k - a_k) < \delta. \]
+    Then for each $N\in\Z^+$, we have
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+    so
+    \[ \sum_{k=1}^N |f(b_k) - f(a_k)| < \frac{\epsilon}{2}. \]
+    By taking the limit as $N\to\infty$ we see that
+    \[ \sum_{k=1}^\infty |f(b_k) - f(a_k)| \leq \frac{\epsilon}{2} < \epsilon. \]
+    
+    Since the collection $\{(a_k,b_k)\}_{k=1}^\infty$ satisfying $\sum_{k=1}^\infty (b_k - a_k) < \delta$ was arbitrary, and $\epsilon > 0$ was arbitrary, we have shown that the function $f$ satisfies the condition in the statement of the exercise.
+    Thus the forward direction is proven.
+
+    \vspace{2mm}
+
+    ($\Leftarrow$) The reverse direction is trivial since any finite collection of pairwise disjoint sub-intervals is also a countable collection of pairwise disjoint sub-intervals.
+    
+    \vspace{2mm}
+
+    Suppose now that $f$ is increasing and absolutely continuous on $[a,b]$, and let $E\subseteq [a,b]$ be a set of Lebesgue measure zero.
+    Let $\epsilon > 0$, and let $\delta > 0$ be such that for any countable collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^\infty$ of $[a,b]$ with
+    \[ \sum_{k=1}^\infty (b_k - a_k) < \delta, \]
+    we have
+    \[ \sum_{k=1}^\infty |f(b_k) - f(a_k)| < \epsilon. \]
+    Since $E$ has Lebesgue measure zero, there exists a countable collection of pairwise disjoint open intervals $\{(a_k,b_k)\}_{k=1}^\infty$ of $[a,b]$ such that
+    \[ E \subseteq \bigcup_{k=1}^\infty (a_k,b_k) \quad\text{and}\quad \sum_{k=1}^\infty (b_k - a_k) < \delta. \]
+    Then
+    \[ f(E) \subseteq f\left( \bigcup_{k=1}^\infty (a_k,b_k) \right) \subseteq \bigcup_{k=1}^\infty [f(a_k),f(b_k)] \]
+    since $f$ is increasing, so
+    \[ m(f(E)) \leq m\left( \bigcup_{k=1}^\infty [f(a_k),f(b_k)] \right) \leq \sum_{k=1}^\infty |f(b_k) - f(a_k)| < \epsilon. \]
+    Since $\epsilon > 0$ was arbitrary, we have shown that $m(f(E)) = 0$.
+\end{proof}
+
+\begin{lemma}[$AC$ implies $BV$]
+    \label{lem:AC_implies_BV}
+    If $f:[a,b]\to\R$ is absolutely continuous on $[a,b]$, then it is of bounded variation on $[a,b]$ and its total variation function is absolutely continuous.
+\end{lemma}
+\begin{proof}
+    Let $f:[a,b]\to\R$ be absolutely continuous on $[a,b]$.
+    Then there exists $\delta > 0$ such that for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+    we have
+    \[ \sum_{k=1}^N |f(b_k) - f(a_k)| < 1. \]
+
+    Then let $P$ be a partition \[a = x_0 < x_1 < \cdots < x_N = b \] 
+    of $[a,b]$ such that $x_k - x_{k-1} < \delta$ for each $k=1,\ldots,N$.
+    Then
+    \[ V_{x_{k-1}}^{x_k}(f) = \sup \left\{ \sum_{j=1}^M |f(y_j) - f(y_{j-1})| : P' = \{ y_0 < y_1 < \cdots < y_M \} \text{ is a partition of } [x_{k-1},x_k] \right\} \leq 1 \]
+    for each $k=1,\ldots,N$, so
+    \[ V_a^b(f) = \sum_{k=1}^N V_{x_{k-1}}^{x_k}(f) \leq N < \infty. \]
+    Thus $f$ is of bounded variation on $[a,b]$.
+
+    \vspace{2mm}
+
+    Now we will show that the function $x\longmapsto V_a^x(f)$ is absolutely continuous on $[a,b]$.
+    Let $\epsilon > 0$. Since $f$ is absolutely continuous on $[a,b]$, there exists $\delta > 0$ such that for any finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+    \[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+    we have
+    \[ \sum_{k=1}^N |f(b_k) - f(a_k)| < \frac{\epsilon}{2}. \] 
+
+    Fix a finite collection of pairwise disjoint sub-intervals $\{(c_k,d_k)\}_{k=1}^M$ of $[a,b]$ with
+    \[ \sum_{k=1}^M (d_k - c_k) < \delta, \]
+    and for each $k=1,\ldots,M$, let $P_k = \{ c_k = y_0 < y_1 < \cdots < y_{N_k} = d_k \}$ be a partition of $[c_k,d_k]$.
+    We have
+    \[ \sum_{k=1}^M V( f|_{[c_k,d_k]}, P_k ) < \frac{\epsilon}{2} \]
+    by choice of $\delta$.
+
+    By taking the supremum over all partitions $P_k$ of $[c_k,d_k]$ for each $k=1,\ldots,M$, we have
+    \[ \sum_{k=1}^M V_{c_k}^{d_k}(f) \leq \frac{\epsilon}{2} < \epsilon. \]
+    It follows from additivity of the total variation function (see Proposition \ref{prop:additivity_of_total_variation}) that
+    \[ V_{c_k}^{d_k}(f) = V_a^{d_k}(f) - V_a^{c_k}(f) \quad \forall k = 1,\ldots,M. \]
+    Putting these two facts together, we have
+    \[ \sum_{k=1}^M |V_a^{d_k}(f) - V_a^{c_k}(f)| = \sum_{k=1}^M V_{c_k}^{d_k}(f) < \epsilon. \]
+    Since the collection $\{(c_k,d_k)\}_{k=1}^M$ satisfying $\sum_{k=1}^M (d_k - c_k) < \delta$ was arbitrary, and $\epsilon > 0$ was arbitrary, we have shown that the function $x\longmapsto V_a^x(f)$ is absolutely continuous on $[a,b]$.
+\end{proof}
+
+\begin{corollary}[Jordan Decomposition for $AC$ Functions]
+    \label{cor:AC_is_difference_of_increasing_AC}
+    If $f:[a,b]\to\R$ is absolutely continuous on $[a,b]$, then there exist increasing, absolutely continuous functions $f_1,f_2:[a,b]\to\R$ such that
+    \[ f = f_1 - f_2. \]
+\end{corollary}
+\begin{proof}
+    From the previous lemma \ref{lem:AC_implies_BV} and the Jordan decomposition theorem (Theorem \ref{thm:jordan_decomposition_theorem}),
+    it follows that 
+    \[ f(x) = (f(x) + V_a^x(f)) - V_a^x(f) \qquad \forall x \in [a,b] \]
+    expresses $f$ as the difference of two increasing functions on $[a,b]$.
+    The previous lemma also shows that $x\mapsto V_a^x(f)$ is absolutely continuous on $[a,b]$, and in Exercise \ref{ex:AC_is_a_vector_space} we showed that the difference of two absolutely continuous functions is absolutely continuous.
+    Thus $f$ can be expressed as the difference of two increasing, absolutely continuous functions on $[a,b]$.
+\end{proof}
+
+The following Corollary is frequently used.
+\begin{corollary}[$AC$ Functions are Differentiable Almost Everywhere]
+    \label{cor:AC_functions_are_differentiable_almost_everywhere}
+    If $f:[a,b]\to\R$ is absolutely continuous on $[a,b]$, then it is differentiable almost everywhere on $[a,b]$.
+\end{corollary}
+\begin{proof}
+    Since $f$ is absolutely continuous on $[a,b]$, it is of bounded variation on $[a,b]$ by Lemma \ref{lem:AC_implies_BV}.
+    Thus by Corollary \ref{cor:BV_functions_are_differentiable_a_e}, $f$ is differentiable almost everywhere on $[a,b]$.
+\end{proof}
+
+\subsection{Fundamental Theorem of Calculus}
+
+\begin{lemma}[(Improved) Second Fundamental Theorem of Calculus]
+    \label{lem:anti_derivative_is_AC}
+    Let $f:[a,b]\to\R$ be an integrable function.
+    Then the indefinite integral
+    \[ F(x) = \int_a^x f(t)\,\dif t, \qquad x\in[a,b], \]
+    is absolutely continuous on $[a,b]$ and has derivative $F'(x) = f(x)$ for almost every $x\in[a,b]$.
+\end{lemma}
+\noindent We already know $F$ is continuous on $[a,b]$, and that $F'(x)$ exists and equals $f(x)$ for almost every $ x\in[a,b]$ by Theorem \ref{thm:second_fundamental_theorem_of_calculus}.
+The new conclusion here is that $F$ is absolutely continuous on $[a,b]$.
+
+\begin{proof}
+
+Let $\{ (a_k,b_k) \}_{k=1}^N$ be an arbitrary finite collection of pairwise disjoint sub-intervals of $[a,b]$.
+Then we have
+\begin{align*}
+    \sum_{k=1}^N |F(b_k) - F(a_k)| &= \sum_{k=1}^N \left| \int_a^{b_k} f(t)\,dt - \int_a^{a_k} f(t)\,dt \right| \\
+        &= \sum_{k=1}^N \left| \int_{a_k}^{b_k} f(t)\,dt \right| \\
+        &\leq \sum_{k=1}^N \int_{a_k}^{b_k} |f(t)|\,dt = \int_{\bigcup_{k=1}^N (a_k,b_k)} |f(t)|\,dt. \\
+\end{align*}
+
+Let $\epsilon > 0$, and let $\delta > 0$ be such that if $E\subseteq [a,b]$ is a measurable set with $\mathcal{L}^1(E) < \delta$, then 
+\[ \int_E |f(t)|\,dt < \epsilon. \]
+(This is possible by \ref{lem:integral_on_small_sets_is_small} since $f$ is integrable on $[a,b]$.)
+Then for each finite collection of pairwise disjoint sub-intervals $\{(a_k,b_k)\}_{k=1}^N$ of $[a,b]$ with
+\[ \sum_{k=1}^N (b_k - a_k) < \delta, \]
+we have
+\[ \sum_{k=1}^N |F(b_k) - F(a_k)| \leq \int_{\bigcup_{k=1}^N (a_k,b_k)} |f(t)|\,dt < \epsilon. \]
+Thus $F$ is absolutely continuous on $[a,b]$. 
+\end{proof}
+
+\begin{lemma}[Zero Derivative Implies Constant]
+    \label{lem:zero_derivative_implies_constant}
+    Let $f:[a,b]\to\R$ be an increasing absolutely continuous function on $[a,b]$.
+    If $f'(x) = 0$ for almost every $x\in[a,b]$, then $f$ is constant on $[a,b]$.
+\end{lemma}
+
+\begin{proof}
+    \textit{Step 1:} We assume that $f$ is increasing on $[a,b]$ and that $f'(x) = 0$ for almost every $x\in[a,b]$.
+    \vspace{2mm}
+
+    Since $f$ is increasing and uniformly continuous on the compact set $[a,b]$, its range must be the closed interval $[f(a),f(b)]$.
+    We will show that the length of this interval is zero. Let 
+    \[ E := \{ x\in [a,b] : f'(x)  = 0 \} \]
+    so that $\mathcal{L}^1([a,b]\setminus E) = 0$ by assumption.
+    By \ref{ex:equivalent_definition_of_AC_functions}, the absolute continuity of $f$ implies that the image of $[a,b]\setminus E$ under $f$ has Lebesgue measure zero.
+    That is, 
+    \[ \mathcal{L}^1(f([a,b]\setminus E)) = 0. \]
+
+    \vspace{2mm}
+    \textit{Step 2:} We claim that $f(E)$ also has Lebesgue measure zero.
+    \vspace{2mm}
+
+    Let $\epsilon > 0$. If $x_0\in E$ then $f'(x_0) = 0$, so by definition of the derivative, there exists a $\delta > 0$ such that for each $x\in [x_0,x_0 + \delta)$ we have
+    \[  \frac{f(x) - f(x_0)}{x - x_0} < \epsilon \]
+    which is equivalent to
+    \[ f(x) - f(x_0) < \epsilon (x - x_0) \]
+    which rearranges to
+    \[ \epsilon x_0 - f(x_0) < \epsilon x - f(x). \]
+    Thus $x_0$ is invisible from the right with respect to the continuous function $x\mapsto \epsilon x - f(x)$.
+    Since $x_0\in E$ was arbitrary, we have shown that every point in $E$ is invisible from the right with respect to the continuous function $x\mapsto \epsilon x - f(x)$.
+
+    By the Rising Sun Lemma (Lemma \ref{lem:rising_sun_lemma}), there is a countable collection of pairwise disjoint open intervals $\{(a_k,b_k)\}_{k=1}^\infty$ such that
+    \[ E \subseteq \bigcup_{k=1}^\infty (a_k,b_k) \quad\text{and}\quad f(b_k) - \epsilon b_k \leq f(a_k) - \epsilon a_k \quad\forall k\in\Z^+. \]
+    That is, \[ f(b_k) - f(a_k) \leq \epsilon (b_k - a_k) \quad\forall k\in\Z^+. \]
+    But then we see that 
+    \[ \sum_{k=1}^\infty (f(b_k) - f(a_k)) \leq \epsilon \sum_{k=1}^\infty (b_k - a_k) \leq \epsilon (b-a). \]
+    Hence
+    \[ \mathcal{L}^1(f(E)) \leq \mathcal{L}^1\left(f\left(\bigcup_{k=1}^\infty (a_k,b_k)\right)\right) \leq \mathcal{L}^1\left(\bigcup_{k=1}^\infty f((a_k,b_k))\right) \leq \sum_{k=1}^\infty (f(b_k) - f(a_k)) \leq \epsilon (b-a). \]
+    Since $\epsilon > 0$ was arbitrary, we have shown that $\mathcal{L}^1(f(E)) = 0$.
+
+    But now we see that 
+    \[ \mathcal{L}^1(f([a,b])) = \mathcal{L}^1(f(E) \cup f([a,b]\setminus E)) \leq \mathcal{L}^1(f(E)) + \mathcal{L}^1(f([a,b]\setminus E)) = 0 + 0 = 0. \]
+    Since $f([a,b]) = [f(a),f(b)]$ is a closed interval, it must be that $f(a) = f(b)$ and $f(x) = f(a)$ for all $x\in[a,b]$.
+
+    \vspace{2mm}
+
+    [It is instructive to note where we have used the fact that $f$ is increasing in the above argument --- 
+    first of all, this allows us to remove the absolute value bars in the first inequality in step 2, and this is crucial for all the following computations.
+    It is also worth noting that we used the absolute continuity of $f$ in step 1 deduce that the image of $\{ x : f'(x) = 0 \} $ has Lebesgue measure zero, and also in step 2 to apply the Rising Sun Lemma (which requires continuity).]
+\end{proof}
+
+\begin{theorem}[First Fundamental Theorem of Calculus for $AC$ Functions]
+    \label{thm:fundamental_theorem_of_calculus_for_AC_functions}
+    If $f:[a,b]\to\R$ is absolutely continuous on $[a,b]$, then
+    \[ \int_a^b f'(t)\,\dif t = f(b) - f(a). \]
+\end{theorem}
+
+Note that we already know that $f'$ exists almost everywhere on $[a,b]$ and is integrable, since $AC$ functions are $BV$ functions (Lemma \ref{lem:AC_implies_BV}) and $BV$ functions are differentiable almost everywhere (Corollary \ref{cor:BV_functions_are_differentiable_a_e}) and have integrable derivatives.
+
+\begin{proof}
+    \textit{Step 1:}
+    First we consider an increasing absolutely continuous function $f:[a,b]\to\R$.
+    Then as we remarked above, $f'$ exists almost everywhere on $[a,b]$ and is integrable.
+    We define a function $\Phi:[a,b]\to\R$ by
+    \[ \Phi(x) := f(x) - \int_a^x f'(t)\,\dif t, \qquad\forall x \in [a,b]. \]
+    Then becuase $f'$ is integrable on $[a,b]$, the function $x\mapsto \int_a^x f'(t)\,\dif t$ is absolutely continuous on $[a,b]$ by Lemma \ref{lem:anti_derivative_is_AC}, and hence $\Phi$ is absolutely continuous on $[a,b]$ as well since it is the difference of two absolutely continuous functions.
+
+    See that $\Phi$ is increasing on $[a,b]$ since for all $x,y\in[a,b]$ with $x < y$, we have
+    \begin{align*}
+        \Phi(y) - \Phi(x) &= f(y) - f(x) - \int_a^y f'(t)\,\dif t + \int_a^x f'(t)\,\dif t \\
+            &= f(y) - f(x) - \int_x^y f'(t)\,\dif t \\
+            &\geq f(y) - f(x) - (f(y) - f(x)) = 0,
+    \end{align*}
+    where we have used Exercise \ref{ex:fundamental_theorem_of_calculus_inequality} in the last line. 
+    [This is where we use the fact that $f$ is increasing.]
+
+    We also see that $\Phi$ is differentiable almost everywhere on $[a,b]$ and that
+    \[ \Phi'(x) = f'(x) - f'(x) = 0 \]
+    for almost every $x\in[a,b]$, where we have used the fact that $f'$ exists almost everywhere on $[a,b]$, and that the derivative of the indefinite integral is the integrand almost everywhere (the Second Fundamental Theorem of Calculus \ref{thm:second_fundamental_theorem_of_calculus}).
+
+    Therefore by Lemma \ref{lem:zero_derivative_implies_constant}, $\Phi$ is constant on $[a,b]$, so
+    for each $x\in[a,b]$ we have $\Phi(x) = \Phi(a)$, which is equivalent to
+    \[ f(x) - \int_a^x f'(t)\,\dif t = f(a) - \int_a^a f'(t)\,\dif t = f(a). \]
+    Rearranging this gives
+    \[ f(x) = f(a) + \int_a^x f'(t)\,\dif t \qquad\forall x\in[a,b]. \]
+    In particular, letting $x = b$ gives
+    \[ f(b) - f(a) = \int_a^b f'(t)\,\dif t. \]
+
+    \vspace{2mm}
+
+    \textit{Step 2:}
+    Now let $f:[a,b]\to\R$ be an arbitrary absolutely continuous function on $[a,b]$.
+    By Corollary \ref{cor:AC_is_difference_of_increasing_AC}, there exist increasing absolutely continuous functions $f_1,f_2:[a,b]\to\R$ such that
+    \[ f = f_1 - f_2. \]
+    Then by Step 1, we have
+    \[ f_1(x) - f_1(a) = \int_a^x f_1'(t)\,\dif t \quad\text{and}\quad f_2(x) - f_2(a) = \int_a^x f_2'(t)\,\dif t \qquad\forall x\in [a,b]. \]
+    Subtracting these two equations gives
+    \[ f(x) - f(a) = (f_1(x) - f_2(x)) - (f_1(a) - f_2(a)) = \int_a^x f_1'(t)\,\dif t - \int_a^x f_2'(t)\,\dif t = \int_a^x (f_1'(t) - f_2'(t))\,\dif t \qquad\forall x\in[a,b]. \]
+    But since $f = f_1 - f_2$, we have $f' = f_1' - f_2'$ almost everywhere on $[a,b]$, so
+    \[ f(x) - f(a) = \int_a^x f'(t)\,\dif t \qquad \forall x\in [a,b]. \] 
+    In particular, letting $x = b$ gives
+    \[ f(b) - f(a) = \int_a^b f'(t)\,\dif t. \]
+\end{proof}
+
+\begin{corollary}[Integration by Parts for $AC$ Functions]
+    \label{cor:integration_by_parts_for_AC_functions}
+    If $f,g:[a,b]\to\R$ are absolutely continuous on $[a,b]$, then
+    \[ \int_a^b f(t)g'(t)\,\dif t = f(b)g(b) - f(a)g(a) - \int_a^b f'(t)g(t)\,\dif t. \]
+\end{corollary}
+\begin{proof}
+    Let $f,g:[a,b]\to\R$ be absolutely continuous on $[a,b]$.
+    By exercise \ref{ex:product_of_AC_is_AC}, the product $fg$ is absolutely continuous on $[a,b]$.
+    Then by Theorem \ref{thm:fundamental_theorem_of_calculus_for_AC_functions}, we have
+    \[ (fg)(b) - (fg)(a) = \int_a^b (fg)'(t)\,\dif t. \]
+    But by the product rule for derivatives, we have
+    \[ (fg)'(t) = f'(t)g(t) + f(t)g'(t) \]
+    for almost every $t\in[a,b]$, so
+    \[ f(b)g(b) - f(a)g(a) = \int_a^b f'(t)g(t)\,\dif t + \int_a^b f(t)g'(t)\,\dif t. \]
+    Rearranging this gives the desired result.
+\end{proof}
+
+This finishes our generalization of one-variable calculus to the Lebesgue integral.

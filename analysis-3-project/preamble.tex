@@ -1,0 +1,101 @@
+% ============================================================================
+% Preamble for MT Project
+% ============================================================================
+
+% Document formatting
+\linespread{1.2}
+\usepackage[margin=1in]{geometry}
+
+% ============================================================================
+% Core Mathematics & Text Packages
+% ============================================================================
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{mathtools}
+\usepackage{mathabx}
+\usepackage{esint}
+\usepackage{commath}
+\usepackage{halloweenmath}
+
+% ============================================================================
+% Graphics & Diagrams
+% ============================================================================
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing,calc,intersections}
+\usepackage{tikz-cd}
+\usepackage{fourier-orns}
+
+% ============================================================================
+% Formatting & Structure
+% ============================================================================
+\usepackage{enumerate}
+\usepackage{xcolor}
+\usepackage{changepage}
+\usepackage{subfiles}
+\usepackage{pifont}
+\usepackage{hyperref}
+\usepackage{stmaryrd}
+
+% ============================================================================
+% Theorem & Proof Environments
+% ============================================================================
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{problem}[theorem]{Problem}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}{Exercise}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{notation}[theorem]{Notation}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+% ============================================================================
+% Custom Commands - Blackboard Bold Letters
+% ============================================================================
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathbb{F}}
+\renewcommand{\S}{\mathbb{S}}
+
+% ============================================================================
+% Custom Commands - Operators & Functions
+% ============================================================================
+\newcommand{\sub}{\subseteq}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\graph}{\operatorname{graph}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\diam}{\operatorname{diam}}
+\newcommand{\avg}{\operatorname{avg}}
+\newcommand{\vol}{\operatorname{vol}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\esssup}{\operatorname{ess\,sup}}
+\newcommand{\essinf}{\operatorname{ess\,inf}}
+\newcommand{\Lip}{\operatorname{Lip}}
+\newcommand{\mres}{\downharpoonright}
+\newcommand{\lt}{<}
+
+% Redefine existing commands
+\renewcommand{\H}{\mathcal{H}}
+\renewcommand{\L}{\mathcal{L}}
+\renewcommand{\div}{\operatorname{div}}
+
+% ============================================================================
+% Custom Commands - Calligraphic & Other Styles
+% ============================================================================
+\newcommand{\Chi}{\mathbf{1}}  % Indicator/characteristic function

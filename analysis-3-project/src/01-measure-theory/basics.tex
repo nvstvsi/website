@@ -1,0 +1,624 @@
+
+\section{Outer Measures and Carathéodory Measurable Sets}
+
+In this section, we discuss outer measures which allow us to define ``size'' or measure for every subset of a given set $X$.
+This has certain advantages and disadvantages compared with the approach of defining a measure (as we do in the next section).
+
+The advantage is that we have a notion of measure for all subsets, but the disadvantage is that it turns out there are some extremely pathological sets which are not ``measurable'' in a reasonable sense.
+Another advantage is that the two measures we are most interested in --- the Lebesgue measure and the Hausdorff measure --- can both be easily constructed as outer measures.
+
+\subsection{Outer Measures and Measurable Sets}
+\begin{definition}[Outer Measure]
+    \label{def:outer_measure}
+    Let $X$ be a set. A function $\mu : 2^X \to [0,\infty]$ is called an \textit{outer measure} on $X$ if it satisfies the following properties:
+    \begin{enumerate}[(i)]
+        \item $\mu(\emptyset) = 0$,
+        \item (monotonicity) if $A\subseteq B \subseteq X$, then $\mu(A) \leq \mu(B)$,
+        \item (countable subadditivity) if $\{A_j\}_{j=1}^\infty$ is a countable collection of subsets of $X$, then
+            \[ \mu\left( \bigcup_{j=1}^\infty A_j \right) \leq \sum_{j=1}^\infty \mu(A_j). \]
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Restriction of an Outer Measure]
+    \label{def:restriction_of_an_outer_measure}
+    Let $\mu$ be an outer measure on a set $X$, and let $A\subseteq X$ be an arbitrary subset.
+    The \textit{restriction} of $\mu$ to $A$ is the outer measure $\mu\mres A$ on $X$ defined by
+    \[ \mu\mres A(B) := \mu(A\cap B) \]
+    for every subset $B\subseteq X$.
+\end{definition}
+
+Notice that the restriction is still defined on all subsets of $X$, not just those contained in $A$;
+basically, the restriction just ignores the part of each set that lies outside of $A$.
+It is clear that for each subset $A\subseteq X$, the restriction $\mu\mres A$ is indeed an outer measure on $X$.
+
+\begin{definition}[Carathéodory Measurable]
+    \label{def:caratheodory_measurable}
+    Let $\mu$ be an outer measure on a set $X$.
+    A set $A\subseteq X$ is called \textit{$\mu$-measurable} (or \textit{Carathéodory measurable}) if for every subset $B\subseteq X$, we have
+    \[ \mu(B) = \mu(B\cap A) + \mu(B\setminus A). \]
+\end{definition}
+
+\begin{remark}
+    \label{rmk:caratheodory_measurable}
+In words, this says that $A$ is $\mu$-measurable if it splits every set $B$ into two pieces without adding any extra measure.
+We note that if $A,B\subseteq X$ are arbitrary subsets, then $B = (B\cap A) \cup (B\setminus A)$ so by countable subadditivity of $\mu$, we always have
+\[ \mu(B) \leq \mu(B\cap A) + \mu(B\setminus A). \]
+Thus the nontrivial part of the definition is the reverse inequality.
+Furthermore, if $\mu(B) = \infty$, then the reverse inequality is automatically satisfied, so in order to check that $A$ is $\mu$-measurable, it suffices to check the definition for those sets $B\subseteq X$ satisfying $\mu(B) < \infty$.
+
+\end{remark}
+
+\begin{proposition}[Properties of $\mu$-Measurable Sets]
+    \label{prop:properties_of_mu_measurable_sets}
+    Let $\mu$ be an outer measure on a set $X$. Then the following properties hold:
+    \begin{enumerate}[(i)]
+        \item A subset $A\subseteq X$ is $\mu$-measurable if and only if its complement $A^c$ is $\mu$-measurable.
+        \item The empty set $\emptyset$ and the whole set $X$ are $\mu$-measurable.
+        \item If $A\subseteq X$ satisfies $\mu(A) = 0$, then $A$ is $\mu$-measurable.
+        \item For each subset $A\subseteq X$, each $\mu$-measurable set is also $\mu\mres A$-measurable.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \begin{enumerate}
+        \item Let $A\subseteq X$ be an arbitrary subset.
+        
+            ($\implies$) Suppose $A$ is $\mu$-measurable.
+            Then for each subset $B\subseteq X$, we have
+            \[ \mu(B) = \mu(B\cap A) + \mu(B\setminus A) = \mu(B\setminus A^c) + \mu(B\cap A^c). \]
+            Since $B\setminus A^c = B\cap A$, this shows that $A^c$ is $\mu$-measurable.
+
+            ($\impliedby$) Suppose $A^c$ is $\mu$-measurable.
+            Then by repeating the above argument, we see that $(A^c)^c = A$ is $\mu$-measurable.
+
+        \item To see that $\emptyset$ is $\mu$-measurable, let $B\subseteq X$ be an arbitrary subset.
+            Then
+            \[ \mu(B\cap \emptyset) + \mu(B\setminus \emptyset) = 0 + \mu(B) = \mu(B). \]
+            Thus $\emptyset$ is $\mu$-measurable.
+
+            To see that $X$ is $\mu$-measurable, let $B\subseteq X$ be an arbitrary subset.
+            Then
+            \[ \mu(B\cap X) + \mu(B\setminus X) = \mu(B) + 0 = \mu(B). \]
+            Thus $X$ is $\mu$-measurable.
+
+        \item More generally, let $A\subseteq X$ be an arbitrary subset satisfying $\mu(A) = 0$.
+            Then for each subset $B\subseteq X$, we have
+            \[ \mu(B\cap A) + \mu(B\setminus A) \leq \mu(A) + \mu(B) = 0 + \mu(B) = \mu(B). \]
+            By Remark \ref{rmk:caratheodory_measurable}, this shows that $A$ is $\mu$-measurable.
+            
+        \item Let $A\subseteq X$ be an arbitrary subset, and let $E\subseteq X$ be a $\mu$-measurable set.
+            Then for each subset $B\subseteq X$, we have
+            \begin{align*}
+                \mu\mres A(B) &= \mu(A\cap B) \\
+                    &= \mu((A\cap B)\cap E) + \mu((A\cap B)\setminus E) \quad \text{(since $E$ is $\mu$-measurable)} \\
+                    &= \mu((B\cap E)\cap A) + \mu((B\setminus E)\cap A) \\
+                    &= \mu\mres A(B\cap E) + \mu\mres A(B\setminus E).
+            \end{align*}
+            Thus $E$ is $\mu\mres A$-measurable.
+    \end{enumerate}
+\end{proof}
+
+\begin{proposition}[Sequences of Measurable Sets]
+    \label{prop:sequences_of_measurable_sets}
+    Let $\mu$ be an outer measure on a set $X$, and let $\{A_j\}_{j=1}^\infty$ be a sequence of $\mu$-measurable sets.
+    \begin{enumerate}[(i)]
+        \item The sets $\bigcup_{j=1}^\infty A_j$ and $\bigcap_{j=1}^\infty A_j$ are $\mu$-measurable.
+        \item If the sets $A_j$ are pairwise disjoint, then \[ \mu\left( \bigcup_{j=1}^\infty A_j \right) = \sum_{j=1}^\infty \mu(A_j). \]
+        \item If $A_1\sub A_2 \sub \cdots \sub A_j \sub \cdots$ is an increasing sequence, then \[ \mu\left( \bigcup_{j=1}^\infty A_j \right) = \lim_{j\to\infty} \mu(A_j). \]
+        \item If $A_1 \supseteq A_2 \supseteq \cdots \supseteq A_j \supseteq \cdots$ is a decreasing sequence and $\mu(A_1) < \infty$, then \[ \mu\left( \bigcap_{j=1}^\infty A_j \right) = \lim_{j\to\infty} \mu(A_j). \]
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \textit{Step 1}: We claim that finite unions and intersections of $\mu$-measurable sets are also $\mu$-measurable.
+    \vspace{2mm}
+
+    If $A_1,A_2\subseteq X$ are $\mu$-measurable, then for each subset $B\subseteq X$, we have
+    \begin{align*}
+        \mu(B) &= \mu(B\cap A_1) + \mu(B\setminus A_1) \quad\text{(since $A_1$ is $\mu$-measurable)} \\
+            &= \mu(B\cap A_1) + \mu((B\setminus A_1)\cap A_2) + \mu((B\setminus A_1)\setminus A_2) \quad\text{(since $A_2$ is $\mu$-measurable)} \\
+            &\geq \mu( (B\cap A_1) \cup (( B\setminus A_1 ) \cap A_2 )) + \mu( B\setminus (A_1 \cup A_2) ) \quad\text{(by countable subadditivity)} \\
+            &= \mu( B\cap A_1\cap A_2 ) + \mu( B\setminus (A_1 \cup A_2) ). \\
+    \end{align*}
+    By Remark \ref{rmk:caratheodory_measurable}, this shows that $A_1\cup A_2$ is $\mu$-measurable.
+    
+    Similarly, if $A_1,A_2\subseteq X$ are $\mu$-measurable, then for each subset $B\subseteq X$, we know that $A_1^c,A_2^c\subseteq X$ are also $\mu$-measurable by Proposition \ref{prop:properties_of_mu_measurable_sets} (i), and we see that
+    \[ (A_1 \cap A_2)^c = A_1^c \cup A_2^c \]
+    by De Morgan's laws; thus $(A_1\cap A_2)$ is $\mu$-measurable by the above argument, and hence $A_1\cap A_2$ is $\mu$-measurable by Proposition \ref{prop:properties_of_mu_measurable_sets} (i).
+
+    By induction, we conclude that finite unions and intersections of $\mu$-measurable sets are also $\mu$-measurable.
+    This proves our claim.
+
+    \vspace{2mm}
+    We will actually prove part (i) in the last step of this proof, after we have established the other parts.
+    \vspace{2mm}
+    \textit{Step 2}: We prove part (ii). 
+    Suppose that $\{A_j\}_{j=1}^\infty$ is a sequence of pairwise disjoint $\mu$-measurable sets.
+    Then for each $N\in \N$, the finite union $\bigcup_{j=1}^N A_j$ is $\mu$-measurable by Step 1, so
+    \begin{align*}
+        \mu\left( \bigcup_{j=1}^{N+1} A_j \right) &= \mu\left( \left( \bigcup_{j=1}^N A_j \right) \cap A_{N+1} \right) + \mu\left( \left( \bigcup_{j=1}^N A_j \right) \setminus A_{N+1} \right) \\
+            &= \mu(A_{N+1}) + \mu\left( \bigcup_{j=1}^N A_j \right).
+    \end{align*}
+    By induction, we conclude that
+    \[ \mu\left( \bigcup_{j=1}^N A_j \right) = \sum_{j=1}^N \mu(A_j) \]
+    for each $N\in \N$.
+    Using monotonicity of $\mu$, we have
+    \[ \sum_{j=1}^N \mu(A_j) \leq \mu\left( \bigcup_{j=1}^\infty A_j \right) \]
+    for each $N\in \N$, so by letting $N\to\infty$, we obtain
+    \[ \sum_{j=1}^\infty \mu(A_j) \leq \mu\left( \bigcup_{j=1}^\infty A_j \right). \]
+    The reverse inequality follows from countable subadditivity of $\mu$. 
+
+    This proves part (ii).
+    \vspace{2mm}
+    \textit{Step 3}: We prove part (iii) and (iv)
+
+    Suppose that $A_1\sub A_2 \sub \cdots \sub A_j \sub \cdots$ is an increasing sequence of $\mu$-measurable subsets of $X$.
+    Then we consider the pairwise disjoint $\mu$-measurable sets
+    \[ B_1 := A_1, \quad B_j := A_j \setminus A_{j-1} \ \ \text{ for } j\geq 2. \]
+    By part (ii), we have
+    \[ \mu\left( \bigcup_{j=1}^\infty B_j \right) = \sum_{j=1}^\infty \mu(B_j). \]
+    That is,
+    \[ \mu\left( \bigcup_{j=1}^\infty A_j \right) = \mu(A_1) + \sum_{j=2}^\infty [\mu(A_j) - \mu(A_{j-1})] = \lim_{N\to\infty} \mu(A_N). \]
+    This proves part (iii).
+    \vspace{2mm}
+
+    Now suppose that $A_1 \supseteq \cdots \supseteq A_j \supseteq \cdots$ is a decreasing sequence of $\mu$-measurable subsets of $X$ satisfying $\mu(A_1) < \infty$.
+    Then we see that
+    \begin{align*}
+        \mu(A_1) - \lim_{j\to\infty} \mu(A_j) &= \lim_{j\to\infty} [\mu(A_1) - \mu(A_j)] \\
+            &= \lim_{j\to\infty} \mu\left( \bigcup_{k=j}^\infty (A_1 \setminus A_k) \right) \\
+            &\geq \mu(A_1) - \mu\left( \bigcap_{j=1}^\infty A_j \right)
+    \end{align*}
+    by part (iii) and monotonicity of $\mu$; it follows that
+    \[ \mu\left( \bigcap_{j=1}^\infty A_j \right) \geq \lim_{j\to\infty} \mu(A_j). \]
+    The reverse inequality follows from monotonicity of $\mu$.
+    This proves part (iv).
+    \vspace{2mm}
+    \textit{Step 4}: We prove part (i).
+
+    Suppose that $\{A_j\}_{j=1}^\infty$ is a sequence of $\mu$-measurable sets.
+    We use step 1 to see that the finite unions $\bigcup_{j=1}^N A_j$ are $\mu$-measurable for each $N\in \N$, and form an increasing sequence:
+    \[ A_1 \subseteq A_1\cup A_2 \subseteq \cdots \subseteq \bigcup_{j=1}^N A_j \subseteq \cdots. \]
+    Hence for each set $B\subseteq X$ with $\mu(B) < \infty$, we have
+    \begin{align*}
+        \mu\left( B \cap \bigcup_{j=1}^\infty A_j \right) + \mu\left( B \setminus \bigcup_{j=1}^\infty A_j \right) &= \mu\left( B \cap \bigcup_{N=1}^\infty \bigcup_{j=1}^N A_j \right) + \mu\left( B \cap \bigcap_{N=1}^\infty \left(\bigcup_{j=1}^N A_j\right)^c \right) \\
+            &= \mu\mres B\left( \bigcup_{N=1}^\infty \bigcup_{j=1}^N A_j \right) + \mu\mres B\left( \bigcap_{N=1}^\infty \bigcap_{j=1}^N A_j^c \right) \\
+            &= \lim_{N\to\infty} \mu\mres B\left( \bigcup_{j=1}^N A_j \right) + \lim_{N\to\infty} \mu\mres B\left( \bigcap_{j=1}^N A_j^c \right) \quad\text{(by parts (iii) and (iv))} \\
+            &= \lim_{N\to\infty} \left[ \mu\mres B \left( X \cap \bigcup_{j=1}^N A_j \right) + \mu\mres B \left( X \cap \bigcap_{j=1}^N A_j^c \right) \right] \\
+            &= \lim_{N\to\infty} \left[ \mu\mres B \left( X \cap \bigcup_{j=1}^N A_j \right) + \mu\mres B \left( X \setminus \bigcup_{j=1}^N A_j \right) \right] \\
+            &= \mu\mres B(X) = \mu(B).
+    \end{align*}
+    Since this holds for each set $B\subseteq X$ with $\mu(B) < \infty$, we conclude that $\bigcup_{j=1}^\infty A_j$ is $\mu$-measurable by Remark \ref{rmk:caratheodory_measurable}.
+
+    Finally, since $\bigcap_{j=1}^\infty A_j = \left( \bigcup_{j=1}^\infty A_j^c \right)^c$ by De Morgan's laws, we see that $\bigcap_{j=1}^\infty A_j$ is also $\mu$-measurable by the above argument and Proposition \ref{prop:properties_of_mu_measurable_sets}.
+    This proves part (i).
+\end{proof}
+
+\newpage
+
+\subsection{$\sigma$-Algebras and the Carathéodory Criterion}
+
+\begin{definition}[$\sigma$-Algebra]
+    \label{def:sigma_algebra}
+    Let $X$ be a set. A collection $\mathcal{A}\subseteq 2^X$ of subsets of $X$ is called a \textit{$\sigma$-algebra} on $X$ if it satisfies the following properties:
+    \begin{enumerate}[(i)]
+        \item $\emptyset,X \in \mathcal{A}$,
+        \item (closed under complements) if $A\in \mathcal{A}$, then $A^c \in \mathcal{A}$,
+        \item (closed under countable unions) if $\{A_j\}_{j=1}^\infty \subseteq \mathcal{A}$ is a countable collection of sets,
+            then $\bigcup_{j=1}^\infty A_j \in \mathcal{A}$,
+        \item (closed under countable intersections) if $\{A_j\}_{j=1}^\infty \subseteq \mathcal{A}$ is a countable collection of sets,
+            then $\bigcap_{j=1}^\infty A_j \in \mathcal{A}$.
+    \end{enumerate}
+\end{definition}
+
+Note that properties (ii) and (iii) imply property (iv) by De Morgan's laws.
+We list this property explicitly for emphasis, and because it is very convenient to use in proofs (once you have a $\sigma$-algebra) and as a stepping stone to proving the other properties.
+In particular, it is sometimes easier to show that (iii) and (iv) hold before showing that (ii) holds.
+
+\begin{lemma}[Measurable Sets Form a $\sigma$-Algebra]
+    \label{lem:measurable_sets_form_a_sigma_algebra}
+    Let $\mu$ be an outer measure on a set $X$, and let
+    \[ \mathcal{M}_\mu := \{ A\sub X : A \text{ is } \mu\text{-measurable} \}. \]
+    Then $\mathcal{M}_\mu$ is a $\sigma$-algebra on $X$ which contains all subsets of $X$ with $\mu$-measure zero.
+\end{lemma}
+\begin{proof}
+    This follows from Proposition \ref{prop:properties_of_mu_measurable_sets} and Proposition \ref{prop:sequences_of_measurable_sets}.
+\end{proof}
+
+\begin{exercise}
+    \label{ex:smallest_sigma_algebra}
+    Let $X$ be a set, and let $\{ \mathcal{A}_j \}_{j\in J}$ be an arbitrary collection of $\sigma$-algebras on $X$ (where $J$ is an arbitrary index set).
+    Then the intersection $ \bigcap_{j\in J} \mathcal{A}_j $ is also a $\sigma$-algebra on $X$.
+\end{exercise}
+\begin{proof}
+    
+    Since $\emptyset,X \in \mathcal{A}_j$ for each $j\in J$, we have $\emptyset,X \in \bigcap_{j\in J} \mathcal{A}_j$.
+
+    Now let $A\in \bigcap_{j\in J} \mathcal{A}_j$ be an arbitrary set.
+    Then $A\in \mathcal{A}_j$ for each $j\in J$, so $A^c \in \mathcal{A}_j$ for each $j\in J$ by property (ii) of Definition \ref{def:sigma_algebra}.
+    Thus $A^c \in \bigcap_{j\in J} \mathcal{A}_j$.
+    This shows that $\bigcap_{j\in J} \mathcal{A}_j$ is closed under complements.
+
+    Finally, let $\{A_k\}_{k=1}^\infty \subseteq \bigcap_{j\in J} \mathcal{A}_j$ be an arbitrary countable collection of sets.
+    Then for each $k\in \N$, we have $A_k \in \mathcal{A}_j$ for each $j\in J$, so
+    \[ \bigcup_{k=1}^\infty A_k \in \mathcal{A}_j \]
+    for each $j\in J$ by property (iii) of Definition \ref{def:sigma_algebra}.
+    Thus $\bigcup_{k=1}^\infty A_k \in \bigcap_{j\in J} \mathcal{A}_j$.
+    This shows that $\bigcap_{j\in J} \mathcal{A}_j$ is closed under countable unions, and hence also closed under countable intersections by De Morgan's laws.
+
+    We conclude that $\bigcap_{j\in J} \mathcal{A}_j$ is a $\sigma$-algebra on $X$.
+\end{proof}
+
+\begin{definition}[Smallest $\sigma$-Algebra Containing a Collection of Sets]
+    \label{def:smallest_sigma_algebra_containing_a_collection_of_sets}
+    Let $X$ be a set, and let $\mathcal{C}\sub 2^X$ be an arbitrary collection of subsets of $X$.
+    The \textit{smallest $\sigma$-algebra containing} $\mathcal{C}$ is the intersection of all $\sigma$-algebras on $X$ which contain $\mathcal{C}$, i.e.
+    \[ \sigma(\mathcal{C}) := \bigcap_{\substack{\mathcal{A} \text{ is a } \sigma\text{-algebra on } X \\ \mathcal{C}\subseteq \mathcal{A}}} \mathcal{A}. \]
+\end{definition}
+
+This is a well-defined $\sigma$-algebra on $X$ by the previous exercise \ref{ex:smallest_sigma_algebra}.
+
+\begin{definition}[Borel Sets, Borel Measure]
+    \label{def:borel_sets}
+    Let $X$ be a topological space.
+    The \textit{Borel $\sigma$-algebra} on $X$ is the smallest $\sigma$-algebra containing all open sets in $X$.
+    The elements of the Borel $\sigma$-algebra are called \textit{Borel sets}.
+
+    We say an outer measure $\mu$ on $X$ is \textit{Borel} if every Borel set is $\mu$-measurable.
+\end{definition}
+
+Since the Borel $\sigma$-algebra is generated by the open sets and is closed under complements, it also contains all closed sets, and can be equivalently be defined as the smallest $\sigma$-algebra containing all closed sets.
+
+\begin{theorem}[Carathéodory Criterion]
+    \label{thm:caratheodory_criterion}
+    Let $(X,d)$ be a metric space, and let $\mu$ be an outer measure on $X$ with the property that
+    \[ \mu(A\cup B) = \mu(A) + \mu(B) \]
+    for all sets $A,B\subseteq X$ satisfying $d(A,B) > 0$.
+    Then every Borel set is $\mu$-measurable, i.e. $\mu$ is a Borel outer measure on $X$.
+\end{theorem}
+
+Such outer measures are sometimes called \textit{metric outer measures}.
+
+\begin{proof}
+    Since the Borel $\sigma$-algebra is the smallest $\sigma$-algebra containing all closed sets, it is enough to show that every closed set is $\mu$-measurable.
+
+    Let $C\sub X$ be a closed set, and let $B\sub X$ be an arbitrary subset satisfying $\mu(B) < \infty$.
+    For each $j\in \N$, we define
+    \[ C_j := \left\{x\in X : \dist(x,C) \leq \frac{1}{j} \right\} \]
+    which is a closed set; this implies
+    \[ \dist( B\setminus C_j, B\cap C_j ) > \frac{1}{j} > 0. \]
+    Hence
+    \[ \mu(B) \geq \mu( (B\setminus C_j) \cup (B\cap C_j) ) = \mu(B\setminus C_j) + \mu(B\cap C_j) \]
+    by monotonicity and the assumption on $\mu$.
+
+    We claim that
+    \[ \lim_{j\to\infty} \mu(B\setminus C_j) = \mu(B \setminus C). \tag{$\star$} \]
+    To see this, note that since $C$ is closed we can write
+    \[ B\setminus C = \{ x\in X :\dist(x, C) > 0 \} = (B\setminus C_j) \cup \bigcup_{k=j}^\infty R_k \]
+    where
+    \[ R_k := \left\{ x \in B : \frac{1}{k+1} < \dist(x, C) \leq \frac{1}{k} \right\} \]
+    for each $k\in \Z^+$.
+
+    Using subadditivity of $\mu$, we have
+    \[ \mu(B\setminus C_j) \leq \mu( B \setminus C) \leq \mu( B \setminus C_j) + \sum_{k=j}^\infty \mu(R_k) \tag{$\star\star$}\]
+    for each $j\in \Z^+$.
+    Since $\mu(B) < \infty$, for each $k\in \Z^+$ we have $\mu(R_k) \leq \mu(B) < \infty$, and we also have that
+    \[ \dist(R_j,R_k) > 0 \qquad \forall\  k > j+1 \]
+    by definition of these sets.
+    By assumption on $\mu$, this implies
+    \[ \sum_{k=1}^N \mu(R_{2k}) = \mu\left( \bigcup_{k=1}^N R_{2k} \right) \leq \mu(B) < \infty, \]
+    and \[ \sum_{k=1}^N \mu(R_{2k-1}) = \mu\left( \bigcup_{k=1}^N R_{2k-1} \right) \leq \mu(B) < \infty \]
+    for all $N\in \Z^+$.
+    In particular, we conclude that $\sum_{k=1}^\infty \mu(R_k) < \infty$.
+    Hence for each $\epsilon > 0$, there exists $J\in \Z^+$ such that
+    \[ \sum_{k=j}^\infty \mu(R_k) < \epsilon \]
+    for all $j\geq J$.
+    Using this in ($\star\star$), we obtain
+    \[ 0 \leq \mu(B\setminus C) - \mu(B\setminus C_j) \leq \sum_{k=j}^\infty \mu(R_k) < \epsilon \]
+    for all $j\geq J$, which proves ($\star$).
+
+    Using this in the inequality before ($\star$), we obtain
+    \[ \mu(B) \geq \lim_{j\to\infty} [\mu(B\setminus C_j) + \mu(B\cap C_j)] = \mu(B\setminus C) + \lim_{j\to\infty} \mu(B\cap C_j) \]
+    by ($\star$).
+    Since $B\sub X$ is an arbitrary subset satisfying $\mu(B) < \infty$, this shows that $C$ is $\mu$-measurable by Remark \ref{rmk:caratheodory_measurable}.
+    Since $C\sub X$ is an arbitrary closed set, we conclude that every closed set is $\mu$-measurable.
+\end{proof}
+
+\newpage
+
+\subsection{Regular and Borel Regular Outer Measures}
+
+\begin{definition}[Regular, Borel Regular, Open $\sigma$-Finite]
+    \label{def:regular_measure}
+    Let $X$ be a set, and let $\mu$ be an outer measure on $X$.
+    We say that $\mu$ is \textit{regular} if for every subset $A\sub X$ there exists a $\mu$-measurable set $B\sub X$ such that $A\sub B$ and $\mu(A) = \mu(B)$.
+
+    \vspace{2mm}
+    Now let $X$ be a topological space, and let $\mu$ be an outer measure on $X$.
+    We say that $\mu$ is \textit{Borel regular} if $\mu$ is a Borel measure and for every subset $A\sub X$ there exists a Borel set $B\sub X$ such that $A\sub B$ and $\mu(A) = \mu(B)$.
+
+    \vspace{2mm}
+    If $\mu$ is a Borel regular measure on $X$, then we say that the pair $(X,\mu)$ is \textit{open $\sigma$-finite} if $X$ can be covered by a countable collection of open sets with finite $\mu$-measure.
+\end{definition}
+
+Observe that if $(X,d)$ is a seperable metric space and $\mu$ is locally finite (i.e. for each $x\in X$ there exists $r>0$ such that $\mu(B(x,r)) < \infty$), then $(X,\mu)$ is open $\sigma$-finite.
+Why? --- seperability gives a countable dense set $\{x_j\}_{j=1}^\infty \sub X$, so let $r_j > 0$ be such that $\mu(B(x_j,r_j)) < \infty$ for each $j\in \Z^+$.
+Then $\{B(x_j,r_j)\}_{j=1}^\infty$ is a countable cover of $X$ by open sets with finite $\mu$-measure.
+
+\begin{lemma}[Restriction of Borel Regular Outer Measure]
+    \label{lem:restriction_of_borel_regular_outer_measure}
+    Let $X$ be a topological space, and let $\mu$ be a Borel regular outer measure on $X$.
+    Let $A$ be an arbitrary subset of $X$ satisfying $\mu(A) < \infty$.
+    Then the restriction $\mu\mres A$ is also a Borel regular outer measure on $X$.
+\end{lemma}
+\begin{proof}
+    Since $\mu$ is a Borel regular outer measure on $X$, we can choose a Borel set $B_1$ with $A\sub B_1$ such that $\mu(B_1 \setminus A) = 0$.
+    Then choose another Borel set $B_2$ with $ B_1\setminus A \sub B_2$ such that $\mu(B_2) = 0$.
+    Fix a subset $E\sub X$. Then we have
+    \begin{align*}
+        E = (E\cap A)\cup (E\setminus A) &\subseteq (E\cap A) \cup(X\setminus A) \\
+            &= (E\cap A) \cup (X\setminus B_1) \cup (B_1\setminus A) \\
+            &\sub (E\cap A) \cup (X\setminus B_1) \cup B_2.
+    \end{align*}
+    Finally choose a Borel set $B_3$ with $E\cap A \sub B_3$ such that $\mu(B_3) = \mu(E\cap A)$.
+    Then we have
+    \[ E \subseteq (X\setminus B_1) \cup B_2 \cup B_3 \]
+    which is a Borel set containing $E$.
+    Thus 
+    \[ E \cap A \sub \left ( (X\setminus B_1) \cup B_2 \cup B_3 \right ) \cap A \]
+    which implies that 
+    \[ (\mu\mres A)(E) = \mu(E\cap A) \leq \mu\left( \left( (X\setminus B_1) \cup B_2 \cup B_3 \right) \cap A \right) = (\mu\mres A)\left( (X\setminus B_1) \cup B_2 \cup B_3 \right). \]
+    Also, we have
+    \begin{align*}
+        (\mu\mres A)((X\setminus B_1) \cup B_2 \cup B_3) &= (\mu\mres A)((X\setminus B_1) \cup B_3)  \qquad\qquad\text{ since } \mu(B_2) = 0 \\
+            &= \mu((A\cap(X\setminus B_1)) \cup (A\cap B_3)) \\
+            &= \mu(A\cap B_3) \qquad\qquad\qquad\qquad\quad\text{ since } A\sub B_1 \implies A\cap(X\setminus B_1) = \emptyset \\
+            &\leq \mu(B_3) \\
+            &= \mu(E\cap A) \\
+            &= (\mu\mres A)(E).
+    \end{align*}
+    This shows that
+    \[ (\mu\mres A)(E) = (\mu\mres A)( (X\setminus B_1) \cup B_2 \cup B_3 ). \]
+    Since $(X\setminus B_1) \cup B_2 \cup B_3$ is a Borel set containing $E$, and $E\sub X$ was arbitrary, we see that $\mu\mres A$ is a Borel regular outer measure on $A$.
+\end{proof}
+
+
+\vspace{2mm}
+
+We come to the last result of this section.
+The first states that on a nice topological space, every Borel regular measure is ``inner regular'' and ``outer regular''.
+
+\begin{theorem}[Borel Regular Measures are Inner and Outer Regular]
+    \label{thm:borel_reg_implies_inner/outer_reg}
+    Let $X$ be a topological space which has the property that every closed subset of $X$ is a countable intersection of open sets, 
+    and let $\mu$ be a Borel regular measure on $X$ such that $(X,\mu)$ is open $\sigma$-finite.
+    Then the following two properties hold:
+    \begin{enumerate}[(i)]
+        \item for each subset $A\sub X$, we have\[ \mu(A) = \inf\{ \mu(U) : A\sub U, U\text{ open} \} \]
+             and
+        \item for each $\mu$-measurable set $A\sub X$, we have
+            \[  \mu(A) = \sup\{ \mu(K) : K\sub A, K\text{ closed} \}. \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{remark}
+    Before the proof, we make two remarks. 
+    First is that the condition that every closed set is a countable intersection of open sets is satisfied by all metric spaces.
+
+    Second, if $X$ is a Hausdorff space which is a union of countably many compact sets, then the conclusion (ii) above guaruntees that
+    \[ \mu(A) = \sup\{ \mu(K) : K\sub A, K\text{ compact} \} \]
+    for each $\mu$-measurable set $A\sub X$ with $\mu(A) < \infty$.
+
+    We check this --- write $X = \bigcup_{j=1}^\infty K_j$ where $K_j\sub X$ is compact for each $j\in \Z^+$.
+    Then we can write $X$ as the increasing union of compact sets 
+    \[  X = \bigcup_{m=1}^\infty \bigcup_{j=1}^m K_j \]
+    and each closed set $C$ can be written as the increasing union of compact sets
+    \[ C = \bigcup_{m=1}^\infty \left(\bigcup_{j=1}^m K_j \cap C \right). \]
+    Here we have used that $K_j\cap C$ is compact, since $X$ is Hausdorff.
+
+    Therefore, if $A\sub X$ is a $\mu$-measurable set with $\mu(A) < \infty$, then by (ii) we have
+    \[ \sup\{ \mu(K) : K\sub A, K\text{ compact} \} \leq \mu(A) \]
+    since every compact set is closed, and for each closed set $C\sub A$, we have
+    \[ \mu(C) = \lim_{m\to\infty} \mu\left( \bigcup_{j=1}^m K_j \cap C \right) \leq \sup\{ \mu(K) : K\sub A, K\text{ compact} \} \]
+    by monotonicity and the above argument.
+    Thus
+    \[ \mu(A) = \sup\{ \mu(K) : K\sub A, K\text{ compact} \}. \]
+\end{remark}
+
+\begin{proof}
+    We begin by assuming we have $\mu(X)<\infty$.
+    We will remove this assumption at the end of the proof.
+    First note that in this case, conclusion (ii) follows by applying conclusion (i) to the complement $A^c$ of a $\mu$-measurable set $A\sub X$ and using that $\mu(A^c) = \mu(X) - \mu(A)$.
+
+    Also since $\mu$ is Borel regular, it suffices to prove conclusion (i) in the case that $A\sub X$ is a Borel set. Let
+    \[ \mathcal{A} := \{ A\sub X : A \text{ is a Borel set such that (i) holds} \}. \]
+    Trivially we see that $\mathcal{A}$ contains all open sets; we claim that $\mathcal{A}$ is closed under countable unions and countable intersections.
+
+    Let $\{A_j\}_{j=1}^\infty \sub \mathcal{A}$ be an arbitrary countable collection of Borel sets satisfying (i).
+    Let $\varepsilon > 0$ be arbitrary.
+    For each $j\in \N$, we can find an open set $U_j$ such that $A_j \sub U_j$ and $\mu(U_j) \leq \mu(A_j) + \varepsilon/2^j$.
+    Then
+    \[ \left( \bigcup_{j=1}^\infty U_j \right)\setminus \left( \bigcup_{k=1}^\infty A_k \right) = \bigcup_{j=1}^\infty \left( U_j \setminus \bigcup_{k=1}^\infty A_k \right) \sub \bigcup_{j=1}^\infty U_j\setminus A_j \] 
+    and
+    \[ \left( \bigcap_{j=1}^\infty U_j \right)\setminus \left( \bigcap_{k=1}^\infty A_k \right) = \bigcap_{j=1}^\infty \left( U_j \setminus \bigcap_{k=1}^\infty A_k \right) = \bigcap_{j=1}^\infty \left( \bigcup_{k=1}^\infty U_j \setminus A_k \right) \sub \bigcup_{j=1}^\infty U_j\setminus A_j \] 
+    so by subadditivity we have
+    \[ \mu\left( \left( \bigcup_{j=1}^\infty U_j \right)\setminus \left( \bigcup_{k=1}^\infty A_k \right) \right) \leq \sum_{j=1}^\infty \mu(U_j\setminus A_j) \leq \sum_{j=1}^\infty [\mu(U_j) - \mu(A_j)] \leq \varepsilon, \]
+    and
+    \begin{align*}
+        \lim_{N\to\infty}\mu \left( \left( \bigcap_{j=1}^N U_j  \right)\setminus \left( \bigcap_{k=1}^\infty A_k \right) \right) &= \mu\left( \left( \bigcap_{j=1}^\infty U_j \right)\setminus \left( \bigcap_{k=1}^\infty A_k \right) \right) \\
+            &\leq \sum_{j=1}^\infty \mu(U_j\setminus A_j) \\
+            &\leq \sum_{j=1}^\infty [\mu(U_j) - \mu(A_j)] \leq \varepsilon. \\
+    \end{align*}
+    Since $\varepsilon > 0$ was arbitrary we conclude that $\bigcup_{j=1}^\infty A_j$ and $\bigcap_{j=1}^\infty A_j$ satisfy (i).
+
+    (The reason we needed to take the limit in the second inequality is that $\bigcap_{j=1}^N U_j$ is a decreasing sequence of open sets, but the infinite intersection need not be open;
+    taking limits allows us to show the infimum condition in (i) holds.)
+
+    This proves our claim that $\mathcal{A}$ is closed under countable unions and countable intersections.
+    Since $\mathcal{A}$ contains all open sets and is closed under countable intersections, it contains all closed sets by the assumption on $X$.
+    Notice that we do not yet know that $\mathcal{A}$ is a $\sigma$-algebra, since we do not know that it is closed under complements.
+
+    For this reason, we let $\mathcal{A}^*$ be defined by
+    \[ \mathcal{A}^* := \{ A\sub X : A^c \in \mathcal{A} \} \]
+    and we claim that $\mathcal{A}^*$ is a $\sigma$-algebra.
+    Clearly $\emptyset,X \in \mathcal{A}^*$ since $\emptyset^c = X$ and $X^c = \emptyset$ are both open sets, so they belong to $\mathcal{A}$.
+    Also $\mathcal{A}^*$ is closed under complements since if $A\in \mathcal{A}^*$, then $A^c \in \mathcal{A}$ by definition, so $(A^c)^c = A \in \mathcal{A}^*$.
+
+    Finally, if $\{A_j\}_{j=1}^\infty \sub \mathcal{A}^*$ is an arbitrary countable collection of sets, then $A_j^c \in \mathcal{A}$ for each $j\in \N$, so that
+    \[ \left( \bigcup_{j=1}^\infty A_j \right)^c = \bigcap_{j=1}^\infty A_j^c \in \mathcal{A} \]
+    becuase $\mathcal{A}$ is closed under countable intersections.
+    Thus $\bigcup_{j=1}^\infty A_j \in \mathcal{A}^*$.
+
+    This proves our claim that $\mathcal{A}^*$ is a $\sigma$-algebra.
+    Since $\mathcal{A}^*$ contains all closed sets and hence all open sets, we conclude that $\mathcal{A}^*$ contains all Borel sets.
+    Thus $\mathcal{A}$ also contains all Borel sets (and is actually equal to the Borel $\sigma$-algebra).
+    
+    Thus every Borel set satisfies (i), which completes the proof in the case that $\mu(X) < \infty$.
+
+    \vspace{2mm}
+    Now we remove the assumption that $\mu(X) < \infty$.
+    Since $(X,\mu)$ is open $\sigma$-finite, we can write $X = \bigcup_{j=1}^\infty V_j$ where $V_j\sub X$ is open and $\mu(V_j) < \infty$ for each $j\in \Z^+$.
+    Since $\mu$ is Borel regular, it suffices to prove conclusion (i) in the case that $A\sub X$ is a Borel set. 
+
+    Let $A\sub X$ be an arbitrary Borel set, and let $\varepsilon > 0$ be arbitrary.
+    For each $j\in \N$, we can apply the first part of the proof to the measure $\mu\mres V_j$ which satisfies $\mu\mres V_j(X) = \mu(V_j) < \infty$ to find an open set $U_j\sub X$ such that $A\sub U_j$ and
+    \[ \mu((V_j\cap U_j)\setminus A) = \mu\mres V_j(U_j \setminus A) < \frac{\varepsilon}{2^j}. \]
+    By subadditivity of $\mu$ and summing over $j\in \Z^+$ we get
+    \[ \mu\left( \bigcup_{j=1}^\infty (V_j\cap U_j)\setminus A \right) < \sum_{j=1}^\infty \frac{\varepsilon}{2^j} = \varepsilon. \]
+    Since $\bigcup_{j=1}^\infty (V_j\cap U_j)$ is open and contains $A$, this shows that $A$ satisfies (i).
+
+    Now to complete the proof of conclusion (ii), let $A\sub X$ be a Borel set and let $\varepsilon > 0$ be arbitrary.
+    For each $j\in \N$, the fact that $\mu\mres V_j (X)<\infty$ implies we can apply conclusion (ii) to the measure $\mu\mres V_j$ to find a closed set $C_j\sub X$ such that $C_j \sub A$ and
+    \[ \mu((A\cap V_j)\setminus C_j) = \mu\mres V_j(A\setminus C_j) < \frac{\varepsilon}{2^j}. \]
+    Since
+    \[ \bigcup_{j=1}^\infty V_j \setminus \bigcup_{k=1}^\infty C_k = \bigcup_{j=1}^\infty \left(V_j \setminus \bigcup_{k=1}^\infty C_k\right) \sub \bigcup_{j=1}^\infty V_j\setminus C_j \]
+    the countable subadditivity of $\mu$ implies
+    \begin{align*}
+        \mu\left( A\setminus \bigcup_{k=1}^\infty C_k \right) &= \mu\left( \bigcup_{j=1}^\infty (A\cap V_j) \setminus \bigcup_{k=1}^\infty C_k \right) \\
+            &\leq \mu \left( \bigcup_{j=1}^\infty (A\cap V_j) \setminus C_j \right) \\
+            &\leq \sum_{j=1}^\infty \mu((A\cap V_j)\setminus C_j) < \varepsilon.
+    \end{align*}
+    Thus either $\mu(A)=\infty$ and $\mu\left(A\setminus \bigcup_{k=1}^N C_k\right) \to\infty$ as $N\to\infty$ or $\mu(A)<\infty$ and $ \mu\left(A\setminus \bigcup_{k=1}^N C_k\right) < 2\epsilon$ for all sufficiently large $N$. 
+    In either case, since $\varepsilon > 0$ was arbitrary we conclude that $A$ satisfies (ii).
+    This completes the proof.
+\end{proof}
+
+
+\subsection{$\pi$-$\lambda$ Theorem}
+
+It will be useful later to have a way of showing that two measures are equal.
+The $\pi$-$\lambda$ theorem is a tool for doing this.
+
+\begin{definition}[$\pi$-system, $\lambda$-system]
+    \label{def:pi-lambda_system}
+    Let $X$ be a set.
+    A collection $\mathcal{P}$ of subsets of $X$ is called a \textit{$\pi$-system} if it is closed under finite intersections, i.e. if $A,B\in \mathcal{P}$, then $A\cap B \in \mathcal{P}$ as well.
+
+\vspace{2mm}
+
+    \noindent A collection $\mathcal{L}$ of subsets of $X$ is called a \textit{$\lambda$-system} if it satisfies the following properties:
+    \begin{itemize}
+        \item $X\in \mathcal{L}$.
+        \item If $A,B\in \mathcal{L}$ and $A\sub B$, then $B\setminus A \in \mathcal{L}$ as well.
+        \item If $\{A_j\}_{j=1}^\infty$ is an increasing sequence of sets in $\mathcal{L}$, then $\bigcup_{j=1}^\infty A_j \in \mathcal{L}$ as well.
+    \end{itemize}
+\end{definition}
+
+Since $\pi$-systems and $\lambda$-systems are less restrictive than $\sigma$-algebras, it is easier in practice to check that a collection of sets is a $\pi$-system or a $\lambda$-system than to check that it is a $\sigma$-algebra.
+Of course, $\sigma$-algebras are both $\pi$-systems and $\lambda$-systems.
+The converse is contained in Step 3 of the following theorem.
+
+\begin{theorem}[Dynkin's $\pi$-$\lambda$ Theorem]
+    \label{thm:pi-lambda}
+    Let $X$ be a set.
+    If $\mathcal{P}$ is a $\pi$-system and $\mathcal{L}$ is a $\lambda$-system such that $\mathcal{P} \subseteq \mathcal{L}$, then $\sigma(\mathcal{P}) \subseteq \mathcal{L}$.
+\end{theorem}
+
+\begin{proof}
+    \emph{Step 1.}
+    We define \[ \mathcal{D} := \bigcap\left\{ \mathcal{L} : \text{ is a } \lambda\text{-system containing } \mathcal{P} \,\right\}. \]
+    Then $\mathcal{D}$ is a $\lambda$-system and we have $\mathcal{P} \subseteq \mathcal{D} \subseteq \mathcal{L}$.
+    
+    We check this. 
+    First, let $P\in \mathcal{P}$. 
+    Then for each $\lambda$-system $\mathcal{L}'$ containing $\mathcal{P}$, we have $P\in \mathcal{L}'$, and hence $P\in \mathcal{D}$.
+    This shows that $\mathcal{P} \subseteq \mathcal{D}$.
+    Also, since $\mathcal{L}$ is a $\lambda$-system containing $\mathcal{P}$, we have $\mathcal{D} \subseteq \mathcal{L}$ by definition.
+    
+    Finally we see that $\mathcal{D}$ is a $\lambda$-system.
+    \begin{itemize}
+        \item Since $X\in \mathcal{L}'$ for each $\lambda$-system $\mathcal{L}'$ containing $\mathcal{P}$, we have $X\in \mathcal{D}$ as well.
+        \item If $A,B\in \mathcal{D}$ and $A\sub B$, then $A,B\in \mathcal{L}'$ for each $\lambda$-system $\mathcal{L}'$ containing $\mathcal{P}$, and hence $B\setminus A \in \mathcal{L}'$.
+            This shows that $B\setminus A \in \mathcal{D}$ as well.
+        \item If $\{A_j\}_{j=1}^\infty$ is an increasing sequence of sets in $\mathcal{D}$, then $A_j \in \mathcal{L}'$ for each $j\in \Z^+$ and each $\lambda$-system $\mathcal{L}'$ containing $\mathcal{P}$, and hence $\bigcup_{j=1}^\infty A_j \in \mathcal{L}'$.
+            This shows that $\bigcup_{j=1}^\infty A_j \in \mathcal{D}$.
+    \end{itemize}
+    
+    \vspace{2mm}
+    \emph{Step 2.}
+    We claim that $\mathcal{D}$ is also a $\pi$-system.
+    \vspace{2mm}
+
+    Let $A,B\in \mathcal{D}$.
+    We want to show that $A\cap B \in \mathcal{D}$.
+    Define 
+    \[ \mathcal{D}_A := \{ C\sub X : A\cap C \in \mathcal{D} \}. \]
+    We claim that $\mathcal{D}_A$ is a $\lambda$-system containing $\mathcal{P}$; this follows from the fact that $\mathcal{D}$ is a $\lambda$-system.
+    \begin{itemize}
+        \item Since $A\cap X = A \in \mathcal{D}$, we have $X\in \mathcal{D}_A$.
+        \item If $C_1,C_2 \in \mathcal{D}_A$ and $C_1 \sub C_2$, then $A\cap C_1, A\cap C_2 \in \mathcal{D}$ and $A\cap C_1 \sub A\cap C_2$, so that $(A\cap C_2) \setminus (A\cap C_1) = A\cap (C_2\setminus C_1) \in \mathcal{D}$.
+            This shows that $C_2 \setminus C_1 \in \mathcal{D}_A$.
+        \item If $\{C_j\}_{j=1}^\infty$ is an increasing sequence of sets in $\mathcal{D}_A$, then $A\cap C_j \in \mathcal{D}$ for each $j\in \Z^+$, and hence
+            \[ A\cap \left( \bigcup_{j=1}^\infty C_j \right) = \bigcup_{j=1}^\infty (A\cap C_j) \in \mathcal{D} \]
+            since $\mathcal{D}$ is a $\lambda$-system.
+            This shows that $\bigcup_{j=1}^\infty C_j \in \mathcal{D}_A$.
+    \end{itemize}
+    Therefore, $\mathcal{D}_A$ is a $\lambda$-system.
+    Now, if $P\in \mathcal{P}$, then $A\cap P \in \mathcal{D}$ since $\mathcal{P}$ is a $\pi$-system and $A\in \mathcal{D}$; 
+    hence $P\in \mathcal{D}_A$.
+    This shows that $\mathcal{P} \subseteq \mathcal{D}_A$.
+    By the definition of $\mathcal{D}$, we have $\mathcal{D}_A \subseteq \mathcal{D}$, and hence $B\in \mathcal{D}_A$ since $B\in \mathcal{D}$ by assumption.
+    This shows that $A\cap B \in \mathcal{D}$, as desired.
+
+    Since $A,B\in \mathcal{D}$ were arbitrary, this shows that $\mathcal{D}$ is a $\pi$-system.
+
+    \vspace{2mm}
+    \emph{Step 3.}
+    Now we claim that $\mathcal{D}$ is a $\sigma$-algebra.
+    This follows from the fact that $\mathcal{D}$ is both a $\pi$-system and a $\lambda$-system.
+    \vspace{2mm}
+
+    Since $\mathcal{D}$ is a $\lambda$-system, we have $X\in \mathcal{D}$, and the closure of $\mathcal{D}$ under complements implies that $X\setminus A = \emptyset \in \mathcal{D}$.
+    Also it is clear that $\mathcal{D}$ is closed under finite unions since it is closed under finite intersections and complements.
+    Finally, let $\{A_j\}_{j=1}^\infty$ be an arbitrary countable collection of sets in $\mathcal{D}$.
+    Then for each $n\in \Z^+$ define $B_n := \bigcup_{j=1}^n A_j$ which is in $\mathcal{D}$ since $\mathcal{D}$ is closed under finite unions;
+    also note that $\{B_n\}_{n=1}^\infty$ is an increasing sequence of sets in $\mathcal{D}$.
+    Since $\mathcal{D}$ is a $\lambda$-system, we have 
+    \[ \bigcup_{j=1}^\infty A_j = \bigcup_{n=1}^\infty \bigcup_{j=1}^n A_j = \bigcup_{n=1}^\infty B_n \in \mathcal{D}. \]
+    This shows that $\mathcal{D}$ is closed under countable unions, and hence is a $\sigma$-algebra.
+
+    \vspace{2mm}
+
+    Since $\mathcal{D}$ is a $\sigma$-algebra containing $\mathcal{P}$, we have $\sigma(\mathcal{P}) \subseteq \mathcal{D} \subseteq \mathcal{L}$ as desired.
+\end{proof}
+
+\begin{corollary}[Borel Outer Measures on $\R^n$]
+    \label{cor:borel_reg_outer_measures_in_rn}
+    If $\mu$ and $\nu$ are two Borel outer measures on $\R^n$ such that
+    \[ \mu(R) = \nu(R) \]
+    for each closed rectangle $R = [a_1,b_1]\times \cdots \times [a_n,b_n]$, then $\mu(E) = \nu(E)$ for every Borel set $E\sub \R^n$.
+    The same is true if we replace closed rectangles with open rectangles or half-open rectangles.
+\end{corollary}
+
+\begin{proof}
+    Let $\mathcal{P}$ be the collection of all closed (open, half-open) rectangles in $\R^n$.
+    Then $\mathcal{P}$ is a $\pi$-system which generates the Borel $\sigma$-algebra on $\R^n$.
+    Let $\mathcal{L} = \{ E\sub \R^n : \mu(E) = \nu(E) \}$.
+    Then $\mathcal{L}$ is a $\lambda$-system containing $\mathcal{P}$, since $\mu(R) = \nu(R)$ for every $R\in \mathcal{P}$ by assumption.
+    Thus by the $\pi$-$\lambda$ theorem, we have $\sigma(\mathcal{P}) \sub \mathcal{L}$. 
+    
+    We know that $\sigma(\mathcal{P})$ is the Borel $\sigma$-algebra on $\R^n$ since each open set in $\R^n$ can be written as a countable union of closed (open, half-open) rectangles.
+    Thus $\mu(E) = \nu(E)$ for every Borel set $E\sub \R^n$ as desired.
+\end{proof}
+
+Hopefully this proof shows the utility of the $\pi$-$\lambda$ theorem, as it is not obvious that the collection $\mathcal{L}$ is a $\sigma$-algebra (closed under intersections is not obvious), but it is easy to check that it is a $\lambda$-system.

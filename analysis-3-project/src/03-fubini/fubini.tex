@@ -1,0 +1,656 @@
+
+\section{Fubini and Tonelli Theorems}
+
+In this section, we prove the Fubini and Tonelli theorems, which allow us to compute integrals on product spaces as iterated integrals.
+In a later section, we will prove a curvilinear version of this theorem for computing integrals called the \emph{Area Formula} and the \emph{Coarea Formula}.
+
+We follow the treatment given by Axler.
+\subsection{Products of Measures}
+
+\begin{definition}[Product of $\sigma$-algebras]
+    \label{def:product_sigma_algebra}
+    Let $(X,\mathcal{A})$ and $(Y,\mathcal{B})$ be measurable spaces.
+    We define the \textit{product} of the $\sigma$-algebras $\mathcal{A}$ and $\mathcal{B}$ as the smallest $\sigma$-algebra on $X \times Y$ containing all products $A \times B$ with $A \in \mathcal{A}$ and $B \in \mathcal{B}$, 
+    and we denote this $\sigma$-algebra by $\mathcal{A} \otimes \mathcal{B}$.
+    A \textit{measurable product} is a set of the form $A\times B$ with $A \in \mathcal{A}$ and $B \in \mathcal{B}$.
+\end{definition}
+
+\begin{definition}[Cross Sections of a Set]
+    \label{def:cross_sections}
+    Let $X$ and $Y$ be sets, and let $E \subseteq X \times Y$.
+    For each $x \in X$, we define the \emph{cross section} of $E$ at $x$ as
+    \[ E_x := \{ y \in Y : (x,y) \in E \} \subseteq Y. \]
+    For each $y \in Y$, we define the \emph{cross section} of $E$ at $y$ as
+    \[ E^y := \{ x \in X : (x,y) \in E \} \subseteq X. \]
+\end{definition}
+
+\begin{lemma}[Cross Sections of Measurable Products are Measurable]
+    \label{lem:cross_section_of_measurable_product_is_measurable}
+    Let $(X,\mathcal{A})$ and $(Y,\mathcal{B})$ be measurable spaces, and let $E = A \times B$ be a measurable product with $A \in \mathcal{A}$ and $B \in \mathcal{B}$.
+    Then for each $x \in X$ we have $E_x \in \mathcal{B}$, and for each $y \in Y$ we have $E^y \in \mathcal{A}$.
+\end{lemma}
+\begin{proof}
+    Let $\mathcal{E}$ be the collection of all subsets $E \subseteq X \times Y$ such that $E_x \in \mathcal{B}$ for each $x \in X$ and $E^y \in \mathcal{A}$ for each $y \in Y$.
+    Then for all $A\in \mathcal{A}$ and all $B \in \mathcal{B}$, we have $(A \times B)_x = B$ if $x \in A$ and $(A \times B)_x = \emptyset$ otherwise, so $(A \times B)_x \in \mathcal{B}$ for each $x \in X$.
+    Similarly, we have $(A \times B)^y = A$ if $y \in B$ and $(A \times B)^y = \emptyset$ otherwise, so $(A \times B)^y \in \mathcal{A}$ for each $y \in Y$.
+    Thus $A \times B \in \mathcal{E}$ for all $A \in \mathcal{A}$ and $B \in \mathcal{B}$.
+
+    See that $\mathcal{E}$ is closed under complements because for each $E\in \mathcal{E}$ we have
+    \[ ((X\times Y)\setminus E)_x = Y \setminus E_x \in \mathcal{B} \]
+    for all $x \in X$ and similarly
+    \[ ((X\times Y)\setminus E)^y = X \setminus E^y \in \mathcal{A} \]
+    for all $y \in Y$.
+
+    Also see that $\mathcal{E}$ is closed under countable unions because for each sequence $\{E_j\}_{j=1}^\infty$ in $\mathcal{E}$ we have
+    \[ \left( \bigcup_{j=1}^\infty E_j \right)_x = \bigcup_{j=1}^\infty (E_j)_x \in \mathcal{B} \]
+    for all $x \in X$ and similarly
+    \[ \left( \bigcup_{j=1}^\infty E_j \right)^y = \bigcup_{j=1}^\infty (E_j)^y \in \mathcal{A} \]
+    for all $y \in Y$.
+
+    Since $\mathcal{E}$ contains all measurable products and is a $\sigma$-algebra, we have $\mathcal{A} \otimes \mathcal{B} \subseteq \mathcal{E}$.
+\end{proof}
+
+\begin{definition}[Cross Section of a Function]
+    \label{def:cross_section_of_function}
+    Let $X$ and $Y$ be sets, and let $f : X \times Y \to [-\infty,\infty]$ be a function.
+    For each $x \in X$, we define the \emph{cross section} of $f$ at $x$ as the function $f_x : Y \to [-\infty,\infty]$ given by
+    \[ f_x(y) := f(x,y) \quad \text{for all } y \in Y. \]
+    For each $y \in Y$, we define the \emph{cross section} of $f$ at $y$ as the function $f^y : X \to [-\infty,\infty]$ given by
+    \[ f^y(x) := f(x,y) \quad \text{for all } x \in X. \]
+\end{definition}
+    Basically if $f$ is a function defined on a product $X\times Y$, then fixing $x\in X$ gives a function $f_x$ defined on $Y$, and fixing $y \in Y$ gives a function $f^y$ defined on $X$.
+
+\begin{lemma}[Cross Sections of Measurable Functions are Measurable]
+    \label{lem:cross_section_of_measurable_function_is_measurable}
+    Let $(X,\mathcal{A})$ and $(Y,\mathcal{B})$ be measurable spaces, and let $f : X \times Y \to [-\infty,\infty]$ be an $(\mathcal{A} \otimes \mathcal{B})$-measurable function.
+    Then for each $x \in X$, the cross section $f_x : Y \to [-\infty,\infty]$ is a $\mathcal{B}$-measurable function, and for each $y \in Y$, the cross section $f^y : X \to [-\infty,\infty]$ is an $\mathcal{A}$-measurable function.
+\end{lemma}
+
+\begin{proof}
+    Let $D$ be a Borel subset of $[-\infty,\infty]$ and let $x\in X$.
+    Then we have
+    \begin{align*}
+        y = (f_x)^{-1}(D) &\iff f_x(y) \in D \\
+        &\iff f(x,y) \in D \\
+        &\iff (x,y) \in f^{-1}(D).
+        &\iff y \in (f^{-1}(D))_x
+    \end{align*}
+    which shows that \[ (f_x)^{-1}(D) = (f^{-1}(D))_x \in \mathcal{B}. \]
+    Since $f$ is $(\mathcal{A} \otimes \mathcal{B})$-measurable, we have $f^{-1}(D) \in \mathcal{A} \otimes \mathcal{B}$, so by Lemma \ref{lem:cross_section_of_measurable_set_is_measurable} we have $(f^{-1}(D))_x \in \mathcal{B}$.
+    Thus $f_x$ is $\mathcal{B}$-measurable.
+    Since $x\in X$ was arbitrary, we have that $f_x$ is $\mathcal{B}$-measurable for each $x \in X$.
+
+    The same idea shows that for each $y \in Y$, the cross section $f^y : X \to [-\infty,\infty]$ is an $\mathcal{A}$-measurable function.
+\end{proof}
+
+\subsection{Monotone Class Lemma}
+
+\begin{definition}[Algebra (of Sets)]
+    \label{def:algebra_of_sets}
+    Let $X$ be a set.
+    A collection $\mathcal{A}$ of subsets of $X$ is an \emph{algebra} if
+    \begin{itemize}
+        \item $\emptyset \in \mathcal{A}$,
+        \item if $A \in \mathcal{A}$, then $X \setminus A \in \mathcal{A}$, and
+        \item if $A,B \in \mathcal{A}$, then $A \cup B \in \mathcal{A}$.
+    \end{itemize}
+\end{definition}
+Notice that an algebra is also closed under finite intersections, by DeMorgan's laws.
+
+An algebra is like a $\sigma$-algebra, except that it is only closed under finite unions instead of countable unions.
+
+\begin{lemma}[Finite Unions of Measurable Products Form an Algebra]
+    \label{lem:finite_union_of_measurable_products_is_algebra}
+    Let $(X,\mathcal{A})$ and $(Y,\mathcal{B})$ be measurable spaces, and let $\mathcal{E}$ be the collection of all finite unions of measurable products $A \times B$ with $A \in \mathcal{A}$ and $B \in \mathcal{B}$.
+    Then $\mathcal{E}$ is an algebra on $X \times Y$.
+
+    Moreover, every finite union of measurable products in $\mathcal{A}\otimes\mathcal{B}$ can be written as a countable union of disjoint measurable products in $\mathcal{A}\otimes\mathcal{B}$.
+\end{lemma}
+\begin{proof}
+    It is clear that $\emptyset \in \mathcal{E}$ since $\emptyset = \emptyset \times \emptyset$.
+    Furthermore it is clear that $\mathcal{E}$ is closed under finite unions by definition.
+    The set $\mathcal{E}$ is also closed under finite intersections because if $(A_1 \times B_1) \cup (A_2 \times B_2) \cup \cdots \cup (A_m \times B_m)$ and $(C_1 \times D_1) \cup (C_2 \times D_2) \cup \cdots \cup (C_n \times D_n)$ are in $\mathcal{E}$, then
+    \begin{align*}
+        \bigcup_{j=1}^m (A_j \times B_j) \,\cap\, \bigcup_{k=1}^n (C_k \times D_k) &= \bigcup_{j=1}^m \bigcup_{k=1}^n \left( (A_j \times B_j) \cap (C_k \times D_k) \right) \\
+            &= \bigcup_{j=1}^m \bigcup_{k=1}^n \left( (A_j \cap C_k) \times (B_j \cap D_k) \right) \in \mathcal{E}.
+    \end{align*}
+
+    To see that the set $\mathcal{E}$ is closed under compliments, let $A \in \mathcal{A}$ and $B \in \mathcal{B}$.
+    Then \[ (X\times Y)\setminus (A\times B) = \left( (X \setminus A) \times Y \right) \cup \left( A \times (Y \setminus B) \right). \]
+    Hence the compliment of $A\times B$ is in $\mathcal{E}$. 
+    That is, the compliemnt of each measurable product is in $\mathcal{E}$.
+    Since $\mathcal{E}$ is closed under finite unions, we see that the compliment of any finite union of measurable products is in $\mathcal{E}$ by DeMorgan's laws and the fact that $\mathcal{E}$ is closed under finite intersections.
+
+    Therefore $\mathcal{E}$ is an algebra on $X \times Y$.
+
+\vspace{2mm}
+
+    For the second part, note that if $A\times B$ and $C \times D$ are measurable products, then
+    \[ (A\times B)\cup (C\times D) = (A\times B)\cup(C\times (D\setminus B)) \cup (C\setminus A)\times(B\cap D) \]
+    is a union of three disjoint measurable products.
+
+    Now consider a finite union of measurable products
+    \[ E = \bigcup_{j=1}^m (A_j \times B_j) \]
+    with $A_j \in \mathcal{A}$ and $B_j \in \mathcal{B}$ for each $j=1,2,\ldots,m$.
+    If there is some $j\in \{1,2,\ldots,m\}$ such that $A_j \times B_j$ is not disjoint from $\bigcup_{k \neq j} (A_k \times B_k)$, then we can replace $A_j \times B_j$ in the union with a union of three disjoint measurable products as above.
+    Doing this for all such $j$ gives $E$ as a finite union of disjoint measurable products.
+\end{proof}
+
+\begin{definition}[Monotone Class]
+    \label{def:monotone_class}
+    Let $X$ be a set and let $\mathcal{M}$ be a collection of subsets of $X$.
+    We say that $\mathcal{M}$ is a \emph{monotone class} if
+    \begin{itemize}
+        \item if $\{A_j\}_{j=1}^\infty$ is an increasing sequence of sets in $\mathcal{M}$, then $\bigcup_{j=1}^\infty A_j \in \mathcal{M}$, and
+        \item if $\{A_j\}_{j=1}^\infty$ is a decreasing sequence of sets in $\mathcal{M}$, then $\bigcap_{j=1}^\infty A_j \in \mathcal{M}$.
+    \end{itemize}
+\end{definition}
+
+Clearly every $\sigma$-algebra is a monotone class, since $\sigma$-algebras are closed under countable unions and countable intersections.
+Monotone classes don't have to be algebras or $\sigma$-algebras, as the following example shows. 
+
+\begin{example}[Monotone Class of Intervals]
+    \label{ex:monotone_class_of_intervals}
+    Let $\mathcal{M}$ be the collection of all intervals (closed, open, half-open, degenerate) in $\R$.
+    Then $\mathcal{M}$ is a monotone class since increasing unions and decreasing intersections of intervals are intervals.
+    
+    However, $\mathcal{M}$ is not an algebra since it is not closed under finite unions.
+\end{example}
+
+\begin{exercise}[Smallest Monotone Class]
+    \label{ex:smallest_monotone_class}
+    Let $X$ be a set, and let $\mathcal{E}$ be a collection of subsets of $X$.
+    Show that 
+    \[ \mathcal{M}_\mathcal{E} := \bigcap \{ \mathcal{M} : \mathcal{M} \text{ is a monotone class containing } \mathcal{E} \} \]
+    is the smallest monotone class containing $\mathcal{E}$.    
+\end{exercise}
+
+\begin{proof}
+    There are two things to show here --- first that $\mathcal{M}_\mathcal{E}$ is a monotone class, and second that for each monotone class $\mathcal{M}$ containing $\mathcal{E}$, we have $\mathcal{M}_\mathcal{E} \subseteq \mathcal{M}$.
+
+    To see that $\mathcal{M}_\mathcal{E}$ is a monotone class, let $\{A_j\}_{j=1}^\infty$ be an increasing sequence of sets in $\mathcal{M}_\mathcal{E}$.
+    Then for each monotone class $\mathcal{M}$ containing $\mathcal{E}$, we have $A_j \in \mathcal{M}$ for each $j\in\Z^+$, so $\bigcup_{j=1}^\infty A_j \in \mathcal{M}$ since $\mathcal{M}$ is a monotone class.
+    Since this is true for each monotone class $\mathcal{M}$ containing $\mathcal{E}$, we have $\bigcup_{j=1}^\infty A_j \in \mathcal{M}_\mathcal{E}$.
+    A similar argument shows that if $\{A_j\}_{j=1}^\infty$ is a decreasing sequence of sets in $\mathcal{M}_\mathcal{E}$, then $\bigcap_{j=1}^\infty A_j \in \mathcal{M}_\mathcal{E}$.
+    Thus $\mathcal{M}_\mathcal{E}$ is a monotone class.
+
+    Now let $\mathcal{M}$ be a monotone class containing $\mathcal{E}$.
+    Then by definition of $\mathcal{M}_\mathcal{E}$, we have $\mathcal{M}_\mathcal{E} \subseteq \mathcal{M}$.
+\end{proof}
+
+\begin{theorem}[Monotone Class Lemma]
+    \label{thm:monotone_class_lemma}
+    Let $X$ be a set, and let $\mathcal{A}$ be an algebra of subsets of $X$.
+    Then the smallest monotone class containing $\mathcal{A}$ is the smallest $\sigma$-algebra containing $\mathcal{A}$.
+\end{theorem}
+
+\begin{proof}
+    Let $\mathcal{M}_\mathcal{A}$ be the smallest monotone class containing $\mathcal{A}$.
+    Since every $\sigma$-algebra is a monotone class, we have $\mathcal{M}_\mathcal{A} \subseteq \sigma(\mathcal{A})$, where $\sigma(\mathcal{A})$ is the smallest $\sigma$-algebra containing $\mathcal{A}$.
+    To show the reverse inclusion, fix a set $A \in \mathcal{A}$ and let 
+    \[ \mathcal{E}_A := \{ E \in \mathcal{M}_\mathcal{A} : A \cup E \in \mathcal{M}_\mathcal{A} \}. \]
+    Then $\mathcal{A}\subseteq \mathcal{E}_A$ because $\mathcal{A}$ is closed under finite unions.
+
+    We want to show that $\mathcal{E}_A$ is a monotone class.
+    Let $\{E_j\}_{j=1}^\infty$ be an increasing sequence of sets in $\mathcal{E}_A$.
+    Then for each $j\in\Z^+$ we have $A \cup E_j \in \mathcal{M}_\mathcal{A}$, so
+    \[ A \cup \left( \bigcup_{j=1}^\infty E_j \right) = \bigcup_{j=1}^\infty (A \cup E_j) \in \mathcal{M}_\mathcal{A}. \]
+    Thus $\bigcup_{j=1}^\infty E_j \in \mathcal{E}_A$.
+    Since $\{E_j\}_{j=1}^\infty$ was arbitrary, we have shown that $\mathcal{E}_A$ is closed under countable increasing unions.
+    Now let $\{E_j\}_{j=1}^\infty$ be a decreasing sequence of sets in $\mathcal{E}_A$.
+    Then for each $j\in\Z^+$ we have $A \cup E_j \in \mathcal{M}_\mathcal{A}$, so
+    \[ A \cup \left( \bigcap_{j=1}^\infty E_j \right) = \bigcap_{j=1}^\infty (A \cup E_j) \in \mathcal{M}_\mathcal{A}. \]
+    Thus $\bigcap_{j=1}^\infty E_j \in \mathcal{E}_A$.
+    Since $\{E_j\}_{j=1}^\infty$ was arbitrary, we have shown that $\mathcal{E}_A$ is closed under countable decreasing intersections.
+    Therefore $\mathcal{E}_A$ is a monotone class containing $\mathcal{A}$, so $\mathcal{M}_\mathcal{A} \subseteq \mathcal{E}_A$ by Exercise \ref{ex:smallest_monotone_class}.
+    Hence we have shown that $A \cup E \in \mathcal{M}_\mathcal{A}$ for each $E \in \mathcal{M}_\mathcal{A}$.
+
+    Now define
+    \[ \mathcal{F} := \{ F \in \mathcal{M}_\mathcal{A} : F\cup E \text{ for each } E \in \mathcal{M}_\mathcal{A} \}. \]
+    Then $\mathcal{A} \subseteq \mathcal{F}$ since we have just shown that $A \cup E \in \mathcal{M}_\mathcal{A}$ for each $A \in \mathcal{A}$ and each $E \in \mathcal{M}_\mathcal{A}$.
+    Again, one shows that $\mathcal{F}$ is a monotone class by a similar argument as above.
+    As before, we have $\mathcal{M}_\mathcal{A} \subseteq \mathcal{F}$, so we have shown that $F \cup E \in \mathcal{M}_\mathcal{A}$ for each $E,F \in \mathcal{M}_\mathcal{A}$.
+
+    We claim that $\mathcal{M}_\mathcal{A}$ is a $\sigma$-algebra.
+    The previous paragraph shows that $\mathcal{M}_\mathcal{A}$ is closed under finite unions.
+    If $\{E_j\}_{j=1}^\infty$ is a sequence of sets in $\mathcal{M}_\mathcal{A}$, then we can define a new sequence $\{F_j\}_{j=1}^\infty$ by
+    \[ F_j := \bigcup_{k=1}^j E_k. \]
+    Then $\{F_j\}_{j=1}^\infty$ is an increasing sequence of sets in $\mathcal{M}_\mathcal{A}$, so
+    \[ \bigcup_{j=1}^\infty E_j = \bigcup_{j=1}^\infty F_j \in \mathcal{M}_\mathcal{A}. \]
+    Thus $\mathcal{M}_\mathcal{A}$ is closed under countable unions.
+
+    To see that $\mathcal{M}_\mathcal{A}$ is closed under complements, let
+    \[ \mathcal{D} := \{ D \in \mathcal{M}_\mathcal{A} : D^c \in \mathcal{M}_\mathcal{A} \}. \]
+    Then $\mathcal{A} \subseteq \mathcal{D}$ since $\mathcal{A}$ is closed under compliments.
+    Once again, one shows that $\mathcal{D}$ is a monotone class by a similar argument as above.
+    As before, we have $\mathcal{M}_\mathcal{A} \subseteq \mathcal{D}$, so we have shown that $D^c \in \mathcal{M}_\mathcal{A}$ for each $D \in \mathcal{M}_\mathcal{A}$.
+    Therefore $\mathcal{M}_\mathcal{A}$ is closed under complements.
+    This shows that $\mathcal{M}_\mathcal{A}$ is a $\sigma$-algebra containing $\mathcal{A}$, so $\sigma(\mathcal{A}) \subseteq \mathcal{M}_\mathcal{A}$.
+\end{proof}
+
+\subsection{Products of $\sigma$-finite Measures}
+
+\begin{definition}[$\sigma$-finite]
+    \label{def:sigma_finite}
+    Let $(X,\mathcal{A},\mu)$ be a measure space.
+    We say that $(X,\mathcal{A},\mu)$ is \emph{$\sigma$-finite} if there exists a countable collection of $\mu$-measurable sets $\{E_j\}_{j=1}^\infty$ such that $X = \bigcup_{j=1}^\infty E_j$ and $\mu(E_j) < \infty$ for each $j\in\Z^+$.
+
+    \vspace{2mm}
+
+    \noindent A subset $A\subseteq X$ is \emph{$\sigma$-finite} if there exists a countable collection of $\mu$-measurable sets $\{A_j\}_{j=1}^\infty$ such that $A = \bigcup_{j=1}^\infty A_j$ and $\mu(A_j) < \infty$ for each $j\in\Z^+$.
+    
+    \vspace{2mm}
+
+    \noindent A function $f: X \to [-\infty,\infty]$ is \emph{$\sigma$-finite} if $f$ is $\mu$-measurable and the set $\{x \in X : f(x) \neq 0\}$ is $\sigma$-finite.
+\end{definition}
+
+\begin{lemma}[The Measure of Cross Sections is a Measurable Function]
+    \label{lem:measure_of_cross_section_is_measurable}
+    Let $(X,\mathcal{A},\mu)$ and $(Y,\mathcal{B},\nu)$ be $\sigma$-finite measure spaces. If $E \in \mathcal{A} \otimes \mathcal{B}$, then the function
+    \[ x\longmapsto \nu(E_x) \]
+    is $\mathcal{A}$-measurable, and the function
+    \[ y\longmapsto \mu(E^y) \]
+    is $\mathcal{B}$-measurable.
+\end{lemma}
+\begin{proof}
+    If $E\in \mathcal{A} \otimes \mathcal{B}$, we know that $E_x\in \mathcal{B}$ for each $x\in X$.
+    Thus the function $x \mapsto \nu(E_x)$ is well-defined on $X$.
+
+    \vspace{2mm}
+    \textit{Step 1:} Assume first that $\nu(Y) < \infty$.
+    \vspace{2mm}
+
+    Let 
+    \[ \mathcal{M} := \{ E \in \mathcal{A}\otimes\mathcal{B} : x \mapsto \nu(E_x) \text{ is } \mathcal{A}\text{-measurable on } X \}. \]
+    We want to show that $\mathcal{M} = \mathcal{A} \otimes \mathcal{B}$.
+
+    If $A\in \mathcal{A}$ and $B \in \mathcal{B}$, then for each $x \in X$ we have
+    \[ (A \times B)_x = \begin{cases} B & \text{if } x \in A \\ \emptyset & \text{if } x \notin A \end{cases} \]
+    so that
+    \[ \nu((A \times B)_x) = \begin{cases} \nu(B) & \text{if } x \in A \\ 0 & \text{if } x \notin A \end{cases} = \nu(B) \chi_A(x). \]
+    In particular, the function $x\longmapsto \nu((A \times B)_x)$ is $\mathcal{A}$-measurable on $X$ since $\chi_A$ is $\mathcal{A}$-measurable.
+    Therefore $A \times B \in \mathcal{M}$ for all $A \in \mathcal{A}$ and $B \in \mathcal{B}$.
+
+    Let $\mathcal{E}$ be the collection of all finite unions of measurable products $A \times B$ with $A \in \mathcal{A}$ and $B \in \mathcal{B}$, 
+    and let $E \in \mathcal{E}$.
+    Then by Lemma \ref{lem:finite_union_of_measurable_products_is_algebra}, we can write $E$ as a finite union of disjoint measurable products $E = \bigcup_{j=1}^m E_j$.
+    Then 
+    \begin{align*}
+        \nu(E_x) &= \nu\left( \left( \bigcup_{j=1}^m E_j \right)_x \right) \\
+            &= \nu\left( \bigcup_{j=1}^m (E_j)_x \right) \\
+            &= \sum_{j=1}^m \nu((E_j)_x)
+    \end{align*}
+    by disjoint additivity of $\nu$.
+    Since each $E_j$ is a measurable product, we have $E_j \in \mathcal{M}$, so the function $x \mapsto \nu((E_j)_x)$ is $\mathcal{A}$-measurable on $X$ for each $j=1,2,\ldots,m$.
+    Thus the function $x \mapsto \nu(E_x)$ is a finite sum of $\mathcal{A}$-measurable functions, so $x \mapsto \nu(E_x)$ is $\mathcal{A}$-measurable on $X$.
+    Therefore $E \in \mathcal{M}$ for all $E \in \mathcal{E}$.
+    Since $E\in \mathcal{E}$ was arbitrary, we have shown that $\mathcal{E} \subseteq \mathcal{M}$.
+
+    Our next goal is to show that $\mathcal{M}$ is a monotone class on $X\times Y$.
+    Let $\{E_j\}_{j=1}^\infty$ be an increasing sequence of sets in $\mathcal{M}$, i.e.
+    \[ E_1 \subseteq E_2 \subseteq E_3 \subseteq \cdots. \]
+    Then for each $x \in X$, we have
+    \[ \left(\bigcup_{j=1}^\infty E_j\right)_x = \bigcup_{j=1}^\infty (E_j)_x \]
+    which implies that
+    \[ \nu\left( \left( \bigcup_{j=1}^\infty E_j \right)_x \right) = \nu\left( \bigcup_{j=1}^\infty (E_j)_x \right) = \lim_{j \to \infty} \nu((E_j)_x) \]
+    since the sequence of sets $\{(E_j)_x\}_{j=1}^\infty$ is increasing.
+    Since the pointwise limit of measurable functions is measurable, we have that the function $x \mapsto \nu\left( \left( \bigcup_{j=1}^\infty E_j \right)_x \right)$ is $\mathcal{A}$-measurable on $X$.
+    Thus $\bigcup_{j=1}^\infty E_j \in \mathcal{M}$.
+    This shows that $\mathcal{M}$ is closed under countable increasing unions.
+    
+    Now let $\{E_j\}_{j=1}^\infty$ be a decreasing sequence of sets in $\mathcal{M}$, i.e.
+    \[ E_1 \supseteq E_2 \supseteq E_3 \supseteq \cdots. \]
+    Then for each $x \in X$, we have
+    \[ \left(\bigcap_{j=1}^\infty E_j\right)_x = \bigcap_{j=1}^\infty (E_j)_x \]
+    which implies that
+    \[ \nu\left( \left( \bigcap_{j=1}^\infty E_j \right)_x \right) = \nu\left( \bigcap_{j=1}^\infty (E_j)_x \right) = \lim_{j \to \infty} \nu((E_j)_x) \]
+    since the sequence of sets $\{(E_j)_x\}_{j=1}^\infty$ is decreasing and $\nu(Y) < \infty$.
+    Since the pointwise limit of measurable functions is measurable, we have that the function $x \mapsto \nu\left( \left( \bigcap_{j=1}^\infty E_j \right)_x \right)$ is $\mathcal{A}$-measurable on $X$.
+    Thus $\bigcap_{j=1}^\infty E_j \in \mathcal{M}$.
+    This shows that $\mathcal{M}$ is closed under countable decreasing intersections; hence $\mathcal{M}$ is a monotone class.
+
+    We have shown that $\mathcal{M}$ is a monotone class that contains the algebra $\mathcal{E}$ of all finite unions of measurable products in $\mathcal{A}\times \mathcal[B]$.
+    By the Monotone Class Lemma (Theorem \ref{thm:monotone_class_lemma}), the smallest $\sigma$-algebra containing $\mathcal{E}$ is the smallest monotone class containing $\mathcal{E}$, so we have
+    $\mathcal{A}\otimes \mathcal{B} \subset \mathcal{M}$. 
+    This completes the proof of the fact that $x \mapsto \nu(E_x)$ is $\mathcal{A}$-measurable on $X$ for each $E \in \mathcal{A} \otimes \mathcal{B}$ in the case that $\nu(Y) < \infty$.
+
+    \vspace{2mm}
+    \textit{Step 2:} Now we prove the general case.
+    \vspace{2mm}
+
+    Since $(Y,\mathcal{B},\nu)$ is $\sigma$-finite, there exists an increasing sequence $\{Y_j\}_{j=1}^\infty$ of $\nu$-measurable subsets of $Y$ such that $Y = \bigcup_{j=1}^\infty Y_j$ and $\nu(Y_j) < \infty$ for each $j\in\Z^+$.
+    If $E \in \mathcal{A}\otimes \mathcal{B}$, then
+    \[ \nu( E_x ) = \lim_{j \to \infty} \nu( (E \cap (X \times Y_j))_x ) \]
+    for each $x \in X$ since $\{(E \cap (X \times Y_j))_x\}_{j=1}^\infty$ is an increasing sequence of sets whose union is $E_x$.
+    By Step 1, for each $j\in\Z^+$ the function $x \mapsto \nu( (E \cap (X \times Y_j))_x )$ is $\mathcal{A}$-measurable on $X$ since $E \cap (X \times Y_j) \in \mathcal{A} \otimes \mathcal{B}$ and $\nu(Y_j) < \infty$.
+    Since the pointwise limit of measurable functions is measurable, we have that the function $x \mapsto \nu(E_x)$ is $\mathcal{A}$-measurable on $X$.
+    This completes the proof of the first part of the lemma.
+
+    The proof of the second part is similar.
+\end{proof}
+
+At last, we are ready to define the product of two measures. 
+
+\begin{definition}[Product of Measures]
+    \label{def:product_measure}
+    Let $(X,\mathcal{A},\mu)$ and $(Y,\mathcal{B},\nu)$ be $\sigma$-finite measure spaces.
+    We define their \textit{product} $\mu \otimes \nu : \mathcal{A} \otimes \mathcal{B} \to [0,\infty]$ by
+    \[ (\mu \otimes \nu)(E) = \int_X \int_Y \Chi_E(x,y) \, \dif \nu(y) \, \dif \mu(x). \]
+\end{definition}
+
+Notice that we need the $\sigma$-finiteness assumption to ensure that the function $x \mapsto \nu(E_x)$ is $\mathcal{A}$-measurable, so that the outer integral is well-defined.
+
+\begin{lemma}
+    \label{lem:product_of_measures_is_measure}
+    Let $(X,\mathcal{A},\mu)$ and $(Y,\mathcal{B},\nu)$ be $\sigma$-finite measure spaces.
+    Then the product $\mu \otimes \nu : \mathcal{A} \otimes \mathcal{B} \to [0,\infty]$ is a measure on $X \times Y$.
+\end{lemma}
+
+\begin{proof}
+    Clearly we have $(\mu \otimes \nu)(\emptyset) = 0$ since $\chi_\emptyset(x,y) = 0$ for all $(x,y) \in X \times Y$.
+    Now let $\{E_j\}_{j=1}^\infty$ be a sequence of disjoint sets in $\mathcal{A} \otimes \mathcal{B}$.
+    Then we have
+    \begin{align*}
+        (\mu\otimes \nu)\left( \bigcup_{j=1}^\infty E_j \right) &= \int_X \int_Y \Chi_{\bigcup_{j=1}^\infty E_j}(x,y) \, \dif \nu(y) \, \dif \mu(x) \\
+            &= \int_X \nu\left( \bigcup_{j=1}^\infty (E_j)_x \right) \, \dif \mu(x) \\
+            &= \int_X \sum_{j=1}^\infty \nu((E_j)_x) \, \dif \mu(x) \\
+            &= \sum_{j=1}^\infty \int_X \nu((E_j)_x) \, \dif \mu(x) \\
+            &= \sum_{j=1}^\infty \int_X \int_Y \Chi_{E_j}(x,y) \, \dif \nu(y) \, \dif \mu(x) \\
+            &= \sum_{j=1}^\infty (\mu \otimes \nu)(E_j)
+    \end{align*}
+    where the interchange of the sum and integral is justified by the Monotone Convergence Theorem (\ref{thm:monotone_convergence_theorem}).
+    Thus $\mu \otimes \nu$ is countably additive, so $\mu \otimes \nu$ is a measure on $X \times Y$.
+\end{proof}
+
+\subsection{Tonelli's Theorem and Fubini's Theorem}
+
+We have built up all the machinery we need to state and prove Tonelli's theorem and Fubini's theorem.
+
+\begin{theorem}[Tonelli's Theorem]
+    \label{thm:tonelli_theorem}
+    Let $(X,\mathcal{A},\mu)$ and $(Y,\mathcal{B},\nu)$ be $\sigma$-finite measure spaces, and let $f: X \times Y \to [0,\infty]$ be a nonnegative $\mathcal{A} \otimes \mathcal{B}$-measurable function.
+    Then
+    \[ x \longmapsto \int_Y f(x,y) \, \dif\nu(y) \qquad\text{is a }\mu\text{-measurable function on }X, \]
+    \[ y \longmapsto \int_X f(x,y) \, \dif\mu(x) \qquad\text{is a }\nu\text{-measurable function on }Y, \]
+    and
+    \[ \int_{X \times Y} f \, \dif(\mu \otimes \nu) = \int_X \int_Y f(x,y) \, \dif\nu(y) \, \dif\mu(x) = \int_Y \int_X f(x,y) \, \dif\mu(x) \, \dif\nu(y). \]
+\end{theorem}
+
+We want to notice a few things --- first, the spaces we integrate over must be $\sigma$-finite.
+Second, the function $f$ must be nonnegative. Third is that we make \emph{no} integrability assumptions on $f$.
+This is a very powerful theorem.
+
+\begin{proof}
+    \textit{Step 0:} First consider the special case where $f = \Chi_E$ for some $E \in \mathcal{A} \otimes \mathcal{B}$, and assume that $\mu(X) < \infty$ and $\nu(Y) < \infty$.
+    \vspace{2mm}
+
+    Let $E \in \mathcal{A} \otimes \mathcal{B}$ be arbitrary. 
+    Then we have
+    \[ \int_Y \Chi_E(x,y) \, \dif\nu(y) = \nu(E_x) \]
+    for each $x \in X$, and similarly
+    \[ \int_X \Chi_E(x,y) \, \dif\mu(x) = \mu(E^y) \]
+    for each $y \in Y$.
+    By Lemma \ref{lem:measure_of_cross_section_is_measurable}, the functions $x \mapsto \nu(E_x)$ and $y \mapsto \mu(E^y)$ are measurable.
+    Thus, in this case, the first two conclusions of Tonelli's theorem hold.
+
+    Now let
+    \[ \mathcal{M} := \left\{ E \in \mathcal{A} \otimes \mathcal{B} : \int_X \int_Y \Chi_E(x,y) \, \dif\nu(y) \, \dif\mu(x) = \int_Y \int_X \Chi_E(x,y) \, \dif\mu(x) \, \dif\nu(y) \right\}. \]
+    If $A \in \mathcal{A}$ and $B \in \mathcal{B}$, then we have $A \times B \in \mathcal{M}$ since
+    \begin{align*}
+        \int_X \int_Y \Chi_{A \times B}(x,y) \, \dif\nu(y) \, \dif\mu(x) &= \int_X \int_Y \Chi_A(x) \Chi_B(y) \, \dif\nu(y) \, \dif\mu(x) \\
+            &= \int_X \Chi_A(x) \left( \int_Y \Chi_B(y) \, \dif\nu(y) \right) \, \dif\mu(x) \\
+            &= \nu(B) \int_X \Chi_A(x) \, \dif\mu(x) \\
+            &= \nu(B) \mu(A)
+    \end{align*}
+    and similarly the other integral equals $\mu(A) \nu(B)$.
+    Thus $A \times B \in \mathcal{M}$ for all $A \in \mathcal{A}$ and $B \in \mathcal{B}$.
+
+    Let $\mathcal{E}$ be the collection of all finite unions of measurable products $A \times B$ with $A \in \mathcal{A}$ and $B \in \mathcal{B}$.
+    Then by Lemma \ref{lem:finite_union_of_measurable_products_is_algebra}, we can write an arbitrary $E \in \mathcal{E}$ as a finite union of disjoint measurable products $E = \bigcup_{j=1}^m E_j$.
+    Then by disjoint additivity of the integral, we have
+    \begin{align*}
+        \int_X \int_Y \Chi_E(x,y) \, \dif\nu(y) \, \dif\mu(x) &= \int_X \int_Y \Chi_{\bigcup_{j=1}^m E_j}(x,y) \, \dif\nu(y) \, \dif\mu(x) \\
+            &= \int_X \int_Y \sum_{j=1}^m \Chi_{E_j}(x,y) \, \dif\nu(y) \, \dif\mu(x) \\
+            &= \sum_{j=1}^m \int_X \int_Y \Chi_{E_j}(x,y) \, \dif\nu(y) \, \dif\mu(x) \\
+            &= \sum_{j=1}^m \int_Y \int_X \Chi_{E_j}(x,y) \, \dif\mu(x) \, \dif\nu(y) \\
+            &= \int_Y \int_X \Chi_{\bigcup_{j=1}^m E_j}(x,y) \, \dif\mu(x) \, \dif\nu(y) \\
+            &= \int_Y \int_X \Chi_E(x,y) \, \dif\mu(x) \, \dif\nu(y).
+    \end{align*}
+    Thus $E \in \mathcal{M}$.
+    Since $E\in \mathcal{E}$ was arbitrary, we have shown that $\mathcal{E} \subseteq \mathcal{M}$.
+
+    Now the Monotone Convergence Theorem (\ref{thm:monotone_convergence_theorem}) shows that $\mathcal{M}$ is closed under countable increasing unions.
+    The Bounded Convergence Theorem (\ref{thm:bounded_convergence_theorem}) shows that $\mathcal{M}$ is closed under countable decreasing intersections --- note that \emph{this} is where we need the finiteness assumptions on $\mu(X)$ and $\nu(Y)$.
+    Thus $\mathcal{M}$ is a monotone class containing the algebra $\mathcal{E}$ of all finite unions of measurable products in $\mathcal{A}\times \mathcal{B}$.
+    By the Monotone Class Lemma (Theorem \ref{thm:monotone_class_lemma}), the smallest $\sigma$-algebra containing $\mathcal{E}$ is the smallest monotone class containing $\mathcal{E}$, so we have
+    $\mathcal{A}\otimes \mathcal{B} \subset \mathcal{M}$. 
+    That is, for each $E \in \mathcal{A} \otimes \mathcal{B}$ we have
+    \[ \int_X \int_Y \Chi_E(x,y) \, \dif\nu(y) \, \dif\mu(x) = \int_Y \int_X \Chi_E(x,y) \, \dif\mu(x) \, \dif\nu(y). \]
+    Since the integral on the left-hand side is precisely $(\mu \otimes \nu)(E)$ by Definition \ref{def:product_measure}, we have
+    \[ (\mu \otimes \nu)(E) = \int_{X\times Y} \Chi_E \, \dif(\mu \otimes \nu) = \int_X \int_Y \Chi_E(x,y) \, \dif\nu(y) \, \dif\mu(x) = \int_Y \int_X \Chi_E(x,y) \, \dif\mu(x) \, \dif\nu(y). \]
+    This completes the proof of Tonelli's theorem in the special case where $f = \Chi_E$ for some $E \in \mathcal{A} \otimes \mathcal{B}$ and $\mu(X) < \infty$ and $\nu(Y) < \infty$.
+
+    \vspace{2mm}
+    \textit{Step 1:} Now consider the case where $f = \Chi_E$ for some $E \in \mathcal{A} \otimes \mathcal{B}$, but we do not assume that $\mu(X) < \infty$ or $\nu(Y) < \infty$.
+    \vspace{2mm}
+
+    Since $(X,\mathcal{A},\mu)$ and $(Y,\mathcal{B},\nu)$ are $\sigma$-finite, there exist increasing sequences $\{X_j\}_{j=1}^\infty$ and $\{Y_k\}_{k=1}^\infty$ of measurable subsets of $X$ and $Y$, respectively, such that $X = \bigcup_{j=1}^\infty X_j$ and $Y = \bigcup_{k=1}^\infty Y_k$ and $\mu(X_j) < \infty$ and $\nu(Y_k) < \infty$ for each $j,k\in\Z^+$.
+    
+    Let $E \in \mathcal{A} \otimes \mathcal{B}$.
+    For each $j,k \in \Z^+$, we apply the previous case to the finite measures $\mu\mres_{X_j}$ and $\nu\mres_{Y_k}$ to conclude that
+    \[  \int_{X_j} \int_{Y_k} \Chi_E(x,y) \, \dif\nu(y) \, \dif\mu(x) = \int_{Y_k} \int_{X_j} \Chi_E(x,y) \, \dif\mu(x) \, \dif\nu(y). \]
+    Now by the Monotone Convergence Theorem (\ref{thm:monotone_convergence_theorem}), we have
+    \begin{align*}
+        \int_X \int_Y \Chi_E(x,y) \, \dif\nu(y) \, \dif\mu(x) &= \lim_{j \to \infty} \lim_{k \to \infty} \int_{X_j} \int_{Y_k} \Chi_E(x,y) \, \dif\nu(y) \, \dif\mu(x) \\
+            &= \lim_{j \to \infty} \lim_{k \to \infty} \int_{Y_k} \int_{X_j} \Chi_E(x,y) \, \dif\mu(x) \, \dif\nu(y) \\
+            &= \int_Y \int_X \Chi_E(x,y) \, \dif\mu(x) \, \dif\nu(y).
+    \end{align*}
+    Now the definition of the product measure (Definition \ref{def:product_measure}) shows that
+    \[ (\mu \otimes \nu)(E) = \int_X \int_Y \Chi_E(x,y) \, \dif\nu(y) \, \dif\mu(x). \]
+    Putting this together, we have
+    \[ \int_{X \times Y} \Chi_E \, \dif(\mu \otimes \nu) = \int_X \int_Y \Chi_E(x,y) \, \dif\nu(y) \, \dif\mu(x) = \int_Y \int_X \Chi_E(x,y) \, \dif\mu(x) \, \dif\nu(y). \]
+    Since $E \in \mathcal{A} \otimes \mathcal{B}$ was arbitrary, this completes the proof of Tonelli's theorem in the case where $f = \Chi_E$ for some $E \in \mathcal{A} \otimes \mathcal{B}$.
+
+    \vspace{2mm}
+    \textit{Step 2:} Now consider the general case.
+    \vspace{2mm}
+
+    Let $f: X \times Y \to [0,\infty]$ be a nonnegative $\mathcal{A} \otimes \mathcal{B}$-measurable function.
+    Then we define a sequence of nonnegative simple functions $\{s_k\}_{k=1}^\infty$ on $X \times Y$ by
+    \[ s_k(x,y) := \begin{cases}
+        \frac{m}{2^k}, & \text{if } f(x,y) < k \text{ and } \frac{m}{2^k} \leq f(x,y) < \frac{m+1}{2^k} \text{ for some } m = 0,1,2,\ldots,2^{2k}k - 1 \\
+        k, & \text{if } f(x,y) \geq k \\
+    \end{cases} \]
+    for each $k\in\Z^+$.
+
+    Note that by construction, we have 
+    \[ 0 \leq s_k(x,y) \leq s_{k+1}(x,y) \leq f(x,y) \]
+    for all $(x,y) \in X \times Y$ and $k\in\Z^+$, and
+    \[ \lim_{k \to \infty} s_k(x,y) = f(x,y) \]
+    for all $(x,y) \in X \times Y$.
+    Notice that each $s_k$ is a finite linear combination of characteristic functions of measurable sets, so by the previous step we know Tonelli's theorem holds for each $s_k$.
+    Now the Monotone Convergence Theorem (\ref{thm:monotone_convergence_theorem}) shows that
+    \[ \int_Y f(x,y) \, \dif\nu(y) = \lim_{k \to \infty} \int_Y s_k(x,y) \, \dif\nu(y) \]
+    for each $x \in X$. Thus the function 
+    \[ x \longmapsto \int_Y f(x,y) \, \dif\nu(y) \]
+    is the pointwise limit of a sequence of $\mathcal{A}$-measurable functions, so it is $\mathcal{A}$-measurable on $X$.
+    Similarly the map
+    \[ y \longmapsto \int_X f(x,y) \, \dif\mu(x) \]
+    is $\mathcal{B}$-measurable on $Y$.
+
+    Finally, another application of the Monotone Convergence Theorem (\ref{thm:monotone_convergence_theorem}) shows that
+    \begin{align*}
+        \int_{X \times Y} f \, \dif(\mu \otimes \nu) &= \lim_{k \to \infty} \int_{X \times Y} s_k \, \dif(\mu \otimes \nu) \\
+            &= \lim_{k \to \infty} \int_X \int_Y s_k(x,y) \, \dif\nu(y) \, \dif\mu(x) \\
+            &= \int_X \int_Y f(x,y) \, \dif\nu(y) \, \dif\mu(x)
+    \end{align*}
+    and similarly
+    \[ \int_{X \times Y} f \, \dif(\mu \otimes \nu) = \int_Y \int_X f(x,y) \, \dif\mu(x) \, \dif\nu(y). \]
+    This completes the proof of Tonelli's theorem.
+\end{proof}
+
+\begin{corollary}
+    \label{cor:double_indexed_sum}
+    Let $\{a_{i,j}\}_{i,j=1}^\infty$ be a doubly-indexed collection of nonnegative numbers.
+    Then
+    \[ \sum_{i,j=1}^\infty a_{i,j} = \sum_{i=1}^\infty \sum_{j=1}^\infty a_{i,j} = \sum_{j=1}^\infty \sum_{i=1}^\infty a_{i,j}. \]
+\end{corollary}
+\begin{proof}
+    Apply Tonelli's theorem with $X = Y = \Z^+$, $\mu = \nu$ the counting measure, and $f(i,j) = a_{ij}$.
+\end{proof}
+
+\begin{theorem}[Fubini's Theorem]
+    \label{thm:fubini_theorem}
+    Let $(X,\mathcal{A},\mu)$ and $(Y,\mathcal{B},\nu)$ be $\sigma$-finite measure spaces, and let $f: X \times Y \to [-\infty,\infty]$ be an $\mathcal{A} \otimes \mathcal{B}$-integrable function.
+    Then
+    \[ x \longmapsto \int_Y f(x,y) \, \dif\nu(y) \qquad\text{is a }\mu\text{-measurable function on }X, \]
+    \[ y \longmapsto \int_X f(x,y) \, \dif\mu(x) \qquad\text{is a }\nu\text{-measurable function on }Y, \]
+    and \[ \int_Y |f(x,y)| \, \dif\nu(y) < \infty \text{ for } \mu\text{-almost every } x \in X \quad\text{ and }\quad \int_X |f(x,y)| \, \dif\mu(x) < \infty \text{ for }\nu\text{-almost every } y \in Y, \]
+    and
+    \[ \int_{X \times Y} f \, \dif(\mu \otimes \nu) = \int_X \int_Y f(x,y) \, \dif\nu(y) \, \dif\mu(x) = \int_Y \int_X f(x,y) \, \dif\mu(x) \, \dif\nu(y). \]
+\end{theorem}
+
+We remark a few things --- first, the spaces we integrate over must be $\sigma$-finite.
+Second, the function $f$ can take on negative values, but we must assume that $f$ is integrable, i.e. that $\int_{X \times Y} |f| \, \dif(\mu \otimes \nu) < \infty$.
+Third is that we have the same conclusion as Tonelli's theorem, but we also have that the iterated integrals of $|f|$ are finite almost everywhere.
+
+\begin{remark}[Using Tonelli and Fubini in Practice]
+    \label{rmk:using_tonelli_and_fubini_in_practice}
+    Here's the trick. Assume that you have a function $f$ defined on a product space $X\times Y$ and you want to compute its integral.
+    What you should do is apply Tonelli's theorem to $|f|$ and show that the integral $\int_{X \times Y} |f| \, \dif(\mu \otimes \nu)$ is finite by evaluating one of the iterated integrals
+    given in Tonelli's theorem.
+    This shows that $f$ is integrable on $X \times Y$.
+    Then you can apply Fubini's theorem to $f$ to compute the integral $\int_{X \times Y} f \, \dif(\mu \otimes \nu)$ by evaluating either of the iterated integrals given in Fubini's theorem.
+
+    In practice, this combo is referred to as the Fubini-Tonelli theorem or just Fubini's theorem.
+\end{remark}
+
+\begin{proof}
+    Applying Tonelli's theorem (Theorem \ref{thm:tonelli_theorem}) to the nonnegative $\mathcal{A} \otimes \mathcal{B}$-measurable function $|f|$, we have
+    \[ x \longmapsto \int_Y |f(x,y)| \, \dif\nu(y) \qquad\text{is a }\mu\text{-measurable function on }X, \]
+    so the set \[ \left\{ x\in X : \int_Y |f(x,y)| \, \dif\nu(y) = \infty \right\} \]
+    is in $\mathcal{A}$.
+    Since $f$ is integrable on $X \times Y$, Tonelli's theorem and the assumption $f$ is integrable shows that
+    \[ \int_{X \times Y} |f| \, \dif(\mu \otimes \nu) = \int_X \int_Y |f(x,y)| \, \dif\nu(y) \, \dif\mu(x) < \infty. \]
+    Thus we must have
+    \[ \mu\left( \left\{ x\in X : \int_Y |f(x,y)| \, \dif\nu(y) = \infty \right\} \right) = 0. \]
+
+    Recall the definitions 
+    \[ f^+ = \max(f,0) \quad\text{and}\quad f^- = \max(-f,0) \]
+    which satisfy $f = f^+ - f^-$ and $|f| = f^+ + f^-$.
+    Applying Tonelli's theorem to the nonnegative $\mathcal{A} \otimes \mathcal{B}$-measurable functions $f^+$ and $f^-$ shows that
+    \[ x \longmapsto \int_Y f^+(x,y) \, \dif\nu(y) \qquad\text{and}\qquad x \longmapsto \int_Y f^-(x,y) \, \dif\nu(y) \]
+    are $\mu$-measurable functions on $X$. 
+    Since $f^+ \leq |f|$ and $f^- \leq |f|$, the sets \[ \left\{ x\in X : \int_Y f^+(x,y) \, \dif\nu(y) = \infty \right\} \quad\text{and}\quad \left\{ x\in X : \int_Y f^-(x,y) \, \dif\nu(y) = \infty \right\} \]
+    must also have $\mu$-measure zero.
+    The intersection of these two sets is \[ \left\{ x\in X : \int_Y |f(x,y)| \, \dif\nu(y) = \infty \right\}, \]
+    which is exacly the set on which the integral $\int_Y f(x,y) \, \dif\nu(y)$ fails to be defined.
+    Thus we have shown that
+    \[ \int_Y |f(x,y)| \, \dif\nu(y) < \infty \text{ for } \mu\text{-almost every } x \in X. \]
+
+    Now the function 
+    \[ x \longmapsto \int_Y f(x,y) \, \dif\nu(y) = \int_Y f^+(x,y) \, \dif\nu(y) - \int_Y f^-(x,y) \, \dif\nu(y) \]
+    which must be modified to take the valued $0$ on if the right side is of the form $\infty - \infty$ (but this happens on a set of $\mu$-measure zero, as we just showed), is the difference of two $\mu$-measurable functions, so it is $\mu$-measurable on $X$.
+    We compute that
+    \begin{align*}
+        \int_{X\times Y} f \dif (\mu\otimes \nu) &= \int_{X \times Y} f^+ \, \dif(\mu \otimes \nu) - \int_{X \times Y} f^- \, \dif(\mu \otimes \nu) \\
+            &= \int_X \int_Y f^+(x,y) \, \dif\nu(y) \, \dif\mu(x) - \int_X \int_Y f^-(x,y) \, \dif\nu(y) \, \dif\mu(x) \\
+            &= \int_X \int_Y (f^+(x,y) - f^-(x,y)) \, \dif\nu(y) \, \dif\mu(x) \\
+            &= \int_X \int_Y f(x,y) \, \dif\nu(y) \, \dif\mu(x)
+    \end{align*}
+    where we have used the definition of the integral of a real-valued function and Tonelli's theorem on $f^+$ and $f^-$.
+
+    This proves the first iterated integral formula in Fubini's theorem.
+
+    The assertions about the $\nu$-measurability of the function $y \mapsto \int_X f(x,y) \, \dif\mu(x)$ and the second iterated integral formula in Fubini's theorem follow by a symmetric argument.
+\end{proof}
+
+We summarize the technique described in Remark \ref{rmk:using_tonelli_and_fubini_in_practice} in the following result.
+\begin{corollary}[The Fubini-Tonelli Theorem]
+    \label{cor:fubini_tonelli_theorem}
+    Let $(X,\mathcal{A},\mu)$ and $(Y,\mathcal{B},\nu)$ be $\sigma$-finite measure spaces, and let $f: X \times Y \to [-\infty,\infty]$ be an $\mathcal{A} \otimes \mathcal{B}$-measurable function.
+    If either
+    \[ \int_X \int_Y |f(x,y)| \, \dif\nu(y) \, \dif\mu(x) < \infty \quad\text{ or }\quad \int_Y \int_X |f(x,y)| \, \dif\mu(x) \, \dif\nu(y) < \infty , \]
+    then $f$ is integrable on $X \times Y$, and
+    \[ \int_{X \times Y} f \, \dif(\mu \otimes \nu) = \int_X \int_Y f(x,y) \, \dif\nu(y) \, \dif\mu(x) = \int_Y \int_X f(x,y) \, \dif\mu(x) \, \dif\nu(y). \]
+\end{corollary}
+\begin{proof}
+    The function $|f|$ is nonnegative and $\mathcal{A} \otimes \mathcal{B}$-measurable, so we can apply Tonelli's theorem to $|f|$ to conclude that
+    \[ \int_{X \times Y} |f| \, \dif(\mu \otimes \nu) = \int_X \int_Y |f(x,y)| \, \dif\nu(y) \, \dif\mu(x) = \int_Y \int_X |f(x,y)| \, \dif\mu(x) \, \dif\nu(y). \]
+    If either of the iterated integrals on the right-hand side is finite, then $\int_{X \times Y} |f| \, \dif(\mu \otimes \nu) < \infty$, so $f$ is integrable on $X \times Y$.
+    We can then apply Fubini's theorem to $f$ to conclude the desired result.
+\end{proof}
+
+\begin{exercise}[Area Under Graph Formula]
+    \label{ex:area_under_graph_formula}
+    Let $(X,\mathcal{A},\mu)$ be a $\sigma$-finite measure space and let $f: X \to [0,\infty]$ be a $\mu$-measurable function.
+    Then \[ \int_X f \, d\mu = \int_0^\infty \mu(\{x \in X : t < f(x) \}) \, \dif t. \]
+\end{exercise}
+
+\begin{proof}
+    Let $\mathcal{B}_\R$ be the Borel $\sigma$-algebra on $\R$.
+
+    For each $k\in \Z^+$ let
+    \[ E_k := \bigcup_{m=0}^{k^2-1} \left( f^{-1}\left( \left[ \frac{m}{k}, \frac{m+1}{k} \right) \right) \right) \quad\text{ and }\quad F_k := f^{-1}\left( [k, \infty) \right) \times(0,k). \]
+    The for each $k\in\Z^+$ the set $E_k$ is a finite union of measurable products in $\mathcal{A} \times \mathcal{B}_\R$, and $F_k$ is a measurable product in $\mathcal{A} \times \mathcal{B}_\R$, so both $E_k$ and $F_k$ are in $\mathcal{A} \otimes \mathcal{B}_\R$.
+    Since \[ \{ (x,t) \in X \times \R : 0 < t < f(x) \} = \bigcup_{k=1}^\infty (E_k \cup F_k), \]
+    the set \(\{ (x,t) \in X \times \R : 0 < t < f(x) \}\) is in \(\mathcal{A} \otimes \mathcal{B}_\R\).
+
+    The definition of the product measure $\mu \otimes \mathcal{L}^1$ then gives
+    \begin{align*}
+        (\mu \otimes \mathcal{L}^1) \left( \{ (x,t) \in X \times \R : 0 < t < f(x) \} \right) &= \int_X \int_\R \Chi_{\{ (x,t) : 0 < t < f(x) \}}(x,t) \, \dif \mathcal{L}^1(t) \, \dif \mu(x) \\
+            &= \int_X \int_0^{f(x)} 1 \, \dif t \, \dif \mu(x) \\
+            &= \int_X f(x) \, \dif \mu(x).
+    \end{align*}
+    This formula shows that the measure of the set $\{ (x,t) \in X \times \R : 0 < t < f(x) \}$ with respect to the product measure \(\mu \otimes \mathcal{L}^1 \) is equal to the integral of $f$ over $X$.
+    That is, the ``area under the graph'' of $f$ is equal to the integral of $f$.
+
+    On the other hand, Tonelli's theorem (Theorem \ref{thm:tonelli_theorem}) says that we chan interchange the order of integration to get
+    \begin{align*}
+        (\mu \otimes \mathcal{L}^1) \left( \{ (x,t) \in X \times \R : 0 < t < f(x) \} \right) &= \int_0^\infty \int_X \Chi_{\{ (x,t) : 0 < t < f(x) \}}(x,t) \, \dif \mu(x) \, \dif \mathcal{L}^1(t) \\
+            &= \int_0^\infty \mu(\{ x \in X : t < f(x) \}) \, \dif t.
+    \end{align*}
+    Combinging the two formulas gives
+    \[ \int_X f(x) \, \dif \mu(x) = \int_0^\infty \mu(\{ x \in X : t < f(x) \}) \, \dif t, \]
+    which is the desired result.
+\end{proof}
+
+\subsection{Notation for Multiple Integrals in $\R^n$}
+
+\begin{lemma}[Another Definition of Lebesgue Measure]
+    \label{lem:another_definition_of_lebesgue_measure}
+    For each $n>1$, the Lebesgue measure $\mathcal{L}^n$ on $\R^n$ is the product measure of $(\R^{n-1},\mathcal{L}^{n-1})$ and $(\R,\mathcal{L}^1)$, i.e.
+    \[ \mathcal{L}^n = \mathcal{L}^{n-1} \otimes \mathcal{L}^1. \]
+\end{lemma}
+\begin{proof}
+    Fix $n>1$. Then the measure spaces $(\R^{n-1},\mathcal{L}^{n-1})$ and $(\R,\mathcal{L}^1)$ are $\sigma$-finite since $\R^{n-1}$ and $\R$ can both be written as a countable union of finite measure sets.
+    Thus the product measure $\mathcal{L}^{n-1} \otimes \mathcal{L}^1$ is well-defined on $\R^{n-1} \times \R = \R^n$.
+
+    By Cor \ref{cor:borel_reg_outer_measures_in_rn}, we only need to show that $\mathcal{L}^n$ and $\mathcal{L}^{n-1} \otimes \mathcal{L}^1$ agree on all boxes in $\R^n$.
+    Let $R = [a_1,b_1] \times [a_2,b_2] \times \cdots \times [a_n,b_n]$ be a box in $\R^n$.
+    Then
+    \begin{align*}
+        (\mathcal{L}^{n-1} \otimes \mathcal{L}^1)(R) &= \int_{\R^{n-1}} \int_\R \Chi_R(x_1,x_2,\ldots,x_n) \, \dif \mathcal{L}^1(x_n) \, \dif \mathcal{L}^{n-1}(x_1,x_2,\ldots,x_{n-1}) \\
+            &= \int_{\R^{n-1}} \int_{a_n}^{b_n} \Chi_{[a_1,b_1] \times [a_2,b_2] \times \cdots \times [a_{n-1},b_{n-1}]}(x_1,x_2,\ldots,x_{n-1}) \, \dif x_n \, \dif \mathcal{L}^{n-1}(x_1,x_2,\ldots,x_{n-1}) \\
+            &= \int_{a_n}^{b_n} \dif x_n\,\cdot \int_{\R^{n-1}} \Chi_{[a_1,b_1] \times [a_2,b_2] \times \cdots \times [a_{n-1},b_{n-1}]}(x_1,x_2,\ldots,x_{n-1}) \, \dif \mathcal{L}^{n-1}(x_1,x_2,\ldots,x_{n-1}) \\
+            &= (b_n - a_n) \int_{\R^{n-1}} \Chi_{[a_1,b_1] \times [a_2,b_2] \times \cdots \times [a_{n-1},b_{n-1}]}(x_1,x_2,\ldots,x_{n-1}) \, \dif \mathcal{L}^{n-1}(x_1,x_2,\ldots,x_{n-1}) \\
+            &= (b_n - a_n) \mathcal{L}^{n-1}([a_1,b_1] \times [a_2,b_2] \times \cdots \times [a_{n-1},b_{n-1}]) \\
+            &= (b_n - a_n) (b_1 - a_1)(b_2 - a_2) \cdots (b_{n-1} - a_{n-1}) \\
+            &= (b_1 - a_1)(b_2 - a_2) \cdots (b_n - a_n) = \mathcal{L}^n(R)
+    \end{align*}
+    so we are done. 
+\end{proof}
+
+By this result and induction, if $n>1$ and we have an integer $1 \leq k < n$, then
+\[ \mathcal{L}^n = \mathcal{L}^{n-k} \otimes \mathcal{L}^{k}. \]
+Then we can apply Tonelli's theorem and Fubini's theorem to functions defined on $\R^n$ to get formulas such as
+\[ \int_{\R^k \times \R^{n-k}} f \, \dif x = \int_{\R^k} \int_{\R^{n-k}} f(x_1,x_2) \, \dif \mathcal{L}^{n-k}(x_2) \, \dif \mathcal{L}^k(x_1) = \int_{\R^{n-k}} \int_{\R^k} f(x_1,x_2) \, \dif \mathcal{L}^k(x_1) \, \dif \mathcal{L}^{n-k}(x_2). \]
+for integrable $f: \R^n\to [-\infty,\infty]$.
+We remark that you should be careful in using the above formula, since we have $x_1 \in \R^k$ and $x_2 \in \R^{n-k}$ which is at odds with the usual notation.
+
+To avoid confusion, we usually write $x \in \R^n$ as $x = (x_1,x_2,\ldots,x_n)$ where each $x_j \in \R$.
+Then Fubini-Tonelli takes the form
+\[ \int_{\R^n} f(x) \, \dif x = \int_{\R^k} \int_{\R^{n-k}} f(x_1,x_2,\ldots,x_n) \, \dif x_{k+1} \cdots \dif x_n \, \dif x_1 \cdots \dif x_k = \int_{\R^{n-k}} \int_{\R^k} f(x_1,x_2,\ldots,x_n) \, \dif x_1 \cdots \dif x_k \, \dif x_{k+1} \cdots \dif x_n. \]
+for integrable $f: \R^n \to [-\infty,\infty]$, which we think is better (because it is more explicit and conforms to the usual notation), even if it is longer to write.
+
+The next section will be devoted to examples and applications of Fubini-Tonelli theorems in $\R^n$.

@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lippy</title>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '0.8em',
+      packages: {'[+]': ['ams']},
+      macros: {
+        R: '\\mathbb{R}',
+        C: '\\mathbb{C}',
+        N: '\\mathbb{N}',
+        Z: '\\mathbb{Z}',
+        Q: '\\mathbb{Q}',
+        E: '\\mathbb{E}',
+        F: '\\mathbb{F}',
+        S: '\\mathbb{S}',
+        H: '\\mathcal{H}',
+        L: '\\mathcal{L}',
+        dif: '\\,\\mathrm{d}',
+        supp: '\\operatorname{supp}',
+        proj: '\\operatorname{proj}',
+        Id: '\\operatorname{Id}',
+        Span: '\\operatorname{span}',
+        graph: '\\operatorname{graph}',
+        dist: '\\operatorname{dist}',
+        diam: '\\operatorname{diam}',
+        avg: '\\operatorname{avg}',
+        div: '\\operatorname{div}',
+        vol: '\\operatorname{vol}',
+        ord: '\\operatorname{ord}',
+        Chi: '\\mathbf{1}',
+        sub: '\\subseteq',
+        mres: '\\downharpoonright',
+        ddag: '\\ddagger',
+        dag: '\\dagger',
+        norm: ['\\left\\| #1 \\right\\|', 1],
+        abs: ['\\left| #1 \\right|', 1],
+        set: ['\\left\\{ #1 \\right\\}', 1],
+        inner: ['\\langle #1, #2 \\rangle', 2],
+        floor: ['\\lfloor #1 \\rfloor', 1],
+        ceil: ['\\lceil #1 \\rceil', 1],
+        llbracket: '\\unicode{x27E6}',
+        rrbracket: '\\unicode{x27E7}',
+        bigskull: '\\unicode{x1F480}',
+        skull: '\\unicode{x2620}',
+        mathwitch: '\\unicode{x1F9D9}',
+        pumpkin: '\\unicode{x1F383}',
+        mathpumpkin: '\\unicode{x1F383}',
+        bigpumpkin: '\\unicode{x1F383}',
+        mathghost: '\\unicode{x1F47B}',
+        mathcat: '\\unicode{x1F408}',
+        mathbat: '\\unicode{x1F987}',
+        esssup: '\\operatorname{ess\\,sup}',
+        essinf: '\\operatorname{ess\\,inf}',
+        Lip: '\\operatorname{Lip}',
+        pd: ['\\frac{\\partial#1}{\\partial#2}', 2],
+        od: ['\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}', 2],
+        dashint: '\\mathchoice{\\rlap{-}\\!\\int}{\\rlap{\\raise.15ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}',
+        eurologo: '\\unicode{x20AC}',
+        starredbullet: '\\unicode{x2726}',
+        grimace: '\\unicode{x1F62C}',
+        textthing: '\\unicode{x2639}',
+        noway: '\\unicode{x26D4}',
+        warning: '\\unicode{x26A0}',
+        danger: '\\unicode{x26A0}',
+        textxswup: '\\unicode{x2195}',
+        textxswdown: '\\unicode{x2195}',
+        decoone: '\\unicode{x2756}',
+        decotwo: '\\unicode{x2767}',
+        decothreeleft: '\\unicode{x2619}',
+        decothreeright: '\\unicode{x2767}',
+        decofourleft: '\\unicode{x261A}',
+        decofourright: '\\unicode{x261B}',
+        floweroneleft: '\\unicode{x2740}',
+        floweroneright: '\\unicode{x2740}',
+        lefthand: '\\unicode{x261C}',
+        righthand: '\\unicode{x261E}',
+        decosix: '\\unicode{x2766}',
+        bomb: '\\unicode{x1F4A3}',
+        caution: '\\unicode{x2621}',
+        leftblackhand: '\\unicode{x261A}',
+        rightblackhand: '\\unicode{x261B}',
+        leafleft: '\\unicode{x2618}',
+        leafright: '\\unicode{x2618}',
+        leafNW: '\\unicode{x2618}',
+        leafNE: '\\unicode{x2618}',
+        leafSE: '\\unicode{x2618}',
+        leafSW: '\\unicode{x2618}',
+        aldineleft: '\\unicode{x2619}',
+        aldineright: '\\unicode{x2767}',
+        aldine: '\\unicode{x2766}',
+        aldinesmall: '\\unicode{x2767}',
+        aldinesmallrevert: '\\unicode{x2619}',
+        aldinesmallup: '\\unicode{x2766}',
+        grappe: '\\unicode{x2766}',
+        rightgrappe: '\\unicode{x2767}',
+        leftgrappe: '\\unicode{x2619}',
+        oldpilcrowone: '\\unicode{x00B6}',
+        oldpilcrowtwo: '\\unicode{x00B6}',
+        oldpilcrowthree: '\\unicode{x00B6}',
+        oldpilcrowfour: '\\unicode{x00B6}',
+        oldpilcrowfive: '\\unicode{x00B6}',
+        oldpilcrowsix: '\\unicode{x00B6}'
+      }
+    },
+    startup: {
+      pageReady: () => {
+        return MathJax.startup.defaultPageReady().then(() => {
+          console.log('MathJax ready');
+        });
+      }
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+  <script>
+  (function() {
+    window.addEventListener('beforeunload', function() {
+      saveProofState();
+      saveCollapsibleState();
+    });
+    
+    const eventSource = new EventSource('http://localhost:35729/reload-stream');
+    
+    eventSource.onmessage = function(event) {
+      if (event.data === 'reload') {
+        console.log('📝 File updated, saving state and reloading...');
+        saveProofState();
+        saveCollapsibleState();
+        setTimeout(() => {
+          window.location.reload();
+        }, 50);
+      }
+    };
+    
+    eventSource.onerror = function() {
+      console.log('⚠️  Auto-reload server not available. Run node watch.js to enable auto-reload.');
+      eventSource.close();
+    };
+    
+    console.log('🔄 Auto-reload enabled');
+  })();
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+    
+    /* Layout with sidebar */
+    .page-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      width: 280px;
+      background: #fff;
+      border-right: 1px solid #e0e0e0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px 0;
+      font-size: 14px;
+    }
+    
+    .sidebar-header {
+      padding: 15px 20px 25px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .sidebar-header h1 {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 5px 0;
+    }
+    
+    .sidebar-header .subtitle {
+      font-size: 0.85em;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .sidebar-header .back-link {
+      display: block;
+      font-size: 0.8em;
+      color: #666;
+      text-decoration: none;
+      margin-top: 12px;
+    }
+    
+    .sidebar-header .back-link:hover {
+      color: #1a1a1a;
+    }
+    
+    .sidebar-nav {
+      padding: 10px 0;
+    }
+    
+    .chapter-group {
+      margin-bottom: 2px;
+    }
+    
+    .chapter-title {
+      padding: 12px 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chapter-title:hover {
+      background: #f5f5f5;
+    }
+    
+    .chapter-title .toggle {
+      font-size: 0.65em;
+      color: #999;
+      transition: transform 0.2s;
+    }
+    
+    .chapter-group.expanded .chapter-title .toggle {
+      transform: rotate(90deg);
+    }
+    
+    .section-list {
+      display: none;
+      padding: 5px 0;
+      background: #f8f8f8;
+    }
+    
+    .chapter-group.expanded .section-list {
+      display: block;
+    }
+    
+    .section-link {
+      display: block;
+      padding: 8px 20px 8px 35px;
+      font-size: 0.85em;
+      color: #555;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+    }
+    
+    .section-link:hover {
+      background: #f0f0f0;
+      color: #1a1a1a;
+    }
+    
+    .section-link.active {
+      background: #e8e8e8;
+      border-left-color: #333;
+      color: #000;
+      font-weight: 500;
+    }
+    
+    /* Main content area */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      max-width: 900px;
+      padding: 40px 60px;
+    }
+    
+    @media (max-width: 1100px) {
+      .sidebar {
+        width: 240px;
+      }
+      .main-content {
+        margin-left: 240px;
+        padding: 30px 40px;
+      }
+    }
+    
+    @media (max-width: 800px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+      .page-layout {
+        flex-direction: column;
+      }
+    }
+    
+    h2, h3, h4 {
+      margin-top: 2em;
+      margin-bottom: 0.75em;
+      color: #000;
+      font-weight: 600;
+    }
+    h2 { font-size: 1.5em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.1em; }
+    p {
+      margin: 1em 0;
+      text-indent: 2em;
+    }
+    p:first-of-type,
+    h2 + p,
+    h3 + p,
+    h4 + p,
+    .theorem-box + p,
+    .proof-box + p {
+      text-indent: 0;
+    }
+    .noindent + p,
+    p:has(> .noindent:first-child) {
+      text-indent: 0 !important;
+    }
+    .noindent {
+      display: none;
+    }
+    .theorem-box {
+      margin: 1.75em 0;
+      padding: 1.25em;
+      border-left: 5px solid #16a34a;
+      background: linear-gradient(to top, #bbf7d0 0%, #d1fae5 100%);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .definition-box { border-left-color: #16a34a; background: linear-gradient(to top, #d1fae5 0%, #ecfdf5 100%); }
+    .lemma-box { border-left-color: #1e3a8a; background: linear-gradient(to top, #bfdbfe 0%, #dbeafe 100%); }
+    .corollary-box { border-left-color: #9333ea; background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%); }
+    .proposition-box { border-left-color: #dc2626; background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%); }
+    .remark-box { border-left-color: #64748b; background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%); }
+    .example-box { border-left-color: #0891b2; background: linear-gradient(to top, #a5f3fc 0%, #cffafe 100%); }
+    .construction-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .notation-box { border-left-color: #ca8a04; background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%); }
+    .exercise-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .problem-box { border-left-color: #ec4899; background: linear-gradient(to top, #fbcfe8 0%, #fce7f3 100%); }
+    .theorem-header {
+      margin-bottom: 0.75em;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+    .theorem-header.clickable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .theorem-header.clickable:hover {
+      background: rgba(0,0,0,0.03);
+      margin: -0.5em -0.75em 0.75em -0.75em;
+      padding: 0.5em 0.75em;
+      border-radius: 4px;
+    }
+    .collapsible-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      margin-right: 0.5em;
+      color: #6b7280;
+    }
+    .collapsible-box.collapsed .collapsible-icon {
+      transform: rotate(-90deg);
+    }
+    .collapsible-content {
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+    }
+    .collapsible-box.collapsed .collapsible-content {
+      display: none;
+    }
+    .theorem-content {
+      padding-left: 0.5em;
+      line-height: 1.8;
+    }
+    .proof-box {
+      margin: 1.5em 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .proof-header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      border-radius: 6px 6px 0 0;
+    }
+    .proof-toggle {
+      width: 100%;
+      padding: 0.85em 1.25em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      transition: background 0.15s;
+    }
+    .proof-toggle:hover { background: rgba(0,0,0,0.03); }
+    .proof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      color: #6b7280;
+    }
+    .proof-box.collapsed .proof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .proof-content {
+      padding: 1.25em;
+      line-height: 1.8;
+    }
+    .proof-box.collapsed .proof-content {
+      display: none;
+    }
+    .proof-end {
+      float: right;
+      font-size: 1.3em;
+      margin-left: 0.5em;
+      color: #374151;
+    }
+    .subproof {
+      margin: 1em 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #f9fafb;
+    }
+    .subproof-header {
+      background: linear-gradient(to bottom, #f9fafb 0%, #f3f4f6 100%);
+      border-bottom: 1px solid #d1d5db;
+      border-radius: 4px 4px 0 0;
+    }
+    .subproof-toggle {
+      width: 100%;
+      padding: 0.6em 1em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: background 0.15s;
+    }
+    .subproof-toggle:hover {
+      background: rgba(0,0,0,0.03);
+    }
+    .subproof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.7em;
+      color: #6b7280;
+    }
+    .subproof.collapsed .subproof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .subproof-content {
+      padding: 1em;
+      line-height: 1.7;
+    }
+    .subproof.collapsed .subproof-content {
+      display: none;
+    }
+    .ref-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 0.15em;
+      border-radius: 2px;
+    }
+    .ref-link:hover {
+      background: #dbeafe;
+      text-decoration: underline;
+    }
+    .ref-unknown {
+      color: #dc2626;
+      font-weight: bold;
+      background: #fee2e2;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+    ol, ul {
+      margin: 1em 0;
+      padding-left: 2.5em;
+      line-height: 1.8;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    .latex-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5em auto;
+    }
+    .latex-figure .latex-image {
+      display: inline-block;
+      margin: 0.5em;
+      vertical-align: middle;
+    }
+    .latex-figure {
+      margin: 2em 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .latex-figure .figure-content {
+      margin-bottom: 0.75em;
+      line-height: normal;
+    }
+    .latex-figure .figure-content > * {
+      vertical-align: middle;
+    }
+    .latex-figure figcaption {
+      font-size: 0.9em;
+      color: #4b5563;
+      font-style: italic;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1>Analysis III</h1>
+        <div class="subtitle">Measure Theory &amp; Integration</div>
+        <a href="../index.html" class="back-link">← Table of Contents</a>
+      </div>
+      <div class="sidebar-nav">
+        <div class="chapter-group expanded">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>1. Measure Theory</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../01-measure-theory/measure-theory.html" class="section-link">Overview</a>
+            <a href="../01-measure-theory/basics.html" class="section-link">Outer Measures</a>
+            <a href="../01-measure-theory/lebesgue-meas.html" class="section-link">Lebesgue Measure</a>
+            <a href="../01-measure-theory/cantor.html" class="section-link">The Cantor Set</a>
+            <a href="../01-measure-theory/measure-spaces.html" class="section-link">Measure Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>2. Integration</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../02-integration/integration.html" class="section-link">Overview</a>
+            <a href="../02-integration/integrals-1.html" class="section-link">Simple Functions</a>
+            <a href="../02-integration/integrals-2.html" class="section-link">General Functions</a>
+            <a href="../02-integration/convergence.html" class="section-link">Convergence Theorems</a>
+            <a href="../02-integration/inequality-party.html" class="section-link">Integral Inequalities</a>
+            <a href="../02-integration/lp_spaces.html" class="section-link">Lᵖ Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>3. Product Measures</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../03-fubini/fubini_ch.html" class="section-link">Overview</a>
+            <a href="../03-fubini/fubini.html" class="section-link">Fubini-Tonelli</a>
+            <a href="../03-fubini/integrals-3.html" class="section-link">Product Measures</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>4. Differentiation I</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../04-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../04-differentiation-1/covering.html" class="section-link">Vitali Covering</a>
+            <a href="../04-differentiation-1/monotone.html" class="section-link">Monotone Functions</a>
+            <a href="../04-differentiation-1/BV_on_R.html" class="section-link">Bounded Variation</a>
+            <a href="../04-differentiation-1/FTOC.html" class="section-link">FTC for Lebesgue</a>
+            <a href="../04-differentiation-1/HL.html" class="section-link">Hardy-Littlewood</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>5. Differentiation I (cont)</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../05-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../05-differentiation-1/r-nik.html" class="section-link">Radon-Nikodym</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>6. Differentiation II</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-differentiation-2/diff-2.html" class="section-link">Overview</a>
+            <a href="../06-differentiation-2/vector-measures.html" class="section-link">Vector Measures</a>
+            <a href="../06-differentiation-2/r-nik.html" class="section-link">Radon-Nikodym</a>
+            <a href="../06-differentiation-2/besi.html" class="section-link">Besicovitch</a>
+            <a href="../06-differentiation-2/densities.html" class="section-link">Densities</a>
+            <a href="../06-differentiation-2/diff-measures.html" class="section-link">Measure Derivatives</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>7. Riesz Representation</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-riesz/riesz.html" class="section-link">Overview</a>
+            <a href="../06-riesz/riesz_functional.html" class="section-link">Riesz Representation</a>
+            <a href="../06-riesz/LCH_spaces.html" class="section-link">LCH Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>8. Integral Formulas</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../07-formulas/formulas.html" class="section-link">Overview</a>
+            <a href="../07-formulas/hausdorff_meas.html" class="section-link">Hausdorff Measures</a>
+            <a href="../07-formulas/lippy.html" class="section-link">Lipschitz Maps</a>
+            <a href="../07-formulas/rademacher.html" class="section-link">Rademacher</a>
+            <a href="../07-formulas/coarea-prereq.html" class="section-link">Coarea Prerequisites</a>
+            <a href="../07-formulas/coarea.html" class="section-link">Coarea Formula</a>
+            <a href="../07-formulas/area-prereq.html" class="section-link">Area Prerequisites</a>
+            <a href="../07-formulas/area-formula.html" class="section-link">Area Formula</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>9. Extension Results</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../08-ext-res/ext-res.html" class="section-link">Overview</a>
+            <a href="../08-ext-res/taylor_thm_integral_remainder.html" class="section-link">Taylor's Theorem</a>
+            <a href="../08-ext-res/whitney-cover.html" class="section-link">Whitney Covering</a>
+            <a href="../08-ext-res/whitney-partition-of-unity.html" class="section-link">Partition of Unity</a>
+            <a href="../08-ext-res/whitney-decomposition.html" class="section-link">Decomposition</a>
+            <a href="../08-ext-res/whitney-extension-theorem.html" class="section-link">Extension Theorem</a>
+            <a href="../08-ext-res/whitney-extension-proof.html" class="section-link">Extension Proof</a>
+            <a href="../08-ext-res/whitney-extension-applications.html" class="section-link">Applications</a>
+            <a href="../08-ext-res/whitney-extension.html" class="section-link">Summary</a>
+            <a href="../08-ext-res/more-bump.html" class="section-link">More Bump Functions</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <main class="main-content">
+      <h2>Lipschitz Functions</h2>
+<h3>Definitions and Extension of Lipschitz Functions</h3>
+<div class="theorem-box definition-box" id="def:lipschitz_map">
+  <div class="theorem-header"><strong>Definition ?</strong> (Lipschitz Map)</div>
+  <div class="theorem-content">Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces.
+    A map $f : X \to Y$ is said to be <em>Lipschitz</em> if there exists a constant $C > 0$ such that for all $x_1,x_2 \in X$,
+    \[ d_Y(f(x_1),f(x_2)) \leq C d_X(x_1,x_2). \]
+    The infimum of all such constants $C$ is called the <em>Lipschitz constant</em> of $f$, and is denoted by $\Lip(f)$.</div>
+</div>
+<p>Basically a Lipschitz function is one that does not distort distances too much.</p>
+<div class="theorem-box exercise-box" id="ex:lip_implies_uniformly_continuous">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Lipschitz Implies Uniformly Continuous)</div>
+  <div class="theorem-content">Every Lipschitz map is uniformly continuous.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-0">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-0')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-0">
+    Let $f : X \to Y$ be a Lipschitz map between metric spaces $(X,d_X)$ and $(Y,d_Y)$, with Lipschitz constant $C > 0$.
+    Let $\epsilon > 0$ be given.
+    Choose $\delta := \epsilon / C > 0$.
+    Then for each $x_1,x_2 \in X$ such that $d_X(x_1,x_2) < \delta$, we have
+    \[ d_Y(f(x_1),f(x_2)) \leq C d_X(x_1,x_2) < C \delta = \epsilon. \]
+    This shows that $f$ is uniformly continuous.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<p>We are mostly interested in the case where $X$ is a subset of $\R^n$ with the Euclidean metric, and $Y = \R^m$ with the Euclidean metric.</p>
+<p>This next result says that any Lipschitz function defined on a subset of a metric space can be extended to a Lipschitz function on the whole space, with the same Lipschitz constant.
+This is known as <em>McShane's Extension Lemma</em>, and is a very useful result.
+Basically, if it is ever convenient, we can assume without loss of generality that a Lipschitz function is defined on the whole space, rather than just a subset.</p>
+<div class="theorem-box lemma-box" id="lem:mcshane_lemma">
+  <div class="theorem-header"><strong>Lemma ?</strong> (McShane's Extension Lemma)</div>
+  <div class="theorem-content">Let $(X,d)$ be a metric space, and let $A \subseteq X$ be a nonempty subset.
+    Let $f : A \to \R$ be a Lipschitz function.
+    Then there exists a Lipschitz function $\overline{f} : X \to \R$ such that $\overline{f}|_A = f$ and $\Lip(\overline{f}) = \Lip(f)$.
+    This extension is given by
+    \[ \overline{f}(x) := \inf_{a \in A} \left\{ f(a) + \Lip(f) d(x,a) \right\} \]
+    for each $x \in X$.</div>
+</div>
+<p>Of course, such an extension is not unique, but that doesn't really matter.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-1">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-1')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-1">
+    <em>Step 1:</em> We first show that the function $\overline{f}$ is well-defined and extends $f$.
+    <div style="margin: 1em 0;"></div>
+<p>First note that for each $x \in X$, the set $\{ f(a) + \Lip(f) d(x,a) : a \in A \}$ is nonempty since $A$ is nonempty; also this set is bounded below
+    --- choose a point $a_0 \in A$, then for each $a \in A$, we have
+    \[ f(a) \geq f(a_0) - |f(a) - f(a_0)| \geq f(a_0) - \Lip(f) d(a,a_0) \] 
+    which implies that
+    \[ f(a) + \Lip(f) d(x,a) \geq f(a_0) - \Lip(f) d(a,a_0) + \Lip(f) d(x,a) \geq f(a_0) - \Lip(f) d(a_0,x) \]
+    by the triangle inequality; thus the set $\{ f(a) + \Lip(f) d(x,a) : a \in A \}$ is bounded below by $f(a_0) - \Lip(f) d(a_0,x)$.
+    Therefore the infimum in the definition of $\overline{f}(x)$ is well-defined and finite for each point $x \in X$.</p>
+<p>Next, for each $a \in A$, we have $\overline{f}(a) \leq f(a)$ by the fact that $d(a,a) = 0$ and using the definition of $\overline{f}$.
+    On the other hand, for all $a,a' \in A$, we have
+    \[ f(a') + \Lip(f) d(a,a') \geq f(a') \geq f(a) - |f(a') - f(a)| \geq f(a) - \Lip(f) d(a,a') \]
+    which implies that
+    \[ f(a') + \Lip(f) d(a,a') \geq f(a). \]
+    Taking the infimum over all $a' \in A$ gives $\overline{f}(a) \geq f(a)$.
+    Therefore we have shown that $\overline{f}(a) = f(a)$ for each $a \in A$, so $\overline{f}|_A = f$.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 2:</em> We now show that $\overline{f}$ is Lipschitz with Lipschitz constant $\Lip(f)$.
+    <div style="margin: 1em 0;"></div></p>
+<p>Let $x_1,x_2 \in X$ be arbitrary.
+    Then for each $a \in A$, we have
+    \begin{align*}
+        \overline{f}(x_1) - \overline{f}(x_2) &= \inf_{a_1 \in A} \left( f(a_1) + \Lip(f) d(x_1,a_1) \right) - \inf_{a_2 \in A} \left( f(a_2) + \Lip(f) d(x_2,a_2) \right) \\
+            &= \sup_{a_2 \in A} \inf_{a_1 \in A} \left( f(a_1) + \Lip(f) d(x_1,a_1) - f(a_2) - \Lip(f) d(x_2,a_2) \right) \\
+            &= \sup_{a_2 \in A} \inf_{a_1 \in A} \left( f(a_1) - f(a_2) + \Lip(f) (d(x_1,a_1) - d(x_2,a_2)) \right) \\
+            &\leq \sup_{a_2 \in A} \,\left( \Lip(f) (d(x_1,a_2) - d(x_2,a_2)) \right) \\
+            &\leq \Lip(f) d(x_1,x_2)
+    \end{align*}
+    and similarly
+    \[ \overline{f}(x_2) - \overline{f}(x_1) \leq \Lip(f) d(x_1,x_2). \]
+    This shows that
+    \[ |\overline{f}(x_1) - \overline{f}(x_2)| \leq \Lip(f) d(x_1,x_2) \]
+    for all $x_1,x_2 \in X$, so $\overline{f}$ is Lipschitz with Lipschitz constant at most $\Lip(f)$.
+    Since $\overline{f}$ extends $f$, we must have $\Lip(\overline{f}) \geq \Lip(f)$, so $\Lip(\overline{f}) = \Lip(f)$.
+    This completes the proof.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:extension_to_R_m">
+  <div class="theorem-header"><strong>Exercise ?</strong> (McShane's Extension Lemma to $\R^m$)</div>
+  <div class="theorem-content">Let $(X,d)$ be a metric space, and let $A \subset X$ be a nonempty subset.
+    Let $f : A \to \R^m$ be a Lipschitz map.
+    Then there exists a Lipschitz function $\overline{f} : X \to \R^m$ such that $\overline{f}|_A = f$ and $\Lip(\overline{f}) \leq \sqrt{m} \Lip(f)$.</div>
+</div>
+<p>It turns out that we can actually get an extension with the same Lipschitz constant --- a result known as <em>Kirszbraun's Extension Theorem</em>, which we will prove later.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-2">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-2')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-2">
+    For each $j = 1,2,\ldots,m$, let $\pi_j : \R^m \to \R$ be the projection onto the $j$-th coordinate, i.e. \[ \pi_j(y) := y_j, \qquad \forall y = (y_1,\ldots,y_m) \in \R^m. \]
+    Write $f = (f_1,\ldots,f_m)$, where for each $j = 1,\ldots,m$, the function $f_j : A \to \R$ is given by $f_j = \pi_j \circ f$.
+    Then for each $j = 1,\ldots,m$, the function $f_j$ is Lipschitz with Lipschitz constant at most $\Lip(f)$ because
+    \[ |f_j(x_1) - f_j(x_2)| = |\pi_j(f(x_1)) - \pi_j(f(x_2))| \leq |f(x_1) - f(x_2)| \leq \Lip(f) d(x_1,x_2) \]
+    for all $x_1,x_2 \in A$.
+<p>By McShane's extension lemma <span class="ref-unknown" title="Reference not found: lem:mcshane_lemma">[lem:mcshane_lemma?]</span>, for each $j = 1,\ldots,m$, there exists a Lipschitz function $\overline{f_j} : X \to \R$ such that $\overline{f_j}|_A = f_j$ and $\Lip(\overline{f_j}) = \Lip(f_j) \leq \Lip(f)$.
+    Now define the function $\overline{f} : X \to \R^m$ by
+    \[ \overline{f}(x) := (\overline{f_1}(x),\ldots,\overline{f_m}(x)) \in \R^m \qquad \forall x \in X. \]
+    Then for each $x \in A$, we have
+    \[ \overline{f}(x) = (\overline{f_1}(x),\ldots,\overline{f_m}(x)) = (f_1(x),\ldots,f_m(x)) = f(x), \]
+    so $\overline{f}|_A = f$.
+    Moreover, for each $x_1,x_2 \in X$, we have
+    \begin{align*}
+        \|\overline{f}(x_1) - \overline{f}(x_2)\|^2 &= \sum_{j=1}^m |\overline{f_j}(x_1) - \overline{f_j}(x_2)|^2   \\
+            &\leq \sum_{j=1}^m (\Lip(\overline{f_j}) d(x_1,x_2))^2 \\
+            &\leq m \left(\Lip(f) d(x_1,x_2)\right)^2
+    \end{align*}
+    which implies that
+    \[ \| \overline{f}(x_1) - \overline{f}(x_2) \| \leq \sqrt{m} \Lip(f) d(x_1,x_2). \]
+    This shows that $\overline{f}$ is Lipschitz with Lipschitz constant $\leq \sqrt{m} \Lip(f)$.
+    Therefore we have constructed the desired extension $\overline{f} : X \to \R^m$ of $f$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<h3>Locally Lipschitz Functions</h3>
+<div class="theorem-box definition-box" id="def:locally_lipschitz_map">
+  <div class="theorem-header"><strong>Definition ?</strong> (Locally Lipschitz Map)</div>
+  <div class="theorem-content">Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces.
+    A map $f : X \to Y$ is said to be <em>locally Lipschitz</em> if for every point $x \in X$, there exists an open set $U_x$ containing $x$ such that the restriction $f|_{U_x} : U_x \to Y$ is Lipschitz.</div>
+</div>
+<div class="theorem-box exercise-box" id="ex:equivalent_definition_of_locally_lipschitz">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Equivalent Definition of Locally Lipschitz Map)</div>
+  <div class="theorem-content">Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, and assume that $X$ is locally compact.
+    A map $f : X \to Y$ is locally Lipschitz if and only if for every compact set $K \subseteq X$, the restriction $f|_K : K \to Y$ is Lipschitz.</div>
+</div>
+<p>Note that only the reverse direction requires that $X$ be locally compact.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-3">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-3')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-3">
+    ($\implies$) Suppose that $f : X \to Y$ is locally Lipschitz.
+    Let $K \subseteq X$ be a compact set.
+    For each $x \in K$, there exists an open set $U_x$ containing $x$ such that $f|_{U_x} : U_x \to Y$ is Lipschitz.
+    The collection $\{ U_x : x \in K \}$ is an open cover of the compact set $K$, so there exists a finite subcover $\{ U_{x_1},\ldots,U_{x_N} \}$ that also covers $K$.
+    For each $j = 1,\ldots,N$, let $L_j$ be the Lipschitz constant of $f|_{U_{x_j}}$.
+    Let $L := \max\{ L_1,\ldots,L_N \}$.
+    By the Lebesgue Number Lemma, there exists $\delta > 0$ such that for each $x \in K$, there exists $j \in \{ 1,\ldots,N \}$ such that $B(x,\delta) \subseteq U_{x_j}$.
+<p>Now let $z_1,z_2 \in K$ be arbitrary.
+    If $d_X(z_1,z_2) < \delta$, then there exists $j \in \{ 1,\ldots,N \}$ such that $B(z_1,\delta) \subseteq U_{x_j}$, so both $z_1$ and $z_2$ are in $U_{x_j}$.
+    Thus we have
+    \[ d_Y(f(z_1),f(z_2)) \leq L_j d_X(z_1,z_2) \leq L d_X(z_1,z_2). \]
+    On the other hand, if $d_X(z_1,z_2) \geq \delta$, then we have
+    \[ d_Y(f(z_1),f(z_2)) \leq \diam_Y(f(K)) \leq \frac{\diam_Y(f(K))}{\delta} d_X(z_1,z_2). \]
+    Note that $\diam_Y(f(K)) < \infty$ since $f(K)$ is compact in $Y$.
+    Thus in either case, we have
+    \[ d_Y(f(z_1),f(z_2)) \leq \max\left\{ L, \frac{\diam_Y(f(K))}{\delta} \right\} d_X(z_1,z_2). \]
+    Since $z_1,z_2 \in K$ were arbitrary, this shows that the restriction $f|_K : K \to Y$ is Lipschitz.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>($\impliedby$)
+    Now suppose that for every compact set $K \subseteq X$, the restriction $f|_K : K \to Y$ is Lipschitz.
+    Let $x \in X$ be arbitrary.
+    Since $X$ is locally compact, there exists an open set $U_x$ containing $x$ such that the closure $\overline{U_x}$ is compact; 
+    hence there exists $r > 0$ such that $B(x,r) \subseteq U_x$ and $\overline{B(x,r)}$ is compact (since it is a closed subset of the compact set $\overline{U_x}$).
+    By assumption, the restriction $f|_{\overline{B(x,r)}} : \overline{B(x,r)} \to Y$ is Lipschitz with some Lipschitz constant $L > 0$.
+    Thus the restriction $f|_{B(x,r)} : B(x,r) \to Y$ is also Lipschitz with Lipschitz constant $L$.
+    Since $x \in X$ was arbitrary, this shows that $f$ is locally Lipschitz.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:c1_functions_are_locally_lipschitz">
+  <div class="theorem-header"><strong>Exercise ?</strong> ($C^1$ Functions are Locally Lipschitz)</div>
+  <div class="theorem-content">Let $U\subseteq \R^n$ be open and let $f:U\to \R$ be a $C^1$ function.
+    Then $f$ is locally Lipschitz on $U$.
+<p><div style="margin: 1em 0;"></div></p>
+<p><span class="noindent"></span>If the derivative $Df:U\to \R^{n}$ is bounded and $U$ is convex, then $f$ is Lipschitz on $U$.</div>
+</div></p>
+<div class="proof-box collapsed" data-proof-id="proof-num-4">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-4')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-4">
+    Let $x\in U$.
+    Since $U$ is open, there exists $r>0$ such that $B(x,r)\subseteq U$.
+    Since $f$ is $C^1$, the derivative $Df:U\to \R^n$ is continuous, so $Df$ is bounded on the compact set $\overline{B(x,r/2)}$.
+    Thus the $L^\infty$-norm
+    \[ \|Df\|_{L^\infty(\overline{B(x,r/2)})} = \sup_{y\in \overline{B(x,r/2)}}\|Df(y)\| < \infty \]
+    of $Df$ on $\overline{B(x,r/2)}$ is finite.
+    Now, if $y,z\in B(x,r/2)$, then the line segment from $y$ to $z$ is contained in $B(x,r)$, so by the Mean Value Inequality we know that
+    \[ |f(y) - f(z)| \leq \sup_{\lambda\in[0,1]}\|Df(\lambda y + (1-\lambda)z)\|\|y - z\| \]
+    which implies
+    \[ |f(y) - f(z)| \leq \|Df\|_{L^\infty(\overline{B(x,r/2)})}\|y - z\|. \]
+    Since $y,z\in B(x,r/2)$ were arbitrary, this shows that $f$ is Lipschitz on $B(x,r/2)$.
+    Since $x\in U$ was arbitrary, this shows that $f$ is locally Lipschitz on $U$.
+<p><div style="margin: 1em 0;"></div></p>
+<p>Now suppose that $Df:U\to \R^n$ is bounded, i.e. $\|Df\|_{L^\infty(U)} < \infty$, and that $U$ is convex.
+    Then for each $y,z\in U$, the line segment from $y$ to $z$ is contained in $U$, so by the Mean Value Inequality we have
+    \[ |f(y) - f(z)| \leq \sup_{\lambda\in[0,1]}\|Df(\lambda y + (1-\lambda)z)\|\|y - z\| \leq \|Df\|_{L^\infty(U)} \|y - z\|. \]
+    This shows that $f$ is Lipschitz on $U$ with Lipschitz constant at most $\|Df\|_{L^\infty(U)}$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<h3>Lipschitz Maps and Hausdorff Measure</h3>
+<div class="theorem-box proposition-box" id="prop:hausdorff_measure_under_lipschitz_maps">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Hausdorff Measure under Lipschitz Maps)</div>
+  <div class="theorem-content">Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, and let $f : X \to Y$ be a Lipschitz map.
+    Then for each $\alpha \geq 0$ and each set $A \subseteq X$, we have
+    \[ \mathcal{H}_Y^\alpha(f(A)) \leq (\Lip(f))^\alpha \cdot \mathcal{H}_X^\alpha(A). \]</div>
+</div>
+<p>Thus, in addition to not distorting distances too much, Lipschitz maps also do not distort Hausdorff measure too much.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-5">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-5')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-5">
+<p><span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>We record a few corollaries of this result.</p>
+<div class="theorem-box corollary-box" id="cor:hausdorff_measure_under_retraction">
+  <div class="theorem-header"><strong>Corollary ?</strong> (Hausdorff Measure under Retraction)</div>
+  <div class="theorem-content">If $R: X \to X$ is a retraction map (i.e. $R \circ R = R$), then $\mathcal{H}^\alpha(R(A)) \leq \mathcal{H}^\alpha(A)$ for each $A \subseteq X$ and each $\alpha \geq 0$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-6">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-6')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-6">
+    Let $R : X \to X$ be a retraction map.
+    Then for each $x_1,x_2 \in X$, we have
+    \[ d_X(R(x_1),R(x_2)) = d_X(R(R(x_1)),R(R(x_2))) \leq d_X(x_1,x_2) \]
+    which shows that $R$ is Lipschitz with $\Lip(R) \leq 1$.
+    Therefore by proposition <span class="ref-unknown" title="Reference not found: prop:hausdorff_measure_under_lipschitz_maps">[prop:hausdorff_measure_under_lipschitz_maps?]</span>, we have
+    \[ \mathcal{H}^\alpha(R(A)) \leq (\Lip(R))^\alpha \cdot \mathcal{H}^\alpha(A) \leq \mathcal{H}^\alpha(A) \]
+    for each $A \subseteq X$ and each $\alpha \geq 0$.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<div class="theorem-box corollary-box" id="cor:hausdorff_measure_under_projection">
+  <div class="theorem-header"><strong>Corollary ?</strong> (Hausdorff Measure under Projection)</div>
+  <div class="theorem-content">Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, and let $P : X \times Y \to X$ be the projection onto the first factor. 
+    Then for each $\alpha \geq 0$ and each set $A \subseteq X \times Y$, we have
+    \[ \mathcal{H}_X^\alpha(P(A)) \leq \mathcal{H}_{X \times Y}^\alpha(A). \]</div>
+</div>
+<p>Note that we do not specify which of the product metrics we put on $X \times Y$ here, as the Hausdorff measure on the right will depend on the choice of metric, but the inequality will still hold.</p>
+<div class="proof-box collapsed" data-proof-id="proof-num-7">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-7')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-7">
+    We see that the map $P$ is Lipschitz with Lipschitz constant $\Lip(P) = 1$, so this is immediate from proposition <span class="ref-unknown" title="Reference not found: prop:hausdorff_measure_under_lipschitz_maps">[prop:hausdorff_measure_under_lipschitz_maps?]</span>.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<div class="theorem-box corollary-box" id="cor:lipschitz_image_of_hausdorff_measure_zero_set">
+  <div class="theorem-header"><strong>Corollary ?</strong> (Lipschitz Image of Hausdorff Measure Zero Set has Hausdorff Measure Zero)</div>
+  <div class="theorem-content">Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, and let $f : X \to Y$ be a Lipschitz map.
+    If $A \subseteq X$ is such that $\mathcal{H}_X^\alpha(A) = 0$ for some $\alpha \geq 0$, then $\mathcal{H}_Y^\alpha(f(A)) = 0$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-8">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-8')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-8">
+    This is immediate from the inequality in proposition <span class="ref-unknown" title="Reference not found: prop:hausdorff_measure_under_lipschitz_maps">[prop:hausdorff_measure_under_lipschitz_maps?]</span>.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<div class="theorem-box proposition-box" id="prop:hausdorff_dim_of_lipschitz_graph">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Hausdorff Dimension of Lipschitz Graph in $\R^n$)</div>
+  <div class="theorem-content">Let $f: \R^n \to \R^m$ be a Lipschitz function, and let $A\subset \R^n$ be a Lebeasgue measurable set with $\L^n(A) > 0$. 
+    Then the graph of $f$ over $A$ has Hausdorff dimension $n$, i.e.
+    \[ \H_{\dim}(\graph (f|_A)) = n. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-9">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-9')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-9">
+<p><span class="proof-end">□</span>
+  </div>
+</div></p>
+    </main>
+  </div>
+  
+  <script>
+    function toggleChapter(element) {
+      element.parentElement.classList.toggle('expanded');
+    }
+    
+    // Highlight current page in sidebar
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPath = window.location.pathname;
+      const links = document.querySelectorAll('.section-link');
+      links.forEach(link => {
+        if (currentPath.endsWith(link.getAttribute('href').split('/').pop())) {
+          link.classList.add('active');
+          // Expand parent chapter
+          const group = link.closest('.chapter-group');
+          if (group) group.classList.add('expanded');
+        }
+      });
+    });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('Restoring proof collapse states...');
+      try {
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        const currentPage = window.location.pathname;
+        const pageOpen = openProofs[currentPage] || [];
+        
+        console.log('Current page:', currentPage);
+        console.log('Open proof IDs stored:', pageOpen);
+        console.log('Found ' + pageOpen.length + ' open proofs for this page');
+        
+        document.querySelectorAll('.proof-box').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          console.log('Checking proof:', proofId, 'Should be open:', pageOpen.includes(proofId));
+          if (pageOpen.includes(proofId)) {
+            box.classList.remove('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'true');
+          } else {
+            box.classList.add('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        const pageBoxes = openBoxes[currentPage] || [];
+        
+        console.log('Open box IDs stored:', pageBoxes);
+        
+        document.querySelectorAll('.collapsible-box').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          console.log('Checking box:', boxId, 'Should be open:', pageBoxes.includes(boxId));
+          if (pageBoxes.includes(boxId)) {
+            box.classList.remove('collapsed');
+          } else {
+            box.classList.add('collapsed');
+          }
+        });
+        
+        console.log('Proof states restored');
+      } catch (e) {
+        console.error('Error restoring collapse state:', e);
+      }
+    });
+    
+    function toggleProof(proofId) {
+      const proofContent = document.getElementById(proofId);
+      const proofBox = proofContent.closest('.proof-box');
+      proofBox.classList.toggle('collapsed');
+      
+      const button = proofBox.querySelector('.proof-toggle');
+      button.setAttribute('aria-expanded', !proofBox.classList.contains('collapsed'));
+      
+      saveProofState();
+    }
+    
+    function toggleSubproof(subproofId) {
+      const subproofContent = document.getElementById(subproofId);
+      const subproof = subproofContent.closest('.subproof');
+      subproof.classList.toggle('collapsed');
+      
+      const button = subproof.querySelector('.subproof-toggle');
+      button.setAttribute('aria-expanded', !subproof.classList.contains('collapsed'));
+    }
+    
+    function saveProofState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        if (!openProofs[currentPage]) {
+          openProofs[currentPage] = [];
+        }
+        
+        openProofs[currentPage] = [];
+        document.querySelectorAll('.proof-box:not(.collapsed)').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          if (proofId) {
+            openProofs[currentPage].push(proofId);
+          }
+        });
+        
+        localStorage.setItem('openProofs', JSON.stringify(openProofs));
+        console.log('Saved proof state (open proofs):', openProofs[currentPage]);
+      } catch (e) {
+        console.error('Error saving collapse state:', e);
+      }
+    }
+    
+    function toggleCollapsible(collapsibleId) {
+      const content = document.getElementById(collapsibleId);
+      const box = content.closest('.collapsible-box');
+      box.classList.toggle('collapsed');
+      
+      saveCollapsibleState();
+    }
+    
+    function saveCollapsibleState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        if (!openBoxes[currentPage]) {
+          openBoxes[currentPage] = [];
+        }
+        
+        openBoxes[currentPage] = [];
+        document.querySelectorAll('.collapsible-box:not(.collapsed)').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          if (boxId) {
+            openBoxes[currentPage].push(boxId);
+          }
+        });
+        
+        localStorage.setItem('openBoxes', JSON.stringify(openBoxes));
+      } catch (e) {
+        console.error('Error saving box state:', e);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        const proofBoxes = document.querySelectorAll('.proof-box');
+        const anyExpanded = Array.from(proofBoxes).some(box => !box.classList.contains('collapsed'));
+        
+        proofBoxes.forEach(box => {
+          if (anyExpanded) {
+            box.classList.add('collapsed');
+          } else {
+            box.classList.remove('collapsed');
+          }
+        });
+        
+        saveProofState();
+      }
+    });
+    
+    document.querySelectorAll('a.ref-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.background = '#fef3c7';
+          target.style.transition = 'background 0.3s ease';
+          setTimeout(() => { target.style.background = ''; }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

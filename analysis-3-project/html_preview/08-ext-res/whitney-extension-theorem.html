@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>whitney-extension-theorem</title>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '0.8em',
+      packages: {'[+]': ['ams']},
+      macros: {
+        R: '\\mathbb{R}',
+        C: '\\mathbb{C}',
+        N: '\\mathbb{N}',
+        Z: '\\mathbb{Z}',
+        Q: '\\mathbb{Q}',
+        E: '\\mathbb{E}',
+        F: '\\mathbb{F}',
+        S: '\\mathbb{S}',
+        H: '\\mathcal{H}',
+        L: '\\mathcal{L}',
+        dif: '\\,\\mathrm{d}',
+        supp: '\\operatorname{supp}',
+        proj: '\\operatorname{proj}',
+        Id: '\\operatorname{Id}',
+        Span: '\\operatorname{span}',
+        graph: '\\operatorname{graph}',
+        dist: '\\operatorname{dist}',
+        diam: '\\operatorname{diam}',
+        avg: '\\operatorname{avg}',
+        div: '\\operatorname{div}',
+        vol: '\\operatorname{vol}',
+        ord: '\\operatorname{ord}',
+        Chi: '\\mathbf{1}',
+        sub: '\\subseteq',
+        mres: '\\downharpoonright',
+        ddag: '\\ddagger',
+        dag: '\\dagger',
+        norm: ['\\left\\| #1 \\right\\|', 1],
+        abs: ['\\left| #1 \\right|', 1],
+        set: ['\\left\\{ #1 \\right\\}', 1],
+        inner: ['\\langle #1, #2 \\rangle', 2],
+        floor: ['\\lfloor #1 \\rfloor', 1],
+        ceil: ['\\lceil #1 \\rceil', 1],
+        llbracket: '\\unicode{x27E6}',
+        rrbracket: '\\unicode{x27E7}',
+        bigskull: '\\unicode{x1F480}',
+        skull: '\\unicode{x2620}',
+        mathwitch: '\\unicode{x1F9D9}',
+        pumpkin: '\\unicode{x1F383}',
+        mathpumpkin: '\\unicode{x1F383}',
+        bigpumpkin: '\\unicode{x1F383}',
+        mathghost: '\\unicode{x1F47B}',
+        mathcat: '\\unicode{x1F408}',
+        mathbat: '\\unicode{x1F987}',
+        esssup: '\\operatorname{ess\\,sup}',
+        essinf: '\\operatorname{ess\\,inf}',
+        Lip: '\\operatorname{Lip}',
+        pd: ['\\frac{\\partial#1}{\\partial#2}', 2],
+        od: ['\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}', 2],
+        dashint: '\\mathchoice{\\rlap{-}\\!\\int}{\\rlap{\\raise.15ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}',
+        eurologo: '\\unicode{x20AC}',
+        starredbullet: '\\unicode{x2726}',
+        grimace: '\\unicode{x1F62C}',
+        textthing: '\\unicode{x2639}',
+        noway: '\\unicode{x26D4}',
+        warning: '\\unicode{x26A0}',
+        danger: '\\unicode{x26A0}',
+        textxswup: '\\unicode{x2195}',
+        textxswdown: '\\unicode{x2195}',
+        decoone: '\\unicode{x2756}',
+        decotwo: '\\unicode{x2767}',
+        decothreeleft: '\\unicode{x2619}',
+        decothreeright: '\\unicode{x2767}',
+        decofourleft: '\\unicode{x261A}',
+        decofourright: '\\unicode{x261B}',
+        floweroneleft: '\\unicode{x2740}',
+        floweroneright: '\\unicode{x2740}',
+        lefthand: '\\unicode{x261C}',
+        righthand: '\\unicode{x261E}',
+        decosix: '\\unicode{x2766}',
+        bomb: '\\unicode{x1F4A3}',
+        caution: '\\unicode{x2621}',
+        leftblackhand: '\\unicode{x261A}',
+        rightblackhand: '\\unicode{x261B}',
+        leafleft: '\\unicode{x2618}',
+        leafright: '\\unicode{x2618}',
+        leafNW: '\\unicode{x2618}',
+        leafNE: '\\unicode{x2618}',
+        leafSE: '\\unicode{x2618}',
+        leafSW: '\\unicode{x2618}',
+        aldineleft: '\\unicode{x2619}',
+        aldineright: '\\unicode{x2767}',
+        aldine: '\\unicode{x2766}',
+        aldinesmall: '\\unicode{x2767}',
+        aldinesmallrevert: '\\unicode{x2619}',
+        aldinesmallup: '\\unicode{x2766}',
+        grappe: '\\unicode{x2766}',
+        rightgrappe: '\\unicode{x2767}',
+        leftgrappe: '\\unicode{x2619}',
+        oldpilcrowone: '\\unicode{x00B6}',
+        oldpilcrowtwo: '\\unicode{x00B6}',
+        oldpilcrowthree: '\\unicode{x00B6}',
+        oldpilcrowfour: '\\unicode{x00B6}',
+        oldpilcrowfive: '\\unicode{x00B6}',
+        oldpilcrowsix: '\\unicode{x00B6}'
+      }
+    },
+    startup: {
+      pageReady: () => {
+        return MathJax.startup.defaultPageReady().then(() => {
+          console.log('MathJax ready');
+        });
+      }
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+  <script>
+  (function() {
+    window.addEventListener('beforeunload', function() {
+      saveProofState();
+      saveCollapsibleState();
+    });
+    
+    const eventSource = new EventSource('http://localhost:35729/reload-stream');
+    
+    eventSource.onmessage = function(event) {
+      if (event.data === 'reload') {
+        console.log('📝 File updated, saving state and reloading...');
+        saveProofState();
+        saveCollapsibleState();
+        setTimeout(() => {
+          window.location.reload();
+        }, 50);
+      }
+    };
+    
+    eventSource.onerror = function() {
+      console.log('⚠️  Auto-reload server not available. Run node watch.js to enable auto-reload.');
+      eventSource.close();
+    };
+    
+    console.log('🔄 Auto-reload enabled');
+  })();
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+    
+    /* Layout with sidebar */
+    .page-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      width: 280px;
+      background: #fff;
+      border-right: 1px solid #e0e0e0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px 0;
+      font-size: 14px;
+    }
+    
+    .sidebar-header {
+      padding: 15px 20px 25px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .sidebar-header h1 {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 5px 0;
+    }
+    
+    .sidebar-header .subtitle {
+      font-size: 0.85em;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .sidebar-header .back-link {
+      display: block;
+      font-size: 0.8em;
+      color: #666;
+      text-decoration: none;
+      margin-top: 12px;
+    }
+    
+    .sidebar-header .back-link:hover {
+      color: #1a1a1a;
+    }
+    
+    .sidebar-nav {
+      padding: 10px 0;
+    }
+    
+    .chapter-group {
+      margin-bottom: 2px;
+    }
+    
+    .chapter-title {
+      padding: 12px 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chapter-title:hover {
+      background: #f5f5f5;
+    }
+    
+    .chapter-title .toggle {
+      font-size: 0.65em;
+      color: #999;
+      transition: transform 0.2s;
+    }
+    
+    .chapter-group.expanded .chapter-title .toggle {
+      transform: rotate(90deg);
+    }
+    
+    .section-list {
+      display: none;
+      padding: 5px 0;
+      background: #f8f8f8;
+    }
+    
+    .chapter-group.expanded .section-list {
+      display: block;
+    }
+    
+    .section-link {
+      display: block;
+      padding: 8px 20px 8px 35px;
+      font-size: 0.85em;
+      color: #555;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+    }
+    
+    .section-link:hover {
+      background: #f0f0f0;
+      color: #1a1a1a;
+    }
+    
+    .section-link.active {
+      background: #e8e8e8;
+      border-left-color: #333;
+      color: #000;
+      font-weight: 500;
+    }
+    
+    /* Main content area */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      max-width: 900px;
+      padding: 40px 60px;
+    }
+    
+    @media (max-width: 1100px) {
+      .sidebar {
+        width: 240px;
+      }
+      .main-content {
+        margin-left: 240px;
+        padding: 30px 40px;
+      }
+    }
+    
+    @media (max-width: 800px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+      .page-layout {
+        flex-direction: column;
+      }
+    }
+    
+    h2, h3, h4 {
+      margin-top: 2em;
+      margin-bottom: 0.75em;
+      color: #000;
+      font-weight: 600;
+    }
+    h2 { font-size: 1.5em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.1em; }
+    p {
+      margin: 1em 0;
+      text-indent: 2em;
+    }
+    p:first-of-type,
+    h2 + p,
+    h3 + p,
+    h4 + p,
+    .theorem-box + p,
+    .proof-box + p {
+      text-indent: 0;
+    }
+    .noindent + p,
+    p:has(> .noindent:first-child) {
+      text-indent: 0 !important;
+    }
+    .noindent {
+      display: none;
+    }
+    .theorem-box {
+      margin: 1.75em 0;
+      padding: 1.25em;
+      border-left: 5px solid #16a34a;
+      background: linear-gradient(to top, #bbf7d0 0%, #d1fae5 100%);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .definition-box { border-left-color: #16a34a; background: linear-gradient(to top, #d1fae5 0%, #ecfdf5 100%); }
+    .lemma-box { border-left-color: #1e3a8a; background: linear-gradient(to top, #bfdbfe 0%, #dbeafe 100%); }
+    .corollary-box { border-left-color: #9333ea; background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%); }
+    .proposition-box { border-left-color: #dc2626; background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%); }
+    .remark-box { border-left-color: #64748b; background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%); }
+    .example-box { border-left-color: #0891b2; background: linear-gradient(to top, #a5f3fc 0%, #cffafe 100%); }
+    .construction-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .notation-box { border-left-color: #ca8a04; background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%); }
+    .exercise-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .problem-box { border-left-color: #ec4899; background: linear-gradient(to top, #fbcfe8 0%, #fce7f3 100%); }
+    .theorem-header {
+      margin-bottom: 0.75em;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+    .theorem-header.clickable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .theorem-header.clickable:hover {
+      background: rgba(0,0,0,0.03);
+      margin: -0.5em -0.75em 0.75em -0.75em;
+      padding: 0.5em 0.75em;
+      border-radius: 4px;
+    }
+    .collapsible-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      margin-right: 0.5em;
+      color: #6b7280;
+    }
+    .collapsible-box.collapsed .collapsible-icon {
+      transform: rotate(-90deg);
+    }
+    .collapsible-content {
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+    }
+    .collapsible-box.collapsed .collapsible-content {
+      display: none;
+    }
+    .theorem-content {
+      padding-left: 0.5em;
+      line-height: 1.8;
+    }
+    .proof-box {
+      margin: 1.5em 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .proof-header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      border-radius: 6px 6px 0 0;
+    }
+    .proof-toggle {
+      width: 100%;
+      padding: 0.85em 1.25em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      transition: background 0.15s;
+    }
+    .proof-toggle:hover { background: rgba(0,0,0,0.03); }
+    .proof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      color: #6b7280;
+    }
+    .proof-box.collapsed .proof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .proof-content {
+      padding: 1.25em;
+      line-height: 1.8;
+    }
+    .proof-box.collapsed .proof-content {
+      display: none;
+    }
+    .proof-end {
+      float: right;
+      font-size: 1.3em;
+      margin-left: 0.5em;
+      color: #374151;
+    }
+    .subproof {
+      margin: 1em 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #f9fafb;
+    }
+    .subproof-header {
+      background: linear-gradient(to bottom, #f9fafb 0%, #f3f4f6 100%);
+      border-bottom: 1px solid #d1d5db;
+      border-radius: 4px 4px 0 0;
+    }
+    .subproof-toggle {
+      width: 100%;
+      padding: 0.6em 1em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: background 0.15s;
+    }
+    .subproof-toggle:hover {
+      background: rgba(0,0,0,0.03);
+    }
+    .subproof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.7em;
+      color: #6b7280;
+    }
+    .subproof.collapsed .subproof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .subproof-content {
+      padding: 1em;
+      line-height: 1.7;
+    }
+    .subproof.collapsed .subproof-content {
+      display: none;
+    }
+    .ref-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 0.15em;
+      border-radius: 2px;
+    }
+    .ref-link:hover {
+      background: #dbeafe;
+      text-decoration: underline;
+    }
+    .ref-unknown {
+      color: #dc2626;
+      font-weight: bold;
+      background: #fee2e2;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+    ol, ul {
+      margin: 1em 0;
+      padding-left: 2.5em;
+      line-height: 1.8;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    .latex-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5em auto;
+    }
+    .latex-figure .latex-image {
+      display: inline-block;
+      margin: 0.5em;
+      vertical-align: middle;
+    }
+    .latex-figure {
+      margin: 2em 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .latex-figure .figure-content {
+      margin-bottom: 0.75em;
+      line-height: normal;
+    }
+    .latex-figure .figure-content > * {
+      vertical-align: middle;
+    }
+    .latex-figure figcaption {
+      font-size: 0.9em;
+      color: #4b5563;
+      font-style: italic;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1>Analysis III</h1>
+        <div class="subtitle">Measure Theory &amp; Integration</div>
+        <a href="../index.html" class="back-link">← Table of Contents</a>
+      </div>
+      <div class="sidebar-nav">
+        <div class="chapter-group expanded">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>1. Measure Theory</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../01-measure-theory/measure-theory.html" class="section-link">Overview</a>
+            <a href="../01-measure-theory/basics.html" class="section-link">Outer Measures</a>
+            <a href="../01-measure-theory/lebesgue-meas.html" class="section-link">Lebesgue Measure</a>
+            <a href="../01-measure-theory/cantor.html" class="section-link">The Cantor Set</a>
+            <a href="../01-measure-theory/measure-spaces.html" class="section-link">Measure Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>2. Integration</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../02-integration/integration.html" class="section-link">Overview</a>
+            <a href="../02-integration/integrals-1.html" class="section-link">Simple Functions</a>
+            <a href="../02-integration/integrals-2.html" class="section-link">General Functions</a>
+            <a href="../02-integration/convergence.html" class="section-link">Convergence Theorems</a>
+            <a href="../02-integration/inequality-party.html" class="section-link">Integral Inequalities</a>
+            <a href="../02-integration/lp_spaces.html" class="section-link">Lᵖ Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>3. Product Measures</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../03-fubini/fubini_ch.html" class="section-link">Overview</a>
+            <a href="../03-fubini/fubini.html" class="section-link">Fubini-Tonelli</a>
+            <a href="../03-fubini/integrals-3.html" class="section-link">Product Measures</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>4. Differentiation I</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../04-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../04-differentiation-1/covering.html" class="section-link">Vitali Covering</a>
+            <a href="../04-differentiation-1/monotone.html" class="section-link">Monotone Functions</a>
+            <a href="../04-differentiation-1/BV_on_R.html" class="section-link">Bounded Variation</a>
+            <a href="../04-differentiation-1/FTOC.html" class="section-link">FTC for Lebesgue</a>
+            <a href="../04-differentiation-1/HL.html" class="section-link">Hardy-Littlewood</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>5. Differentiation I (cont)</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../05-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../05-differentiation-1/r-nik.html" class="section-link">Radon-Nikodym</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>6. Differentiation II</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-differentiation-2/diff-2.html" class="section-link">Overview</a>
+            <a href="../06-differentiation-2/vector-measures.html" class="section-link">Vector Measures</a>
+            <a href="../06-differentiation-2/r-nik.html" class="section-link">Radon-Nikodym</a>
+            <a href="../06-differentiation-2/besi.html" class="section-link">Besicovitch</a>
+            <a href="../06-differentiation-2/densities.html" class="section-link">Densities</a>
+            <a href="../06-differentiation-2/diff-measures.html" class="section-link">Measure Derivatives</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>7. Riesz Representation</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-riesz/riesz.html" class="section-link">Overview</a>
+            <a href="../06-riesz/riesz_functional.html" class="section-link">Riesz Representation</a>
+            <a href="../06-riesz/LCH_spaces.html" class="section-link">LCH Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>8. Integral Formulas</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../07-formulas/formulas.html" class="section-link">Overview</a>
+            <a href="../07-formulas/hausdorff_meas.html" class="section-link">Hausdorff Measures</a>
+            <a href="../07-formulas/lippy.html" class="section-link">Lipschitz Maps</a>
+            <a href="../07-formulas/rademacher.html" class="section-link">Rademacher</a>
+            <a href="../07-formulas/coarea-prereq.html" class="section-link">Coarea Prerequisites</a>
+            <a href="../07-formulas/coarea.html" class="section-link">Coarea Formula</a>
+            <a href="../07-formulas/area-prereq.html" class="section-link">Area Prerequisites</a>
+            <a href="../07-formulas/area-formula.html" class="section-link">Area Formula</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>9. Extension Results</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../08-ext-res/ext-res.html" class="section-link">Overview</a>
+            <a href="../08-ext-res/taylor_thm_integral_remainder.html" class="section-link">Taylor's Theorem</a>
+            <a href="../08-ext-res/whitney-cover.html" class="section-link">Whitney Covering</a>
+            <a href="../08-ext-res/whitney-partition-of-unity.html" class="section-link">Partition of Unity</a>
+            <a href="../08-ext-res/whitney-decomposition.html" class="section-link">Decomposition</a>
+            <a href="../08-ext-res/whitney-extension-theorem.html" class="section-link">Extension Theorem</a>
+            <a href="../08-ext-res/whitney-extension-proof.html" class="section-link">Extension Proof</a>
+            <a href="../08-ext-res/whitney-extension-applications.html" class="section-link">Applications</a>
+            <a href="../08-ext-res/whitney-extension.html" class="section-link">Summary</a>
+            <a href="../08-ext-res/more-bump.html" class="section-link">More Bump Functions</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <main class="main-content">
+      <h2>Whitney's Extension Theorem</h2>
+<p>In this section we present the full version of Whitney's Extension Theorem, which we state somewhat imprecisely as follows.</p>
+<p>Let $A \subset \R^n$ be a proper nonempty closed subset, and let $f : A \to \R$ 
+be a continuous function. 
+Then Whitney's Extension Theorem states that $f$ is the restriction of a $C^m$ function $F : \R^n \to \R$ if there is a collection of continuous functions 
+$\{f^{(\alpha)} : \alpha \in \N^n, |\alpha| \leq m\}$ defined on $A$ which satisfy certain compatibility conditions which arise naturally from Taylor's theorem.</p>
+<h3>The Language of Jets</h3>
+<p>We have to introduce some technical language in order to get some more properties out of the extension operator.</p>
+<div class="theorem-box definition-box" id="def:jets">
+  <div class="theorem-header"><strong>Definition ?</strong> ($m$-jets)</div>
+  <div class="theorem-content">Let $A \subseteq \R^n$ be a nonempty closed subset, and let $m \in \Z^+$. An <em>$m$-jet</em> on $A$ is a collection of continuous functions 
+    $\{f^{(\alpha)} : \alpha\in \N^n \text{ and } |\alpha| \leq m\} \subset C^0(A)$
+    which are indexed by multi-indices of order at most $m$.
+<p>We will commonly denote an $m$-jet on $A$ by $f^\bullet = \left( f^{(\alpha)} \right)_{|\alpha| \leq m}$.</div>
+</div></p>
+<p>The following is the key example of an $m$-jet.</p>
+<div class="theorem-box example-box collapsible-box collapsed" id="ex:jets_from_Cm_functions" data-collapsible-id="collapsible-ex:jets_from_Cm_functions">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-ex:jets_from_Cm_functions')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Example ?</strong> (Jets from $C^m$ functions)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-ex:jets_from_Cm_functions">Let $U \subseteq \R^n$ be an open set.
+    Then for each $f\in C^m(U)$ and each compact subset $K \subseteq U$, the collection of functions $\left( D^\alpha f|_K \right)_{|\alpha| \leq m}$ is an $m$-jet on $K$.</div>
+</div>
+<div class="theorem-box remark-box collapsible-box collapsed" id="rmk:how_to_think_about_jets" data-collapsible-id="collapsible-rmk:how_to_think_about_jets">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-rmk:how_to_think_about_jets')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong> (How to think about $m$-jets in this context)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-rmk:how_to_think_about_jets">The previous example also shows us how to think about $m$-jets in this context.
+<p>Let $A \subseteq \R^n$ be a nonempty closed subset, and let $\{ f^{(\alpha)} : |\alpha| \leq m\}$ be an $m$-jet on $A$.
+Following the example above, we can think of $f^{(0)}$ as the ``original'' function which we are tying to extend, and for each multi-index $\alpha$ with $1 \leq |\alpha| \leq m$, 
+we can think of $f^{(\alpha)}$ as the candidate for the $\alpha^{\text{th}}$ derivative of the extension $F$ on the set $A$.</div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:jets_are_normed_vector_spaces">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Jets are Banach Spaces)</div>
+  <div class="theorem-content">Let $A \subseteq \R^n$ be a nonempty closed subset, and let $m \in \Z^+$.
+    Let $J^m(A)$ be the set of all $m$-jets on $A$.
+    Show that $J^m(A)$ is a vector space with the obvious addition and scalar multiplication operations defined by
+    \[ \left(f^{(\alpha)} + g^{(\alpha)}\right)_{|\alpha| \leq m} := \left(f^{(\alpha)}\right)_{|\alpha| \leq m} + \left(g^{(\alpha)}\right)_{|\alpha| \leq m} \]
+    and
+    \[ \left(c f^{(\alpha)}\right)_{|\alpha| \leq m} := c \left(f^{(\alpha)}\right)_{|\alpha| \leq m} \]
+    for all $c \in \R$ and all $m$-jets $\left(f^{(\alpha)}\right)_{|\alpha| \leq m}$ and $\left(g^{(\alpha)}\right)_{|\alpha| \leq m}$ on $A$.
+<p>Furthermore, for each compact set $K \subset \R^n$, the function
+    \[ \| \cdot \|_{J^m(K)} : J^m(K) \to [0,\infty), \quad \left\| \left(f^{(\alpha)}\right)_{|\alpha| \leq m} \right\|_{J^m(K)} := \max_{|\alpha| \leq m} \left\| f^{(\alpha)} \right\|_{C^0(K)} \]
+    is a norm on $J^m(K)$, and with this norm $J^m(K)$ is a Banach space.</div>
+</div></p>
+<div class="proof-box collapsed" data-proof-id="proof-num-0">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-0')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-0">
+    The fact that $J^m(A)$ is a vector space with these operations follows immediately from the definition of $m$-jets and the fact that $C^0(A)$ is a vector space.
+<p>Now we will show that $\| \cdot \|_{J^m(K)}$ is a norm on $J^m(K)$.
+    See that if $\left\| \left(f^{(\alpha)}\right)_{|\alpha| \leq m} \right\|_{J^m(K)} = 0$, then $f^{(\alpha)} = 0$ for each $|\alpha| \leq m$, so $\left(f^{(\alpha)}\right)_{|\alpha| \leq m}$ is the zero jet; hence $\| \cdot \|_{J^m(K)}$ is positive definite.</p>
+<p>Now if $\left(f^{(\alpha)}\right)_{|\alpha| \leq m}$ and $c \in \R$, then
+    \[ \left\| c \left(f^{(\alpha)}\right)_{|\alpha| \leq m} \right\|_{J^m(K)} = \max_{|\alpha| \leq m} \left\| c f^{(\alpha)} \right\|_{C^0(K)} = |c| \max_{|\alpha| \leq m} \left\| f^{(\alpha)} \right\|_{C^0(K)} = |c| \left\| \left(f^{(\alpha)}\right)_{|\alpha| \leq m} \right\|_{J^m(K)} \]
+    so $\| \cdot \|_{J^m(K)}$ is absolutely homogeneous.</p>
+<p>Finally, if $\left(f^{(\alpha)}\right)_{|\alpha| \leq m}$ and $\left(g^{(\alpha)}\right)_{|\alpha| \leq m}$ are two $m$-jets on $K$, then
+    \begin{align*}
+        \left\| \left(f^{(\alpha)} + g^{(\alpha)}\right)_{|\alpha| \leq m} \right\|_{J^m(K)} &= \max_{|\alpha| \leq m} \left\| f^{(\alpha)} + g^{(\alpha)} \right\|_{C^0(K)} \\
+            &\leq \max_{|\alpha| \leq m} \left( \left\| f^{(\alpha)} \right\|_{C^0(K)} + \left\| g^{(\alpha)} \right\|_{C^0(K)} \right) \\
+            &\leq \max_{|\alpha| \leq m} \left\| f^{(\alpha)} \right\|_{C^0(K)} + \max_{|\alpha| \leq m} \left\| g^{(\alpha)} \right\|_{C^0(K)} \\
+            &=  \left\| \left(f^{(\alpha)}\right)_{|\alpha| \leq m} \right\|_{J^m(K)} +  \left\| \left(g^{(\alpha)}\right)_{|\alpha| \leq m} \right\|_{J^m(K)}
+    \end{align*}
+    where we have used the triangle inequality for the $C^0$ norm.
+    Therefore $\| \cdot \|_{J^m(K)}$ satisfies the triangle inequality, and hence is a norm on $J^m(K)$.</p>
+<p>Finally, we will show that $J^m(K)$ is complete with respect to this norm.
+    If $\left\{ \left(f^{(\alpha)}_j\right)_{|\alpha| \leq m} \right\}_{j=1}^\infty$ is a Cauchy sequence in $J^m(K)$, then for each multi-index $\alpha$ with $|\alpha| \leq m$,
+    the sequence $\left\{f^{(\alpha)}_j\right\}_{j=1}^\infty$ is a Cauchy sequence in $C^0(K)$ and hence converges to some function $f^{(\alpha)} \in C^0(K)$.
+    The resulting collection of functions $\left(f^{(\alpha)}\right)_{|\alpha| \leq m}$ is an $m$-jet on $K$, 
+    and we see that $\left\{ \left(f^{(\alpha)}_j\right)_{|\alpha| \leq m} \right\}_{j=1}^\infty$ converges to $\left(f^{(\alpha)}\right)_{|\alpha| \leq m}$ in $J^m(K)$.
+    This shows that $J^m(K)$ is complete with respect to the norm $\| \cdot \|_{J^m(K)}$, and hence is a Banach space.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box definition-box" id="def:formal_taylor_polynomial">
+  <div class="theorem-header"><strong>Definition ?</strong> (Formal Taylor Polynomial, Formal Derivative)</div>
+  <div class="theorem-content">Let $A \subseteq \R^n$ be a nonempty closed subset, and let $f^\bullet = \left( f^{(\alpha)} \right)_{|\alpha| \leq m}$ be an $m$-jet on $A$.
+<p>For each $a \in A$, we define the <em>formal Taylor polynomial of</em> $f^\bullet$ <em>at</em> $a$ to be the function $T^m_a f^\bullet : \R^n \to \R$ defined by
+    \[ T^m_a f^\bullet(x) := \sum_{|\alpha| \leq m} \frac{f^{(\alpha)}(a)}{\alpha!} (x - a)^\alpha \qquad \forall\, x\in\R^n. \]</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p><span class="noindent"></span>For each multi-index $\beta$ with $|\beta| \leq m$, we define the <em>formal</em> $\beta^{\text{th}}$ <em>derivative of</em> $f^\bullet$ to be the $m-|\beta|$-jet on $A$ defined by
+    \[ D^\beta f^\bullet := \left( f^{(\alpha+\beta)} \right)_{|\alpha| \leq m - |\beta|}. \]</div>
+</div></p>
+<div class="theorem-box remark-box collapsible-box collapsed" id="rmk:formal_taylor_polynomial_justification" data-collapsible-id="collapsible-rmk:formal_taylor_polynomial_justification">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-rmk:formal_taylor_polynomial_justification')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong> (Justification for the name ``formal Taylor polynomial'' and ``formal derivative'')
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-rmk:formal_taylor_polynomial_justification">Let $U \subseteq \R^n$ be an open set, and let $K \subset U$ be a compact set.
+    Let $f \in C^m(U)$, and let $f^\bullet = \left( D^\alpha f|_K \right)_{|\alpha| \leq m}$ be the $m$-jet on $K$ obtained from $f$ as in Example <span class="ref-unknown" title="Reference not found: ex:jets_from_Cm_functions">[ex:jets_from_Cm_functions?]</span>.
+<p>Then for each $a \in K$, the formal Taylor polynomial of $f^\bullet$ at $a$ is exactly the $m^{\text{th}}$ order Taylor polynomial of $f$ at $a$, i.e.
+    \[ T^m_a f^\bullet = T^m_a f \]
+    because for each multi-index $\alpha$ with $|\alpha| \leq m$, we have $f^{(\alpha)}(a) = D^\alpha f(a)$.</p>
+<p>Similarly, for each multi-index $\beta$ with $|\beta| \leq m$, the formal $\beta^{\text{th}}$ derivative of $f^\bullet$ is exactly the $m-|\beta|$-jet obtained from the $\beta^{\text{th}}$ derivative of $f$, i.e.
+    \[ D^\beta f^\bullet = \left( D^{\alpha+\beta} f|_K \right)_{|\alpha| \leq m - |\beta|} = \left( D^\alpha \left( D^\beta f \right) \right)_{|\alpha| \leq m - |\beta|} \]
+    by using the fact that partial derivatives commute since $f$ is $C^m$.</div>
+</div></p>
+<div class="theorem-box definition-box" id="def:jet_map">
+  <div class="theorem-header"><strong>Definition ?</strong></div>
+  <div class="theorem-content">Let $U \subseteq \R^n$ be an open set, and let $A \subseteq U$ be a closed set.
+    We define the <em>jet map</em> $J^m_A : C^m(U) \to J^m(A)$ by
+    \[ J^m_A(f) := \left( D^\alpha f|_A \right)_{|\alpha| \leq m} \qquad \forall\, f \in C^m(U). \]</div>
+</div>
+<div class="theorem-box definition-box" id="def:jet_remainder">
+  <div class="theorem-header"><strong>Definition ?</strong></div>
+  <div class="theorem-content">Let $A \subseteq \R^n$ be a nonempty closed subset, and let $f^\bullet = \left( f^{(\alpha)} \right)_{|\alpha| \leq m}$ be an $m$-jet on $A$.
+    For each $a \in A$, we define the <em>remainder of</em> $f^\bullet$ <em>at</em> $a$ to be the jet defined by
+    \[ R^m_a f^\bullet = f^\bullet - J^m_A \left( T^m_a f^\bullet \right). \]</div>
+</div>
+<p>Notice that while $f^\bullet$ is an $m$-jet on $A$, the Taylor polynomial $T^m_a f^\bullet$ is a polynomial function defined on $\R^n$, and so we must apply the jet map $J^m$ to $T^m_a f^\bullet$ in order to get an $m$-jet on $A$ which we can subtract from $f^\bullet$.
+This shows the remainder is well-defined as an $m$-jet on $A$.</p>
+<p>The next three exrecises may seem like you are just pushing symbolds around, but all of these properties will be used in the proof of the Whitney's Extension Theorem.</p>
+<div class="theorem-box exercise-box" id="ex:remainder_jet_properties">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Remainder Properties)</div>
+  <div class="theorem-content">Let $A \subseteq \R^n$ be a nonempty closed subset, and let $f^\bullet = \left( f^{(\alpha)} \right)_{|\alpha| \leq m}$ be an $m$-jet on $A$.
+    Then for each $a \in A$ and for each each multi-index $\alpha$ with $|\alpha| \leq m$, we have
+        \[ (R^m_a f)^{(\alpha)}(x) = f^{(\alpha)}(x) - \sum_{|\beta|\leq m-|\alpha|} \frac{f^{(\alpha+\beta)}(a)}{\beta!} (x - a)^\beta \qquad\forall \, x\in \R^n. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-1">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-1')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-1">
+    Fix $a \in A$ and a multi-index $\alpha$ with $|\alpha| \leq m$.
+    Let $x\in \R^n$ be arbitrary.
+    By the definition of the remainder jet, we have
+    \[ (R^m_a f^\bullet)^{(\alpha)}(x) = f^{(\alpha)}(x) - (J^m_A(T^m_a f^\bullet))^{(\alpha)}(x). \]
+    Now by the definition of the jet map and the formal Taylor polynomial, we have
+    \begin{align*}
+        \left(J^m_A (T^m_a f^\bullet))\right)^{(\alpha)}(x) &= D^\alpha (T^m_a f^\bullet)(x) \\
+            &= D^\alpha \left( \sum_{|\beta| \leq m} \frac{f^{(\beta)}(a)}{\beta!} (\cdot - a)^\beta \right)(x) \\
+            &= \sum_{|\beta| \leq m} \frac{f^{(\beta)}(a)}{\beta!} D^\alpha \left( (\cdot - a)^\beta \right)(x) \\
+            &= \sum_{|\beta| \leq m} \frac{f^{(\beta)}(a)}{\beta!} \cdot \left(\begin{cases}
+                0 &\text{if } |\beta| < |\alpha|, \\
+                \frac{\beta!}{(\beta - \alpha)!} (x - a)^{\beta - \alpha} &\text{if } |\beta| \geq |\alpha|
+            \end{cases} \right) \\
+            &= \sum_{|\alpha|\leq |\beta| \leq m} \frac{f^{(\beta)}(a)}{\beta!} \cdot \frac{\beta!}{(\beta - \alpha)!} (x - a)^{\beta - \alpha} \\
+            &= \sum_{|\alpha|\leq |\beta| \leq m} \frac{f^{(\beta)}(a)}{(\beta - \alpha)!} (x - a)^{\beta - \alpha} \\
+            &= \sum_{|\gamma| \leq m - |\alpha|} \frac{f^{(\alpha + \gamma)}(a)}{\gamma!} (x - a)^{\gamma}
+    \end{align*}
+    which we summarize and re-index as
+    \[ (J^m_A (T^m_a f^\bullet))^{(\alpha)}(x) = \sum_{|\beta|\leq m-|\alpha|} \frac{f^{(\alpha+\beta)}(a)}{\beta!} (x - a)^\beta. \]
+<p>Putting these this last equation together with the first gives
+    \[ (R^m_a f^\bullet)^{(\alpha)}(x) = f^{(\alpha)}(x) - \sum_{|\beta|\leq m-|\alpha|} \frac{f^{(\alpha+\beta)}(a)}{\beta!} (x - a)^\beta. \]
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:formal_derivative_of_formal_taylor_polynomial">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Formal Derivative of Formal Taylor Polynomial)</div>
+  <div class="theorem-content">Let $A \subseteq \R^n$ be a nonempty closed subset, and let $f^\bullet = \left( f^{(\alpha)} \right)_{|\alpha| \leq m}$ be an $m$-jet on $A$.
+    Then for each $a \in A$ and for each each multi-index $\alpha$ with $|\alpha| \leq m$, we have
+    \[ D^\beta T^m_a f^\bullet = T^{m-|\beta|}_a (D^\beta f^\bullet) \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-2">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-2')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-2">
+    Let $\alpha$ be a multi-index with $|\alpha| \leq m$, and let $a \in A$ be arbitrary.
+    The second computation in the previous exercise shows 
+    \[ D^\alpha(T^m_a f^\bullet)(x) = \sum_{|\beta| \leq m - |\alpha|} \frac{f^{(\alpha+\beta)}}{\beta!}(x-a)^\beta \qquad \forall \, x\in \R^n \]
+    and the right hand side is by definition the formal $m-|\alpha|$ order Taylor polynomial at $a\in A$ of the formal derivative $D^\alpha f^\bullet$.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<div class="theorem-box exercise-box" id="ex:more_formal_properties">
+  <div class="theorem-header"><strong>Exercise ?</strong> (More Formal Properties)</div>
+  <div class="theorem-content">Let $A \subseteq \R^n$ be a nonempty closed subset, and let $f^\bullet = \left( f^{(\alpha)} \right)_{|\alpha| \leq m}$ be an $m$-jet on $A$. Then for each $a \in A$ and for each each multi-index $\alpha$ with $|\alpha| \leq m$, we have
+    <ol><li>$f^{(\alpha)}(a) = D^\alpha (T^m_a f^\bullet)(a)$, and
+        </li><li>if $b\in A$, then 
+            \[ D^\alpha(T^m_a f^\bullet - T^m_b f^\bullet)(a) = (R^m_b f^\bullet)^{(\alpha)}(a) \]
+        </li><li>and if $b\in A$, then 
+            \[ f^{(\alpha)}(b)(x-b)^{\alpha} = D^\alpha(T^m_b f^\bullet)(a)\cdot (x-a)^{\alpha} \qquad \forall \, x\in \R^n. \]</li></ol></div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-3">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-3')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-3">
+    Fix $a \in A$ and a multi-index $\alpha$ with $|\alpha| \leq m$.
+    By definition of the formal Taylor polynomial, we have
+    \[ T^m_a f^\bullet (x) = \sum_{|\beta| \leq m} \frac{f^{(\beta)}(a)}{\beta!} (x - a)^\beta  \qquad \forall \, x\in \R^n \]
+    so taking derivatives gives
+    \begin{align*}
+        D^\alpha (T^m_a f^\bullet)(x) &= \sum_{|\beta| \leq m} \frac{f^{(\beta)}(a)}{\beta!} \cdot\left(\begin{cases}
+        0 &\text{if } |\beta| < |\alpha|, \\
+        \frac{\beta!}{(\beta - \alpha)!} (x - a)^{\beta - \alpha} &\text{if } |\beta| \geq |\alpha|
+    \end{cases} \right) \\
+        &= \sum_{|\alpha| \leq |\beta| \leq m} \frac{f^{(\beta)}(a)}{(\beta - \alpha)!} (x - a)^{\beta - \alpha}
+    \end{align*}
+    similarly to in the proof of <span class="ref-unknown" title="Reference not found: ex:remainder_jet_properties">[ex:remainder_jet_properties?]</span>.
+<p>Evaluating this at $x=a$ gives
+    \[ D^\alpha (T^m_a f^\bullet)(a) = \frac{f^{(\alpha)}(a)}{0!} = f^{(\alpha)}(a), \]
+    because all other terms vanish; this proves the first assertion.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>Now let $b \in A$ be arbitrary.
+    By exercise <span class="ref-unknown" title="Reference not found: ex:remainder_jet_properties">[ex:remainder_jet_properties?]</span> and <span class="ref-unknown" title="Reference not found: ex:formal_derivative_of_formal_taylor_polynomial">[ex:formal_derivative_of_formal_taylor_polynomial?]</span>, we have
+    \begin{align*}
+        (R^m_b f^\bullet)^{(\alpha)}(a) &= f^{(\alpha)}(a) - \sum_{|\beta|\leq m-|\alpha|} \frac{f^{(\alpha+\beta)}(b)}{\beta!} (a - b)^\beta \\
+            &= f^{(\alpha)}(a) - T^{m-|\alpha|}_b (D^\alpha f^\bullet)(a) \\
+            &= f^{(\alpha)}(a) - D^\alpha (T^m_b f^\bullet)(a). 
+    \end{align*}
+    From the first assertion, we have $f^{(\alpha)}(a) = D^\alpha (T^m_a f^\bullet)(a)$, so we have
+    \[ (R^m_b f^\bullet)^{(\alpha)}(a) = D^\alpha (T^m_a f^\bullet)(a) - D^\alpha (T^m_b f^\bullet)(a) = D^\alpha(T^m_a f^\bullet - T^m_b f^\bullet)(a) \]
+    and the second assertion is proved.</p>
+<p>To prove the third assertion, notice that both
+    \[ f^{(\alpha)}(b) (x-b)^{\alpha} \quad \text{and} \quad D^\alpha(T^m_b f^\bullet)(a) (x-a)^{\alpha} \]
+    are homogeneous polynomials of degree $|\alpha|$ in the variable $x$, so it suffices to check that the coefficients of these polynomials are equal.
+    The Taylor polynomial at $b$ is 
+    \[ T^m_b f^\bullet(x) = \sum_{|\beta| \leq m} \frac{f^{(\beta)}(b)}{\beta!} (x - b)^\beta \qquad \forall \,x\in\R^n \]
+    and the degree-$|\alpha|$ homogeneous part of this polynomial is precisely $\frac{f^{(\alpha)}(b)}{\alpha!} (x - b)^\alpha$.</p>
+<p>But now expanding the same polynomial around $a$ gives
+    \[ T^m_b f^\bullet(x) = \sum_{|\beta| \leq m} \frac{ D^\beta(T^m_b f^\bullet)(a)}{\beta!} (x - a)^\beta \qquad \forall \,x\in\R^n \]
+    and the degree-$|\alpha|$ homogeneous part of this polynomial is precisely $\frac{D^\alpha(T^m_b f^\bullet)(a)}{\alpha!} (x - a)^\alpha$.
+    Equating the homogeneous parts (which is valid since the degree-$|\alpha|$ homogeneous part of a polynomial is unique) gives
+    \[ \frac{f^{(\alpha)}(b)}{\alpha!} (x - b)^\alpha = \frac{D^\alpha(T^m_b f^\bullet)(a)}{\alpha!} (x - a)^\alpha \qquad \forall \, x\in\R^n \]
+    and the third assertion is proved.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box proposition-box" id="prop:remainder_jet_of_Cm_function">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Remainder jet of a $C^m$ function)</div>
+  <div class="theorem-content">Let $U \subseteq \R^n$ be an open set, and let $K \subseteq U$ be a compact set.
+    We consider $f \in C^m(U)$, and let $f^\bullet = J^m_K(f) = \left( D^\alpha f|_K \right)_{|\alpha| \leq m}$ be the $m$-jet on $K$ obtained from $f$ as in Example <span class="ref-unknown" title="Reference not found: ex:jets_from_Cm_functions">[ex:jets_from_Cm_functions?]</span>.
+<p>Then for each multi-index $\alpha$ with $|\alpha| \leq m$, we have 
+    \[ (R^m_a f^\bullet)^\alpha (x) = o(\| x - a \|^{m - |\alpha|}) \quad \text{as } \ x \to a, \ \text{ uniformly for }\  x,a\in K. \]</div>
+</div></p>
+<div class="proof-box collapsed" data-proof-id="proof-num-4">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-4')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-4">
+    Because of exercise <span class="ref-unknown" title="Reference not found: ex:remainder_jet_properties">[ex:remainder_jet_properties?]</span>, we have
+    \[ (R^m_a f^\bullet)^{(\alpha)}(x) = D^\alpha f(x) - \sum_{|\beta|\leq m-|\alpha|} \frac{D^{\alpha+\beta} f(a)}{\beta!} (x - a)^\beta \]
+    for each multi-index $\alpha$ with $|\alpha| \leq m$ and all $x,a \in K$.
+<p>Thus the conclusion is precisely the content of Lemma <span class="ref-unknown" title="Reference not found: lem:taylor_polynomial_uniform_remainder">[lem:taylor_polynomial_uniform_remainder?]</span>, just restated in the language of jets.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box definition-box" id="def:whitney_jet">
+  <div class="theorem-header"><strong>Definition ?</strong> (Whitney Jets)</div>
+  <div class="theorem-content">Let $A \subseteq \R^n$ be a nonempty closed subset, and let $m \in \Z^+$.
+    An $m$-jet $f^\bullet = \left( f^{(\alpha)} \right)_{|\alpha| \leq m}$ on $A$ is called a <em>Whitney $m$-jet</em> if for each compact set $K \subseteq A$ and each multi-index $\alpha$ with $|\alpha| \leq m$, we have
+    \[ (R^m_a f^\bullet)^{(\alpha)}(x) = o(\| x - a \|^{m - |\alpha|}) \quad \text{as } \ x \to a, \ \text{ uniformly for }\  x,a\in K. \tag{W}\]
+<p>We denote the set of all Whitney $m$-jets on $A$ by $\mathcal{W}^m(A)$.</div>
+</div></p>
+<p>While the notation $J^m(A)$ is standard, there is no standard notation for the set of Whitney $m$-jets on $A$, so we have chosen to denote it by $\mathcal{W}^m(A)$.</p>
+<div class="theorem-box example-box collapsible-box collapsed" id="ex:whitney_extension_finite_set" data-collapsible-id="collapsible-ex:whitney_extension_finite_set">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-ex:whitney_extension_finite_set')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Example ?</strong> (Every $m$-jet on a finite set is a Whitney $m$-jet)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-ex:whitney_extension_finite_set">Let $A = \{ a_1, a_2, \ldots, a_k \} \subseteq \R^n$ be a finite set, and let $m \in \Z^+$.
+    Then every $m$-jet on $A$ is a Whitney $m$-jet on $A$, because each point in $A$ is isolated and hence the remainder condition is trivially satisfied.</div>
+</div>
+<div class="theorem-box exercise-box" id="ex:whitney_jets_are_banach_spaces">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Whitney Jets on a compact set are a Banach Space)</div>
+  <div class="theorem-content">Let $K \subseteq \R^n$ be a compact set, and let $m \in \Z^+$.
+    Show that $\mathcal{W}^m(K)$ is a vector subspace of $J^m(K)$.
+<p>Also we define 
+    \[ \| \cdot \|_{\mathcal{W}^m(K)} : \mathcal{W}^m(K) \to [0,\infty), \quad \left\| f^\bullet \right\|_{\mathcal{W}^m(K)} := \| f^\bullet \|_{J^m(K)} + \sup\left\{ \frac{|(R^m_a f^\bullet)^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\}. \]
+    Show that $\| \cdot \|_{\mathcal{W}^m(K)}$ is a norm on $\mathcal{W}^m(K)$, and with this norm $\mathcal{W}^m(K)$ is a Banach space.</div>
+</div></p>
+<div class="proof-box collapsed" data-proof-id="proof-proof-that-cdot-mathcal-w-m-k-is-a-norm-on-mathcal-w-m-k-">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-proof-that-cdot-mathcal-w-m-k-is-a-norm-on-mathcal-w-m-k-')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof that $\| \cdot \|_{\mathcal{W}^m(K)}$ is a norm on $\mathcal{W}^m(K)$</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-proof-that-cdot-mathcal-w-m-k-is-a-norm-on-mathcal-w-m-k-">
+    See that by exercise <span class="ref-unknown" title="Reference not found: ex:remainder_jet_properties">[ex:remainder_jet_properties?]</span>, we have
+    \[ R^m_a (f^\bullet + g^\bullet) = R^m_a f^\bullet + R^m_a g^\bullet \]
+    for each $a \in K$ and each $f^\bullet, g^\bullet \in \mathcal{W}^m(K)$.
+<p>Thus if $f^\bullet, g^\bullet \in \mathcal{W}^m(K)$, then for each multi-index $\alpha$ with $|\alpha| \leq m$ we have 
+    \[ \left(R^m_a (f^\bullet + g^\bullet)\right)^{(\alpha)}(x) = (R^m_a f^\bullet)^{(\alpha)}(x) + (R^m_a g^\bullet)^{(\alpha)}(x) = o(\|x-a\|) \quad \text{as} \ x\to a, \ \text{ uniformly for } x,a \in K. \]
+    This shows that $f^\bullet + g^\bullet$ is a Whitney $m$-jet on $K$, and hence $\mathcal{W}^m(K)$ is closed under addition.</p>
+<p>Similarly $\mathcal{W}^m(K)$ is closed under scalar multiplication, and hence is a vector subspace of $J^m(K)$.</p>
+<p>To show that $\| \cdot \|_{\mathcal{W}^m(K)}$ is a norm on $\mathcal{W}^m(K)$, it suffices to show that the quantity on the right-hand side is a semi-norm on $\mathcal{W}^m(K)$, since we already know that $\| \cdot \|_{J^m(K)}$ is a norm on $J^m(K)$ and hence is a norm on $\mathcal{W}^m(K)$.</p>
+<p>Clearly
+    \[ \sup\left\{ \frac{|(R^m_a f^\bullet)^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\} \geq 0 \]
+    for all $f^\bullet \in \mathcal{W}^m(K)$, and if $f^\bullet = 0 \in \mathcal{W}^m(K)$, then this quantity is zero; hence it is positive semi-definite.</p>
+<p>Now if $f^\bullet \in \mathcal{W}^m(K)$ and $c \in \R$, then
+    \begin{align*}
+        \sup\left\{ \frac{|(R^m_a (c f^\bullet))^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\} &= \sup\left\{ \frac{|c| |(R^m_a f^\bullet)^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\} \\
+            &= |c| \sup\left\{ \frac{|(R^m_a f^\bullet)^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\}
+    \end{align*}
+    which shows that this quantity is absolutely homogeneous.</p>
+<p>Finally, if $f^\bullet, g^\bullet \in \mathcal{W}^m(K)$, then
+    \begin{align*}
+        \sup\left\{ \frac{|(R^m_a (f^\bullet + g^\bullet))^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\} &\leq \sup\left\{ \frac{|(R^m_a f^\bullet)^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\} \\
+            &\qquad + \sup\left\{ \frac{|(R^m_a g^\bullet)^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\}
+    \end{align*}
+    which shows that this quantity satisfies the triangle inequality, and hence is a semi-norm on $\mathcal{W}^m(K)$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="proof-box collapsed" data-proof-id="proof-proof-that-mathcal-w-m-k-is-a-banach-space">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-proof-that-mathcal-w-m-k-is-a-banach-space')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof that $\mathcal{W}^m(K)$ is a Banach space</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-proof-that-mathcal-w-m-k-is-a-banach-space">
+    Now we will show that $\mathcal{W}^m(K)$ is complete with respect to the norm $\| \cdot \|_{\mathcal{W}^m(K)}$.
+    For brevity, we let 
+    \[ S(g^\bullet) := \sup\left\{ \frac{|(R^m_a g^\bullet)^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\} \]
+    for each $g^\bullet \in \mathcal{W}^m(K)$.
+<p>Let $\{ f^\bullet_j \}_{j=1}^\infty \subset \mathcal{W}^m(K)$ be a Cauchy sequence with respect to the norm $\| \cdot \|_{\mathcal{W}^m(K)}$.
+    Then $\{ f^\bullet_j \}_{j=1}^\infty$ is also a Cauchy sequence with respect to the norm $\| \cdot \|_{J^m(K)}$, 
+    and hence converges to some $f^\bullet \in J^m(K)$ since $J^m(K)$ is a Banach space by Exercise <span class="ref-unknown" title="Reference not found: ex:jets_are_banach_spaces">[ex:jets_are_banach_spaces?]</span>.
+    We claim that 
+    \[ \lim_{j\to \infty} \| f^\bullet_j - f^\bullet \|_{\mathcal{W}^m(K)} = 0 \]
+    and that $f^\bullet \in \mathcal{W}^m(K)$.</p>
+<p>Since $\{ f^\bullet_j \}_{j=1}^\infty$ converges to $f^\bullet$ with respect to the norm $\| \cdot \|_{J^m(K)}$ and $\| \cdot \|_{\mathcal{W}^m(K)} = \| \cdot \|_{J^m(K)} + S(\cdot)$, it suffices to show that 
+    \[ \lim_{j\to \infty} S(f^\bullet_j - f^\bullet) = 0. \tag{$\star$}\]</p>
+<p>Let $\epsilon > 0$ be arbitrary.
+    Since $\{ f^\bullet_j \}_{j=1}^\infty$ is a Cauchy sequence with respect to the norm $\| \cdot \|_{\mathcal{W}^m(K)}$, there exists $N \in \Z^+$ such that for all $j,k \geq N$ we have
+    \[ \| f^\bullet_j - f^\bullet_k \|_{\mathcal{W}^m(K)} < \epsilon. \]
+    Expending this gives
+    \[ \| f^\bullet_j - f^\bullet_k \|_{J^m(K)} + S(f^\bullet_j - f^\bullet_k) < \epsilon \qquad \forall\, j,k \geq N. \]
+    Since both quantities on the left-hand side are non-negative, we have
+    \[ S(f^\bullet_j - f^\bullet_k) < \epsilon \qquad \forall\, j,k \geq N. \]
+    By using the definition of $S(\cdot)$ we see that
+    \[ S(f^\bullet_j - f^\bullet_k) = \sup\left\{ \frac{|(R^m_a (f^\bullet_j - f^\bullet_k))^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\} \]
+    for all $j \in \Z^+$.
+    Thus for all $j,k \geq N$, and for all $x,a \in K$ with $x \neq a$, and each multi-index $\alpha$ with $|\alpha| \leq m$, we have
+    \[ \frac{|(R^m_a (f^\bullet_j - f^\bullet_k))^{(\alpha)}(x)|}{\|x - a\|^{m - |\alpha|}} < \epsilon \]
+    or equivalently
+    \[ \left|(R^m_a (f^\bullet_j - f^\bullet_k))^{(\alpha)}(x)\right| < \epsilon \|x - a\|^{m - |\alpha|}. \tag{$\dagger$}\]</p>
+<p>Now let $x,a \in K$ be such that $x \neq a$, and let $\alpha$ be a multi-index with $|\alpha| \leq m$.
+    Then for all $j,k \geq N$ we have
+    \begin{align*}
+        \left|(R^m_a (f^\bullet_j - f^\bullet_k))^{(\alpha)}(x)\right| &= 
+                \left|(R^m_a f^\bullet_j)^{(\alpha)}(x) - (R^m_a f^\bullet_k)^{(\alpha)}(x)\right| \\
+            &= \left| f_j^{(\alpha)}(x) - f_k^{(\alpha)}(x) + \sum_{|\beta|\leq m-|\alpha|} \frac{f_j^{(\alpha+\beta)}(a) - f_k^{(\alpha+\beta)}(a)}{\beta!} (x - a)^\beta \right|
+    \end{align*}
+    by exercise <span class="ref-unknown" title="Reference not found: ex:remainder_jet_properties">[ex:remainder_jet_properties?]</span> applied to the jet $f^\bullet_j - f^\bullet_k$;
+    for each $j \geq N$ we take the limit of the above as $k \to \infty$ to get
+    \begin{align*}
+        \lim_{k\to \infty}\left|(R^m_a (f^\bullet_j - f^\bullet_k))^{(\alpha)}(x)\right| &= 
+                \left| f_j^{(\alpha)}(x) - f^{(\alpha)}(x) + \sum_{|\beta|\leq m-|\alpha|} \frac{f_j^{(\alpha+\beta)}(a) - f^{(\alpha+\beta)}(a)}{\beta!} (x - a)^\beta \right| \\
+            &= \left| (R^m_a (f^\bullet_j - f^\bullet))^{(\alpha)}(x) \right|    
+    \end{align*}
+    by using exercise <span class="ref-unknown" title="Reference not found: ex:remainder_jet_properties">[ex:remainder_jet_properties?]</span> applied to the jet $f^\bullet_j - f^\bullet$.
+    Thus for each $j \geq N$ we have
+    \[ \left| (R^m_a (f^\bullet_j - f^\bullet))^{(\alpha)}(x) \right| = \lim_{k\to \infty}\left|(R^m_a (f^\bullet_j - f^\bullet_k))^{(\alpha)}(x)\right| \leq \epsilon \|x - a\|^{m - |\alpha|} \]
+    by using the inequality $(\dagger)$.
+    Rearranging this gives
+    \[ \frac{\left| (R^m_a (f^\bullet_j - f^\bullet))^{(\alpha)}(x) \right|}{\|x - a\|^{m - |\alpha|}} \leq \epsilon \qquad \forall\, j \geq N \]
+    Since $x,a \in K$ such that $x \neq a$ and $\alpha$ with $|\alpha| \leq m$ were arbitrary, we have
+    \[ \sup\left\{ \frac{\left| (R^m_a (f^\bullet_j - f^\bullet))^{(\alpha)}(x) \right|}{\|x - a\|^{m - |\alpha|}} : x,a \in K, x \neq a, |\alpha| \leq m \right\} \leq \epsilon \qquad \forall \, j\geq N. \]
+    That is, for all $j \geq N$ we have
+    \[ S(f^\bullet_j - f^\bullet) \leq \epsilon. \]
+    Since $\epsilon > 0$ was arbitrary, we have shown that $\lim_{j\to \infty} S(f^\bullet_j - f^\bullet) = 0$, which proves the claim $(\star)$.</p>
+<p>As a result, we have shown that $\{ f^\bullet_j \}_{j=1}^\infty$ converges to $f^\bullet$ with respect to the norm $\| \cdot \|_{\mathcal{W}^m(K)}$.
+    The reverse triangle inequality gives
+    \[ S(f^\bullet) \leq S(f^\bullet - f^\bullet_j) + S(f^\bullet_j) \qquad \forall\, j \in \Z^+ \]
+    and hence $S(f^\bullet) < \infty$, since both terms on the right are uniformly bounded for all $j \geq N$.
+    Thus $f^\bullet \in \mathcal{W}^m(K)$, and we have shown that $\{ f^\bullet_j \}_{j=1}^\infty$ converges to $f^\bullet$ in $\mathcal{W}^m(K)$.</p>
+<p>Since $\{ f^\bullet_j \}_{j=1}^\infty$ was an arbitrary Cauchy sequence in $\mathcal{W}^m(K)$, we have shown that $\mathcal{W}^m(K)$ is complete with respect to the norm $\| \cdot \|_{\mathcal{W}^m(K)}$, and hence is a Banach space.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box exercise-box" id="ex:whitney_jet_frechet_space">
+  <div class="theorem-header"><strong>Exercise ?</strong> (Whitney Jets on a non-compact set are a Fréchet Space)</div>
+  <div class="theorem-content">Let $A \subseteq \R^n$ be a nonempty closed subset, and let $m \in \Z^+$.
+    Then for each compact set $K \subseteq A$, we consider the semi-norm $\| \cdot \|_{\mathcal{W}^m(K)}$ on $\mathcal{W}^m(A)$.
+<p>Let $\{ K_j \}_{j=1}^\infty$ be an increasing sequence of compact sets such that $\bigcup_{j=1}^\infty K_j = A$.
+    Show that the family of semi-norms $\{ \| \cdot \|_{\mathcal{W}^m(K_j)} \}_{j=1}^\infty$ defines a Fréchet space structure on $\mathcal{W}^m(A)$, and that this structure does not depend on the choice of the sequence $\{ K_j \}_{j=1}^\infty$.</div>
+</div></p>
+<div class="proof-box collapsed" data-proof-id="proof-num-7">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-7')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-7">
+    See that for each compact set $K \subseteq A$, the function $\| \cdot \|_{\mathcal{W}^m(K)}$ is a semi-norm on $\mathcal{W}^m(A)$ because it is a norm on $\mathcal{W}^m(K)$.
+<p>The fact that $\{ \| \cdot \|_{\mathcal{W}^m(K_j)} \}_{j=1}^\infty$ defines a Fréchet space structure on $\mathcal{W}^m(A)$ is shown in exactly the same way 
+    that we proved $C^0(A)$ is a Fréchet space with respect to the family of semi-norms $\{ \| \cdot \|_{C^0(K_j)} \}_{j=1}^\infty$.</p>
+<p>The fact that this structure does not depend on the choice of the sequence $\{ K_j \}_{j=1}^\infty$ is shown in exactly the same way that we showed that the Fréchet space structure on $C^0(A)$ does not depend on the choice of the sequence $\{ K_j \}_{j=1}^\infty$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<h3>Whitney's $C^m$ Extension Theorem</h3>
+<div class="theorem-box theorem-box" id="thm:whitney_extension_theorem">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Whitney's $C^m$ Extension Theorem, 1934)</div>
+  <div class="theorem-content">Let $A \subseteq \R^n$ be a nonempty closed subset, and let $m \in \Z^+$.
+    Then there exists a continuous linear map
+    \[ W : \mathcal{W}^m(A) \to C^m(\R^n) \]
+    such that for each $f^\bullet \in \mathcal{W}^m(A)$, and each multi-index $\alpha$ with $|\alpha| \leq m$, we have
+    \[ D^\alpha (W(f^\bullet))(x) = f^{(\alpha)}(x) \qquad \forall\, x \in A. \]
+    Moreover, for each $f^\bullet \in \mathcal{W}^m(A)$, the function $W(f^\bullet)$ is $C^\infty$ on $\R^n \setminus A$.</div>
+</div>
+<div class="theorem-box remark-box collapsible-box collapsed" id="rmk:continuity_of_extension_operator" data-collapsible-id="collapsible-rmk:continuity_of_extension_operator">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-rmk:continuity_of_extension_operator')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong> (Continuity of the Extension Operator)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-rmk:continuity_of_extension_operator">The continuity of the extension operator $W$ means that if $K \subseteq A$ is a compact set, and $Q \subset \R^n$ is an open cube containing $K$ and we set 
+    \[ \lambda := \sup_{x\in Q} \dist(x,K) \]
+    then there is a constant $C_{m,n,\lambda} > 0$ such that for each $f^\bullet \in \mathcal{W}^m(A)$, we have
+    \[ \| W(f^\bullet) \|_{C^m(Q)} \leq C_{m,n,\lambda} \| f^\bullet \|_{\mathcal{W}^m(K)}. \]</div>
+</div>
+<div class="theorem-box example-box collapsible-box collapsed" id="ex:whitney_extension_condition_cannot_be_weakened" data-collapsible-id="collapsible-ex:whitney_extension_condition_cannot_be_weakened">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-ex:whitney_extension_condition_cannot_be_weakened')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Example ?</strong> (The Condition (W) cannot be weakened)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-ex:whitney_extension_condition_cannot_be_weakened">The property (W) in the definition of Whitney $m$-jets cannot be weakened to the condition 
+    \[ \lim_{x\to a} \frac{(R^m_a f^\bullet)^{(\alpha)}(x)}{\|x-a\|^{m - |\alpha|}} = 0 \tag{$*$}\]
+    for each $a \in A$ and each multi-index $\alpha$ with $|\alpha| \leq m$.
+    (This is condition (W) without the requirement that this limit must be uniform on compact subsets of $A$.)
+<p>We will show that there exist a $m$-jet satisfying this weaker condition but which do not admit a $C^m$ extension to $\R^n$.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>In this example, we take $n = m = 1$. 
+    Choose sequences of positive real numbers $\{ x_j \}_{j=1}^\infty$ and $\{ y_j \}_{j=1}^\infty$ such that $x_j \to 0$ and $y_j \to 0$ as $j \to \infty$, and such that the line segment joining 
+    $(x_j, y_j)$ and $(x_{j+1}, y_{j+1})$ has slope $(-1)^j$ for each $j \in \Z^+$.</p>
+<figure class="latex-figure" id="fig:whitney_extension_counterexample">
+  <div class="figure-content"><img src="figures/bierstone.png" alt="Figure" class="latex-image"></div>
+</figure>
+<p>Let $A := \{ 0 \} \cup \{ x_j : j \in \Z^+ \}$.
+    Define a jet $f^\bullet \in J^1(A)$ by defining $f^{(0)}(0) := 0$ and $f^{(0)}(x_j) = y_j$ for each $j \in \Z^+$, and also $f^{(1)}\equiv 0$. 
+    Since each point in $A$ is isolated, the limit condition $(*)$ is trivially satisfied if $x = x_k$ for some $k \in \Z^+$.
+    Also see that
+    \[ (R^1_0f^\bullet)^0(x_j) = y_j \quad \text{ and }\quad (R^1_0f^\bullet)^1(x_j) = 0 \qquad \forall\, j\in \Z^+, \]
+    so the limit condition $(*)$ is satisfied at $0$ as well, since $y_j \to 0$ as $j \to \infty$.</p>
+<p>However, we claim there is no $C^1$ extension of $f^{(0)}$ to $\R$. 
+    See that
+    \[ \frac{y_{k+1} - y_k}{x_{k+1} - x_k} = (-1)^k \qquad \forall\, k \in \Z^+ \]
+    and this does not approach a limit as $k \to \infty$.
+    Thus there can be no extension $f$ with $f'$ continuous at $0$, and hence there cannot be a $C^1$ extension of $f^{(0)}$ to $\R$.</div>
+</div></p>
+<div class="theorem-box theorem-box" id="thm:whitney_simplified">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Simplified Version of Whitney's $C^m$ Extension Theorem)</div>
+  <div class="theorem-content">Let $A \subseteq \R^n$ be a nonempty proper closed subset, and let $m \in \Z^+$.
+    Let $f^{(0)} : A \to \R$ be a continuous function, and assume that there exist continuous functions $( f^{(\alpha)} )_{1\leq|\alpha| \leq m}$ defined on $A$ such that the collection $( f^{(\alpha)} )_{|\alpha| \leq m}$ is a Whitney $m$-jet on $A$.
+<p>Then there exists a function $f \in C^m(\R^n)$ such that for each multi-index $\alpha$ with $|\alpha| \leq m$, we have
+    \[ D^\alpha f(x) = f^{(\alpha)}(x) \qquad \forall\, x \in A. \]
+    Moreover, the function $f$ can be chosen so that it is $C^\infty$ on $\R^n \setminus A$.
+    We say that $f$ is a $C^m$ <em>extension</em> of $f^{(0)}$ to $\R^n$.</div>
+</div></p>
+<p>Of course, the converse of this theorem is also true --- see that if $f \in C^m(\R^n)$ is an extension of $f^{(0)}$ to $\R^n$, i.e. $f|_A = f^{(0)}$, 
+then the collection $\{ D^\alpha f|_A : |\alpha| \leq m\}$ is a Whitney $m$-jet on $A$ by Proposition <span class="ref-unknown" title="Reference not found: prop:remainder_jet_of_Cm_function">[prop:remainder_jet_of_Cm_function?]</span>.</p>
+    </main>
+  </div>
+  
+  <script>
+    function toggleChapter(element) {
+      element.parentElement.classList.toggle('expanded');
+    }
+    
+    // Highlight current page in sidebar
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPath = window.location.pathname;
+      const links = document.querySelectorAll('.section-link');
+      links.forEach(link => {
+        if (currentPath.endsWith(link.getAttribute('href').split('/').pop())) {
+          link.classList.add('active');
+          // Expand parent chapter
+          const group = link.closest('.chapter-group');
+          if (group) group.classList.add('expanded');
+        }
+      });
+    });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('Restoring proof collapse states...');
+      try {
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        const currentPage = window.location.pathname;
+        const pageOpen = openProofs[currentPage] || [];
+        
+        console.log('Current page:', currentPage);
+        console.log('Open proof IDs stored:', pageOpen);
+        console.log('Found ' + pageOpen.length + ' open proofs for this page');
+        
+        document.querySelectorAll('.proof-box').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          console.log('Checking proof:', proofId, 'Should be open:', pageOpen.includes(proofId));
+          if (pageOpen.includes(proofId)) {
+            box.classList.remove('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'true');
+          } else {
+            box.classList.add('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        const pageBoxes = openBoxes[currentPage] || [];
+        
+        console.log('Open box IDs stored:', pageBoxes);
+        
+        document.querySelectorAll('.collapsible-box').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          console.log('Checking box:', boxId, 'Should be open:', pageBoxes.includes(boxId));
+          if (pageBoxes.includes(boxId)) {
+            box.classList.remove('collapsed');
+          } else {
+            box.classList.add('collapsed');
+          }
+        });
+        
+        console.log('Proof states restored');
+      } catch (e) {
+        console.error('Error restoring collapse state:', e);
+      }
+    });
+    
+    function toggleProof(proofId) {
+      const proofContent = document.getElementById(proofId);
+      const proofBox = proofContent.closest('.proof-box');
+      proofBox.classList.toggle('collapsed');
+      
+      const button = proofBox.querySelector('.proof-toggle');
+      button.setAttribute('aria-expanded', !proofBox.classList.contains('collapsed'));
+      
+      saveProofState();
+    }
+    
+    function toggleSubproof(subproofId) {
+      const subproofContent = document.getElementById(subproofId);
+      const subproof = subproofContent.closest('.subproof');
+      subproof.classList.toggle('collapsed');
+      
+      const button = subproof.querySelector('.subproof-toggle');
+      button.setAttribute('aria-expanded', !subproof.classList.contains('collapsed'));
+    }
+    
+    function saveProofState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        if (!openProofs[currentPage]) {
+          openProofs[currentPage] = [];
+        }
+        
+        openProofs[currentPage] = [];
+        document.querySelectorAll('.proof-box:not(.collapsed)').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          if (proofId) {
+            openProofs[currentPage].push(proofId);
+          }
+        });
+        
+        localStorage.setItem('openProofs', JSON.stringify(openProofs));
+        console.log('Saved proof state (open proofs):', openProofs[currentPage]);
+      } catch (e) {
+        console.error('Error saving collapse state:', e);
+      }
+    }
+    
+    function toggleCollapsible(collapsibleId) {
+      const content = document.getElementById(collapsibleId);
+      const box = content.closest('.collapsible-box');
+      box.classList.toggle('collapsed');
+      
+      saveCollapsibleState();
+    }
+    
+    function saveCollapsibleState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        if (!openBoxes[currentPage]) {
+          openBoxes[currentPage] = [];
+        }
+        
+        openBoxes[currentPage] = [];
+        document.querySelectorAll('.collapsible-box:not(.collapsed)').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          if (boxId) {
+            openBoxes[currentPage].push(boxId);
+          }
+        });
+        
+        localStorage.setItem('openBoxes', JSON.stringify(openBoxes));
+      } catch (e) {
+        console.error('Error saving box state:', e);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        const proofBoxes = document.querySelectorAll('.proof-box');
+        const anyExpanded = Array.from(proofBoxes).some(box => !box.classList.contains('collapsed'));
+        
+        proofBoxes.forEach(box => {
+          if (anyExpanded) {
+            box.classList.add('collapsed');
+          } else {
+            box.classList.remove('collapsed');
+          }
+        });
+        
+        saveProofState();
+      }
+    });
+    
+    document.querySelectorAll('a.ref-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.background = '#fef3c7';
+          target.style.transition = 'background 0.3s ease';
+          setTimeout(() => { target.style.background = ''; }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

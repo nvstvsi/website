@@ -1,0 +1,296 @@
+\section{Decomposition of Open Sets into Cubes}
+
+In this section, we will construct a particularly nice decomposition of an open set into almost disjoint cubes.
+We will then use this decomposition to construct a nice partition of unity for the open set, which will be a crucial tool for defining the extension operators in the next section.
+
+\subsection{The Whitney Decomposition}
+
+\begin{definition}[Dyadic Cubes]
+    \label{def:dyadic_cubes}
+For each $k \in \Z$, we let $\mathcal{D}_k$ be the collection of all dyadic closed cubes of the form
+\[ Q = \{ (x_1, \ldots, x_n) \in\R^n :m_j 2^{-k} \leq x_j \leq (m_j+1) 2^{-k} \text{ for } j=1,\ldots,n \} \]
+where $m_j \in \Z$ for each $j=1,\ldots,n$.
+
+The set of all dyadic cubes is defined as $\mathcal{D} = \bigcup_{k\in \Z} \mathcal{D}_k$.
+\end{definition}
+
+\begin{exercise}[Basic Facts about Dyadic Cubes]
+    \label{ex:dyadic_cubes}
+    \begin{enumerate}[(i)]
+        \item Let $k\in \Z$. 
+            For each $Q \in \mathcal{D}_k$ there exists $2^n$ almost disjoint cubes $Q_1, \ldots, Q_{2^n} \in \mathcal{D}_{k+1}$ such that $Q = \bigcup_{j=1}^{2^n} Q_j$.
+
+        \item If $Q,Q' \in \mathcal{D}$ are such that the interiors of $Q$ and $Q'$ have nonempty intersection, then either $Q \subseteq Q'$ or $Q' \subseteq Q$.
+            In other words, the dyadic cubes are either almost disjoint or one is contained in the other.
+
+        \item Let $k\in \Z$. For each $Q \in \mathcal{D}_k$ there are exactly $3^n - 1$ other cubes in $\mathcal{D}_k$ which intersect $Q$.            
+    \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+    \begin{enumerate}
+        \item Let $Q \in \mathcal{D}_k$ be given by
+            \[ Q = \{ (x_1, \ldots, x_n) \in\R^n :m_j 2^{-k} \leq x_j \leq (m_j+1) 2^{-k} \text{ for } j=1,\ldots,n \}. \]
+            For each $j=1,\ldots,n$, we define the intervals
+            \[ I_j^0 = [m_j 2^{-k}, (m_j + \tfrac{1}{2}) 2^{-k}] \qquad \text{and} \qquad I_j^1 = [(m_j + \tfrac{1}{2}) 2^{-k}, (m_j + 1) 2^{-k}]. \]
+            Then we can define the cube $Q_{(i_1, \ldots, i_n)}$ for each $i_j \in \{0,1\}$ by
+            \[ Q_{(i_1, \ldots, i_n)} = I_1^{i_1} \times \cdots \times I_n^{i_n}. \]
+            Then we have 
+            \[Q = \bigcup_{i_1, \ldots, i_n \in \{0,1\}} Q_{(i_1, \ldots, i_n)}, \]
+            and the collection of cubes $\{Q_{(i_1, \ldots, i_n)}\}_{i_j \in \{0,1\}}$ are pairwise almost disjoint and belong to $\mathcal{D}_{k+1}$.
+            Furthermore, there are $2^n$ such cubes, as claimed.
+
+        \item Let $Q,Q' \in \mathcal{D}$ be such that $Q \cap Q' \neq \varnothing$.
+            Then there exist $k,k' \in \Z$ such that $Q \in \mathcal{D}_k$ and $Q' \in \mathcal{D}_{k'}$.
+            Without loss of generality, we can assume that $k \leq k'$. 
+            We write $Q$ and $Q'$ as
+            \[ Q = \prod_{j=1}^n [m_j 2^{-k}, (m_j+1) 2^{-k}] \qquad \text{and} \qquad Q' = \prod_{j=1}^n [m'_j 2^{-k'}, (m'_j+1) 2^{-k'}] \]
+            for some integers $m_1, \ldots, m_n$ and $m'_1, \ldots, m'_n$.
+
+            Since the interiors of $Q$ and $Q'$ have nonempty intersection, there exists a point $x = (x_1, \ldots, x_n)$ in their common interior. 
+            Then for each $j=1,\ldots,n$, we have
+            \[ m_j 2^{-k} < x_j < (m_j + 1) 2^{-k} \qquad \text{and}\qquad  m'_j 2^{-k'} < x_j < (m'_j + 1) 2^{-k'}. \]
+            Since $k \leq k'$, we have $2^{-k} \geq 2^{-k'}$, and so for each $j=1,\ldots,n$ the interval $[m_j 2^{-k}, (m_j+1) 2^{-k}]$ contains the interval $[m'_j 2^{-k'}, (m'_j + 1) 2^{-k'}]$.
+            Therefore, we have $Q' \subseteq Q$, as claimed.
+
+        \item Write
+            \[ Q = \prod_{i=1}^n [m_i 2^{-k},(m_i+1)2^{-k}] \]
+            for some $(m_1,\dots,m_n)\in\mathbb{Z}^n$. 
+            If 
+            \[ Q' = \prod_{i=1}^n [m_i' 2^{-k},(m_i'+1)2^{-k}] \in \mathcal{D}_k \]
+            is such that $Q' \cap Q \neq \varnothing$, then for each $j=1,\dots,n$ we must have $|m_j - m_j'| \leq 1$, so that $m'_j \in \{m_j-1,m_j,m_j+1\}$.
+
+            Thus if $Q' \in \mathcal{D}_k$ is such that $Q' \cap Q \neq \varnothing$, then there are $3^n$ possible choices for the vector $(m_1',\dots,m_n')$, and hence there are $3^n$ cubes in $\mathcal{D}_k$ which intersect $Q$.
+            However, one of these cubes is $Q$ itself, so there are exactly $3^n - 1$ other cubes in $\mathcal{D}_k$ which intersect $Q$ as claimed.
+    \end{enumerate}
+
+\end{proof}
+
+\begin{definition}[Adjacent Cubes]
+    \label{def:adjacent_cubes}
+    Two cubes $Q,Q' \subset \R^n$ are said to be adjacent if $Q$ and $Q'$ are almost disjoint but $\partial Q \cap \partial Q' \neq \varnothing$.
+    In other words, $Q$ and $Q'$ are adjacent if their interiors are disjoint but they share a common boundary point.
+\end{definition}
+
+\begin{proposition}[Whitney Decomposition]
+    \label{thm:whitney_decomposition}
+    Let $A \subset \R^n$ be a non-empty proper closed subset.
+    Then there exists a countable collection of almost disjoint dyadic closed cubes $\{Q_j\}_{j=1}^\infty$ such that
+    \begin{enumerate}[(a)]
+        \item $\displaystyle A^c = \bigcup_{j=1}^\infty Q_j$, and
+        \item for each $j\in\Z^+$, we have \[ \diam Q_j \leq \dist(Q_j, A) \leq 4 \diam Q_j. \]
+    \end{enumerate}
+    As a consequence, note that
+    \begin{enumerate}[(a)]
+        \setcounter{enumi}{2}
+        \item if $j,k\in\Z^+$ are such that $Q_j$ and $Q_k$ are adjacent, then 
+            \[ \frac{1}{4} \leq \frac{\diam Q_j}{\diam Q_k} \leq 4. \]
+    \end{enumerate}
+    As a further consequence, note that
+    \begin{enumerate}[(a)]
+        \setcounter{enumi}{3}
+        \item for each $j\in\Z^+$, there are at most $12^n - 4^n$ cubes in the collection which are adjacent to $Q_j$.
+    \end{enumerate}
+    The collection of dyadic cubes $\{Q_j\}_{j=1}^\infty$ is called a \textit{Whitney decomposition} of the open set $A^c$.
+\end{proposition}
+
+In other words, the key property (b) says the size of a cube in the Whitney decomposition is comparable to its distance from the set $A$.
+
+\begin{proof}[Proof of (a) and (b)]
+    For each $k \geq 1$, we let 
+    \[ \Omega_k := \left\{ x\in A^c : 2\sqrt{n} 2^{-k} < \dist(x, A) \leq 4 \sqrt{n}\cdot 2^{-k} \right\} \]
+    and see that $ \displaystyle A^c = \bigcup_{k=1}^\infty \Omega_k$.
+
+    We define $\mathcal{F}$ to be the collection of all closed cubes $Q \subset \R^n$ such that there exists $k \geq 1$ such that $Q \in \mathcal{D}_k$ and $Q \cap \Omega_k \neq \varnothing$.
+    We claim that property (b) holds for the cubes in $\mathcal{F}$.
+
+    Let $Q \in \mathcal{F}$, and let $k\geq 1$ be such that $Q \in \mathcal{D}_k$ and $Q \cap \Omega_k \neq \varnothing$.
+    Then choose $x \in Q \cap \Omega_k$, and observe that
+    \begin{align*} 
+        \diam Q = \sqrt{n}2^{-k} &\leq \dist(x, A) - \sqrt{n}2^{-k} \\
+            &= \dist(x, A) - \diam Q \\
+            &\leq \dist(Q,A) \\
+            &\leq 4\sqrt{n}2^{-k} \\
+            &= 4\diam Q 
+    \end{align*}
+    which gives \[ \diam Q \leq \dist(Q,A) \leq 4\diam Q \]
+    as claimed.
+
+    We also claim that
+    \[ A^c = \bigcup_{Q\in \mathcal{F}} Q. \]
+    Note that each cube in $\mathcal{F}$ is contained in $A^c$, since it has distance at least $\diam Q$ from $A$.
+    Thus we have $\bigcup_{Q\in \mathcal{F}} Q \subseteq A^c$.
+
+    Conversely, let $x \in A^c$ be given.
+    Then there exists $k\geq 1$ such that $x \in \Omega_k$, and so there exists a cube $Q \in \mathcal{D}_k$ such that $x \in Q$.
+    Since $x \in \Omega_k$, we have $\dist(x, A) > 2\sqrt{n} 2^{-k}$, and so $Q \cap \Omega_k \neq \varnothing$.
+    Thus $Q \in \mathcal{F}$, and so $x \in \bigcup_{Q\in \mathcal{F}} Q$.
+    Since $x$ was arbitrary, we have $A^c \subseteq \bigcup_{Q\in \mathcal{F}} Q$, and so $A^c = \bigcup_{Q\in \mathcal{F}} Q$ as claimed.
+
+            \vspace{2mm}
+
+    Thus the collection $\mathcal{F}$ satisfies properties (a) and (b).
+    The problem is that the cubes in $\mathcal{F}$ are not almost disjoint.
+    Recall that by Exercise \ref{ex:dyadic_cubes}, if $Q_1, Q_2 \in \mathcal{F}$ and $Q_1^\circ \cap Q_2^\circ \neq \varnothing$, then either $Q_1 \subseteq Q_2$ or $Q_2 \subseteq Q_1$.
+    That is, two cubes in $\mathcal{F}$ either have disjoint interiors or one is contained in the other.
+    
+    Therefore for each cube $Q \in \mathcal{F}$, we let $Q^{\text{max}}$ be the maximal cube in $\mathcal{F}$ which contains $Q$; such a cube exists and is unique by the previous observation.
+    By maximality and our previous observation, the maximal cubes have pairwise disjoint interiors, and hence are almost disjoint.
+    Noting that the collection $\mathcal{F}$ is countable, we can enumerate the maximal cubes as $\{Q_j\}_{j=1}^\infty$.
+    Then $\{Q_j\}_{j=1}^\infty$ is a Whitney cover of $A^c$ because
+    \begin{itemize}
+        \item the cubes $\{ Q_j\}_{j=1}^\infty$ are almost disjoint by construction;
+        \item we have $\displaystyle A^c = \bigcup_{Q\in \mathcal{F}} Q = \bigcup_{j=1}^\infty Q_j$; and
+        \item each cube $Q_j$ belongs to $\mathcal{F}$, and hence satisfies $\diam Q_j \leq \dist(Q_j, A) \leq 4\diam Q_j$.
+    \end{itemize}
+\end{proof}
+
+\begin{proof}[Proof of (c) and (d)]
+    \begin{enumerate}[(a)]
+        \setcounter{enumi}{2}
+        \item Suppose $j,k \geq 1$ are such that the cubes $Q_j$ and $Q_k$ are adjacent.
+            Then $Q_j$ and $Q_k$ are almost disjoint, but $\partial Q_j \cap \partial Q_k \neq \varnothing$, and so $\dist(Q_j,Q_k) = 0$.
+            Then we see that
+            \[ \diam Q_j \leq \dist(Q_j, A) \leq \dist(Q_j, Q_k) + \dist(Q_k, A) \leq 0 + 4\diam Q_k \]
+            which gives $\diam Q_j \leq 4\diam Q_k$.
+
+            By symmetry, we also have $\diam Q_k \leq 4\diam Q_j$, and hence 
+            \[\frac{1}{4} \leq \frac{\diam Q_j}{\diam Q_k} \leq 4\]
+            as desired.
+
+        \item Let $j\in\Z^+$ be arbitrary. 
+            Note that the largest number of dyadic cubes adjacent to $Q_j$ is obtained when all of the adjacent cubes have the smallest possible size.
+            By part (c), the smallest possible size of a cube adjacent to $Q_j$ is $\frac{1}{4}\diam Q_j$.
+            
+            We claim that for each $Q \in \mathcal{D}_k$ there are at most $4^n$ cubes in $\{Q_j\}_{j=1}^\infty$ with diameter $\geq \frac{1}{4}\diam Q$ which are contained in $Q$.
+
+        \begin{proof}[Proof of Claim]
+            Let $Q \in \mathcal{D}_k$ be arbitrary.
+            Then each cube $Q_j$ with $\diam Q_j \geq \frac{1}{4}\diam Q$ which is contained in $Q$ must belong to $\mathcal{D}_k$, or $\mathcal{D}_{k-1}$, or $\mathcal{D}_{k-2}$.
+            We cannot have $Q_j \in \mathcal{D}_{k-3}$ because then $\diam Q_j < \frac{1}{4}\diam Q$, and we cannot have $Q_j \in \mathcal{D}_{k+1}$ because then $\diam Q_j > 4\diam Q$ and hence $Q_j$ cannot be contained in $Q$.
+
+            In the first case, there is a unique cube in $\mathcal{D}_k$ which is equal to $Q$, so there is at most one cube in $\{Q_j\}_{j=1}^\infty$ with diameter $\geq \frac{1}{4}\diam Q$ which is contained in $Q$ and belongs to $\mathcal{D}_k$.
+
+            In the second case where $Q_j \in \mathcal{D}_{k-1}$, there are at most $2^n$ cubes in $\mathcal{D}_{k-1}$ which are contained in $Q$, and hence at most $2^n$ cubes in $\{Q_j\}_{j=1}^\infty$ with diameter $\geq \frac{1}{4}\diam Q$ which are contained in $Q$ and belong to $\mathcal{D}_{k-1}$.
+
+            In the third case where $Q_j \in \mathcal{D}_{k-2}$, there are at most $4^n$ cubes in $\mathcal{D}_{k-2}$ which are contained in $Q$, and hence at most $4^n$ cubes in $\{Q_j\}_{j=1}^\infty$ with diameter $\geq \frac{1}{4}\diam Q$ which are contained in $Q$ and belong to $\mathcal{D}_{k-2}$.
+        \end{proof}
+
+        Combining the previous claim with exercise \ref{ex:dyadic_cubes} (c) shows that there are at most $4^n(3^n-1)=12^n - 4^n$ cubes in the collection which are adjacent to $Q_j$.
+    \end{enumerate}
+\end{proof}
+
+\begin{corollary}
+    \label{cor:whitney_cover_dilation}    
+    Let $A \subseteq \R^n$ be a non-empty proper closed subset, and let $\{Q_j\}_{j=1}^\infty$ be the Whitney decomposition of $A^c$ given by Proposition \ref{thm:whitney_decomposition}.
+
+    Fix $0 < \varepsilon < \frac{2}{5}$. 
+    For each $j\in\Z^+$, let $Q_j^* = (1+\varepsilon) Q_j$ be the cube obtained by dilating $Q_j$ by a factor of $1+\varepsilon$ about its center.
+    
+\vspace{2mm}
+
+    \noindent Then for each $j\in\Z^+$, we have $Q_j^* \subseteq A^c$.
+    Also if $j,k\in\Z^+$ are such that $Q_j \cap Q_k = \varnothing$, then $Q_j^* \cap Q^*_k = \varnothing$.
+
+    Furthermore, 
+    \[ \Chi_{A^c} \leq \sum_{j=1}^\infty \Chi_{Q^*_j} \leq 2^n\Chi_{A^c}. \]
+\end{corollary}
+
+\begin{proof}
+    Let $j\in\Z^+$ be arbitrary.
+    Then we have $Q_j^* = (1+\varepsilon) Q_j$, and since each cube adjacent to $Q_j$ has diameter at least $\frac{1}{4}\diam Q_j$, we see that $Q_j^*$ is contained in the union of $Q_j$ and the cubes adjacent to $Q_j$.
+    Since each cube adjacent to $Q_j$ is contained in $A^c$, we have $Q_j^* \subseteq A^c$ as claimed.
+
+    Moreover, see that 
+    \[ A^c = \bigcup_{j=1}^\infty Q_j \subseteq \bigcup_{j=1}^\infty Q_j^* \]
+    implies that 
+    \[ \Chi_{A^c} \leq \Chi_{\bigcup_{j=1}^\infty Q_j^*} = \sum_{j=1}^\infty \Chi_{Q_j^*} \]
+    which is the first inequality.
+
+    \vspace{2mm}
+
+    Suppose now that $j,k\in\Z^+$ are such that $Q_j \cap Q_k = \varnothing$.
+    Then $Q_j$ and $Q_k$ are not adjacent, and since $Q_j^*$ is contained in the union of $Q_j$ and the cubes adjacent to $Q_j$, we have $Q_j^* \cap Q_k = \varnothing$. 
+    We claim that in fact $Q_j^* \cap Q_k^* = \varnothing$.
+    
+    \begin{proof}[Proof of Claim]
+        Since $Q_j^*$ is contained in the union of $Q_j$ and the cubes adjacent to $Q_j$, and since $Q_k^*$ is contained in the union of $Q_k$ and the cubes adjacent to $Q_k$, we see that for the intersection $Q_j^* \cap Q_k^*$ to be nonempty, there must be a cube in the Whitney decomposition which is adjacent to both $Q_j$ and $Q_k$.
+        Let $Q_l$ be a cube in the Whitney decomposition which is adjacent to both $Q_j$ and $Q_k$.
+        Then by part (c) of Proposition \ref{thm:whitney_decomposition}, we have
+        \[ \frac{1}{4} \leq \frac{\diam Q_j}{\diam Q_l} \leq 4 \qquad \text{and} \qquad \frac{1}{4} \leq \frac{\diam Q_k}{\diam Q_l} \leq 4. \]
+        Without loss of generality, we can assume that $\diam Q_j \leq \diam Q_k$.
+        Then we must have $\diam Q_k \leq 16 \diam Q_j$ by combining the previous inequalities, which implies that 
+        \[ \diam Q_k = c\cdot \diam Q_j \qquad\text{for some } c \in \{ 1,2, 4, 8, 16\}. \]
+        \textbf{DRAW PICTURE}
+
+        Assume that $\diam Q_k = \diam Q_j$.
+        Then $Q_j$ and $Q_k$ are non-adjacent dyadic cubes in $\mathcal{D}_N$ for some $N\in\Z$, and hence must have $\dist(Q_j, Q_k) \geq 2^{-N} = \ell(Q_j)$.
+        (Why? The dyadic cubes in $\mathcal{D}_N$ are arranged in a grid, and two cubes in $\mathcal{D}_k$ are adjacent or separated by at least one cube in $\mathcal{D}_N$.)
+        Hence, the cubes $Q_j^*$ and $Q_k^*$ have a positive distance
+        \begin{align*}
+            \dist(Q_j^* ,Q_k^*) &> \dist\left( \left(\frac{7}{5}Q_j\right) , \left(\frac{7}{5}Q_k\right) \right) \\
+                &\geq \dist(Q_j ,Q_k) - \frac{1}{2}\frac{2}{5}\ell(Q_j) - \frac{1}{2}\frac{2}{5}\ell(Q_k) \\
+                &\geq \ell(Q_j) - \frac{1}{5}\ell(Q_j) - \frac{1}{5}\ell(Q_k) \\
+                &= \frac{3}{5}\ell(Q_j) > 0
+        \end{align*}
+        where the first inequality follows from the fact that $Q_j^* = (1+\varepsilon) Q_j$ and $1 + \varepsilon < \frac{7}{5}$, and the second inequality follows from the triangle inequality.
+
+        Now assume that $\diam Q_k = 2 \diam Q_j$.
+        Then $Q_j$ and $Q_k$ are non-adjacent dyadic cubes in $\mathcal{D}_{N+1}$ and $\mathcal{D}_{N}$ respectively for some $N\in\Z$, and hence must have $\dist(Q_j, Q_k) \geq 2^{-N-1} = \frac{1}{2}\ell(Q_k)$.
+        (Why? Since $Q_k\in \mathcal{D}_{N}$ we see that $Q_k$ is a union of $2^n$ cubes in $\mathcal{D}_{N+1}$, and hence by identical reasoning as in the previous case with one of these cubes in $\mathcal{D}_{N+1}$ we see that $Q_j$ and $Q_k$ must be separated by at least one cube in $\mathcal{D}_{N+1}$, which has side length $\ell(Q_j) = \frac{1}{2}\ell(Q_k)$.)
+        Hence the cubes $Q_j^*$ and $Q_k^*$ have a positive distance
+        \begin{align*}
+            \dist(Q_j^* ,Q_k^*) &> \dist\left( \left(\frac{7}{5}Q_j\right) , \left(\frac{7}{5}Q_k\right) \right) \\
+                &\geq \dist(Q_j ,Q_k) - \frac{1}{2}\frac{2}{5}\ell(Q_j) - \frac{1}{2}\frac{2}{5}\ell(Q_k) \\
+                &\geq \frac{1}{2}\ell(Q_k) - \frac{1}{5}\ell(Q_j) - \frac{1}{5}\ell(Q_k) \\
+                &= \frac{3}{10}\ell(Q_k) - \frac{1}{10}\ell(Q_k) = \frac{1}{5}\ell(Q_k) > 0.
+        \end{align*}
+
+        Now assume that $\diam Q_k = 4 \diam Q_j$.
+        Then $Q_j$ and $Q_k$ are non-adjacent dyadic cubes in $\mathcal{D}_{N+2}$ and $\mathcal{D}_{N}$ respectively for some $N\in\Z$, and hence must have $\dist(Q_j, Q_k) \geq 2^{-N-2} = \frac{1}{4}\ell(Q_k)$.
+        (Why? Since $Q_k\in \mathcal{D}_{N-2}$ we see that $Q_k$ is a union of $2^{2n}$ cubes in $\mathcal{D}_{N}$, and hence by identical reasoning as in the previous case with one of these cubes in $\mathcal{D}_{N}$ we see that $Q_j$ and $Q_k$ must be separated by at least one cube in $\mathcal{D}_{N}$, which has side length $\ell(Q_j)$.)
+        Hence the cubes $Q_j^*$ and $Q_k^*$ have a positive distance
+        \begin{align*}
+            \dist(Q_j^* ,Q_k^*) &> \dist\left( \left(\frac{7}{5}Q_j\right) , \left(\frac{7}{5}Q_k\right) \right) \\
+                &\geq \dist(Q_j ,Q_k) - \frac{1}{2}\frac{2}{5}\ell(Q_j) - \frac{1}{2}\frac{2}{5}\ell(Q_k) \\
+                &\geq \frac{1}{4}\ell(Q_k) - \frac{1}{5}\ell(Q_j) - \frac{1}{5}\ell(Q_k) \\
+                &= \frac{5}{20} \ell(Q_k) - \frac{1}{20}\ell(Q_k) - \frac{4}{20}\ell(Q_k) = 0.
+        \end{align*}
+
+        In the cases that $\diam Q_k = 8 \diam Q_j$ or $\diam Q_k = 16 \diam Q_j$, the cubes $Q_j$ and $Q_k$ must have distance at least $ \frac{1}{4}\ell(Q_k)$, because the smallest cube adjacent to $Q_k$ has side length at least $\frac{1}{4}\ell(Q_k)$.
+        In these cases, the cubes $Q^*_j$ and $Q^*_k$ have a positive distance, as 
+        \begin{align*}
+            \dist(Q_j^* ,Q_k^*) &\geq \dist\left( \left(\frac{7}{5}Q_j\right) , \left(\frac{7}{5}Q_k\right) \right) \\
+                &\geq \dist(Q_j ,Q_k) - \frac{1}{2}\frac{2}{5}\ell(Q_j) - \frac{1}{2}\frac{2}{5}\ell(Q_k) \\
+                &\geq \frac{1}{4}\ell(Q_k) - \frac{1}{5}\ell(Q_j) - \frac{1}{5}\ell(Q_k) \\
+                &= \frac{1}{20}\ell(Q_k) - \frac{1}{5}\ell(Q_j) 
+        \end{align*}
+        and in the case $\diam Q_k = 8 \diam Q_j$ we have $\ell(Q_j) = \frac{1}{8}\ell(Q_k)$, and in the case $\diam Q_k = 16 \diam Q_j$ we have $\ell(Q_j) = \frac{1}{16}\ell(Q_k)$, so that in either case we have $\dist(Q_j^* ,Q_k^*) > 0$.
+
+        This case analysis shows that if $Q_j \cap Q_k = \emptyset$, then $Q_j^*$ and $Q_k^*$ are disjoint, as claimed.
+    \end{proof}
+
+    It remains to prove the final inequality.
+
+    \vspace{2mm}
+
+    We claim that the maximum number of pairwise adjacent cubes in the Whitney decomposition such that their dilations by a factor of $1+\varepsilon$ contain a common point is at most $2^n$.
+
+    \begin{proof}[Proof of Claim]
+        Assume that there are cubes $Q_{j_1}, \ldots, Q_{j_M}$ in the Whitney decomposition, and that the intersection of their dilations is nonempty, i.e. $Q_{j_1}^* \cap \cdots \cap Q_{j_M}^* \neq \emptyset$.
+        By the contrapositive of the previous claim, we see that the intersection of any pair of cubes in the collection $\{Q_{j_1}, \ldots, Q_{j_M}\}$ is nonempty.
+        If $M < 2^n$, then we are done.
+        The only way to have $M \geq 2^n$ is if the cubes $Q_{j_1}, \ldots, Q_{j_M}$ all have a common corner vertex, and hence are all adjacent to each other, and this forces $M = 2^n$.
+    \end{proof}
+
+    In particular, for each point $x \in A^c$, there are at most $2^n$ cubes in the collection $\{Q_j^*\}_{j=1}^\infty$ which contain $x$, and hence
+    \[ \sum_{j=1}^\infty \Chi_{Q_j^*}(x) \leq 2^n \]
+    for each $x \in A^c$ as claimed.
+
+    If $x \in A$, then $x$ cannot belong to any of the cubes in the Whitney decomposition (as their union equals $A^c$), and hence for each $j\in\Z^+$ we have $x \notin Q_j^*$, since $Q_j^*$ is contained in the union of $Q_j$ and the cubes adjacent to $Q_j$.
+    Thus, for each $x \in A$, we have $\sum_{j=1}^\infty \Chi_{Q_j^*}(x) = 0$, so that
+    \[ \sum_{j=1}^\infty \Chi_{Q_j^*}(x) = 0 = 2^n \Chi_{A^c}(x) \]
+    as claimed. 
+
+    This completes the proof of the final inequality, and hence the proof of the corollary.
+\end{proof}

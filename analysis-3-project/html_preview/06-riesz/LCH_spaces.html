@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LCH_spaces</title>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '0.8em',
+      packages: {'[+]': ['ams']},
+      macros: {
+        R: '\\mathbb{R}',
+        C: '\\mathbb{C}',
+        N: '\\mathbb{N}',
+        Z: '\\mathbb{Z}',
+        Q: '\\mathbb{Q}',
+        E: '\\mathbb{E}',
+        F: '\\mathbb{F}',
+        S: '\\mathbb{S}',
+        H: '\\mathcal{H}',
+        L: '\\mathcal{L}',
+        dif: '\\,\\mathrm{d}',
+        supp: '\\operatorname{supp}',
+        proj: '\\operatorname{proj}',
+        Id: '\\operatorname{Id}',
+        Span: '\\operatorname{span}',
+        graph: '\\operatorname{graph}',
+        dist: '\\operatorname{dist}',
+        diam: '\\operatorname{diam}',
+        avg: '\\operatorname{avg}',
+        div: '\\operatorname{div}',
+        vol: '\\operatorname{vol}',
+        ord: '\\operatorname{ord}',
+        Chi: '\\mathbf{1}',
+        sub: '\\subseteq',
+        mres: '\\downharpoonright',
+        ddag: '\\ddagger',
+        dag: '\\dagger',
+        norm: ['\\left\\| #1 \\right\\|', 1],
+        abs: ['\\left| #1 \\right|', 1],
+        set: ['\\left\\{ #1 \\right\\}', 1],
+        inner: ['\\langle #1, #2 \\rangle', 2],
+        floor: ['\\lfloor #1 \\rfloor', 1],
+        ceil: ['\\lceil #1 \\rceil', 1],
+        llbracket: '\\unicode{x27E6}',
+        rrbracket: '\\unicode{x27E7}',
+        bigskull: '\\unicode{x1F480}',
+        skull: '\\unicode{x2620}',
+        mathwitch: '\\unicode{x1F9D9}',
+        pumpkin: '\\unicode{x1F383}',
+        mathpumpkin: '\\unicode{x1F383}',
+        bigpumpkin: '\\unicode{x1F383}',
+        mathghost: '\\unicode{x1F47B}',
+        mathcat: '\\unicode{x1F408}',
+        mathbat: '\\unicode{x1F987}',
+        esssup: '\\operatorname{ess\\,sup}',
+        essinf: '\\operatorname{ess\\,inf}',
+        Lip: '\\operatorname{Lip}',
+        pd: ['\\frac{\\partial#1}{\\partial#2}', 2],
+        od: ['\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}', 2],
+        dashint: '\\mathchoice{\\rlap{-}\\!\\int}{\\rlap{\\raise.15ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}',
+        eurologo: '\\unicode{x20AC}',
+        starredbullet: '\\unicode{x2726}',
+        grimace: '\\unicode{x1F62C}',
+        textthing: '\\unicode{x2639}',
+        noway: '\\unicode{x26D4}',
+        warning: '\\unicode{x26A0}',
+        danger: '\\unicode{x26A0}',
+        textxswup: '\\unicode{x2195}',
+        textxswdown: '\\unicode{x2195}',
+        decoone: '\\unicode{x2756}',
+        decotwo: '\\unicode{x2767}',
+        decothreeleft: '\\unicode{x2619}',
+        decothreeright: '\\unicode{x2767}',
+        decofourleft: '\\unicode{x261A}',
+        decofourright: '\\unicode{x261B}',
+        floweroneleft: '\\unicode{x2740}',
+        floweroneright: '\\unicode{x2740}',
+        lefthand: '\\unicode{x261C}',
+        righthand: '\\unicode{x261E}',
+        decosix: '\\unicode{x2766}',
+        bomb: '\\unicode{x1F4A3}',
+        caution: '\\unicode{x2621}',
+        leftblackhand: '\\unicode{x261A}',
+        rightblackhand: '\\unicode{x261B}',
+        leafleft: '\\unicode{x2618}',
+        leafright: '\\unicode{x2618}',
+        leafNW: '\\unicode{x2618}',
+        leafNE: '\\unicode{x2618}',
+        leafSE: '\\unicode{x2618}',
+        leafSW: '\\unicode{x2618}',
+        aldineleft: '\\unicode{x2619}',
+        aldineright: '\\unicode{x2767}',
+        aldine: '\\unicode{x2766}',
+        aldinesmall: '\\unicode{x2767}',
+        aldinesmallrevert: '\\unicode{x2619}',
+        aldinesmallup: '\\unicode{x2766}',
+        grappe: '\\unicode{x2766}',
+        rightgrappe: '\\unicode{x2767}',
+        leftgrappe: '\\unicode{x2619}',
+        oldpilcrowone: '\\unicode{x00B6}',
+        oldpilcrowtwo: '\\unicode{x00B6}',
+        oldpilcrowthree: '\\unicode{x00B6}',
+        oldpilcrowfour: '\\unicode{x00B6}',
+        oldpilcrowfive: '\\unicode{x00B6}',
+        oldpilcrowsix: '\\unicode{x00B6}'
+      }
+    },
+    startup: {
+      pageReady: () => {
+        return MathJax.startup.defaultPageReady().then(() => {
+          console.log('MathJax ready');
+        });
+      }
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+  <script>
+  (function() {
+    window.addEventListener('beforeunload', function() {
+      saveProofState();
+      saveCollapsibleState();
+    });
+    
+    const eventSource = new EventSource('http://localhost:35729/reload-stream');
+    
+    eventSource.onmessage = function(event) {
+      if (event.data === 'reload') {
+        console.log('📝 File updated, saving state and reloading...');
+        saveProofState();
+        saveCollapsibleState();
+        setTimeout(() => {
+          window.location.reload();
+        }, 50);
+      }
+    };
+    
+    eventSource.onerror = function() {
+      console.log('⚠️  Auto-reload server not available. Run node watch.js to enable auto-reload.');
+      eventSource.close();
+    };
+    
+    console.log('🔄 Auto-reload enabled');
+  })();
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+    
+    /* Layout with sidebar */
+    .page-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      width: 280px;
+      background: #fff;
+      border-right: 1px solid #e0e0e0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px 0;
+      font-size: 14px;
+    }
+    
+    .sidebar-header {
+      padding: 15px 20px 25px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .sidebar-header h1 {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 5px 0;
+    }
+    
+    .sidebar-header .subtitle {
+      font-size: 0.85em;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .sidebar-header .back-link {
+      display: block;
+      font-size: 0.8em;
+      color: #666;
+      text-decoration: none;
+      margin-top: 12px;
+    }
+    
+    .sidebar-header .back-link:hover {
+      color: #1a1a1a;
+    }
+    
+    .sidebar-nav {
+      padding: 10px 0;
+    }
+    
+    .chapter-group {
+      margin-bottom: 2px;
+    }
+    
+    .chapter-title {
+      padding: 12px 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chapter-title:hover {
+      background: #f5f5f5;
+    }
+    
+    .chapter-title .toggle {
+      font-size: 0.65em;
+      color: #999;
+      transition: transform 0.2s;
+    }
+    
+    .chapter-group.expanded .chapter-title .toggle {
+      transform: rotate(90deg);
+    }
+    
+    .section-list {
+      display: none;
+      padding: 5px 0;
+      background: #f8f8f8;
+    }
+    
+    .chapter-group.expanded .section-list {
+      display: block;
+    }
+    
+    .section-link {
+      display: block;
+      padding: 8px 20px 8px 35px;
+      font-size: 0.85em;
+      color: #555;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+    }
+    
+    .section-link:hover {
+      background: #f0f0f0;
+      color: #1a1a1a;
+    }
+    
+    .section-link.active {
+      background: #e8e8e8;
+      border-left-color: #333;
+      color: #000;
+      font-weight: 500;
+    }
+    
+    /* Main content area */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      max-width: 900px;
+      padding: 40px 60px;
+    }
+    
+    @media (max-width: 1100px) {
+      .sidebar {
+        width: 240px;
+      }
+      .main-content {
+        margin-left: 240px;
+        padding: 30px 40px;
+      }
+    }
+    
+    @media (max-width: 800px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+      .page-layout {
+        flex-direction: column;
+      }
+    }
+    
+    h2, h3, h4 {
+      margin-top: 2em;
+      margin-bottom: 0.75em;
+      color: #000;
+      font-weight: 600;
+    }
+    h2 { font-size: 1.5em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.1em; }
+    p {
+      margin: 1em 0;
+      text-indent: 2em;
+    }
+    p:first-of-type,
+    h2 + p,
+    h3 + p,
+    h4 + p,
+    .theorem-box + p,
+    .proof-box + p {
+      text-indent: 0;
+    }
+    .noindent + p,
+    p:has(> .noindent:first-child) {
+      text-indent: 0 !important;
+    }
+    .noindent {
+      display: none;
+    }
+    .theorem-box {
+      margin: 1.75em 0;
+      padding: 1.25em;
+      border-left: 5px solid #16a34a;
+      background: linear-gradient(to top, #bbf7d0 0%, #d1fae5 100%);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .definition-box { border-left-color: #16a34a; background: linear-gradient(to top, #d1fae5 0%, #ecfdf5 100%); }
+    .lemma-box { border-left-color: #1e3a8a; background: linear-gradient(to top, #bfdbfe 0%, #dbeafe 100%); }
+    .corollary-box { border-left-color: #9333ea; background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%); }
+    .proposition-box { border-left-color: #dc2626; background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%); }
+    .remark-box { border-left-color: #64748b; background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%); }
+    .example-box { border-left-color: #0891b2; background: linear-gradient(to top, #a5f3fc 0%, #cffafe 100%); }
+    .construction-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .notation-box { border-left-color: #ca8a04; background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%); }
+    .exercise-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .problem-box { border-left-color: #ec4899; background: linear-gradient(to top, #fbcfe8 0%, #fce7f3 100%); }
+    .theorem-header {
+      margin-bottom: 0.75em;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+    .theorem-header.clickable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .theorem-header.clickable:hover {
+      background: rgba(0,0,0,0.03);
+      margin: -0.5em -0.75em 0.75em -0.75em;
+      padding: 0.5em 0.75em;
+      border-radius: 4px;
+    }
+    .collapsible-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      margin-right: 0.5em;
+      color: #6b7280;
+    }
+    .collapsible-box.collapsed .collapsible-icon {
+      transform: rotate(-90deg);
+    }
+    .collapsible-content {
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+    }
+    .collapsible-box.collapsed .collapsible-content {
+      display: none;
+    }
+    .theorem-content {
+      padding-left: 0.5em;
+      line-height: 1.8;
+    }
+    .proof-box {
+      margin: 1.5em 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .proof-header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      border-radius: 6px 6px 0 0;
+    }
+    .proof-toggle {
+      width: 100%;
+      padding: 0.85em 1.25em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      transition: background 0.15s;
+    }
+    .proof-toggle:hover { background: rgba(0,0,0,0.03); }
+    .proof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      color: #6b7280;
+    }
+    .proof-box.collapsed .proof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .proof-content {
+      padding: 1.25em;
+      line-height: 1.8;
+    }
+    .proof-box.collapsed .proof-content {
+      display: none;
+    }
+    .proof-end {
+      float: right;
+      font-size: 1.3em;
+      margin-left: 0.5em;
+      color: #374151;
+    }
+    .subproof {
+      margin: 1em 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #f9fafb;
+    }
+    .subproof-header {
+      background: linear-gradient(to bottom, #f9fafb 0%, #f3f4f6 100%);
+      border-bottom: 1px solid #d1d5db;
+      border-radius: 4px 4px 0 0;
+    }
+    .subproof-toggle {
+      width: 100%;
+      padding: 0.6em 1em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: background 0.15s;
+    }
+    .subproof-toggle:hover {
+      background: rgba(0,0,0,0.03);
+    }
+    .subproof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.7em;
+      color: #6b7280;
+    }
+    .subproof.collapsed .subproof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .subproof-content {
+      padding: 1em;
+      line-height: 1.7;
+    }
+    .subproof.collapsed .subproof-content {
+      display: none;
+    }
+    .ref-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 0.15em;
+      border-radius: 2px;
+    }
+    .ref-link:hover {
+      background: #dbeafe;
+      text-decoration: underline;
+    }
+    .ref-unknown {
+      color: #dc2626;
+      font-weight: bold;
+      background: #fee2e2;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+    ol, ul {
+      margin: 1em 0;
+      padding-left: 2.5em;
+      line-height: 1.8;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    .latex-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5em auto;
+    }
+    .latex-figure .latex-image {
+      display: inline-block;
+      margin: 0.5em;
+      vertical-align: middle;
+    }
+    .latex-figure {
+      margin: 2em 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .latex-figure .figure-content {
+      margin-bottom: 0.75em;
+      line-height: normal;
+    }
+    .latex-figure .figure-content > * {
+      vertical-align: middle;
+    }
+    .latex-figure figcaption {
+      font-size: 0.9em;
+      color: #4b5563;
+      font-style: italic;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1>Analysis III</h1>
+        <div class="subtitle">Measure Theory &amp; Integration</div>
+        <a href="../index.html" class="back-link">← Table of Contents</a>
+      </div>
+      <div class="sidebar-nav">
+        <div class="chapter-group expanded">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>1. Measure Theory</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../01-measure-theory/measure-theory.html" class="section-link">Overview</a>
+            <a href="../01-measure-theory/basics.html" class="section-link">Outer Measures</a>
+            <a href="../01-measure-theory/lebesgue-meas.html" class="section-link">Lebesgue Measure</a>
+            <a href="../01-measure-theory/cantor.html" class="section-link">The Cantor Set</a>
+            <a href="../01-measure-theory/measure-spaces.html" class="section-link">Measure Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>2. Integration</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../02-integration/integration.html" class="section-link">Overview</a>
+            <a href="../02-integration/integrals-1.html" class="section-link">Simple Functions</a>
+            <a href="../02-integration/integrals-2.html" class="section-link">General Functions</a>
+            <a href="../02-integration/convergence.html" class="section-link">Convergence Theorems</a>
+            <a href="../02-integration/inequality-party.html" class="section-link">Integral Inequalities</a>
+            <a href="../02-integration/lp_spaces.html" class="section-link">Lᵖ Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>3. Product Measures</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../03-fubini/fubini_ch.html" class="section-link">Overview</a>
+            <a href="../03-fubini/fubini.html" class="section-link">Fubini-Tonelli</a>
+            <a href="../03-fubini/integrals-3.html" class="section-link">Product Measures</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>4. Differentiation I</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../04-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../04-differentiation-1/covering.html" class="section-link">Vitali Covering</a>
+            <a href="../04-differentiation-1/monotone.html" class="section-link">Monotone Functions</a>
+            <a href="../04-differentiation-1/BV_on_R.html" class="section-link">Bounded Variation</a>
+            <a href="../04-differentiation-1/FTOC.html" class="section-link">FTC for Lebesgue</a>
+            <a href="../04-differentiation-1/HL.html" class="section-link">Hardy-Littlewood</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>5. Differentiation I (cont)</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../05-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../05-differentiation-1/r-nik.html" class="section-link">Radon-Nikodym</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>6. Differentiation II</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-differentiation-2/diff-2.html" class="section-link">Overview</a>
+            <a href="../06-differentiation-2/vector-measures.html" class="section-link">Vector Measures</a>
+            <a href="../06-differentiation-2/r-nik.html" class="section-link">Radon-Nikodym</a>
+            <a href="../06-differentiation-2/besi.html" class="section-link">Besicovitch</a>
+            <a href="../06-differentiation-2/densities.html" class="section-link">Densities</a>
+            <a href="../06-differentiation-2/diff-measures.html" class="section-link">Measure Derivatives</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>7. Riesz Representation</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-riesz/riesz.html" class="section-link">Overview</a>
+            <a href="../06-riesz/riesz_functional.html" class="section-link">Riesz Representation</a>
+            <a href="../06-riesz/LCH_spaces.html" class="section-link">LCH Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>8. Integral Formulas</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../07-formulas/formulas.html" class="section-link">Overview</a>
+            <a href="../07-formulas/hausdorff_meas.html" class="section-link">Hausdorff Measures</a>
+            <a href="../07-formulas/lippy.html" class="section-link">Lipschitz Maps</a>
+            <a href="../07-formulas/rademacher.html" class="section-link">Rademacher</a>
+            <a href="../07-formulas/coarea-prereq.html" class="section-link">Coarea Prerequisites</a>
+            <a href="../07-formulas/coarea.html" class="section-link">Coarea Formula</a>
+            <a href="../07-formulas/area-prereq.html" class="section-link">Area Prerequisites</a>
+            <a href="../07-formulas/area-formula.html" class="section-link">Area Formula</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>9. Extension Results</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../08-ext-res/ext-res.html" class="section-link">Overview</a>
+            <a href="../08-ext-res/taylor_thm_integral_remainder.html" class="section-link">Taylor's Theorem</a>
+            <a href="../08-ext-res/whitney-cover.html" class="section-link">Whitney Covering</a>
+            <a href="../08-ext-res/whitney-partition-of-unity.html" class="section-link">Partition of Unity</a>
+            <a href="../08-ext-res/whitney-decomposition.html" class="section-link">Decomposition</a>
+            <a href="../08-ext-res/whitney-extension-theorem.html" class="section-link">Extension Theorem</a>
+            <a href="../08-ext-res/whitney-extension-proof.html" class="section-link">Extension Proof</a>
+            <a href="../08-ext-res/whitney-extension-applications.html" class="section-link">Applications</a>
+            <a href="../08-ext-res/whitney-extension.html" class="section-link">Summary</a>
+            <a href="../08-ext-res/more-bump.html" class="section-link">More Bump Functions</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <main class="main-content">
+      <h2>Locally Compact Hausdorff Spaces</h2>
+<p>In this section, we follow Simon.</p>
+<p>We begin by reviewing some definitions and results from general topology.
+Recall a topological space $X$ is said to be <em>Hausdorff</em> if for every pair of distinct points $x,y\in X$, there exist disjoint open sets $U,V \subseteq X$ such that $x\in U$ and $y\in V$.</p>
+<div class="theorem-box lemma-box" id="lem:compact_sets_in_hausdorff_space_are_closed">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Compact Sets in a Hausdorff Space are Closed)</div>
+  <div class="theorem-content">Let $X$ be a Hausdorff space, and let $K \subseteq X$ be a compact set.
+    Then $K$ is closed.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-0">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-0')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-0">
+    Let $x\in X\setminus K$ be arbitrary.
+    For each $y\in K$, there exist disjoint open sets $U_y, V_y \subseteq X$ such that $x\in U_y$ and $y\in V_y$.
+    The collection $\{V_y : y\in K\}$ is an open cover of $K$, and so there exist $y_1, \ldots, y_n \in K$ such that $K \subseteq \bigcup_{j=1}^n V_{y_j}$.
+    Then $U := \bigcap_{j=1}^n U_{y_j}$ is an open set containing $x$ such that $U \cap K = \emptyset$, which shows that $X\setminus K$ is open.
+    Thus $K$ is closed.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<p><div style="margin: 1em 0;"></div></p>
+<div class="theorem-box remark-box collapsible-box collapsed" id="rem:base_case_of_lemma_disjoint_compact_sets_in_hausdorff_space" data-collapsible-id="collapsible-rem:base_case_of_lemma_disjoint_compact_sets_in_hausdorff_space">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-rem:base_case_of_lemma_disjoint_compact_sets_in_hausdorff_space')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong> (Disjoint Compact Sets in a Hausdorff Space can be Separated by Open Sets)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-rem:base_case_of_lemma_disjoint_compact_sets_in_hausdorff_space">In fact we have proven a bit more ---
+If $X$ is a Hausdorff space and $K\subseteq X$ is compact, then
+for each $x\in X\setminus K$, there exist disjoint open sets $U,V \subseteq X$ such that $x\in U$ and $K \subseteq V$.
+Then if $K_2 \subseteq X$ is another compact set such that $K \cap K_2 = \emptyset$, we can repeat this argument to obtain disjoint open sets $U'_x, V'_x \subseteq X$ such that $x\in U'_x$ and $K_2 \subseteq V'_x$ for each $x\in K_2$; 
+compactness of $K_2$ then implies that there exist $x_1, \ldots, x_m \in K_2$ such that $K_2 \subseteq \bigcup_{j=1}^m U'_{x_j}$ and then $V' := \bigcap_{j=1}^m V'_{x_j}$ is an open set containing $K$ such that $V' \cap K_2 = \emptyset$.
+In summary, if $K_1, K_2 \subseteq X$ are disjoint compact sets, then there exist disjoint open sets $U,V \subseteq X$ such that $K_1 \subseteq U$ and $K_2 \subseteq V$.</div>
+</div>
+<p>We have thus proven the base case of the following useful lemma.</p>
+<div class="theorem-box lemma-box" id="lem:disjoint_compact_sets_in_hausdorff_space">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Disjoint Compact Sets in a Hausdorff Space can be Separated by Open Sets)</div>
+  <div class="theorem-content">Let $X$ be a Hausdorff space and let $K_1, K_2, \ldots, K_n \subseteq X$ be compact sets such that $K_i \cap K_j = \emptyset$ for all $i\neq j$.
+    Then there exist disjoint open sets $U_1, U_2, \ldots, U_n \subseteq X$ such that $K_j \subseteq U_j$ for each $j=1,2,\ldots,n$.</div>
+</div>
+<p>We also recall a useful corollary in the case when $X$ is compact.</p>
+<div class="theorem-box corollary-box" id="cor:compact_hausdorff_implies_normal">
+  <div class="theorem-header"><strong>Corollary ?</strong> (Compact Hausdorff Spaces are Normal)</div>
+  <div class="theorem-content">Let $X$ be a compact Hausdorff space. 
+    Then $X$ is <em>normal</em>, i.e. for every disjoint pair of closed sets $K_1,K_2\subseteq X$ , there exists a pair of disjoint open sets $U_1,U_2\subseteq X$ such that $K_1\subseteq U_1$ and $K_2\subseteq U_2$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-1">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-1')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-1">
+    This follows immediately from the fact that if $X$ is compact, then every closed subset of $X$ must be compact.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<p>Recall that a topological space $X$ is said to be <em>locally compact</em> if for each $x\in X$, there exists an open set $U_x \subseteq X$ containing $x$ such that the closure $\overline{U_x}$ is compact.</p>
+<div class="theorem-box lemma-box" id="lem:lch_compact_subset_in_open_set">
+  <div class="theorem-header"><strong>Lemma ?</strong></div>
+  <div class="theorem-content">Let $X$ be a locally compact Hausdorff space, and let $x\in X$. 
+    Then for each open set $U \subseteq X$ containing $x$, there exists an open set $V \subseteq X$ such that $x\in V$, $\overline{V}$ is compact, and $\overline{V} \subseteq U$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-2">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-2')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-2">
+    With $x\in X$ fixed, let $U\subseteq X$ be an open set which contains $x$.
+    Since $X$ is locally compact, there exists an open set $W_0\subseteq X$ containing $x$ such that $\overline{W_0}$ is compact.
+    We define $W := W_0 \cap U$. 
+    Since $\overline{W} \subseteq \overline{W_0}$, we see that the $\overline{W}$ is compact (a closed subset of a compact set is compact).
+<p>By applying Corollary <span class="ref-unknown" title="Reference not found: cor:compact_hausdorff_implies_normal">[cor:compact_hausdorff_implies_normal?]</span> to the disjoint closed sets $\overline{W}\setminus W$ and $\{x\}$ we see that there exists disjoint open sets $V_1,V_2\subseteq \overline{W}$
+    such that 
+    \[ x\in V_1 \quad\text{ and }\quad \overline{W} \setminus W \subseteq V_2. \]
+    By definition of the subspace topology on $\overline{W}$, there exist open sets $U_1,U_2\subseteq X$ such that $V_1 = \overline{W} \cap U_1$ and $V_2 = \overline{W} \cap U_2$.
+    Thus we have
+    \[ x\in U_1,  \ \overline{W}\setminus W \subseteq U_2, \ \ \text{ and } (\overline{W} \cap U_1) \cap (\overline{W} \cap U_2) = \varnothing. \]
+    In particular, this last equation implies that $\overline{W} \cap U_1 \subseteq \overline{W} \setminus U_2$.
+    Therefore 
+    \[ x\in W\cap U_1 \subseteq \overline{W}\setminus U_2 \subseteq W \subseteq U. \]
+    Since $\overline{W}\setminus U_2$ is a closed set, it follows that
+    \[ x\in W \cap U_1 \subseteq\overline{ W \cap U_1 } \subseteq \overline{W} \setminus U_2 \subseteq U. \]
+    Now take $V:= W \cap U_1$ and the lemma is proved.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>We will normally abbreviate ``locally compact Hausdorff'' as ``LCH''.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>Combining Lemmas <span class="ref-unknown" title="Reference not found: lem:disjoint_compact_sets_in_hausdorff_space">[lem:disjoint_compact_sets_in_hausdorff_space?]</span> and the proof in <span class="ref-unknown" title="Reference not found: rem:base_case_of_lemma_disjoint_compact_sets_in_hausdorff_space">[rem:base_case_of_lemma_disjoint_compact_sets_in_hausdorff_space?]</span>, we obtain the following strengthened version of Lemma <span class="ref-unknown" title="Reference not found: lem:disjoint_compact_sets_in_hausdorff_space">[lem:disjoint_compact_sets_in_hausdorff_space?]</span>.</p>
+<div class="theorem-box corollary-box" id="cor:disjoint_compact_sets_in_lch_space">
+  <div class="theorem-header"><strong>Corollary ?</strong> (Disjoints Compact Sets in a LCH Space can be Separated by Open Sets with Compact Closure)</div>
+  <div class="theorem-content">Let $X$ be a LCH space and let $K_1, K_2, \ldots, K_n \subseteq X$ be compact sets such that $K_i \cap K_j = \emptyset$ for all $i\neq j$.
+    Then there exist open sets $U_1, U_2, \ldots, U_n \subseteq X$ such that for each $j=1,2,\ldots,n$, we have $K_j \subseteq U_j$, the closure $\overline{U_j}$ is compact, and $\overline{U_i} \cap \overline{U_j} = \emptyset$ for all $i\neq j$.</div>
+</div>
+<div class="theorem-box lemma-box" id="lem:LCH_urysohns_lemma">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Urysohn's Lemma for LCH Spaces)</div>
+  <div class="theorem-content">Let $X$ be a LCH space, and let $K \subseteq X$ be a compact set.
+    Then for each open set $V \subseteq X$ such that $K \subseteq V$, there exists an open set $U \subseteq X$ such that $K \subseteq U \subseteq \overline{U} \subseteq V$, the closure $\overline{U}$ is compact, and there exists a continuous function
+    \[ f: X \to [0,1] \]
+    such that $f\equiv 1$ on an open set containing $K$ and $f \equiv 0$ on $X\setminus U$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-3">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-3')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-3">
+    By lemma <span class="ref-unknown" title="Reference not found: lem:lch_compact_subset_in_open_set">[lem:lch_compact_subset_in_open_set?]</span>, for each $x\in K$, there exists an open set $U_x \subseteq X$ such that $x\in U_x$, $\overline{U_x}$ is compact, and $\overline{U_x} \subseteq V$.
+    Since $K$ is compact, there exist $x_1, x_2, \ldots, x_n \in K$ such that
+    \[ K \subseteq \bigcup_{j=1}^n U_{x_j}. \]
+    Define $U := \bigcup_{j=1}^n U_{x_j}$ so that 
+    \[ K \subseteq U \subseteq \overline{U} \subseteq V, \]
+    and $\overline{U}$ is compact as a finite union of compact sets.
+<p>By Corollary <span class="ref-unknown" title="Reference not found: cor:compact_hausdorff_implies_normal">[cor:compact_hausdorff_implies_normal?]</span>, we know that $\overline{U}$ is normal.
+    By the classical Urysohn's lemma, there exists a continuous function $f_0: \overline{U} \to [0,1]$ such that $f_0\equiv 1$ on $K$ and $f_0\equiv 0$ on $ \overline{U} \setminus U$.
+    We can extend $f_0$ to a continuous function $f_1$ on $X$ by defining $f\equiv 0$ on $X\setminus \overline{U}$.</p>
+<p>(Let us check that $f_1$ is continuous.
+    Since $f_0$ is continuous on $\overline{U}$ and $f_1 |_{\overline{U}} = f_0$, we see that $f_1$ is continuous on $\overline{U}$.
+    Since $f_1 \equiv 0$ on the overlap $\overline{U}\setminus U = \overline{U} \cap (X\setminus U)$, we see that $f_1$ is continuous on $X\setminus U$.)</p>
+<p>Finally, we let $f := 2 \min\{f_1, 1/2\}$.
+    Then see that $f\equiv 1$ on the set $\left\{ f_1 > \frac{1}{2} \right\}$, which is an open set containing $K$, and $f\equiv 0$ on $X\setminus U$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>Okay, we need one last topological lemma about LCH spaces before we can get back to measure theory, yay.</p>
+<div class="theorem-box theorem-box" id="thm:partition_of_unity">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Partition of Unity for LCH Spaces)</div>
+  <div class="theorem-content">Let $X$ be a locally compact Hausdorff space, and let $K \subseteq X$ be a compact set.
+    Let $\{U_j\}_{j=1}^n$ be a finite open cover of $K$.
+    Then there exist finitely many continuous functions $\psi_1, \psi_2, \ldots, \psi_n : X \to [0,1]$ such that
+    <ol style="list-style-type: lower-roman;"><li>$\supp(\psi_j) := \overline{\{x\in X : \psi_j(x) \neq 0\}}$ is compact for each $j=1,2,\ldots,n$,
+        </li><li>for each $j=1,2,\ldots,n$, we have $\supp(\psi_j) \subseteq U_{j}$,
+        </li><li>$\sum_{j=1}^n \psi_j(x) = 1$ for all $x$ in an open set containing $K$, and
+        </li><li>$0 \leq \sum_{j=1}^n \psi_j(x) \leq 1$ for all $x\in X$.</li></ol></div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-4">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-4')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-4">
+    By Lemma <span class="ref-unknown" title="Reference not found: lem:LCH_urysohns_lemma">[lem:LCH_urysohns_lemma?]</span>, for each $x\in K$, there exists $j\in \{1,2,\ldots,n\}$ and an open set $U_x$ containing $x$ such that $\overline{U_x}$ is a compact subset of $U_j$.
+    Since $K$ is compact, there exist $x_1, x_2, \ldots, x_m \in K$ such that
+    \[ K \subseteq \bigcup_{i=1}^m U_{x_i}. \]
+    For each $i=1,2,\ldots,m$, we define $V_j$ to be the union of all $U_{x_i}$ such that $\overline{U_{x_i}} \subseteq U_j$.
+    Then $\{V_j\}_{j=1}^n$ is an open cover of $K$ such that $\overline{V_j}$ is a compact subset of $U_j$ for each $j=1,2,\ldots,n$.
+    Thus for each $j=1,2,\ldots,n$, we can apply Lemma <span class="ref-unknown" title="Reference not found: lem:LCH_urysohns_lemma">[lem:LCH_urysohns_lemma?]</span> to obtain a continuous function $\varphi_j : X \to [0,1]$ such that $\varphi_j \equiv 1$ on $\overline{V_j}$ and $\varphi_j \equiv 0$ on $X\setminus W_j$ for some open set $W_j$
+    such that $\overline{W_j}$ is a compact subset of $U_j$ and $\overline{V_j} \subseteq W_j$.
+<p>We can also use the same lemma on the open set $\bigcup_{j=1}^n V_j$ which contains $K$ to obtain a continuous function $f_0 : X \to [0,1]$ such that $f_0 \equiv 1$ on $\bigcup_{j=1}^n V_j$ and $f_0 \equiv 0$ on $\{ x\in X : \sum_{j=1}^n \varphi_j(x) = 0 \}$.
+    (Let us check this --- the set $\{ x\in X : \sum_{j=1}^n \varphi_j(x) = 0 \}$ is closed since it is the intersection of the closed sets $\{x\in X : \varphi_j(x) = 0\}$ for $j=1,2,\ldots,n$.
+    Thus its complement $\{ x\in X : \sum_{j=1}^n \varphi_j(x) \neq 0 \}$ is open and contains the compact set $\bigcup_{j=1}^n \overline{V}_j$.
+    Hence Lemma <span class="ref-unknown" title="Reference not found: lem:LCH_urysohns_lemma">[lem:LCH_urysohns_lemma?]</span> applies.)</p>
+<p>We now define $\varphi_0 := 1 - f_0$ so that by contruction we have 
+    \[ \sum_{j=0}^n \varphi_j(x) > 0,\qquad \forall x\in X. \]
+    For each $j=1,2,\ldots,n$, we define
+    \[ \psi_j := \frac{\varphi_j}{\sum_{k=0}^n \varphi_k}. \]
+    Then the functions $\psi_1, \psi_2, \ldots, \psi_n$ satisfy properties (i)-(iv).</p>
+<p>We check this. 
+    Property (i) and (ii) hold since
+    \[ \supp(\psi_j) = \supp(\varphi_j) \subseteq W_j \subseteq \overline{W_j} \subseteq U_j . \]
+    Property (iv) is evident from the definition of $\psi_j$.
+    Finally, property (iii) holds since for each $x\in \bigcup_{j=1}^n V_j$, we have $\varphi_0(x) = 0$ and so
+    \[ \sum_{j=1}^n \psi_j(x) = \frac{\sum_{j=1}^n \varphi_j(x)}{\sum_{j=0}^n \varphi_j(x)} = 1. \]
+    Since $\bigcup_{j=1}^n V_j$ is an open set containing $K$, property (iii) is proved.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p></p>
+<h2>Radon Measures on LCH Spaces</h2>
+<p>We now give the definition of a Radon measure on an LCH space.
+We remark that the definition and the first two lemmas are valid in an arbitrary Hausdorff space.</p>
+<div class="theorem-box definition-box" id="def:radon_measure">
+  <div class="theorem-header"><strong>Definition ?</strong> (Radon Measure)</div>
+  <div class="theorem-content">Let $X$ be a Hausdorff space. 
+    A <em>Radon measure</em> on $X$ is an outer measure $\mu$ on $X$ satisfying:
+    <ol style="list-style-type: lower-roman;"><li>$\mu$ is Borel regular and $\mu(K) < \infty$ for each compact set $K \subseteq X$, 
+        </li><li>$\mu(A) = \inf\{\mu(U) : U \supseteq A, U \text{ open}\}$ for each set $A \subseteq X$,
+        </li><li>$\mu(U) = \sup\{\mu(K) : K \subseteq U, K \text{ compact}\}$ for each open set $U \subseteq X$.</li></ol></div>
+</div>
+<p>You might wonder why we do not require the third condition to hold for all sets $A \subseteq X$, instead of just open sets, 
+but it turns out that this automatically follows from the definition given.</p>
+<div class="theorem-box lemma-box" id="lem:radon_measure_inner_regular">
+  <div class="theorem-header"><strong>Lemma ?</strong></div>
+  <div class="theorem-content">Let $X$ be a Hausdorff space, and let $\mu$ be a Radon measure on $X$.
+    Then for each set $A \subseteq X$ such that $\mu(A) < \infty$, we have
+    \[ \mu(A) = \sup\{\mu(K) : K \subseteq A, K \text{ compact}\}. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-5">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-5')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-5">
+    Let $A \subseteq X$ be such that $\mu(A) < \infty$.
+    Let $\varepsilon > 0$ be arbitrary.
+    By condition (ii) in Definition <span class="ref-unknown" title="Reference not found: def:radon_measure">[def:radon_measure?]</span>, there exists an open set $U \subseteq X$ such that $A \subseteq U$ and
+    \[ \mu(U\setminus A) < \varepsilon. \]
+    By condition (iii) in Definition <span class="ref-unknown" title="Reference not found: def:radon_measure">[def:radon_measure?]</span>, there exists a compact set $K \subseteq U$ such that
+    \[ \mu(U \setminus K) < \varepsilon. \]
+    By using condition (ii) again on the set $U\setminus A$, there exists an open set $V \subseteq X$ such that $U\setminus A \subseteq V$ and
+    \[ \mu(V \setminus (U\setminus A) ) < \varepsilon. \]
+    Therefore
+    \[ \mu(V) \leq \epsilon + \mu(U\setminus A) < 2\varepsilon. \]
+    Now $K\setminus W$ is a compact subset of $U\setminus V$, so is a subset of $A$; we compute
+    \[ \mu(A \setminus (K\setminus V) ) \leq \mu( U \setminus (K\setminus V)) \leq \mu(U\setminus K) + \mu(W) \leq 3 \varepsilon. \]
+    Since $\varepsilon > 0$ is arbitrary, we conclude that
+    \[ \mu(A) = \sup\{\mu(K) : K \subseteq A, K \text{ compact}\} \]
+    as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<p>The next lemma shows that if we have an outer measure $\mu$ on a LCH space $X$ which is finite on compact sets, and finitely additive on disjoint unions of compact sets, and $\mu$ satisfies conditions (ii) and (iii) in Definition <span class="ref-unknown" title="Reference not found: def:radon_measure">[def:radon_measure?]</span>, then $\mu$ is a Radon measure.</p>
+<div class="theorem-box lemma-box" id="lem:outer_measure_is_radon_if_finitely_additive_on_compact_sets">
+  <div class="theorem-header"><strong>Lemma ?</strong></div>
+  <div class="theorem-content">Let $X$ be a LCH space, and let $\mu$ be an outer measure on $X$ such that $\mu(K) < \infty$ for each compact set $K \subseteq X$.
+    Suppose that $\mu$ is finitely additive on disjoint unions of compact sets, i.e. if $K_1, K_2 \subseteq X$ are disjoint compact sets, then
+    \[ \mu(K_1 \cup K_2) = \mu(K_1) + \mu(K_2) < \infty. \]
+    If $\mu$ also satisfies conditions (ii) and (iii) in Definition <span class="ref-unknown" title="Reference not found: def:radon_measure">[def:radon_measure?]</span>, then $\mu$ also satisfies condition (i) in Definition <span class="ref-unknown" title="Reference not found: def:radon_measure">[def:radon_measure?]</span>, and hence is a Radon measure on $X$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-6">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-6')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-6">
+    <em>Step 1:</em> We claim that for each set $A \subseteq X$, there is a countable collection of open sets $\{U_j\}_{j=1}^\infty$ such that $A \subseteq \bigcap_{j=1}^\infty U_j$ and $\mu(A) = \mu(\bigcap_{j=1}^\infty U_j)$.
+    <div style="margin: 1em 0;"></div>
+<p>Let $A \subseteq X$ be arbitrary.
+    By condition (ii) in Definition <span class="ref-unknown" title="Reference not found: def:radon_measure">[def:radon_measure?]</span>, for each $j=1,2,\ldots$, there exists an open set $U_j \subseteq X$ such that $A \subseteq U_j$ and
+    \[ \mu(U_j) < \mu(A) + \frac{1}{j}. \]
+    Then we have $A \subseteq \bigcap_{j=1}^\infty U_j$ and
+    \[ \mu\left( \bigcap_{j=1}^\infty U_j \right) \leq \mu(U_j) < \mu(A) + \frac{1}{j}, \qquad \forall j=1,2,\ldots. \]
+    Since $\mu(A) \leq \mu(\bigcap_{j=1}^\infty U_j)$, we conclude that
+    \[ \mu(A) = \mu\left( \bigcap_{j=1}^\infty U_j \right). \]</p>
+<p>This proves our claim.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 2:</em> We claim that all Borel sets in $X$ are $\mu$-measurable.
+    <div style="margin: 1em 0;"></div></p>
+<p>Since the Borel $\sigma$-algebra is the smallest $\sigma$-algebra containing all open subsets of $X$, and the set of all $\mu$-measurable sets is a $\sigma$-algebra, 
+    it suffices to show that all open sets in $X$ are $\mu$-measurable.</p>
+<p>Let $\varepsilon > 0$ be arbitrary, and let $U \subseteq X$ be an open set.
+    Fix an arbitrary set $A \subseteq X$ such that $\mu(A) < \infty$.
+    By (ii) in the definition of Radon measure, there exists an open set $V \subseteq X$ such that $A \subseteq V$ and 
+    \[ \mu(V) < \mu(A) + \varepsilon. \]
+    By (iii) in the definition of Radon measure, there exists a compact set $K_1 \subseteq V\cap U$ such that
+    \[ \mu(V\cap U) < \mu(K_1) + \varepsilon. \]
+    By (iii) again, there exists a compact set $K_2 \subseteq V\setminus K_1$ such that
+    \[ \mu(V\setminus K_1) < \mu(K_2) + \varepsilon. \]
+    We estimate
+    \begin{align*}
+        \mu(V\setminus U) + \mu(V\cap U) &< \mu(V\setminus U) + \mu(K_1) + \varepsilon \\
+            &\leq \mu(K_2) + \mu(K_1) + 2\varepsilon \\
+            &= \mu(K_1 \cup K_2) + 2\varepsilon \qquad &\text{(by finite additivity of $\mu$ on disjoint compact sets)} \\
+            &\leq \mu((V\setminus K_1) \cup K_1) + 2\varepsilon \\
+            &= \mu(V) + 2\varepsilon \\
+            &< \mu(A) + 3\varepsilon
+    \end{align*}
+    which implies that
+    \[ \mu(A\setminus U) + \mu(A\cap U) \leq \mu(V\setminus U) + \mu(V\cap U) \leq \mu(A) + 3\varepsilon. \]
+    Since $\varepsilon > 0$ is arbitrary, we conclude that
+    \[ \mu(A\setminus U) + \mu(A\cap U) \leq \mu(A) \]
+    which is the Carathéodory criterion for $\mu$-measurability of $U$.</p>
+<p>Since $U \subseteq X$ was an arbitrary open set, we conclude that all open sets in $X$ are $\mu$-measurable, and hence all Borel sets in $X$ are $\mu$-measurable.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 3:</em> We claim that (i) in the Definition of Radon measure holds.
+    <div style="margin: 1em 0;"></div></p>
+<p>By assumption $\mu$ being finitely additive on disjoint unions of compact sets, we have $\mu(K) < \infty$ for each compact set $K \subseteq X\ $
+    (Look back!).
+    By Step 2, we know that all Borel sets in $X$ are $\mu$-measurable.
+    Thus $\mu$ is a Borel measure, and by Step 1, we see that $\mu$ is Borel regular.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>Combining Steps 2 and 3, we see that $\mu$ satisfies condition (i) in Definition <span class="ref-unknown" title="Reference not found: def:radon_measure">[def:radon_measure?]</span>.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>The next lemma is convenient, and gives us a way to check that a Borel regular outer measure is a Radon measure.</p>
+<div class="theorem-box lemma-box" id="lem:borel_reg_outer_measure_on_sigma_compact_lch_space_is_radon">
+  <div class="theorem-header"><strong>Lemma ?</strong></div>
+  <div class="theorem-content">Let $X$ be a LCH space such that each open set in $X$ is the countable union of compact sets.
+    Then each Borel regular outer measure which is finite on compact sets is a Radon measure.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-7">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-7')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-7">
+    First we observe that, since $X$ is a Hausdorff space, the statement ``each open set in $X$ is the countable union of compact sets'' is equivalent to the statement ``$X$ is the countable union of compact sets and every closed set in $X$ is the countable intersection of open sets''.
+<p>(Let's check this. Assume that each open set in $X$ is the countable union of compact sets.
+    Then since $X$ is open, we see that $X$ is the countable union of compact sets.
+    Now let $F \subseteq X$ be a closed set. Then $F^c$ is open, so is the countable union of compact sets, say $F^c = \bigcup_{j=1}^\infty K_j$ where each $K_j$ is compact.
+    Then we have
+    \[ F = (F^c)^c = \left( \bigcup_{j=1}^\infty K_j \right)^c = \bigcap_{j=1}^\infty K_j^c \]
+    which is a countable intersection of open sets since each $K_j$ is closed.</p>
+<p>Conversely, assume that $X$ is the countable union of compact sets and every closed set in $X$ is the countable intersection of open sets.
+    Let $U \subseteq X$ be an open set.
+    Then $U^c$ is closed, so is the countable intersection of open sets, say $U^c = \bigcap_{j=1}^\infty V_j$ where each $V_j$ is open.
+    Then we have
+    \[ U = (U^c)^c = \left( \bigcap_{j=1}^\infty V_j \right)^c = \bigcup_{j=1}^\infty V_j^c \]
+    which is a countable union of closed sets since each $V_j$ is closed.
+    Since $X$ is the countable union of compact sets, say $X = \bigcup_{k=1}^\infty K_k$ where each $K_k$ is compact, we see that
+    \[ U = \bigcup_{j=1}^\infty V_j^c = \bigcup_{j=1}^\infty \bigcup_{k=1}^\infty (V_j^c \cap K_k) \]
+    which is a countable union of compact sets since each $V_j^c \cap K_k$ is closed in $K_k$ and hence compact.</p>
+<p>We have used two facts about Hausdorff spaces here: (1) compact sets are closed, and (2) closed subsets of compact sets are compact.)</p>
+<p>Therefore $X$ is the countable union of compact sets, and each closed set in $X$ is the countable intersection of open sets.    
+    Let $\mu$ be a Borel regular outer measure on $X$ such that $\mu(K) < \infty$ for each compact set $K \subseteq X$.
+    Then Theorem <span class="ref-unknown" title="Reference not found: thm:borel_reg_implies_inner/outer_reg">[thm:borel_reg_implies_inner/outer_reg?]</span> about Borel regular outer measures implies that $\mu$ satisfies the following two conditions:
+    <ol style="list-style-type: lower-alpha;" start="2">
+        </li><li>if $A \subseteq X$ is such that there is a countable collection of open sets $\{V_j\}_{j=1}^\infty$ such that $A \subseteq \bigcap_{j=1}^\infty V_j$ and $\mu(V_j)<\infty$ for each $j\in\Z^+$, then
+        \[ \mu(A) = \inf\{\mu(U) : U \supseteq A, U \text{ open}\}, \]
+        </li><li>if $\{A_j\}_{j=1}^\infty$ is a countable collection of $\mu$-measurable sets such that $\mu(A_j) < \infty$ for each $j\in\Z^+$, then $A := \bigcup_{j=1}^\infty A_j$ has
+        \[ \mu(A) = \sup\{ \mu(C) : C\subseteq A, C \text{ closed}\} \]</li></ol></p>
+<p>Now see that because $X$ is an LCH space, for each compact set $K \subseteq X$, there exists an open set $U \subseteq X$ such that $K \subseteq U$ and $\overline{U}$ is compact.
+    (We check --- since each point $x\in K$ has an open set $V_x$ such that $x\in V_x$ and $\overline{V_x}$ is compact, we can cover $K$ by finitely many such neighborhoods $V_{x_1}, V_{x_2}, \ldots, V_{x_n}$; then we can take $U := \bigcup_{j=1}^n V_{x_j}$ which has compact closure.)</p>
+<p>Our first observation shows that there are countably many compact sets $\{K_j\}_{j=1}^\infty$ such that $X = \bigcup_{j=1}^\infty K_j$.
+    By the previous paragraph, for each $j\in\Z^+$, there exists an open set $U_j \subseteq X$ such that $K_j \subseteq U_j$ and $\overline{U_j}$ is compact.
+    Since $\mu(\overline{U_j}) < \infty$ for each $j\in\Z^+$ by assumption that $\mu$ is finite on compact sets, we see that condition (b) holds for each set $A \subseteq X$.
+    That is, condition (ii) in the definition of Radon measure holds for each set $A \subseteq X$.</p>
+<p>Next, see that if $A\subseteq X$ is $\mu$-measurable, then we can write $A = \bigcup_{j=1}^\infty (A \cap K_j)$ and each $A \cap K_j$ is $\mu$-measurable and $\mu(A\cap K_j) \leq \mu(K_j) < \infty$.
+    Thus condition (c) holds for each $\mu$-measurable set $A$ since $X$ is the countable union of compact sets.
+    Also each closed set $C\subseteq X$ we can write $C$ as an increasing union of compact sets $C = \bigcup_{j=1}^\infty C_j$ where 
+    \[ C_j := C \cap \left( \bigcup_{i=1}^j K_i \right) \]
+    so that each $C_j$ is compact; also $\lim_{j\to\infty} \mu(C_j) = \mu(C)$ which implies that
+    \[ \mu(C) = \sup\{ \mu(K) : K\subseteq C, K \text{ compact} \}. \]
+    This fact combined with condition (c) implies that for each $\mu$-measurable set $A \subseteq X$ we have
+    \[ \mu(A) = \sup\{ \mu(K) : K\subseteq A, K \text{ compact} \}. \]
+    In particular, this shows that condition (iii) in the definition of Radon measure holds for each open set $U \subseteq X$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p></p>
+<div class="theorem-box theorem-box" id="thm:density_of_Cc_in_Lp_on_lch_space">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Density of $C_c(X)$ in $L^p(X,\mu)$)</div>
+  <div class="theorem-content">Let $X$ be a LCH space, and let $\mu$ be a Radon measure on $X$.
+    Then for each $1 \leq p < \infty$, the space $C_c(X)$ of continuous functions with compact support is dense in $L^p(X,\mu)$.
+    That is, for each $f\in L^p(X,\mu)$ and each $\varepsilon > 0$, there exists $g\in C_c(X)$ such that
+    \[ \|f - g\|_{L^p(X,\mu)} < \varepsilon. \]</div>
+</div>
+<p>Before the proof, we record the following useful corollary.</p>
+<div class="theorem-box corollary-box" id="cor:extension_of_borel_measure_to_radon_measure">
+  <div class="theorem-header"><strong>Corollary ?</strong></div>
+  <div class="theorem-content">Let $X$ be a LCH space with the property that each open set in $X$ is the countable union of compact sets.
+    Let $\mu$ be a Borel measure on $X$ such that $\mu(K) < \infty$ for each compact set $K \subseteq X$.
+    Then $C_c(X)$ is dense in $L^1(X,\mu)$ and there exists a radon measure $\overline{\mu}$ on $X$ such that $\overline{\mu}(B) = \mu(B)$ for each Borel set $B \subseteq X$.
+<p>That is, every Borel measure on $X$ which is finite on compact sets is the restriction of a Radon measure.</div>
+</div></p>
+<div class="proof-box collapsed" data-proof-id="proof-proof-of-density-of-c-c-x-in-l-p-x-mu-">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-proof-of-density-of-c-c-x-in-l-p-x-mu-')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof of Density of $C_c(X)$ in $L^p(X,\mu)$</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-proof-of-density-of-c-c-x-in-l-p-x-mu-">
+    Let $p\in [1,\infty)$ be fixed.
+    Let $f\in L^p(X,\mu)$ such that $\|f\|_{L^p} < \infty$, and let $\varepsilon > 0$ be arbitrary.
+<p>First see that the set of simple functions is dense in $L^p(X,\mu)$.
+    (We can decompose $f$ into its positive and negative parts as $f = f^+ - f^-$, and then approximate $f^+$ and $f^-$ by increasing sequences of simple functions using the Dominated Convergence Theorem.)
+    Thus there exists a simple function 
+    \[ \varphi = \sum_{j=1}^n a_j \Chi_{A_j} \]
+    where the numbers $a_1, a_2, \ldots, a_n$ are distinct and nonzero, and the sets $A_1, A_2, \ldots, A_n \subseteq X$ are disjoint $\mu$-measurable sets, and
+    \[ \|f - \varphi\|_{L^p} < \varepsilon. \]
+    Since $\|\varphi\|_{L^p} \leq \|\varphi - f\|_{L^p} + \|f\|_{L^p} < \infty$, we see that $\mu(A_j) < \infty$ for each $j=1,2,\ldots,n$.</p>
+<p>Choose $M>\max\{|a_j| : j=1,2,\ldots,n\}$ and for each $j=1,2,\ldots,n$ use Lemma <span class="ref-unknown" title="Reference not found: lem:radon_measure_inner_regular">[lem:radon_measure_inner_regular?]</span> to find a compact set $K_j \subseteq A_j$ such that
+    \[ \mu(A_j \setminus K_j) < \frac{\varepsilon^p}{n 2^p M^p}. \]
+    Similarly, by definition of a Radon measure, for each $j=1,2,\ldots,n$ we can find an open set $U_j$ containing $K_j$ such that
+    \[ \mu(U_j \setminus K_j) < \frac{\varepsilon^p}{n 2^p M^p}. \]</p>
+<p>We may assume that the sets $U_1, U_2, \ldots, U_n$ are disjoint. (If not, we can use Corollary <span class="ref-unknown" title="Reference not found: cor:disjoint_compact_sets_in_lch_space">[cor:disjoint_compact_sets_in_lch_space?]</span> to find disjoint open sets $U'_1, U'_2, \ldots, U'_n$ such that $K_j \subseteq U'_j$ for each $j=1,2,\ldots,n$; 
+    then we can replace $U_j$ by $U_j\cap U'_j$.)
+    For each $j=1,2,\ldots,n$, we can use Lemma <span class="ref-unknown" title="Reference not found: lem:LCH_urysohns_lemma">[lem:LCH_urysohns_lemma?]</span> to find a continuous function $g_j\in C_c(X)$ such that $g_j \equiv a_j$ on an open subset containing $K_j$, $\supp(g_j) \subseteq \subseteq U_j$, and $|g_j| \leq |a_j|$ on $X$.
+    We define
+    \[ g := \sum_{j=1}^n g_j. \]
+    Then $g\in C_c(X)$ since the supports of $g_1, g_2, \ldots, g_n$ are compact and disjoint.
+    We compute that for each $j=1,2,\ldots,n$ and each $x\in K_j$, we have
+    \[ g(x) = \sum_{i=1}^n g_i(x) = g_j(x) = a_j = \sum_{i=1}^n a_i \Chi_{K_i}(x) = \varphi(x). \]
+    Therefore $g \equiv \varphi$ on the set $\bigcup_{j=1}^n K_j$, and we have 
+    \[ \sup|g| = \sup|\varphi| < M. \]
+    Now the function $\varphi - g$ is identically zero on the compliment of the set $\bigcup_{j=1}^n((U_j\setminus K_j) \cup (A_j \setminus K_j))$, and we have
+    \begin{align*}
+        \int_X |\varphi - g|^p \, \dif \mu &\leq \sum_{j=1}^n \int\limits_{(U_j\setminus K_j)\cup(A_j \setminus K_j)} |\varphi - g|^p \, \dif \mu \\
+            &\leq \sup|\varphi-g|^p \sum_{j=1}^n \mu((U_j\setminus K_j)\cup(A_j \setminus K_j) ) \\
+            &\leq (2M)^p \sum_{j=1}^n \mu((U_j\setminus K_j)\cup(A_j \setminus K_j) ) \\
+            &\leq (2M)^p \sum_{j=1}^n \left( \mu(U_j\setminus K_j) + \mu(A_j \setminus K_j) \right) \\
+            &< (2M)^p \sum_{j=1}^n \frac{\varepsilon^p}{n 2^p M^p} \\
+            &\leq \varepsilon^p 
+    \end{align*}
+    where we have used subadditivity of $\mu$ in the first line, and Lemma <span class="ref-unknown" title="Reference not found: ex:bounding_an_integral">[ex:bounding_an_integral?]</span> (Bounding an Integral) in the second line.
+    Hence
+    \[ \| f - g\|_{L^p} \leq \| f - \varphi\|_{L^p} + \| \varphi - g\|_{L^p} \leq 2\varepsilon. \]
+    Since $\varepsilon > 0$ is arbitrary, the theorem is proved.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>We remark that this result is sometimes used ``coordinate-wise'', and cited as ``the space of continuous functions $C_c(X,\F^m)$ is dense in $L^p(X,\F^m,\mu)$, for $p\in [1,\infty).$ ''</p>
+    </main>
+  </div>
+  
+  <script>
+    function toggleChapter(element) {
+      element.parentElement.classList.toggle('expanded');
+    }
+    
+    // Highlight current page in sidebar
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPath = window.location.pathname;
+      const links = document.querySelectorAll('.section-link');
+      links.forEach(link => {
+        if (currentPath.endsWith(link.getAttribute('href').split('/').pop())) {
+          link.classList.add('active');
+          // Expand parent chapter
+          const group = link.closest('.chapter-group');
+          if (group) group.classList.add('expanded');
+        }
+      });
+    });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('Restoring proof collapse states...');
+      try {
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        const currentPage = window.location.pathname;
+        const pageOpen = openProofs[currentPage] || [];
+        
+        console.log('Current page:', currentPage);
+        console.log('Open proof IDs stored:', pageOpen);
+        console.log('Found ' + pageOpen.length + ' open proofs for this page');
+        
+        document.querySelectorAll('.proof-box').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          console.log('Checking proof:', proofId, 'Should be open:', pageOpen.includes(proofId));
+          if (pageOpen.includes(proofId)) {
+            box.classList.remove('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'true');
+          } else {
+            box.classList.add('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        const pageBoxes = openBoxes[currentPage] || [];
+        
+        console.log('Open box IDs stored:', pageBoxes);
+        
+        document.querySelectorAll('.collapsible-box').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          console.log('Checking box:', boxId, 'Should be open:', pageBoxes.includes(boxId));
+          if (pageBoxes.includes(boxId)) {
+            box.classList.remove('collapsed');
+          } else {
+            box.classList.add('collapsed');
+          }
+        });
+        
+        console.log('Proof states restored');
+      } catch (e) {
+        console.error('Error restoring collapse state:', e);
+      }
+    });
+    
+    function toggleProof(proofId) {
+      const proofContent = document.getElementById(proofId);
+      const proofBox = proofContent.closest('.proof-box');
+      proofBox.classList.toggle('collapsed');
+      
+      const button = proofBox.querySelector('.proof-toggle');
+      button.setAttribute('aria-expanded', !proofBox.classList.contains('collapsed'));
+      
+      saveProofState();
+    }
+    
+    function toggleSubproof(subproofId) {
+      const subproofContent = document.getElementById(subproofId);
+      const subproof = subproofContent.closest('.subproof');
+      subproof.classList.toggle('collapsed');
+      
+      const button = subproof.querySelector('.subproof-toggle');
+      button.setAttribute('aria-expanded', !subproof.classList.contains('collapsed'));
+    }
+    
+    function saveProofState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        if (!openProofs[currentPage]) {
+          openProofs[currentPage] = [];
+        }
+        
+        openProofs[currentPage] = [];
+        document.querySelectorAll('.proof-box:not(.collapsed)').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          if (proofId) {
+            openProofs[currentPage].push(proofId);
+          }
+        });
+        
+        localStorage.setItem('openProofs', JSON.stringify(openProofs));
+        console.log('Saved proof state (open proofs):', openProofs[currentPage]);
+      } catch (e) {
+        console.error('Error saving collapse state:', e);
+      }
+    }
+    
+    function toggleCollapsible(collapsibleId) {
+      const content = document.getElementById(collapsibleId);
+      const box = content.closest('.collapsible-box');
+      box.classList.toggle('collapsed');
+      
+      saveCollapsibleState();
+    }
+    
+    function saveCollapsibleState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        if (!openBoxes[currentPage]) {
+          openBoxes[currentPage] = [];
+        }
+        
+        openBoxes[currentPage] = [];
+        document.querySelectorAll('.collapsible-box:not(.collapsed)').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          if (boxId) {
+            openBoxes[currentPage].push(boxId);
+          }
+        });
+        
+        localStorage.setItem('openBoxes', JSON.stringify(openBoxes));
+      } catch (e) {
+        console.error('Error saving box state:', e);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        const proofBoxes = document.querySelectorAll('.proof-box');
+        const anyExpanded = Array.from(proofBoxes).some(box => !box.classList.contains('collapsed'));
+        
+        proofBoxes.forEach(box => {
+          if (anyExpanded) {
+            box.classList.add('collapsed');
+          } else {
+            box.classList.remove('collapsed');
+          }
+        });
+        
+        saveProofState();
+      }
+    });
+    
+    document.querySelectorAll('a.ref-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.background = '#fef3c7';
+          target.style.transition = 'background 0.3s ease';
+          setTimeout(() => { target.style.background = ''; }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

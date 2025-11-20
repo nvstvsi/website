@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>diff-measures</title>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '0.8em',
+      packages: {'[+]': ['ams']},
+      macros: {
+        R: '\\mathbb{R}',
+        C: '\\mathbb{C}',
+        N: '\\mathbb{N}',
+        Z: '\\mathbb{Z}',
+        Q: '\\mathbb{Q}',
+        E: '\\mathbb{E}',
+        F: '\\mathbb{F}',
+        S: '\\mathbb{S}',
+        H: '\\mathcal{H}',
+        L: '\\mathcal{L}',
+        dif: '\\,\\mathrm{d}',
+        supp: '\\operatorname{supp}',
+        proj: '\\operatorname{proj}',
+        Id: '\\operatorname{Id}',
+        Span: '\\operatorname{span}',
+        graph: '\\operatorname{graph}',
+        dist: '\\operatorname{dist}',
+        diam: '\\operatorname{diam}',
+        avg: '\\operatorname{avg}',
+        div: '\\operatorname{div}',
+        vol: '\\operatorname{vol}',
+        ord: '\\operatorname{ord}',
+        Chi: '\\mathbf{1}',
+        sub: '\\subseteq',
+        mres: '\\downharpoonright',
+        ddag: '\\ddagger',
+        dag: '\\dagger',
+        norm: ['\\left\\| #1 \\right\\|', 1],
+        abs: ['\\left| #1 \\right|', 1],
+        set: ['\\left\\{ #1 \\right\\}', 1],
+        inner: ['\\langle #1, #2 \\rangle', 2],
+        floor: ['\\lfloor #1 \\rfloor', 1],
+        ceil: ['\\lceil #1 \\rceil', 1],
+        llbracket: '\\unicode{x27E6}',
+        rrbracket: '\\unicode{x27E7}',
+        bigskull: '\\unicode{x1F480}',
+        skull: '\\unicode{x2620}',
+        mathwitch: '\\unicode{x1F9D9}',
+        pumpkin: '\\unicode{x1F383}',
+        mathpumpkin: '\\unicode{x1F383}',
+        bigpumpkin: '\\unicode{x1F383}',
+        mathghost: '\\unicode{x1F47B}',
+        mathcat: '\\unicode{x1F408}',
+        mathbat: '\\unicode{x1F987}',
+        esssup: '\\operatorname{ess\\,sup}',
+        essinf: '\\operatorname{ess\\,inf}',
+        Lip: '\\operatorname{Lip}',
+        pd: ['\\frac{\\partial#1}{\\partial#2}', 2],
+        od: ['\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}', 2],
+        dashint: '\\mathchoice{\\rlap{-}\\!\\int}{\\rlap{\\raise.15ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}',
+        eurologo: '\\unicode{x20AC}',
+        starredbullet: '\\unicode{x2726}',
+        grimace: '\\unicode{x1F62C}',
+        textthing: '\\unicode{x2639}',
+        noway: '\\unicode{x26D4}',
+        warning: '\\unicode{x26A0}',
+        danger: '\\unicode{x26A0}',
+        textxswup: '\\unicode{x2195}',
+        textxswdown: '\\unicode{x2195}',
+        decoone: '\\unicode{x2756}',
+        decotwo: '\\unicode{x2767}',
+        decothreeleft: '\\unicode{x2619}',
+        decothreeright: '\\unicode{x2767}',
+        decofourleft: '\\unicode{x261A}',
+        decofourright: '\\unicode{x261B}',
+        floweroneleft: '\\unicode{x2740}',
+        floweroneright: '\\unicode{x2740}',
+        lefthand: '\\unicode{x261C}',
+        righthand: '\\unicode{x261E}',
+        decosix: '\\unicode{x2766}',
+        bomb: '\\unicode{x1F4A3}',
+        caution: '\\unicode{x2621}',
+        leftblackhand: '\\unicode{x261A}',
+        rightblackhand: '\\unicode{x261B}',
+        leafleft: '\\unicode{x2618}',
+        leafright: '\\unicode{x2618}',
+        leafNW: '\\unicode{x2618}',
+        leafNE: '\\unicode{x2618}',
+        leafSE: '\\unicode{x2618}',
+        leafSW: '\\unicode{x2618}',
+        aldineleft: '\\unicode{x2619}',
+        aldineright: '\\unicode{x2767}',
+        aldine: '\\unicode{x2766}',
+        aldinesmall: '\\unicode{x2767}',
+        aldinesmallrevert: '\\unicode{x2619}',
+        aldinesmallup: '\\unicode{x2766}',
+        grappe: '\\unicode{x2766}',
+        rightgrappe: '\\unicode{x2767}',
+        leftgrappe: '\\unicode{x2619}',
+        oldpilcrowone: '\\unicode{x00B6}',
+        oldpilcrowtwo: '\\unicode{x00B6}',
+        oldpilcrowthree: '\\unicode{x00B6}',
+        oldpilcrowfour: '\\unicode{x00B6}',
+        oldpilcrowfive: '\\unicode{x00B6}',
+        oldpilcrowsix: '\\unicode{x00B6}'
+      }
+    },
+    startup: {
+      pageReady: () => {
+        return MathJax.startup.defaultPageReady().then(() => {
+          console.log('MathJax ready');
+        });
+      }
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+  <script>
+  (function() {
+    window.addEventListener('beforeunload', function() {
+      saveProofState();
+      saveCollapsibleState();
+    });
+    
+    const eventSource = new EventSource('http://localhost:35729/reload-stream');
+    
+    eventSource.onmessage = function(event) {
+      if (event.data === 'reload') {
+        console.log('📝 File updated, saving state and reloading...');
+        saveProofState();
+        saveCollapsibleState();
+        setTimeout(() => {
+          window.location.reload();
+        }, 50);
+      }
+    };
+    
+    eventSource.onerror = function() {
+      console.log('⚠️  Auto-reload server not available. Run node watch.js to enable auto-reload.');
+      eventSource.close();
+    };
+    
+    console.log('🔄 Auto-reload enabled');
+  })();
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+    
+    /* Layout with sidebar */
+    .page-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      width: 280px;
+      background: #fff;
+      border-right: 1px solid #e0e0e0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px 0;
+      font-size: 14px;
+    }
+    
+    .sidebar-header {
+      padding: 15px 20px 25px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .sidebar-header h1 {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 5px 0;
+    }
+    
+    .sidebar-header .subtitle {
+      font-size: 0.85em;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .sidebar-header .back-link {
+      display: block;
+      font-size: 0.8em;
+      color: #666;
+      text-decoration: none;
+      margin-top: 12px;
+    }
+    
+    .sidebar-header .back-link:hover {
+      color: #1a1a1a;
+    }
+    
+    .sidebar-nav {
+      padding: 10px 0;
+    }
+    
+    .chapter-group {
+      margin-bottom: 2px;
+    }
+    
+    .chapter-title {
+      padding: 12px 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chapter-title:hover {
+      background: #f5f5f5;
+    }
+    
+    .chapter-title .toggle {
+      font-size: 0.65em;
+      color: #999;
+      transition: transform 0.2s;
+    }
+    
+    .chapter-group.expanded .chapter-title .toggle {
+      transform: rotate(90deg);
+    }
+    
+    .section-list {
+      display: none;
+      padding: 5px 0;
+      background: #f8f8f8;
+    }
+    
+    .chapter-group.expanded .section-list {
+      display: block;
+    }
+    
+    .section-link {
+      display: block;
+      padding: 8px 20px 8px 35px;
+      font-size: 0.85em;
+      color: #555;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+    }
+    
+    .section-link:hover {
+      background: #f0f0f0;
+      color: #1a1a1a;
+    }
+    
+    .section-link.active {
+      background: #e8e8e8;
+      border-left-color: #333;
+      color: #000;
+      font-weight: 500;
+    }
+    
+    /* Main content area */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      max-width: 900px;
+      padding: 40px 60px;
+    }
+    
+    @media (max-width: 1100px) {
+      .sidebar {
+        width: 240px;
+      }
+      .main-content {
+        margin-left: 240px;
+        padding: 30px 40px;
+      }
+    }
+    
+    @media (max-width: 800px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+      .page-layout {
+        flex-direction: column;
+      }
+    }
+    
+    h2, h3, h4 {
+      margin-top: 2em;
+      margin-bottom: 0.75em;
+      color: #000;
+      font-weight: 600;
+    }
+    h2 { font-size: 1.5em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.1em; }
+    p {
+      margin: 1em 0;
+      text-indent: 2em;
+    }
+    p:first-of-type,
+    h2 + p,
+    h3 + p,
+    h4 + p,
+    .theorem-box + p,
+    .proof-box + p {
+      text-indent: 0;
+    }
+    .noindent + p,
+    p:has(> .noindent:first-child) {
+      text-indent: 0 !important;
+    }
+    .noindent {
+      display: none;
+    }
+    .theorem-box {
+      margin: 1.75em 0;
+      padding: 1.25em;
+      border-left: 5px solid #16a34a;
+      background: linear-gradient(to top, #bbf7d0 0%, #d1fae5 100%);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .definition-box { border-left-color: #16a34a; background: linear-gradient(to top, #d1fae5 0%, #ecfdf5 100%); }
+    .lemma-box { border-left-color: #1e3a8a; background: linear-gradient(to top, #bfdbfe 0%, #dbeafe 100%); }
+    .corollary-box { border-left-color: #9333ea; background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%); }
+    .proposition-box { border-left-color: #dc2626; background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%); }
+    .remark-box { border-left-color: #64748b; background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%); }
+    .example-box { border-left-color: #0891b2; background: linear-gradient(to top, #a5f3fc 0%, #cffafe 100%); }
+    .construction-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .notation-box { border-left-color: #ca8a04; background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%); }
+    .exercise-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .problem-box { border-left-color: #ec4899; background: linear-gradient(to top, #fbcfe8 0%, #fce7f3 100%); }
+    .theorem-header {
+      margin-bottom: 0.75em;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+    .theorem-header.clickable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .theorem-header.clickable:hover {
+      background: rgba(0,0,0,0.03);
+      margin: -0.5em -0.75em 0.75em -0.75em;
+      padding: 0.5em 0.75em;
+      border-radius: 4px;
+    }
+    .collapsible-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      margin-right: 0.5em;
+      color: #6b7280;
+    }
+    .collapsible-box.collapsed .collapsible-icon {
+      transform: rotate(-90deg);
+    }
+    .collapsible-content {
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+    }
+    .collapsible-box.collapsed .collapsible-content {
+      display: none;
+    }
+    .theorem-content {
+      padding-left: 0.5em;
+      line-height: 1.8;
+    }
+    .proof-box {
+      margin: 1.5em 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .proof-header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      border-radius: 6px 6px 0 0;
+    }
+    .proof-toggle {
+      width: 100%;
+      padding: 0.85em 1.25em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      transition: background 0.15s;
+    }
+    .proof-toggle:hover { background: rgba(0,0,0,0.03); }
+    .proof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      color: #6b7280;
+    }
+    .proof-box.collapsed .proof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .proof-content {
+      padding: 1.25em;
+      line-height: 1.8;
+    }
+    .proof-box.collapsed .proof-content {
+      display: none;
+    }
+    .proof-end {
+      float: right;
+      font-size: 1.3em;
+      margin-left: 0.5em;
+      color: #374151;
+    }
+    .subproof {
+      margin: 1em 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #f9fafb;
+    }
+    .subproof-header {
+      background: linear-gradient(to bottom, #f9fafb 0%, #f3f4f6 100%);
+      border-bottom: 1px solid #d1d5db;
+      border-radius: 4px 4px 0 0;
+    }
+    .subproof-toggle {
+      width: 100%;
+      padding: 0.6em 1em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: background 0.15s;
+    }
+    .subproof-toggle:hover {
+      background: rgba(0,0,0,0.03);
+    }
+    .subproof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.7em;
+      color: #6b7280;
+    }
+    .subproof.collapsed .subproof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .subproof-content {
+      padding: 1em;
+      line-height: 1.7;
+    }
+    .subproof.collapsed .subproof-content {
+      display: none;
+    }
+    .ref-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 0.15em;
+      border-radius: 2px;
+    }
+    .ref-link:hover {
+      background: #dbeafe;
+      text-decoration: underline;
+    }
+    .ref-unknown {
+      color: #dc2626;
+      font-weight: bold;
+      background: #fee2e2;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+    ol, ul {
+      margin: 1em 0;
+      padding-left: 2.5em;
+      line-height: 1.8;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    .latex-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5em auto;
+    }
+    .latex-figure .latex-image {
+      display: inline-block;
+      margin: 0.5em;
+      vertical-align: middle;
+    }
+    .latex-figure {
+      margin: 2em 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .latex-figure .figure-content {
+      margin-bottom: 0.75em;
+      line-height: normal;
+    }
+    .latex-figure .figure-content > * {
+      vertical-align: middle;
+    }
+    .latex-figure figcaption {
+      font-size: 0.9em;
+      color: #4b5563;
+      font-style: italic;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1>Analysis III</h1>
+        <div class="subtitle">Measure Theory &amp; Integration</div>
+        <a href="../index.html" class="back-link">← Table of Contents</a>
+      </div>
+      <div class="sidebar-nav">
+        <div class="chapter-group expanded">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>1. Measure Theory</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../01-measure-theory/measure-theory.html" class="section-link">Overview</a>
+            <a href="../01-measure-theory/basics.html" class="section-link">Outer Measures</a>
+            <a href="../01-measure-theory/lebesgue-meas.html" class="section-link">Lebesgue Measure</a>
+            <a href="../01-measure-theory/cantor.html" class="section-link">The Cantor Set</a>
+            <a href="../01-measure-theory/measure-spaces.html" class="section-link">Measure Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>2. Integration</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../02-integration/integration.html" class="section-link">Overview</a>
+            <a href="../02-integration/integrals-1.html" class="section-link">Simple Functions</a>
+            <a href="../02-integration/integrals-2.html" class="section-link">General Functions</a>
+            <a href="../02-integration/convergence.html" class="section-link">Convergence Theorems</a>
+            <a href="../02-integration/inequality-party.html" class="section-link">Integral Inequalities</a>
+            <a href="../02-integration/lp_spaces.html" class="section-link">Lᵖ Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>3. Product Measures</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../03-fubini/fubini_ch.html" class="section-link">Overview</a>
+            <a href="../03-fubini/fubini.html" class="section-link">Fubini-Tonelli</a>
+            <a href="../03-fubini/integrals-3.html" class="section-link">Product Measures</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>4. Differentiation I</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../04-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../04-differentiation-1/covering.html" class="section-link">Vitali Covering</a>
+            <a href="../04-differentiation-1/monotone.html" class="section-link">Monotone Functions</a>
+            <a href="../04-differentiation-1/BV_on_R.html" class="section-link">Bounded Variation</a>
+            <a href="../04-differentiation-1/FTOC.html" class="section-link">FTC for Lebesgue</a>
+            <a href="../04-differentiation-1/HL.html" class="section-link">Hardy-Littlewood</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>5. Differentiation I (cont)</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../05-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../05-differentiation-1/r-nik.html" class="section-link">Radon-Nikodym</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>6. Differentiation II</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-differentiation-2/diff-2.html" class="section-link">Overview</a>
+            <a href="../06-differentiation-2/vector-measures.html" class="section-link">Vector Measures</a>
+            <a href="../06-differentiation-2/r-nik.html" class="section-link">Radon-Nikodym</a>
+            <a href="../06-differentiation-2/besi.html" class="section-link">Besicovitch</a>
+            <a href="../06-differentiation-2/densities.html" class="section-link">Densities</a>
+            <a href="../06-differentiation-2/diff-measures.html" class="section-link">Measure Derivatives</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>7. Riesz Representation</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-riesz/riesz.html" class="section-link">Overview</a>
+            <a href="../06-riesz/riesz_functional.html" class="section-link">Riesz Representation</a>
+            <a href="../06-riesz/LCH_spaces.html" class="section-link">LCH Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>8. Integral Formulas</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../07-formulas/formulas.html" class="section-link">Overview</a>
+            <a href="../07-formulas/hausdorff_meas.html" class="section-link">Hausdorff Measures</a>
+            <a href="../07-formulas/lippy.html" class="section-link">Lipschitz Maps</a>
+            <a href="../07-formulas/rademacher.html" class="section-link">Rademacher</a>
+            <a href="../07-formulas/coarea-prereq.html" class="section-link">Coarea Prerequisites</a>
+            <a href="../07-formulas/coarea.html" class="section-link">Coarea Formula</a>
+            <a href="../07-formulas/area-prereq.html" class="section-link">Area Prerequisites</a>
+            <a href="../07-formulas/area-formula.html" class="section-link">Area Formula</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>9. Extension Results</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../08-ext-res/ext-res.html" class="section-link">Overview</a>
+            <a href="../08-ext-res/taylor_thm_integral_remainder.html" class="section-link">Taylor's Theorem</a>
+            <a href="../08-ext-res/whitney-cover.html" class="section-link">Whitney Covering</a>
+            <a href="../08-ext-res/whitney-partition-of-unity.html" class="section-link">Partition of Unity</a>
+            <a href="../08-ext-res/whitney-decomposition.html" class="section-link">Decomposition</a>
+            <a href="../08-ext-res/whitney-extension-theorem.html" class="section-link">Extension Theorem</a>
+            <a href="../08-ext-res/whitney-extension-proof.html" class="section-link">Extension Proof</a>
+            <a href="../08-ext-res/whitney-extension-applications.html" class="section-link">Applications</a>
+            <a href="../08-ext-res/whitney-extension.html" class="section-link">Summary</a>
+            <a href="../08-ext-res/more-bump.html" class="section-link">More Bump Functions</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <main class="main-content">
+      <h2>Densities and the Radon-Nikodym Theorem</h2>
+<p>In this section, we will finish the goal stated in the previous section of expressing the Radon-Nikodym derivative as a limit of ratios of measures.</p>
+<h3>Lebesgue-Besicovich Differentiation Theorem</h3>
+<p>First we want to show that densities can be used to prove a generalization of the Lebesgue Differentiation Theorem <span class="ref-unknown" title="Reference not found: thm:lebesgue_differentiation_theorem">[thm:lebesgue_differentiation_theorem?]</span>.</p>
+<div class="theorem-box theorem-box" id="thm:lebesgue_besicovich_differentiation_theorem">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Lebesgue-Besicovich Differentiation Theorem)</div>
+  <div class="theorem-content">Let $\mu$ be a Borel regular outer measure on $X$ which is open $\sigma$-finite and has the symmetric Vitali property.
+    Let $f: X \to \R$ be a locally integrable function with respect to $\mu$, i.e. for each $x \in X$ there exists $r > 0$ such that
+    \[ \int_{\overline{B}(x,r)} |f| \,\dif \mu < \infty. \]
+    Then for $\mu$-almost every $x \in X$, we have
+    \[ f(x) = \lim_{r \to 0^+} \frac{1}{\mu\big( \overline{B}(x,r) \big)} \int_{\overline{B}(x,r)} f \,\dif \mu. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-0">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-0')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-0">
+    Assume first that $f \geq 0$.
+    We define $\nu : 2^X \to [0,\infty]$ by
+    \[ \nu(A) := \int_A f \,\dif \mu \]
+    for each Borel set $A \subseteq X$, and 
+    \[ \nu(E) := \inf\{ \nu(A) : A\subseteq X \text{ is a Borel set with } E\subseteq A \}. \]
+    We claim that $\nu$ is a well-defined Borel regular outer measure on $X$.
+<div class="subproof collapsed" data-subproof-id="subproof-1763576799635-0">
+      <div class="subproof-header">
+        <button class="subproof-toggle" onclick="toggleSubproof('subproof-1763576799635-0')" aria-expanded="false">
+          <span class="subproof-toggle-icon">▼</span>
+          <strong>Proof of Claim</strong>
+        </button>
+      </div>
+      <div class="subproof-content" id="subproof-1763576799635-0">
+        See that $\nu$ is well-defined, since if $A\subseteq X$ is a Borel set, then clearly
+        \[ \inf\left\{ \nu(\hat{A}) : \hat{A} \subseteq X \text{ is a Borel set with } A \subseteq \hat{A} \right\} \leq \nu(A) \]
+        since $A$ is one such Borel set containing itself; also for each Borel set $\hat{A} \subseteq X$ with $A \subseteq \hat{A}$, we have
+        \[ \nu(\hat{A}) = \int_{\hat{A}} f \,\dif \mu \geq \int_A f \,\dif \mu = \nu(A) \]
+        by monotonicity of the Lebesgue integral (Proposition <span class="ref-unknown" title="Reference not found: prop:properties_of_the_lebesgue_integral">[prop:properties_of_the_lebesgue_integral?]</span> (iii)).
+        Therefore if $A \subseteq X$ is a Borel set, then
+        \[ \nu(A) = \inf\{ \nu(\hat{A}) : \hat{A}\subseteq X \text{ is a Borel set with } A \subseteq \hat{A} \} \]
+        which shows that $\nu$ is well-defined.
+<p>To see that $\nu$ is a Borel regular outer measure, first note that $\nu(\emptyset) = 0$ and if $\{ A_j \}_{j=1}^\infty$ is a countable collection of subsets of $X$, then
+        \[  \nu\left(\bigcup_{j=1}^\infty A_j\right) = \int_{\bigcup_{j=1}^\infty A_j} f \,\dif \mu \leq \sum_{j=1}^\infty \int_{A_j} f \,\dif \mu = \sum_{j=1}^\infty \nu(A_j). \]
+        Therefore $\nu$ is an outer measure on $X$.</p>
+<p>Now let $A \subseteq X$ be a Borel set. For an arbitrary subset $S \subseteq X$, we let $C\subset X$ be a Borel set such that $S \subseteq C$ and $\nu(S) = \nu(C)$.
+        Then
+        \[ \nu(S) = \nu(C) = \int_C f \,\dif \mu = \int_{C\cap A} f \,\dif \mu + \int_{C\cap A^c} f \,\dif \mu = \nu(C\cap A) + \nu(C\cap A^c) \geq \nu(S\cap A) + \nu(S\cap A^c) \]
+        which proves that $A$ is $\nu$-measurable as $S$ was an arbitrary subset of $X$.
+        Thus $\nu$ is a Borel outer measure on $X$.
+        The fact that $\nu$ is Borel regular follows from the definition of $\nu$ as the infimum over Borel sets.
+        Therefore $\nu$ is a Borel regular outer measure on $X$.
+        <span class="proof-end">□</span>
+      </div>
+    </div></p>
+<p>For each $j,k \in \Z^+$, we define the sets
+    \[ A_{j,k} := f^{-1}\left( \left[ \frac{k-1}{j}, \frac{k}{j} \right] \right) \]
+    and observe that for each $j,k \in \Z^+$, the set $A_{j,k}$ is $\mu$-measurable since $f$ is measurable; hence, by the Density Theorem <span class="ref-unknown" title="Reference not found: thm:density_theorem_general">[thm:density_theorem_general?]</span>, for $\mu$-almost every $x \in A_{j,k}$ we have
+    \[ \lim_{r\to 0^+} \frac{\mu( \overline{B}(x,r) \cap A_{j,k} )}{\mu( \overline{B}(x,r) )} = 1 \tag{$\diamondsuit$}\]
+    By the Upper Density Theorem <span class="ref-unknown" title="Reference not found: thm:upper_density_theorem">[thm:upper_density_theorem?]</span>, for $\mu$-almost every $x \in A_{j,k}$ we have
+    \[ \lim_{r\to 0+} \frac{\nu( \overline{B}(x,r) \setminus A_{j,k} )}{\mu( \overline{B}(x,r) )} = 0. \tag{$\clubsuit$}\]</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>Fix $j,k \in \Z^+$. Let $x \in A_{j,k}$ be a point where both $(\diamondsuit)$ and $(\clubsuit)$ hold, and let $r > 0$ be small enough so that $\int_{\overline{B}(x,r)} |f| \,\dif \mu < \infty$.
+    Then we have the chain of inequalities
+    \begin{align*}
+        \mu( \overline{B}(x,r) \cap A_{j,k} ) \cdot\frac{k-1}{j} &\leq \int_{ \overline{B}(x,r) \cap A_{j,k} } f \,\dif \mu = \nu( \overline{B}(x,r) \cap A_{j,k} ) \\
+            &= \int_{ \overline{B}(x,r) } f\,\dif\mu - \nu( \overline{B}(x,r) \setminus A_{j,k} ) \\
+            &\leq \mu(\overline{B}(x,r)\cap A_{j,k}) \cdot \frac{k}{j}. \qquad (\heartsuit)
+    \end{align*}
+    Extracting the first and thirs terms of this chain of inequalities, we have
+    \begin{align*}
+        \frac{k-1}{j} &\leq \frac{1}{\mu( \overline{B}(x,r) \cap A_{j,k})} \left( \int_{\overline{B}(x,r)} f\,\dif\mu - \nu( \overline{B}(x,r)\setminus A_{j,k} ) \right) \\
+            &= \frac{ \mu( \overline{B}(x,r) )}{ \mu( \overline{B}(x,r) \cap A_{j,k} )} \cdot \left( \frac{1}{ \mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } f \,\dif \mu - \frac{ \nu( \overline{B}(x,r) \setminus A_{j,k}) }{ \mu( \overline{B}(x,r) )} \right). \qquad (\heartsuit_1)
+    \end{align*}
+    by monotonicity of $\mu$.
+    Taking limits as $r \to 0^+$ in $(\heartsuit_1)$ and using $(\diamondsuit)$ and $(\clubsuit)$, we see that
+    \[ \frac{k-1}{j} \leq \liminf_{r\to 0^+} \frac{1}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } f \,\dif \mu. \tag{$\spadesuit_1$}\]</p>
+<p>Similarly we take the third and fourth terms of the chain of inequalities $(\heartsuit)$ to see that
+    \begin{align*}
+        \frac{k}{j} &\geq \frac{1}{\mu( \overline{B}(x,r) \cap A_{j,k})} \left( \int_{ \overline{B}(x,r) } f \,\dif \mu - \nu( \overline{B}(x,r) \setminus A_{j,k} ) \right) \\
+            &= \frac{ \mu( \overline{B}(x,r) ) }{ \mu( \overline{B}(x,r) \cap A_{j,k} ) } \cdot \left( \frac{1}{ \mu( \overline{B}(x,r) ) } \int_{ \overline{B}(x,r) } f \,\dif \mu - \frac{ \nu( \overline{B}(x,r) \setminus A_{j,k} ) }{ \mu( \overline{B}(x,r) ) } \right). \qquad (\heartsuit_2)
+    \end{align*}
+    Taking limits as $r \to 0^+$ in $(\heartsuit_2)$ and using $(\diamondsuit)$ and $(\clubsuit)$, we see that
+    \[ \frac{k}{j} \geq \limsup_{r\to 0^+} \frac{1}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } f \,\dif \mu. \tag{$\spadesuit_2$}\]
+    Combining $(\spadesuit_1)$ and $(\spadesuit_2)$, we have
+    \[ \frac{k-1}{j} \leq \liminf_{r\to 0^+} \frac{1}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } f \,\dif \mu \leq \limsup_{r\to 0^+} \frac{1}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } f \,\dif \mu \leq \frac{k}{j}. \]
+    Since $\frac{k-1}{j} \leq f \leq \frac{k}{j}$ on $A_{j,k}$, we finally estimate
+    \begin{align*}
+        f(x) - \frac{1}{j} &\leq \frac{k-1}{j} \\
+            &\leq \liminf_{r\to 0^+} \frac{1}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } f \,\dif \mu \\
+            &\leq \limsup_{r\to 0^+} \frac{1}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } f \,\dif \mu \\
+            &\leq \frac{k}{j} \leq f(x) + \frac{1}{j}.
+    \end{align*}
+    Since $\mu$-almost every $x \in A_{j,k}$ satisfies both $(\diamondsuit)$ and $(\clubsuit)$, we have shown that
+    \[ f(x) - \frac{1}{j} \leq \liminf \frac{1}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } f \,\dif \mu \leq \limsup \frac{1}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } f \,\dif \mu \leq f(x) + \frac{1}{j} \]</p>
+<p>For each $j \in \Z^+$ and for each $x\in X$ there exists $k \in \Z^+$ such that $x \in A_{j,k}$.
+    Thus for each $j\in \Z^+$, for $\mu$-almost every $x \in X$ we have
+    \[ f(x) - \frac{1}{j} \leq \liminf_{r\to 0^+} \frac{1}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } f \,\dif \mu \leq \limsup_{r\to 0^+} \frac{1}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } f \,\dif \mu \leq f(x) + \frac{1}{j}. \]
+    Taking $j \to \infty$, we conclude that for $\mu$-almost every $x \in X$,
+    \[ f(x) = \lim_{r\to 0^+} \frac{1}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } f \,\dif \mu. \]
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box corollary-box" id="cor:lebesgue_points">
+  <div class="theorem-header"><strong>Corollary ?</strong> (Lebesgue Points)</div>
+  <div class="theorem-content">Let $\mu$ be a Borel regular outer measure on $X$ which is open $\sigma$-finite and has the symmetric Vitali property, and let $1 \leq p < \infty$.
+    Let $f: X\to \R$ be a locally $p$-integrable function with respect to $\mu$, i.e. for each $x \in X$ there exists $r > 0$ such that
+    \[ \int_{\overline{B}(x,r)} |f|^p \,\dif \mu < \infty. \]
+    Then for $\mu$-almost every $x \in X$, we have
+    \[ \lim_{r \to 0^+} \frac{1}{\mu\big( \overline{B}(x,r) \big)} \int_{\overline{B}(x,r)} |f(y) - f(x)|^p \,\dif \mu(y) = 0. \tag{$\dag$}\]
+    Points $x \in X$ satisfying $(\dag)$ are called <em>Lebesgue points</em> of $f$ with respect to $\mu$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-1">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-1')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-1">
+    Let $\{ q_j \}_{j=1}^\infty$ be an enumeration of the rational numbers.
+    Then for each $j \in \Z^+$, the function $|f - q_j|^p$ is a locally integrable function with respect to $\mu$, so by the Lebesgue-Besicovich Differentiation Theorem <span class="ref-unknown" title="Reference not found: thm:lebesgue_besicovich_differentiation_theorem">[thm:lebesgue_besicovich_differentiation_theorem?]</span>, for $\mu$-almost every $x \in X$ we have
+    \[ |f(x) - q_j|^p = \lim_{r\to 0^+} \frac{1}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } |f(y) - q_j|^p \,\dif \mu(y). \]
+<p>Thus there exists a set $A\subset X$ with $\mu(A) = 0$ such that for each $j \in \Z^+$ and for each $x \in X \setminus A$, we have
+    \[ |f(x) - q_j|^p = \lim_{r\to 0^+} \frac{1}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } |f(y) - q_j|^p \,\dif \mu(y) \]
+    for each $j \in \Z^+$.</p>
+<p>Now let $x \in X \setminus A$ be arbitrary, and let $\varepsilon > 0$. Choose $j \in \Z^+$ such that 
+    \[ | f(x) - q_j|^p < \frac{\varepsilon}{2^p}. \]
+    Then 
+    \begin{align*}
+        \limsup_{r\to 0^+} \frac{1}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } |f(y) - f(x)|^p \,\dif \mu(y) &\leq \limsup_{r\to 0^+} \frac{2^{p-1}}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } |f(y) - q_j|^p + |q_j - f(x)|^p \,\dif \mu(y) \\
+            &= 2^{p-1} \Big( \limsup_{r\to 0^+} \frac{1}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } |f(y) - q_j|^p \,\dif \mu(y) \\
+            &\quad\qquad + \, \limsup_{r\to 0^+} \frac{1}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } |q_j - f(x)|^p \,\dif \mu(y) \Big) \\
+            &= 2^{p-1} \left( |f(x) - q_j|^p + |q_j - f(x)|^p \right) \\
+            &= 2^p |f(x) - q_j|^p < \varepsilon.
+    \end{align*}
+    Since $\varepsilon > 0$ was arbitrary, we conclude that
+    \[ \lim_{r \to 0^+} \frac{1}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } |f(y) - f(x)|^p \,\dif \mu(y) = 0. \]
+    Since this holds for each $x \in X \setminus A$ and $\mu(A) = 0$, we have shown that for $\mu$-almost every $x \in X$, $x$ is a Lebesgue point of $f$ with respect to $\mu$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box notation-box" id="not:avg_integral">
+  <div class="theorem-header"><strong>Notation ?</strong> (Averaged Integral)</div>
+  <div class="theorem-content">With $\mu$ and $f$ as in Corollary <span class="ref-unknown" title="Reference not found: cor:lebesgue_points">[cor:lebesgue_points?]</span>, we will sometimes use the notation
+    \[ \fint_{\overline{B}(x,r)} f \,\dif \mu := \frac{1}{\mu( \overline{B}(x,r) )} \int_{ \overline{B}(x,r) } f \,\dif \mu \]
+    to denote the <em>averaged integral</em> of $f$ over the closed ball $\overline{B}(x,r)$ with respect to the outer measure $\mu$.
+<p>More generally, if $A \subseteq X$ is a $\mu$-measurable set with $\mu(A) > 0$  then we write
+    \[ \fint_A f \,\dif \mu := \frac{1}{\mu(A)} \int_A f \,\dif \mu \]
+    to denote the averaged integral of $f$ over the set $A$ with respect to the outer measure $\mu$.</div>
+</div></p>
+<h3>The Lebesgue-Radon-Nikodym Theorem via Densities</h3>
+<p>We begin with a result that is related to the Lebesgue Decomposition Theorem <span class="ref-unknown" title="Reference not found: thm:lebsegue_decomposition">[thm:lebsegue_decomposition?]</span>.</p>
+<div class="theorem-box lemma-box" id="lem:lower_densities_absolute_continuity">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Absolute Continuity Lemma)</div>
+  <div class="theorem-content">Let $\mu$ and $\mu_0$ be Borel regular outer measures on $X$, and assume that $(X,\mu)$ is $\sigma$-finite.
+    Then there is a Borel set $Z \subseteq X$ such that $\mu_0(Z) = 0$ and $\mu\mres (X\setminus Z)$ is absolutely continuous with respect to $\mu_0$. 
+    The Borel set $Z$ is unique up to $\mu$-measure zero, and as a result the Borel regular outer measure $\mu\mres (X\setminus Z)$ is uniquely determined.
+<p><div style="margin: 1em 0;"></div></p>
+<p><span class="noindent"></span>The measure $\mu\mres (X\setminus Z)$ is called the <em>absolutely continuous part</em> of $\mu$ with respect to $\mu_0$.</div>
+</div></p>
+<div class="theorem-box remark-box collapsible-box collapsed" id="rem:lower_densities_absolute_continuity_lebesgue_decomposition" data-collapsible-id="collapsible-rem:lower_densities_absolute_continuity_lebesgue_decomposition">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-rem:lower_densities_absolute_continuity_lebesgue_decomposition')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong> (Relation to the Lebesgue Decomposition)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-rem:lower_densities_absolute_continuity_lebesgue_decomposition">Recall that, considering $\mu$ and $\mu_0$ as measures on the measurable space $(X,\mathcal{B}(X))$, by the Lebesgue Decomposition Theorem <span class="ref-unknown" title="Reference not found: thm:lebsegue_decomposition">[thm:lebsegue_decomposition?]</span> there exist unique measures $\mu_{ac}$ and $\mu_s$ on $(X,\mathcal{B}(X))$ such that $\mu = \mu_{ac} + \mu_s$, where $\mu_{ac}$ is absolutely continuous with respect to $\mu_0$ and $\mu_s$ is singular with respect to $\mu_0$.
+    By uniqueness of the absolutely continuous part of $\mu$ with respect to $\mu_0$ in Lemma <span class="ref-unknown" title="Reference not found: lem:lower_densities_absolute_continuity">[lem:lower_densities_absolute_continuity?]</span>, we see that the measure $\mu\mres (X\setminus Z)$ in Lemma <span class="ref-unknown" title="Reference not found: lem:lower_densities_absolute_continuity">[lem:lower_densities_absolute_continuity?]</span> coincides with the absolutely continuous part $\mu_{ac}$ of $\mu$ with respect to $\mu_0$ in the Lebesgue Decomposition Theorem <span class="ref-unknown" title="Reference not found: thm:lebsegue_decomposition">[thm:lebsegue_decomposition?]</span>.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-2">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-2')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-2">
+    <em>Step 1:</em> First we assume that $\mu(X) < \infty$.
+    <div style="margin: 1em 0;"></div>
+<p>We define the set
+    \[ \mathcal{A} := \{ A \subseteq X : \mu_0(A) = 0 \} \]
+    and let \[ \alpha := \sup\{ \mu(A) : A \in \mathcal{A} \}. \]
+    Choose a sequence $\{ A_j \}_{j=1}^\infty \subset \mathcal{A}$ such tha $\lim_{j\to \infty} \mu(A_j) = \alpha$.
+    Then we have $\bigcup_{j=1}^\infty A_j \in \mathcal{A}$ since $\mu_0$ is countably subadditive.
+    We claim that
+    \[ Z := \bigcup_{j=1}^\infty A_j \]
+    is the desired Borel set.</p>
+<p>To see this, assume that $S \subseteq X$ is such that $\mu_0(S) = 0$.
+    Then by Borel regularity of $\mu_0$, there exists a Borel set $A \in \mathcal{A}$ such that $S \subseteq A$ and
+    \[ \mu(S\setminus Z) \leq \mu(A\setminus Z) = \mu( Z \cup (A\setminus Z)) - \mu(Z) \leq \alpha - \alpha = 0 \]
+    That is, \[ \mu\mres(X\setminus Z)(S) = 0. \]
+    Since $S$ was an arbitrary Borel set with $\mu_0(S) = 0$, we have shown that $\mu\mres (X\setminus Z)$ is absolutely continuous with respect to $\mu_0$.</p>
+<p>To see the uniqueness of $Z$ up to $\mu$-measure zero, suppose that $\hat{Z} \subseteq X$ is another Borel set such that $\mu_0(\hat{Z}) = 0$ and $\mu\mres (X\setminus \hat{Z})$ is absolutely continuous with respect to $\mu_0$.
+    Then we have
+    \[ \mu(Z \setminus \hat{Z}) = \mu\mres (X\setminus \hat{Z})(Z \setminus \hat{Z}) = 0 \]
+    since $\mu_0(Z \setminus \hat{Z}) = 0$.
+    Similarly, we have $\mu(\hat{Z} \setminus Z) = 0$.
+    Thus $\mu(Z \triangle \hat{Z}) = 0$, which proves the uniqueness of $Z$ up to $\mu$-measure zero.
+    As a result, the Borel regular outer measure $\mu\mres (X\setminus Z)$ is uniquely determined.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 2:</em> Now we assume that $(X,\mu)$ is $\sigma$-finite.
+    <div style="margin: 1em 0;"></div></p>
+<p>Then there is an increasing sequence of Borel sets $\{ A_j \}_{j=1}^\infty$ such that $X = \bigcup_{j=1}^\infty A_j$ and $\mu(A_j) < \infty$ for each $j \in \Z^+$.
+    For each $j \in \Z^+$, by Step 1 there exists a Borel set $Z_j \subseteq A_j$ such that $\mu_0(Z_j) = 0$ and $\mu\mres (A_j \setminus Z_j)$ is absolutely continuous with respect to $\mu_0$.
+    Let \[ Z := \bigcup_{j=1}^\infty Z_j. \]
+    Then $Z \subseteq X$ is a Borel set with $\mu_0(Z) = 0$.
+    We claim that $\mu\mres (X\setminus Z)$ is absolutely continuous with respect to $\mu_0$.
+    To see this, let $A \subseteq X\setminus Z$ be a Borel set with $\mu_0(A) = 0$.
+    Then for each $j \in \Z^+$, we have
+    \[ \mu\mres (X\setminus Z)(A \cap A_j) = \mu\mres (A_j \setminus Z_j)(A \cap A_j) = 0 \]
+    since $\mu\mres (A_j \setminus Z_j)$ is absolutely continuous with respect to $\mu_0$.
+    Thus by countable sub-additivity of $\mu\mres (X\setminus Z)$, we have
+    \[ \mu\mres (X\setminus Z)(A) = \mu\mres (X\setminus Z)\left( \bigcup_{j=1}^\infty (A \cap A_j) \right) \leq \sum_{j=1}^\infty \mu\mres (X\setminus Z)(A \cap A_j) = 0. \]
+    This proves that $\mu\mres (X\setminus Z)$ is absolutely continuous with respect to $\mu_0$.</p>
+<p>The uniqueness of the Borel set $Z$ up to $\mu$-measure zero follows from the uniqueness of $Z_j$ up to $\mu$-measure zero for each $j \in \Z^+$ established in Step 1.
+    Thus the Borel regular outer measure $\mu\mres (X\setminus Z)$ is uniquely determined.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>We can also define lower densities in a similar manner to upper densities. The following two definitions and comparison lemma are the last ingredients to prepare before the proof of the Lebesgue-Radon-Nikodym Theorem via Densities.</p>
+<div class="theorem-box definition-box" id="def:lower_density_of_measure_wrt_measure">
+  <div class="theorem-header"><strong>Definition ?</strong> (Lower Densities)</div>
+  <div class="theorem-content">Let $\mu$ and $\mu_0$ be Borel regular outer measures on $X$, and assume that $\mu_0$ is locally finite. 
+    Let
+    \[ U_{\mu_0} := \{ x\in X : \mu_0(\overline{B}(x,r)) = 0 \text{ for some } r > 0 \} \quad\text{ and }\quad U_{\mu} := \{ x\in X : \mu(\overline{B}(x,r)) = 0 \text{ for some } r > 0 \}. \]
+    We define the <em>lower density</em> of $\mu$ with respect to $\mu_0$ by
+    \[ \Theta_*^{\mu_0}(\mu,x) := \begin{cases}
+        \displaystyle\liminf_{r \to 0^+} \frac{\mu(\overline{B}(x,r))}{\mu_0(\overline{B}(x,r)),} & \text{ if } x \in X \setminus (U_{\mu_0} \cup U_{\mu}), \\
+        \infty, & \text{ if } x \in U_{\mu_0} \setminus U_{\mu}, \\
+        0, & \text{ if }x \in U_{\mu}.
+    \end{cases} \]</div>
+</div>
+<div class="theorem-box definition-box" id="def:density_of_measure_wrt_measure">
+  <div class="theorem-header"><strong>Definition ?</strong> (Density of a Measure with respect to another Measure)</div>
+  <div class="theorem-content">Let $\mu$ and $\mu_0$ be Borel regular outer measures on $X$, and assume that $\mu_0$ is locally finite. 
+    If $x \in X$ is such that $\Theta^{*\mu_0}(\mu,x) = \Theta_*^{\mu_0}(\mu,x) \in [0,\infty]$, then we define the <em>density</em> of $\mu$ with respect to $\mu_0$ at $x$ as the common value
+    \[ \Theta^{\mu_0}(\mu,x) := \Theta^{*\mu_0}(\mu,x) = \Theta_*^{\mu_0}(\mu,x). \]
+    If $x\in X$ is such that $\Theta_{*}^{\mu_0}(\mu,x) < \Theta^{*\mu_0}(\mu,x)$, then $\Theta^{\mu_0}(\mu,x)$ is undefined.</div>
+</div>
+<p>We can also give an alternate definition of the density of a measure with respect to another measure, which more closely resembles the definitions of upper and lower densities.</p>
+<div class="theorem-box remark-box collapsible-box collapsed" id="rem:density_of_measure_wrt_measure_defn" data-collapsible-id="collapsible-rem:density_of_measure_wrt_measure_defn">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-rem:density_of_measure_wrt_measure_defn')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong> (Alternate Definition of Density of a Measure with respect to another Measure)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-rem:density_of_measure_wrt_measure_defn">Letting $\mu,\mu_0$ be as in Definition <span class="ref-unknown" title="Reference not found: def:density_of_measure_wrt_measure">[def:density_of_measure_wrt_measure?]</span>, let 
+    \[ U_{\mu_0} := \{ x \in X : \mu(\overline{B}(x,r)) = 0 \text{ for some } r > 0 \} \quad \text{ and } \quad U_\mu := \{ x \in X : \mu_0(\overline{B}(x,r)) = 0 \text{ for some } r > 0 \}. \]
+    Then we see that 
+    \[ \Theta^{\mu_0}(\mu,x) = \begin{cases}
+        \displaystyle\lim_{r \to 0^+} \frac{\mu(\overline{B}(x,r))}{\mu_0(\overline{B}(x,r))}, & \text{ if } x \in X \setminus (U_{\mu_0} \cup U_\mu) \text{ and this limit exists}, \\
+        \infty, & \text{ if } x \in U_{\mu_0} \setminus U_\mu, \\
+        0, & \text{ if } x \in U_\mu,
+    \end{cases} \]
+    and is undefined otherwise.</div>
+</div>
+<div class="theorem-box lemma-box" id="lem:lower_density_comparison_lemma">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Comparison Lemma for Lower Densities)</div>
+  <div class="theorem-content">Let $\mu$ and $\mu_0$ be Borel regular outer measures on $X$, and assume that both $\mu$ and $\mu_0$ are open $\sigma$-finite.
+    Let $t > 0$ and let $A \subseteq X$ be such that $\Theta_*^{\mu_0}(\mu,x) \leq t$ for each $x \in A$.
+    <ol style="list-style-type: lower-alpha;"><li>If $\mu$ has the Symmetric Vitali Property, then $\mu(A) \leq \mu_0(A) \cdot t$.
+        </li><li>If $\mu_0$ has the Symmetric Vitali Property, then with $Z$ as in Lemma <span class="ref-unknown" title="Reference not found: lem:lower_densities_absolute_continuity">[lem:lower_densities_absolute_continuity?]</span>, we have $\mu(A \setminus Z) \leq \mu_0(A) \cdot t$.</li></ol></div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-3">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-3')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-3">
+    <em>Step 1:</em> First we assume that $\mu_0(X) < \infty$ and $\mu(A) < \infty$, and we prove (a).
+    <div style="margin: 1em 0;"></div>
+<p>First we observe that $A \subset X \setminus U_{\mu_0}$ since $\Theta_*^{\mu_0}(\mu,x) = \infty$ for each $x \in U_{\mu_0}$.
+    Fix $\tau > t$. Since $\mu_0$ is Borel regular and $(X,\mu_0)$ is open $\sigma$-finite, Theorem <span class="ref-unknown" title="Reference not found: thm:borel_reg_implies_inner/outer_reg">[thm:borel_reg_implies_inner/outer_reg?]</span> implies that there exists an open set $U \supseteq A$ such that
+    \[ \mu_0(U) \leq \mu_0(A) + \tau - t. \]
+    We define
+    \[ \mathcal{B} := \{ \overline{B}(x,r) : x\in A \text{ and } \mu(\overline{B}(x,r)) < \tau \mu_0(\overline{B}(x,r)) \} \]
+    and notice that for each $x \in A$, the definition of lower density implies that for each $\varepsilon > 0$ there exists $0< r_x < \varepsilon$ such that
+    \[ \mu(\overline{B}(x,r_x)) < \tau \mu_0(\overline{B}(x,r_x)). \]
+    Thus for each $x \in A$, there exists a sequence $\{ r_{x,j} \}_{j=1}^\infty$ such that $r_{x,j} \to 0$ as $j \to \infty$ and $\overline{B}(x,r_{x,j}) \in \mathcal{B}$ for each $j \in \Z^+$.
+    As a result, we see that
+    \[ \inf\{ r: \overline{B}(x,r) \in \mathcal{B} \} = 0 \]
+    for each $x \in A$.</p>
+<p>Since $\mu$ has the Symmetric Vitali Property, there exists a countable collection of disjoint closed balls $\{ B_j \}_{j=1}^\infty \subset \mathcal{B}$ such that
+    \[ \mu\left( A \setminus \bigcup_{j=1}^\infty B_j \right) = 0 \]
+    and then also $\mu(B_j) < \tau \mu_0(B_j)$ for each $j \in \Z^+$ since $B_j \in \mathcal{B}$.
+    Summing over $j \in \Z^+$ gives
+    \begin{align*}
+        \mu(A) &\leq \mu\left( A \setminus \bigcup_{j=1}^\infty B_j \right) + \mu\left( \bigcup_{j=1}^\infty B_j \right) \\
+            &= 0 + \sum_{j=1}^\infty \mu(B_j) \\
+            &< \tau \sum_{j=1}^\infty \mu_0(B_j) \\
+            &= \tau \mu_0\left( \bigcup_{j=1}^\infty B_j \right) && \text{by disjointness of } \{ B_j \}_{j=1}^\infty \\
+            &\leq \tau \mu_0(U) \\
+            &\leq \tau ( \mu_0(A) + \tau - t ).
+    \end{align*}
+    Letting $\tau \to t^+$ gives the desired result
+    \[ \mu(A) \leq \mu_0(A) \cdot t. \]</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 2:</em> Now we assume that both $\mu$ and $\mu_0$ are open $\sigma$-finite, and we prove (a).
+    <div style="margin: 1em 0;"></div></p>
+<p>Then there exist countable collections of open sets $\{ U_k \}_{k=1}^\infty$ and $\{ V_k \}_{k=1}^\infty$ such that $X = \bigcup_{k=1}^\infty U_k = \bigcup_{k=1}^\infty V_k$ and $\mu(U_k) < \infty$ and $\mu_0(V_k) < \infty$ for each $k \in \Z^+$.
+    By considering the collection 
+    \[ \{ U_j \cap V_k : j,k\in \Z^+ \} \]
+    of open set, see that $ X = \bigcup_{j,k=1}^\infty (U_j \cap V_k)$ and $\mu(U_j \cap V_k) < \infty$ and $\mu_0(U_j \cap V_k) < \infty$ for each $j,k \in \Z^+$.
+    Thus be re-labeling if necessary, we may assume there is an increasing collection of open sets $\{ W_k \}_{k=1}^\infty$ such that $X = \bigcup_{k=1}^\infty W_k$ and $\mu(W_k) < \infty$ and $\mu_0(W_k) < \infty$ for each $k \in \Z^+$.</p>
+<p>For each $k \in \Z^+$ we consider the measures $\mu \mres W_k$ and $\mu_0 \mres W_k$ which are Borel regular outer measures on $X$ satisfying $(\mu \mres W_k)(X) = \mu(W_k) < \infty$ and $(\mu_0 \mres W_k)(X) = \mu_0(W_k) < \infty$.
+    Then by Step 1, we have
+    \[ (\mu \mres W_k)(A) \leq (\mu_0 \mres W_k)(A) \cdot t \]
+    for each $k \in \Z^+$.
+    That is, \[ \mu(A \cap W_k) \leq \mu_0(A \cap W_k) \cdot t \qquad \forall \,k \in \Z^+. \]
+    By using the fact that $\{ W_k \}_{k=1}^\infty$ is an increasing collection of sets whose union is $X$, we have
+    \[ \mu(A) = \lim_{k\to \infty} \mu(A \cap W_k) \leq \lim_{k\to \infty} \mu_0(A \cap W_k) \cdot t = \mu_0(A) \cdot t \]
+    by Proposition <span class="ref-unknown" title="Reference not found: prop:sequences_of_measurable_sets">[prop:sequences_of_measurable_sets?]</span>.
+    This proves (a).</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 3:</em> Finally, we prove (b).
+    <div style="margin: 1em 0;"></div></p>
+<p>Let $Z \subseteq X$ be the Borel set given by Lemma <span class="ref-unknown" title="Reference not found: lem:lower_densities_absolute_continuity">[lem:lower_densities_absolute_continuity?]</span>, so that $\mu \mres(X\setminus Z)$ is absolutely continuous with respect to $\mu_0$.
+    Thus the Symmetric Vitali Property for $\mu_0$ implies that $\mu\mres (X\setminus Z)$ also has the Symmetric Vitali Property, so we apply the result of (a) to the set $A \setminus Z$ and the measure $\tilde{\mu}$, instead of $A$ and $\mu$, to see that
+    \[ (\mu\mres(X\setminus Z))(A\setminus Z) = \mu(A\setminus Z) \leq \mu_0(A\setminus Z) \cdot t. \]
+    Since $\mu_0(Z) = 0$, we have $\mu_0(A\setminus Z) = \mu_0(A)$, and the above inequality implies
+    \[ \mu(A\setminus Z) \leq \mu_0(A\setminus Z) \cdot t = \mu_0(A) \cdot t \]
+    which completes the proof of (b).
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<p>At this point, we are ready to show how these densities relate to the differentiation theorems in the previous chapter.</p>
+<div class="theorem-box theorem-box" id="thm:differentiation_of_measures">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Differentiation of Measures)</div>
+  <div class="theorem-content">Let $\mu$ and $\mu_0$ be Borel regular outer measures on $X$, which are both open $\sigma$-finite.
+    <ol style="list-style-type: lower-alpha;"><li>If $\mu$ has the symmetric Vitali property, then there is a Borel set $S \subseteq X$ with $\mu(S) = 0$ such that for every $x \in X\setminus S$, the density $\Theta^{\mu_0}(\mu,x)$ is defined.
+        </li><li>If $\mu_0$ has the symmetric Vitali property, then there is a Borel set $S\subseteq X$ with $\mu_0(S) = 0$ such that for every $x \in X\setminus S$, the density $\Theta^{\mu_0}(\mu,x)$ is defined.</li></ol>
+    In either case, the function 
+    \[ (X\setminus S) \ni x\longmapsto \Theta^{\mu_0}(\mu,x) \]
+    is Borel measurable.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-proof-of-a-">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-proof-of-a-')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof of (a)</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-proof-of-a-">
+    We will show (a) first, so assume that $\mu$ has the symmetric Vitali property.
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 1:</em> First we assume that $\mu_0(X) < \infty$ and $\mu(A) < \infty$, and we prove (a).
+    <div style="margin: 1em 0;"></div></p>
+<p>First see that if $A\subseteq X$ is a subset and $a,b > 0$ are positive real numbers such that 
+    \[ \Theta_*^{\mu_0}(\mu,x) < a \quad\text{ and }\quad b < \Theta^{*\mu_0}(\mu,x) \qquad \forall\, x\in A\]
+    then \[ \mu(A) \leq a \mu_0(A) \quad\text{ and }\quad \mu_0(A) \cdot b \leq \mu(A) \]
+    by the Comparison Lemmas <span class="ref-unknown" title="Reference not found: lem:comparison_lemma_general">[lem:comparison_lemma_general?]</span> and <span class="ref-unknown" title="Reference not found: lem:lower_density_comparison_lemma">[lem:lower_density_comparison_lemma?]</span>.</p>
+<p>In particular, if $0 < a < b$ and 
+    \[ E_{a,b} := \{ x\in X: \Theta_*^{\mu_0}(\mu,x) < a < b < \Theta^{*\mu_0}(\mu,x) \} \]
+    then we have
+    \[ \frac{\mu(E_{a,b})}{a} \leq \mu_0(E_{a,b}) \leq \frac{\mu(E_{a,b})}{b} \]
+    which implies that \[ \mu_0(E_{a,b}) = \mu(E_{a,b}) = 0. \]
+    Because 
+    \[ \{ x\in X : \Theta_*^{\mu_0}(\mu,x) < \Theta^{*\mu_0}(\mu,x) \} \subseteq \bigcup_{\substack{ a,b\in \Q^+ \\ a < b }}  E_{a,b} \]
+    we deduce that $\Theta_*^{\mu_0}(\mu,x) < \Theta^{*\mu_0}(\mu,x)$ only on a set which has both $\mu$-measure and $\mu_0$-measure zero.
+    As a result the density $\Theta^{\mu_0}(\mu,x)$ is defined for $\mu$-almost every $x \in X \setminus U_{\mu_0}$.
+    Since $\Theta^{\mu_0}(\mu,x)$ is also defined in $[0,\infty]$ for each $x \in U_{\mu}$ by <span class="ref-unknown" title="Reference not found: rem:density_of_measure_wrt_measure_defn">[rem:density_of_measure_wrt_measure_defn?]</span>, we conclude that $\Theta^{\mu_0}(\mu,x)$ is defined for $\mu$-almost every $x \in X$.
+    By using Borel regularity of $\mu$, we may therefore choose a Borel set $S \subseteq X$ with $\mu(S) = 0$ such that for every $x \in X\setminus S$, the density $\Theta^{\mu_0}(\mu,x)$ is defined.</p>
+<p>We now show that thedensity function 
+    \[ (X\setminus S) \ni x \longmapsto \Theta^{\mu_0}(\mu,x) \]
+    is Borel measurable.</p>
+<p>For each fixed $ r > 0 $, the functions
+    \[ x\longmapsto \mu(B(x,r)), \qquad x\longmapsto \mu_0(B(x,r)) \]
+    defined on $X \setminus (S \cup U_{\mu_0} \cup U_{\mu})$ are upper semi-continuous, and hence Borel measurable.
+    Thus their ratio
+    \[ x\longmapsto \frac{\mu(B(x,r))}{\mu_0(B(x,r))} \]
+    is also Borel measurable on $X \setminus (S \cup U_{\mu_0} \cup U_{\mu})$.
+    Therefore 
+    \[ \Theta^{\mu_0}(\mu,x) = \lim_{j\to \infty} \frac{\mu(B(x,\frac{1}{j}))}{\mu_0(B(x,\frac{1}{j}))} \]
+    is a Borel measurable function on $X \setminus (S \cup U_{\mu_0} \cup U_{\mu})$, as the pointwise limit of a sequence of Borel measurable functions.</p>
+<p>Since $\Theta^{\mu_0}(\mu,x) = \infty$ on $U_{\mu_0} \setminus U_{\mu}$ and $\Theta^{\mu_0}(\mu,x) = 0$ on $U_{\mu}$, and the sets $U_{\mu_0}$ and $U_{\mu}$ are both open (by <span class="ref-unknown" title="Reference not found: ex:set_where_measure_vanishes_are_open">[ex:set_where_measure_vanishes_are_open?]</span>), 
+    so we conclude that $\Theta^{\mu_0}(\mu,x)$ is Borel measurable on all of $X \setminus S$.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 2:</em> Now we assume that both $\mu$ and $\mu_0$ are open $\sigma$-finite, and we prove (a).
+    <div style="margin: 1em 0;"></div></p>
+<p>Then there exist countable collections of open sets $\{ U_k \}_{k=1}^\infty$ and $\{ V_k \}_{k=1}^\infty$ such that $X = \bigcup_{k=1}^\infty U_k = \bigcup_{k=1}^\infty V_k$ and $\mu(U_k) < \infty$ and $\mu_0(V_k) < \infty$ for each $k \in \Z^+$.
+    By considering the collection 
+    \[ \{ U_j \cap V_k : j,k\in \Z^+ \} \]
+    of open sets, see that $ X = \bigcup_{j,k=1}^\infty (U_j \cap V_k)$ and $\mu(U_j \cap V_k) < \infty$ and $\mu_0(U_j \cap V_k) < \infty$ for each $j,k \in \Z^+$.
+    Thus be re-labeling if necessary, we may assume there is an increasing collection of open sets $\{ W_k \}_{k=1}^\infty$ such that $X = \bigcup_{k=1}^\infty W_k$ and $\mu(W_k) < \infty$ and $\mu_0(W_k) < \infty$ for each $k \in \Z^+$.</p>
+<p>For each $k \in \Z^+$ we consider the measures $\mu \mres W_k$ and $\mu_0 \mres W_k$ which are Borel regular outer measures on $X$ satisfying $(\mu \mres W_k)(X) = \mu(W_k) < \infty$ and $(\mu_0 \mres W_k)(X) = \mu_0(W_k) < \infty$.
+    Then by Step 1, there exists a Borel set $S_k \subseteq W_k$ with $(\mu \mres W_k)(S_k) = \mu(S_k) = 0$ such that for every $x \in W_k \setminus S_k$, the density $\Theta^{\mu_0 \mres W_k}(\mu \mres W_k,x)$ is defined.
+    Let \[ S := \bigcup_{k=1}^\infty S_k. \]
+    Then $S \subseteq X$ is a Borel set with $\mu(S) = 0$.
+    We claim that for every $x \in X\setminus S$, the density $\Theta^{\mu_0}(\mu,x)$ is defined.
+    To see this, let $x \in X\setminus S$ be arbitrary.
+    Then there exists $k_0 \in \Z^+$ such that $x \in W_{k_0}$.
+    Since $x \notin S$, we have $x \notin S_{k_0}$, so the density $\Theta^{\mu_0 \mres W_{k_0}}(\mu \mres W_{k_0},x)$ is defined.
+    By the definitions of densities, we see that
+    \[ \Theta^{\mu_0}(\mu,x) = \Theta^{\mu_0 \mres W_{k_0}}(\mu \mres W_{k_0},x) \]
+    is also defined.
+    Since $x \in X\setminus S$ was arbitrary, we have shown that for every $x \in X\setminus S$, the density $\Theta^{\mu_0}(\mu,x)$ is defined.</p>
+<p>Lastly, see that the density function $\Theta^{\mu_0}(\mu,x)$ is Borel measurable on $X\setminus S$ by taking the pointwise limit of the Borel measurable functions $\Theta^{\mu_0 \mres W_k}(\mu \mres W_k,x)$ on each $W_k \setminus S_k$ as in Step 1.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="proof-box collapsed" data-proof-id="proof-proof-of-b-">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-proof-of-b-')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof of (b)</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-proof-of-b-">
+    Now we prove (b), so assume that $\mu_0$ has the symmetric Vitali property.
+    By <span class="ref-unknown" title="Reference not found: cor:upper_density_finite">[cor:upper_density_finite?]</span>, we know that
+    \[ \Theta^{*\mu_0}(\mu,x) < \infty \qquad \text{ for } \mu_0\text{-almost every } x \in X. \]
+    By <span class="ref-unknown" title="Reference not found: lem:lower_densities_absolute_continuity">[lem:lower_densities_absolute_continuity?]</span>, there is a Borel set $Z \subseteq X$ such that $\mu_0(Z) = 0$ and $\hat{\mu} := \mu \mres (X\setminus Z)$ is absolutely continuous with respect to $\mu_0$.
+    Since $\hat{\mu}$ is absolutely continuous with respect to $\mu_0$, it is clear that $\hat{\mu}$ also has the Symmetric Vitali Property. 
+    Now we use the argument of part (a) applied to the measures $\hat{\mu}$ to see that
+    \[ \mu_0(E_{a,b}) = \mu(E_{a,b} \setminus Z) = 0 \]
+    where $E_{a,b}$ is as defined in the proof of part (a).
+    Thus the density $\Theta^{\mu_0}(\mu,x)$ is defined for $\mu_0$-almost every $x \in X \setminus Z$, and by our first remark in this proof, it is finite for $\mu_0$-almost every $x \in X$.
+    By using Borel regularity of $\mu_0$, we may therefore choose a Borel set $S \subseteq X$ with $\mu_0(S) = 0$ such that for every $x \in X\setminus S$, the density $\Theta^{\mu_0}(\mu,x)$ is defined and finite.
+<p>The Borel measurability of the density function
+    \[ (X\setminus S) \ni x \longmapsto \Theta^{\mu_0}(\mu,x) \]
+    follows from the same argument as in part (a).
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box theorem-box" id="thm:radon_nikodym_theorem_via_densities">
+  <div class="theorem-header"><strong>Theorem ?</strong> (The Lebesgue-Radon-Nikodym Theorem)</div>
+  <div class="theorem-content">Let $\mu,\mu_0$ be Borel regular outer measures on $X$, which are both open $\sigma$-finite, and suppose that $\mu_0$ has the symmetric Vitali property.
+    <ol style="list-style-type: lower-roman;"><li>If $\mu \ll \mu_0$, then $\mu$ also has the symmetric Vitali property, and
+            \[ \mu(A) = \int_A \Theta^{\mu_0}(\mu,x) \,\dif \mu_0(x) \]
+            for each Borel set $A \subseteq X$.
+        </li><li>In general, there exists a Borel set $Z\subseteq X$ such that $\mu_0(Z) = 0$ and
+            \[ \mu(A) = \int_A \Theta^{\mu_0}(\mu,x) \,\dif \mu_0(x) + (\mu\mres Z)(A) \]
+            for each Borel set $A \subseteq X$.
+        </li><li>If $\mu$ also has the symmetric Vitali property, then the set $Z$ in part (b) can be taken to be 
+            \[ Z = \{ x \in X : \Theta^{\mu_0}(\mu,x) = \infty \}. \]</li></ol></div>
+</div>
+<div class="theorem-box remark-box collapsible-box collapsed" id="rem:interpretation_of_radon_nikodym_theorem_via_densities" data-collapsible-id="collapsible-rem:interpretation_of_radon_nikodym_theorem_via_densities">
+  <div class="theorem-header clickable" onclick="toggleCollapsible('collapsible-rem:interpretation_of_radon_nikodym_theorem_via_densities')">
+    <span class="collapsible-icon">▼</span>
+    <strong>Remark ?</strong> (Interpretation of the Lebesgue-Radon-Nikodym Theorem via Densities)
+  </div>
+  <div class="theorem-content collapsible-content" id="collapsible-rem:interpretation_of_radon_nikodym_theorem_via_densities">Basically this says that if you have Borel regular outer measures $\mu$ and $\mu_0$ on $X$ which are open $\sigma$-finite and such that $\mu_0$ has the symmetric Vitali property, then the Radon-Nikodym derivative of $\mu$ with respect to $\mu_0$ can be computed as a limit of ratios of measures at $\mu$-almost every point.
+<p>More precisely, using our notation for the Radon-Nikodym derivative, (i) says that if $\mu \ll \mu_0$, then
+\[ D_{\mu_0}\mu(x) = \Theta^{\mu_0}(\mu,x) = \lim_{r \to 0^+} \frac{\mu\big( \overline{B}(x,r) \big)}{\mu_0\big( \overline{B}(x,r) \big)} \]
+for $\mu_0$-almost every $x \in X$.</p>
+<p>\begin{proof}[Sanity Check]
+[ Sanity check --- note that $\Theta^{\mu_0}(\mu,x)$ exists for $\mu_0$-almost every $x \in X$ by Theorem <span class="ref-unknown" title="Reference not found: thm:differentiation_of_measures">[thm:differentiation_of_measures?]</span>.
+To justify the second equality computing $\Theta^{\mu_0}(\mu,x)$ as a limit, we use the alternate definition <span class="ref-unknown" title="Reference not found: rem:density_of_measure_wrt_measure_defn">[rem:density_of_measure_wrt_measure_defn?]</span> of density of a measure with respect to another measure.
+Since
+\[ \Theta^{\mu_0}(\mu,x) = \begin{cases}
+        \displaystyle\lim_{r \to 0^+} \frac{\mu(\overline{B}(x,r))}{\mu_0(\overline{B}(x,r))}, & \text{ if } x \in X \setminus (U_{\mu_0} \cup U_\mu) \text{ and this limit exists}, \\
+        \infty, & \text{ if } x \in U_{\mu_0} \setminus U_\mu, \\
+        0, & \text{ if } x \in U_\mu,
+\end{cases} \]
+and $\mu_0 (U_{\mu_0}) = 0$, so the second branch only occurs on a $\mu_0$-measure zero set.</p>
+<p>If $x \in U_\mu \setminus U_{\mu_0}$, then $ \mu_0(\overline{B}(x,r)) > 0$ for each $r > 0$ but $\mu(\overline{B}(x,r)) = 0$ for some $r > 0$, so the limit in the first branch is $0$ which agrees with the third branch (for such $x$).
+Since the set $U_{\mu_0}$ has $\mu_0$-measure zero, we conclude that for every $x \in X \setminus U_{\mu_0}$ where $\Theta^{\mu_0}(\mu,x)$ is defined, we have
+\[ \Theta^{\mu_0}(\mu,x) = \lim_{r \to 0^+} \frac{\mu\big( \overline{B}(x,r) \big)}{\mu_0\big( \overline{B}(x,r) \big)}. \]
+Finally, use Theorem <span class="ref-unknown" title="Reference not found: thm:differentiation_of_measures">[thm:differentiation_of_measures?]</span> to see that $\Theta^{\mu_0}(\mu,x)$ is defined for $\mu_0$-almost every $x \in X$, so the above equality holds for $\mu_0$-almost every $x \in X$ as well. ]
+\end{proof}</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>Also (ii) says that in general, we can decompose $\mu$ into an absolutely continuous part with respect to $\mu_0$ and a singular part with respect to $\mu_0$ using these densities, i.e.
+\begin{align*}
+    \mu &= \ \, \mu_{ac} \ \ + \ \ \ \mu_s \\
+        &= D_{\mu_0}\mu + (\mu\mres Z)
+\end{align*}
+and the absolutely continuous part and the singular part are unique, by the Lebesgue Decomposition Theorem <span class="ref-unknown" title="Reference not found: thm:lebsegue_decomposition">[thm:lebsegue_decomposition?]</span>.
+Furthermore the absolutely continuous part $\mu_{ac}$ can be computed pointwise using the densities $\Theta^{\mu_0}(\mu,x) = \lim_{r \to 0^+} \frac{\mu(\overline{B}(x,r))}{\mu_0(\overline{B}(x,r))}$ for $\mu_0$-almost every $x \in X$ as in the previous paragraph.</div>
+</div></p>
+<p>First we prove the statements of the theorem in the case that $\mu(X) < \infty$ and $\mu_0(X) < \infty$.
+The general case where $\mu$ and $\mu_0$ are open $\sigma$-finite then follows by a standard exhaustion argument as in previous results.</p>
+<div class="proof-box collapsed" data-proof-id="proof-proof-when-mu-x-infty-and-mu-0-x-infty-">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-proof-when-mu-x-infty-and-mu-0-x-infty-')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof when $\mu(X) < \infty$ and $\mu_0(X) < \infty$.</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-proof-when-mu-x-infty-and-mu-0-x-infty-">
+    We assume that both $\mu(X) < \infty$ and $\mu_0(X) < \infty$.
+    <div style="margin: 1em 0;"></div>
+<p>(i). Assume that $\mu \ll \mu_0$.
+    Then it is clear that $\mu$ has the Symmetric Vitali Property since $\mu_0$ does.</p>
+<p>Since $\mu_0$ has the Symmetric Vitali Property, there is a Borel set $S \subseteq X$ with $\mu_0(S) = 0$ such that for every $x \in X\setminus S$, the density $\Theta^{\mu_0}(\mu,x)$ is defined by Theorem <span class="ref-unknown" title="Reference not found: thm:differentiation_of_measures">[thm:differentiation_of_measures?]</span>.
+    For each Borel set $A \subset X \setminus S$ we define
+    \[ \nu(A) := \int_A \Theta^{\mu_0}(\mu,x) \,\dif \mu_0(x) \]
+    and for an arbitrary set $E \subseteq X$, we define
+    \[ \nu(E) := \inf \{  \nu(A) : A\text{ is a Borel set such that } A \supseteq E \}. \]
+    The same argument as in the first step of the proof of <span class="ref-unknown" title="Reference not found: lem:lower_densities_absolute_continuity">[lem:lower_densities_absolute_continuity?]</span> shows that $\nu$ is a well-defined Borel regular outer measure on $X$.</p>
+<p>Let $A \subseteq X$ be an arbitrary Borel set.
+    If $0 < a < b$ and \[ A_{(a,b)} := \{ x \in A : a < \Theta^{\mu_0}(\mu,x) < b \}, \] then we have
+    \[ a \mu_0 (A_{a,b}) \leq \nu(A_{a,b}) \leq b \mu_0 (A_{a,b}) \]
+    by definition of $\nu$, while the Comparison Lemmas <span class="ref-unknown" title="Reference not found: lem:comparison_lemma_general">[lem:comparison_lemma_general?]</span> and <span class="ref-unknown" title="Reference not found: lem:lower_density_comparison_lemma">[lem:lower_density_comparison_lemma?]</span> imply that
+    \[ a \mu_0 (A_{a,b}) \leq \mu(A_{a,b}) \leq b \mu_0 (A_{a,b}) \]
+    and as a result we see that
+    \[ \frac{a}{b} \mu_0 (A_{a,b}) \leq \nu(A_{a,b}) \leq \frac{b}{a} \mu_0 (A_{a,b}). \]
+    Since $a$ and $b$ are arbitrary positive real numbers with $a < b$, we conclude that
+    \[ \nu(A) = \mu(A). \]
+    Since $A \subset X$ was an arbitrary Borel set, we have proven (i).</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>(ii). Now assume that we are in the general case, where we allow sets $A \subset X$ with $\mu(A) > 0$ and $\mu_0(A) = 0$.
+    By <span class="ref-unknown" title="Reference not found: lem:lower_densities_absolute_continuity">[lem:lower_densities_absolute_continuity?]</span>, there exists a Borel set $Z \subseteq X$ such that $\mu_0(Z) = 0$ and $\hat{\mu} := \mu \mres (X\setminus Z)$ is absolutely continuous with respect to $\mu_0$.
+    Applying part (i) to the measures $\hat{\mu}$ and $\mu_0$, we see that
+    \[ \hat{\mu}(A) = \int_A \Theta^{\mu_0}(\hat{\mu},x) \,\dif \mu_0(x) \qquad\text{for each Borel set } A \subseteq X\]
+    which means that 
+    \[ \mu(A \setminus Z) = \int_{A \setminus Z} \Theta^{\mu_0}(\hat{\mu},x) \,\dif \mu_0(x) \qquad\text{for each Borel set} A \subset X. \]
+    As a result, for each Borel set $A \subseteq X$, we have
+    \[ \mu(A) = \mu(A \setminus Z) + \mu(A\cap Z) = \int_{A \setminus Z} \Theta^{\mu_0}(\hat{\mu},x) \,\dif \mu_0(x) + \mu(A\cap Z) = \int_A \Theta^{\mu_0}(\hat{\mu},x) \,\dif \mu_0(x) + (\mu\mres Z)(A) \]
+    as desired.</p>
+<p><div style="margin: 1em 0;"></div></p>
+<p>(iii). Finally, assume that $\mu$ also has the Symmetric Vitali Property.
+    Then the density $\Theta^{\mu_0}(\mu,x)$ is defined for $\mu$-almost every $x \in X$ by Theorem <span class="ref-unknown" title="Reference not found: thm:differentiation_of_measures">[thm:differentiation_of_measures?]</span> (and also for $\mu_0$-almost every $x \in X$ by the same theorem).
+    Also see that if
+    \[ A \subseteq \{ x \in X\setminus U_{\mu_0} : \Theta^{\mu_0}(\mu,x) < \infty \} \]
+    then the Comparison Lemma for Lower Densities <span class="ref-unknown" title="Reference not found: lem:lower_density_comparison_lemma">[lem:lower_density_comparison_lemma?]</span> shows that 
+    \[ \mu_0(A) = 0 \implies \mu(A) = 0. \]
+    Therefore we can apply part (i) to the measure $\mu \mres (X\setminus \{ x : \Theta^{\mu_0}(\mu,x) = \infty \})$ which is absolutely continuous with respect to $\mu_0$ (as we just showed) to see that
+    \[ \mu(A \setminus \{ x : \Theta^{\mu_0}(\mu,x) = \infty \}) = \int_{A \setminus \{ x : \Theta^{\mu_0}(\mu,x) = \infty \}} \Theta^{\mu_0}(\mu,x) \,\dif \mu_0(x) \]
+    for each Borel set $A \subseteq X$.</p>
+<p>Thus if we let
+    \[ Z := \{ x \in X : \Theta^{\mu_0}(\mu,x) = \infty \}, \]
+    then $Z \subseteq X$ is a Borel set with $\mu_0(Z) = 0$ and for each Borel set $A \subseteq X$, we have
+    \[ \mu(A) = \int_A \Theta^{\mu_0}(\mu,x) \,\dif \mu_0(x) + (\mu\mres Z)(A) \]
+    as desired.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="proof-box collapsed" data-proof-id="proof-proof-when-both-mu-and-mu-0-are-open-sigma-finite-">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-proof-when-both-mu-and-mu-0-are-open-sigma-finite-')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof when both $\mu$ and $\mu_0$ are open $\sigma$-finite.</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-proof-when-both-mu-and-mu-0-are-open-sigma-finite-">
+    Assume now that both $\mu$ and $\mu_0$ are open $\sigma$-finite.
+    Then there exist countable collections of open sets $\{ U_k \}_{k=1}^\infty$ and $\{ V_k \}_{k=1}^\infty$ such that $X = \bigcup_{k=1}^\infty U_k = \bigcup_{k=1}^\infty V_k$ and $\mu(U_k) < \infty$ and $\mu_0(V_k) < \infty$ for each $k \in \Z^+$.
+    By considering the collection 
+    \[ \{ U_j \cap V_k : j,k\in \Z^+ \} \]
+    of open sets, see that $ X = \bigcup_{j,k=1}^\infty (U_j \cap V_k)$ and $\mu(U_j \cap V_k) < \infty$ and $\mu_0(U_j \cap V_k) < \infty$ for each $j,k \in \Z^+$.
+    Thus be re-labeling if necessary, we may assume there is an increasing collection of open sets $\{ W_k \}_{k=1}^\infty$ such that $X = \bigcup_{k=1}^\infty W_k$ and $\mu(W_k) < \infty$ and $\mu_0(W_k) < \infty$ for each $k \in \Z^+$.
+<p>For each $k \in \Z^+$ we consider the measures $\mu \mres W_k$ and $\mu_0 \mres W_k$ which are Borel regular outer measures on $X$ satisfying $(\mu \mres W_k)(X) = \mu(W_k) < \infty$ and $(\mu_0 \mres W_k)(X) = \mu_0(W_k) < \infty$.
+    Then by the previous proof, there exists a Borel set $Z_k \subseteq W_k$ such that $(\mu_0 \mres W_k)(Z_k) = \mu_0(Z_k) = 0$ and
+    \[ (\mu \mres W_k)(A) = \int_A \Theta^{\mu_0 \mres W_k}(\mu \mres W_k,x) \,\dif (\mu_0 \mres W_k)(x) + ((\mu \mres W_k)\mres Z_k)(A) \]
+    for each Borel set $A \subseteq X$.
+    Let \[ Z := \bigcup_{k=1}^\infty Z_k. \]
+    Then $Z \subseteq X$ is a Borel set with $\mu_0(Z) = 0$.</p>
+<p>See that for each Borel set $A \subseteq X$, we have
+    \begin{align*}
+        \mu(A) &= \lim_{k\to \infty} (\mu \mres W_k)(A) \\
+            &= \lim_{k\to \infty} \left( \int_A \Theta^{\mu_0 \mres W_k}(\mu \mres W_k,x) \,\dif (\mu_0 \mres W_k)(x) + ((\mu \mres W_k)\mres Z_k)(A) \right) \\
+            &= \lim_{k\to \infty} \int_A \Theta^{\mu_0 \mres W_k}(\mu \mres W_k,x) \,\dif (\mu_0 \mres W_k)(x) + \lim_{k\to \infty} ((\mu \mres W_k)\mres Z_k)(A) \\
+            &= \int_A \Theta^{\mu_0}(\mu,x) \,\dif \mu_0(x) + (\mu\mres Z)(A).
+    \end{align*}</p>
+<p>Thus if $\mu \ll \mu_0$, then $\mu\mres Z = 0$ and part (i) holds, while in general part (ii) holds.
+    Lastly, if $\mu$ also has the Symmetric Vitali Property, then by the result in the finite case we may take
+    \[ Z_k := \{ x\in W_k : \Theta^{\mu_0 \mres W_k}(\mu \mres W_k,x) = \infty \} \qquad\forall \, k\in\Z^+ \]
+    which means that
+    \[ Z = \bigcup_{k=1}^\infty Z_k = \{ x \in X : \Theta^{\mu_0}(\mu,x) = \infty \} \]
+    as desired in part (iii).
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+    </main>
+  </div>
+  
+  <script>
+    function toggleChapter(element) {
+      element.parentElement.classList.toggle('expanded');
+    }
+    
+    // Highlight current page in sidebar
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPath = window.location.pathname;
+      const links = document.querySelectorAll('.section-link');
+      links.forEach(link => {
+        if (currentPath.endsWith(link.getAttribute('href').split('/').pop())) {
+          link.classList.add('active');
+          // Expand parent chapter
+          const group = link.closest('.chapter-group');
+          if (group) group.classList.add('expanded');
+        }
+      });
+    });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('Restoring proof collapse states...');
+      try {
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        const currentPage = window.location.pathname;
+        const pageOpen = openProofs[currentPage] || [];
+        
+        console.log('Current page:', currentPage);
+        console.log('Open proof IDs stored:', pageOpen);
+        console.log('Found ' + pageOpen.length + ' open proofs for this page');
+        
+        document.querySelectorAll('.proof-box').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          console.log('Checking proof:', proofId, 'Should be open:', pageOpen.includes(proofId));
+          if (pageOpen.includes(proofId)) {
+            box.classList.remove('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'true');
+          } else {
+            box.classList.add('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        const pageBoxes = openBoxes[currentPage] || [];
+        
+        console.log('Open box IDs stored:', pageBoxes);
+        
+        document.querySelectorAll('.collapsible-box').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          console.log('Checking box:', boxId, 'Should be open:', pageBoxes.includes(boxId));
+          if (pageBoxes.includes(boxId)) {
+            box.classList.remove('collapsed');
+          } else {
+            box.classList.add('collapsed');
+          }
+        });
+        
+        console.log('Proof states restored');
+      } catch (e) {
+        console.error('Error restoring collapse state:', e);
+      }
+    });
+    
+    function toggleProof(proofId) {
+      const proofContent = document.getElementById(proofId);
+      const proofBox = proofContent.closest('.proof-box');
+      proofBox.classList.toggle('collapsed');
+      
+      const button = proofBox.querySelector('.proof-toggle');
+      button.setAttribute('aria-expanded', !proofBox.classList.contains('collapsed'));
+      
+      saveProofState();
+    }
+    
+    function toggleSubproof(subproofId) {
+      const subproofContent = document.getElementById(subproofId);
+      const subproof = subproofContent.closest('.subproof');
+      subproof.classList.toggle('collapsed');
+      
+      const button = subproof.querySelector('.subproof-toggle');
+      button.setAttribute('aria-expanded', !subproof.classList.contains('collapsed'));
+    }
+    
+    function saveProofState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        if (!openProofs[currentPage]) {
+          openProofs[currentPage] = [];
+        }
+        
+        openProofs[currentPage] = [];
+        document.querySelectorAll('.proof-box:not(.collapsed)').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          if (proofId) {
+            openProofs[currentPage].push(proofId);
+          }
+        });
+        
+        localStorage.setItem('openProofs', JSON.stringify(openProofs));
+        console.log('Saved proof state (open proofs):', openProofs[currentPage]);
+      } catch (e) {
+        console.error('Error saving collapse state:', e);
+      }
+    }
+    
+    function toggleCollapsible(collapsibleId) {
+      const content = document.getElementById(collapsibleId);
+      const box = content.closest('.collapsible-box');
+      box.classList.toggle('collapsed');
+      
+      saveCollapsibleState();
+    }
+    
+    function saveCollapsibleState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        if (!openBoxes[currentPage]) {
+          openBoxes[currentPage] = [];
+        }
+        
+        openBoxes[currentPage] = [];
+        document.querySelectorAll('.collapsible-box:not(.collapsed)').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          if (boxId) {
+            openBoxes[currentPage].push(boxId);
+          }
+        });
+        
+        localStorage.setItem('openBoxes', JSON.stringify(openBoxes));
+      } catch (e) {
+        console.error('Error saving box state:', e);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        const proofBoxes = document.querySelectorAll('.proof-box');
+        const anyExpanded = Array.from(proofBoxes).some(box => !box.classList.contains('collapsed'));
+        
+        proofBoxes.forEach(box => {
+          if (anyExpanded) {
+            box.classList.add('collapsed');
+          } else {
+            box.classList.remove('collapsed');
+          }
+        });
+        
+        saveProofState();
+      }
+    });
+    
+    document.querySelectorAll('a.ref-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.background = '#fef3c7';
+          target.style.transition = 'background 0.3s ease';
+          setTimeout(() => { target.style.background = ''; }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

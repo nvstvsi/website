@@ -1,0 +1,461 @@
+
+\section{Proof of Whitney's $C^m$ Extension Theorem}
+
+In this section we present the proof of Whitney's $C^m$ Extension Theorem.
+
+\begin{lemma}[Modulus of Continuity for Whitney Jets]
+    \label{lem:modulus_of_continuity_for_whitney_jet}
+    A \textit{modulus of continuity} is a function $\omega: [0,\infty) \to [0,\infty)$ which is increasing, concave, and satisfies $\omega(0) = 0$.
+
+    Let $A \subseteq \R^n$ be a nonempty compact set, and let $f^\bullet \in \mathcal{W}^m(A)$ be a Whitney $m$-jet on $A$.
+    Then there exists a modulus of continuity $\omega$ such that for each multi-index $\alpha$ with $|\alpha| \leq m$, we have
+    \[ \left\| (R^m_a f^\bullet)^{(\alpha)} (x) \right\| \leq \omega\left( \|x-a\|\right) \cdot \|x-a\|^{m-|\alpha|} \quad \forall\, x,a\in A \]
+    and also satisfying 
+    \[ \omega(t) = \omega(\diam A) \qquad \forall \, t\geq \diam A, \]
+    and \[ \|f^\bullet\|_{\mathcal{W}^m(A)} = \| f^\bullet \|_{J^m(A)} + \omega(\diam A). \]
+\end{lemma}
+
+    \begin{proof}
+        Define $\rho: [0,\infty) \to [0,\infty)$ by
+        \[ \rho(t) := \sup \left\{ \frac{\| (R^m_a f^\bullet)^{(\alpha)} (x) \|}{\|x-a\|^{m-|\alpha|}} : a,x \in A, 0 < \|x-a\| \leq t, |\alpha| \leq m \right\} \]
+        if $t > 0$, and $\rho(0) := 0$.
+        Note that $\rho$ is finite-valued since $f^\bullet \in \mathcal{W}^m(A)$.
+        Then $\rho$ is clearly increasing and 
+        \[ \lim_{t\to 0^+} \rho(t) = 0 = \rho(0) \]
+        so $\rho$ is continuous at $0$.
+        Also if $t \geq \diam A$, then $\rho(t) = \rho(\diam A)$, so $\rho$ is constant on $[\diam A,\infty)$.
+        (We note that $\rho$ is not necessarily concave or continuous on $(0,\infty)$.)
+
+        Now define 
+        \[ \operatorname{conv}(\rho) := \operatorname{conv}\left( [0,\infty) \cup \graph (\rho) \right) \]
+        to be the closed convex hull of the graph of $\rho$ together with the nonnegative $t$-axis.
+        Since $\operatorname{conv}(\rho)$ is convex and $\rho$ is non-negative, 
+        see that for each $t \geq 0$, the set $\{ s : (t,s) \in \operatorname{conv}(\rho) \}$ is a closed (possiby degenerate) interval of the form $[0,\omega(t)]$ for some $\omega(t) \geq \rho(t) \geq 0$.
+
+        This defines a function $\omega$ on $[0,\infty)$ by $\omega(t) := \sup \{ s : (t,s) \in \operatorname{conv}(\rho) \}$.
+
+        Let us check the required properties of $\omega$.
+        By construction, $\operatorname{conv}(\rho)$ is a closed subset of the upper half-plane, so $\omega(t) \geq 0$ for each $t \geq 0$.
+        Thus $\omega: [0,\infty) \to [0,\infty)$ is well-defined.
+
+        Now the only point in $[0,\infty) \cup \graph(\rho)$ with $t=0$ is $(0,0)$, so 
+        the only point in $\operatorname{conv}(\rho)$ with $t=0$ is $(0,0)$, which implies $\omega(0) = 0$.
+        
+        We also see that $\omega$ is concave.
+        Let $t_1,t_2 \geq 0$ and $\lambda \in [0,1]$ be arbitrary.
+        Then the points $(t_1,\omega(t_1))$ and $(t_2,\omega(t_2))$ are in the convex set $\operatorname{conv}(\rho)$, so we have
+        \[ (\lambda t_1 + (1-\lambda) t_2, \lambda \omega(t_1) + (1-\lambda) \omega(t_2)) \in \operatorname{conv}(\rho). \]
+        But then the definition of $\omega(\lambda t_1 + (1-\lambda)t_2)$ implies that
+        \[ \lambda \omega(t_1) + (1-\lambda) \omega(t_2) \leq \omega(\lambda t_1 + (1-\lambda) t_2). \]
+        Since $t_1,t_2 \in [0,\infty)$ and $\lambda \in [0,1]$ were arbitrary, we conclude that $\omega$ is concave.
+
+        Now $\omega: [0,\infty) \to [0,\infty)$ is a concave function with $\omega(0) = 0$, so we know from Analysis 1 that $\omega$ is increasing and continuous on $[0,\infty)$.
+
+        Suppose towards a contradiction that there exists $t_0 > \diam A$ such that $\omega(t_0) > \rho(\diam A)$.
+        Then we define the function 
+        \[ \hat{\omega}: [0,\infty)\to [0,\infty), \quad \hat{\omega} := \begin{cases}
+            \omega(t) &\text{if } 0 \leq t \leq \diam A, \\
+            \omega(\diam A) &\text{if } t \geq \diam A.
+        \end{cases} \]
+        Note that $\hat{\omega}$ is a continuous function since $\hat{\omega}|_{[0,\diam A]} = \omega|_{[0,\diam A]}$ is continuous and $\hat{\omega}(\diam A) = \omega(\diam A)$.
+        Also note that $\hat{\omega}$ is concave because it is the pointwise minimum of the concave function $\omega$ and the constant (concave) function $\omega(\diam A)$.
+
+        That is, $\hat{\omega}$ is a continuous increasing concave function with $\hat{\omega}(0) = 0$ and $\hat{\omega}(t) = \rho(\diam A)$ for each $t \geq \diam A$.
+        (In reality, $\hat{\omega}$ is literally equal to $\omega$, but it is easier to define a new function $\hat{\omega}$ than to prove directly that $\omega$ has this last property.)
+
+        \vspace{2mm}
+        The final thing to prove is the remainder estimate and the norm identity.
+        \vspace{2mm}
+
+        Let $\alpha$ be a multi-index with $|\alpha| \leq m$.
+        Then by definition of $\rho$ we see that
+        \[ \| (R^m_a f^\bullet)^{(\alpha)}(x) \| \leq \rho(\|x-a\|) \cdot \|x-a\|^{m-|\alpha|} \leq \hat{\omega}(\|x-a\|) \cdot \|x-a\|^{m-|\alpha|} \qquad\forall\, x,a\in A \]
+        as desired.
+        Also 
+        \begin{align*}
+            \| f^\bullet \|_{\mathcal{W}^m(A)} &= \| f^\bullet \|_{J^m(A)} + \sup\left\{ \frac{\| (R^m_a f^\bullet)^{(\alpha)}(x) \|}{\|x-a\|^{m-|\alpha|}} : x,a \in A, x\neq a, |\alpha| \leq m \right\} \\
+                &= \| f^\bullet \|_{J^m(A)} + \sup \left\{ \frac{\| (R^m_a f^\bullet)^{(\alpha)}(x) \|}{\|x-a\|^{m-|\alpha|}} : x,a \in A, 0 < \|x-a\| \leq \diam A, |\alpha| \leq m \right\} \\
+                &= \| f^\bullet \|_{J^m(A)} + \sup_{t \in (0,\diam A]} \rho(t) \\
+                &= \| f^\bullet \|_{J^m(A)} + \rho(\diam A) \\
+                &= \| f^\bullet \|_{J^m(A)} + \hat{\omega}(\diam A)
+        \end{align*}
+        where we have used that $A$ is compact in the second equality, and that $\rho$ is increasing in the third equality, and that $\hat{\omega}(\diam A) = \rho(\diam A)$ in the last equality.
+        This finishes the proof of the claim.
+    \end{proof}
+
+We are now ready to prove Whitney's $C^m$ Extension Theorem.
+We warn you that this is one of the \emph{longest} proofs in the book, and it is quite technical.
+
+\begin{proof}[Proof of Whitney's $C^m$ Extension Theorem in the case $A \subset \R^n$ is compact]
+    Assume that $A \subset \R^n$ is a nonempty compact set, and let $\{Q_j\}_{j=1}^\infty$ be the Whitney decomposition of $A^c$ given by Lemma \ref{lem:whitney_decomposition}. 
+    Fix $0 < \varepsilon < \frac{1}{4}$ and for each $j \in \Z^+$, let $Q_j^* := (1+\varepsilon) Q_j$ be the cube with the same center as $Q_j$ but with side length $(1+\varepsilon)$ times that of $Q_j$. 
+    Let $\{ \psi_j \}_{j=1}^\infty$ be the Whitney partition of unity subordinate to the open cover $\{Q_j^*\}_{j=1}^\infty$ of $A^c$ given by Lemma \ref{lem:whitney_partition_of_unity}.
+
+    For each $j \in \Z^+$, choose a point $a_j \in A$ such that 
+    \[ \dist(Q_j,A) = \dist(Q_j,a_j). \]
+    For each jet $f^\bullet \in \mathcal{J}^m(A)$, we define the function $\mathcal{E}_m(f^\bullet) : \R^n \to \R$ by
+    \[ \mathcal{E}_m(f^\bullet)(x) = \begin{cases}
+    f^{(0)}(x) &\text{if } x \in A, \\
+    \displaystyle \sum_{j=1}^\infty \psi_j(x) \cdot T^m_{a_j} f^\bullet (x) &\text{if } x \in A^c.
+    \end{cases} \]
+    This defines a linear map $\mathcal{E}_m$ from $\mathcal{J}^m(A)$ to functions on $\R^n$. 
+
+    \vspace{2mm}
+    \textit{Claim 1:}
+    We claim that if $f^\bullet \in J^m(A)$, then $\mathcal{E}_m(f^\bullet)$ is $C^\infty$ on $A^c$.
+
+    \begin{proof}[Proof of Claim 1]
+        See that for each $j \in \Z^+$, at most $12^n$ other cubes from the Whitney decomposition can intersect $Q_j^*$ by Lemma \ref{lem:whitney_decomposition} and \ref{cor:whitney_cover_dilation}.
+        Hence there are only finitely many terms in the sum defining $\mathcal{E}_m(f^\bullet)$ on $Q^*_j$ which are nonzero, and each of these terms is a smooth function on $Q_j^*$, so $\mathcal{E}_m(f^\bullet)$ is smooth on $Q_j^*$.
+
+        Since $A^c = \bigcup_{j=1}^\infty Q_j^*$ by Lemma \ref{lem:whitney_decomposition}, we conclude that $\mathcal{E}_m(f^\bullet)$ is smooth on $A^c$.
+    \end{proof}
+
+    Now we assume that $f^\bullet \in \mathcal{W}^m(A)$, and let $f := \mathcal{E}_m(f^\bullet)$.
+    We want to show that $f \in C^m(\R^n)$.
+
+    \vspace{2mm}
+    By Lemma \ref{lem:modulus_of_continuity_for_whitney_jet}, there exists a modulus of continuity $\omega$ such that for each multi-index $\alpha$ with $|\alpha| \leq m$, we have
+    \[ \left\| (R^m_a f^\bullet)^{(\alpha)} (x) \right\| \leq \omega\left( \|x-a\|\right) \cdot \|x-a\|^{m-|\alpha|} \quad \forall\, x,a\in A \]
+    and also satisfying 
+    \[ \omega(t) = \omega(\diam A) \qquad \forall \, t\geq \diam A, \]
+    and \[ \|f^\bullet\|_{\mathcal{W}^m(A)} = \| f^\bullet \|_{J^m(A)} + \omega(\diam A). \]
+
+    Now we fix an cube $Q\subset \R^n$ such that $A \subset Q$ for the rest of the proof.
+    
+    \vspace{2mm}
+    \textit{Claim 2:}
+    For each multi-index $\alpha$ with $|\alpha| \leq m$, we define
+        \[ \underline{\partial^{\alpha}} f(x) := \begin{cases}
+            D^\alpha f(x) &\text{if } x \in A^c, \\
+            f^{(\alpha)}(x) &\text{if } x \in A
+        \end{cases} \]
+    which is the candidate for the $\alpha$ partial derivative of $f$ on $\R^n$.
+
+    We claim that there exists a constant $C > 0$ which only depends on $m$, $n$, and $\sup_{y\in Q} \dist(y,A)$ such that if $\alpha$ is a multi-index with $|\alpha| \leq m$, 
+    and if $x \in Q$ and $a \in A$, then we have
+    \[ \left| {\underline{\partial^{\alpha}}} f(x) - D^\alpha T^m_a f^\bullet(x) \right| \leq C \cdot \omega\left( \|x-a\|\right) \cdot \|x-a\|^{m-|\alpha|}. \tag{$\mathwitch$}\]
+
+    For the moment, we will assume Claim 2 and use it to finish the proof of the theorem. 
+    We claim that $(\mathwitch)$ implies that $f \in C^m(\R^n)$ and that there is a constant $c > 0$ depending only on $m$, $n$, and $\sup_{y\in Q} \dist(y,A)$ such that 
+    \[ \| f \|_{C^m(Q)} \leq c \,\| f^\bullet \|_{\mathcal{W}^m(A)}. \tag{$\bigpumpkin$}\]
+    Recall that the estimate $(\bigpumpkin)$ is the required continuity estimate for the extension operator $\mathcal{E}_m$.
+
+    \begin{proof}[Proof that $(\mathwitch)$ implies $f \in C^m(\R^n)$]
+        Fix a multi-index $\alpha$ with $|\alpha| < m$. 
+        For each $j \in \{ 1,2 ,\ldots,n\}$, we let $e_j$ be the $j$-th standard basis vector in $\R^n$.
+        If $a \in A$ and $x \in Q \setminus A$, then
+        \[ \underline{\partial^{\alpha}} f(a) = f^{(\alpha)}(a) = D^\alpha T^m_a f^\bullet(a) \]
+        so that 
+        \begin{align*}
+            \left| \underline{\partial^{\alpha}} f(x) - \underline{\partial^{\alpha}} f(a) - \sum_{j=1}^n \underline{\partial^{\alpha + e_j}} f(a) (x_j - a_j) \right| &= \left| \underline{\partial^{\alpha}} f(x) - D^\alpha T^m_a f^\bullet(a) - \sum_{j=1}^n \underline{\partial^{\alpha + e_j}} f(a) (x_j - a_j) \right| \\
+                &\leq \left| \underline{\partial^{\alpha}} f(x) -  D^\alpha T^m_a f^\bullet(x) \right| \ + \\
+                &\qquad\qquad + \left|  D^\alpha T^m_a f^\bullet(x) -  D^\alpha T^m_a f^\bullet(a) - \sum_{j=1}^n \underline{\partial^{\alpha + e_j}} f(a) (x_j - a_j) \right| \\
+                &\leq C\cdot \omega\left( \|x-a\|\right) \cdot \|x-a\|^{m-|\alpha|} \ +\\
+                &\qquad\qquad + \left|  D^\alpha T^m_a f^\bullet(x) -  D^\alpha T^m_a f^\bullet(a) - \sum_{j=1}^n D^{\alpha + e_j} T^m_a f^\bullet(a) (x_j - a_j) \right| \\ 
+                &= o(\|x-a\|^{m-|\alpha|}) + o(\|x-a\|) \\
+                &= o(\|x-a\|)
+        \end{align*}
+        where we have used the estimate $(\mathwitch)$ in the second inequality, and the fact that $T^m_a f^\bullet$ is a polynomial of degree at most $m$ in the second to last equality, and finally the fact that $|\alpha| < m$ in the last equality.
+
+        If $a\in A$ and $x\in A$, then we have
+        \begin{align*}
+            \left| \underline{\partial^{\alpha}} f(x) - \underline{\partial^{\alpha}} f(a) - \sum_{j=1}^n \underline{\partial^{\alpha + e_j}} f(a) (x_j - a_j) \right| &= \left| D^{\alpha}T^m_a f^\bullet (x) - D^\alpha T^m_a f^\bullet(a) - \sum_{j=1}^n \underline{\partial^{\alpha + e_j}} f(a) (x_j - a_j) \right| \\
+                &= \left| D^{\alpha}T^m_a f^\bullet (x) - D^\alpha T^m_a f^\bullet(a) - \sum_{j=1}^n D^{\alpha + e_j} T^m_a f^\bullet(a) (x_j - a_j) \right| \\
+                &= o(\|x-a\|).
+        \end{align*}
+        where we have used the fact that $T^m_a f^\bullet$ is a polynomial of degree at most $m$.
+
+        In either case, we have shown that for each multi-index $\alpha$ with $|\alpha| < m$ and each $a\in A$ we have
+        \[ \left| \underline{\partial^{\alpha}} f(x) - \underline{\partial^{\alpha}} f(a) - \sum_{j=1}^n \underline{\partial^{\alpha + e_j}} f(a) (x_j - a_j) \right| = o(\|x-a\|) \quad \text{as } x \to a, \]
+        and as a result, we conclude that $\underline{\partial^{\alpha}} f$ is differentiable at $a$ with derivative $\underline{\partial^{\alpha + e_j}} f(a) = f^{(\alpha + e_j)}(a)$ for each $j \in \{1,2,\ldots,n\}$.
+        Since $a \in A$ was arbitrary, we conclude that $\underline{\partial^{\alpha}} f$ is differentiable at each point of $A$ with derivative $\underline{\partial^{\alpha + e_j}} f(a) = f^{(\alpha + e_j)}(a)$ for each $j \in \{1,2,\ldots,n\}$; hence $\underline{\partial^{\alpha}} f$ is $C^1$ on $\R^n$. 
+
+        Now taking $\alpha = 0$ shows that for each $j\in \{1,2,\ldots,n\}$ the function $\underline{\partial_j} f$ is continuous , and the above argument combined with Claim 1 shows that $\underline{\partial_j} f$ is the $j^{\text{th}}$ partial derivative of $f$ on $\R^n$. 
+        Therefore $f \in C^1(\R^n)$ and $\underline{\partial_j} f = D_j f$ for each $j \in \{1,2,\ldots,n\}$.
+
+        In a similar way, we then see that for each multi-index $\alpha$ with $|\alpha| = 2$, the function $\underline{\partial^{\alpha}} f$ is continuous; writing
+        $\alpha = e_i + e_j$ for some $i,j \in \{1,2,\ldots,n\}$, we see that $\underline{\partial^{\alpha}} f$ is the $i^\text{th}$ partial derivative of $\underline{\partial_j} f$, 
+        and hence $\underline{\partial^{\alpha}} f$ is the $\alpha = e_i + e_j$ partial derivative of $f$ on $\R^n$.
+        Since $\alpha$ was an arbitrary multi-index with $|\alpha| = 2$, we conclude that $f \in C^2(\R^n)$ and $\underline{\partial^{\alpha}} f = D^\alpha f$ for each multi-index $\alpha$ with $|\alpha| = 2$.
+
+        Bootstrapping this argument, we conclude that for each multi-index $\alpha$ with $|\alpha| \leq m$ 
+        the function $\underline{\partial^{\alpha}} f$ is continuous and is the $\alpha$ partial derivative of $f$ on $\R^n$; because this is true for each multi-index $\alpha$ with $|\alpha| < m$, we conclude that $f \in C^m(\R^n)$.
+    \end{proof}
+
+    \begin{proof}[Proof that $(\mathwitch)$ and $f \in C^m(\R^n)$ implies $(\bigpumpkin)$]
+        Let $\alpha$ be a multi-index with $|\alpha| \leq m$, and let $x \in Q$ be arbitrary.
+        Since $A$ is compact there is a point $a \in A$ such that $\dist(x,A) = \|x-a\|$.
+        Set 
+        \[ \lambda := \sup_{y \in Q} \dist(y,A). \]
+
+        Then, as shown above we have $D^\alpha f(x) = \underline{\partial^{\alpha}} f(x)$, and for each $a \in A$ we have
+        \[ D^\alpha (T^m_a f^\bullet)(x) = \sum_{|\beta|\leq m - |\alpha|} \frac{f^{(\alpha+\beta)}(a)}{\beta!}(x-a)^\beta = \sum_{|\beta| \leq m - |\alpha|} \frac{D^{\alpha+\beta} f(a)}{\beta!}(x-a)^\beta \tag{$\dagger$}\]
+        where the first equality follows from the second computation in the proof of \ref{ex:remainder_jet_properties}, 
+        and the second equality follows from the fact that $f^{(\alpha+\beta)}(a) = D^{\alpha+\beta} f(a)$ for all multi-indices $\beta$ with $|\beta| \leq m - |\alpha|$, which was shown in the previous step.
+        
+        Then we estimate
+        \begin{align*}
+            | D^\alpha f(x) | &\leq \left| D^\alpha f(x) - D^\alpha T^m_a f^\bullet(x) \right| + \left| D^\alpha T^m_a f^\bullet(x) \right| && \text{by triangle inequality}\\
+                &= \left| \underline{\partial^{\alpha}} f(x) - D^\alpha T^m_a f^\bullet(x) \right| + \left| \sum_{|\beta| \leq m - |\alpha|} \frac{D^{\alpha+\beta} f(a)}{\beta!}(x-a)^\beta \right| && \text{ by } (\dagger)\\
+                &\leq C \cdot \omega\left( \|x-a\| \right) \cdot \|x-a\|^{m-|\alpha|} + \sum_{|\beta| \leq m - |\alpha|}  \frac{\left|D^{\alpha+\beta} f(a)\right|}{\beta!}\left|(x-a)^\beta\right| &&\text{by }(\mathwitch) \text{ and the triangle inequality}\\
+                &\leq C \cdot \omega\left( \lambda \right) \cdot \lambda^{m-|\alpha|} + \sum_{|\beta| \leq m - |\alpha|}  \frac{\left|D^{\alpha+\beta} f(a)\right|}{\beta!} \|x-a\|^{|\beta|} &&\text{since } \omega \text{ is increasing and } \|x-a\| \leq \lambda\\
+                &\leq C \cdot \omega\left( \diam A \right) \cdot \lambda^{m-|\alpha|} + \sum_{|\beta| \leq m - |\alpha|}  \frac{\|f^\bullet\|_{J^m(A)}}{\beta!} \lambda^{|\beta|} \\
+                &= C \left( \| f^\bullet \|_{\mathcal{W}^m(A)} - \| f^\bullet \|_{J^m(A)} \right) \cdot \lambda^{m-|\alpha|}  + \left( \sum_{|\beta| \leq m - |\alpha|}  \frac{1}{\beta!} \lambda^{|\beta|} \right) \cdot \|f^\bullet\|_{J^m(A)} \\
+                &=: C \left( \| f^\bullet \|_{\mathcal{W}^m(A)} - \| f^\bullet \|_{J^m(A)} \right) \cdot \lambda^{m-|\alpha|}  + c_{m,\lambda} \cdot \|f^\bullet\|_{J^m(A)} \\
+                &= C \lambda^{m-|\alpha|} \cdot \| f^\bullet \|_{\mathcal{W}^m(A)} + (c_{m,\lambda} - C \lambda^{m-|\alpha|}) \cdot \|f^\bullet\|_{J^m(A)} \\
+        \end{align*}
+        where $C$ is the constant from $(\mathwitch)$ and $c_{m,\lambda} := \sum_{|\beta| \leq m - |\alpha|}  \frac{1}{\beta!} \lambda^{|\beta|}$.
+        Now let 
+        \[ C' := \max \left\{ C, \frac{c_{m,\lambda}}{\lambda^{m-|\alpha|}} \right \} \]
+        so that 
+        \[ C \leq C' \quad\text{and}\quad \frac{c_{m,\lambda}}{\lambda^{m-|\alpha|}} \leq C' \]
+        which implies
+        \[ c_{m,\lambda} - C' \lambda^{m-|\alpha|} \leq 0. \]
+        Then using the exact same argument as before but with $C'$ in place of $C$, we see that
+        \begin{align*}
+            |D^\alpha f(x)| &\leq C' \lambda^{m-|\alpha|} \cdot \| f^\bullet \|_{\mathcal{W}^m(A)} + (c_{m,\lambda} - C' \lambda^{m-|\alpha|}) \cdot \|f^\bullet\|_{J^m(A)} \\
+                &\leq C' \lambda^{m-|\alpha|} \cdot \| f^\bullet \|_{\mathcal{W}^m(A)}.
+        \end{align*}
+        Setting 
+        \[ c := C' \lambda^{m-|\alpha|} = \max \left\{ C \lambda^{m-|\alpha|}, c_{m,\lambda} \right\} \]
+        we conclude that
+        \[ |D^\alpha f(x)| \leq c \| f^\bullet \|_{\mathcal{W}^m(A)}. \]
+        Since $\alpha$ was an arbitrary multi-index with $|\alpha| \leq m$ and $x\in Q$ was arbitrary, we conclude that
+        \[ \max_{|\alpha| \leq m} \sup_{x \in Q} |D^\alpha f(x)| \leq c \| f^\bullet \|_{\mathcal{W}^m(A)} \]
+        which says that 
+        \[ \| f \|_{C^m(Q)} \leq c \,\| f^\bullet \|_{\mathcal{W}^m(A)} \]
+        as desired in $(\bigpumpkin)$.
+    \end{proof}
+
+    It remains to prove Claim 2.
+    For this, we make a subclaim which will be used in the proof of Claim 2.
+
+    \vspace{2mm}
+    \textit{Subclaim 2a.}
+    We claim that if $a,b \in A$ and $\alpha$ is a multi-index with $|\alpha| \leq m$, then
+    \[ \left| D^\alpha T^m_a f^\bullet(x) - D^\alpha T^m_b f^\bullet (x) \right| \leq 4^{m-|\alpha|} e^n \cdot \omega(\|a-b\|) \cdot\left( \|x-a\|^{m-|\alpha|} + \|x-b\|^{m-|\alpha|} \right) \qquad \forall\, x\in \R^n. \]
+
+    \begin{proof}[Proof of Subclaim 2a.]
+        Let $a,b \in A$ and $\alpha$ be a multi-index with $|\alpha| \leq m$.
+
+        We will use three properties about jets and their formal derivatives and Taylor polynomials.
+        Namely, for each multi-index $\beta$ with $|\beta| \leq m$, we have
+        \[ f^{(\beta)}(a) = D^\beta(T^m_a f^\bullet)(a) \tag{i}\]  
+        and
+        \[ D^\beta(T^m_a f^\bullet - T^m_b f^\bullet)(a) = (R^m_b f^\bullet)^{(\beta)}(a) \tag{ii} \]
+        and
+        \[ f^{(\beta)}(b)(x-b)^\beta = D^\beta(T^m_b f^\bullet)(a)\cdot (x-a)^\beta, \tag{iii}\]
+        which were proven in Exercise \ref{ex:more_formal_properties}.
+
+        Then as a result of these properties, for each $x\in \R^n$ we have 
+        \begin{align*}
+            T^m_a f^\bullet(x) - T^m_b f^\bullet(x) &= \sum_{|\beta| \leq m} \frac{f^{(\beta)}(a)}{\beta!}(x-a)^\beta - \sum_{|\beta| \leq m} \frac{f^{(\beta)}(b)}{\beta!}(x-b)^\beta &&\text{ by definition of formal Taylor polynomial}\\
+                &= \sum_{|\beta| \leq m} \frac{(x-a)^\beta}{\beta!} D^\beta(T^m_a f^\bullet)(a) \, - \sum_{|\beta| \leq m} \frac{(x-a)^\beta}{\beta!} D^\beta(T^m_b f^\bullet)(a) &&\text{ by properties (i) and (iii)}\\
+                &= \sum_{|\beta| \leq m} \frac{(x-a)^\beta}{\beta!} \left( D^\beta(T^m_a f^\bullet)(a) - D^\beta(T^m_b f^\bullet)(a) \right) \\
+                &= \sum_{|\beta| \leq m} \frac{(x-a)^\beta}{\beta!} D^\beta(T^m_a f^\bullet - T^m_b f^\bullet)(a) \\
+                &= \sum_{|\beta| \leq m} \frac{(x-a)^\beta}{\beta!} (R^m_b f^\bullet)^{(\beta)}(a) &&\text{ by property (ii)}.
+        \end{align*}
+
+        As a result, we see that 
+        \[ D^\alpha(T^m_a f^\bullet)(x) - D^\alpha(T^m_b f^\bullet)(x) = \sum_{|\beta| \leq m-|\alpha|} \frac{(x-a)^\beta}{\beta!} (R^m_a f^\bullet)^{(\beta+\alpha)}(a) \qquad \forall \, x\in \R^n. \]
+        Hence if $x\in \R^n$ is such that $\|x-a\| \leq \|x-b\|$, then we can estimate
+        \begin{align*}
+            \left| D^\alpha T^m_a f^\bullet(x) - D^\alpha T^m_b f^\bullet (x) \right| &\leq
+                \sum_{|\beta| \leq m-|\alpha|} \frac{\|x-a\|^{|\beta|}}{\beta!} \cdot \left\| (R^m_a f^\bullet)^{(\beta+\alpha)}(a) \right\| \\
+                &\leq \sum_{|\beta| \leq m-|\alpha|} \frac{\|x-a\|^{|\beta|}}{\beta!} \cdot \|a-b\|^{m-|\alpha|-|\beta|} \cdot \omega(\|a-b\|) \\
+                &= \sum_{|\beta|\leq m - |\alpha|} \frac{1}{\beta!} \cdot \|x-a\|^{|\beta|} \cdot \|a-b\|^{m-|\alpha|-|\beta|} \cdot \omega(\|a-b\|). &&(\star)
+        \end{align*}
+        Then for each $x\in \R^n$ such that $\|x-a\| \leq \|x-b\|$, and each multi-index $\beta$ with $|\beta| \leq m-|\alpha|$, we have
+        \begin{align*}
+            \|x-a\|^{|\beta|} \|a-b\|^{m-|\alpha|-|\beta|} &\leq \|x-a\|^{|\beta|}\left( \|x-a\| + \|a-b\| \right)^{m-|\alpha|-|\beta|} \\
+                &\leq (\|x-a\|+\|a-b\|)^{m-|\alpha|} \\
+                &\leq 2^{m-|\alpha|} \cdot \left( \|x-a\|^{m-|\alpha|} + \|a-b\|^{m-|\alpha|} \right) \\
+                &\leq 2^{m-|\alpha|} \cdot \left( \|x-a\|^{m-|\alpha|} + \left( \|a-x\|+ \|x-b\| \right)^{m-|\alpha|}\right) \\
+                &\leq 2^{m-|\alpha|} \cdot \left( \|x-a\|^{m-|\alpha|} + (2\|x-b\|)^{m-|\alpha|} \right) \\
+                &\leq 4^{m-|\alpha|} \cdot \left( \|x-a\|^{m-|\alpha|} + \|x-b\|^{m-|\alpha|} \right) \\
+        \end{align*}
+        Returning to the estimate $(\star)$, we conclude that
+        \begin{align*}
+            \left| D^\alpha T^m_a f^\bullet(x) - D^\alpha T^m_b f^\bullet (x) \right| &\leq 
+                4^{m-|\alpha|} \cdot \sum_{|\beta| \leq m-|\alpha|} \frac{1}{\beta!} \cdot \omega(\|a-b\|) \cdot \left( \|x-a\|^{m-|\alpha|} + \|x-b\|^{m-|\alpha|} \right) \\
+                &\leq 4^{m-|\alpha|} \left( \sum_{\beta\in \N^n} \frac{1}{\beta!} \right) \cdot \omega(\|a-b\|) \cdot \left( \|x-a\|^{m-|\alpha|} + \|x-b\|^{m-|\alpha|} \right) \\
+                &\leq 4^{m-|\alpha|} \left( \prod_{j=1}^n \sum_{k=0}^\infty \frac{1}{k!} \right) \cdot \omega(\|a-b\|) \cdot \left( \|x-a\|^{m-|\alpha|} + \|x-b\|^{m-|\alpha|} \right) \\
+                &\leq 4^{m-|\alpha|} e^n \cdot \omega(\|a-b\|) \cdot \left( \|x-a\|^{m-|\alpha|} + \|x-b\|^{m-|\alpha|} \right).
+        \end{align*}
+
+        Similarly, if $x\in \R^n$ is such that $\|x-b\| \leq \|x-a\|$, then we can estimate
+        \[ \left| D^\alpha T^m_a f^\bullet(x) - D^\alpha T^m_b f^\bullet (x) \right| \leq 4^{m-|\alpha|} e^n \cdot \omega(\|a-b\|) \cdot \|x-b\|^{m-|\alpha|}. \]
+        Putting these two estimates together, we conclude that for each $x\in \R^n$ we have
+        \[ \left| D^\alpha T^m_a f^\bullet(x) - D^\alpha T^m_b f^\bullet (x) \right| \leq 4^{m-|\alpha|} e^n \cdot \omega(\|a-b\|) \cdot\left( \|x-a\|^{m-|\alpha|} + \|x-b\|^{m-|\alpha|} \right) \]
+        as stated in the subclaim.
+
+    \end{proof}
+
+
+    Now we prove $(\mathwitch)$ in Claim 2 using two cases. 
+
+    \vspace{2mm}
+
+    \noindent Let $\alpha$ be a multi-index with $|\alpha| \leq m$, and let $x \in Q$ and $a \in A$ be arbitrary.
+    First consider the case where $x \in A$.
+
+    \begin{proof}[Proof of $(\mathwitch)$ when $x \in A$.]
+        If $x \in A$, then $\underline{\partial^{\alpha}} f(x) = f^{(\alpha)}(x)$ and we can estimate
+        \begin{align*}
+            \left| {\underline{\partial^{\alpha}}} f(x) - D^\alpha T^m_a f^\bullet(x) \right|
+                &= \left| f^{(\alpha)}(x) - T^{m-|\alpha|}_a D^\alpha f^{\bullet}(x) \right| \\
+                &= \left| (R^{m-|\alpha|}_a f^{\bullet + (\alpha)}) (x) \right| \\
+                &\leq \omega\left( \|x-a\|\right) \cdot \|x-a\|^{m-|\alpha|} 
+        \end{align*}
+        where the first equality follows from Exercise \ref{ex:formal_derivative_of_formal_taylor_polynomial}, 
+        and the final inequality follows from Lemma \ref{lem:modulus_of_continuity_for_whitney_jet} applied to the $m-|\alpha|$-jet $D^\alpha f^\bullet$.
+        This shows that $(\mathwitch)$ holds for each $x \in A$.
+    \end{proof}
+
+    \begin{proof}[Proof of $(\mathwitch)$ when $x \in A^c$.]
+        (NOTE: We have \emph{not} yet used the definition of the extension operator $\mathcal{E}_m$ in this proof, and the 
+        consequences of the Whitney partition of unity and the Whitney decomposition, so this is where we will use these tools.)
+        
+    Assume that $x\in Q\setminus A$. Then by definition of $f = \mathcal{E}_m(f^\bullet)$ and the fact that $\{\psi_j\}_{j=1}^\infty$ is a partition of unity on $A^c$,
+    we have
+    \[ f(x) - T^m_a f^\bullet(x) = \sum_{j=1}^\infty \psi_j(x) T^m_{a_j} f^\bullet(x) - \sum_{j=1}^\infty \psi_j(x) T^m_a f^\bullet(x) = \sum_{j=1}^\infty \psi_j(x) \left( T^m_{a_j} f^\bullet(x) - T^m_a f^\bullet(x) \right). \]
+    Hence we have
+    \begin{align*}
+        D^\alpha f(x) - D^\alpha T^m_a f^\bullet(x) &= \sum_{\beta \leq \alpha} \binom{\alpha}{\beta} \sum_{j=1}^\infty D^{\beta} \psi_j(x) \cdot D^{\alpha - \beta} \left( T^m_{a_j} f^\bullet(x) - T^m_a f^\bullet(x) \right) 
+    \end{align*}
+    by the Leibniz rule, which implies that
+    \begin{align*}
+        \left| D^\alpha f(x) - D^\alpha T^m_a f^\bullet(x) \right| &\leq
+            \sum_{\beta \leq \alpha} \binom{\alpha}{\beta} \left| \sum_{j=1}^\infty D^{\beta} \psi_j(x) \cdot D^{\alpha - \beta} \left( T^m_{a_j} f^\bullet(x) - T^m_a f^\bullet(x) \right) \right|.
+    \end{align*}
+    For each multi-index $\beta$ with $\beta \leq \alpha$, we let 
+    \[ S_\beta(x) := \sum_{j=1}^\infty D^\beta \psi_j(x) \cdot D^{\alpha - \beta} \left( T^m_{a_j} f^\bullet(x) - T^m_a f^\bullet(x) \right) \]
+    so that the previous equation reads
+    \[ \left| D^\alpha f(x) - D^\alpha T^m_a f^\bullet(x) \right| \leq \sum_{\beta \leq \alpha} \binom{\alpha}{\beta} |S_\beta(x)|. \tag{$\heartsuit$}\]
+
+    First we estimate $|S_0(x)|$.
+    If $j \geq 1$ is such that $x \in Q^*_j$, then we have
+    \begin{align*}
+        \| x-a_j \| &\leq \diam Q^*_j + \dist(Q_j^*, A) \\
+            &\leq \frac{5}{4} \,\diam Q_j + \frac{3}{4} \,\dist(Q_j, A) &&\text{ since $Q_j^*$ is the dilation of $Q_j$ by a factor of } 1+\varepsilon < \frac{5}{4} \\
+            &\leq 2 \diam Q_j + \dist(Q_j, A) \\
+            &\leq 8 \dist(Q_j, A) + \dist(Q_j, A) &&\text{by Lemma \ref{lem:whitney_decomposition}} \\
+            &\leq 9 \|x-a\|
+    \end{align*}
+    where the first inequality follows from the triangle inequality,
+    and the final inequality follows from the fact that $x \in Q_j$ and $a \in A$.
+    
+    Hence if $j \geq 1$ is such that $x \in Q_j^*$, then we have
+    \[ \|a-a_{j}\| \leq \|a-x\| + \|x-a_{j}\| \leq \|a-x\| + 9 \|x-a\| = 10 \|x-a\| \]
+    which implies 
+    \[ \omega(\|a-a_{j}\|) \leq 10 \omega(\|x-a\|) \]
+    since $\omega$ is concave and increasing.
+
+    If $j \geq 1$ is such that $x \notin Q_j^*$, then $\psi_j(x) = 0$ and so this term does not contribute to the sum defining $S_0(x)$.
+
+    Therefore we have 
+    \begin{align*}
+    |S_0(x)| &\leq \sum_{ \{ j\, : \,x \in Q_j^* \} } 1 \cdot \left| D^\alpha(T^m_{a_j} f^\bullet - T^m_a f^\bullet)(x) \right| \\
+        &\leq C_{m,n} \cdot \sum_{\{ j\, : \,x \in Q_j^* \}} \omega(\|a-a_j\|) \left( \|x-a\|^{m-|\alpha|} + \|x-a_j\|^{m-|\alpha|} \right) && \text{by Subclaim 2a} \\
+        &\leq C_{m,n} \cdot \sum_{\{ j\, : \,x \in Q_j^* \}} 10 \omega(\|x-a\|) \left( \|x-a\|^{m-|\alpha|} + (9 \|x-a\|)^{m-|\alpha|} \right) \\
+        &\leq C_{m,n} \cdot 2^n \cdot 10(9^{m-|\alpha|} + 1) \cdot \omega(\|x-a\|) \cdot \|x-a\|^{m-|\alpha|} &&\text{by Corollary \ref{cor:whitney_cover_dilation}}
+    \end{align*}
+    where $C_{m,n} = 4^m e^n$ is the constant from Subclaim 2a for the case of the zero multi-index.
+    Thus there is a constant $C_0$ which only depends on $m$ and $n$ such that
+    \[ |S_0(x)| \leq C_0 \cdot \omega(\|x-a\|) \cdot \|x-a\|^{m-|\alpha|}. \tag{$\clubsuit$}\]
+
+    Next let $\beta$ be a multi-index with $\beta \leq \alpha$ and $|\beta| \geq 1$, and consider $|S_\beta(x)|$.
+    Then see that for each $b \in A$ we have
+    \begin{align*}
+        S_\beta (x) &= \sum_{j=1}^\infty D^\beta \psi_j(x) \cdot D^{\alpha - \beta} \left( T^m_{a_j} f^\bullet(x) - T^m_a f^\bullet(x) \right) \\
+            &= \sum_{j=1}^\infty D^\beta \psi_j(x) \cdot \left( D^{\alpha - \beta} T^m_{a_j} f^\bullet(x) - D^{\alpha - \beta} T^m_b f^\bullet(x) + D^{\alpha - \beta} T^m_b f^\bullet(x) - D^{\alpha - \beta} T^m_a f^\bullet(x) \right) \\
+            &= \sum_{j=1}^\infty D^\beta \psi_j(x) \cdot \left( D^{\alpha - \beta} T^m_{a_j} f^\bullet(x) - D^{\alpha - \beta} T^m_b f^\bullet(x) \right) + \sum_{j=1}^\infty D^\beta \psi_j(x) \cdot \left( D^{\alpha - \beta} T^m_b f^\bullet(x) - D^{\alpha - \beta} T^m_a f^\bullet(x) \right) \\
+            &= \sum_{j=1}^\infty D^\beta \psi_j(x) \cdot \left( D^{\alpha - \beta} T^m_{a_j} f^\bullet(x) - D^{\alpha - \beta} T^m_b f^\bullet(x) \right) + 0 \\
+            &= \sum_{j=1}^\infty D^\beta \psi_j(x) \cdot \left( D^{\alpha - \beta} T^m_{a_j} f^\bullet(x) - D^{\alpha - \beta} T^m_b f^\bullet(x) \right)
+    \end{align*}
+    since $\sum_j \psi_j \equiv 1$ on $A^c$ and hence $\sum_j D^\beta \psi_j \equiv 0$ on $A^c$ for each multi-index $\beta$ with $|\beta| \geq 1$.
+
+    Now choose a point $b\in A$ such that $\dist(x,A) = \|x-b\|$.
+    Then if $j \geq 1$ is such that $x \in Q_j^*$, then as before we have $\|x-a_j\| \leq 9 \|x-b\|$ so that 
+    \[ \|a_j - b\| \leq \|a_j - x\| + \|x-b\| \leq 10 \|x-b\| \]
+    and 
+    \[ \omega(\|a_j - b\|) \leq 10 \omega(\|x-b\|). \]
+    Hence we can estimate
+    \begin{align*}
+        |S_\beta(x)| &\leq \sum_{ \{j\,:\, x \in Q_j^* \} }
+            \left| D^\beta \psi_j(x) \cdot D^{\alpha - \beta} \left( T^m_{a_j} f^\bullet - T^m_b f^\bullet \right)(x) \right| \\
+            &\leq \sum_{ \{j\,:\, x \in Q_j^* \} } \left| D^\beta \psi_j(x) \right| \cdot
+                \left( 4^{m-|\alpha-\beta|}e^n \omega(\|a_j - b\|) \left( \|x-a_j\|^{m-|\alpha - \beta|} + \|x-b\|^{m-|\alpha - \beta|} \right) \right)
+                && \quad \text{ by Subclaim 2a} \\
+            &\leq C_{m,n,\beta} \cdot \sum_{ \{j\,:\, x \in Q_j^* \} } \left| D^\beta \psi_j(x) \right| \cdot 10 \omega(\|x-b\|) \left( (9\|x-b\|)^{m-|\alpha - \beta|} + \|x-b\|^{m-|\alpha -\beta|} \right) 
+                && \quad\text{ where } C_{m,n,\beta} := 4^{m-|\alpha-\beta|} e^n \\
+            &\leq C_{m,n,\beta} \cdot 10(9^{m-|\alpha - \beta|} + 1) 
+                \cdot \omega(\|x-b\|)\|x-b\|^{m-|\alpha -\beta|} \sum_{ \{j\,:\, x \in Q_j^* \} } \left| D^\beta \psi_j(x) \right| \\
+            &\leq C_{m,n,\beta} \cdot 10(9^{m-|\alpha - \beta|} + 1) \cdot \omega(\|x-b\|)\|x-b\|^{m-|\alpha - \beta|} \cdot C_\beta \sum_{ \{ j\,:\, x\in Q^*_j \} } (\diam Q_j)^{-|\beta|}
+    \end{align*}
+    where the last inequality holds by the property (iv) of the Whitney partition of unity \ref{prop:whitney_partition_of_unity}, and the constant $C_\beta$ only depends only on $\beta$ and $n$.
+
+    Letting
+    \[ \hat{C}_{\beta} := C_{m,n,\beta} \cdot 10(9^{m-|\alpha - \beta|} + 1) \cdot C_\beta \]
+    to make things more managable, we have shown that 
+    \[ |S_\beta(x)| \leq \hat{C}_{\beta} \cdot \omega(\|x-b\|)\|x-b\|^{m-|\alpha-\beta|} \sum_{ \{ j\,:\, x\in Q^*_j \} } (\diam Q_j)^{-|\beta|}. \]
+    Now fix some $l \in \Z^+$ such that $x \in Q_l$. 
+    Then for each $j\geq 1$ such that $x\in Q_j^*$, the cubes $Q_j$ and $Q_l$ must be adjacent, as shown in the proof of Corollary \ref{cor:whitney_cover_dilation}.
+    Hence there are at most $2^n$ terms in the sum $\sum_{ \{ j\,:\, x\in Q^*_j \} } (\diam Q_j)^{-|\beta|}$, 
+    as shown in \ref{cor:whitney_cover_dilation},
+    and each term is at most $4^{|\beta|}(\dist(Q_l, A))^{-|\beta|}$ by Lemma \ref{lem:whitney_decomposition} (b) and (c).
+
+    Hence we have 
+    \begin{align*}
+        |S_\beta(x)| &\leq 2^n \cdot 4^{|\beta|} \cdot \hat{C}_{\beta} \cdot \omega(\|x-b\|)\|x-b\|^{m-|\alpha-\beta|} \cdot (\dist(Q_l, A))^{-|\beta|} \\
+            &= 2^n \cdot 4^{|\beta|} \cdot \hat{C}_{\beta} \cdot \omega\left( \dist(x,A)\right) \left(\dist(x,A)\right)^{m-|\alpha-\beta|} 
+                \cdot \left( \dist(x,A) \right)^{-|\beta|} \\
+    \end{align*} 
+    because $\|x-b\| = \dist(x,A)$ and $\dist(Q_l, A) \geq \dist(x,A)$ by virtue of $x \in Q_l$.
+    Since $\beta \leq \alpha$, we see that $m-|\alpha-\beta| = m-|\alpha| + |\beta|$ and thus we have
+    \[ |S_\beta(x)| \leq 2^n \cdot 4^{|\beta|} \cdot \hat{C}_{\beta} \cdot \omega\left( \dist(x,A)\right) \left(\dist(x,A)\right)^{m-|\alpha|}. \]
+    Letting $C'_\beta := 2^n \cdot 4^{|\beta|} \cdot \hat{C}_{\beta}$, we have shown that
+    \[ |S_\beta(x)| \leq C'_\beta \cdot \omega\left( \dist(x,A)\right) \left(\dist(x,A)\right)^{m-|\alpha|}. \tag{$\spadesuit$}\]
+
+    Putting this all together, we have 
+    \begin{align*}
+        | D^\alpha f(x) - D^\alpha T^m_a f^\bullet(x) | &\leq
+            \sum_{\beta \leq \alpha} \binom{\alpha}{\beta} |S_\beta(x)| && \text{ by }(\heartsuit) \\
+            &= |S_0(x)| + \sum_{\substack{\beta \leq \alpha, \\ |\beta| \geq 1}} \binom{\alpha}{\beta} |S_\beta(x)| \\
+            &\leq C_0 \cdot \omega(\|x-a\|) \cdot \|x-a\|^{m-|\alpha|} + \sum_{\substack{\beta \leq \alpha, \\ |\beta| \geq 1}} \binom{\alpha}{\beta} C'_\beta \cdot\omega\left( \dist(x,A)\right) \left(\dist(x,A)\right)^{m-|\alpha|} &&\text{ by }(\clubsuit) \text{ and }(\spadesuit) \\
+            &= C \cdot \omega\left( \dist(x,A)\right) \left(\dist(x,A)\right)^{m-|\alpha|} 
+    \end{align*}
+    where we have set
+    \[ C := C_0 + \sum_{\substack{\beta \leq \alpha, \\ |\beta| \geq 1}} \binom{\alpha}{\beta} C'_\beta. \]
+    Because $x\in A^c$, we have $\underline{\partial^\alpha} f(x) = D^\alpha f(x)$, and thus we have shown $(\mathwitch)$ in the case where $x \in A^c$.
+    \end{proof}
+
+\end{proof}
+
+\begin{proof}[Proof of Whitney's Extension Theorem in the general case]
+    Let $A \subseteq \R^n$ be a closed set, and let $f^\bullet\in \mathcal{W}^m(A)$ be a Whitney $m$-jet on $A$.
+    
+
+
+    partition of unity argument
+    
+\end{proof}
+
+    We did it.
+    That is like, \emph{the}, coolest theorem.
+    I have been wanting to go through that full proof since I learned about the result as an undergrad. 
+
+It turns out that even more can be said about the extension operator in terms of continuity.
+If things are properly defined, 
+it can be shown that a small modification of the operator $\mathcal{E}_m$ we constructed is a continuous map
+from the Banach space of $s$-H\"older continuous Whitney jets on a compact subset to the Banach space $C^{m,s}(\R^n)$
+of $C^m$ functions on $\R^n$ with $s$-H\"older continuous $m^{\text{th}}$ derivatives.
+The details are in Stein's book \textit{Singular Integrals and Differentiability Properties of Functions}.
+
+The natural follow up question is the following: Is there a continuous extension operator for jets of infinite order, satisfying a 
+Whitney condition? 
+
+Grothendieck showed that such an extension operator, with the natural definitions in place, cannot exist on a general closed set --- his example shows that
+the singleton $\{0\}$ is a closed set for which no such extension operator can exist.
+See Bierstone's paper \textit{Differentiable Functions} in the Bulletin of the Brazilian Mathematical Society for details.

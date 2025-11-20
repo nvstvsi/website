@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analysis III - C. Nastasi's Analysis Notes</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Georgia', 'Times New Roman', serif; background: #fafafa; min-height: 100vh; color: #333; line-height: 1.6; }
+    .layout { display: flex; min-height: 100vh; }
+    .sidebar { width: 280px; background: #fff; border-right: 1px solid #e0e0e0; position: fixed; top: 0; left: 0; height: 100vh; overflow-y: auto; padding: 20px 0; }
+    .sidebar-header { padding: 15px 20px 25px; border-bottom: 1px solid #e0e0e0; }
+    .sidebar-header h1 { font-size: 1.3em; font-weight: 600; color: #1a1a1a; margin-bottom: 5px; }
+    .sidebar-header .subtitle { font-size: 0.85em; color: #666; font-style: italic; }
+    .sidebar-header .back-link { display: block; font-size: 0.8em; color: #666; text-decoration: none; margin-top: 12px; }
+    .sidebar-header .back-link:hover { color: #1a1a1a; }
+    .sidebar-nav { padding: 10px 0; }
+    .chapter-group { margin-bottom: 2px; }
+    .chapter-title { padding: 12px 20px; font-size: 0.9em; font-weight: 600; color: #333; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .chapter-title:hover { background: #f5f5f5; }
+    .chapter-title .toggle { font-size: 0.65em; color: #999; transition: transform 0.2s; }
+    .chapter-group.expanded .chapter-title .toggle { transform: rotate(90deg); }
+    .section-list { display: none; padding: 5px 0; background: #f8f8f8; }
+    .chapter-group.expanded .section-list { display: block; }
+    .section-link { display: block; padding: 8px 20px 8px 35px; font-size: 0.85em; color: #555; text-decoration: none; border-left: 3px solid transparent; }
+    .section-link:hover { background: #f0f0f0; color: #1a1a1a; }
+    .section-link.wip { color: #999; font-style: italic; }
+    .main-content { margin-left: 280px; flex: 1; padding: 50px 60px; }
+    .main-content header { margin-bottom: 40px; padding-bottom: 30px; border-bottom: 2px solid #e0e0e0; }
+    .title-row { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
+    .main-content h1 { font-size: 2.5em; font-weight: 400; color: #1a1a1a; }
+    .status-badge { font-size: 0.65em; padding: 5px 15px; border-radius: 20px; font-weight: 500; text-transform: uppercase; background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+    .main-subtitle { font-size: 1.2em; color: #666; font-style: italic; }
+    .intro { font-size: 1.05em; color: #444; margin-bottom: 40px; line-height: 1.8; }
+    h2 { font-size: 1.5em; font-weight: 600; margin-bottom: 25px; color: #222; }
+    .chapter-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 50px; }
+    .chapter-card { background: white; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; }
+    .chapter-card:hover { border-color: #999; box-shadow: 0 3px 10px rgba(0,0,0,0.08); }
+    .chapter-card h3 { font-size: 1em; font-weight: 600; margin-bottom: 12px; color: #1a1a1a; }
+    .chapter-card .chapter-num { color: #888; font-weight: 400; }
+    .chapter-card ul { list-style: none; font-size: 0.85em; color: #555; line-height: 1.7; }
+    .chapter-card li { padding: 3px 0; }
+    .chapter-card li.wip { color: #999; font-style: italic; }
+    .chapter-card a { color: #555; text-decoration: none; }
+    .chapter-card a:hover { color: #1a1a1a; text-decoration: underline; }
+    .learning-paths { background: white; border: 1px solid #e0e0e0; border-radius: 8px; padding: 25px; margin-top: 30px; }
+    .learning-paths h3 { font-size: 1.1em; font-weight: 600; margin-bottom: 15px; color: #333; }
+    .path-item { margin-bottom: 12px; font-size: 0.95em; line-height: 1.6; }
+    .path-item strong { color: #1a1a1a; }
+    .path-item span { color: #555; }
+    @media (max-width: 1200px) { .chapter-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 900px) { .sidebar { width: 240px; } .main-content { margin-left: 240px; padding: 40px 30px; } .chapter-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1>Analysis III</h1>
+        <div class="subtitle">Measure Theory &amp; Integration</div>
+        <a href="../index.html" class="back-link">← All Notes</a>
+      </div>
+      <div class="sidebar-nav">
+        <div class="chapter-group expanded">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>1. Measure Theory</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../../analysis-3/html_preview/01-measure-theory/measure-theory.html" class="section-link">Overview</a>
+            <a href="../../analysis-3/html_preview/01-measure-theory/basics.html" class="section-link">Outer Measures</a>
+            <a href="../../analysis-3/html_preview/01-measure-theory/lebesgue-meas.html" class="section-link">Lebesgue Measure</a>
+            <a href="../../analysis-3/html_preview/01-measure-theory/cantor.html" class="section-link">The Cantor Set</a>
+            <a href="../../analysis-3/html_preview/01-measure-theory/measure-spaces.html" class="section-link">Measure Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>2. Integration</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../../analysis-3/html_preview/02-integration/integration.html" class="section-link">Overview</a>
+            <a href="../../analysis-3/html_preview/02-integration/integrals-1.html" class="section-link">Simple Functions</a>
+            <a href="../../analysis-3/html_preview/02-integration/integrals-2.html" class="section-link">General Functions</a>
+            <a href="../../analysis-3/html_preview/02-integration/convergence.html" class="section-link wip">Convergence Theorems</a>
+            <a href="../../analysis-3/html_preview/02-integration/inequality-party.html" class="section-link wip">Integral Inequalities</a>
+            <a href="../../analysis-3/html_preview/02-integration/lp_spaces.html" class="section-link wip">Lᵖ Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>3. Product Measures</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../../analysis-3/html_preview/03-fubini/fubini_ch.html" class="section-link">Overview</a>
+            <a href="../../analysis-3/html_preview/03-fubini/fubini.html" class="section-link">Fubini-Tonelli</a>
+            <a href="../../analysis-3/html_preview/03-fubini/integrals-3.html" class="section-link">Product Measures</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>4. Differentiation I</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../../analysis-3/html_preview/04-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../../analysis-3/html_preview/04-differentiation-1/covering.html" class="section-link">Vitali Covering</a>
+            <a href="../../analysis-3/html_preview/04-differentiation-1/monotone.html" class="section-link">Monotone Functions</a>
+            <a href="../../analysis-3/html_preview/04-differentiation-1/BV_on_R.html" class="section-link">Bounded Variation</a>
+            <a href="../../analysis-3/html_preview/04-differentiation-1/FTOC.html" class="section-link">FTC for Lebesgue</a>
+            <a href="../../analysis-3/html_preview/04-differentiation-1/HL.html" class="section-link">Hardy-Littlewood</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>5. Differentiation I (cont)</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../../analysis-3/html_preview/05-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../../analysis-3/html_preview/05-differentiation-1/covering.html" class="section-link">Vitali Covering</a>
+            <a href="../../analysis-3/html_preview/05-differentiation-1/monotone.html" class="section-link">Monotone Functions</a>
+            <a href="../../analysis-3/html_preview/05-differentiation-1/BV_on_R.html" class="section-link">Bounded Variation</a>
+            <a href="../../analysis-3/html_preview/05-differentiation-1/FTOC.html" class="section-link">FTC for Lebesgue</a>
+            <a href="../../analysis-3/html_preview/05-differentiation-1/HL.html" class="section-link">Hardy-Littlewood</a>
+            <a href="../../analysis-3/html_preview/05-differentiation-1/r-nik.html" class="section-link">Radon-Nikodym</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>6. Differentiation II</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../../analysis-3/html_preview/06-differentiation-2/diff-2.html" class="section-link">Overview</a>
+            <a href="../../analysis-3/html_preview/06-differentiation-2/vector-measures.html" class="section-link">Vector Measures</a>
+            <a href="../../analysis-3/html_preview/06-differentiation-2/r-nik.html" class="section-link">Radon-Nikodym</a>
+            <a href="../../analysis-3/html_preview/06-differentiation-2/besi.html" class="section-link">Besicovitch</a>
+            <a href="../../analysis-3/html_preview/06-differentiation-2/densities.html" class="section-link">Densities</a>
+            <a href="../../analysis-3/html_preview/06-differentiation-2/diff-measures.html" class="section-link">Measure Derivatives</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>7. Riesz Representation</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../../analysis-3/html_preview/06-riesz/riesz.html" class="section-link">Overview</a>
+            <a href="../../analysis-3/html_preview/06-riesz/riesz_functional.html" class="section-link">Riesz Representation</a>
+            <a href="../../analysis-3/html_preview/06-riesz/LCH_spaces.html" class="section-link">LCH Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>8. Integral Formulas</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../../analysis-3/html_preview/07-formulas/formulas.html" class="section-link">Overview</a>
+            <a href="../../analysis-3/html_preview/07-formulas/hausdorff_meas.html" class="section-link">Hausdorff Measures</a>
+            <a href="../../analysis-3/html_preview/07-formulas/lippy.html" class="section-link">Lipschitz Maps</a>
+            <a href="../../analysis-3/html_preview/07-formulas/rademacher.html" class="section-link">Rademacher</a>
+            <a href="../../analysis-3/html_preview/07-formulas/coarea-prereq.html" class="section-link">Coarea Prerequisites</a>
+            <a href="../../analysis-3/html_preview/07-formulas/coarea.html" class="section-link">Coarea Formula</a>
+            <a href="../../analysis-3/html_preview/07-formulas/area-prereq.html" class="section-link">Area Prerequisites</a>
+            <a href="../../analysis-3/html_preview/07-formulas/area-formula.html" class="section-link wip">Area Formula</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>9. Extension Results</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../../analysis-3/html_preview/08-ext-res/ext-res.html" class="section-link">Overview</a>
+            <a href="../../analysis-3/html_preview/08-ext-res/taylor_thm_integral_remainder.html" class="section-link">Taylor's Theorem</a>
+            <a href="../../analysis-3/html_preview/08-ext-res/whitney-cover.html" class="section-link">Whitney Covering</a>
+            <a href="../../analysis-3/html_preview/08-ext-res/whitney-partition-of-unity.html" class="section-link">Partition of Unity</a>
+            <a href="../../analysis-3/html_preview/08-ext-res/whitney-decomposition.html" class="section-link">Decomposition</a>
+            <a href="../../analysis-3/html_preview/08-ext-res/whitney-extension-theorem.html" class="section-link">Extension Theorem</a>
+            <a href="../../analysis-3/html_preview/08-ext-res/whitney-extension-proof.html" class="section-link">Extension Proof</a>
+            <a href="../../analysis-3/html_preview/08-ext-res/whitney-extension-applications.html" class="section-link wip">Applications</a>
+            <a href="../../analysis-3/html_preview/08-ext-res/whitney-extension.html" class="section-link">Summary</a>
+            <a href="../../analysis-3/html_preview/08-ext-res/more-bump.html" class="section-link">More Bump Functions</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <main class="main-content">
+      <header>
+        <div class="title-row">
+          <h1>Analysis III</h1>
+          <span class="status-badge">In Progress</span>
+        </div>
+        <p class="main-subtitle">Measure Theory, Integration, and Fine Properties of Functions</p>
+      </header>
+      <p class="intro">These notes cover measure theory and Lebesgue integration, progressing through Lᵖ spaces, product measures, and differentiation of measures. The later chapters develop the fine properties of functions needed for geometric measure theory.</p>
+      <h2>Chapters</h2>
+      <div class="chapter-grid">
+        <div class="chapter-card">
+          <h3><span class="chapter-num">1.</span> Measure Theory</h3>
+          <ul>
+            <li><a href="../../analysis-3/html_preview/01-measure-theory/basics.html">Outer measures and σ-algebras</a></li>
+            <li><a href="../../analysis-3/html_preview/01-measure-theory/lebesgue-meas.html">Lebesgue measure on ℝⁿ</a></li>
+            <li><a href="../../analysis-3/html_preview/01-measure-theory/cantor.html">The Cantor set</a></li>
+            <li><a href="../../analysis-3/html_preview/01-measure-theory/measure-spaces.html">Measurable functions</a></li>
+          </ul>
+        </div>
+        <div class="chapter-card">
+          <h3><span class="chapter-num">2.</span> Integration</h3>
+          <ul>
+            <li><a href="../../analysis-3/html_preview/02-integration/integrals-1.html">Simple functions</a></li>
+            <li><a href="../../analysis-3/html_preview/02-integration/integrals-2.html">General functions</a></li>
+            <li class="wip"><a href="../../analysis-3/html_preview/02-integration/convergence.html">Convergence theorems</a></li>
+            <li class="wip"><a href="../../analysis-3/html_preview/02-integration/inequality-party.html">Integral inequalities</a></li>
+            <li class="wip"><a href="../../analysis-3/html_preview/02-integration/lp_spaces.html">Lᵖ spaces</a></li>
+          </ul>
+        </div>
+        <div class="chapter-card">
+          <h3><span class="chapter-num">3.</span> Product Measures</h3>
+          <ul>
+            <li><a href="../../analysis-3/html_preview/03-fubini/fubini.html">Fubini-Tonelli theorem</a></li>
+            <li><a href="../../analysis-3/html_preview/03-fubini/integrals-3.html">Product σ-algebras</a></li>
+          </ul>
+        </div>
+        <div class="chapter-card">
+          <h3><span class="chapter-num">4.</span> Differentiation I</h3>
+          <ul>
+            <li><a href="../../analysis-3/html_preview/04-differentiation-1/covering.html">Vitali covering lemma</a></li>
+            <li><a href="../../analysis-3/html_preview/04-differentiation-1/monotone.html">Monotone functions</a></li>
+            <li><a href="../../analysis-3/html_preview/04-differentiation-1/BV_on_R.html">Bounded variation</a></li>
+            <li><a href="../../analysis-3/html_preview/04-differentiation-1/FTOC.html">FTC for Lebesgue</a></li>
+            <li><a href="../../analysis-3/html_preview/04-differentiation-1/HL.html">Hardy-Littlewood</a></li>
+          </ul>
+        </div>
+        <div class="chapter-card">
+          <h3><span class="chapter-num">6.</span> Differentiation II</h3>
+          <ul>
+            <li><a href="../../analysis-3/html_preview/06-differentiation-2/vector-measures.html">Vector measures</a></li>
+            <li><a href="../../analysis-3/html_preview/06-differentiation-2/r-nik.html">Radon-Nikodym</a></li>
+            <li><a href="../../analysis-3/html_preview/06-differentiation-2/besi.html">Besicovitch covering</a></li>
+            <li><a href="../../analysis-3/html_preview/06-differentiation-2/densities.html">Densities</a></li>
+            <li><a href="../../analysis-3/html_preview/06-differentiation-2/diff-measures.html">Measure derivatives</a></li>
+          </ul>
+        </div>
+        <div class="chapter-card">
+          <h3><span class="chapter-num">7.</span> Riesz Representation</h3>
+          <ul>
+            <li><a href="../../analysis-3/html_preview/06-riesz/riesz_functional.html">Riesz representation</a></li>
+            <li><a href="../../analysis-3/html_preview/06-riesz/LCH_spaces.html">LCH spaces</a></li>
+          </ul>
+        </div>
+        <div class="chapter-card">
+          <h3><span class="chapter-num">8.</span> Integral Formulas</h3>
+          <ul>
+            <li><a href="../../analysis-3/html_preview/07-formulas/hausdorff_meas.html">Hausdorff measures</a></li>
+            <li><a href="../../analysis-3/html_preview/07-formulas/lippy.html">Lipschitz maps</a></li>
+            <li><a href="../../analysis-3/html_preview/07-formulas/rademacher.html">Rademacher's theorem</a></li>
+            <li><a href="../../analysis-3/html_preview/07-formulas/coarea.html">Coarea formula</a></li>
+            <li class="wip"><a href="../../analysis-3/html_preview/07-formulas/area-formula.html">Area formula</a></li>
+          </ul>
+        </div>
+        <div class="chapter-card">
+          <h3><span class="chapter-num">9.</span> Extension Results</h3>
+          <ul>
+            <li><a href="../../analysis-3/html_preview/08-ext-res/taylor_thm_integral_remainder.html">Taylor's theorem</a></li>
+            <li><a href="../../analysis-3/html_preview/08-ext-res/whitney-cover.html">Whitney covering</a></li>
+            <li><a href="../../analysis-3/html_preview/08-ext-res/whitney-decomposition.html">Whitney decomposition</a></li>
+            <li><a href="../../analysis-3/html_preview/08-ext-res/whitney-extension-theorem.html">Extension theorem</a></li>
+            <li class="wip"><a href="../../analysis-3/html_preview/08-ext-res/whitney-extension-applications.html">Applications</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="learning-paths">
+        <h3>Learning Paths</h3>
+        <div class="path-item"><strong>First Course:</strong> <span>Chapters 1–3, plus sections 4.1–4.3.</span></div>
+        <div class="path-item"><strong>Road to GMT:</strong> <span>All chapters.</span></div>
+      </div>
+    </main>
+  </div>
+  <script>function toggleChapter(element) { element.parentElement.classList.toggle('expanded'); }</script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+\section{Rademacher's Theorem}
+
+In this section, we will prove the famous Rademacher's theorem, which states that Lipschitz functions on $\R^n$ are differentiable almost everywhere.
+Later on, we will give another (independent) proof of Rademacher's theorem using the theory of Sobolev spaces.
+
+\subsection{Rademacher's Theorem}
+
+\begin{theorem}[Rademacher's Theorem]
+    \label{thm:rademacher_theorem}
+    Let $U \subseteq \R^n$ be open, and let $f : U \to \R$ be a Lipschitz function.
+    Then $f$ is differentiable almost everywhere on $U$ and the derivative $Df : U \to \R^n$ is essentially bounded with
+    \[ \|Df\|_{L^\infty(U)} \leq \Lip(f). \]
+    In the case $U$ is a convex open set, we have equality $\|Df\|_{L^\infty(U)} = \Lip(f)$.
+\end{theorem}
+
+Here we remind you that the $L^\infty$-norm of the derivative $Df : U \to \R^n$, which is an $\R^n$-valued map, is defined by
+\[ \|Df\|_{L^\infty(U)} := \| \|Df(\cdot)\| \|_{L^\infty(U)} = \esssup_{x \in U} \|Df(x)\| \]
+i.e. as the $L^\infty$-norm of the function $x \mapsto \|Df(x)\|$.
+
+Before the proof, we state a result that we will need and is of its own interest.
+
+\begin{lemma}[Fundamental Lemma in the Calculus of Variations]
+    \label{lem:fundamental_lemma_of_calculus_of_variations}
+    Let $U\subseteq \R^n$ and let $f \in L^1_{\text{loc}}(U)$ be a locally integrable function.
+    If \[ \int_{U} f(x) \varphi(x) \, dx = 0 \quad \text{for all } \varphi \in C_c^\infty(\R^n), \]
+    then $f = 0$ almost everywhere in $\R^n$.
+\end{lemma}
+\begin{proof}
+    Towards a contradiction, suppose that $f\neq 0$ on a set of positive measure.
+    Without loss of generality, suppose that there exists a set $A \subseteq \R^n$ with $\mathcal{L}^n(A) > 0$ such that $f(x) > 0$ for all $x\in A$.
+    Hence there is a compact set $K \subset U$ and an $\epsilon > 0$ such that $f \geq \epsilon$ on $K$. 
+
+    Let $\{ V_j \}_{j=1}^\infty$ be a decreasing sequence of open sets such that $K \subset V_j \subset \subset U$; for each $j\geq 1$ let $\varphi_j \in C_c^\infty(V_j)$ be a bump function such that $\varphi_j = 1$ on $K$ and $0 \leq \varphi_j \leq 1$.
+    Then we see that 
+    \[ 0 = \int_{U} f(x) \varphi_j(x) \, \dif x \geq \int_{K} f(x)\varphi_j(x) \,\dif x - \int_{V_j \setminus K} f(x) \varphi_j(x) \, \dif x \geq \epsilon \mathcal{L}^n(K) - \int_{V_j \setminus K} f(x) \varphi_j(x) \, \dif x \]
+    which converges to $\epsilon \mathcal{L}^n(K) > 0$ as $j \to \infty$ by the Dominated Convergence Theorem, a contradiction.
+\end{proof}
+
+With the Fundamental Lemma of the Calculus of Variations in hand, we can now prove Rademacher's theorem.
+
+\begin{proof}[Proof of Rademacher's Theorem]
+    \textit{Step 1:} We first prove the result in the case $U = \R^n$.
+    \vspace{2mm}
+
+    \noindent Let $f : \R^n \to \R$ be a Lipschitz function.
+    For each unit vector $v \in \mathbb{S}^{n-1}$ and each $x\in \R^n$ we define
+    \[ D_v f(x) := \lim_{t \to 0} \frac{f(x + tv) - f(x)}{t} \]
+    whenever this limit exists.
+
+    \vspace{2mm}
+    \textit{Step 1a:} We claim that for each $v\in \mathbb{S}^{n-1}$, the directional derivative $D_v f(x)$ exists for almost every $x \in \R^n$.
+    \vspace{2mm}
+
+    \begin{proof}[Proof of Step 1a]
+    Fix $v \in \mathbb{S}^{n-1}$.
+    For each $x\in \R^n$ we also define
+    \[ \overline{D}_v f(x) := \limsup_{t \to 0} \frac{f(x + tv) - f(x)}{t} \quad\text{and}\quad  \underline{D}_v f(x) := \liminf_{t \to 0} \frac{f(x + tv) - f(x)}{t} \]
+    so that $D_v f(x)$ exists if and only if $\overline{D}_v f(x) = \underline{D}_v f(x)$.
+    See that continuity of $f$ implies that $\overline{D}_v f$ and $\underline{D}_v f$ are measurable functions, as they are pointwise limits of measurable functions.
+    Thus the set of points 
+    \[ A_v := \{ x \in \R^n : \overline{D}_v f(x) > \underline{D}_v f(x) \} \]
+    where $D_v f(x)$ does not exist is a measurable set.
+    We will show that $A_v$ has measure zero.
+
+    For each $x\in \R^n$ we define a function
+    \[ \phi_{x,v} : \R\to \R, \qquad \phi_{x,v}(t) := f(x + tv). \]
+    Then for each $x\in \R^n$ see that $\phi_{x,v}$ is a Lipschitz function on $\R$ with Lipschitz constant at most $\Lip(f)$, so by \ref{ex:lipschitz_functions_are_absolutely_continuous} we know that $\phi_{x,v}$ is absolutely continuous on $\R$.
+    Since AC functions on $\R$ are differentiable almost everywhere (Corollary \ref{cor:AC_functions_are_differentiable_almost_everywhere}), we know that for each $x\in \R^n$ the function $\phi_{x,v}$ is differentiable almost everywhere on $\R$.
+
+    Let $x\in \R^n$ be arbitrary, and let $L_{x,v} := \{  x + tv : t \in \R \}\subset \R^n$ be the line parallel to $v$ passing through $x$.
+    Then the set $A_v \cap L_{x,v}$ is the set of points on the line $L_{x,v}$ where the directional derivative $D_v f$ does not exist.
+    See that $x + tv \in A_v$ if and only if $\phi_{x,v}$ is not differentiable at $t$, so we have
+    \[ A_v \cap L_{x,v} = \{ x + tv : t \in \R, \phi_{x,v} \ \text{ is not differentiable at } t \}. \]
+    Letting $R_{x,v}$ be an affine isometry of $\R^n$ that sends $x$ to the origin and $v$ to $e_1 = (1,0,\ldots,0)$, we have
+    \[ R_{x,v}( A_v \cap L_{x,v}) = (\{ t\in \R : \phi_{x,v} \ \text{ is not differentiable at } t \}) \times  \{0\}^{n-1}. \]
+    Therefore
+    \begin{align*}
+        \mathcal{H}_{\R^n}^1(A_v \cap L_{x,v}) &= \mathcal{H}_{\R^n}^1(R_{x,v}( A_v \cap L_{x,v})) &&\text{ by isometry invariance of Hausdorff measure}\\
+            &= \mathcal{H}_{\R^n}^1\left( (\{ t\in \R : \phi_{x,v} \ \text{ is not differentiable at } t \}) \times  \{0\}^{n-1} \right) \\
+            &= \mathcal{H}^1_{\R \times \{0\}^{n-1}}(\{ t\in \R : \phi_{x,v} \ \text{ is not differentiable at } t \} \times \{ 0 \}^{n-1}) &&\text{ by remark \ref{rem:which_hausdorff_measure_on_subsets}}\\
+            &= \mathcal{H}^1_{\R}(\{ t\in \R : \phi_{x,v} \ \text{ is not differentiable at } t \}) &&\text{ by isometry invariance of Hausdorff measure}\\
+            &= \mathcal{L}^1(\{ t\in \R : \phi_{x,v} \ \text{ is not differentiable at } t \}) &&\text{ since }\mathcal{H}^1_{\R} = \mathcal{L}^1\\
+            &= 0
+    \end{align*}
+    since $\phi_{x,v}$ is differentiable almost everywhere on $\R$.
+    Thus for each $x\in \R^n$ we have shown that
+    \[ \mathcal{H}^1(A_v \cap L_{x,v}) = 0. \]
+
+    See that for each $x\in \{v\}^\perp$ and each $t\in \R$, we have
+    \[ \Chi_{A_v}(x + tv) = \begin{cases}
+        1, & \text{if } x + tv \in A_v \\ 
+        0, & \text{if } x + tv \notin A_v
+    \end{cases} = \begin{cases}
+        1, & \text{if } x + tv \in A_v \cap L_{x,v} \\
+        0, & \text{otherwise}
+    \end{cases} \]
+    so that
+    \[\Chi_{A_v}(x + tv) = \Chi_{A_v \cap L_{x,v}}(x+tv). \]
+
+    Thus by Funbini-Tonelli \ref{prop:fubini_tonelli_for_hausdorff_measures_on_orthogonal_subspaces} we have
+    \begin{align*}
+        \mathcal{L}^n(A_v) = \mathcal{H}^n(A_v) &= \int_{\R^n} \Chi_{A_v} \dif \mathcal{H}^n \\
+            &=\int_{\operatorname{span}\{v\}} \int_{ \{v\}^\perp } \Chi_{A_v}(x+y) \,\dif \mathcal{H}^1(y) \,\dif \mathcal{H}^{n-1}(x) \\
+            &=\int_{\R} \int_{ \{v\}^\perp } \Chi_{A_v}(x+tv) \,\dif \mathcal{H}^1(t) \,\dif \mathcal{H}^{n-1}(x) \\
+            &=\int_{\R} \int_{ \{v\}^\perp } \Chi_{A_v \cap L_{x,v}}(x+tv) \,\dif \mathcal{H}^1(t) \,\dif \mathcal{H}^{n-1}(x) \\
+            &=\int_\R \mathcal{H}^1(A_v \cap L_{x,v}) \,\dif \mathcal{H}^{n-1}(x) = 0
+    \end{align*}
+    since $\mathcal{H}^1(A_v \cap L_{x,v}) = 0$ for each $x\in \R^n$.
+    Therefore the set $A_v$ where the directional derivative $D_v f$ does not exist has measure zero.
+
+    Thus we have shown that for each $v \in \mathbb{S}^{n-1}$, the directional derivative $D_v f(x)$ exists for almost every $x \in \R^n$.
+    \end{proof}
+
+    \vspace{2mm}
+    \textit{Step 1b:} Now we define the gradient $\nabla f$.
+    \vspace{2mm}
+
+    For each $k = 1,2,\ldots,n$ we let $e_k$ be the $k$-th standard basis vector in $\R^n$, and we let 
+    \[ D_k f(x) := D_{e_k} f(x) \]
+    be the directional derivative of $f$ at $x$ in the direction $e_k$, whenever this limit exists.
+    By Step 1a, for each $k = 1,2,\ldots,n$, the directional derivative $D_k f(x)$ exists for almost every $x \in \R^n$.
+    
+    For each $x \in \R^n$ where all of the directional derivatives $D_1 f(x),\ldots,D_n f(x)$ are defined, we define the gradient $\nabla f(x) \in \R^n$ by
+    \[ \nabla f(x) := (D_1 f(x),\ldots,D_n f(x)). \]
+    Then $\nabla f(x)$ is well-defined for almost every $x \in \R^n$, but we still need to show that $f$ is actually differentiable at almost every point.
+    (Recall that the existance of all directional derivatives does \emph{not} imply differentiability.)    
+
+    \vspace{2mm}
+    \textit{Step 1c:} We claim that for each $v\in \mathbb{S}^{n-1}$ and almost every $x \in \R^n$ we have
+    \[  D_v f(x) = \nabla f(x) \cdot v. \]
+    \vspace{2mm}
+
+    \begin{proof}[Proof of Step 1c]
+    Fix $v \in \mathbb{S}^{n-1}$ and let $\zeta \in C^\infty_c(\R^n)$ be an arbitrary bump function.
+    Then for each $t\neq 0$ we see that
+    \begin{align*}
+        \int_{\R^n} \left( \frac{f(x+tv)- f(x)}{t} \right) \zeta(x) \,\dif x &= \int_{\R^n} \frac{f(x+tv)\zeta(x)}{t} \,\dif x - \int_{\R^n} \frac{f(x)\zeta(x)}{t} \,\dif x \\
+            &= \int_{\R^n} \frac{f(x)\zeta(x-tv)}{t} \,\dif x - \int_{\R^n} \frac{f(x)\zeta(x)}{t} \,\dif x \\
+            &= \int_{\R^n} f(x) \left( \frac{\zeta(x-tv) - \zeta(x)}{t} \right) \,\dif x \\
+            &= -\int_{\R^n} f(x) \left( \frac{\zeta(x) - \zeta(x-tv)}{t} \right) \,\dif x \qquad\qquad(\heartsuit)
+    \end{align*}
+    by using translation invariance and linearity of the Lebesgue integral.
+
+    Notice that for each $k\geq 1$ we have
+    \[ \abs{ \frac{f\left( x + \frac{1}{k}v \right) - f(x)}{\frac{1}{k}} } \leq \Lip(f) \|v\| = \Lip(f) \]
+    by definition of $f$ being Lipschitz, and also
+    \[ \abs{ \frac{\zeta(x) - \zeta\left(x - \frac{1}{k}v\right)}{\frac{1}{k}} } \leq \|\nabla \zeta\|_{L^\infty(\R^n)} \|v\| =  \|\nabla \zeta\|_{L^\infty(\R^n)} \]
+    by Exercise \ref{ex:c1_functions_are_locally_lipschitz}.
+    These uniform bounds mean that we can apply the dominated convergence theorem to each side of $(\heartsuit)$ to conclude
+    \begin{align*}
+        \int_{\R^n} D_v f(x) \zeta(x) \,\dif x &= \int_{\R^n} \left( \lim_{k \to \infty} \frac{f\left( x + \frac{1}{k}v \right) - f(x)}{\frac{1}{k}} \right) \zeta(x) \,\dif x  &&\text{by definition of } D_v f \\
+            &= \lim_{k \to \infty} \int_{\R^n} \frac{f\left( x + \frac{1}{k}v \right) - f(x)}{\frac{1}{k}} \zeta(x) \,\dif x &&\text{by Dominated Convergence Theorem}\\
+            &= -\lim_{k \to \infty} \int_{\R^n} f(x) \left( \frac{\zeta(x) - \zeta\left(x - \frac{1}{k}v\right)}{\frac{1}{k}} \right) \,\dif x &&\text{ by } (\heartsuit) \\
+            &= -\int_{\R^n} f(x) \left( \lim_{k \to \infty} \frac{\zeta(x) - \zeta\left(x - \frac{1}{k}v\right)}{\frac{1}{k}} \right) \,\dif x &&\text{ by Dominated Convergence Theorem}\\
+            &= -\int_{\R^n} f(x) \nabla \zeta(x) \cdot v \,\dif x.
+    \end{align*}
+
+    \textit{Note:} Later on (once everything is defined), the previous computation can be interpreted as saying that the weak directional derivative of $f$ in the direction $v$ is given by $D_v f = \nabla f \cdot v$.
+
+    We continue with the previous computation
+    \[ \int_{\R^n} D_v f(x) \zeta(x) \,\dif x = -\int_{\R^n} f(x) \nabla \zeta(x) \cdot v \,\dif x = -\sum_{k=1}^n v_k \int_{\R^n} f(x) \partial_k \zeta(x) \,\dif x. \tag{$\spadesuit$} \]
+    For the moment, we fix $k \in \{1,2,\ldots,n\}$.
+    Then we can use Fubini's theorem and Integration by Parts for $AC$ functions to write
+    \begin{align*}
+        \int_{\R^n} f(x) \partial_k \zeta(x) \,\dif x &= \int_{\R^{n-1}} \left( \int_{\R} f(x_1,\ldots,x_n) \partial_k \zeta(x_1,\ldots,x_n) \,\dif x_k \right) \dif x_1\cdots \widehat{\dif x_k} \cdots \dif x_n \\
+            &= -\int_{\R^{n-1}} \left( \int_{\R} \partial_k f(x_1,\ldots,x_n) \zeta(x_1,\ldots,x_n) \,\dif x_k \right) \dif x_1\cdots \widehat{\dif x_k} \cdots \dif x_n \\
+            &= -\int_{\R^n} \partial_k f(x) \zeta(x) \,\dif x. 
+    \end{align*}
+    Returning to the previous computation $(\spadesuit)$, we have
+    \begin{align*}
+        \int_{\R^n} D_v f(x) \zeta(x) \,\dif x &= -\sum_{k=1}^n v_k \int_{\R^n} f(x) \partial_k \zeta(x) \,\dif x \\
+            &= \sum_{k=1}^n v_k \int_{\R^n} \partial_k f(x) \zeta(x) \,\dif x \\
+            &= \int_{\R^n} (\nabla f(x) \cdot v) \zeta(x) \,\dif x.
+    \end{align*}
+    Since $\zeta \in C^\infty_c(\R^n)$ was arbitrary, this shows that
+    \[ \int_{\R^n} D_v f(x) \zeta(x) \,\dif x = \int_{\R^n} (\nabla f(x) \cdot v) \zeta(x) \,\dif x \quad\qquad\forall \zeta \in C^\infty_c(\R^n). \]
+    By the Fundamental Theorem of the Calculus of Variations \ref{lem:fundamental_lemma_of_calculus_of_variations}, this implies that
+    \[ D_v f(x) = \nabla f(x) \cdot v \qquad \text{ for a.e. } x \in \R^n \]
+    as claimed.
+    \end{proof}
+
+    \vspace{2mm}
+    \textit{Step 2:} We let $\{ v_k \}_{k=1}^\infty$ be a countable dense subset of $\mathbb{S}^{n-1}$.
+    For each $k\geq 1$, let $A_{v_k}$ be the set
+    \[ A_{v_k} := \{ x \in \R^n : \text{ both } D_{v_k} f(x) \text{ and } \nabla f(x) \text{ exist and } D_{v_k} f(x) = \nabla f(x) \cdot v_k \}. \]
+    Then by Step 1c, we know that $\mathcal{L}^n(\R^n \setminus A_{v_k}) = 0$ for each $k\geq 1$.
+    Therefore the set
+    \[ A := \bigcap_{k=1}^\infty A_{v_k} \]
+    satisfies $\mathcal{L}^n(\R^n \setminus A) = 0$ since it is a countable intersection of full measure sets.
+    We claim that $f$ is differentiable at each point $x \in A$.
+
+    \begin{proof}[Proof of Claim in Step 2]
+        Fix $x \in A$.
+        For each $v\in \S^{n-1}$ and each $t > 0$ we define 
+        \[ R(x,v,t) := \frac{f(x+tv) - f(x)}{t} - \nabla f(x) \cdot v. \]
+        Then since $x \in A \subseteq A_{v_k}$ for each $k\geq 1$, we have
+        \[ \lim_{t \to 0} R(x,v_k,t) = 0 \qquad\forall k \geq 1. \]
+        For $v , \hat{v} \in \S^{n-1}$ and $t > 0$, we have
+        \begin{align*}
+            |R(x,v,t) - R(x,\hat{v},t)| &\leq \left| \frac{f(x+tv) - f(x+t\hat{v})}{t} \right| + |\nabla f(x) \cdot (v - \hat{v})| \\
+                &\leq \Lip(f) \|v - \hat{v}\| + \|\nabla f(x)\| \|v - \hat{v}\| \\
+                &= (\Lip(f) + \|\nabla f(x)\|) \|v - \hat{v}\|.
+        \end{align*}
+
+        Now let $\epsilon > 0$ be arbitrary.
+        Since $\{ v_k \}_{k=1}^\infty$ is dense in $\S^{n-1}$, there exists $N \geq 1$ such that for each $v \in \S^{n-1}$ there exists $k \in \{1,2,\ldots,N\}$ with
+        \[ \|v - v_k\| < \frac{\epsilon}{ 2(\Lip(f) + \|\nabla f(x)\|)}. \]
+        Since $\lim_{t \to 0} R(x,v_k,t) = 0$ for each $k = 1,2,\ldots,N$, there exists $\delta > 0$ such that for all $t \in (0,\delta)$ and all $k = 1,2,\ldots,N$, we have
+        \[ |R(x,v_k,t)| < \frac{\epsilon}{2}. \]
+        As a result, for each $v \in \S^{n-1}$ there exists $k \in \{1,2,\ldots,N\}$ such that for all $t \in (0,\delta)$ we have
+        \[ | R(x,v,t) | \leq |R(x,v,t) - R(x,v_k,t)| + |R(x,v_k,t)| < \epsilon. \]
+        We note that $\delta > 0$ does not depend on $v \in \S^{n-1}$.
+
+        Now let $y\in \R^n\setminus \{ x \}$ be arbitrary and let $v := \frac{y-x}{\|y-x\|} \in \S^{n-1}$.
+        Then 
+        \[ y = x + \|y-x\| v. \]
+        We set $t := \|y-x\| > 0$ and compute that
+        \begin{align*}
+            f(y) - f(x) &= f(x + tv) - f(x) \\
+                &= t \left( \frac{f(x + tv) - f(x)}{t} - \nabla f(x) \cdot v \right) + t \nabla f(x) \cdot v \\
+                &= t R(x,v,t) + \nabla f(x) \cdot (y-x).
+        \end{align*}
+        Now if $y \in B(x,\delta)\setminus \{ x \}$, then $t = \|y-x\| < \delta$, so we have
+        \[ |f(y) - f(x) - \nabla f(x) \cdot (y-x)| = |t R(x,v,t)| < \epsilon \|y-x\|. \]
+        Since $\epsilon > 0$ was arbitrary, this shows that
+        \[ \lim_{y \to x} \frac{ |f(y) - f(x) - \nabla f(x) \cdot (y-x)| }{ \|y-x\| } = 0, \]
+        so $f$ is differentiable at $x$ with derivative $Df(x) = \nabla f(x)$.
+
+        Since $x \in A$ was arbitrary, this shows that $f$ is differentiable at each point $x \in A$.
+    \end{proof}
+
+    With the claim proved, the fact that $\mathcal{L}^n(\R^n \setminus A) = 0$ implies that $f$ is differentiable almost everywhere on $\R^n$.
+    
+\vspace{2mm}
+In summary, we have shown that if $f : \R^n \to \R$ is a Lipschitz function, then $f$ is differentiable almost everywhere on $\R^n$.
+
+    \vspace{3mm}
+    \textit{Step 3:}
+    Now let $U\subseteq \R^n$ be an arbitrary open set, and let $f : U \to \R$ be a Lipschitz function.
+    We claim that $f$ is differentiable almost everywhere on $U$.
+    \vspace{2mm}
+
+    This is easy to see. 
+    By McShane's Extension Lemma \ref{lem:mcshane_lemma}, there exists a Lipschitz extension $\tilde{f} : \R^n \to \R$ of $f$ with $\Lip(\tilde{f}) = \Lip(f)$.
+    By Step 2, the function $\tilde{f}$ is differentiable almost everywhere on $\R^n$.
+    Thus the restriction $f = \tilde{f}|_U$ is differentiable almost everywhere on $U$ as well.
+
+    \vspace{2mm}
+    \textit{Step 4:}
+    We show that the derivative $Df : U \to \R^n$ is essentially bounded with
+    \[ \|Df\|_{L^\infty(U)} \leq \Lip(f). \]
+
+    \begin{proof}[Proof of Step 4]
+        Let $x \in U$ be a point where $f$ is differentiable and assume that $Df(x) \neq 0$.
+        Then by definition of differentiability, we have
+        \[ \lim_{ y \to x } \frac{ |f(y) - f(x) - Df(x)(y-x)| }{ \|y-x\| } = 0. \]
+        Thus for any $\epsilon > 0$, there exists $\delta > 0$ such that for all $y \in U$ with $\|y-x\| < \delta$, we have
+        \[ |f(y) - f(x) - Df(x)(y-x)| \leq \epsilon \|y-x\|. \]
+        Rearranging and using the triangle inequality, we have
+        \[ |Df(x)(y-x)| \leq |f(y) - f(x)| + \epsilon \|y-x\| \qquad\forall y \in U \text{ with } \|y-x\| < \delta. \]
+        Using the Lipschitz property of $f$, we have
+        \[ |Df(x)(y-x)| \leq (\Lip(f) + \epsilon) \|y-x\| \qquad\forall y \in U \text{ with } \|y-x\| < \delta. \]
+        Dividing both sides by $\|y-x\| > 0$, we obtain
+        \[ \frac{ |Df(x)(y-x)| }{ \|y-x\| } \leq \Lip(f) + \epsilon \qquad\forall y \in U \text{ with } \|y-x\| < \delta. \]
+        Since $U$ is an open set, there exists a point $y \in U$ with $\|y-x\| < \delta$ such that
+        \[ \frac{y-x}{\|y-x\|} = \frac{Df(x)}{\|Df(x)\|}. \]
+        That is, the vector $y-x$ points in the direction of maximal increase of the linear map $Df(x)$.
+        With this choice of $y$, the previous inequality implies
+        \[ \|Df(x)\| = \frac{ |Df(x)(y-x)| }{ \|y-x\| } \leq \Lip(f) + \epsilon. \]
+        Since $\epsilon > 0$ was arbitrary, we conclude that
+        \[ \|Df(x)\| \leq \Lip(f). \]
+        Since this holds for each $x \in U$ where $f$ is differentiable, we conclude that
+        \[ \|Df\|_{L^\infty(U)} \leq \Lip(f) \]
+        by step 3.
+    \end{proof}
+
+    \vspace{2mm}
+    \textit{Step 5:} In the case that $U$ is convex, we show that we have equality $\|Df\|_{L^\infty(U)} = \Lip(f)$.
+    \vspace{2mm}
+
+    \begin{proof}[Proof of Step 5]
+        Assume that $U \subseteq \R^n$ is a convex open set.
+        Let $x,y \in U$ be arbitrary.
+        Then the function 
+        \[ g_{x,y}: [0,1] \to \R^n, \quad g_{x,y}(t) := f(x + t(y-x)) \]
+        is absolutely continuous on $[0,1]$ with derivative
+        \[ g_{x,y}'(t) = Df(x + t(y-x))(y-x) \]
+        for almost every $t \in [0,1]$.
+        Thus by the Fundamental Theorem of Calculus for $AC$ functions \ref{thm:fundamental_theorem_of_calculus_for_ac_functions} we have
+        \begin{align*}
+            f(y) - f(x) = g_{x,y}(1) - g_{x,y}(0) &= \int_0^1 g_{x,y}'(t) \,\dif t \\
+                &= \int_0^1 Df(x + t(y-x))(y-x) \,\dif t.
+        \end{align*}
+        Taking norms and using the triangle inequality, we have
+        \begin{align*}
+            |f(y) - f(x)| &= \left| \int_0^1 Df(x + t(y-x))(y-x) \,\dif t \right| \\
+                &\leq \int_0^1 |Df(x + t(y-x))(y-x)| \,\dif t \\
+                &\leq \int_0^1 \|Df(x + t(y-x))\| \|y-x\| \,\dif t && \text{ by Cauchy-Schwarz inequality} \\
+                &= \|y-x\| \int_0^1 \|Df(x + t(y-x))\| \,\dif t \\
+                &\leq \|y-x\| \cdot \esssup_{t\in[0,1]} \|Df(x + t(y-x))\| \int_0^1 1 \,\dif t \\
+                &\leq \|Df\|_{L^\infty(U)} \|y-x\|.
+        \end{align*}
+        Since $x,y \in U$ were arbitrary, it follows that
+        \[ \Lip(f) \leq \|Df\|_{L^\infty(U)}. \]
+        Combining this with the inequality from Step 4, we conclude that
+        \[ \Lip(f) = \|Df\|_{L^\infty(U)}. \]
+    \end{proof}
+\end{proof}
+
+\begin{exercise}[Equality Fails for Non-Convex Sets]
+    \label{ex:equality_fails_for_non_convex_sets}
+    Give an example of a non-convex open set $U \subseteq \R^2$ and a Lipschitz function $f : U \to \R$ such that
+    \[ \|Df\|_{L^\infty(U)} < \Lip(f). \]
+\end{exercise}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{theorem}[Rademacher's Theorem for $\R^m$-Valued Maps]
+    \label{thm:rademacher_theorem_for_rn_valued_maps}
+    Let $U \subseteq \R^n$ be open, and let $f : U \to \R^m$ be a Lipschitz map.
+    Then $f$ is differentiable almost everywhere on $U$.
+\end{theorem}
+
+\begin{proof}
+    For each $k = 1,2,\ldots,m$, let $\pi_k : \R^m \to \R$ be the projection onto the $k$-th coordinate, i.e.
+    \[ \pi_k(y_1,y_2,\ldots,y_m) := y_k. \]
+    Then we have
+    \[ f(x) = (f_1(x), f_2(x), \ldots, f_m(x)) \qquad\forall x \in U \]
+    and for each $k = 1,2,\ldots,m$, the function $f_k := \pi_k \circ f : U \to \R$ is a Lipschitz function with $\Lip(f_k) \leq \Lip(f)$.
+   
+    By Rademacher's Theorem \ref{thm:rademacher_theorem}, for each $k=1,2,\ldots,m$, the function $f_k$ is differentiable almost everywhere on $U$ and has essentially bounded derivative $Df_k : U \to \R^n$.
+    Thus the function $f : U \to \R^m$ is differentiable almost everywhere on $U$, with derivative
+    \[ Df(x)h = (Df_1(x)h, Df_2(x)h, \ldots, Df_m(x)h) \qquad\forall h \in \R^n \]
+    for almost every $x \in U$.
+\end{proof}
+
+\begin{corollary}[Rademacher's Theorem for Locally Lipschitz Functions]
+    \label{cor:rademacher_for_locally_lipschitz}
+    Let $U \subseteq \R^n$ be open, and let $f : U \to \R^m$ be a locally Lipschitz map.
+    Then $f$ is differentiable almost everywhere on $U$.
+\end{corollary}
+
+\begin{proof}
+    For each $x \in U$, since $f$ is locally Lipschitz, there exists an open ball $B(x,r_x) \subseteq U$ such that the restriction $f|_{B(x,r_x)} : B(x,r_x) \to \R^m$ is Lipschitz.
+    By Rademacher's Theorem for $\R^m$-valued maps \ref{thm:rademacher_theorem_for_rn_valued_maps}, the function $f|_{B(x,r_x)}$ is differentiable almost everywhere on $B(x,r_x)$.
+
+    The collection of open balls $\{ B(x,r_x) : x \in U \}$ forms an open cover of $U$.
+    Since $\R^n$ is a separable metric space, there exists a countable subcover $\{ B(x_k,r_{x_k}) : k = 1,2,\ldots \}$ of $U$.
+    Then the set
+    \[ A := U \setminus \bigcup_{k=1}^\infty \{ y \in B(x_k,r_{x_k}) : f|_{B(x_k,r_{x_k})} \text{ is not differentiable at } y \} \]
+    satisfies
+    \[ \mathcal{L}^n(U \setminus A) = 0 \]
+    since it is a countable union of measure zero sets.
+    Thus $f$ is differentiable at each point in $A$, so $f$ is differentiable almost everywhere on $U$.
+\end{proof}
+
+\begin{corollary}[Differentiability on Level Sets]
+    \label{cor:differentiability_on_level_sets}
+    \begin{enumerate}
+        \item Let $U \subseteq \R^n$ be open, and let $f : U \to \R^m$ be a locally Lipschitz map.
+        Then $D f(x) = 0$ for almost every $x \in f^{-1}(\{ 0 \})$.
+        \item Let $U \subseteq \R^n$ be open, and let $f,g : U \to \R^m$ be locally Lipschitz maps.
+        Then $Dg(f(x))Df(x) = I_n$ for almost every $x \in U$ with $g(f(x)) = x$.
+    \end{enumerate}
+\end{corollary}
+
+\begin{proof}
+    
+\end{proof}
+
+We finish this section with a nice generalization of Rademacher's Theorem due to Stepanov.
+
+\begin{theorem}[Stepanov's Theorem]
+    \label{thm:stepanov}
+
+\end{theorem}
+
+\begin{proof}
+    
+\end{proof}

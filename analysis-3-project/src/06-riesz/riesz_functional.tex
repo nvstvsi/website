@@ -1,0 +1,395 @@
+\section{The Riesz Representation Theorem}
+
+In this section, we present and prove the Riesz Representation Theorem for linear functionals.
+There are actually several results which go by this name, and they are all closely related.
+
+\vspace{2mm}
+
+Throughout this section, we let $X$ be an arbitrary nonempty LCH space.
+Recall that $C_c(X)$ is the set of all continuous, real-valued functions on $X$ with compact support.
+We define $C_c^+(X)$ to be the set of all nonnegative functions in $C_c(X)$.
+
+\begin{theorem}[Riesz Representation Theorem for Positive Linear Functionals]
+    \label{thm:riesz_representation_theorem_for_positive_linear_functionals}
+    Let $L: C_c(X) \to \R$ be a positive linear functional, i.e. $L$ is linear and $L(f) \geq 0$ for each $f\in C_c^+(X)$.
+    Then there exists a unique Radon measure $\mu$ on $X$ such that
+    \[     L(f) = \int_X f \,\dif \mu, \qquad \forall f\in C^+_c(X). \]
+\end{theorem}
+    
+\begin{proof}
+    We begin with some remarks.
+    First, note that if $f,g \in C_c^+(X)$ are such that $f \leq g$, then $g - f \in C_c^+(X)$ and so
+    \begin{equation} L(f) = L(g) - L(g - f) \leq L(g). \end{equation}
+    Thus $L$ is monotone on $C_c^+(X)$.
+
+    Second, if $K\subseteq X$ is compact and $f\in C_c^+(X)$ is such that $\text{supp}(f) \subseteq K$, and if $g\in C_c^+(X)$ is such that $g \equiv 1$ on $K$, then we have $gf = f \leq (\sup f) g$ so we have 
+    \begin{equation} L(f) \leq (\sup f) L(g).  \end{equation}
+
+    Notice that if $U$ is an arbitrary open subset of $X$ which contains $K$, then by Urysohn's lemma there exists an open set $V$ such that $K \subseteq V \subseteq \overline{V} \subseteq U$ and a function $g\in C_c^+(X)$ such that $g \equiv 1$ on an oen set containing $\overline{V}$, $g \leq 1$ on $X$, and $\supp(g) \subseteq U$.
+    Then for each $f\in C_c^+(X)$ such that $\supp(f) \subseteq V$ and $f \leq 1$, our previous remark implies
+    \[ L(f) \leq (\sup f) L(g) \leq L(g). \]
+    Taking the supremum over all such $f$ and the infimum over all such $g$, we obtain
+    \begin{equation}
+         \sup\{ L(f) : f\in C_c^+(X), f\leq 1, \supp f \subseteq V \} \leq \inf \{ L(g) : g\in C_c^+(X), g\leq 1, g \equiv 1 \text{ on an open set containing } \overline{V}, \supp g \subseteq U  \}  
+    \end{equation}
+       
+    This concludes our remarks. 
+
+    \vspace{2mm}
+
+    \noindent \emph{Step 1:}
+    Definition of the measure $\mu$.
+    \vspace{2mm}
+
+    We begin by defining $\mu$ on open sets $U\subseteq X$ by
+    \[  \mu(U) := \sup \{ L(f) : f \in C^+_c(X), f \leq 1, \supp f \subseteq U \} \]
+    and for an arbitrary set $A\subseteq X$, we define
+    \[ \mu(A) := \inf \{ \mu(U) : U \supseteq A, U \text{ open} \}. \]
+    Note that these two definitions are consistent --- if $U\subseteq X$ is open, then for each open set $V\supseteq U$, we have
+    \[ \mu(U) := \sup \{ L(f) : f \in C^+_c(X), f \leq 1, \supp f \subseteq U \} \leq \sup \{ L(f) : f \in C^+_c(X), f \leq 1, \supp f \subseteq V \} =: \mu(V) \]
+    and this shows
+    \[ \mu(U) \leq \inf \{ \mu(V) : V \supseteq U, V \text{ open} \}. \]
+    For the other direction, note that $U$ is one of the open sets containing itself, so
+    \[ \inf \{ \mu(V) : V \supseteq U, V \text{ open} \} \leq \mu(U). \]
+    Thus we conclude that
+    \[ \mu(U) = \inf \{ \mu(V) : V \supseteq U, V \text{ open} \} \]
+    for each open set $U\subseteq X$.
+
+    Also note that for each compact set $K\subseteq X$, we have
+    \[ \mu(K) := \inf \{ \mu(U) : U \supseteq K, U \text{ open} \} = \inf \{ L(g) : g\in C_c^+(X), g\leq 1, g \equiv 1 \text{ on an open set containing } K \} < \infty \tag{$*$}\]
+    so the measure $\mu$ is finite on compact sets.
+
+    \vspace{2mm}    
+    \noindent \emph{Step 2:}
+    Now we claim that $\mu$ is an outer measure on $X$.
+    \vspace{2mm}
+
+    To prove the claim, let $U\subseteq X$ be open and let $\{U_j\}_{j=1}^\infty$ be a countable collection of open subsets of $X$ such that $U \subseteq \bigcup_{j=1}^\infty U_j$.
+    Fix a $g\in C_c^+(X)$ with $g \leq 1$ and $\text{supp}(g) \subseteq U$. Since $\supp(g)$ is compact, there exists a $k\in \N$ such that $\supp(g) \subseteq \bigcup_{j=1}^k U_j$.
+    Let $\{\psi_j\}_{j=1}^k \subseteq C^+_c(X)$ be a partition of unity subordinate to the open cover $\{U_j\}_{j=1}^k$ of $\supp(g)$ (Theorem \ref{thm:partition_of_unity}).
+    Then we have
+    \[ g = \sum_{j=1}^k \psi_j g \]
+    which implies that
+    \[ L(g) \leq \sum_{j=1}^k L(\psi_j g) \leq \sum_{j=1}^k \mu(U_j) \leq \sum_{j=1}^\infty \mu(U_j). \]
+    Taking the supremum over all such $g$, we obtain
+    \[ \mu(U) \leq \sum_{j=1}^\infty \mu(U_j). \]
+    This proves that $\mu$ is countably subadditive on open sets.
+
+    Now let $\{A_j\}_{j=1}^\infty$ be an arbitrary countable collection of subset of $X$ and let $A \subseteq \bigcup_{j=1}^\infty A_j$.
+    Fix $\varepsilon > 0$. For each $j\in \Z^+$, the definition of $\mu(A_j)$ implies that there exists an open set $U_j$ such that $A_j \subseteq U_j$ and
+    \[ \mu(U_j) \leq \mu(A_j) + \frac{\varepsilon}{2^j}. \]
+    Then $A\subseteq \bigcup_{j=1}^\infty U_j$, and so
+    \[ \mu(A) \leq \mu\left( \bigcup_{j=1}^\infty U_j \right) \leq \sum_{j=1}^\infty \mu(U_j) \leq \sum_{j=1}^\infty \mu(A_j) + \varepsilon. \]
+    Since $\varepsilon > 0$ is arbitrary, we conclude that
+    \[ \mu(A) \leq \sum_{j=1}^\infty \mu(A_j). \]
+    This proves that $\mu$ is countably subadditive on all subsets of $X$.
+
+    Since $\mu(\emptyset) = 0$ by definition, we conclude that $\mu$ is an outer measure on $X$.
+
+    \vspace{2mm}
+    \noindent \emph{Step 3:}
+    We claim that $\mu$ is a Radon measure on $X$.
+    \vspace{2mm}
+
+    See that $\mu$ is an outer measure on $X$ which is finite on compact sets by Step 1, and conditions (i) and (ii) of the definition of a Radon measure are satisfied.
+    Thus, by Lemma \ref{lem:outer_measure_is_radon_if_finitely_additive_on_compact_sets}, it suffices to show that $\mu$ is finitely additive on compact sets.
+
+    Let $K_1, K_2 \subseteq X$ be disjoint compact sets and let $\varepsilon > 0$.
+    By $(*)$ in Step 1, since $K_1\cup K_2$ is compact, there exists a $g\in C^+_c(X)$ such that $g \leq 1$, $g \equiv 1$ on an open set $W$ containing $K_1 \cup K_2$, and
+    \[ L(g) \leq \mu(K_1 \cup K_2) + \varepsilon. \]
+    By Lemma \ref{lem:disjoint_compact_sets_in_hausdorff_space}, there exist disjoint open sets $U_1, U_2 \subseteq X$ such that $K_1 \subseteq U_1$ and $K_2 \subseteq U_2$.
+    Then Urysohn's lemma \ref{lem:LCH_urysohns_lemma} implies that there exist functions $f_1, f_2 \in C_c^+(X)$ such for $i=1,2$, we have $f_i \leq 1$, $\supp(f_i) \subseteq U_i$, and $f_i \equiv 1$ on an open set containting $K_i$.
+    Now $(*)$ implies that
+    \begin{align*}
+        \mu(K_1) + \mu(K_2) &\leq L(f_1g) + L(f_2g) = L((f_1 + f_2)g) \\
+            &\leq L(g) \leq \mu(K_1 \cup K_2) + \varepsilon.
+    \end{align*}
+    Since $\varepsilon > 0$ is arbitrary, we conclude that
+    \[ \mu(K_1) + \mu(K_2) \leq \mu(K_1 \cup K_2). \]
+    The reverse inequality follows from countable subadditivity of $\mu$.
+    Thus $\mu$ is finitely additive on compact sets, and we conclude that $\mu$ is a Radon measure on $X$ by Lemma \ref{lem:outer_measure_is_radon_if_finitely_additive_on_compact_sets}.
+
+    \vspace{2mm}
+    \noindent \emph{Step 4:}
+    It remains to show that $L(f) = \int_X f \,\dif \mu$ for each $f\in C_c^+(X)$.
+    \vspace{2mm}
+    
+    By (2) it follows that for each $h\in C^+_c(X)$,
+    by taking an arbitrary $g\in C^+_c(X)$ such that $g\leq 1$, and $g \equiv 1$ on an open set containing $\supp(h)$, we have
+    \[ L(h) \leq (\sup h) L(g) \]
+    and by taking the infimum over all such $g$, we obtain
+    \[ L(h) \leq (\sup h) \mu(\supp(h)) < \infty. \]
+    By observing that $h$ is the uniform limit of the functions $\{ \max\{ h - 1/n ,0 \} \}_{n=1}^\infty \subseteq C_c^+(X)$, we see that
+    \[ L(h) \leq (\sup h) \mu(\{ x \in X : h(x) > 0 \}). \tag{$\star$}\]
+    Note that this inequality holds for each $h\in C^+_c(X)$.
+
+    Now we will show that the integral identity holds. Let $f\in C_c^+(X)$ be and let $\varepsilon > 0$.
+    If $f \equiv 0$, then the integral identity holds trivially, so we may assume that $\sup f > 0$.
+    Then choose numbers $t_0, t_1, \ldots, t_N$ such that
+    \[ 0 = t_0 < t_1 < \cdots < t_{N-1} < \sup f < t_N \]
+    and \[ \max_{1\leq k \leq N} t_k - t_{k-1} < \varepsilon \]
+    and \[ \mu (f^{-1}(\{ t_k \})) = 0 \qquad \forall k=1,2,\ldots,N. \]
+    (This final requirement is no issue, as $\mu(f^{-1}(\{ t \})) = 0$ for all but countably many $t\in \R$, by virtue of the fact that
+    $\{x\in X: f(x)>0\}$ is contained in the compact set $\supp f$, which has finite $\mu$ measure.)
+
+    For each $k=1,2,\ldots,N$, define 
+    \[ U_k := f^{-1}(\{(t_{k-1}, t_k)\}). \]
+    Note that the sets $U_1, U_2, \ldots, U_N$ are open and disjoint, and that each $U_k$ is contained in the compact set $\supp(f)$.
+    We define functions $\phi^-, \phi^+ : X \to [0,\infty)$ by
+    \[  \phi^-(x) := \sum_{k=1}^N t_{k-1} \chi_{U_k}(x), \quad \phi^+(x) := \sum_{k=1}^N t_k \chi_{U_k}(x) \]
+    for each $x\in X$.
+    Then we have
+    \[ \phi^-(x) \leq f(x) \leq \phi^+(x) \qquad \forall x\in X \]
+    because if $x\in U_k$ for some $k=1,2,\ldots,N$, then $t_{k-1} < f(x) < t_k$, and if $x\notin \bigcup_{k=1}^N U_k$, then $f(x) = 0$ and $\phi^-(x) = \phi^+(x) = 0$.
+    Monotonicity of the integral implies that
+    \[  \int_X \phi^-(x) \,\dif \mu \leq \int_X f(x) \,\dif \mu \leq \int_X \phi^+(x) \,\dif \mu \]
+    and the fact that $\phi^-$ and $\phi^+$ are simple functions and the sets $U_1, U_2, \ldots, U_N$ are disjoint implies that
+    \[  \sum_{k=1}^N t_{k-1} \mu(U_k) \leq \int_X f(x) \,\dif \mu \leq \sum_{k=1}^N t_k \mu(U_k). \tag{$\ddag$} \]
+
+    By definition of the measure $\mu$ on open sets, for each $k=1,2,\ldots,N$, there exists a function $g_k \in C_c^+(X)$ such that $g_k \leq 1$, $\supp(g_k) \subseteq U_k$, and
+    \[ \mu(U_k) \leq L(g_k) + \frac{\varepsilon}{N}. \]
+    Also for each $k=1,2,\ldots,N$ and each compact set $K_k\subseteq U_k$, Urysohn's lemma implies that there exists a function $h_k \in C_c^+(X)$ such that $h_k \leq 1$, $h_k \equiv 1$ on an open set containing $K_k \cup \supp g_j$, and $\supp(h_k) \subseteq U_k$.
+    Then $g_k \leq h_k \leq 1$ and $\supp(h_k)$ is a compact subset of $U_k$ for each $k=1,2,\ldots,N$, and thus
+    \[ \mu(U_k) - \frac{\varepsilon}{N} \leq L(g_k) \leq L(h_k) \leq \mu(U_k) \quad\forall j=1,2,\ldots,N. \tag{$\star\star$}\]
+    Since $\mu$ is a Radon measure, we can choose the compact sets $K_1, K_2, \ldots, K_N$ such that $\mu(U_k \setminus K_k) < \varepsilon/N$ for each $k=1,2,\ldots,N$.
+    Then we have
+    \[ \left\{ x\in X : \left(f - f \sum_{k=1}^N h_k\right)(x) > 0 \right\} \subseteq \bigcup_{k=1}^N (U_k \setminus K_k) \]
+    so we use $(\star)$, subadditivity of $\mu$, and monotonicity of $L$ to deduce that
+    \begin{align*}
+        L\left( f - f\sum_{k=1}^N h_k \right) &\leq  \sup \left(f - f\sum_{k=1}^N h_k \right) \mu\left( \bigcup_{k=1}^N (U_k \setminus K_k) \right) \\
+            &\leq (\sup f) \sum_{k=1}^N \mu(U_k \setminus K_k) < (\sup f) \varepsilon. \qquad\qquad(\pumpkin)
+    \end{align*}
+
+    Using $(\star\star)$ and the fact that $t_{k-1} h_k \leq fh_k \leq t_k h_k$ for each $k=1,2,\ldots,N$, we obtain
+    \begin{align*}
+        \sum_{k=1}^N t_{k-1} \mu(U_k) - \varepsilon\sup f &\leq L\left( \sum_{k=1} t_{k-1} h_k \right) \ \ \ \,\qquad\qquad\qquad\qquad\text{ by }(\star\star)\\
+            &\leq L\left( f\sum_{k=1}^N h_k \right) \qquad\qquad\qquad\qquad\qquad \text{ since  }t_{k-1}h_k \leq fh_k \text{ for all } k\\
+            &\leq \ L(f) \qquad\qquad\qquad\qquad\qquad\qquad\quad\ \ \ \text{by monotonicity of }L \\
+            &\leq L\left( f\sum_{k=1}^N h_k \right) + \varepsilon\sup f \ \qquad\qquad\qquad\text{by }(\pumpkin) \\
+            &\leq L\left( \sum_{k=1}^N t_kh_k \right) + \varepsilon\sup f \qquad\qquad\qquad\text{ since }t_kh_k \leq fh_k \text{ for all } k\\
+            &\leq \sum_{k=1}^N t_k \mu(U_k) + \varepsilon\sup f. \ \ \qquad\qquad\qquad\text{ by }(\star\star)
+    \end{align*}
+    from which we extract that
+    \[  \sum_{k=1}^N t_{k-1} \mu(U_k) - \varepsilon\sup f \leq L( f ) \leq \sum_{k=1}^N t_k \mu(U_k) + \varepsilon\sup f. \]
+    
+    Combining the above with $(\ddag)$, we obtain
+    \begin{align*}
+        -\varepsilon( \mu(\supp f) + \sup f ) &\leq - \sum_{k=1}^N (t_k - t_{k-1})\mu(U_j) - \varepsilon\sup f \\
+            &\leq \int_X f \,\dif \mu - L(f) \\
+            &\leq \sum_{k=1}^N (t_k - t_{k-1})\mu(U_j) + \varepsilon\sup f \leq \varepsilon( \mu(\supp f) + \sup f ).
+    \end{align*}
+    That is,
+    \[ \left| \int_X f \,\dif \mu - L(f) \right| \leq \varepsilon( \mu(\supp f) + \sup f ). \]
+    Since $\varepsilon > 0$ is arbitrary, we conclude that $L(f) = \int_X f \,\dif \mu$.
+    This completes the proof of the integral identity for each $f\in C_c^+(X)$.
+
+\end{proof}
+
+\newpage
+
+Now we are ready to state and prove the Riesz Representation Theorem. 
+
+In the theorem below, we let $H$ denote a finite-dimensional real Hilbert space with inner product $\langle \cdot, \cdot \rangle$ and induced norm $\| \cdot \|$.
+The set $C_c(X,H)$ is defined as the vector space of continuous maps $X\to H$ with compact support.
+
+
+
+\begin{theorem}[Riesz Representation Theorem for Bounded Linear Functionals on $C_c(X,H)$]
+    \label{thm:riesz_representation_theorem_for_CcX}
+    Let $L: C_c(X,H) \to \R$ be a linear functional such that for each compact set $K\subseteq X$ we have
+    \[  \sup \left\{ L(f) : f \in C_c(X,H), \| f\| \leq 1, \supp f\subseteq K \right\} < \infty. \]
+    Then there exists a unique finite Radon measure $\mu$ on $X$ and a $\mu$-measurable map
+    \[ \sigma : X \to H \]
+    such that $\| \sigma(x) \| = 1$ for $\mu$-a.e. $x\in X$ and
+    \[ L(f) = \int_X \langle f(x), \sigma(x) \rangle \,\dif \mu(x) \qquad \forall f\in C_c(X,H). \]
+\end{theorem}
+
+\begin{proof}
+    By using an orthonormal basis of $H$, we can identify $H$ with $\R^n$ for some $n\in \Z^+$.
+    Thus it suffices to prove the theorem in the case $H = \R^n$.
+
+    \vspace{2mm}
+    \noindent \emph{Step 1:}
+    We begin by defining
+    \[ \lambda:C^+_c(X)\to \R, \quad \lambda(f) := \sup\{ L(\omega) : \omega \in C_c(X,\R^n), \| \omega \| \leq f \}, \ \forall f\in C^+_c(X) \]
+    and we claim that $\lambda$ is a positive linear functional on $C_c^+(X)$.
+    \vspace{2mm}
+
+    It is clear that $\lambda$ is nonnegative and positively homogeneous, since 
+    \[ \lambda(cf) = \sup\{ L(\omega) : \omega \in C_c(X,\R^n), \| \omega \| \leq cf \} = c \sup\{ L(\omega) : \omega \in C_c(X,\R^n), \| \omega \| \leq f \} = c\lambda(f) \]
+    for each $c\geq 0$ and each $f\in C_c^+(X)$.
+    To see that $\lambda$ is additive, let $f_1, f_2 \in C_c^+(X)$ be given.
+    If $\omega_1, \omega_2 \in C_c(X,\R^n)$ are such that $\| \omega_1 \| \leq f_1$ and $\| \omega_2 \| \leq f_2$, then we have
+    $\| \omega_1 + \omega_2 \| \leq f_1 + f_2$ and so
+    \[ \lambda(f_1 + f_2) \geq L(\omega_1 + \omega_2) = L(\omega_1) + L(\omega_2). \]
+    Taking the supremum over all such $\omega_1$ and $\omega_2$, we obtain
+    \[ \lambda(f_1 + f_2) \geq \lambda(f_1) + \lambda(f_2). \]
+    For the reverse inequality, let $\omega\in C_c(X,\R^n)$ be such that $\| \omega \| \leq f_1 + f_2$, and define
+    \[ \omega_j := \begin{cases}
+        \frac{f_j}{f_1 + f_2} \omega & \text{on } \{f_1 + f_2 > 0\}, \\
+        0, & \text{on } \{f_1 + f_2 = 0\}
+    \end{cases} \quad \]
+    for $j=1,2$. It is easy to see that $\omega_1, \omega_2 \in C_c(X,\R^n)$.
+    Then $\omega = \omega_1 + \omega_2$, $\| \omega_1 \| \leq f_1$, and $\| \omega_2 \| \leq f_2$, so
+    \[ L(\omega) = L(\omega_1 + \omega_2) = L(\omega_1) + L(\omega_2) \leq \lambda(f_1) + \lambda(f_2). \]
+    By taking the supremum over all such $\omega$, we obtain
+    \[ \lambda(f_1 + f_2) \leq \lambda(f_1) + \lambda(f_2). \]
+    Therefore \[ \lambda(f_1 + f_2) = \lambda(f_1) + \lambda(f_2). \]
+    Since $f_1, f_2 \in C_c^+(X)$ were arbitrary, we conclude that $\lambda$ is additive.
+
+    This proves the claim.
+
+    \vspace{2mm}
+    \noindent \emph{Step 2:}
+    By Step 1 and the Riesz Representation Theorem for Positive Linear Functionals (Theorem \ref{thm:riesz_representation_theorem_for_positive_linear_functionals}), there exists a unique Radon measure $\mu$ on $X$ such that
+    \[ \lambda(f) = \int_X f \,\dif \mu \qquad \forall f\in C_c^+(X). \]
+    \vspace{2mm}
+
+    That is, we have
+    \[ \sup\{ L(\omega) : \omega \in C_c(X,\R^n), \| \omega \| \leq f \} = \int_X f \,\dif \mu \qquad \forall f\in C_c^+(X). \tag{$\dagger$}\]
+    Let $e_1, e_2, \ldots, e_n$ be the standard orthonormal basis of $\R^n$.
+    Then for each $j=1,2,\ldots,n$ and we have
+    \[ |L(f e_j)| \leq \int_X |f| \,\dif \mu =: \|f\|_{L^1}, \qquad \forall f\in C_c(X) \]
+    since $\| f e_j \| = |f|\in C^+_c(X)$ for each $f\in C_c(X)$.
+
+    Thus for each $j=1,2,\ldots,n$, the map
+    \[ L_j : C_c(X) \to \R, \quad L_j(f) := L(f e_j) \ ,\forall f\in C_c(X) \]
+    can be extended to a bounded linear functional on $L^1(X,\mu)$ with operator norm at most $1$
+    by the previous inequality and density of $C_c(X)$ in $L^1(X,\mu)$ (Theorem \ref{thm:density_of_Cc_in_Lp_on_lch_space}).
+    By the Riesz Representation Theorem for Bounded Linear Functionals on $L^1(\mu)$, for each $j=1,2,\ldots,n$ there exists a bounded $\mu$-measurable function $\sigma_j : X \to \R$ such that
+    \[ L_j(f) = \int_X f \sigma_j \,\dif \mu \qquad \forall f\in L^1(X,\mu). \]
+    Hence for each $j=1,2,\ldots,n$ we have
+    \[ L(fe_j) = \int_X f \sigma_j \,\dif \mu \qquad \forall f\in C_c(X). \]
+    Since each vector-valued map $f\in C_c(X,\R^n)$ can be written as
+    \[ f = \sum_{j=1}^n f_j e_j \]
+    for some $f_1, f_2, \ldots, f_n \in C_c(X)$, it follows that
+    \[ L(f) = \sum_{j=1}^n L(f_j e_j) = \sum_{j=1}^n \int_X f_j \sigma_j \,\dif \mu = \int_X \langle f, \sigma \rangle \,\dif \mu \qquad \forall f\in C_c(X,\R^n) \]
+    where
+    \[ \sigma := \sum_{j=1}^n \sigma_j e_j : X \to \R^n. \]
+
+    \vspace{2mm}
+    \noindent \emph{Step 3:}
+    It remains to show that $\| \sigma(x) \| = 1$ for $\mu$-a.e. $x\in X$.
+    \vspace{2mm}
+
+    To see this, note that by using Cauchy-Schwarz it follows that for each $f\in C^+_c(X)$ we have
+    \[ \sup \{ |L(g)| : g\in C_c(X,\R^n), \|g\|\leq f \} \leq \int_X f \|\sigma\| \,\dif \mu. \tag{$\bigskull$}\]
+    Define
+    \[ \hat{\sigma}(x) := \begin{cases}
+        \frac{\sigma(x)}{\|\sigma(x)\|}, & \text{if } \sigma(x) \neq 0, \\
+        0, & \text{if } \sigma(x) = 0.
+    \end{cases} \]
+    Then $\hat{\sigma}: X \to \R^n$ is a $\mu$-measurable map which belongs to $L^\infty(X,\R^n, \mu)$ with $\| \hat{\sigma} \|_{L^\infty} \leq 1$.
+    Since $C_c(X,\R^n)$ is dense in $L^1(X,\R^n,\mu)$ (Theorem \ref{thm:density_of_Cc_in_Lp_on_lch_space}), there exists a sequence $\{g_k\}_{k=1}^\infty \subseteq C_c(X,\R^n)$ such that $g_k \to \hat{\sigma}$ in $L^1(X,\R^n,\mu)$ as $k\to \infty$.
+    That is,
+    \[ \lim_{k\to \infty} \int_X \|g_k - \hat{\sigma}\| \,\dif \mu = 0. \]
+    Also define
+    \[ \Phi:\R^n\to \R^n, \quad \Phi(y) := \begin{cases}
+        \frac{y}{\|y\|}, & \text{if } \|y\|>1, \\
+        y, & \text{if } \|y\| \leq 1.
+    \end{cases} \]
+    and for each $k\in \Z^+$, define
+    \[ \hat{g}_k := \Phi \circ g_k \in C_c(X,\R^n). \]
+    Then for each $k\in \Z^+$, clearly $\| \hat{g}_k \| \leq 1$ by definition of $\Phi$.
+    Also for each $k\in \Z^+$ and each $x\in X$ such that $\hat{\sigma}(x) \neq 0$, we have $\|\hat{\sigma}(x)\| = 1$ which implies that
+    \[ \|\hat{g}_k(x) - \hat{\sigma}(x)\| \leq \|g_k(x) - \hat{\sigma}(x)\|. \]
+    
+    (To see this note that if $v\in \R^n$ is such that $\|v\|=1$ and $y$ is an arbitrary vector in $\R^n$, then
+    \[ \| \Phi(y) - v \| \leq \|y -v \|. \]
+    This follows from the fact that if $\|y\| \leq 1$, then $\Phi(y) = y$ and the inequality is trivial.
+    If $\|y\| > 1$, then write $y = r \frac{y}{\|y\|}$ where $r := \|y\| > 1$, and define a function
+    \[ \varphi:[1,\infty) \to \R, \quad \varphi(t) := \left\| t\frac{y}{\|y\|} - v \right\|^2 = t^2 - 2t \left\langle \frac{y}{\|y\|}, v \right\rangle + 1. \]
+    Then
+    \[ \varphi'(t) = 2t - 2\left\langle \frac{y}{\|y\|}, v \right\rangle = 2\left(t - \left\langle \frac{y}{\|y\|}, v \right\rangle\right). \]
+    In particular, for $t \geq 1$ we have
+    \[ \varphi'(t) = 2\left( t - \left\langle \frac{y}{\|y\|}, v \right\rangle \right) \geq 2\left(1 - \left\langle \frac{y}{\|y\|}, v \right\rangle\right) \geq 2 \left( 1 - \left\| \frac{y}{\|y\|} \right\| \|v\|\right) = 0 \]
+    by the Cauchy-Schwarz inequality.
+    Thus $\varphi$ is increasing on $[1,\infty)$, and so $r>1$ implies that $\varphi(r) \geq \varphi(1)$, which says that
+    \[ \left\| r\frac{y}{\|y\|} - v \right\|^2 \geq \left\| \frac{y}{\|y\|} - v \right\|^2 \]
+    which by definition of $\Phi$ and $r=\|y\|$ is exactly the desired inequality.)
+
+    Therefore
+    \begin{align*}
+        \lim_{k\to \infty} \int_X \|\hat{g}_k - \hat{\sigma}\| \,\dif \mu &= \lim_{k\to \infty} \left( \int_{\{ x :\hat{\sigma}(x) \neq 0\}} \|\hat{g}_k(x) - \hat{\sigma}(x)\| \,\dif \mu + \int_{\{ x :\hat{\sigma}(x) = 0\}} \|\hat{g}_k(x) - \hat{\sigma}(x)\| \,\dif \mu \right) \\
+            &= \lim_{k\to \infty} \left( \int_{\{ x :\hat{\sigma}(x) \neq 0\}} \|\hat{g}_k(x) - \hat{\sigma}(x)\| \,\dif \mu + \int_{\{ x :\hat{\sigma}(x) = 0\}} \|\hat{g}_k(x) \| \,\dif \mu \right). \qquad (\pumpkin)
+    \end{align*}
+    We can estimate the first integral as
+    \[ \int_{\{ x :\hat{\sigma}(x) \neq 0\}} \|\hat{g}_k(x) - \hat{\sigma}(x)\| \,\dif \mu \leq \int_{\{ x :\hat{\sigma}(x) \neq 0\}} \|g_k(x) - \hat{\sigma}(x)\| \,\dif \mu \leq \int_X \|g_k - \hat{\sigma}\| \,\dif \mu \]
+    by the previous inequality.
+    For the second integral, note that the fact that $g_k \to \hat{\sigma}$ in $L^1(X,\R^n,\mu)$ implies that
+    \[ \lim_{k\to \infty} \int_{\{ x :\hat{\sigma}(x) = 0\}} \|g_k(x) \| \,\dif \mu = \int_{\{ x :\hat{\sigma}(x) = 0\}} \|\hat{\sigma} \| \,\dif \mu = 0 \]
+    so there exists $M\in \Z^+$ such that $\|g_k\|_{L^1} < 1$ for each $k\geq M$.
+    Thus for each $k\geq M$ and each $x\in X$ such that $\hat{\sigma}(x) = 0$, we have
+    \[ \hat{g}_k(x) = \Phi (g_k(x)) = g_k(x). \]
+    It follows that
+    \[ \lim_{k\to \infty}\int_{\{ x :\hat{\sigma}(x) = 0\}} \|\hat{g}_k(x) \| \,\dif \mu = \lim_{k\to \infty}\int_{\{ x :\hat{\sigma}(x) = 0\}} \|g_k(x) \| \,\dif \mu = 0. \]
+    Therefore the second integral in $(\pumpkin)$ also converges to $0$ as $k\to \infty$.
+    Combining these facts, we conclude that
+    \[ \lim_{k\to \infty} \int_X \|\hat{g}_k - \hat{\sigma}\| \,\dif \mu = 0. \]
+
+    \vspace{2mm}
+    We claim that we actually have equality in $(\bigskull)$, i.e.,
+    \[ \sup \{ |L(g)| : g\in C_c(X,\R^n), \|g\|\leq f \} = \int_X f \|\sigma\| \,\dif \mu, \qquad \forall f\in C^+_c(X). \tag{$\bigskull'$}\]
+    \vspace{2mm}
+
+    To see this, note that for each $f\in C_c^+(X)$ the sequence $\{f \hat{g}_k\}_{k=1}^\infty \subseteq C_c(X,\R^n)$ satisfies $\| f \hat{g}_k \| \leq f$ for each $k\in \Z^+$, and by the previous limit and the Dominated Convergence Theorem we have
+    \[ \lim_{k\to \infty} L(f \hat{g}_k) = \lim_{k\to \infty} \int_X f \langle\hat{g}_k,\sigma\rangle \,\dif \mu = \int_X f \langle \hat{\sigma},\sigma\rangle \,\dif \mu = \int_X f \|\sigma\| \,\dif \mu. \]
+    That is, for each $f\in C_c^+(X)$ there is a sequence of vector-valued maps satisfying the constraints in the supremum on the left side of $(\bigskull)$ whose $L$-values converge to the right side of $(\bigskull)$.
+    Thus we must have equality in $(\bigskull)$.
+
+    By comparing the left side of $(\bigskull')$ with $(\dagger)$, we conclude that
+    \[ \int_X f \,\dif \mu = \int_X f \|\sigma\| \,\dif \mu, \qquad \forall f\in C^+_c(X). \]
+    By decomposing an arbitrary $f\in C_c(X)$ into its positive and negative parts, we see that 
+    \[ \int_X f \,\dif \mu = \int_X f \|\sigma\| \,\dif \mu, \qquad \forall f\in C_c(X). \]
+    Since $C_c(X)$ is dense in $L^1(X,\mu)$ (Theorem \ref{thm:density_of_Cc_in_Lp_on_lch_space}), we have
+    \[ \int_X g \,\dif \mu = \int_X g \|\sigma\| \,\dif \mu, \qquad \forall g\in L^1(X,\mu). \]
+    By taking $g = \Chi_{\{\|\sigma\| \neq 1\}}$ we conclude that
+    \[ \int_X \Chi_{\{\|\sigma\| \neq 1\}} \,\dif \mu = \int_X \Chi_{\{\|\sigma\| \neq 1\}} \|\sigma\| \,\dif \mu \]
+    which implies that either $\mu(\{\|\sigma\| \neq 1\}) = 0$ or $\|\sigma\| = 1$ $\mu$-a.e. on $\{\|\sigma\| \neq 1\}$.
+    The latter is impossible, so we must have $\mu(\{\|\sigma\| \neq 1\}) = 0$.
+    That is, $\|\sigma(x)\| = 1$ for $\mu$-a.e. $x\in X$.
+\end{proof}
+
+\begin{remark}
+    Theorem \ref{thm:riesz_representation_theorem_for_CcX} says that Radon measures are in one-to-one correspondence with bounded linear functionals on $C_c(X)$.
+    Every Radon measure $\mu$ on $X$ gives rise to an integral functional
+    \[ L_\mu : C_c(X) \to \R, \quad f \mapsto \int_X f \,\dif \mu \]
+    and the Riesz Representation Theorem says that every bounded linear functional on $C_c(X)$ arises in this way from a unique Radon measure on $X$.
+\end{remark}
+
+The proof of the next theorem uses the Banach-Alaoglu theorem from linear functional analysis to prove a compactness result for Radon measures.
+There is a functional analysis interpretation of the Riesz Representation Theorem, but it is not needed for the rest of these notes so we omit it. 
+
+\begin{theorem}[Compactness Theorem for Radon Measures]
+    \label{thm:compactness_theorem_for_radon_measures}
+    Let $X$ be a LCH space which is the union of countably many compact sets.
+    Let $\{\mu_j\}_{j=1}^\infty$ be a sequence of Radon measures on $X$ such that
+    \[ \sup_{j\in \Z^+} \mu_j(K) < \infty \]
+    for each compact set $K\subseteq X$.
+    Then there exists a subsequence $\{\mu_{j_k}\}_{k=1}^\infty$ and a Radon measure $\mu$ on $X$ such that
+    \[ \lim_{k\to \infty} L_{\mu_{j_k}}(f) = L_{\mu}(f), \qquad \forall f\in C_c(X). \]
+\end{theorem}
+
+\noindent Here we use the notation $L_\mu(f) := \int_X f \,\dif \mu$ for each Radon measure $\mu$ on $X$ and each $f\in C_c(X)$.
+
+\begin{proof}
+    Let $\{K_m\}_{m=1}^\infty$ be an increasing sequence of compact sets such that $X = \bigcup_{m=1}^\infty K_m$.
+    For $j,m\in \Z^+$ define
+    \[ L_{j,m}(f) := \int_{K_m} f \,\dif \mu_j, \qquad \forall f\in C_c(K_m). \]
+    For each $m\in \Z^+$, the sequence $\{L_{j,m}\}_{j=1}^\infty$ is a sequence of bounded linear functionals on the Banach space $C(K_m)$ since
+    \[ \sup_{j\in \Z^+} |L_{j,m}(f)| \leq \left(\sup_{x\in K_m} |f(x)|\right) \sup_{j\in \Z^+} \mu_j(K_m) < \infty, \qquad \forall f\in C(K_m). \]
+    Thus for each $m\in\Z^+$, applying the Banach-Alaoglu theorem to the sequence $\{L_{j,m}\}_{j=1}^\infty$ we see that there exists a subsequence $\{L_{j_k,m}\}_{k=1}^\infty$ that converges to a limit functional $L_m \in C(K_m)^*$.
+
+    By choosing the subsequences $\{L_{j_k,m}\}_{k=1}^\infty$ successively, so that $\{L_{j_k,m+1}\}_{k=1}^\infty$ is a subsequence of $\{L_{j_k,m}\}_{k=1}^\infty$ for each $m\in \Z^+$, we can use a diagonalization argument to obtain a single subsequence $\{L_{j_k,k}\}_{k=1}^\infty$ such that for each $m\in \Z^+$, the sequence $\{L_{j_k,m}\}_{k=m}^\infty$ converges to $L_m$ in $C(K_m)^*$ as $k\to \infty$.
+    Since the collection $\{K_m\}_{m=1}^\infty$ is increasing, it is easy to see that the limit functionals $L_m$ are compatible in the sense that
+    \[ L_{m+1}(f) = L_m(f), \qquad \forall f\in C(K_m), \ \forall m\in \Z^+. \]
+    Thus we can define a linear functional $L:C_c(X) \to \R$ by
+    \[ L(f) := L_m(f) \]
+    where $m\in \Z^+$ is such that $\supp(f) \subseteq K_m$.
+    It is easy to see that $L$ is well-defined, since $X = \bigcup_{m=1}^\infty K_m$ and the limit functionals $L_m$ are compatible.
+    Unravelling the definitions, we see that if $f\in C_c(X)$ and $m\in \Z^+$ is such that $\supp(f) \subseteq K_m$, then
+    \[ L(f) = L_m(f) = \lim_{k\to \infty} L_{j_k,m}(f) = \lim_{k\to \infty} L_{\mu_{j_k}}(f)\]
+    Now use the Riesz Representation Theorem for Bounded Linear Functionals on $C_c(X)$ to see that there exists a unique Radon measure $\mu$ on $X$ such that
+    \[ L(f) = \int_X f \,\dif \mu, \qquad \forall f\in C_c(X). \]
+    This completes the proof of the theorem.
+\end{proof}

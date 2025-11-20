@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complex Analysis - C. Nastasi's Analysis Notes</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Georgia', 'Times New Roman', serif; background: #fafafa; min-height: 100vh; color: #333; line-height: 1.7; }
+    .container { max-width: 900px; margin: 0 auto; padding: 60px 40px; }
+    .back-link { display: inline-block; margin-bottom: 40px; text-decoration: none; color: #666; font-size: 0.95em; }
+    .back-link:hover { color: #1a1a1a; }
+    header { margin-bottom: 50px; padding-bottom: 30px; border-bottom: 2px solid #e0e0e0; }
+    .title-row { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
+    h1 { font-size: 2.5em; font-weight: 400; color: #1a1a1a; }
+    .status-badge { font-size: 0.7em; padding: 5px 15px; border-radius: 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+    .subtitle { font-size: 1.2em; color: #666; font-style: italic; }
+    p { margin-bottom: 20px; color: #444; font-size: 1.05em; }
+    .planned-chapters { background: white; border: 1px solid #e0e0e0; border-radius: 8px; padding: 30px; margin: 30px 0; }
+    .planned-chapters h3 { font-size: 1.1em; font-weight: 600; margin-bottom: 20px; color: #333; }
+    .chapter-list { list-style: none; }
+    .chapter-list li { padding: 12px 0; border-bottom: 1px solid #f0f0f0; color: #555; }
+    .chapter-list li:last-child { border-bottom: none; }
+    .chapter-num { font-weight: 600; color: #333; margin-right: 10px; }
+    .tech-debt { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 8px; padding: 25px; margin-top: 30px; }
+    .tech-debt h3 { font-size: 1.1em; font-weight: 600; margin-bottom: 15px; color: #92400e; }
+    .tech-debt ul { margin: 0; padding-left: 20px; }
+    .tech-debt li { margin-bottom: 8px; color: #78350f; font-size: 0.95em; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../index.html" class="back-link">← Back to Home</a>
+    <header>
+      <div class="title-row">
+        <h1>Complex Analysis</h1>
+        <span class="status-badge">In Preparation</span>
+      </div>
+      <p class="subtitle">Functions of a Complex Variable</p>
+    </header>
+    <p>This subject develops the beautiful theory of functions of a complex variable. Analytic functions have remarkable properties—differentiability implies infinite differentiability, and local behavior determines global behavior through analytic continuation.</p>
+    <div class="planned-chapters">
+      <h3>Planned Chapters</h3>
+      <ul class="chapter-list">
+        <li><span class="chapter-num">1.</span> The Complex Plane — ℂ, topology, extended plane, Möbius transformations</li>
+        <li><span class="chapter-num">2.</span> Analytic Functions — Cauchy-Riemann equations, elementary functions</li>
+        <li><span class="chapter-num">3.</span> Power Series — Radius of convergence, analytic functions as power series</li>
+        <li><span class="chapter-num">4.</span> Complex Integration — Riemann-Stieltjes integrals, contour integrals</li>
+        <li><span class="chapter-num">5.</span> Cauchy's Theorem — Goursat's lemma, Cauchy integral formula, consequences</li>
+        <li><span class="chapter-num">6.</span> Singularities — Classification, Laurent series, meromorphic functions</li>
+        <li><span class="chapter-num">7.</span> Residue Calculus — Residue theorem, evaluation of real integrals</li>
+        <li><span class="chapter-num">8.</span> Maximum Principles — Maximum modulus, Phragmén-Lindelöf</li>
+      </ul>
+    </div>
+    <div class="tech-debt">
+      <h3>Technical Debt</h3>
+      <ul>
+        <li>Decide on Riemann-Stieltjes vs. Lebesgue approach to contour integrals</li>
+        <li>Plan level of Riemann surface coverage</li>
+        <li>Coordinate with Analysis III on measure-theoretic aspects</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

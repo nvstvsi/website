@@ -1,0 +1,206 @@
+\section{Taylor's Theorem with Integral Remainder}
+
+In this section we will present Taylor's Theorem with integral remainder for $C^m$ functions, as motivation for the criterion in Whitney's $C^m$ Extension Theorem.
+
+\begin{theorem}[Taylor's Theorem with Integral Remainder for $C^m$ Functions on an Interval]
+    \label{thm:taylor_n_1}
+    Let $[a,b] \subset \R$ be a closed interval, and let $f: [a,b] \to \R$ be a $C^m$ function. Explicitly, this means that $f$ is $m$ times differentiable on $[a,b]$, and that the $m^{\text{th}}$ derivative of $f$ is continuous on $[a,b]$.
+
+    Then for each $x \in [a,b]$, we have 
+    \[ f(x) = f(a) + \sum_{k=1}^{m-1} \frac{f^{(k)}(a)}{k!} h^k + \frac{1}{(m-1)!}\int_a^x f^{(m)}(t) (x-t)^{m-1} \, \dif t. \]
+\end{theorem}
+
+\begin{proof}
+    Fix a number $x \in [a,b]$. In what follows, all integrals and derivatives are taken with respect to the variable $t\in [a,x]$. 
+
+    See that by repeated uses of the Fundamental Theorem of Calculus and Integration by Parts, we have
+    \begin{align*}
+        f(x) - f(a) &= \int_a^x f'(t) \, \dif t \\
+            &= - \int_a^x f'(t) \, \dif (x-t) \\
+            &= - \left[ f'(t) (x-t) \right]\Big|_{t=a}^{t=x} \ + \int_a^x f''(t) (x-t) \, \dif t \\
+            &= f'(a)(x-a) - \frac{1}{2}\int_a^x f''(t) \dif (x-t)^2 \\
+            &= f'(a)(x-a) + \left[ f''(t) \cdot \frac{1}{2}(x-t)^2 \right]\Big|_{t=a}^{t=x} \ - \frac{1}{2}\int_a^x f'''(t) \cdot (x-t)^2 \, \dif t \\
+            &= f'(a)(x-a) + \frac{f''(a)}{2} (x-a)^2 - \frac{1}{2} \frac{1}{3} \int_a^x f'''(t) \dif (x-t)^3 \\
+            &\ \ \vdots \\
+            &= f'(a)(x-a) + \frac{f''(a)}{2} (x-a)^2 + \cdots + \frac{f^{(m-1)}(a)}{(m-1)!} (x-a)^{m-1} + \frac{1}{(m-1)!}\int_a^x f^{(m)}(t) (x-t)^{m-1} \, \dif t \\
+            &= \sum_{k=1}^{m-1} \frac{f^{(k)}(a)}{k!} (x-a)^k + \frac{1}{(m-1)!}\int_a^x f^{(m)}(t) (x-t)^{m-1} \, \dif t
+    \end{align*}
+    as desired.
+\end{proof}
+
+\begin{theorem}[Taylor's Formula with Integral Remainder]
+    \label{thm:taylor_formula_with_remainder}
+    Let $U$ be a open subset of $\R^n$, and let $f\in C^m(U)$. 
+    Fix a point $a \in U$.
+
+    Then for each $x \in U$ where the line segment connecting $a$ and $x$ is contained in $U$, we have
+    \[ f(x) = \sum_{|\alpha| < m} \frac{D^\alpha f(a)}{\alpha!} (x - a)^\alpha + m \sum_{|\alpha| = m} \frac{(x - a)^\alpha}{\alpha!} \int_0^1 (1-t)^{m-1} D^\alpha f(a + t(x-a)) \, \dif t \]
+    and as a consequence, we have
+    \[ f(x) = \sum_{|\alpha| \leq m} \frac{D^\alpha f(a)}{\alpha!} (x - a)^\alpha + m\sum_{|\alpha | = m} \frac{(x-a)^\alpha}{\alpha!} \int_0^1 (1-t)^{m-1} \left( D^\alpha f(a + t(x-a)) - D^\alpha f(a) \right) \, \dif t. \]
+\end{theorem}
+
+\begin{proof}
+    Let $x \in U$ be such that the line segment connecting $a$ and $x$ is contained in $U$. 
+    
+    Define the function $g : [0,1] \to \R$ by
+    \[ g(t) := f(a + t(x-a)) \qquad \forall\, t \in [0,1]. \]
+    Notice that $g$ is a $C^m$ function on the interval $[0,1]$, since $f$ is a $C^m$ function on $U$ and the map $t \mapsto a + t(x-a)$ is smooth.
+    We see that
+    \[ g(t) = f(a_1 + t(x_1 - a_1), \ldots, a_n + t(x_n - a_n)) \forall\, t \in [0,1]\]
+    so the first derivative of $g$ is given by
+    \[ g'(t) = \sum_{i=1}^n (x_i - a_i) \cdot D_i f(a + t(x-a)) \qquad \forall\, t \in [0,1] \]
+    and the second derivative of $g$ is given by
+    \[ g''(t) = \sum_{i=1}^n \sum_{j=1}^n (x_i - a_i)(x_j - a_j) \cdot D_{i,j} f(a + t(x-a)) \qquad \forall\, t \in [0,1] \]
+    and by continuing in this way, we see that the $m^{\text{th}}$ derivative of $g$ is given by
+    \[ g^{(m)}(t) = \sum_{j_1=1}^n \cdots \sum_{j_m=1}^n (x_{j_1} - a_{j_1}) \cdots (x_{j_m} - a_{j_m}) \cdot D_{j_1, \ldots, j_m} f(a + t(x-a)) \qquad \forall\, t \in [0,1]. \]
+    Using the multi-index notation, we see that for each $1 \leq k \leq m$, the $k^{\text{th}}$ derivative of $g$ is given by
+    \[ g^{(k)}(t) = \sum_{|\alpha| = k} \frac{k!}{\alpha!} (x - a)^\alpha D^\alpha f(a + t(x-a)) \qquad \forall\, t \in [0,1]. \]
+
+    Therefore, we can apply Theorem \ref{thm:taylor_n_1} to the function $g$ and get
+    \begin{align*}
+        f(x) - f(a) = g(1) - g(0) &= \sum_{k=1}^{m-1} \frac{g^{(k)}(0)}{k!} + \frac{1}{(m-1)!}\int_0^1 g^{(m)}(t) (1-t)^{m-1} \, \dif t \\
+            &= \sum_{k=1}^{m-1} \sum_{|\alpha| = k} \frac{(x - a)^\alpha}{\alpha!} D^\alpha f(a) + \frac{1}{(m-1)!}\int_0^1 \sum_{|\alpha| = m} \frac{m!}{\alpha!} (x - a)^\alpha D^\alpha f(a + t(x-a)) (1-t)^{m-1} \, \dif t \\
+            &= \sum_{|\alpha| < m} \frac{D^\alpha f(a)}{\alpha!} (x - a)^\alpha + m \sum_{|\alpha| = m} \frac{(x - a)^\alpha}{\alpha!} \int_0^1 (1-t)^{m-1} D^\alpha f(a + t(x-a)) \, \dif t
+    \end{align*}
+    as desired.
+    This establishes the first formula in the statement of the theorem.
+
+    Since
+    \[ m\int_0^1 (1-t)^{m-1} \, \dif t = 1, \]
+    we see that
+    \begin{align*}
+        f(x) - f(a) &= \sum_{|\alpha| < m} \frac{D^\alpha f(a)}{\alpha!} (x - a)^\alpha + m \sum_{|\alpha| = m} \frac{(x - a)^\alpha}{\alpha!} \int_0^1 (1-t)^{m-1} D^\alpha f(a + t(x-a)) \, \dif t \\
+            &= \sum_{|\alpha| < m} \frac{D^\alpha f(a)}{\alpha!} (x - a)^\alpha + \sum_{|\alpha| = m} \frac{D^\alpha f(a)}{\alpha!} (x - a)^\alpha - \sum_{|\alpha| = m} \frac{D^\alpha f(a)}{\alpha!} (x - a)^\alpha \\
+                &\qquad\qquad +\  m \sum_{|\alpha| = m} \frac{(x - a)^\alpha}{\alpha!} \int_0^1 (1-t)^{m-1} D^\alpha f(a + t(x-a)) \, \dif t \\
+            &= \sum_{|\alpha| \leq m} \frac{D^\alpha f(a)}{\alpha!} (x - a)^\alpha - \left( \sum_{|\alpha| = m} \frac{D^\alpha f(a)}{\alpha!} (x - a)^\alpha\right) \left( m \int_0^1 (1-t)^{m-1} \, \dif t \right) \\
+                &\qquad\qquad +\  m \sum_{|\alpha| = m} \frac{(x - a)^\alpha}{\alpha!} \int_0^1 (1-t)^{m-1} D^\alpha f(a + t(x-a)) \, \dif t \\
+            &= \sum_{|\alpha| \leq m} \frac{D^\alpha f(a)}{\alpha!} (x - a)^\alpha + m\sum_{|\alpha | = m} \frac{(x-a)^\alpha}{\alpha!} \int_0^1 (1-t)^{m-1} \left( D^\alpha f(a + t(x-a)) - D^\alpha f(a) \right) \, \dif t
+    \end{align*}
+    as desired.
+\end{proof}
+
+\begin{corollary}[Local Version of Taylor's Formula with Integral Remainder]
+    \label{cor:taylor_formula_with_remainder_restatement}
+    Let $U \subseteq \R^n$ be an open subset, and let $f \in C^m(U)$.
+    Then for each $a \in U$ we have
+    \[ f(x) - \sum_{|\alpha|\leq m} \frac{D^\alpha f(a)}{\alpha!} (x - a)^\alpha = o(\| x-a \|^m) \quad\text{as}\quad x \to a. \]
+\end{corollary}
+This hides the particular remainder functions, and is often more convenient to work with.
+
+\begin{proof}
+    Fix a point $a \in U$. Since $U$ is open, there is some $\delta > 0$ such that $B(a,\delta) \subseteq U$. 
+    Then, since $B(a,\delta)$ is a convex open subset of $\R^n$, we can apply Theorem \ref{thm:taylor_formula_with_remainder} to the function $f$ and the point $a$ to get
+    \[ f(x) = \sum_{|\alpha| \leq m} \frac{D^\alpha f(a)}{\alpha!} (x - a)^\alpha + m\sum_{|\alpha | = m} \frac{(x-a)^\alpha}{\alpha!} \int_0^1 (1-t)^{m-1} \left( D^\alpha f(a + t(x-a)) - D^\alpha f(a) \right) \, \dif t \]
+    for each $x \in B(a,\delta)$.
+
+    We estimate
+    \begin{align*}
+        &\left| m \sum_{|\alpha | = m} \frac{(x-a)^\alpha}{\alpha!} \int_0^1 (1-t)^{m-1} \left( D^\alpha f(a + t(x-a)) - D^\alpha f(a) \right) \, \dif t \right| \leq \\
+            &\qquad\qquad \leq \sum_{|\alpha| = m} \frac{|(x-a)^\alpha|}{\alpha!} \left( m\int_0^1 (1-t)^{m-1} \left| D^\alpha f(a + t(x-a)) - D^\alpha f(a) \right| \, \dif t \right) \\
+            &\qquad\qquad \leq  \sum_{|\alpha| = m} \frac{\| x-a \|^m}{\alpha!} \cdot \sup_{t \in [0,1]} \left| D^\alpha f(a + t(x-a)) - D^\alpha f(a) \right| \cdot \left( m \int_0^1 (1-t)^{m-1} \, \dif t \right) \\
+            &\qquad\qquad = \left( \sum_{|\alpha| = m} \frac{1}{\alpha!} \cdot \sup_{t \in [0,1]} |D^\alpha f(a + t(x-a)) - D^\alpha f(a)| \right) \| x-a \|^m.
+    \end{align*}
+
+    Let $\varepsilon > 0$ be arbitrary.
+    Then for each multi-index $\alpha$ with $|\alpha| = m$, since $D^\alpha f$ is continuous at $a$, there is some $\delta_\alpha > 0$ such that for each $t \in [0,1]$ and each $x \in B(a,\delta_\alpha)$, we have
+    \[ |D^\alpha f(a + t(x-a)) - D^\alpha f(a)| < \varepsilon \cdot\left( \sum_{|\alpha| = m} \frac{1}{\alpha!} \right)^{-1}. \]
+
+    Let $\delta_0 := \min \{ \delta_\alpha : |\alpha| = m \}$.
+    Then, for each $x \in B(a,\delta_0)$, we have
+    \begin{align*}
+        &\left| m \sum_{|\alpha | = m} \frac{(x-a)^\alpha}{\alpha!} \int_0^1 (1-t)^{m-1} \left( D^\alpha f(a + t(x-a)) - D^\alpha f(a) \right) \, \dif t \right| \\
+            &\qquad\qquad <\left( \sum_{|\alpha| = m} \frac{1}{\alpha!} \right)\cdot \varepsilon \cdot \left( \sum_{|\alpha| = m} \frac{1}{\alpha!} \right)^{-1} \cdot \| x-a \|^m\\
+            &\qquad\qquad = \varepsilon \| x-a \|^m.
+    \end{align*}
+    That is, for each $x \in B(a,\delta_0)$, we have
+    \[ \left| f(x) - \sum_{|\alpha| \leq m} \frac{D^\alpha f(a)}{\alpha!} (x - a)^\alpha \right| < \varepsilon \| x-a \|^m. \]
+    Since $\varepsilon > 0$ was arbitrary, we conclude that
+    \[ f(x) - \sum_{|\alpha|\leq m} \frac{D^\alpha f(a)}{\alpha!} (x - a)^\alpha = o(\| x-a \|^m) \quad\text{as}\quad x \to a. \]
+\end{proof}
+
+\begin{definition}
+    \label{def:taylor_polynomial}
+    Let $U \subseteq \R^n$ be an open subset, and let $f \in C^m(U)$.
+    We define the $m^{\text{th}}$ \textit{order Taylor polynomial of $f$ at a point} $a \in U$ to be the function $T^m_a f: \R^n \to \R$ defined by
+    \[ T^m_a f(x) := \sum_{|\alpha| \leq m} \frac{f^{(\alpha)}(a)}{\alpha!} (x - a)^\alpha \qquad \forall\, x\in\R^n. \]
+\end{definition}
+
+\begin{exercise}
+    \label{ex:taylor_polynomial_properties}
+    Let $U \subseteq \R^n$ be an open set, and let $f \in C^m(U)$. 
+    Fix a point $a \in U$. 
+    
+    Show that for each multi-index $\beta$ with $|\beta| \leq m$, the function $D^\beta T^m_a f$ is the $m-|\beta|$ order Taylor polynomial of $D^\beta f$ at $a$, i.e. that
+    \[  D^\beta T^m_a f = T^{m-|\beta|}_a (D^\beta f). \]
+    Then as a result, for each multi-index $\beta$ with $|\beta| \leq m$, we have
+    \[ D^\beta f(x) - D^\beta T^m_a f(x) = o(\| x - a \|^{m - |\beta|}) \quad\text{as}\quad x \to a. \]
+\end{exercise}
+
+\begin{proof}
+    Let $\beta$ be a multi-index with $|\beta| \leq m$.
+    The definition of the Taylor polynomial of $D^\beta f$ gives us
+    \[ T^{m-|\beta|}_a (D^\beta f)(x) = \sum_{|\gamma| \leq m - |\beta|} \frac{D^\gamma(D^\beta f)(a)}{\gamma!} (x - a)^\gamma = \sum_{|\gamma|\leq m - |\beta|} \frac{D^{\gamma+\beta}f(a)}{\gamma!} (x - a)^\gamma \qquad \forall \,x\in \R^n\]
+    where we have commuted the order of differentiation in the last step, which is justified since $f \in C^m(U)$.
+    
+    Now we compute $D^\beta T^m_a f$ as
+    \begin{align*}
+        D^\beta T^m_a f &= \sum_{|\alpha| \leq m} \frac{D^\alpha f(a)}{\alpha!} D^\beta (\,\cdot - a)^\alpha. 
+    \end{align*}
+    If $\alpha$ is a multi-index with $|\alpha| < |\beta|$, then $D^\beta (\,\cdot - a)^\alpha = 0$. 
+    If $\alpha$ is a multi-index with $|\alpha| \geq |\beta|$, then see that 
+    \[ D^\beta (\,\cdot - a)^\alpha = \frac{\alpha!}{(\alpha - \beta)!} (\,\cdot - a)^{\alpha - \beta}. \]
+    Therefore, we have
+    \begin{align*}
+        D^\beta T^m_a f &= \sum_{|\beta| \leq|\alpha| \leq m} \frac{D^\alpha f(a)}{\alpha!} \cdot \frac{\alpha!}{(\alpha - \beta)!} (\,\cdot - a)^{\alpha - \beta} \\
+            &= \sum_{|\beta| \leq |\alpha| \leq m} \frac{D^\alpha f(a)}{(\alpha - \beta)!} (\,\cdot - a)^{\alpha - \beta} \\
+            &= \sum_{|\gamma| \leq m - |\beta|} \frac{D^{\gamma + \beta} f(a)}{\gamma!} (\,\cdot - a)^\gamma \\
+            &= T^{m-|\beta|}_a (D^\beta f)
+    \end{align*}
+    as desired.
+
+    As a result of corollary \ref{cor:taylor_formula_with_remainder_restatement}, since $D^\beta f \in C^{m-|\beta|}(U)$, we have
+    \[ D^\beta f(x) - D^\beta T^m_a f(x) = D^\beta f(x) - T^{m-|\beta|}_a (D^\beta f)(x) = o(\| x - a \|^{m - |\beta|}) \quad\text{as}\quad x \to a. \]
+
+    Because $\beta$ was an arbitrary multi-index with $|\beta| \leq m$, the result follows.
+\end{proof}
+
+\begin{lemma}[Uniform Remainder Estimate on Compact Sets]
+    \label{lem:taylor_polynomial_uniform_remainder}
+
+    Let $U \subseteq \R^n$ be an open set, and let $f \in C^m(U)$.
+    Let $K\subset U$ be a compact set.
+
+    Then for each multi-index $\beta$ with $|\beta| \leq m$, and for each $\varepsilon > 0$, there exists $\delta > 0$ such that for each $a,x \in K$ with $0 < \| x - a \| < \delta$, we have
+    \[ \frac{\left| D^\beta f(x) - D^\beta T^m_a f(x) \right|}{\| x-a \|^{m - |\beta|}} < \varepsilon. \]
+    We will write this as \[ D^\beta f(x) - D^\beta T^m_a f(x) = o(\| x-a \|^{m - |\beta|}) \quad\text{as}\quad x \to a, \ \text{ uniformly for }\  a,x \in K. \]
+\end{lemma}
+
+In other words, we have a uniform version of the little-o condition in Exercise \ref{ex:taylor_polynomial_properties} on compact subsets of $U$.
+
+\begin{proof}
+    For each point $a \in K$, there is a radius $\delta_a > 0$ such that $B(a,\delta_a) \subseteq U$. The collection $\{B(a,\delta_a)\}_{a \in K}$ is an open cover of the compact set $K$, so there is a finite subcover $\{B(a_j,\delta_{a_j})\}_{j=1}^N$ of $K$.
+    By Lebesgue's number lemma, there is some $\delta > 0$ such that for each $x \in K$, there is some $j \in \{1,\ldots,N\}$ such that $B(x,\delta) \subseteq B(a_j,\delta_{a_j})$.
+
+    Let $\beta$ be a multi-index with $|\beta| \leq m$, and let $\varepsilon > 0$ be arbitrary.
+    See that if $a,x \in K$ are such that $0 < \| x - a \| < \delta$, then there is some $j \in \{1,\ldots,N\}$ such that $B(x,\delta) \subseteq B(a_j,\delta_{a_j})$ and thus $\| x - a_j \| < \delta$ implies that $x,a \in B(a_j,\delta_{a_j}) \subseteq U$.
+    Thus if $a,x \in K$ are such that $0 < \| x - a \| < \delta$, then $U$ contains the line segment connecting $a$ and $x$, so we can apply Theorem \ref{thm:taylor_formula_with_remainder} to obtain the estimate
+    \begin{align*}
+        \left| D^\beta f(x) - D^\beta T^m_a f(x) \right| &= \left| D^\beta f(x) - T^{m-|\beta|}_a (D^\beta f)(x) \right| \\
+            &= \left| m\sum_{|\alpha| = m - |\beta|} \frac{(x-a)^\alpha}{\alpha!} \int_0^1 (1-t)^{m-1} \left( D^{\alpha+\beta} f(a + t(x-a)) - D^{\alpha+\beta} f(a) \right) \, \dif t \right| \\
+            &\leq \sum_{|\alpha| = m - |\beta|} \frac{|(x-a)^\alpha|}{\alpha!} m \int_0^1 (1-t)^{m-1} \left| D^{\alpha+\beta} f(a + t(x-a)) - D^{\alpha+\beta} f(a) \right| \, \dif t \\
+            &\leq \sum_{|\alpha| = m - |\beta|} \frac{\| x-a \|^{m - |\beta|}}{\alpha!} \cdot \sup_{t\in[0,1]}\left| D^{\alpha+\beta} f(a + t(x-a)) - D^{\alpha+\beta} f(a) \right| \cdot \left( m \int_0^1 (1-t)^{m-1} \dif t\right) \\
+            &\leq \left( \sum_{|\alpha| = m - |\beta|} \frac{1}{\alpha!} \cdot \sup_{y,z\in K} |D^{\alpha+\beta} f(y) - D^{\alpha+\beta} f(z)| \right) \| x-a \|^{m - |\beta|}.
+    \end{align*}
+
+    Then for each multi-index $\alpha$ with order $|\alpha| = m - |\beta|$, the function $D^{\alpha+\beta} f$ is continuous on the compact set $K$, so it is uniformly continuous on $K$.
+    Thus there is some $\delta_\varepsilon > 0$ such that for each multi-index $\alpha$ with order $|\alpha| = m - |\beta|$, 
+    and for each $y,z \in K$ with $\| y-z \| < \delta_\varepsilon$, we have 
+    \[ |D^{\alpha+\beta} f(y) - D^{\alpha+\beta} f(z)| < \varepsilon \cdot \left( \sum_{|\alpha| = m - |\beta|} \frac{1}{\alpha!} \right)^{-1}. \]
+
+    Now if $a,x \in K$ are such that $0 < \| x - a \| < \min\{\delta,\delta_\varepsilon\}$, then we have
+    \begin{align*}
+        \left| D^\beta f(x) - D^\beta T^m_a f(x) \right| &\leq \left( \sum_{|\alpha| = m - |\beta|} \frac{1}{\alpha!} \cdot \sup_{y,z\in K} |D^{\alpha+\beta} f(y) - D^{\alpha+\beta} f(z)| \right) \| x-a \|^{m - |\beta|} \\
+            &< \left( \sum_{|\alpha| = m - |\beta|} \frac{1}{\alpha!} \right) \cdot \varepsilon \cdot \left( \sum_{|\alpha| = m - |\beta|} \frac{1}{\alpha!} \right)^{-1} \cdot \| x-a \|^{m - |\beta|} = \varepsilon \| x-a \|^{m - |\beta|}
+    \end{align*}
+    which gives the desired estimate.
+\end{proof}

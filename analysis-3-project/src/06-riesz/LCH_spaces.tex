@@ -1,0 +1,403 @@
+\section{Locally Compact Hausdorff Spaces}
+
+In this section, we follow Simon.
+
+We begin by reviewing some definitions and results from general topology.
+Recall a topological space $X$ is said to be \textit{Hausdorff} if for every pair of distinct points $x,y\in X$, there exist disjoint open sets $U,V \subseteq X$ such that $x\in U$ and $y\in V$.
+
+\begin{lemma}[Compact Sets in a Hausdorff Space are Closed]
+    \label{lem:compact_sets_in_hausdorff_space_are_closed}
+    Let $X$ be a Hausdorff space, and let $K \subseteq X$ be a compact set.
+    Then $K$ is closed.
+\end{lemma}
+\begin{proof}
+    Let $x\in X\setminus K$ be arbitrary.
+    For each $y\in K$, there exist disjoint open sets $U_y, V_y \subseteq X$ such that $x\in U_y$ and $y\in V_y$.
+    The collection $\{V_y : y\in K\}$ is an open cover of $K$, and so there exist $y_1, \ldots, y_n \in K$ such that $K \subseteq \bigcup_{j=1}^n V_{y_j}$.
+    Then $U := \bigcap_{j=1}^n U_{y_j}$ is an open set containing $x$ such that $U \cap K = \emptyset$, which shows that $X\setminus K$ is open.
+    Thus $K$ is closed.
+\end{proof}
+
+\vspace{2mm}
+
+\begin{remark}[Disjoint Compact Sets in a Hausdorff Space can be Separated by Open Sets]
+    \label{rem:base_case_of_lemma_disjoint_compact_sets_in_hausdorff_space}
+In fact we have proven a bit more ---
+If $X$ is a Hausdorff space and $K\subseteq X$ is compact, then
+for each $x\in X\setminus K$, there exist disjoint open sets $U,V \subseteq X$ such that $x\in U$ and $K \subseteq V$.
+Then if $K_2 \subseteq X$ is another compact set such that $K \cap K_2 = \emptyset$, we can repeat this argument to obtain disjoint open sets $U'_x, V'_x \subseteq X$ such that $x\in U'_x$ and $K_2 \subseteq V'_x$ for each $x\in K_2$; 
+compactness of $K_2$ then implies that there exist $x_1, \ldots, x_m \in K_2$ such that $K_2 \subseteq \bigcup_{j=1}^m U'_{x_j}$ and then $V' := \bigcap_{j=1}^m V'_{x_j}$ is an open set containing $K$ such that $V' \cap K_2 = \emptyset$.
+In summary, if $K_1, K_2 \subseteq X$ are disjoint compact sets, then there exist disjoint open sets $U,V \subseteq X$ such that $K_1 \subseteq U$ and $K_2 \subseteq V$.
+\end{remark}
+
+We have thus proven the base case of the following useful lemma.
+
+\begin{lemma}[Disjoint Compact Sets in a Hausdorff Space can be Separated by Open Sets]
+    \label{lem:disjoint_compact_sets_in_hausdorff_space}
+    Let $X$ be a Hausdorff space and let $K_1, K_2, \ldots, K_n \subseteq X$ be compact sets such that $K_i \cap K_j = \emptyset$ for all $i\neq j$.
+    Then there exist disjoint open sets $U_1, U_2, \ldots, U_n \subseteq X$ such that $K_j \subseteq U_j$ for each $j=1,2,\ldots,n$.
+\end{lemma}
+
+We also recall a useful corollary in the case when $X$ is compact. 
+
+\begin{corollary}[Compact Hausdorff Spaces are Normal]
+    \label{cor:compact_hausdorff_implies_normal}
+    Let $X$ be a compact Hausdorff space. 
+    Then $X$ is \emph{normal}, i.e. for every disjoint pair of closed sets $K_1,K_2\subseteq X$ , there exists a pair of disjoint open sets $U_1,U_2\subseteq X$ such that $K_1\subseteq U_1$ and $K_2\subseteq U_2$. 
+\end{corollary}
+   
+\begin{proof}
+    This follows immediately from the fact that if $X$ is compact, then every closed subset of $X$ must be compact.
+\end{proof}
+
+Recall that a topological space $X$ is said to be \textit{locally compact} if for each $x\in X$, there exists an open set $U_x \subseteq X$ containing $x$ such that the closure $\overline{U_x}$ is compact.
+
+\begin{lemma}
+    \label{lem:lch_compact_subset_in_open_set}
+    Let $X$ be a locally compact Hausdorff space, and let $x\in X$. 
+    Then for each open set $U \subseteq X$ containing $x$, there exists an open set $V \subseteq X$ such that $x\in V$, $\overline{V}$ is compact, and $\overline{V} \subseteq U$.
+\end{lemma}
+\begin{proof}
+    With $x\in X$ fixed, let $U\subseteq X$ be an open set which contains $x$.
+    Since $X$ is locally compact, there exists an open set $W_0\subseteq X$ containing $x$ such that $\overline{W_0}$ is compact.
+    We define $W := W_0 \cap U$. 
+    Since $\overline{W} \subseteq \overline{W_0}$, we see that the $\overline{W}$ is compact (a closed subset of a compact set is compact). 
+    
+    By applying Corollary \ref{cor:compact_hausdorff_implies_normal} to the disjoint closed sets $\overline{W}\setminus W$ and $\{x\}$ we see that there exists disjoint open sets $V_1,V_2\subseteq \overline{W}$
+    such that 
+    \[ x\in V_1 \quad\text{ and }\quad \overline{W} \setminus W \subseteq V_2. \]
+    By definition of the subspace topology on $\overline{W}$, there exist open sets $U_1,U_2\subseteq X$ such that $V_1 = \overline{W} \cap U_1$ and $V_2 = \overline{W} \cap U_2$.
+    Thus we have
+    \[ x\in U_1,  \ \overline{W}\setminus W \subseteq U_2, \ \ \text{ and } (\overline{W} \cap U_1) \cap (\overline{W} \cap U_2) = \varnothing. \]
+    In particular, this last equation implies that $\overline{W} \cap U_1 \subseteq \overline{W} \setminus U_2$.
+    Therefore 
+    \[ x\in W\cap U_1 \subseteq \overline{W}\setminus U_2 \subseteq W \subseteq U. \]
+    Since $\overline{W}\setminus U_2$ is a closed set, it follows that
+    \[ x\in W \cap U_1 \subseteq\overline{ W \cap U_1 } \subseteq \overline{W} \setminus U_2 \subseteq U. \]
+    Now take $V:= W \cap U_1$ and the lemma is proved. 
+\end{proof}
+
+We will normally abbreviate ``locally compact Hausdorff'' as ``LCH''.
+
+\vspace{2mm}
+
+Combining Lemmas \ref{lem:disjoint_compact_sets_in_hausdorff_space} and the proof in \ref{rem:base_case_of_lemma_disjoint_compact_sets_in_hausdorff_space}, we obtain the following strengthened version of Lemma \ref{lem:disjoint_compact_sets_in_hausdorff_space}.
+
+\begin{corollary}[Disjoints Compact Sets in a LCH Space can be Separated by Open Sets with Compact Closure]
+    \label{cor:disjoint_compact_sets_in_lch_space}
+    Let $X$ be a LCH space and let $K_1, K_2, \ldots, K_n \subseteq X$ be compact sets such that $K_i \cap K_j = \emptyset$ for all $i\neq j$.
+    Then there exist open sets $U_1, U_2, \ldots, U_n \subseteq X$ such that for each $j=1,2,\ldots,n$, we have $K_j \subseteq U_j$, the closure $\overline{U_j}$ is compact, and $\overline{U_i} \cap \overline{U_j} = \emptyset$ for all $i\neq j$.
+\end{corollary}
+
+\begin{lemma}[Urysohn's Lemma for LCH Spaces]
+    \label{lem:LCH_urysohns_lemma}
+    Let $X$ be a LCH space, and let $K \subseteq X$ be a compact set.
+    Then for each open set $V \subseteq X$ such that $K \subseteq V$, there exists an open set $U \subseteq X$ such that $K \subseteq U \subseteq \overline{U} \subseteq V$, the closure $\overline{U}$ is compact, and there exists a continuous function
+    \[ f: X \to [0,1] \]
+    such that $f\equiv 1$ on an open set containing $K$ and $f \equiv 0$ on $X\setminus U$.
+\end{lemma}
+
+\begin{proof}
+    By lemma \ref{lem:lch_compact_subset_in_open_set}, for each $x\in K$, there exists an open set $U_x \subseteq X$ such that $x\in U_x$, $\overline{U_x}$ is compact, and $\overline{U_x} \subseteq V$.
+    Since $K$ is compact, there exist $x_1, x_2, \ldots, x_n \in K$ such that
+    \[ K \subseteq \bigcup_{j=1}^n U_{x_j}. \]
+    Define $U := \bigcup_{j=1}^n U_{x_j}$ so that 
+    \[ K \subseteq U \subseteq \overline{U} \subseteq V, \]
+    and $\overline{U}$ is compact as a finite union of compact sets.
+
+    By Corollary \ref{cor:compact_hausdorff_implies_normal}, we know that $\overline{U}$ is normal.
+    By the classical Urysohn's lemma, there exists a continuous function $f_0: \overline{U} \to [0,1]$ such that $f_0\equiv 1$ on $K$ and $f_0\equiv 0$ on $ \overline{U} \setminus U$.
+    We can extend $f_0$ to a continuous function $f_1$ on $X$ by defining $f\equiv 0$ on $X\setminus \overline{U}$.
+
+    (Let us check that $f_1$ is continuous.
+    Since $f_0$ is continuous on $\overline{U}$ and $f_1 |_{\overline{U}} = f_0$, we see that $f_1$ is continuous on $\overline{U}$.
+    Since $f_1 \equiv 0$ on the overlap $\overline{U}\setminus U = \overline{U} \cap (X\setminus U)$, we see that $f_1$ is continuous on $X\setminus U$.)
+    
+    Finally, we let $f := 2 \min\{f_1, 1/2\}$.
+    Then see that $f\equiv 1$ on the set $\left\{ f_1 > \frac{1}{2} \right\}$, which is an open set containing $K$, and $f\equiv 0$ on $X\setminus U$.
+\end{proof}
+
+Okay, we need one last topological lemma about LCH spaces before we can get back to measure theory, yay.
+
+\begin{theorem}[Partition of Unity for LCH Spaces]
+    \label{thm:partition_of_unity}
+    Let $X$ be a locally compact Hausdorff space, and let $K \subseteq X$ be a compact set.
+    Let $\{U_j\}_{j=1}^n$ be a finite open cover of $K$.
+    Then there exist finitely many continuous functions $\psi_1, \psi_2, \ldots, \psi_n : X \to [0,1]$ such that
+    \begin{enumerate}[(i)]
+        \item $\supp(\psi_j) := \overline{\{x\in X : \psi_j(x) \neq 0\}}$ is compact for each $j=1,2,\ldots,n$,
+        \item for each $j=1,2,\ldots,n$, we have $\supp(\psi_j) \subseteq U_{j}$,
+        \item $\sum_{j=1}^n \psi_j(x) = 1$ for all $x$ in an open set containing $K$, and
+        \item $0 \leq \sum_{j=1}^n \psi_j(x) \leq 1$ for all $x\in X$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    By Lemma \ref{lem:LCH_urysohns_lemma}, for each $x\in K$, there exists $j\in \{1,2,\ldots,n\}$ and an open set $U_x$ containing $x$ such that $\overline{U_x}$ is a compact subset of $U_j$.
+    Since $K$ is compact, there exist $x_1, x_2, \ldots, x_m \in K$ such that
+    \[ K \subseteq \bigcup_{i=1}^m U_{x_i}. \]
+    For each $i=1,2,\ldots,m$, we define $V_j$ to be the union of all $U_{x_i}$ such that $\overline{U_{x_i}} \subseteq U_j$.
+    Then $\{V_j\}_{j=1}^n$ is an open cover of $K$ such that $\overline{V_j}$ is a compact subset of $U_j$ for each $j=1,2,\ldots,n$.
+    Thus for each $j=1,2,\ldots,n$, we can apply Lemma \ref{lem:LCH_urysohns_lemma} to obtain a continuous function $\varphi_j : X \to [0,1]$ such that $\varphi_j \equiv 1$ on $\overline{V_j}$ and $\varphi_j \equiv 0$ on $X\setminus W_j$ for some open set $W_j$
+    such that $\overline{W_j}$ is a compact subset of $U_j$ and $\overline{V_j} \subseteq W_j$.
+
+    We can also use the same lemma on the open set $\bigcup_{j=1}^n V_j$ which contains $K$ to obtain a continuous function $f_0 : X \to [0,1]$ such that $f_0 \equiv 1$ on $\bigcup_{j=1}^n V_j$ and $f_0 \equiv 0$ on $\{ x\in X : \sum_{j=1}^n \varphi_j(x) = 0 \}$.
+    (Let us check this --- the set $\{ x\in X : \sum_{j=1}^n \varphi_j(x) = 0 \}$ is closed since it is the intersection of the closed sets $\{x\in X : \varphi_j(x) = 0\}$ for $j=1,2,\ldots,n$.
+    Thus its complement $\{ x\in X : \sum_{j=1}^n \varphi_j(x) \neq 0 \}$ is open and contains the compact set $\bigcup_{j=1}^n \overline{V}_j$.
+    Hence Lemma \ref{lem:LCH_urysohns_lemma} applies.)
+
+    We now define $\varphi_0 := 1 - f_0$ so that by contruction we have 
+    \[ \sum_{j=0}^n \varphi_j(x) > 0,\qquad \forall x\in X. \]
+    For each $j=1,2,\ldots,n$, we define
+    \[ \psi_j := \frac{\varphi_j}{\sum_{k=0}^n \varphi_k}. \]
+    Then the functions $\psi_1, \psi_2, \ldots, \psi_n$ satisfy properties (i)-(iv).
+
+    We check this. 
+    Property (i) and (ii) hold since
+    \[ \supp(\psi_j) = \supp(\varphi_j) \subseteq W_j \subseteq \overline{W_j} \subseteq U_j . \]
+    Property (iv) is evident from the definition of $\psi_j$.
+    Finally, property (iii) holds since for each $x\in \bigcup_{j=1}^n V_j$, we have $\varphi_0(x) = 0$ and so
+    \[ \sum_{j=1}^n \psi_j(x) = \frac{\sum_{j=1}^n \varphi_j(x)}{\sum_{j=0}^n \varphi_j(x)} = 1. \]
+    Since $\bigcup_{j=1}^n V_j$ is an open set containing $K$, property (iii) is proved.
+\end{proof}
+
+\newpage
+
+\section{Radon Measures on LCH Spaces}
+
+We now give the definition of a Radon measure on an LCH space.
+We remark that the definition and the first two lemmas are valid in an arbitrary Hausdorff space.
+
+\begin{definition}[Radon Measure]
+    \label{def:radon_measure}
+    Let $X$ be a Hausdorff space. 
+    A \textit{Radon measure} on $X$ is an outer measure $\mu$ on $X$ satisfying:
+    \begin{enumerate}[(i)]
+        \item $\mu$ is Borel regular and $\mu(K) < \infty$ for each compact set $K \subseteq X$, 
+        \item $\mu(A) = \inf\{\mu(U) : U \supseteq A, U \text{ open}\}$ for each set $A \subseteq X$,
+        \item $\mu(U) = \sup\{\mu(K) : K \subseteq U, K \text{ compact}\}$ for each open set $U \subseteq X$.
+    \end{enumerate}
+\end{definition}
+
+You might wonder why we do not require the third condition to hold for all sets $A \subseteq X$, instead of just open sets, 
+but it turns out that this automatically follows from the definition given.
+
+\begin{lemma}
+    \label{lem:radon_measure_inner_regular}
+    Let $X$ be a Hausdorff space, and let $\mu$ be a Radon measure on $X$.
+    Then for each set $A \subseteq X$ such that $\mu(A) < \infty$, we have
+    \[ \mu(A) = \sup\{\mu(K) : K \subseteq A, K \text{ compact}\}. \]
+\end{lemma}
+
+\begin{proof}
+    Let $A \subseteq X$ be such that $\mu(A) < \infty$.
+    Let $\varepsilon > 0$ be arbitrary.
+    By condition (ii) in Definition \ref{def:radon_measure}, there exists an open set $U \subseteq X$ such that $A \subseteq U$ and
+    \[ \mu(U\setminus A) < \varepsilon. \]
+    By condition (iii) in Definition \ref{def:radon_measure}, there exists a compact set $K \subseteq U$ such that
+    \[ \mu(U \setminus K) < \varepsilon. \]
+    By using condition (ii) again on the set $U\setminus A$, there exists an open set $V \subseteq X$ such that $U\setminus A \subseteq V$ and
+    \[ \mu(V \setminus (U\setminus A) ) < \varepsilon. \]
+    Therefore
+    \[ \mu(V) \leq \epsilon + \mu(U\setminus A) < 2\varepsilon. \]
+    Now $K\setminus W$ is a compact subset of $U\setminus V$, so is a subset of $A$; we compute
+    \[ \mu(A \setminus (K\setminus V) ) \leq \mu( U \setminus (K\setminus V)) \leq \mu(U\setminus K) + \mu(W) \leq 3 \varepsilon. \]
+    Since $\varepsilon > 0$ is arbitrary, we conclude that
+    \[ \mu(A) = \sup\{\mu(K) : K \subseteq A, K \text{ compact}\} \]
+    as desired.
+\end{proof}
+
+The next lemma shows that if we have an outer measure $\mu$ on a LCH space $X$ which is finite on compact sets, and finitely additive on disjoint unions of compact sets, and $\mu$ satisfies conditions (ii) and (iii) in Definition \ref{def:radon_measure}, then $\mu$ is a Radon measure.
+
+\begin{lemma}
+    \label{lem:outer_measure_is_radon_if_finitely_additive_on_compact_sets}
+    Let $X$ be a LCH space, and let $\mu$ be an outer measure on $X$ such that $\mu(K) < \infty$ for each compact set $K \subseteq X$.
+    Suppose that $\mu$ is finitely additive on disjoint unions of compact sets, i.e. if $K_1, K_2 \subseteq X$ are disjoint compact sets, then
+    \[ \mu(K_1 \cup K_2) = \mu(K_1) + \mu(K_2) < \infty. \]
+    If $\mu$ also satisfies conditions (ii) and (iii) in Definition \ref{def:radon_measure}, then $\mu$ also satisfies condition (i) in Definition \ref{def:radon_measure}, and hence is a Radon measure on $X$.
+\end{lemma}
+
+\begin{proof}
+    \textit{Step 1:} We claim that for each set $A \subseteq X$, there is a countable collection of open sets $\{U_j\}_{j=1}^\infty$ such that $A \subseteq \bigcap_{j=1}^\infty U_j$ and $\mu(A) = \mu(\bigcap_{j=1}^\infty U_j)$.
+    \vspace{2mm}
+
+    Let $A \subseteq X$ be arbitrary.
+    By condition (ii) in Definition \ref{def:radon_measure}, for each $j=1,2,\ldots$, there exists an open set $U_j \subseteq X$ such that $A \subseteq U_j$ and
+    \[ \mu(U_j) < \mu(A) + \frac{1}{j}. \]
+    Then we have $A \subseteq \bigcap_{j=1}^\infty U_j$ and
+    \[ \mu\left( \bigcap_{j=1}^\infty U_j \right) \leq \mu(U_j) < \mu(A) + \frac{1}{j}, \qquad \forall j=1,2,\ldots. \]
+    Since $\mu(A) \leq \mu(\bigcap_{j=1}^\infty U_j)$, we conclude that
+    \[ \mu(A) = \mu\left( \bigcap_{j=1}^\infty U_j \right). \]
+
+    This proves our claim. 
+
+    \vspace{2mm}
+    \textit{Step 2:} We claim that all Borel sets in $X$ are $\mu$-measurable.
+    \vspace{2mm}
+
+    Since the Borel $\sigma$-algebra is the smallest $\sigma$-algebra containing all open subsets of $X$, and the set of all $\mu$-measurable sets is a $\sigma$-algebra, 
+    it suffices to show that all open sets in $X$ are $\mu$-measurable.
+
+    Let $\varepsilon > 0$ be arbitrary, and let $U \subseteq X$ be an open set.
+    Fix an arbitrary set $A \subseteq X$ such that $\mu(A) < \infty$.
+    By (ii) in the definition of Radon measure, there exists an open set $V \subseteq X$ such that $A \subseteq V$ and 
+    \[ \mu(V) < \mu(A) + \varepsilon. \]
+    By (iii) in the definition of Radon measure, there exists a compact set $K_1 \subseteq V\cap U$ such that
+    \[ \mu(V\cap U) < \mu(K_1) + \varepsilon. \]
+    By (iii) again, there exists a compact set $K_2 \subseteq V\setminus K_1$ such that
+    \[ \mu(V\setminus K_1) < \mu(K_2) + \varepsilon. \]
+    We estimate
+    \begin{align*}
+        \mu(V\setminus U) + \mu(V\cap U) &< \mu(V\setminus U) + \mu(K_1) + \varepsilon \\
+            &\leq \mu(K_2) + \mu(K_1) + 2\varepsilon \\
+            &= \mu(K_1 \cup K_2) + 2\varepsilon \qquad &\text{(by finite additivity of $\mu$ on disjoint compact sets)} \\
+            &\leq \mu((V\setminus K_1) \cup K_1) + 2\varepsilon \\
+            &= \mu(V) + 2\varepsilon \\
+            &< \mu(A) + 3\varepsilon
+    \end{align*}
+    which implies that
+    \[ \mu(A\setminus U) + \mu(A\cap U) \leq \mu(V\setminus U) + \mu(V\cap U) \leq \mu(A) + 3\varepsilon. \]
+    Since $\varepsilon > 0$ is arbitrary, we conclude that
+    \[ \mu(A\setminus U) + \mu(A\cap U) \leq \mu(A) \]
+    which is the Carathéodory criterion for $\mu$-measurability of $U$.
+
+    Since $U \subseteq X$ was an arbitrary open set, we conclude that all open sets in $X$ are $\mu$-measurable, and hence all Borel sets in $X$ are $\mu$-measurable.
+
+    \vspace{2mm}
+    \textit{Step 3:} We claim that (i) in the Definition of Radon measure holds.
+    \vspace{2mm}
+
+    By assumption $\mu$ being finitely additive on disjoint unions of compact sets, we have $\mu(K) < \infty$ for each compact set $K \subseteq X\ $
+    (Look back!).
+    By Step 2, we know that all Borel sets in $X$ are $\mu$-measurable.
+    Thus $\mu$ is a Borel measure, and by Step 1, we see that $\mu$ is Borel regular.
+
+    \vspace{2mm}
+
+    Combining Steps 2 and 3, we see that $\mu$ satisfies condition (i) in Definition \ref{def:radon_measure}.
+\end{proof}
+
+The next lemma is convenient, and gives us a way to check that a Borel regular outer measure is a Radon measure.
+
+\begin{lemma}
+    \label{lem:borel_reg_outer_measure_on_sigma_compact_lch_space_is_radon}
+    Let $X$ be a LCH space such that each open set in $X$ is the countable union of compact sets.
+    Then each Borel regular outer measure which is finite on compact sets is a Radon measure.
+\end{lemma}
+
+\begin{proof}
+    First we observe that, since $X$ is a Hausdorff space, the statement ``each open set in $X$ is the countable union of compact sets'' is equivalent to the statement ``$X$ is the countable union of compact sets and every closed set in $X$ is the countable intersection of open sets''.
+
+    (Let's check this. Assume that each open set in $X$ is the countable union of compact sets.
+    Then since $X$ is open, we see that $X$ is the countable union of compact sets.
+    Now let $F \subseteq X$ be a closed set. Then $F^c$ is open, so is the countable union of compact sets, say $F^c = \bigcup_{j=1}^\infty K_j$ where each $K_j$ is compact.
+    Then we have
+    \[ F = (F^c)^c = \left( \bigcup_{j=1}^\infty K_j \right)^c = \bigcap_{j=1}^\infty K_j^c \]
+    which is a countable intersection of open sets since each $K_j$ is closed.
+
+    Conversely, assume that $X$ is the countable union of compact sets and every closed set in $X$ is the countable intersection of open sets.
+    Let $U \subseteq X$ be an open set.
+    Then $U^c$ is closed, so is the countable intersection of open sets, say $U^c = \bigcap_{j=1}^\infty V_j$ where each $V_j$ is open.
+    Then we have
+    \[ U = (U^c)^c = \left( \bigcap_{j=1}^\infty V_j \right)^c = \bigcup_{j=1}^\infty V_j^c \]
+    which is a countable union of closed sets since each $V_j$ is closed.
+    Since $X$ is the countable union of compact sets, say $X = \bigcup_{k=1}^\infty K_k$ where each $K_k$ is compact, we see that
+    \[ U = \bigcup_{j=1}^\infty V_j^c = \bigcup_{j=1}^\infty \bigcup_{k=1}^\infty (V_j^c \cap K_k) \]
+    which is a countable union of compact sets since each $V_j^c \cap K_k$ is closed in $K_k$ and hence compact.
+    
+    We have used two facts about Hausdorff spaces here: (1) compact sets are closed, and (2) closed subsets of compact sets are compact.)
+
+    Therefore $X$ is the countable union of compact sets, and each closed set in $X$ is the countable intersection of open sets.    
+    Let $\mu$ be a Borel regular outer measure on $X$ such that $\mu(K) < \infty$ for each compact set $K \subseteq X$.
+    Then Theorem \ref{thm:borel_reg_implies_inner/outer_reg} about Borel regular outer measures implies that $\mu$ satisfies the following two conditions:
+    \begin{enumerate}[(a)]
+        \setcounter{enumi}{1}
+        \item if $A \subseteq X$ is such that there is a countable collection of open sets $\{V_j\}_{j=1}^\infty$ such that $A \subseteq \bigcap_{j=1}^\infty V_j$ and $\mu(V_j)<\infty$ for each $j\in\Z^+$, then
+        \[ \mu(A) = \inf\{\mu(U) : U \supseteq A, U \text{ open}\}, \]
+        \item if $\{A_j\}_{j=1}^\infty$ is a countable collection of $\mu$-measurable sets such that $\mu(A_j) < \infty$ for each $j\in\Z^+$, then $A := \bigcup_{j=1}^\infty A_j$ has
+        \[ \mu(A) = \sup\{ \mu(C) : C\subseteq A, C \text{ closed}\} \]
+    \end{enumerate}
+
+    Now see that because $X$ is an LCH space, for each compact set $K \subseteq X$, there exists an open set $U \subseteq X$ such that $K \subseteq U$ and $\overline{U}$ is compact.
+    (We check --- since each point $x\in K$ has an open set $V_x$ such that $x\in V_x$ and $\overline{V_x}$ is compact, we can cover $K$ by finitely many such neighborhoods $V_{x_1}, V_{x_2}, \ldots, V_{x_n}$; then we can take $U := \bigcup_{j=1}^n V_{x_j}$ which has compact closure.)
+    
+    Our first observation shows that there are countably many compact sets $\{K_j\}_{j=1}^\infty$ such that $X = \bigcup_{j=1}^\infty K_j$.
+    By the previous paragraph, for each $j\in\Z^+$, there exists an open set $U_j \subseteq X$ such that $K_j \subseteq U_j$ and $\overline{U_j}$ is compact.
+    Since $\mu(\overline{U_j}) < \infty$ for each $j\in\Z^+$ by assumption that $\mu$ is finite on compact sets, we see that condition (b) holds for each set $A \subseteq X$.
+    That is, condition (ii) in the definition of Radon measure holds for each set $A \subseteq X$.
+
+    Next, see that if $A\subseteq X$ is $\mu$-measurable, then we can write $A = \bigcup_{j=1}^\infty (A \cap K_j)$ and each $A \cap K_j$ is $\mu$-measurable and $\mu(A\cap K_j) \leq \mu(K_j) < \infty$.
+    Thus condition (c) holds for each $\mu$-measurable set $A$ since $X$ is the countable union of compact sets.
+    Also each closed set $C\subseteq X$ we can write $C$ as an increasing union of compact sets $C = \bigcup_{j=1}^\infty C_j$ where 
+    \[ C_j := C \cap \left( \bigcup_{i=1}^j K_i \right) \]
+    so that each $C_j$ is compact; also $\lim_{j\to\infty} \mu(C_j) = \mu(C)$ which implies that
+    \[ \mu(C) = \sup\{ \mu(K) : K\subseteq C, K \text{ compact} \}. \]
+    This fact combined with condition (c) implies that for each $\mu$-measurable set $A \subseteq X$ we have
+    \[ \mu(A) = \sup\{ \mu(K) : K\subseteq A, K \text{ compact} \}. \]
+    In particular, this shows that condition (iii) in the definition of Radon measure holds for each open set $U \subseteq X$.
+\end{proof}
+
+\newpage
+
+\begin{theorem}[Density of $C_c(X)$ in $L^p(X,\mu)$]
+    \label{thm:density_of_Cc_in_Lp_on_lch_space}
+    Let $X$ be a LCH space, and let $\mu$ be a Radon measure on $X$.
+    Then for each $1 \leq p < \infty$, the space $C_c(X)$ of continuous functions with compact support is dense in $L^p(X,\mu)$.
+    That is, for each $f\in L^p(X,\mu)$ and each $\varepsilon > 0$, there exists $g\in C_c(X)$ such that
+    \[ \|f - g\|_{L^p(X,\mu)} < \varepsilon. \]
+\end{theorem}
+
+Before the proof, we record the following useful corollary.
+
+\begin{corollary}
+    \label{cor:extension_of_borel_measure_to_radon_measure}
+    Let $X$ be a LCH space with the property that each open set in $X$ is the countable union of compact sets.
+    Let $\mu$ be a Borel measure on $X$ such that $\mu(K) < \infty$ for each compact set $K \subseteq X$.
+    Then $C_c(X)$ is dense in $L^1(X,\mu)$ and there exists a radon measure $\overline{\mu}$ on $X$ such that $\overline{\mu}(B) = \mu(B)$ for each Borel set $B \subseteq X$.
+
+    That is, every Borel measure on $X$ which is finite on compact sets is the restriction of a Radon measure.
+\end{corollary}
+
+\begin{proof}[Proof of Density of $C_c(X)$ in $L^p(X,\mu)$]
+    Let $p\in [1,\infty)$ be fixed.
+    Let $f\in L^p(X,\mu)$ such that $\|f\|_{L^p} < \infty$, and let $\varepsilon > 0$ be arbitrary.
+
+    First see that the set of simple functions is dense in $L^p(X,\mu)$.
+    (We can decompose $f$ into its positive and negative parts as $f = f^+ - f^-$, and then approximate $f^+$ and $f^-$ by increasing sequences of simple functions using the Dominated Convergence Theorem.)
+    Thus there exists a simple function 
+    \[ \varphi = \sum_{j=1}^n a_j \Chi_{A_j} \]
+    where the numbers $a_1, a_2, \ldots, a_n$ are distinct and nonzero, and the sets $A_1, A_2, \ldots, A_n \subseteq X$ are disjoint $\mu$-measurable sets, and
+    \[ \|f - \varphi\|_{L^p} < \varepsilon. \]
+    Since $\|\varphi\|_{L^p} \leq \|\varphi - f\|_{L^p} + \|f\|_{L^p} < \infty$, we see that $\mu(A_j) < \infty$ for each $j=1,2,\ldots,n$.
+
+    Choose $M>\max\{|a_j| : j=1,2,\ldots,n\}$ and for each $j=1,2,\ldots,n$ use Lemma \ref{lem:radon_measure_inner_regular} to find a compact set $K_j \subseteq A_j$ such that
+    \[ \mu(A_j \setminus K_j) < \frac{\varepsilon^p}{n 2^p M^p}. \]
+    Similarly, by definition of a Radon measure, for each $j=1,2,\ldots,n$ we can find an open set $U_j$ containing $K_j$ such that
+    \[ \mu(U_j \setminus K_j) < \frac{\varepsilon^p}{n 2^p M^p}. \]
+
+    We may assume that the sets $U_1, U_2, \ldots, U_n$ are disjoint. (If not, we can use Corollary \ref{cor:disjoint_compact_sets_in_lch_space} to find disjoint open sets $U'_1, U'_2, \ldots, U'_n$ such that $K_j \subseteq U'_j$ for each $j=1,2,\ldots,n$; 
+    then we can replace $U_j$ by $U_j\cap U'_j$.)
+    For each $j=1,2,\ldots,n$, we can use Lemma \ref{lem:LCH_urysohns_lemma} to find a continuous function $g_j\in C_c(X)$ such that $g_j \equiv a_j$ on an open subset containing $K_j$, $\supp(g_j) \subseteq \subseteq U_j$, and $|g_j| \leq |a_j|$ on $X$.
+    We define
+    \[ g := \sum_{j=1}^n g_j. \]
+    Then $g\in C_c(X)$ since the supports of $g_1, g_2, \ldots, g_n$ are compact and disjoint.
+    We compute that for each $j=1,2,\ldots,n$ and each $x\in K_j$, we have
+    \[ g(x) = \sum_{i=1}^n g_i(x) = g_j(x) = a_j = \sum_{i=1}^n a_i \Chi_{K_i}(x) = \varphi(x). \]
+    Therefore $g \equiv \varphi$ on the set $\bigcup_{j=1}^n K_j$, and we have 
+    \[ \sup|g| = \sup|\varphi| < M. \]
+    Now the function $\varphi - g$ is identically zero on the compliment of the set $\bigcup_{j=1}^n((U_j\setminus K_j) \cup (A_j \setminus K_j))$, and we have
+    \begin{align*}
+        \int_X |\varphi - g|^p \, \dif \mu &\leq \sum_{j=1}^n \int\limits_{(U_j\setminus K_j)\cup(A_j \setminus K_j)} |\varphi - g|^p \, \dif \mu \\
+            &\leq \sup|\varphi-g|^p \sum_{j=1}^n \mu((U_j\setminus K_j)\cup(A_j \setminus K_j) ) \\
+            &\leq (2M)^p \sum_{j=1}^n \mu((U_j\setminus K_j)\cup(A_j \setminus K_j) ) \\
+            &\leq (2M)^p \sum_{j=1}^n \left( \mu(U_j\setminus K_j) + \mu(A_j \setminus K_j) \right) \\
+            &< (2M)^p \sum_{j=1}^n \frac{\varepsilon^p}{n 2^p M^p} \\
+            &\leq \varepsilon^p 
+    \end{align*}
+    where we have used subadditivity of $\mu$ in the first line, and Lemma \ref{ex:bounding_an_integral} (Bounding an Integral) in the second line.
+    Hence
+    \[ \| f - g\|_{L^p} \leq \| f - \varphi\|_{L^p} + \| \varphi - g\|_{L^p} \leq 2\varepsilon. \]
+    Since $\varepsilon > 0$ is arbitrary, the theorem is proved.
+\end{proof}
+
+We remark that this result is sometimes used ``coordinate-wise'', and cited as ``the space of continuous functions $C_c(X,\F^m)$ is dense in $L^p(X,\F^m,\mu)$, for $p\in [1,\infty).$ '' 

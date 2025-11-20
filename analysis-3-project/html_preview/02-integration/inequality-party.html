@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>inequality-party</title>
+  <script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '0.8em',
+      packages: {'[+]': ['ams']},
+      macros: {
+        R: '\\mathbb{R}',
+        C: '\\mathbb{C}',
+        N: '\\mathbb{N}',
+        Z: '\\mathbb{Z}',
+        Q: '\\mathbb{Q}',
+        E: '\\mathbb{E}',
+        F: '\\mathbb{F}',
+        S: '\\mathbb{S}',
+        H: '\\mathcal{H}',
+        L: '\\mathcal{L}',
+        dif: '\\,\\mathrm{d}',
+        supp: '\\operatorname{supp}',
+        proj: '\\operatorname{proj}',
+        Id: '\\operatorname{Id}',
+        Span: '\\operatorname{span}',
+        graph: '\\operatorname{graph}',
+        dist: '\\operatorname{dist}',
+        diam: '\\operatorname{diam}',
+        avg: '\\operatorname{avg}',
+        div: '\\operatorname{div}',
+        vol: '\\operatorname{vol}',
+        ord: '\\operatorname{ord}',
+        Chi: '\\mathbf{1}',
+        sub: '\\subseteq',
+        mres: '\\downharpoonright',
+        ddag: '\\ddagger',
+        dag: '\\dagger',
+        norm: ['\\left\\| #1 \\right\\|', 1],
+        abs: ['\\left| #1 \\right|', 1],
+        set: ['\\left\\{ #1 \\right\\}', 1],
+        inner: ['\\langle #1, #2 \\rangle', 2],
+        floor: ['\\lfloor #1 \\rfloor', 1],
+        ceil: ['\\lceil #1 \\rceil', 1],
+        llbracket: '\\unicode{x27E6}',
+        rrbracket: '\\unicode{x27E7}',
+        bigskull: '\\unicode{x1F480}',
+        skull: '\\unicode{x2620}',
+        mathwitch: '\\unicode{x1F9D9}',
+        pumpkin: '\\unicode{x1F383}',
+        mathpumpkin: '\\unicode{x1F383}',
+        bigpumpkin: '\\unicode{x1F383}',
+        mathghost: '\\unicode{x1F47B}',
+        mathcat: '\\unicode{x1F408}',
+        mathbat: '\\unicode{x1F987}',
+        esssup: '\\operatorname{ess\\,sup}',
+        essinf: '\\operatorname{ess\\,inf}',
+        Lip: '\\operatorname{Lip}',
+        pd: ['\\frac{\\partial#1}{\\partial#2}', 2],
+        od: ['\\frac{\\mathrm{d}#1}{\\mathrm{d}#2}', 2],
+        dashint: '\\mathchoice{\\rlap{-}\\!\\int}{\\rlap{\\raise.15ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}{\\rlap{\\raise.09ex\\hbox{\\smash{\\scriptscriptstyle-}}}\\int}',
+        eurologo: '\\unicode{x20AC}',
+        starredbullet: '\\unicode{x2726}',
+        grimace: '\\unicode{x1F62C}',
+        textthing: '\\unicode{x2639}',
+        noway: '\\unicode{x26D4}',
+        warning: '\\unicode{x26A0}',
+        danger: '\\unicode{x26A0}',
+        textxswup: '\\unicode{x2195}',
+        textxswdown: '\\unicode{x2195}',
+        decoone: '\\unicode{x2756}',
+        decotwo: '\\unicode{x2767}',
+        decothreeleft: '\\unicode{x2619}',
+        decothreeright: '\\unicode{x2767}',
+        decofourleft: '\\unicode{x261A}',
+        decofourright: '\\unicode{x261B}',
+        floweroneleft: '\\unicode{x2740}',
+        floweroneright: '\\unicode{x2740}',
+        lefthand: '\\unicode{x261C}',
+        righthand: '\\unicode{x261E}',
+        decosix: '\\unicode{x2766}',
+        bomb: '\\unicode{x1F4A3}',
+        caution: '\\unicode{x2621}',
+        leftblackhand: '\\unicode{x261A}',
+        rightblackhand: '\\unicode{x261B}',
+        leafleft: '\\unicode{x2618}',
+        leafright: '\\unicode{x2618}',
+        leafNW: '\\unicode{x2618}',
+        leafNE: '\\unicode{x2618}',
+        leafSE: '\\unicode{x2618}',
+        leafSW: '\\unicode{x2618}',
+        aldineleft: '\\unicode{x2619}',
+        aldineright: '\\unicode{x2767}',
+        aldine: '\\unicode{x2766}',
+        aldinesmall: '\\unicode{x2767}',
+        aldinesmallrevert: '\\unicode{x2619}',
+        aldinesmallup: '\\unicode{x2766}',
+        grappe: '\\unicode{x2766}',
+        rightgrappe: '\\unicode{x2767}',
+        leftgrappe: '\\unicode{x2619}',
+        oldpilcrowone: '\\unicode{x00B6}',
+        oldpilcrowtwo: '\\unicode{x00B6}',
+        oldpilcrowthree: '\\unicode{x00B6}',
+        oldpilcrowfour: '\\unicode{x00B6}',
+        oldpilcrowfive: '\\unicode{x00B6}',
+        oldpilcrowsix: '\\unicode{x00B6}'
+      }
+    },
+    startup: {
+      pageReady: () => {
+        return MathJax.startup.defaultPageReady().then(() => {
+          console.log('MathJax ready');
+        });
+      }
+    }
+  };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+  <script>
+  (function() {
+    window.addEventListener('beforeunload', function() {
+      saveProofState();
+      saveCollapsibleState();
+    });
+    
+    const eventSource = new EventSource('http://localhost:35729/reload-stream');
+    
+    eventSource.onmessage = function(event) {
+      if (event.data === 'reload') {
+        console.log('📝 File updated, saving state and reloading...');
+        saveProofState();
+        saveCollapsibleState();
+        setTimeout(() => {
+          window.location.reload();
+        }, 50);
+      }
+    };
+    
+    eventSource.onerror = function() {
+      console.log('⚠️  Auto-reload server not available. Run node watch.js to enable auto-reload.');
+      eventSource.close();
+    };
+    
+    console.log('🔄 Auto-reload enabled');
+  })();
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      color: #1a1a1a;
+      background: #ffffff;
+    }
+    
+    /* Layout with sidebar */
+    .page-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      width: 280px;
+      background: #fff;
+      border-right: 1px solid #e0e0e0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px 0;
+      font-size: 14px;
+    }
+    
+    .sidebar-header {
+      padding: 15px 20px 25px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .sidebar-header h1 {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 5px 0;
+    }
+    
+    .sidebar-header .subtitle {
+      font-size: 0.85em;
+      color: #666;
+      font-style: italic;
+    }
+    
+    .sidebar-header .back-link {
+      display: block;
+      font-size: 0.8em;
+      color: #666;
+      text-decoration: none;
+      margin-top: 12px;
+    }
+    
+    .sidebar-header .back-link:hover {
+      color: #1a1a1a;
+    }
+    
+    .sidebar-nav {
+      padding: 10px 0;
+    }
+    
+    .chapter-group {
+      margin-bottom: 2px;
+    }
+    
+    .chapter-title {
+      padding: 12px 20px;
+      font-size: 0.9em;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chapter-title:hover {
+      background: #f5f5f5;
+    }
+    
+    .chapter-title .toggle {
+      font-size: 0.65em;
+      color: #999;
+      transition: transform 0.2s;
+    }
+    
+    .chapter-group.expanded .chapter-title .toggle {
+      transform: rotate(90deg);
+    }
+    
+    .section-list {
+      display: none;
+      padding: 5px 0;
+      background: #f8f8f8;
+    }
+    
+    .chapter-group.expanded .section-list {
+      display: block;
+    }
+    
+    .section-link {
+      display: block;
+      padding: 8px 20px 8px 35px;
+      font-size: 0.85em;
+      color: #555;
+      text-decoration: none;
+      border-left: 3px solid transparent;
+    }
+    
+    .section-link:hover {
+      background: #f0f0f0;
+      color: #1a1a1a;
+    }
+    
+    .section-link.active {
+      background: #e8e8e8;
+      border-left-color: #333;
+      color: #000;
+      font-weight: 500;
+    }
+    
+    /* Main content area */
+    .main-content {
+      margin-left: 280px;
+      flex: 1;
+      max-width: 900px;
+      padding: 40px 60px;
+    }
+    
+    @media (max-width: 1100px) {
+      .sidebar {
+        width: 240px;
+      }
+      .main-content {
+        margin-left: 240px;
+        padding: 30px 40px;
+      }
+    }
+    
+    @media (max-width: 800px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+      .page-layout {
+        flex-direction: column;
+      }
+    }
+    
+    h2, h3, h4 {
+      margin-top: 2em;
+      margin-bottom: 0.75em;
+      color: #000;
+      font-weight: 600;
+    }
+    h2 { font-size: 1.5em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+    h3 { font-size: 1.25em; }
+    h4 { font-size: 1.1em; }
+    p {
+      margin: 1em 0;
+      text-indent: 2em;
+    }
+    p:first-of-type,
+    h2 + p,
+    h3 + p,
+    h4 + p,
+    .theorem-box + p,
+    .proof-box + p {
+      text-indent: 0;
+    }
+    .noindent + p,
+    p:has(> .noindent:first-child) {
+      text-indent: 0 !important;
+    }
+    .noindent {
+      display: none;
+    }
+    .theorem-box {
+      margin: 1.75em 0;
+      padding: 1.25em;
+      border-left: 5px solid #16a34a;
+      background: linear-gradient(to top, #bbf7d0 0%, #d1fae5 100%);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .definition-box { border-left-color: #16a34a; background: linear-gradient(to top, #d1fae5 0%, #ecfdf5 100%); }
+    .lemma-box { border-left-color: #1e3a8a; background: linear-gradient(to top, #bfdbfe 0%, #dbeafe 100%); }
+    .corollary-box { border-left-color: #9333ea; background: linear-gradient(to top, #e9d5ff 0%, #f3e8ff 100%); }
+    .proposition-box { border-left-color: #dc2626; background: linear-gradient(to top, #fecaca 0%, #fee2e2 100%); }
+    .remark-box { border-left-color: #64748b; background: linear-gradient(to top, #e2e8f0 0%, #f1f5f9 100%); }
+    .example-box { border-left-color: #0891b2; background: linear-gradient(to top, #a5f3fc 0%, #cffafe 100%); }
+    .construction-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .notation-box { border-left-color: #ca8a04; background: linear-gradient(to top, #fef08a 0%, #fef9c3 100%); }
+    .exercise-box { border-left-color: #ea580c; background: linear-gradient(to top, #fed7aa 0%, #ffedd5 100%); }
+    .problem-box { border-left-color: #ec4899; background: linear-gradient(to top, #fbcfe8 0%, #fce7f3 100%); }
+    .theorem-header {
+      margin-bottom: 0.75em;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+    .theorem-header.clickable {
+      cursor: pointer;
+      user-select: none;
+    }
+    .theorem-header.clickable:hover {
+      background: rgba(0,0,0,0.03);
+      margin: -0.5em -0.75em 0.75em -0.75em;
+      padding: 0.5em 0.75em;
+      border-radius: 4px;
+    }
+    .collapsible-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      margin-right: 0.5em;
+      color: #6b7280;
+    }
+    .collapsible-box.collapsed .collapsible-icon {
+      transform: rotate(-90deg);
+    }
+    .collapsible-content {
+      transition: max-height 0.3s ease;
+      overflow: hidden;
+    }
+    .collapsible-box.collapsed .collapsible-content {
+      display: none;
+    }
+    .theorem-content {
+      padding-left: 0.5em;
+      line-height: 1.8;
+    }
+    .proof-box {
+      margin: 1.5em 0;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: white;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .proof-header {
+      position: sticky;
+      top: 0;
+      background: linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      border-radius: 6px 6px 0 0;
+    }
+    .proof-toggle {
+      width: 100%;
+      padding: 0.85em 1.25em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1em;
+      display: flex;
+      align-items: center;
+      gap: 0.75em;
+      transition: background 0.15s;
+    }
+    .proof-toggle:hover { background: rgba(0,0,0,0.03); }
+    .proof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.75em;
+      color: #6b7280;
+    }
+    .proof-box.collapsed .proof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .proof-content {
+      padding: 1.25em;
+      line-height: 1.8;
+    }
+    .proof-box.collapsed .proof-content {
+      display: none;
+    }
+    .proof-end {
+      float: right;
+      font-size: 1.3em;
+      margin-left: 0.5em;
+      color: #374151;
+    }
+    .subproof {
+      margin: 1em 0;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: #f9fafb;
+    }
+    .subproof-header {
+      background: linear-gradient(to bottom, #f9fafb 0%, #f3f4f6 100%);
+      border-bottom: 1px solid #d1d5db;
+      border-radius: 4px 4px 0 0;
+    }
+    .subproof-toggle {
+      width: 100%;
+      padding: 0.6em 1em;
+      border: none;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.95em;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      transition: background 0.15s;
+    }
+    .subproof-toggle:hover {
+      background: rgba(0,0,0,0.03);
+    }
+    .subproof-toggle-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+      font-size: 0.7em;
+      color: #6b7280;
+    }
+    .subproof.collapsed .subproof-toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .subproof-content {
+      padding: 1em;
+      line-height: 1.7;
+    }
+    .subproof.collapsed .subproof-content {
+      display: none;
+    }
+    .ref-link {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0 0.15em;
+      border-radius: 2px;
+    }
+    .ref-link:hover {
+      background: #dbeafe;
+      text-decoration: underline;
+    }
+    .ref-unknown {
+      color: #dc2626;
+      font-weight: bold;
+      background: #fee2e2;
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+    }
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+    ol, ul {
+      margin: 1em 0;
+      padding-left: 2.5em;
+      line-height: 1.8;
+    }
+    li {
+      margin: 0.5em 0;
+    }
+    .latex-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1.5em auto;
+    }
+    .latex-figure .latex-image {
+      display: inline-block;
+      margin: 0.5em;
+      vertical-align: middle;
+    }
+    .latex-figure {
+      margin: 2em 0;
+      text-align: center;
+      line-height: 0;
+    }
+    .latex-figure .figure-content {
+      margin-bottom: 0.75em;
+      line-height: normal;
+    }
+    .latex-figure .figure-content > * {
+      vertical-align: middle;
+    }
+    .latex-figure figcaption {
+      font-size: 0.9em;
+      color: #4b5563;
+      font-style: italic;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-layout">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1>Analysis III</h1>
+        <div class="subtitle">Measure Theory &amp; Integration</div>
+        <a href="../index.html" class="back-link">← Table of Contents</a>
+      </div>
+      <div class="sidebar-nav">
+        <div class="chapter-group expanded">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>1. Measure Theory</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../01-measure-theory/measure-theory.html" class="section-link">Overview</a>
+            <a href="../01-measure-theory/basics.html" class="section-link">Outer Measures</a>
+            <a href="../01-measure-theory/lebesgue-meas.html" class="section-link">Lebesgue Measure</a>
+            <a href="../01-measure-theory/cantor.html" class="section-link">The Cantor Set</a>
+            <a href="../01-measure-theory/measure-spaces.html" class="section-link">Measure Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>2. Integration</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../02-integration/integration.html" class="section-link">Overview</a>
+            <a href="../02-integration/integrals-1.html" class="section-link">Simple Functions</a>
+            <a href="../02-integration/integrals-2.html" class="section-link">General Functions</a>
+            <a href="../02-integration/convergence.html" class="section-link">Convergence Theorems</a>
+            <a href="../02-integration/inequality-party.html" class="section-link">Integral Inequalities</a>
+            <a href="../02-integration/lp_spaces.html" class="section-link">Lᵖ Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>3. Product Measures</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../03-fubini/fubini_ch.html" class="section-link">Overview</a>
+            <a href="../03-fubini/fubini.html" class="section-link">Fubini-Tonelli</a>
+            <a href="../03-fubini/integrals-3.html" class="section-link">Product Measures</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>4. Differentiation I</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../04-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../04-differentiation-1/covering.html" class="section-link">Vitali Covering</a>
+            <a href="../04-differentiation-1/monotone.html" class="section-link">Monotone Functions</a>
+            <a href="../04-differentiation-1/BV_on_R.html" class="section-link">Bounded Variation</a>
+            <a href="../04-differentiation-1/FTOC.html" class="section-link">FTC for Lebesgue</a>
+            <a href="../04-differentiation-1/HL.html" class="section-link">Hardy-Littlewood</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>5. Differentiation I (cont)</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../05-differentiation-1/differentiation.html" class="section-link">Overview</a>
+            <a href="../05-differentiation-1/r-nik.html" class="section-link">Radon-Nikodym</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>6. Differentiation II</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-differentiation-2/diff-2.html" class="section-link">Overview</a>
+            <a href="../06-differentiation-2/vector-measures.html" class="section-link">Vector Measures</a>
+            <a href="../06-differentiation-2/r-nik.html" class="section-link">Radon-Nikodym</a>
+            <a href="../06-differentiation-2/besi.html" class="section-link">Besicovitch</a>
+            <a href="../06-differentiation-2/densities.html" class="section-link">Densities</a>
+            <a href="../06-differentiation-2/diff-measures.html" class="section-link">Measure Derivatives</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>7. Riesz Representation</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../06-riesz/riesz.html" class="section-link">Overview</a>
+            <a href="../06-riesz/riesz_functional.html" class="section-link">Riesz Representation</a>
+            <a href="../06-riesz/LCH_spaces.html" class="section-link">LCH Spaces</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>8. Integral Formulas</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../07-formulas/formulas.html" class="section-link">Overview</a>
+            <a href="../07-formulas/hausdorff_meas.html" class="section-link">Hausdorff Measures</a>
+            <a href="../07-formulas/lippy.html" class="section-link">Lipschitz Maps</a>
+            <a href="../07-formulas/rademacher.html" class="section-link">Rademacher</a>
+            <a href="../07-formulas/coarea-prereq.html" class="section-link">Coarea Prerequisites</a>
+            <a href="../07-formulas/coarea.html" class="section-link">Coarea Formula</a>
+            <a href="../07-formulas/area-prereq.html" class="section-link">Area Prerequisites</a>
+            <a href="../07-formulas/area-formula.html" class="section-link">Area Formula</a>
+          </div>
+        </div>
+        <div class="chapter-group">
+          <div class="chapter-title" onclick="toggleChapter(this)"><span>9. Extension Results</span><span class="toggle">▶</span></div>
+          <div class="section-list">
+            <a href="../08-ext-res/ext-res.html" class="section-link">Overview</a>
+            <a href="../08-ext-res/taylor_thm_integral_remainder.html" class="section-link">Taylor's Theorem</a>
+            <a href="../08-ext-res/whitney-cover.html" class="section-link">Whitney Covering</a>
+            <a href="../08-ext-res/whitney-partition-of-unity.html" class="section-link">Partition of Unity</a>
+            <a href="../08-ext-res/whitney-decomposition.html" class="section-link">Decomposition</a>
+            <a href="../08-ext-res/whitney-extension-theorem.html" class="section-link">Extension Theorem</a>
+            <a href="../08-ext-res/whitney-extension-proof.html" class="section-link">Extension Proof</a>
+            <a href="../08-ext-res/whitney-extension-applications.html" class="section-link">Applications</a>
+            <a href="../08-ext-res/whitney-extension.html" class="section-link">Summary</a>
+            <a href="../08-ext-res/more-bump.html" class="section-link">More Bump Functions</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <main class="main-content">
+      <h2>Inequality Party</h2>
+<p>Get ready to party.</p>
+<h3>Hölder's Inequality</h3>
+<div class="theorem-box lemma-box" id="lem:youngs_inequality">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Young's Inequality)</div>
+  <div class="theorem-content">Let $p,q \in (1,\infty)$ be such that $\frac{1}{p} + \frac{1}{q} = 1$.
+    Then for all $a,b \geq 0$, we have
+    \[ ab \leq \frac{a^p}{p} + \frac{b^q}{q}, \]
+    with equality if and only if $a^p = b^q$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-0">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-0')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-0">
+    If $a=0$ or $b=0$, then the result is trivial, as the left side is zero and the right side is nonnegative; the right side is zero if and only if $a=b=0$, which agrees with the equality condition.
+<p>Fix $b>0$. Define the function $f : (0,\infty) \to \R$ by
+    \[ f(a) = \frac{a^p}{p} + \frac{b^q}{q} - ab. \]
+    Then $f$ is differentiable and \[ f'(a) = a^{p-1} - b \qquad\forall a>0. \]</p>
+<p>See that $f'(a) = 0$ if and only if $a^{p-1} = b$, or equivalently, $a^p = b^q$.
+    Since \[f''(a) = (p-1)a^{p-2} > 0, \qquad \forall a>0\] this critical point is a global minimum.
+    Thus, for all $a>0$, we have
+    \[ f(a) \geq f(b^{1/(p-1)}) = \frac{b^{p/(p-1)}}{p} + \frac{b^q}{q} - b^{(p-1)/(p-1)}b = \frac{b^q}{p} + \frac{b^q}{q} - b^q = 0 \]
+    which is equivalent to
+    \[ \frac{a^p}{p} + \frac{b^q}{q}- ab \geq 0 \]
+    with equality if and only if $a^p = b^q$.</p>
+<p>Since $b>0$ was arbitrary, the result follows.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box proposition-box" id="prop:holders_inequality_1">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Hölder's Inequality)</div>
+  <div class="theorem-content">Let $(X,\mu)$ be a measure space, and let $p,q \in [1,\infty]$ be such that $\frac{1}{p} + \frac{1}{q} = 1$.
+    If $f \in L^p(X,\mu)$ and $g \in L^q(X,\mu)$, then $fg \in L^1(X,\mu)$ and
+    \[ \|fg\|_{L^1} \leq \|f\|_{L^p} \|g\|_{L^q} \]
+    with equality if and only if there are constants $c_1,c_2\geq 0$, not both zero, such that $c_1|f|^p = c_2|g|^q$ almost everywhere.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-1">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-1')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-1">
+    <em>Step 1:</em> Suppose first that $1 < p,q < \infty$.
+<p>We will prove the result in the special case that both functions have unit norm.
+    Suppose that $f \in L^p(X,\mu)$ and $g \in L^q(X,\mu)$ are such that $\|f\|_{L^p} = \|g\|_{L^q} = 1$.
+    Then by <span class="ref-unknown" title="Reference not found: lem:youngs_inequality">[lem:youngs_inequality?]</span>, we have
+    \[ |f(x)g(x)| \leq \frac{|f(x)|^p}{p} + \frac{|g(x)|^q}{q} \qquad\text{for each } x \in X. \]
+    By monotonicity of the integral, we have
+    \begin{align*}
+        \|fg\|_{L^1} = \int_X |f(x)g(x)| \,\dif\mu(x) &\leq \int_X \left( \frac{|f(x)|^p}{p} + \frac{|g(x)|^q}{q} \right) \dif\mu(x) \\
+        &= \frac{1}{p} \int_X |f(x)|^p \,\dif\mu(x) + \frac{1}{q} \int_X |g(x)|^q \,\dif\mu(x) \\
+        &= \frac{1}{p}\|f\|_{L^p}^p + \frac{1}{q}\|g\|_{L^q}^q = \frac{1}{p} + \frac{1}{q} = 1.
+    \end{align*}
+    Thus, in this special case, we have $\|fg\|_{L^1} \leq 1 = \|f\|_{L^p}\|g\|_{L^q}$.
+    Moreover, equality holds if and only if $|f(x)|^p = |g(x)|^q$ for $\mu$-almost every $x \in X$.
+    This proves the result in the special case that both functions have unit norm.</p>
+<p>Now, let $f \in L^p(X,\mu)$ and $g \in L^q(X,\mu)$ be arbitrary.
+    If either $f$ or $g$ equals zero $\mu$-almost everywhere, then the result is trivial as both sides of the inequality are zero, so suppose that neither function is zero $\mu$-almost everywhere.
+    Then $\|f\|_{L^p}, \|g\|_{L^q} > 0$, and so the functions $\frac{f}{\|f\|_{L^p}}$ and $\frac{g}{\|g\|_{L^q}}$ both have unit norm in their respective spaces.
+    By the special case already proven, we have
+    \[ \left\| \frac{f}{\|f\|_{L^p}} \frac{g}{\|g\|_{L^q}} \right\|_{L^1} \leq 1, \]
+    which is equivalent to
+    \[ \|fg\|_{L^1} \leq \|f\|_{L^p} \|g\|_{L^q} \]
+    by homogeneity of the $L^1$ norm.
+    Moreover, equality holds if and only if there is a constant $c>0$ such that $|f|^p = c|g|^q$ $\mu$-almost everywhere.
+    This proves the result in the case that $1 < p,q < \infty$.</p>
+<p><em>Step 2:</em> Now, suppose that $p=1$ and $q=\infty$ (the case $p=\infty$ and $q=1$ is symmetric).
+    Then we recall that the $L^\infty$-norm is defined as the essential supremum,
+    \[ \|g\|_{L^\infty} := \esssup_{x \in X} |g(x)| := \inf\{ C : |g(x)| \leq C \text{ for } \mu\text{-almost every } x \in X \} \qquad\forall g \in L^\infty(X,\mu). \]</p>
+<p>Let $f\in L^1(X,\mu)$ and $g \in L^\infty(X,\mu)$ be arbitrary. Then 
+    \begin{align*}
+        \|fg\|_{L^1} = \int_X |f(x)g(x)| \,\dif\mu(x) &\leq \int_X |f(x)| \|g\|_{L^\infty} \,\dif\mu(x) \\
+            &= \|g\|_{L^\infty} \int_X |f(x)| \,\dif\mu(x) = \|f\|_{L^1} \|g\|_{L^\infty}
+    \end{align*}
+    by monotonicity and homogeneity of the integral.
+    Moreover, equality holds if and only if there is a constant $c \geq 0$ such that $|f| = c|g|$ $\mu$-almost everywhere.
+    This proves the result in the case that $p=1$ and $q=\infty$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box proposition-box" id="prop:reverse_holders_inequality">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Reverse Hölder Inequality)</div>
+  <div class="theorem-content">Let $(X,\mu)$ be a measure space, and let $p<1$ be nonzero, and let $q$ be such that $\frac{1}{p} + \frac{1}{q} = 1$.
+    Also suppose that $\mu(X)>0$.
+    If $f,g: X\to \C$ are measurable functions such that $g\neq 0$ $\mu$-almost everywhere, $fg\in L^1(X,\mu)$, and $\int_X |g|^q \,\dif\mu < \infty$, then
+    \[ \|fg\|_{L^1} \geq \left( \int_X |f|^p \,\dif\mu \right)^{\frac{1}{p}} \left( \int_X |g|^q \,\dif\mu \right)^{\frac{1}{q}}. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-2">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-2')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-2">
+    Notice that 
+    \[ 0<p<1 \iff q <0 \qquad\text{and}\qquad p<0 \iff 0 <q <1. \]
+    Thus by symmetry we may assume without loss of generality that $0<p<1$ and $q<0$.
+<p>Now let $f,g : X \to \C$ be measurable functions such that $g\neq 0$ $\mu$-almost everywhere,
+    \[ \int_X |fg| \,\dif\mu < \infty \quad\text{ and }\quad \int_X |g|^q \,\dif\mu < \infty. \]
+    Define $r:= \frac{1}{p} > 1$ and $r' := \frac{r}{r-1} > 1$ so that we have 
+    \[ \frac{1}{r} + \frac{1}{r'} = 1. \]</p>
+<p>We estimate 
+    \begin{align*}
+        \| |fg|^{1/r} \|_{L^r} &= \left( \int_X |fg|^{1/r \cdot r} \,\dif\mu \right)^{1/r} \\
+            &= \left( \int_X |fg| \,\dif\mu \right)^{1/r} = \left( \int_X |fg| \,\dif\mu \right)^p = \|fg\|_{L^1}^p < \infty 
+    \end{align*}
+    and 
+    \begin{align*}
+        \| |g|^{-1/r} \|_{L^{r'}} &= \left( \int_X |g|^{-1/r \cdot r'} \,\dif\mu \right)^{1/r'} \\
+            &= \left( \int_X |g|^{-\frac{1}{r-1}} \,\dif\mu \right)^{1/r'} = \left( \int_X |g|^q \,\dif\mu \right)^{1-p} < \infty.
+    \end{align*}
+    by using our assumptions on $f$ and $g$.
+    From this we can use Hölder's inequality (<span class="ref-unknown" title="Reference not found: holders_inequality_1">[holders_inequality_1?]</span>) to estimate
+    \begin{align*}
+        \int_X |f|^p \,\dif\mu &= \int_X |fg|^{p} |g|^{-p} \,\dif\mu = \int_X |fg|^{1/r} |g|^{-1/r} \,\dif\mu \\
+            &= \| |fg|^{1/r} |g|^{-1/r} \|_{L^1} \\
+            &\leq \| |fg|^{1/r} \|_{L^r} \| |g|^{-1/r} \|_{L^{r'}} \\
+            &= \|fg\|_{L^1}^p \left( \int_X |g|^q \,\dif\mu \right)^{1-p}.
+    \end{align*}
+    Because $\mu(X)>0$ and $g\neq 0$ $\mu$-almost everywhere, we have $\int_X |g|^q \,\dif\mu > 0$, and so we can divide both sides by $\left( \int_X |g|^q \,\dif\mu \right)^{1-p}$ to obtain
+    \[ \int_X |f|^p \,\dif\mu \left( \int_X |g|^q \,\dif\mu \right)^{-(1-p)} \leq \|fg\|_{L^1}^p \]
+    which is equivalent to
+    \[ \left(\int_X |f|^p \,\dif\mu\right)^{1/p} \left( \int_X |g|^q \,\dif\mu \right)^{\frac{p-1}{p}} \leq \|fg\|_{L^1} \]
+    by taking $p$-th roots of both sides.
+    Since $\frac{p-1}{p} = \frac{1}{q}$, the desired result follows.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box proposition-box" id="cor:holders_inequality_3">
+  <div class="theorem-header"><strong>Proposition ?</strong></div>
+  <div class="theorem-content">Let $(X,\mu)$ be a measure space, and let $0\lt r,p,q\leq \infty$ be such that
+    \[ \frac{1}{r} = \frac{1}{p} + \frac{1}{q}. \]
+    If $f \in L^p(X,\mu)$ and $g \in L^q(X,\mu)$, then $fg \in L^r(X,\mu)$ and
+    \[ \|fg\|_{L^r} \leq \|f\|_{L^p} \|g\|_{L^q}. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-3">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-3')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-3">
+    <em>Case 1:</em> First suppose that $r=\infty$.
+    Then 
+    \[ \frac{1}{p} + \frac{1}{q} = 0 \]
+    so we must have $p=q=\infty$. Thus if $f,g \in L^\infty(X,\mu)$, then we check that 
+    \begin{align*}
+        \|fg\|_{L^\infty} &= \esssup_{x\in X} |f(x)g(x)| \\
+            &\leq \esssup_{x\in X} |f(x)| \cdot \esssup_{x\in X} |g(x)| = \|f\|_{L^\infty} \|g\|_{L^\infty}.
+    \end{align*}
+    This proves the result in the case that $r=\infty$.
+<p><div style="margin: 1em 0;"></div>
+    <em>Case 2:</em> Now suppose that $0\lt r<\infty$.
+    Then we consider two subcases.
+    \[ \text{a)} \quad q < \infty \text{ and } p = \infty \qquad\qquad \text{b)} \quad p,q<\infty. \]
+    Note that both $p$ and $q$ cannot be infinite, as this would imply that $r=\infty$, which is covered in Case 1.
+    <div style="margin: 1em 0;"></div>
+    <em>Subcase 2a:</em> Suppose that $q<\infty$ and $p=\infty$.
+    Then we have \[ \frac{1}{r} = \frac{1}{\infty} + \frac{1}{q} = 0 + \frac{1}{q} = \frac{1}{q} \]
+    so that $r=q$. 
+    Let $f \in L^q(X,\mu)$ and $g \in L^\infty(X,\mu)$ be arbitrary.
+    Then we estimate
+    \begin{align*}
+        \|fg\|_{L^r}^r = \int_X |f(x)g(x)|^r \,\dif\mu(x) &= \int_X |f(x)|^r |g(x)|^r \,\dif\mu(x) \\
+            &\leq \int_X |f(x)|^r \|g\|_{L^\infty}^r \,\dif\mu(x) = \|g\|_{L^\infty}^r \|f\|_{L^r}^r.
+    \end{align*}
+    By taking $r$-th roots and using that $r=q$, we obtain
+    \[ \|fg\|_{L^r} \leq \|f\|_{L^r} \|g\|_{L^\infty}. \]</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Subcase 2b:</em> Now suppose that $p,q<\infty$.
+    Then $\frac{p}{r}, \frac{q}{r} > 1$ and \[ \frac{1}{p/r} + \frac{1}{q/r} = 1 \]
+    so we can apply Hölder's inequality (<span class="ref-unknown" title="Reference not found: holders_inequality_1">[holders_inequality_1?]</span>) with exponents $\frac{p}{r}$ and $\frac{q}{r}$.</p>
+<p>Let $f \in L^p(X,\mu)$ and $g \in L^q(X,\mu)$ be arbitrary.
+    Then $|f|^r \in L^{p/r}(X,\mu)$ and $|g|^r \in L^{q/r}(X,\mu)$, so we can use Hölder's inequality to estimate
+    \begin{align*}
+        \|fg\|_{L^r}^r &= \| |f|^r |g|^r \|_{L^1} \\
+            &\leq \| |f|^r \|_{L^{p/r}} \| |g|^r \|_{L^{q/r}} \\
+            &= \left( \int_X |f(x)|^{r \cdot p/r} \,\dif\mu(x) \right)^{r/p} \left( \int_X |g(x)|^{r \cdot q/r} \,\dif\mu(x) \right)^{r/q} \\
+            &= \|f\|_{L^p}^r \|g\|_{L^q}^r.
+    \end{align*}
+    By taking $r$-th roots of both sides, we obtain the desired result.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box theorem-box" id="thm:generalized_holders_inequality">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Generalized Holder's Inequality)</div>
+  <div class="theorem-content">Let $(X,\mu)$ be a measure space, and let $k \in \Z^+$.
+    Also let $0\lt p,p_1,\ldots,p_k \leq \infty$ be such that 
+    \[ \frac{1}{p} = \sum_{j=1}^k \frac{1}{p_j}. \]
+    If $f_j \in L^{p_j}(X,\mu)$ for each $j=1,\ldots,k$, then $\prod_{j=1}^k f_j \in L^p(X,\mu)$ and
+    \[ \left\| \prod_{j=1}^k f_j \right\|_{L^p} \leq \prod_{j=1}^k \|f_j\|_{L^{p_j}}. \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-4">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-4')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-4">
+    We proceed by induction on $k\in \Z^+$.
+    The base case $k=1$ is trivial --- if $0< p,p_1 \leq \infty$ are such that $\frac{1}{p} = \frac{1}{p_1}$, then $p=p_1$, and so if $f_1 \in L^{p_1}(X,\mu)$, then $f_1 \in L^p(X,\mu)$ and $\|f_1\|_{L^p} = \|f_1\|_{L^{p_1}}$.
+<p>Now suppose that the result holds for some $k \in \Z^+$, and let $0< p,p_1,\ldots,p_{k+1} \leq \infty$ be such that
+    \[ \frac{1}{p} = \sum_{j=1}^{k+1} \frac{1}{p_j}. \]
+    Define \[ q:= \left( \sum_{j=1}^{k+1} \frac{1}{p_j} \right)^{-1} \]
+    so that $0< q\leq \infty$ and 
+    \[ \frac{1}{p} = \frac{1}{q} + \frac{1}{p_{k+1}}. \]
+    Let $f_j \in L^{p_j}(X,\mu)$ for each $j=1,\ldots,k+1$ be arbitrary.
+    Then by the induction hypothesis, we have $ \prod_{j=1}^k f_j \in L^q(X,\mu) $, so the previous proposition (<span class="ref-unknown" title="Reference not found: cor:holders_inequality_3">[cor:holders_inequality_3?]</span>) implies that
+    \begin{align*}
+        \left\| \left( \prod_{j=1}^k f_j\right) \cdot f_{k+1} \right\| &\leq \left\| \prod_{j=1}^k f_j \right\|_{L^q} \|f_{k+1}\|_{L^{p_{k+1}}} \\
+            &\leq \left( \prod_{j=1}^k \|f_j\|_{L^{p_j}} \right) \|f_{k+1}\|_{L^{p_{k+1}}} = \prod_{j=1}^{k+1} \|f_j\|_{L^{p_j}}.
+    \end{align*}
+    That is, 
+    \[ \left\| \prod_{j=1}^{k+1} f_j \right\|_{L^p} \leq \prod_{j=1}^{k+1} \|f_j\|_{L^{p_j}} \]
+    which completes the induction.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<h3>Minkowski's Inequality</h3>
+<div class="theorem-box lemma-box" id="lem:convexity_lemma">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Convexity Lemma)</div>
+  <div class="theorem-content">Suppose that $f : [0,\infty) \to [0,\infty)$ is a convex function such that $f(0)=0$.
+    Then for all $t_1,t_2\geq 0$ we have
+    \[ f(t_1) + f(t_2) \leq f(t_1 + t_2). \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-5">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-5')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-5">
+    Since $f$ is convex with $f(0)=0$, for each $\lambda \in [0,1]$ and each $x\geq 0$ we have
+    \[ f(\lambda x) = f(\lambda x + (1-\lambda)0) \leq \lambda f(x) + (1-\lambda)f(0) = \lambda f(x) \]
+    Let $t_1,t_2 \geq 0$ be arbitrary. If $t_1+t_2=0$, then the result is trivial, so suppose that $t_1+t_2>0$.
+    Define $\lambda_0 := \frac{t_1}{t_1+t_2} \in (0,1)$.
+    Then we estimate
+    \[ f(t_1) = f(\lambda_0 (t_1+t_2)) \leq \lambda_0 f(t_1+t_2) \quad\text{and} \quad f(t_2) = f((1-\lambda_0)(t_1+t_2)) \leq (1-\lambda_0)f(t_1+t_2). \]
+    By adding these two inequalities, we obtain
+    \[ f(t_1) + f(t_2) \leq (\lambda_0 + (1-\lambda_0)) f(t_1+t_2) = f(t_1+t_2) \]
+    which is the desired result.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<div class="theorem-box lemma-box" id="lem:concavity_lemma">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Concavity Lemma)</div>
+  <div class="theorem-content">Suppose that $f : [0,\infty) \to [0,\infty)$ is a concave function such that $f(0)=0$.
+    Then for all $t_1,t_2\geq 0$ we have
+    \[ f(t_1 + t_2) \leq f(t_1) + f(t_2). \]</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-6">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-6')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-6">
+    Note that $-f$ is convex and $-f(0)=0$, so the result follows from <span class="ref-unknown" title="Reference not found: lem:convexity_lemma">[lem:convexity_lemma?]</span>.
+    <span class="proof-end">□</span>
+  </div>
+</div>
+<div class="theorem-box proposition-box" id="proposition-?">
+  <div class="theorem-header"><strong>Proposition ?</strong></div>
+  <div class="theorem-content">Let $\{a_j\}_{j=1}^\infty \subseteq [0,\infty)$ be a sequence of nonnegative real numbers. 
+    Then for all $0\leq p \leq 1$, we have
+    \[ \left( \sum_{j=1}^\infty a_j \right)^p \leq \sum_{j=1}^\infty a_j^p. \]
+    If $p>1$, then the reverse inequality holds.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-7">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-7')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-7">
+    First note that if $p=1$, then both sides are equal, so the result is trivial.
+    Also if $p=0$, then the left side is $1$ if the sequence is not identically zero, and the right side is the number of nonzero terms in the sequence, so the result holds.
+<p>Let $N\in \Z^+$ be arbitrary.
+    See that the function
+    \[  f:[0,\infty) \to [0,\infty), \quad f(x) = x^p \]
+    is twice differentiable with
+    \[ f'(x) = p x^{p-1} \quad\text{ and thus }\quad f''(x) = p(p-1)x^{p-2}. \]
+    Thus
+    \[ f'(x) > 0 \iff p > 1 \quad\text{ and }\quad  f''(x)<0 \iff 0< p <1. \]
+    That is, $f$ is convex if $p>1$ and concave if $0 < p < 1$, and in both cases we have $f(0)=0$.
+    Thus by <span class="ref-unknown" title="Reference not found: lem:convexity_lemma">[lem:convexity_lemma?]</span>,<span class="ref-unknown" title="Reference not found: lem:concavity_lemma">[lem:concavity_lemma?]</span>, we have
+    \[ f\left( \sum_{j=1}^N a_j \right) \leq \sum_{j=1}^N f(a_j) \quad\text{if } 0 < p < 1 \]
+    and
+    \[ f\left( \sum_{j=1}^N a_j \right) \geq \sum_{j=1}^N f(a_j) \quad\text{if } p > 1. \]
+    That is,
+    \[ \left( \sum_{j=1}^N a_j \right)^p \leq \sum_{j=1}^N a_j^p \quad\text{if } 0 < p < 1 \]
+    and
+    \[ \left( \sum_{j=1}^N a_j \right)^p \geq \sum_{j=1}^N a_j^p \quad\text{if } p > 1. \]
+    Since $N\in \Z^+$ was arbitrary, the result follows by taking limits as $N\to \infty$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box theorem-box" id="thm:minkowskis_inequality">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Minkowski's Inequality)</div>
+  <div class="theorem-content">Let $(X,\mu)$ be a measure space, and let $1 \leq p \leq \infty$.
+    If $f,g \in L^p(X,\mu)$, then $f+g \in L^p(X,\mu)$ and
+    \[ \|f+g\|_{L^p} \leq \|f\|_{L^p} + \|g\|_{L^p} \]
+    with equality if and only if there is a constant $c\geq 0$ such that $|f| = c|g|$ almost everywhere.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-8">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-8')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-8">
+    We remark that this has already been proven in the case that $p=1$ as part of the proof that $\|\cdot\|_{L^1}$ is a norm on $L^1(X,\mu)$.
+    Also, the case that $p=\infty$ is easy to check directly --- if $f,g \in L^\infty(X,\mu)$, then
+    \begin{align*}
+        \|f+g\|_{L^\infty} = \esssup_{x\in X} |f(x)+g(x)| &\leq \esssup_{x\in X} |f(x)| + \esssup_{x\in X} |g(x)| \\
+            &= \|f\|_{L^\infty} + \|g\|_{L^\infty}
+    \end{align*}
+    by the triangle inequality for complex numbers.
+<p>Now suppose that $1 < p < \infty$ and let $f,g \in L^p(X,\mu)$ be arbitrary.
+    It is not even obvious that $f+g \in L^p(X,\mu)$, so we will prove this first, with a more elementary inequality.</p>
+<p>See that for each $x \in X$, we have
+    \[ |f(x)+g(x)|^p \leq (|f(x)| + |g(x)|)^p \leq (2\max\{|f(x)|,|g(x)|\})^p \leq 2^p(|f(x)|^p + |g(x)|^p) \]
+    by using the triangle inequality for complex numbers, the fact that $t \mapsto t^p$ is increasing on $[0,\infty)$, and the fact that $\max\{a,b\} \leq a+b$ for all $a,b\geq 0$.
+    By monotonicity of the integral, we have
+    \begin{align*}
+        \|f+g\|_{L^p}^p = \int_X |f(x)+g(x)|^p \,\dif\mu(x) &\leq \int_X 2^p (|f(x)|^p + |g(x)|^p) \,\dif\mu(x) \\
+            &= 2^p \left( \|f\|_{L^p}^p + \|g\|_{L^p}^p \right) < \infty
+    \end{align*}
+    since $f,g \in L^p(X,\mu)$.
+    Thus $f+g \in L^p(X,\mu)$.</p>
+<p>We can now improve this estimate. Let $1< q < \infty$ be such that $\frac{1}{p} + \frac{1}{q} = 1$.
+    See that 
+    \begin{align*}
+        \| f+g \|_{L^p}^p &= \int_X |f+g|^p \,\dif\mu = \int_X |f+g| |f+g|^{p-1} \,\dif\mu \\
+            &\leq \int_X (|f|+|g|) |f+g|^{p-1} \,\dif\mu \qquad\qquad\qquad\text{by the triangle inequality} \\
+            &= \int_X |f| |f+g|^{p-1} \dif\mu + \int_X |g| |f+g|^{p-1} \dif\mu \\
+            &= \| |f| |f+g|^{p-1} \|_{L^1} + \| |g| |f+g|^{p-1} \|_{L^1} \\
+            &\leq \|f\|_{L^p} \| |f+g|^{p-1} \|_{L^q} + \|g\|_{L^p} \| |f+g|^{p-1} \|_{L^q}
+    \end{align*}
+    by Hölder's inequality. 
+    We should check that $|f+g|^{p-1} \in L^q(X,\mu)$ to justify the use of Hölder's inequality above --- we compute 
+    \[ \| |f+g|^{p-1} \|_{L^q}^q = \int_X |f+g|^{(p-1)q} \,\dif\mu = \int_X |f+g|^{p-1 \cdot \frac{p}{p-1}} \,\dif\mu = \int_X |f+g|^p \,\dif\mu = \|f+g\|_{L^p}^p < \infty \]
+    since we have already shown that $f+g \in L^p(X,\mu)$.
+    Thus our use of Hölder's inequality is justified.</p>
+<p>Also the above computation shows that
+    \[ \| |f+g|^{p-1} \|_{L^q} = \|f+g\|_{L^p}^{p/q} = \|f+g\|_{L^p}^{p-1} \]
+    Thus our use of Hölder's inequality gives
+    \[ \|f+g\|_{L^p}^p \leq \|f\|_{L^p} \|f+g\|_{L^p}^{p-1} + \|g\|_{L^p} \|f+g\|_{L^p}^{p-1}. \]
+    If $\|f+g\|_{L^p} = 0$, then the result is trivial, so suppose that $\|f+g\|_{L^p} > 0$.
+    Then we can divide both sides by $\|f+g\|_{L^p}^{p-1}$ to obtain
+    \[ \|f+g\|_{L^p} \leq \|f\|_{L^p} + \|g\|_{L^p} \]
+    which is the desired result.</p>
+<p>Finally, we check when equality holds.
+    If there is a constant $c\geq 0$ such that $|f| = c|g|$ $\mu$-almost everywhere, then it is easy to check that equality holds in the above inequality.
+    Conversely, if equality holds, then we must have equality in the application of Hölder's inequality above, which by <span class="ref-unknown" title="Reference not found: prop:holders_inequality_1">[prop:holders_inequality_1?]</span> implies that there is a constant $c\geq 0$ such that
+    \[ |f(x)| = c |f(x)+g(x)|^{p-1} \quad\text{and}\quad |g(x)| = \frac{1}{c} |f(x)+g(x)|^{p-1} \]
+    for $\mu$-almost every $x \in X$.
+    If $c=0$, then $f=0$ $\mu$-almost everywhere, so we may assume that $c>0$.
+    From this we see that
+    \[ |f(x)|^p = c^p |f(x)+g(x)|^{p(p-1)} \quad\text{and}\quad |g(x)|^p = c^{-p} |f(x)+g(x)|^{p(p-1)} \]
+    for $\mu$-almost every $x \in X$.
+    By dividing these two equations, we obtain
+    \[ |f(x)|^p = c^{2p} |g(x)|^p \]
+    for $\mu$-almost every $x \in X$, which is the desired result.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box proposition-box" id="prop:minkowskis_triangle_inequality">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Minkowski's Triangle Inequality)</div>
+  <div class="theorem-content"></div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-9">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-9')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-9">
+<p><span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box proposition-box" id="prop:reverse_minkowskis_inequality">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Reverse Minkowski's Inequality)</div>
+  <div class="theorem-content"></div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-10">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-10')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-10">
+<p><span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box proposition-box" id="prop:minkowskis_integral_inequality">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Minkowski's Integral Inequality)</div>
+  <div class="theorem-content"></div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-11">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-11')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-11">
+<p><span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box proposition-box" id="prop:jensen_inequality">
+  <div class="theorem-header"><strong>Proposition ?</strong> (Jensen's Inequality)</div>
+  <div class="theorem-content"></div>
+</div>
+<h3>Hanner's Inequalities</h3>
+<div class="theorem-box lemma-box" id="lem:hanners_inequality_lemma">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Hanner's Inequality Lemma $2\leq p < \infty$)</div>
+  <div class="theorem-content">Suppose $2\leq p < \infty$. Then
+    \[ 2(|w|^p + |z|^p) \leq |w+z|^p + |w-z|^p \leq 2^{p-1}(|w|^p + |z|^p) \]
+    for all $w,z \in \C$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-12">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-12')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-12">
+    Notice that the inequalities are symmetric in the variables $w$ and $z$, and that if either $w=0$ or $z=0$, then both inequalities are trivially true since $2 \leq 2 \leq 2^{p-1}$.
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 1:</em> We prove the right inequality first.</p>
+<p>Let $w,z \in \C$ be arbitrary nonzero complex numbers.
+    Since the inequalities are symmetric in $w$ and $z$, we may assume without loss of generality that $|w| \geq |z| >0$.</p>
+<p>Since $p\geq 2$, the function 
+    \[ \phi: [0,\infty) \to [0,\infty), \quad \phi(t) = t^{p/2} \]
+    is convex and has $\phi(0) = 0$, so by <span class="ref-unknown" title="Reference not found: lem:convexity_lemma">[lem:convexity_lemma?]</span>, we have
+    \[ \phi(t_1) + \phi(t_2) \leq \phi( t_1 + t_2 ) \qquad \forall t_1,t_2 \geq 0 \]
+    which says that
+    \[ t_1^{p/2} + t_2^{p/2} \leq (t_1 + t_2)^{p/2} \tag{$\star$} \]
+    for all $t_1,t_2 \geq 0$.
+    But also convexity of $\phi$ implies that
+    \[ \phi\left( \frac{1}{2}t_1 + \frac{1}{2}t_2 \right) \leq \frac{1}{2}\phi(t_1) + \frac{1}{2}\phi(t_2) \qquad \forall t_1,t_2\geq 0\] 
+    which says that
+    \[ \left( \frac{1}{2}t_1 + \frac{1}{2}t_2 \right)^{p/2} \leq \frac{1}{2}t_1^{p/2} + \frac{1}{2}t_2^{p/2} \tag{$\star\star$} \]
+    for all $t_1,t_2 \geq 0$.
+    Now we see that
+    \begin{align*}
+        \left| \frac{w+z}{2} \right|^p + \left| \frac{w-z}{2} \right|^p &= \left( \left| \frac{w+z}{2} \right|^2 \right)^{p/2} + \left( \left| \frac{w-z}{2} \right|^2 \right)^{p/2} \\
+            &\leq \left( \left| \frac{w+z}{2} \right|^2 + \left| \frac{w-z}{2} \right|^2 \right)^{p/2} &&\text{by } (\star) \\
+            &= \left( \frac{2|w|^2 + 2|z|^2}{4} \right)^{p/2} \\
+            &= \left( \frac{1}{2}|w|^2 + \frac{1}{2}|z|^2 \right)^{p/2} \\
+            &\leq \frac{1}{2}|w|^p + \frac{1}{2}|z|^p. &&\text{by } (\star\star)
+    \end{align*}
+    Multiplying both sides by $2^p$ gives us
+    \[ |w+z|^p + |w-z|^p \leq 2^{p-1}(|w|^p + |z|^p) \]
+    which is the right inequality.</p>
+<p>Since $z$ and $w$ were arbitrary nonzero complex numbers, and the inequality is trivially true if either $z=0$ or $w=0$, the right inequality holds for all $w,z \in \C$.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 2:</em> Now we prove the left inequality.
+    Let $w,z \in \C$ be arbitrary nonzero complex numbers.</p>
+<p>Again, since the inequalities are symmetric in $w$ and $z$, we may assume without loss of generality that $|w| \geq |z| >0$.
+    By using the right hand inequality we just proved with the complex numbers
+    \[ a := \frac{w+z}{2}, \quad b := \frac{w-z}{2} \]
+    we obtain
+    \[ |a+b|^p + |a-b|^p \leq 2^{p-1}(|a|^p + |b|^p). \]
+    But
+    \[ a+b = w, \quad a-b = z, \quad |a|^p + |b|^p = \frac{|w+z|^p + |w-z|^p}{2^p}. \]
+    Substituting these back into the inequality gives
+    \[ |w|^p + |z|^p \leq 2^{p-1} \frac{|w+z|^p + |w-z|^p}{2^p}, \]
+    which simplifies to
+    \[ 2(|w|^p + |z|^p) \leq |w+z|^p + |w-z|^p. \]
+    This completes the proof of the left inequality.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box lemma-box" id="lem:hanners_inequality_lemma_2">
+  <div class="theorem-header"><strong>Lemma ?</strong> (Hanner's Inequality Lemma $1 < p \leq 2$)</div>
+  <div class="theorem-content"><span class="noindent"></span>Suppose $1 < p \leq 2$. Then
+    \[ 2^{p-1}(|w|^p + |z|^p) \leq |w+z|^p + |w-z|^p \leq 2(|w|^p + |z|^p) \]
+    for all $w,z \in \C$.</div>
+</div>
+<div class="proof-box collapsed" data-proof-id="proof-num-13">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-13')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-13">
+    Notice that this inequality is symmetric in the variables $w$ and $z$, and that if either $w=0$ or $z=0$, then both inequalities are trivially true since $2^{p-1} \leq 2 \leq 2$.
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 1:</em> We prove the left inequality first.
+    Let $w,z \in \C$ be arbitrary nonzero complex numbers.</p>
+<p>Since the inequalities are symmetric in $w$ and $z$, we may assume without loss of generality that $|w| \geq |z| >0$.
+    Since $1 < p \leq 2$, the function
+    \[ \psi: [0,\infty) \to [0,\infty), \quad \psi(t) = t^{p/2} \]
+    is concave and has $\psi(0) = 0$, so by <span class="ref-unknown" title="Reference not found: lem:concavity_lemma">[lem:concavity_lemma?]</span>, we have
+    \[ \psi(t_1) + \psi(t_2) \geq \psi(t_1 + t_2) \qquad \forall t_1,t_2 \geq 0 \]
+    which says that
+    \[ t_1^{p/2} + t_2^{p/2} \geq (t_1 + t_2)^{p/2} \tag{$\star$} \]
+    for all $t_1,t_2 \geq 0$.
+    But also concavity of $\psi$ implies that
+    \[ \psi\left( \frac{1}{2}t_1 + \frac{1}{2}t_2 \right) \geq \frac{1}{2}\psi(t_1) + \frac{1}{2}\psi(t_2) \qquad \forall t_1,t_2\geq 0\]
+    which says that
+    \[ \left( \frac{1}{2}t_1 + \frac{1}{2}t_2 \right)^{p/2} \geq \frac{1}{2}t_1^{p/2} + \frac{1}{2}t_2^{p/2} \tag{$\star\star$} \]
+    for all $t_1,t_2 \geq 0$.
+    Now we see that
+    \begin{align*}
+        \left| \frac{w+z}{2} \right|^p + \left| \frac{w-z}{2} \right|^p &= \left( \left| \frac{w+z}{2} \right|^2 \right)^{p/2} + \left( \left| \frac{w-z}{2} \right|^2 \right)^{p/2} \\
+            &\geq \left( \left| \frac{w+z}{2} \right|^2 + \left| \frac{w-z}{2} \right|^2 \right)^{p/2} &&\text{by } (\star) \\
+            &= \left( \frac{2|w|^2 + 2|z|^2}{4} \right)^{p/2} \\
+            &= \left( \frac{1}{2}|w|^2 + \frac{1}{2}|z|^2 \right)^{p/2} \\
+            &\geq \frac{1}{2}|w|^p + \frac{1}{2}|z|^p. &&\text{by } (\star\star)
+    \end{align*}
+    Multiplying both sides by $2^p$ gives us
+    \[ |w+z|^p + |w-z|^p \geq 2^{p-1}(|w|^p + |z|^p) \]
+    which is the left inequality.</p>
+<p>Since $z$ and $w$ were arbitrary nonzero complex numbers, and the inequality is trivially true if either $z=0$ or $w=0$, the left inequality holds for all $w,z \in \C$.</p>
+<p><div style="margin: 1em 0;"></div>
+    <em>Step 2:</em> Now we prove the right inequality.
+    Let $w,z \in \C$ be arbitrary nonzero complex numbers.</p>
+<p>Again, since the inequalities are symmetric in $w$ and $z$, we may assume without loss of generality that $|w| \geq |z| >0$.
+    By using the left hand inequality we just proved with the complex numbers
+    \[ a := \frac{w+z}{2}, \quad b := \frac{w-z}{2} \]
+    we obtain
+    \[ |a+b|^p + |a-b|^p \geq 2^{p-1}(|a|^p + |b|^p) \]
+    which is equivalent to
+    \[ 2^{-p}|w|^p + 2^{-p}|z|^p \geq 2^{p-1} \frac{|w+z|^p + |w-z|^p}{2^p} \]
+    which simplifies to
+    \[ 2(|w|^p + |z|^p) \geq |w+z|^p + |w-z|^p \]
+    which is the desired right inequality.</p>
+<p>Since $z$ and $w$ were arbitrary nonzero complex numbers, and the inequality is trivially true if either $z=0$ or $w=0$, the right inequality holds for all $w,z \in \C$.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<div class="theorem-box theorem-box" id="thm:hanners_inequalities">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Hanner's Inequalities)</div>
+  <div class="theorem-content">Let $(X,\mu)$ be a measure space. Suppose that $2 \leq p < \infty$.
+    Then for all $f,g \in L^p(X,\mu)$, we have
+    \[ 2(\|f\|_{L^p}^p + \|g\|_{L^p}^p) \leq \|f+g\|_{L^p}^p + \|f-g\|_{L^p}^p \leq 2^{p-1}(\|f\|_{L^p}^p + \|g\|_{L^p}^p). \]
+<p>Suppose that $1 < p \leq 2$.
+    Then for all $f,g \in L^p(X,\mu)$, we have
+    \[ 2^{p-1}(\|f\|_{L^p}^p + \|g\|_{L^p}^p) \leq \|f+g\|_{L^p}^p + \|f-g\|_{L^p}^p \leq 2(\|f\|_{L^p}^p + \|g\|_{L^p}^p). \]</div>
+</div></p>
+<div class="proof-box collapsed" data-proof-id="proof-num-14">
+  <div class="proof-header">
+    <button class="proof-toggle" onclick="toggleProof('proof-num-14')" aria-expanded="false">
+      <span class="proof-toggle-icon">▼</span>
+      <strong>Proof</strong>
+    </button>
+  </div>
+  <div class="proof-content" id="proof-num-14">
+    Apply the Lemma <span class="ref-unknown" title="Reference not found: lem:hanners_inequality_lemma">[lem:hanners_inequality_lemma?]</span> or <span class="ref-unknown" title="Reference not found: lem:hanners_inequality_lemma_2">[lem:hanners_inequality_lemma_2?]</span> pointwise, integrate over $X$, and use the monotonicity and linearity of the integral.
+<p>If you don't believe me ...</p>
+<p>Let $2 \leq p < \infty$ and let $f,g \in L^p(X,\mu)$ be arbitrary.
+    Then by <span class="ref-unknown" title="Reference not found: lem:hanners_inequality_lemma">[lem:hanners_inequality_lemma?]</span>, we have
+    \[ 2(|f(x)|^p + |g(x)|^p) \leq |f(x)+g(x)|^p + |f(x)-g(x)|^p \leq 2^{p-1}(|f(x)|^p + |g(x)|^p) \]
+    for all $x \in X$.
+    By integrating over $X$ and using the linearity and monotonicity of the integral, we obtain
+    \begin{align*}
+        2\left( \int_X |f(x)|^p \,\dif\mu(x) + \int_X |g(x)|^p \,\dif\mu(x) \right) &\leq \int_X |f(x)+g(x)|^p \,\dif\mu(x) + \int_X |f(x)-g(x)|^p \,\dif\mu(x) \\
+            &\leq 2^{p-1}\left( \int_X |f(x)|^p \,\dif\mu(x) + \int_X |g(x)|^p \,\dif\mu(x) \right)
+    \end{align*} 
+    which says exactly that
+    \[ 2(\|f\|_{L^p}^p + \|g\|_{L^p}^p) \leq \|f+g\|_{L^p}^p + \|f-g\|_{L^p}^p \leq 2^{p-1}(\|f\|_{L^p}^p + \|g\|_{L^p}^p) \]
+    as desired.</p>
+<p>The case that $1 < p \leq 2$ is similar, using <span class="ref-unknown" title="Reference not found: lem:hanners_inequality_lemma_2">[lem:hanners_inequality_lemma_2?]</span> instead.
+    <span class="proof-end">□</span>
+  </div>
+</div></p>
+<h3>Hardy's Inequality</h3>
+<div class="theorem-box theorem-box" id="thm:hardys_inequality">
+  <div class="theorem-header"><strong>Theorem ?</strong> (Hardy's Inequality for Integrals)</div>
+  <div class="theorem-content">Let $f: (0,\infty) \to [0,\infty)$ be a measurable function and let $1 \leq p < \infty$.
+    Then 
+    \[ \int_0^\infty \left( \frac{1}{x} \int_0^x f(t) \,\dif t \right)^p \,\dif x \leq \left( \frac{p}{p-1} \right)^p \int_0^\infty f(x)^p \,\dif x. \]
+    with equality if and only if $f=0$ almost everywhere.</div>
+</div>
+<div class="theorem-box corollary-box" id="cor:hardys_inequality_for_sums">
+  <div class="theorem-header"><strong>Corollary ?</strong> (Hardy's Inequality for Sums)</div>
+  <div class="theorem-content">Let $\{a_n\}_{n=1}^\infty \subseteq [0,\infty)$ be a sequence of nonnegative real numbers, and let $1 \leq p < \infty$.
+    Then
+    \[ \sum_{n=1}^\infty \left( \frac{a_1 + a_2 + \cdots + a_n}{n} \right)^p \leq \left( \frac{p}{p-1} \right)^p \sum_{n=1}^\infty a_n^p. \]
+    with equality if and only if $a_n = 0$ for all $n\in \Z^+$.</div>
+</div>
+    </main>
+  </div>
+  
+  <script>
+    function toggleChapter(element) {
+      element.parentElement.classList.toggle('expanded');
+    }
+    
+    // Highlight current page in sidebar
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPath = window.location.pathname;
+      const links = document.querySelectorAll('.section-link');
+      links.forEach(link => {
+        if (currentPath.endsWith(link.getAttribute('href').split('/').pop())) {
+          link.classList.add('active');
+          // Expand parent chapter
+          const group = link.closest('.chapter-group');
+          if (group) group.classList.add('expanded');
+        }
+      });
+    });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      console.log('Restoring proof collapse states...');
+      try {
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        const currentPage = window.location.pathname;
+        const pageOpen = openProofs[currentPage] || [];
+        
+        console.log('Current page:', currentPage);
+        console.log('Open proof IDs stored:', pageOpen);
+        console.log('Found ' + pageOpen.length + ' open proofs for this page');
+        
+        document.querySelectorAll('.proof-box').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          console.log('Checking proof:', proofId, 'Should be open:', pageOpen.includes(proofId));
+          if (pageOpen.includes(proofId)) {
+            box.classList.remove('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'true');
+          } else {
+            box.classList.add('collapsed');
+            const button = box.querySelector('.proof-toggle');
+            button.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        const pageBoxes = openBoxes[currentPage] || [];
+        
+        console.log('Open box IDs stored:', pageBoxes);
+        
+        document.querySelectorAll('.collapsible-box').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          console.log('Checking box:', boxId, 'Should be open:', pageBoxes.includes(boxId));
+          if (pageBoxes.includes(boxId)) {
+            box.classList.remove('collapsed');
+          } else {
+            box.classList.add('collapsed');
+          }
+        });
+        
+        console.log('Proof states restored');
+      } catch (e) {
+        console.error('Error restoring collapse state:', e);
+      }
+    });
+    
+    function toggleProof(proofId) {
+      const proofContent = document.getElementById(proofId);
+      const proofBox = proofContent.closest('.proof-box');
+      proofBox.classList.toggle('collapsed');
+      
+      const button = proofBox.querySelector('.proof-toggle');
+      button.setAttribute('aria-expanded', !proofBox.classList.contains('collapsed'));
+      
+      saveProofState();
+    }
+    
+    function toggleSubproof(subproofId) {
+      const subproofContent = document.getElementById(subproofId);
+      const subproof = subproofContent.closest('.subproof');
+      subproof.classList.toggle('collapsed');
+      
+      const button = subproof.querySelector('.subproof-toggle');
+      button.setAttribute('aria-expanded', !subproof.classList.contains('collapsed'));
+    }
+    
+    function saveProofState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openProofs = JSON.parse(localStorage.getItem('openProofs') || '{}');
+        if (!openProofs[currentPage]) {
+          openProofs[currentPage] = [];
+        }
+        
+        openProofs[currentPage] = [];
+        document.querySelectorAll('.proof-box:not(.collapsed)').forEach(box => {
+          const proofId = box.getAttribute('data-proof-id');
+          if (proofId) {
+            openProofs[currentPage].push(proofId);
+          }
+        });
+        
+        localStorage.setItem('openProofs', JSON.stringify(openProofs));
+        console.log('Saved proof state (open proofs):', openProofs[currentPage]);
+      } catch (e) {
+        console.error('Error saving collapse state:', e);
+      }
+    }
+    
+    function toggleCollapsible(collapsibleId) {
+      const content = document.getElementById(collapsibleId);
+      const box = content.closest('.collapsible-box');
+      box.classList.toggle('collapsed');
+      
+      saveCollapsibleState();
+    }
+    
+    function saveCollapsibleState() {
+      try {
+        const currentPage = window.location.pathname;
+        const openBoxes = JSON.parse(localStorage.getItem('openBoxes') || '{}');
+        if (!openBoxes[currentPage]) {
+          openBoxes[currentPage] = [];
+        }
+        
+        openBoxes[currentPage] = [];
+        document.querySelectorAll('.collapsible-box:not(.collapsed)').forEach(box => {
+          const boxId = box.getAttribute('data-collapsible-id');
+          if (boxId) {
+            openBoxes[currentPage].push(boxId);
+          }
+        });
+        
+        localStorage.setItem('openBoxes', JSON.stringify(openBoxes));
+      } catch (e) {
+        console.error('Error saving box state:', e);
+      }
+    }
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'p' && e.ctrlKey) {
+        e.preventDefault();
+        const proofBoxes = document.querySelectorAll('.proof-box');
+        const anyExpanded = Array.from(proofBoxes).some(box => !box.classList.contains('collapsed'));
+        
+        proofBoxes.forEach(box => {
+          if (anyExpanded) {
+            box.classList.add('collapsed');
+          } else {
+            box.classList.remove('collapsed');
+          }
+        });
+        
+        saveProofState();
+      }
+    });
+    
+    document.querySelectorAll('a.ref-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.background = '#fef3c7';
+          target.style.transition = 'background 0.3s ease';
+          setTimeout(() => { target.style.background = ''; }, 1500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
