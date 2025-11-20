@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  19 NOV 2025 16:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  19 NOV 2025 19:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2468,15 +2468,15 @@ Overfull \hbox (19.22357pt too wide) detected at line 252
 [348]
 
 [349]
-Overfull \hbox (30.13219pt too wide) detected at line 357
+Overfull \hbox (30.13219pt too wide) detected at line 358
 []
  []
 
 
-LaTeX Warning: Reference `lem:integral_of_product_of_bump_functions' on page 350 undefined on input line 371.
+LaTeX Warning: Reference `lem:integral_of_product_of_bump_functions' on page 350 undefined on input line 372.
 
 
-LaTeX Warning: Reference `lem:integral_of_product_of_bump_functions' on page 350 undefined on input line 371.
+LaTeX Warning: Reference `lem:integral_of_product_of_bump_functions' on page 350 undefined on input line 372.
 
 
 
